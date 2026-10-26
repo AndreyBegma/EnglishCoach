@@ -29,7 +29,8 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     const telegramId = nextUser++;
     const script = scriptedSkills(database.db, queue);
     const h = createHarness(database.db, { adminIds: [telegramId], skills: script.skills });
-    await h.say(telegramId, "/start");
+    // `/start` begins onboarding for a learner without a level; these tests start at the hub.
+    await h.say(telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, telegramId);
     if (!user) throw new Error("user not created");
     return { h, telegramId, user, ...script };

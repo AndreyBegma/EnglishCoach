@@ -124,6 +124,40 @@ demo-summary = Демо завершено: повторено 3 сообщен�
 provider-unavailable-runner = Запуск на вашем собственном компьютере появится в v2. Выберите другого провайдера в настройках.
 provider-unavailable-server = Серверная LLM не настроена. Добавьте свой API-ключ в настройках.
 
+# --- grammar ---
+grammar-pick-topic = ✍️ Практика грамматики: 10 вопросов. Выберите тему или смешанный режим.
+grammar-mixed = 🎲 Микс (рекомендуется)
+grammar-topic-tenses = Времена
+grammar-topic-articles = Артикли
+grammar-topic-prepositions = Предлоги
+grammar-topic-comparatives = Степени сравнения
+grammar-topic-conditionals = Условные предложения
+grammar-topic-modals = Модальные глаголы
+grammar-topic-passive = Страдательный залог
+grammar-topic-reported-speech = Косвенная речь
+grammar-topic-gerund-infinitive = Герундий / инфинитив
+grammar-topic-relative-clauses = Придаточные определительные
+grammar-topic-chosen = Тема: { $topic }
+grammar-question-header = ❓ Вопрос { $n } из { $total }
+grammar-chosen = Ваш ответ: { $answer }
+grammar-use-buttons = Ответьте кнопками выше.
+grammar-verdict-correct = ✅ Верно!
+grammar-verdict-partial = ❌ Почти, но есть ошибка.
+grammar-verdict-wrong = ❌ Неверно.
+grammar-correct-answer = Правильный ответ: { $answer }
+grammar-severity = { $marker } Серьёзность: { $label }
+grammar-severity-critical = критическая
+grammar-severity-moderate = средняя
+grammar-severity-minor = мелкая
+grammar-card-added = 📌 Эта ошибка повторяется — теперь она в вашем повторении.
+grammar-summary = Грамматика: { $correct }/{ $total }
+grammar-summary-weak = Грамматика: { $correct }/{ $total }, слабое место: { $weak }
+grammar-error-quiz = ⚠️ Не удалось подготовить следующий вопрос.
+grammar-error-check = ⚠️ Не удалось проверить ответ. Отправьте его ещё раз чуть позже.
+grammar-retry = 🔄 Повторить
+grammar-stop = ⏹ Остановить
+grammar-outdated = Этот вопрос устарел.
+
 # --- talk ---
 talk-pick-topic = О чём поговорим?
 talk-topic-free = 🎲 О чём угодно

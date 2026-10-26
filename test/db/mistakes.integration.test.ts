@@ -1,6 +1,10 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import type { Database } from "../../src/db/client";
-import { listTopMistakes } from "../../src/db/repositories/mistakes";
+import {
+  listTopMistakes,
+  normaliseMistakePattern,
+  upsertMistake,
+} from "../../src/db/repositories/mistakes";
 import { getOrCreateUser } from "../../src/db/repositories/users";
 import { mistakes } from "../../src/db/schema";
 import { createTestDatabase, testServerUrl } from "./test-database";
@@ -38,5 +42,68 @@ describe.skipIf(!testServerUrl)("mistakes repository", () => {
     const top = await listTopMistakes(database.db, alice.id, 3);
     expect(top.map((m) => m.pattern)).toEqual(["present perfect", "prepositions", "articles"]);
     expect(await listTopMistakes(database.db, alice.id, 0)).toEqual([]);
+  });
+
+  test("upsert counts a pattern up across spellings of the same label", async () => {
+    const user = await getOrCreateUser(database.db, { telegramId: 2003 });
+    const base = {
+      category: "grammar" as const,
+      exampleWrong: "I have seen him yesterday",
+      exampleRight: "I saw him yesterday",
+      explanation: "Past simple with finished time.",
+    };
+
+    const first = await upsertMistake(database.db, user.id, {
+      ...base,
+      pattern: 'Present perfect with "yesterday"',
+    });
+    const second = await upsertMistake(database.db, user.id, {
+      ...base,
+      pattern: "  present PERFECT with yesterday. ",
+      exampleWrong: "She has left yesterday",
+    });
+    const other = await upsertMistake(database.db, user.id, {
+      ...base,
+      category: "spelling",
+      pattern: "present perfect with yesterday",
+    });
+
+    expect(first.count).toBe(1);
+    expect(second).toMatchObject({
+      id: first.id,
+      count: 2,
+      pattern: "present perfect with yesterday",
+      exampleWrong: "She has left yesterday",
+    });
+    expect(other.id).not.toBe(first.id);
+    expect(other.count).toBe(1);
+  });
+
+  test("upsert refuses a pattern that normalises to nothing", async () => {
+    const user = await getOrCreateUser(database.db, { telegramId: 2004 });
+    await expect(
+      upsertMistake(database.db, user.id, {
+        category: "grammar",
+        pattern: " ?! ",
+        exampleWrong: "x",
+        exampleRight: "y",
+        explanation: "z",
+      }),
+    ).rejects.toThrow("empty");
+  });
+});
+
+describe("normaliseMistakePattern", () => {
+  test("lowercases, strips quotes and punctuation, collapses whitespace", () => {
+    expect(normaliseMistakePattern(`  Missing  article — before "singular" noun! `)).toBe(
+      "missing article before singular noun",
+    );
+    expect(normaliseMistakePattern("a/an vs the")).toBe("a/an vs the");
+    // Talk's `wrong → right` patterns keep their arrow.
+    expect(normaliseMistakePattern("we was → we were")).toBe("we was → we were");
+  });
+
+  test("caps the length", () => {
+    expect(normaliseMistakePattern("x".repeat(500))).toHaveLength(120);
   });
 });

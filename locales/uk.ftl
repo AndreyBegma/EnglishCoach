@@ -124,6 +124,40 @@ demo-summary = Демо завершено: повторено 3 повідом�
 provider-unavailable-runner = Запуск на вашому власному комп'ютері з'явиться у v2. Оберіть іншого провайдера в налаштуваннях.
 provider-unavailable-server = Серверна LLM не налаштована. Додайте свій API-ключ у налаштуваннях.
 
+# --- grammar ---
+grammar-pick-topic = ✍️ Практика граматики: 10 запитань. Оберіть тему або мікс.
+grammar-mixed = 🎲 Мікс (рекомендовано)
+grammar-topic-tenses = Часи
+grammar-topic-articles = Артиклі
+grammar-topic-prepositions = Прийменники
+grammar-topic-comparatives = Ступені порівняння
+grammar-topic-conditionals = Умовні речення
+grammar-topic-modals = Модальні дієслова
+grammar-topic-passive = Пасивний стан
+grammar-topic-reported-speech = Непряма мова
+grammar-topic-gerund-infinitive = Герундій / інфінітив
+grammar-topic-relative-clauses = Означальні підрядні речення
+grammar-topic-chosen = Тема: { $topic }
+grammar-question-header = ❓ Запитання { $n } з { $total }
+grammar-chosen = Ваша відповідь: { $answer }
+grammar-use-buttons = Відповідайте кнопками вище.
+grammar-verdict-correct = ✅ Правильно!
+grammar-verdict-partial = ❌ Майже, але є помилка.
+grammar-verdict-wrong = ❌ Неправильно.
+grammar-correct-answer = Правильна відповідь: { $answer }
+grammar-severity = { $marker } Серйозність: { $label }
+grammar-severity-critical = критична
+grammar-severity-moderate = середня
+grammar-severity-minor = дрібна
+grammar-card-added = 📌 Ця помилка повторюється — тепер вона у вашому повторенні.
+grammar-summary = Граматика: { $correct }/{ $total }
+grammar-summary-weak = Граматика: { $correct }/{ $total }, слабке місце: { $weak }
+grammar-error-quiz = ⚠️ Не вдалося підготувати наступне запитання.
+grammar-error-check = ⚠️ Не вдалося перевірити відповідь. Надішліть її ще раз трохи згодом.
+grammar-retry = 🔄 Спробувати знову
+grammar-stop = ⏹ Зупинити
+grammar-outdated = Це запитання застаріло.
+
 # --- talk ---
 talk-pick-topic = Про що поговоримо?
 talk-topic-free = 🎲 Про що завгодно

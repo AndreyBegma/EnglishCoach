@@ -6,7 +6,7 @@ import { findActiveSession, getSession } from "../../src/db/repositories/session
 import { findUserByTelegramId } from "../../src/db/repositories/users";
 import { SkillRegistry, SkillRunner } from "../../src/skills";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
-import { createHarness, type Harness } from "./harness";
+import { createHarness, type Harness, type HarnessOptions } from "./harness";
 
 const ADMIN = 900_001;
 
@@ -19,9 +19,9 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
 
   // Each test uses its own admin-like Telegram ID so they never share a hub or a session.
   let nextUser = ADMIN;
-  async function setup() {
+  async function setup(options: HarnessOptions = {}) {
     const telegramId = nextUser++;
-    const h = createHarness(database.db, { adminIds: [telegramId] });
+    const h = createHarness(database.db, { ...options, adminIds: [telegramId] });
     await h.say(telegramId, "/start");
     const user = await findUserByTelegramId(database.db, telegramId);
     if (!user) throw new Error("user not created");
@@ -221,7 +221,8 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
   });
 
   test("a hub activity without a session handler answers 'coming soon'", async () => {
-    const { h, telegramId, user } = await setup();
+    // Whichever kind is left without a handler, however many slots have registered theirs.
+    const { h, telegramId, user } = await setup({ withoutSessionKinds: ["grammar"] });
     const hub = await hubOf(user.id);
     h.telegram.reset();
     await h.press(

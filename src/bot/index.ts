@@ -1,6 +1,8 @@
 import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
+import type { SessionKind } from "../db/repositories/sessions";
 import { SettingsEvents } from "../events/settings-events";
+import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
 import type { ProviderFactories } from "../llm";
@@ -28,6 +30,8 @@ export interface BotDeps {
   refusals: RefusalGate;
   timeouts: SessionTimeouts;
   enableDemoSession: boolean;
+  /** Session kinds whose `sessions.register` is ignored; tests use it to get a kind with no handler. */
+  withoutSessionKinds?: readonly SessionKind[];
   /** Decrypts and encrypts user API keys. */
   masterKey: Buffer;
   /** The server provider's environment (`SERVER_*`, `CLAUDE_BIN`). */
@@ -59,6 +63,12 @@ export function createBot(deps: BotDeps) {
     i18n,
   });
 
+  const skippedKinds = new Set(deps.withoutSessionKinds);
+  const registerKind = sessions.register.bind(sessions);
+  sessions.register = (kind, handler) => {
+    if (!skippedKinds.has(kind)) registerKind(kind, handler);
+  };
+
   const settingsEvents = new SettingsEvents(log);
   const providers = new ProviderSettings({
     db,
@@ -75,6 +85,8 @@ export function createBot(deps: BotDeps) {
 
   const talk = { db, skills: deps.skills, i18n, log };
   sessions.register("talk", deps.enableDemoSession ? demoSession(i18n) : talkSession(talk));
+  const grammar = { db, skills: deps.skills, i18n, log };
+  sessions.register("grammar", grammarSession(grammar));
 
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(i18n);
@@ -85,6 +97,7 @@ export function createBot(deps: BotDeps) {
   bot.use(settingsHandlers(settings));
   bot.use(hubHandlers({ hub, sessions }));
   bot.use(talkHandlers(talk));
+  bot.use(grammarHandlers(grammar));
 
   if (deps.enableDemoSession) {
     bot.command("demo", async (ctx) => {

@@ -1,0 +1,12 @@
+{
+  "orchestrator": {
+    "base": "main",
+    "maxSlots": 4,
+    "readyLabel": "cs:ready",
+    "install": "bun install",
+    "checks": ["bun run lint", "bun run typecheck", "bun test"],
+    "mergeMethod": "squash",
+    "autoMerge": true,
+    "eco": true
+  }
+}

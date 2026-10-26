@@ -12,6 +12,7 @@ import { SessionManager, type SessionTimeouts } from "../sessions/session-manage
 import { SettingsController } from "../settings/controller";
 import { settingsHandlers, settingsInputMiddleware } from "../settings/handlers";
 import { ProviderSettings } from "../settings/provider";
+import type { SkillRunner } from "../skills";
 import { accessMiddleware, adminCommands, type RefusalGate } from "./access";
 import type { BotContext, FlowState } from "./context";
 import { createI18n } from "./i18n";
@@ -32,6 +33,8 @@ export interface BotDeps {
   llmEnv: ServerEnv;
   /** Tests replace the SDK-backed providers. */
   llmFactories?: ProviderFactories;
+  /** Runs skills for session handlers (one runner per process). */
+  skills: SkillRunner;
   /** Tests pass `botInfo` here so the bot never calls getMe. */
   botConfig?: BotConfig<BotContext>;
 }
@@ -91,7 +94,7 @@ export function createBot(deps: BotDeps) {
   // Any button that reached this point is from an older version of the bot or a dead screen.
   bot.on("callback_query", (ctx) => answerOutdated(ctx, hub));
 
-  return { bot, hub, sessions, settingsEvents };
+  return { bot, hub, sessions, settingsEvents, skills: deps.skills };
 }
 
 export type BotApp = ReturnType<typeof createBot>;

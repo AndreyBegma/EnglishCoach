@@ -4,9 +4,11 @@ import type { RefusalGate } from "../../src/bot/access";
 import type { FlowState } from "../../src/bot/context";
 import { createBot } from "../../src/bot/index";
 import type { Db } from "../../src/db/client";
-import type { ProviderFactories } from "../../src/llm";
+import { type ProviderFactories, resolveProvider } from "../../src/llm";
+import type { ServerEnv } from "../../src/llm/providers/server";
 import { createLogger } from "../../src/log";
 import type { SessionTimeouts } from "../../src/sessions/session-manager";
+import { learnerContextFromDb, loadSkillRegistry, SkillRunner } from "../../src/skills";
 import { FakeLlm } from "./fake-llm";
 
 export const BOT_INFO: UserFromGetMe = {
@@ -179,6 +181,8 @@ export interface HarnessOptions {
   enableDemoSession?: boolean;
   /** Replaces the fake LLM, e.g. with the real providers over fake SDK clients. */
   llmFactories?: ProviderFactories;
+  /** Replaces the skill runner session handlers get as `deps.skills`. */
+  skills?: SkillRunner;
 }
 
 /** A fixed 32-byte master key; tests decrypt stored keys with it. */
@@ -190,6 +194,12 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
   const refusals = new MemoryRefusalGate();
   const llm = new FakeLlm();
   const logs: string[] = [];
+  const llmEnv: ServerEnv = {
+    SERVER_LLM_PROVIDER: "anthropic",
+    SERVER_ANTHROPIC_API_KEY: "server-key",
+    CLAUDE_BIN: "claude",
+  };
+  const llmFactories = options.llmFactories ?? llm.factories;
   const app = createBot({
     token: "123:test",
     db,
@@ -200,12 +210,20 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
     timeouts,
     enableDemoSession: options.enableDemoSession ?? true,
     masterKey: TEST_MASTER_KEY,
-    llmEnv: {
-      SERVER_LLM_PROVIDER: "anthropic",
-      SERVER_ANTHROPIC_API_KEY: "server-key",
-      CLAUDE_BIN: "claude",
-    },
-    llmFactories: options.llmFactories ?? llm.factories,
+    llmEnv,
+    llmFactories,
+    // The real skills over the user's (fake) provider, unless a test brings its own runner.
+    skills:
+      options.skills ??
+      new SkillRunner({
+        registry: loadSkillRegistry(),
+        provider: (userId) =>
+          resolveProvider(
+            { db, env: llmEnv, masterKey: TEST_MASTER_KEY, factories: llmFactories },
+            userId,
+          ),
+        learner: learnerContextFromDb(db),
+      }),
     botConfig: { botInfo: BOT_INFO },
   });
   app.bot.api.config.use(telegram.transformer);

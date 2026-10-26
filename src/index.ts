@@ -7,9 +7,16 @@ import { EnvError, parseEnv } from "./config/env";
 import { masterKeyFromBase64 } from "./crypto/secrets";
 import { createDb } from "./db/client";
 import { createApp } from "./http/app";
+import { resolveProvider } from "./llm";
 import { createLogger } from "./log";
 import { BullSessionTimeouts } from "./queue/session-timeouts";
 import { createRedis } from "./redis";
+import {
+  learnerContextFromDb,
+  loadSkillRegistry,
+  SkillDefinitionError,
+  SkillRunner,
+} from "./skills";
 
 function loadEnvOrExit() {
   try {
@@ -23,10 +30,30 @@ function loadEnvOrExit() {
   }
 }
 
+/** Loads `skills/` before anything connects: a broken skill file stops the boot. */
+function loadSkillsOrExit() {
+  try {
+    return loadSkillRegistry();
+  } catch (error) {
+    if (error instanceof SkillDefinitionError) {
+      process.stderr.write(`Invalid skills: ${error.message}\n`);
+      process.exit(1);
+    }
+    throw error;
+  }
+}
+
 const env = loadEnvOrExit();
 const log = createLogger({ level: env.LOG_LEVEL });
+const skillRegistry = loadSkillsOrExit();
+const masterKey = masterKeyFromBase64(env.MASTER_KEY);
 
 const database = createDb(env.DATABASE_URL);
+const skills = new SkillRunner({
+  registry: skillRegistry,
+  provider: (userId) => resolveProvider({ db: database.db, env, masterKey }, userId),
+  learner: learnerContextFromDb(database.db),
+});
 const redis = createRedis(env.REDIS_URL);
 let lastRedisError = "";
 redis.client.on("error", (error: Error) => {
@@ -56,8 +83,9 @@ const { bot, sessions } = createBot({
   refusals: redisRefusalGate(redis.client),
   timeouts,
   enableDemoSession: env.ENABLE_DEMO_SESSION,
-  masterKey: masterKeyFromBase64(env.MASTER_KEY),
+  masterKey,
   llmEnv: env,
+  skills,
 });
 bot.catch((error) => log.error("bot update failed", { error: error.error }));
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));

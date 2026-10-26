@@ -1,8 +1,13 @@
+import { webhookCallback } from "grammy";
 import { createBot } from "./bot";
+import { redisRefusalGate } from "./bot/access";
+import type { FlowState } from "./bot/context";
+import { redisStorage } from "./bot/storage";
 import { EnvError, parseEnv } from "./config/env";
 import { createDb } from "./db/client";
 import { createApp } from "./http/app";
 import { createLogger } from "./log";
+import { BullSessionTimeouts } from "./queue/session-timeouts";
 import { createRedis } from "./redis";
 
 function loadEnvOrExit() {
@@ -33,22 +38,60 @@ redis.client.on("ready", () => {
   lastRedisError = "";
 });
 
-const app = createApp({ checkDb: database.ping, checkRedis: redis.ping });
+// Connect now: the client fails commands fast while disconnected, and the bot needs it per update.
+redis.ping().catch((error: unknown) => log.warn("redis not reachable at startup", { error }));
+
+const timeouts = new BullSessionTimeouts({
+  redisUrl: env.REDIS_URL,
+  delayMs: env.SESSION_TIMEOUT_MINUTES * 60_000,
+  log,
+});
+const { bot, sessions } = createBot({
+  token: env.TELEGRAM_BOT_TOKEN,
+  db: database.db,
+  log,
+  adminIds: env.ADMIN_TELEGRAM_IDS,
+  storage: redisStorage<FlowState>(redis.client),
+  refusals: redisRefusalGate(redis.client),
+  timeouts,
+  enableDemoSession: env.ENABLE_DEMO_SESSION,
+});
+bot.catch((error) => log.error("bot update failed", { error: error.error }));
+timeouts.startWorker((sessionId) => sessions.expire(sessionId));
+
+const webhookSecret = env.BOT_MODE === "webhook" ? env.TELEGRAM_WEBHOOK_SECRET : undefined;
+const app = createApp({
+  checkDb: database.ping,
+  checkRedis: redis.ping,
+  telegramWebhook: webhookSecret
+    ? {
+        secret: webhookSecret,
+        handler: webhookCallback(bot, "hono", { secretToken: webhookSecret }),
+      }
+    : undefined,
+});
 const server = Bun.serve({ port: env.HTTP_PORT, fetch: app.fetch });
 log.info("http listening", { port: server.port });
 
-const bot = createBot(env.TELEGRAM_BOT_TOKEN);
-bot.catch((error) => log.error("bot update failed", { error: error.error }));
-bot
-  .start({ onStart: (me) => log.info("bot polling", { username: me.username }) })
-  .catch((error: unknown) => log.error("bot stopped", { error }));
+if (webhookSecret && env.PUBLIC_URL) {
+  const url = new URL(`/tg/${webhookSecret}`, env.PUBLIC_URL).toString();
+  bot.api
+    .setWebhook(url, { secret_token: webhookSecret })
+    .then(() => log.info("bot webhook set", { host: new URL(url).host }))
+    .catch((error: unknown) => log.error("bot webhook setup failed", { error }));
+} else {
+  bot
+    .start({ onStart: (me) => log.info("bot polling", { username: me.username }) })
+    .catch((error: unknown) => log.error("bot stopped", { error }));
+}
 
 let shuttingDown = false;
 async function shutdown(signal: string) {
   if (shuttingDown) return;
   shuttingDown = true;
   log.info("shutting down", { signal });
-  await Promise.allSettled([bot.stop(), server.stop(), database.close(), redis.close()]);
+  await Promise.allSettled([bot.stop(), server.stop(), timeouts.close()]);
+  await Promise.allSettled([database.close(), redis.close()]);
   process.exit(0);
 }
 process.on("SIGINT", () => void shutdown("SIGINT"));

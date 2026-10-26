@@ -90,4 +90,38 @@ describe("parseEnv", () => {
     expect(message).not.toContain("hunter2");
     expect(message).not.toContain("c2hvcnQ=");
   });
+
+  test("defaults the bot to polling with a 20 minute session timeout and no demo", () => {
+    const env = parseEnv(valid);
+    expect(env.BOT_MODE).toBe("polling");
+    expect(env.SESSION_TIMEOUT_MINUTES).toBe(20);
+    expect(env.ENABLE_DEMO_SESSION).toBe(false);
+  });
+
+  test("parses ENABLE_DEMO_SESSION", () => {
+    expect(parseEnv({ ...valid, ENABLE_DEMO_SESSION: "true" }).ENABLE_DEMO_SESSION).toBe(true);
+    expect(errorOf({ ...valid, ENABLE_DEMO_SESSION: "yes" }).message).toContain(
+      "ENABLE_DEMO_SESSION",
+    );
+  });
+
+  test("webhook mode requires a secret and a public URL", () => {
+    const message = errorOf({ ...valid, BOT_MODE: "webhook" }).message;
+    expect(message).toContain("TELEGRAM_WEBHOOK_SECRET is required in webhook mode");
+    expect(message).toContain("PUBLIC_URL is required in webhook mode");
+
+    const env = parseEnv({
+      ...valid,
+      BOT_MODE: "webhook",
+      TELEGRAM_WEBHOOK_SECRET: "a".repeat(32),
+      PUBLIC_URL: "https://coach.example.com",
+    });
+    expect(env.BOT_MODE).toBe("webhook");
+  });
+
+  test("rejects a webhook secret with characters Telegram does not allow", () => {
+    const message = errorOf({ ...valid, TELEGRAM_WEBHOOK_SECRET: "short/secret" }).message;
+    expect(message).toContain("TELEGRAM_WEBHOOK_SECRET");
+    expect(message).not.toContain("short/secret");
+  });
 });

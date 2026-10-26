@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import type { Db } from "../client";
 import { type Language, type User, type UserSettings, userSettings, users } from "../schema";
 
@@ -33,6 +33,48 @@ export async function getOrCreateUser(db: Db, profile: TelegramProfile): Promise
 
     return user;
   });
+}
+
+export async function getUserById(db: Db, id: number): Promise<User | undefined> {
+  const [user] = await db.select().from(users).where(eq(users.id, id));
+  return user;
+}
+
+export async function findUserByTelegramId(db: Db, telegramId: number): Promise<User | undefined> {
+  const [user] = await db.select().from(users).where(eq(users.telegramId, telegramId));
+  return user;
+}
+
+/**
+ * Sets the allowlist flag for a Telegram ID. Allowing an unknown ID creates a bare user row; its
+ * settings are created by `getOrCreateUser` on first contact, so they pick up the user's language.
+ * Denying an unknown ID creates nothing and returns undefined.
+ */
+export async function setAllowed(
+  db: Db,
+  telegramId: number,
+  allowed: boolean,
+): Promise<User | undefined> {
+  if (!allowed) {
+    const [user] = await db
+      .update(users)
+      .set({ isAllowed: false })
+      .where(eq(users.telegramId, telegramId))
+      .returning();
+    return user;
+  }
+
+  const [user] = await db
+    .insert(users)
+    .values({ telegramId, isAllowed: true })
+    .onConflictDoUpdate({ target: users.telegramId, set: { isAllowed: true } })
+    .returning();
+  if (!user) throw new Error("upsert of users returned no row");
+  return user;
+}
+
+export async function listAllowedUsers(db: Db): Promise<User[]> {
+  return db.select().from(users).where(eq(users.isAllowed, true)).orderBy(asc(users.id));
 }
 
 export async function getSettings(db: Db, userId: number): Promise<UserSettings | undefined> {

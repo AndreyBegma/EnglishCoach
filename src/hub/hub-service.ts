@@ -12,6 +12,7 @@ import { lastSummaryLine } from "../db/repositories/sessions";
 import { getSettings } from "../db/repositories/users";
 import type { User } from "../db/schema";
 import type { Logger } from "../log";
+import { loadProgress } from "../progress/queries";
 import { type RenderedScreen, renderScreen } from "./screens";
 
 /** Hubs live in the private chat with the user, whose chat ID is the user's Telegram ID. */
@@ -69,10 +70,13 @@ export class HubService {
       countDueCards(this.deps.db, user.id),
       lastSummaryLine(this.deps.db, user.id),
     ]);
+    const progress =
+      screen === "progress" ? await loadProgress(this.deps.db, user.id, settings) : undefined;
     return renderScreen(this.deps.i18n, screen, {
       locale: settings?.uiLang ?? "en",
       dueCount,
       lastSummary,
+      progress,
     });
   }
 

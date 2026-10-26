@@ -106,7 +106,6 @@ input-timezone-invalid = Unknown time zone. Type a name like Europe/Kyiv or send
 
 ## Progress
 progress-title = 📈 Progress
-progress-placeholder = Your statistics will appear here soon.
 
 ## Sessions
 session-conflict = You have an unfinished session. Cancel it to start something new?
@@ -259,6 +258,27 @@ talk-summary-corrections = { $n ->
        *[other] { $n } corrections
     }
 talk-summary-top = top: { $top }
+
+# --- progress ---
+progress-level = 🎓 Level: { $level }
+progress-level-unset = 🎓 Level: not set yet
+progress-streak = 🔥 Streak: { $current } (best: { $best })
+progress-goal = 🎯 Today: { $done }/{ $goal } new words · { $reviews } reviews
+progress-goal-met = ✅
+progress-cards = 🗂 Cards: { $new } new · { $learning } learning · { $review } review
+progress-due = ⏰ Due: { $today } today · { $tomorrow } tomorrow
+progress-words = 📚 Words learned: { $count }
+progress-activity = 📊 Last 7 days: { $spark }
+progress-grammar = ✍️ Grammar accuracy: { $week } (7 days) · { $month } (30 days)
+progress-weak-title = ⚠️ Top weak spots:
+progress-weak-item = • { $pattern } ×{ $count }
+progress-weak-none = No mistakes recorded yet — nothing to practise.
+progress-btn-weak = 🎯 Weak spots
+progress-weak-screen-title = 🎯 Weak spots
+progress-weak-line = { $n }. { $pattern } ×{ $count }{ "\u000A" }❌ { $wrong }{ "\u000A" }✅ { $right }
+progress-btn-practice = ✍️ Practice these
+progress-practice-none = Nothing to practise yet.
+grammar-practice-intro = ✍️ Practising your weak spots ({ $count } patterns), one question each in turn.
 
 # --- voice ---
 voice-listen = 🔊 Listen

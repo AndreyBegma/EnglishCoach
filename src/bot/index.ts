@@ -1,6 +1,8 @@
 import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
+import type { SessionKind } from "../db/repositories/sessions";
 import { SettingsEvents } from "../events/settings-events";
+import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
 import type { ProviderFactories } from "../llm";
@@ -15,6 +17,7 @@ import { SettingsController } from "../settings/controller";
 import { settingsHandlers, settingsInputMiddleware } from "../settings/handlers";
 import { ProviderSettings } from "../settings/provider";
 import type { SkillRunner } from "../skills";
+import { talkHandlers, talkSession } from "../talk";
 import { accessMiddleware, adminCommands, type RefusalGate } from "./access";
 import type { BotContext, FlowState } from "./context";
 import { createI18n } from "./i18n";
@@ -29,6 +32,8 @@ export interface BotDeps {
   refusals: RefusalGate;
   timeouts: SessionTimeouts;
   enableDemoSession: boolean;
+  /** Session kinds whose `sessions.register` is ignored; tests use it to get a kind with no handler. */
+  withoutSessionKinds?: readonly SessionKind[];
   /** Decrypts and encrypts user API keys. */
   masterKey: Buffer;
   /** The server provider's environment (`SERVER_*`, `CLAUDE_BIN`). */
@@ -59,6 +64,12 @@ export function createBot(deps: BotDeps) {
     log,
     i18n,
   });
+
+  const skippedKinds = new Set(deps.withoutSessionKinds);
+  const registerKind = sessions.register.bind(sessions);
+  sessions.register = (kind, handler) => {
+    if (!skippedKinds.has(kind)) registerKind(kind, handler);
+  };
 
   const settingsEvents = new SettingsEvents(log);
   const providers = new ProviderSettings({
@@ -91,7 +102,10 @@ export function createBot(deps: BotDeps) {
     openProviderSettings: (ctx) => settings.controller.show(ctx, { page: "provider" }),
   });
 
-  if (deps.enableDemoSession) sessions.register("talk", demoSession(i18n));
+  const talk = { db, skills: deps.skills, i18n, log };
+  sessions.register("talk", deps.enableDemoSession ? demoSession(i18n) : talkSession(talk));
+  const grammar = { db, skills: deps.skills, i18n, log };
+  sessions.register("grammar", grammarSession(grammar));
   sessions.register("placement", placementSession);
 
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
@@ -102,6 +116,8 @@ export function createBot(deps: BotDeps) {
   bot.use(adminCommands(db));
   bot.use(settingsHandlers(settings));
   bot.use(hubHandlers({ hub, sessions, onboarding }));
+  bot.use(talkHandlers(talk));
+  bot.use(grammarHandlers(grammar));
   bot.use(onboardingHandlers(onboarding));
 
   if (deps.enableDemoSession) {

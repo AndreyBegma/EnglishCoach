@@ -126,6 +126,7 @@ export class ReviewFlow implements SessionKindHandler {
         return;
       }
       case "retry":
+        await this.core.dismissFailure(ctx, handle);
         if (step?.kind === "failed" && step.retry === "exercise" && step.cardId) {
           const card = await getCard(this.core.deps.db, handle.user.id, step.cardId);
           if (card) {

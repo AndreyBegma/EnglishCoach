@@ -23,6 +23,8 @@ export interface GrammarState {
   wrongByTopic: Record<string, number>;
   /** The question waiting for an answer. */
   current?: { n: number; item: QuizItem; messageId: number };
+  /** The answer-check error note on screen, removed when the check next succeeds. */
+  errorId?: number;
 }
 
 declare module "../bot/context" {

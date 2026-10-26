@@ -114,6 +114,7 @@ export class LearnFlow implements SessionKindHandler {
         await this.showNext(handle, ctx);
         return;
       case "retry":
+        await this.core.dismissFailure(ctx, handle);
         if (step?.kind === "failed" && step.retry === "exercise" && step.cardId) {
           const card = await getCard(this.core.deps.db, handle.user.id, step.cardId);
           if (card) await this.core.sendExercise(handle, ctx, card, "recognition");

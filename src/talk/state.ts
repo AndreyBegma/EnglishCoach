@@ -20,6 +20,8 @@ export interface TalkState {
   messages: number;
   corrections: number;
   categories: Partial<Record<MistakeCategory, number>>;
+  /** The error note on screen, removed when the next turn arrives or fails again. */
+  errorId?: number;
 }
 
 // Per-session state lives in grammY's session (Redis in production), next to the other flows.

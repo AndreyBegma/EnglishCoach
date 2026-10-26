@@ -15,7 +15,7 @@ import { encodeVocabCallback, type VocabCallback } from "./callbacks";
 import type { VocabMode } from "./modes";
 import { exampleText, exerciseHtml, HTML, type T } from "./render";
 import { RATINGS, type RatingName, Scheduler } from "./scheduler";
-import { clearFlow, writeFlow } from "./state";
+import { clearFlow, readFlow, writeFlow } from "./state";
 import { addVocabStats, localDate } from "./stats";
 
 export interface VocabDeps {
@@ -201,10 +201,11 @@ export class VocabCore {
       return await run();
     } catch (error) {
       if (error instanceof ProviderUnavailableError) {
-        await handle.send(t(error.i18nKey), {
+        await this.dismissFailure(ctx, handle);
+        const prompt = await handle.send(t(error.i18nKey), {
           reply_markup: InlineKeyboard.from([[button(t("vocab-finish"), { op: "finish" })]]),
         });
-        writeFlow(ctx, handle.session.id, { kind: "idle" });
+        writeFlow(ctx, handle.session.id, { kind: "idle", promptId: prompt.message_id });
         return undefined;
       }
       if (error instanceof LlmOutputError || error instanceof LlmProviderError) {
@@ -213,7 +214,8 @@ export class VocabCore {
           sessionId: handle.session.id,
           error: error.message,
         });
-        await handle.send(t("vocab-llm-failed"), {
+        await this.dismissFailure(ctx, handle);
+        const prompt = await handle.send(t("vocab-llm-failed"), {
           reply_markup: InlineKeyboard.from([
             [
               button(t("vocab-retry"), { op: "retry" }),
@@ -221,11 +223,23 @@ export class VocabCore {
             ],
           ]),
         });
-        writeFlow(ctx, handle.session.id, { kind: "failed", ...failed });
+        writeFlow(ctx, handle.session.id, {
+          kind: "failed",
+          ...failed,
+          promptId: prompt.message_id,
+        });
         return undefined;
       }
       throw error;
     }
+  }
+
+  /** Removes the failure prompt on screen, if any: a session keeps at most one. */
+  async dismissFailure(ctx: BotContext, handle: LearningHandle): Promise<void> {
+    const step = readFlow(ctx, handle.session.id);
+    const promptId = step?.kind === "failed" || step?.kind === "idle" ? step.promptId : undefined;
+    if (promptId === undefined || !ctx.chat) return;
+    await ctx.api.deleteMessage(ctx.chat.id, promptId).catch(() => {});
   }
 
   /** Ends the session with a summary computed from what was rated in it. */

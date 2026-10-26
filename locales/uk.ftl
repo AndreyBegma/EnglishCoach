@@ -124,6 +124,43 @@ demo-summary = Демо завершено: повторено 3 повідом�
 provider-unavailable-runner = Запуск на вашому власному комп'ютері з'явиться у v2. Оберіть іншого провайдера в налаштуваннях.
 provider-unavailable-server = Серверна LLM не налаштована. Додайте свій API-ключ у налаштуваннях.
 
+# --- vocabulary ---
+vocab-collocations = Сполучення: { $list }
+vocab-mnemonic = 💡 { $text }
+vocab-got-it = ✅ Зрозуміло
+vocab-add-word = ➕ Своє слово
+vocab-add-word-prompt = Надішліть слово або фразу, яку хочете вивчити.
+vocab-add-word-cancel = Скасувати
+vocab-add-word-invalid = Надішліть одне слово або коротку фразу: літери, пробіли, апострофи та дефіси, до 60 символів.
+vocab-add-word-exists = У вас уже є картка «{ $word }».
+vocab-finish = Завершити
+vocab-retry = 🔄 Повторити
+vocab-start = ▶ Почати
+vocab-outdated = Це питання вже закрите.
+vocab-use-buttons = Скористайтеся кнопками під останнім повідомленням.
+vocab-llm-failed = ⚠️ Мовна модель відповіла некоректно. Спробувати ще раз?
+vocab-learn-right = ✅ Правильно — <b>{ $word }</b> тепер у вашій колоді повторення.
+vocab-learn-wrong = ❌ <b>{ $word }</b> означає: { $answer }. Незабаром слово повернеться в повторенні.
+vocab-learn-done = 🎉 Нових слів сьогодні: { $count }. Додайте своє слово або завершіть.
+vocab-learn-no-words = Нових слів вашого рівня більше немає. Додайте своє слово або завершіть.
+vocab-review-header = 🔁 Карток до повторення: { $count }.
+vocab-review-right = ✅ Правильно.
+vocab-review-wrong = ❌ Відповідь: <b>{ $answer }</b>
+vocab-check-unavailable = Не вдалося перевірити відповідь автоматично. Відповідь: <b>{ $answer }</b>
+vocab-rate-prompt = Наскільки добре ви це знали?
+vocab-rate-again = Знову
+vocab-rate-hard = Важко
+vocab-rate-good = Добре
+vocab-rate-easy = Легко
+vocab-pattern-prompt = ✍️ Виправте речення, потім перевірте:
+vocab-pattern-reveal = Показати відповідь
+vocab-pattern-answer = ✅ <b>{ $sentence }</b>
+vocab-summary-new = нових: +{ $count }
+vocab-summary-reviewed = повторено: { $count }
+vocab-summary-accuracy = { $percent } %
+vocab-summary-learn-empty = Цього разу без нових слів.
+vocab-review-nothing = Зараз повторювати нічого.
+
 # --- onboarding ---
 onboarding-welcome = 👋 Ласкаво просимо до EnglishCoach! Потроху англійської щодня: слова, граматика й розмова. Спершу оберіть мову інтерфейсу та пояснень.
 onboarding-provider = Який ШІ вестиме уроки? Серверний працює одразу, а власний ключ можна підключити в налаштуваннях будь-коли.

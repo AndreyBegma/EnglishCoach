@@ -28,12 +28,21 @@ export const words = pgTable(
   (table) => [unique("words_lemma_pos_unique").on(table.lemma, table.pos)],
 );
 
-/** LLM enrichment of a card; validated with zod before it is stored. */
+/** An example sentence on a card and its translation into the learner's language. */
+export type CardExample = { en: string; translation: string };
+
+/**
+ * LLM enrichment of a card; validated with zod before it is stored. Generated once per card, so
+ * a card with a filled back never calls the LLM for it again.
+ */
 export type CardBack = {
   translation?: string;
   ipa?: string;
-  examples?: string[];
+  pos?: string;
+  /** Word cards store sentences with translations; grammar-pattern cards plain corrected sentences. */
+  examples?: (CardExample | string)[];
   collocations?: string[];
+  mnemonic?: string;
 };
 
 /** FSRS state columns, 1:1 with the ts-fsrs 5 `Card` (see `src/db/fsrs.ts`). */

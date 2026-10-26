@@ -1,3 +1,4 @@
+import { AsyncLocalStorage } from "node:async_hooks";
 import type { Api } from "grammy";
 import type { Message } from "grammy/types";
 import type { BotContext } from "../bot/context";
@@ -47,7 +48,12 @@ export interface LearningHandle {
 
 /** What a session kind does. Feature slots register one per `session_kind`. */
 export interface SessionKindHandler {
-  onStart(session: LearningHandle): Promise<void>;
+  /**
+   * The session was just created. `ctx` is the update that started it (a hub button, a command),
+   * so the handler can keep flow state in `ctx.session`; it is absent when a session starts
+   * outside an update (a scheduled routine).
+   */
+  onStart(session: LearningHandle, ctx?: BotContext): Promise<void>;
   /** A user message inside the session. The message is already tracked. */
   onMessage?(session: LearningHandle, ctx: BotContext): Promise<void>;
 }
@@ -77,6 +83,7 @@ const DELETE_BATCH = 100;
 
 export class SessionManager {
   private readonly handlers = new Map<SessionKind, SessionKindHandler>();
+  private readonly update = new AsyncLocalStorage<BotContext>();
 
   constructor(private readonly deps: SessionManagerDeps) {}
 
@@ -94,10 +101,19 @@ export class SessionManager {
   }
 
   /**
-   * Starts a session of `kind` unless the user already has an active one, in which case nothing
-   * changes and the active session is returned so the caller can offer to cancel it.
+   * Runs `task` as the handling of `ctx`'s update, so a session started inside it hands that
+   * update to `onStart` without every caller passing it along. Set by `sessionMiddleware`.
    */
-  async start(user: HubUser, kind: SessionKind): Promise<StartOutcome> {
+  inUpdate<T>(ctx: BotContext, task: () => Promise<T>): Promise<T> {
+    return this.update.run(ctx, task);
+  }
+
+  /**
+   * Starts a session of `kind` unless the user already has an active one, in which case nothing
+   * changes and the active session is returned so the caller can offer to cancel it. `ctx`
+   * defaults to the update being handled, when it is this user's.
+   */
+  async start(user: HubUser, kind: SessionKind, ctx?: BotContext): Promise<StartOutcome> {
     const handler = this.handlers.get(kind);
     if (!handler) throw new Error(`no handler registered for session kind "${kind}"`);
 
@@ -107,7 +123,8 @@ export class SessionManager {
     await this.deps.timeouts.schedule(result.session.id);
     const settings = await getSettings(this.deps.db, user.id);
     const handle = this.handle(result.session, user, settings?.uiLang ?? DEFAULT_LOCALE);
-    await handler.onStart(handle);
+    const current = ctx ?? this.update.getStore();
+    await handler.onStart(handle, current?.user.id === user.id ? current : undefined);
     return { started: true, handle };
   }
 

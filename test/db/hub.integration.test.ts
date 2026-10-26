@@ -35,11 +35,17 @@ describe.skipIf(!testServerUrl)("hub repository", () => {
     const user = await getOrCreateUser(database.db, { telegramId: 7002 });
     const other = await getOrCreateUser(database.db, { telegramId: 7003 });
     const now = new Date("2026-10-26T12:00:00Z");
-    const card = (userId: number, due: string) => ({
+    const card = (
+      userId: number,
+      due: string,
+      itemType: "user_word" | "word" | "grammar_pattern" = "user_word",
+      reps = 1,
+    ) => ({
       userId,
-      itemType: "user_word" as const,
+      itemType,
       front: "word",
       ...fsrsCardToColumns(createEmptyCard(new Date(due))),
+      reps,
     });
     await database.db
       .insert(cards)
@@ -51,5 +57,18 @@ describe.skipIf(!testServerUrl)("hub repository", () => {
       ]);
 
     expect(await countDueCards(database.db, user.id, now)).toBe(2);
+  });
+
+  test("pending Learn-words cards are not due; new grammar-pattern cards are", async () => {
+    const user = await getOrCreateUser(database.db, { telegramId: 7004 });
+    const now = new Date("2026-10-26T12:00:00Z");
+    const fresh = fsrsCardToColumns(createEmptyCard(new Date("2026-10-25T00:00:00Z")));
+    await database.db.insert(cards).values([
+      { userId: user.id, itemType: "word", front: "pending", ...fresh },
+      { userId: user.id, itemType: "user_word", front: "pending too", ...fresh },
+      { userId: user.id, itemType: "grammar_pattern", front: "a pattern", ...fresh },
+    ]);
+
+    expect(await countDueCards(database.db, user.id, now)).toBe(1);
   });
 });

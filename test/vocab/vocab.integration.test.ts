@@ -347,6 +347,61 @@ describe.skipIf(!testServerUrl)("vocabulary sessions with a mocked Telegram API"
     expect(h.logs.join("\n")).toContain("vocabulary LLM call failed");
   });
 
+  const failurePrompts = (h: Harness, telegramId: number) =>
+    botMessages(h, telegramId).filter((message) =>
+      message.text.includes("did not answer properly"),
+    );
+  const fail = () => new LlmProviderError("server", "server request failed: 503", 503);
+
+  test("Learn: Retry removes the tapped failure prompt, so at most one is ever on screen", async () => {
+    const { h, telegramId, user, llm } = await setup(2);
+    llm.failure.next = fail();
+    await openFromHub(h, telegramId, user.id, "learn");
+    expect(failurePrompts(h, telegramId)).toHaveLength(1);
+
+    llm.failure.next = fail();
+    await press(h, telegramId, { op: "retry" });
+    expect(failurePrompts(h, telegramId)).toHaveLength(1);
+
+    await press(h, telegramId, { op: "finish" });
+    expect(await expectOnlyHub(h, telegramId, user.id)).toBeDefined();
+    expect(failurePrompts(h, telegramId)).toHaveLength(0);
+  });
+
+  test("Review: Retry removes the tapped failure prompt, so at most one is ever on screen", async () => {
+    const { h, telegramId, user, llm } = await setup(2);
+    const scheduler = new Scheduler();
+    const now = Date.now();
+    await database.db.insert(cards).values({
+      userId: user.id,
+      itemType: "word",
+      front: "quiet",
+      backJson: {
+        translation: "quiet-translation",
+        examples: [{ en: "I quiet it.", translation: "x" }],
+      },
+      ...scheduler.newCard(new Date(now - 30 * DAY)),
+      state: 2,
+      reps: 3,
+      stability: 1,
+      difficulty: 5,
+      scheduledDays: 1,
+      lastReview: new Date(now - 4 * DAY),
+      due: new Date(now - 3 * DAY),
+    });
+    await openFromHub(h, telegramId, user.id, "review");
+    llm.failure.next = fail();
+    await press(h, telegramId, { op: "start" });
+    expect(failurePrompts(h, telegramId)).toHaveLength(1);
+
+    llm.failure.next = fail();
+    await press(h, telegramId, { op: "retry" });
+    expect(failurePrompts(h, telegramId)).toHaveLength(1);
+
+    await press(h, telegramId, { op: "finish" });
+    expect(failurePrompts(h, telegramId)).toHaveLength(0);
+  });
+
   test("Review with nothing due ends at once and says so", async () => {
     const { h, telegramId, user } = await setup(2);
     await openFromHub(h, telegramId, user.id, "review");

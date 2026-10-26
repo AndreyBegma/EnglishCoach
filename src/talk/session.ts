@@ -34,8 +34,22 @@ function talkState(ctx: BotContext, sessionId: number): TalkState | undefined {
 }
 
 /** One learner message through the `conversation` skill; the reply goes out as a session message. */
-async function takeTurn(deps: TalkDeps, session: LearningHandle, state: TalkState, text: string) {
+async function takeTurn(
+  deps: TalkDeps,
+  session: LearningHandle,
+  ctx: BotContext,
+  state: TalkState,
+  text: string,
+) {
   const { db, skills, i18n, log } = deps;
+  /** Removes the error note of a failed turn: a session shows at most one. */
+  const dropError = async () => {
+    const { errorId } = state;
+    state.errorId = undefined;
+    if (errorId !== undefined && ctx.chat) {
+      await ctx.api.deleteMessage(ctx.chat.id, errorId).catch(() => {});
+    }
+  };
   const { id: userId } = session.user;
   const tipKind = TIP_KINDS[state.messages % TIP_KINDS.length] ?? "phrase";
 
@@ -50,9 +64,11 @@ async function takeTurn(deps: TalkDeps, session: LearningHandle, state: TalkStat
   } catch (error) {
     // Nothing was stored, so the learner can simply send the message again.
     log.warn("talk turn failed", { sessionId: session.session.id, error });
-    await session.send(i18n.t(session.locale, "talk-error"));
+    await dropError();
+    state.errorId = (await session.send(i18n.t(session.locale, "talk-error"))).message_id;
     return;
   }
+  await dropError();
 
   state.history = capHistory([
     ...state.history,
@@ -155,7 +171,7 @@ export function talkSession(deps: TalkDeps): SessionKindHandler {
         ctx.session.talk = state;
       }
       state.started = true;
-      await takeTurn(deps, session, state, text);
+      await takeTurn(deps, session, ctx, state, text);
     },
   };
 }

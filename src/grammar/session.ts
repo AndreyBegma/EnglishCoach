@@ -96,8 +96,17 @@ export function grammarSession(deps: GrammarDeps): SessionKindHandler {
         graded = await gradeTyped(deps.skills, handle.user.id, item, text);
       } catch (error) {
         deps.log.warn("grammar answer check failed", { sessionId: handle.session.id, error });
-        await handle.send(deps.i18n.t(handle.locale, "grammar-error-check"));
+        const previous = state.errorId;
+        if (previous !== undefined && ctx.chat) {
+          await ctx.api.deleteMessage(ctx.chat.id, previous).catch(() => {});
+        }
+        const note = await handle.send(deps.i18n.t(handle.locale, "grammar-error-check"));
+        state.errorId = note.message_id;
         return;
+      }
+      if (state.errorId !== undefined && ctx.chat) {
+        await ctx.api.deleteMessage(ctx.chat.id, state.errorId).catch(() => {});
+        state.errorId = undefined;
       }
       await settle(deps, handle, state, graded);
     },

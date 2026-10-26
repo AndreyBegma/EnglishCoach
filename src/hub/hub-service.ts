@@ -12,7 +12,7 @@ import { lastSummaryLine } from "../db/repositories/sessions";
 import { getSettings } from "../db/repositories/users";
 import type { User } from "../db/schema";
 import type { Logger } from "../log";
-import { renderScreen } from "./screens";
+import { type RenderedScreen, renderScreen } from "./screens";
 
 /** Hubs live in the private chat with the user, whose chat ID is the user's Telegram ID. */
 export type HubUser = Pick<User, "id" | "telegramId">;
@@ -40,15 +40,21 @@ export class HubService {
 
   /** Makes sure the user has a hub: edits the existing one back to the main screen, or sends one. */
   show(user: HubUser): Promise<void> {
-    return this.serialised(user, async () => {
-      if (!(await this.editInPlace(user, "main"))) await this.sendNew(user);
-    });
+    return this.refresh(user, "main");
   }
 
   /** Re-renders the hub in place on the given screen; sends a new hub if the old one is gone. */
   refresh(user: HubUser, screen: HubScreen = "main"): Promise<void> {
+    return this.present(user, () => this.render(user, screen));
+  }
+
+  /**
+   * Edits the hub into a screen another module renders (settings). Like `refresh`, a hub that is
+   * gone is replaced by a new one on the main screen.
+   */
+  present(user: HubUser, render: () => Promise<RenderedScreen>): Promise<void> {
     return this.serialised(user, async () => {
-      if (!(await this.editInPlace(user, screen))) await this.sendNew(user);
+      if (!(await this.editInPlace(user, render))) await this.sendNew(user);
     });
   }
 
@@ -71,10 +77,13 @@ export class HubService {
   }
 
   /** Returns false when there is no hub to edit any more. */
-  private async editInPlace(user: HubUser, screen: HubScreen): Promise<boolean> {
+  private async editInPlace(
+    user: HubUser,
+    render: () => Promise<RenderedScreen>,
+  ): Promise<boolean> {
     const hub = await getHub(this.deps.db, user.id);
     if (!hub) return false;
-    const { text, keyboard } = await this.render(user, screen);
+    const { text, keyboard } = await render();
     try {
       await this.deps.api.editMessageText(hub.chatId, hub.messageId, text, {
         reply_markup: keyboard,

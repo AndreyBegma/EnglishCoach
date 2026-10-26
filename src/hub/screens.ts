@@ -1,6 +1,6 @@
 import { InlineKeyboard } from "grammy";
 import { encodeCallback, type HubScreen } from "../bot/callbacks";
-import { type Locale, SUPPORTED_LOCALES, type Translator } from "../bot/i18n";
+import type { Locale, Translator } from "../bot/i18n";
 
 export interface ScreenModel {
   locale: Locale;
@@ -46,28 +46,11 @@ export function renderScreen(
           ],
           [
             button(t("hub-progress"), { type: "screen", screen: "progress" }),
-            button(t("hub-settings"), { type: "screen", screen: "settings" }),
+            button(t("hub-settings"), { type: "settings", page: "root" }),
           ],
         ]),
       };
     }
-    case "settings":
-      return {
-        text: [
-          t("settings-title"),
-          "",
-          t("settings-ui-lang", { lang: t(`lang-${model.locale}`) }),
-        ].join("\n"),
-        keyboard: InlineKeyboard.from([
-          SUPPORTED_LOCALES.map((lang) =>
-            button(`${lang === model.locale ? "✓ " : ""}${t(`lang-${lang}`)}`, {
-              type: "lang",
-              lang,
-            }),
-          ),
-          back,
-        ]),
-      };
     case "progress":
       return {
         text: [t("progress-title"), "", t("progress-placeholder")].join("\n"),

@@ -4,6 +4,7 @@ import { redisRefusalGate } from "./bot/access";
 import type { FlowState } from "./bot/context";
 import { redisStorage } from "./bot/storage";
 import { EnvError, parseEnv } from "./config/env";
+import { masterKeyFromBase64 } from "./crypto/secrets";
 import { createDb } from "./db/client";
 import { createApp } from "./http/app";
 import { createLogger } from "./log";
@@ -55,6 +56,8 @@ const { bot, sessions } = createBot({
   refusals: redisRefusalGate(redis.client),
   timeouts,
   enableDemoSession: env.ENABLE_DEMO_SESSION,
+  masterKey: masterKeyFromBase64(env.MASTER_KEY),
+  llmEnv: env,
 });
 bot.catch((error) => log.error("bot update failed", { error: error.error }));
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));

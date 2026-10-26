@@ -123,3 +123,37 @@ demo-summary = Demo finished: 3 messages echoed.
 ## LLM providers
 provider-unavailable-runner = Running on your own machine is coming in v2. Choose another provider in Settings.
 provider-unavailable-server = The server LLM is not configured. Add your own API key in Settings.
+
+# --- grammar ---
+grammar-pick-topic = ✍️ Grammar practice: 10 questions. Pick a topic or practise a mix.
+grammar-mixed = 🎲 Mixed (recommended)
+grammar-topic-tenses = Tenses
+grammar-topic-articles = Articles
+grammar-topic-prepositions = Prepositions
+grammar-topic-comparatives = Comparatives
+grammar-topic-conditionals = Conditionals
+grammar-topic-modals = Modal verbs
+grammar-topic-passive = Passive voice
+grammar-topic-reported-speech = Reported speech
+grammar-topic-gerund-infinitive = Gerund / infinitive
+grammar-topic-relative-clauses = Relative clauses
+grammar-topic-chosen = Topic: { $topic }
+grammar-question-header = ❓ Question { $n } of { $total }
+grammar-chosen = Your answer: { $answer }
+grammar-use-buttons = Please answer with the buttons above.
+grammar-verdict-correct = ✅ Correct!
+grammar-verdict-partial = ❌ Almost, but there is a slip.
+grammar-verdict-wrong = ❌ Not quite.
+grammar-correct-answer = Correct answer: { $answer }
+grammar-severity = { $marker } Severity: { $label }
+grammar-severity-critical = critical
+grammar-severity-moderate = moderate
+grammar-severity-minor = minor
+grammar-card-added = 📌 This pattern keeps coming up — it is now in your Review.
+grammar-summary = Grammar: { $correct }/{ $total }
+grammar-summary-weak = Grammar: { $correct }/{ $total }, weak: { $weak }
+grammar-error-quiz = ⚠️ I could not prepare the next question.
+grammar-error-check = ⚠️ I could not check your answer. Send it again in a moment.
+grammar-retry = 🔄 Try again
+grammar-stop = ⏹ Stop
+grammar-outdated = This question is outdated.

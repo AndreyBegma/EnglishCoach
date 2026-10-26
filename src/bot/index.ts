@@ -1,6 +1,7 @@
 import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
 import { SettingsEvents } from "../events/settings-events";
+import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
 import type { ProviderFactories } from "../llm";
@@ -73,6 +74,8 @@ export function createBot(deps: BotDeps) {
   };
 
   if (deps.enableDemoSession) sessions.register("talk", demoSession(i18n));
+  const grammar = { db, skills: deps.skills, i18n, log };
+  sessions.register("grammar", grammarSession(grammar));
 
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(i18n);
@@ -82,6 +85,7 @@ export function createBot(deps: BotDeps) {
   bot.use(adminCommands(db));
   bot.use(settingsHandlers(settings));
   bot.use(hubHandlers({ hub, sessions }));
+  bot.use(grammarHandlers(grammar));
 
   if (deps.enableDemoSession) {
     bot.command("demo", async (ctx) => {

@@ -21,6 +21,18 @@ const cliResult = z.object({
   usage: z.object({ input_tokens: z.number(), output_tokens: z.number() }).partial().optional(),
 });
 
+/**
+ * `--output-format json` prints one result object, or — when the host's settings turn verbose mode
+ * on — an array of every session event, whose last `type: "result"` entry is that same object.
+ */
+export function resultEvent(output: unknown): unknown {
+  if (!Array.isArray(output)) return output;
+  return output.findLast(
+    (event: unknown) =>
+      typeof event === "object" && event !== null && "type" in event && event.type === "result",
+  );
+}
+
 /** The CLI takes one prompt; a multi-turn conversation is rendered as a transcript. */
 export function renderConversation(messages: ChatMessage[]): string {
   if (messages.length === 1 && messages[0]?.role === "user") return messages[0].content;
@@ -60,6 +72,7 @@ export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): Ll
         requestModel: req.model,
         tier: req.tier,
       });
+      // `req.temperature` is ignored: `claude -p` has no sampling flag, so the CLI default applies.
       const system = `${req.system}\n\nRespond with only a JSON value that matches this JSON Schema, with no prose around it:\n${JSON.stringify(toJsonSchema(req.schema))}`;
 
       return completeWithRepair("claude-code", req.messages, req.schema, async (messages) => {
@@ -98,7 +111,7 @@ export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): Ll
 
           let parsed: z.infer<typeof cliResult>;
           try {
-            parsed = cliResult.parse(JSON.parse(stdout));
+            parsed = cliResult.parse(resultEvent(JSON.parse(stdout)));
           } catch {
             throw new LlmProviderError(
               "claude-code",

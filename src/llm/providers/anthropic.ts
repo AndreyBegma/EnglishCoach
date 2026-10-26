@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { toProviderError } from "../errors";
+import { isAuthError, toProviderError } from "../errors";
 import { CURATED_MODELS, pickModel } from "../models";
 import { completeWithRepair, toJsonSchema } from "../structured";
 import type { ChatMessage, CompletionRequest, LlmProvider } from "../types";
@@ -15,6 +15,7 @@ export type AnthropicClient = {
     create(params: {
       model: string;
       max_tokens: number;
+      temperature?: number;
       system: string;
       messages: ChatMessage[];
       tools: { name: string; description: string; input_schema: { type: "object" } }[];
@@ -59,6 +60,7 @@ export function createAnthropicProvider(options: AnthropicProviderOptions): LlmP
           response = await client.messages.create({
             model,
             max_tokens: req.maxTokens ?? DEFAULT_MAX_TOKENS,
+            ...(req.temperature === undefined ? {} : { temperature: req.temperature }),
             system: req.system,
             messages,
             tools: [
@@ -89,7 +91,9 @@ export function createAnthropicProvider(options: AnthropicProviderOptions): LlmP
         const ids: string[] = [];
         for await (const model of client.models.list()) ids.push(model.id);
         return ids.length > 0 ? ids : CURATED_MODELS.anthropic;
-      } catch {
+      } catch (error) {
+        // A rejected key must surface (settings validates keys this way); anything else falls back.
+        if (isAuthError(error)) throw toProviderError("anthropic", error, [apiKey]);
         return CURATED_MODELS.anthropic;
       }
     },

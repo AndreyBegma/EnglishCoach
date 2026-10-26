@@ -1,0 +1,37 @@
+{
+  "reply": "That sounds like a great evening! A film about football is perfect for a fan. Which team was it about, and did it have a happy ending?",
+  "corrections": [
+    {
+      "original": "Yesterday I go",
+      "corrected": "Yesterday I went",
+      "category": "grammar",
+      "severity": "critical",
+      "why": "«Yesterday» — это прошлое, поэтому нужен past simple: go → went."
+    },
+    {
+      "original": "we was",
+      "corrected": "we were",
+      "category": "grammar",
+      "severity": "moderate",
+      "why": "С «we» в прошедшем времени используется «were», а не «was»."
+    },
+    {
+      "original": "Film was about football",
+      "corrected": "The film was about football",
+      "category": "grammar",
+      "severity": "moderate",
+      "why": "Конкретный фильм, о котором уже шла речь, требует артикля «the»."
+    },
+    {
+      "original": "I very like it",
+      "corrected": "I really like it",
+      "category": "expression",
+      "severity": "moderate",
+      "why": "«Very» не ставится перед глаголом; говорят «I really like it» или «I like it very much»."
+    }
+  ],
+  "tip": {
+    "kind": "native_pitfall",
+    "text": "Русскоговорящие часто говорят «I very like», калькируя «я очень люблю». По-английски: «I really like football» или «I like football very much» — «very much» стоит в конце."
+  }
+}

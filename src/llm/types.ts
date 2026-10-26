@@ -18,6 +18,8 @@ export type CompletionRequest<T> = {
   /** Used only when neither the user nor `model` names one. Defaults to `smart`. */
   tier?: ModelTier;
   maxTokens?: number;
+  /** Sampling temperature. Unset leaves the backend default; not every backend can honour it. */
+  temperature?: number;
 };
 
 export type Usage = { input: number; output: number };

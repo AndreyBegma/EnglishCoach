@@ -69,6 +69,20 @@ describe("anthropic provider", () => {
     expect(params?.model).toBe("claude-sonnet-5-5");
   });
 
+  test("passes temperature only when the request sets it", async () => {
+    const { client, calls } = fakeClient({
+      inputs: [
+        { word: "a", level: "A1" },
+        { word: "b", level: "A1" },
+      ],
+    });
+    const provider = createAnthropicProvider({ apiKey, client });
+    await provider.complete({ ...request, temperature: 0.2 });
+    await provider.complete(request);
+    expect(calls[0]?.temperature).toBe(0.2);
+    expect(calls[1]).not.toHaveProperty("temperature");
+  });
+
   test("the user's model wins over the request model and the tier", async () => {
     const { client, calls } = fakeClient({ inputs: [{ word: "a", level: "A1" }] });
     await createAnthropicProvider({ apiKey, client, model: "claude-opus-5-5" }).complete({
@@ -137,5 +151,19 @@ describe("anthropic provider", () => {
     expect(await createAnthropicProvider({ apiKey, client: empty.client }).listModels?.()).toEqual(
       CURATED_MODELS.anthropic,
     );
+  });
+
+  test("listModels rethrows 401/403 as a scrubbed LlmProviderError instead of falling back", async () => {
+    for (const status of [401, 403]) {
+      const rejected = fakeClient({
+        models: Object.assign(new Error(`${status} invalid x-api-key ${apiKey}`), { status }),
+      });
+      const error = await createAnthropicProvider({ apiKey, client: rejected.client })
+        .listModels?.()
+        .catch((caught: unknown) => caught);
+      expect(error).toBeInstanceOf(LlmProviderError);
+      expect((error as LlmProviderError).status).toBe(status);
+      expect((error as Error).message).not.toContain(apiKey);
+    }
   });
 });

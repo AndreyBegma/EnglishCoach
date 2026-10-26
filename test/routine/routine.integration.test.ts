@@ -4,12 +4,13 @@ import type { Transformer } from "grammy";
 import { createI18n } from "../../src/bot/i18n";
 import type { Database } from "../../src/db/client";
 import { isGoalMet } from "../../src/db/repositories/daily";
+import { lastSummaryLine } from "../../src/db/repositories/sessions";
 import {
   findUserByTelegramId,
   getOrCreateUser,
   updateSettings,
 } from "../../src/db/repositories/users";
-import { dailyStats, type LearningSession, learningSessions } from "../../src/db/schema";
+import { dailyStats, type LearningSession, learningSessions, mistakes } from "../../src/db/schema";
 import { createLogger } from "../../src/log";
 import { MemoryRoutineJobs, MemoryRoutineStore, Routine } from "../../src/routine";
 import { encodeRoutineCallback } from "../../src/routine/callbacks";
@@ -63,6 +64,17 @@ describe.skipIf(!testServerUrl)("daily routine", () => {
     };
     h.bot.api.config.use(blocked);
     return state;
+  }
+
+  async function addMistake(userId: number, pattern: string) {
+    await database.db.insert(mistakes).values({
+      userId,
+      category: "grammar",
+      pattern,
+      exampleWrong: "I have seen him yesterday.",
+      exampleRight: "I saw him yesterday.",
+      explanation: "A finished past time takes the past simple.",
+    });
   }
 
   async function sessionsOf(userId: number): Promise<LearningSession[]> {
@@ -141,6 +153,13 @@ describe.skipIf(!testServerUrl)("daily routine", () => {
         },
       } as unknown as SkillRunner;
       const { h, telegramId, user } = await setup({ skills });
+      const today = localDate(new Date(), "Europe/Kyiv");
+      const yesterday = localDate(new Date(Date.now() - 86_400_000), "Europe/Kyiv");
+      await database.db.insert(dailyStats).values([
+        { userId: user.id, date: yesterday, goalMet: true },
+        { userId: user.id, date: today, goalMet: true },
+      ]);
+      await addMistake(user.id, "articles before uncountable nouns");
       await h.routine.fire({ userId: user.id, slot: "evening" });
 
       expect(botMessages(h, telegramId).at(-1)?.text).toBe("Your plan for today");
@@ -152,8 +171,8 @@ describe.skipIf(!testServerUrl)("daily routine", () => {
             due_reviews: 0,
             new_words: 0,
             grammar_items: 10,
-            mistakes_to_review: 0,
-            streak_days: 0,
+            mistakes_to_review: 1,
+            streak_days: 2,
           },
         },
       ]);
@@ -296,18 +315,46 @@ describe.skipIf(!testServerUrl)("daily routine", () => {
       ]);
     });
 
-    test("Start evening set opens grammar first", async () => {
-      const { h, telegramId, user, store } = await setup();
-      await h.routine.fire({ userId: user.id, slot: "evening" });
+    async function startEvening(
+      h: Harness,
+      telegramId: number,
+      userId: number,
+      store: MemoryRoutineStore,
+    ) {
+      await h.routine.fire({ userId, slot: "evening" });
       await h.press(
         telegramId,
-        store.prompts.get(user.id)?.messageId ?? -1,
+        store.prompts.get(userId)?.messageId ?? -1,
         encodeRoutineCallback({ type: "start", set: "evening" }),
       );
-      const sessions = await sessionsOf(user.id);
-      expect(sessions.map((session) => [session.kind, session.status])).toEqual([
-        ["grammar", "active"],
+    }
+
+    test("Start evening set practises today's mistakes, then hands over to review", async () => {
+      const { h, telegramId, user, store } = await setup();
+      await addMistake(user.id, "past simple vs present perfect");
+      await startEvening(h, telegramId, user.id, store);
+
+      const texts = botMessages(h, telegramId).map((message) => message.text);
+      expect(texts.some((text) => text.includes("Practising your weak spots (1 patterns)"))).toBe(
+        true,
+      );
+      const [grammar] = await sessionsOf(user.id);
+      expect([grammar?.kind, grammar?.status]).toEqual(["grammar", "active"]);
+
+      await h.sessions.end(grammar?.id ?? -1, "finished", { line: "grammar 8/10" });
+      // Nothing is due, so review ends at once; the hub carries both lines.
+      expect((await sessionsOf(user.id)).map((session) => session.kind)).toEqual([
+        "grammar",
+        "review",
       ]);
+      expect(await lastSummaryLine(database.db, user.id)).toStartWith("grammar 8/10\n");
+    });
+
+    test("Start evening set without mistakes today is plain grammar (the topic picker)", async () => {
+      const { h, telegramId, user, store } = await setup();
+      await startEvening(h, telegramId, user.id, store);
+      expect(botMessages(h, telegramId).at(-1)?.text).toContain("Pick a topic");
+      expect((await sessionsOf(user.id)).map((session) => session.kind)).toEqual(["grammar"]);
     });
 
     test("a button of an older prompt is outdated and starts nothing", async () => {

@@ -52,17 +52,23 @@ export async function isGoalMet(db: Db, userId: number, date: string): Promise<b
   return row?.goalMet ?? false;
 }
 
-/** Mistakes the learner made or repeated on their local `date` (evening "mistakes to review"). */
-export async function countMistakesOn(
+/**
+ * Patterns of the mistakes the learner made or repeated on their local `date`, most frequent
+ * first — what the evening set practises.
+ */
+export async function mistakePatternsOn(
   db: Db,
   userId: number,
   date: string,
   timezone: string,
-): Promise<number> {
-  const result = await db.execute<{ count: number }>(
-    sql`select count(*)::int as count from mistakes
+  limit: number,
+): Promise<string[]> {
+  const rows = await db.execute<{ pattern: string }>(
+    sql`select pattern from mistakes
         where user_id = ${userId}
-          and (last_seen_at at time zone ${timezone})::date = ${date}::date`,
+          and (last_seen_at at time zone ${timezone})::date = ${date}::date
+        order by count desc, last_seen_at desc
+        limit ${limit}`,
   );
-  return Number(result[0]?.count ?? 0);
+  return rows.map((row) => row.pattern);
 }

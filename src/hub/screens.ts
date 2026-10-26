@@ -1,12 +1,16 @@
 import { InlineKeyboard } from "grammy";
 import { encodeCallback, type HubScreen } from "../bot/callbacks";
 import type { Locale, Translator } from "../bot/i18n";
+import type { ProgressData } from "../progress/queries";
+import { renderProgress } from "../progress/render";
 
 export interface ScreenModel {
   locale: Locale;
   dueCount: number;
   /** One-line summary of the last ended session, shown on the main screen. */
   lastSummary?: string;
+  /** The Progress screen's data; the hub loads it only when that screen is rendered. */
+  progress?: ProgressData;
 }
 
 export interface RenderedScreen {
@@ -52,9 +56,7 @@ export function renderScreen(
       };
     }
     case "progress":
-      return {
-        text: [t("progress-title"), "", t("progress-placeholder")].join("\n"),
-        keyboard: InlineKeyboard.from([back]),
-      };
+      if (model.progress) return renderProgress(i18n, model.locale, model.progress);
+      return { text: t("progress-title"), keyboard: InlineKeyboard.from([back]) };
   }
 }

@@ -10,6 +10,7 @@ import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
 import { OnboardingFlow } from "../onboarding/flow";
 import { onboardingHandlers, placementSession } from "../onboarding/handlers";
+import { progressHandlers } from "../progress";
 import {
   MemoryRoutineJobs,
   MemoryRoutineStore,
@@ -17,7 +18,6 @@ import {
   type RoutineJobs,
   type RoutineStore,
   routineHandlers,
-  type StreakSource,
 } from "../routine";
 import { demoSession } from "../sessions/demo";
 import { offerToCancel, sessionMiddleware } from "../sessions/handlers";
@@ -28,6 +28,7 @@ import { ProviderSettings } from "../settings/provider";
 import type { SkillRunner } from "../skills";
 import { talkHandlers, talkSession } from "../talk";
 import { vocabSessions } from "../vocab";
+import { createVoice, type VoiceOptions } from "../voice";
 import { accessMiddleware, adminCommands, type RefusalGate } from "./access";
 import type { BotContext, FlowState } from "./context";
 import { createI18n } from "./i18n";
@@ -52,10 +53,12 @@ export interface BotDeps {
   llmFactories?: ProviderFactories;
   /** Runs skills for session handlers (one runner per process). */
   skills: SkillRunner;
+  /** Voice (STT/TTS) overrides; tests replace the HTTP client and the cache directory. */
+  voice?: VoiceOptions;
   /** Tests pass `botInfo` here so the bot never calls getMe. */
   botConfig?: BotConfig<BotContext>;
   /** The daily routine's jobs and state (BullMQ and Redis in production; in memory otherwise). */
-  routine?: { jobs: RoutineJobs; store: RoutineStore; streak?: StreakSource };
+  routine?: { jobs: RoutineJobs; store: RoutineStore };
 }
 
 /**
@@ -136,20 +139,30 @@ export function createBot(deps: BotDeps) {
     jobs: routineJobs,
     store: routineStore,
     adminIds: deps.adminIds,
-    streak: deps.routine?.streak,
   });
   settingsEvents.on("settings.changed", (event) => routine.onSettingsChanged(event));
   sessions.onEnded((event) => routine.onSessionEnded(event));
+  const voice = createVoice({
+    db,
+    i18n,
+    sessions,
+    llmEnv: deps.llmEnv,
+    masterKey: deps.masterKey,
+    log,
+    options: deps.voice,
+  });
 
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(routine.activity());
   bot.use(i18n);
   bot.use(session({ initial: (): FlowState => ({}), storage: deps.storage }));
   bot.use(settingsInputMiddleware(settings));
+  bot.use(voice.stt);
   bot.use(sessionMiddleware(sessions));
   bot.use(adminCommands(db));
   bot.use(settingsHandlers(settings));
   bot.use(hubHandlers({ hub, sessions, onboarding }));
+  bot.use(progressHandlers({ db, hub, sessions, i18n }));
   bot.use(talkHandlers(talk));
   bot.use(grammarHandlers(grammar));
   bot.use(onboardingHandlers(onboarding));
@@ -163,6 +176,7 @@ export function createBot(deps: BotDeps) {
   }
 
   bot.use(vocab.composer);
+  bot.use(voice.speak);
   bot.use(routineHandlers(routine));
 
   // Any button that reached this point is from an older version of the bot or a dead screen.

@@ -153,6 +153,16 @@ export class SessionManager {
     return this.begin(user, first, ctx, { rest, lines: [] });
   }
 
+  /**
+   * Makes an already started session the first part of a sequence, for a session another module
+   * starts its own way (seeded grammar). No effect when the session is no longer active.
+   */
+  async continueWith(sessionId: number, kinds: readonly SessionKind[]): Promise<void> {
+    const session = await getSession(this.deps.db, sessionId);
+    if (session?.status !== "active" || this.sequences.has(sessionId)) return;
+    this.sequences.set(sessionId, { rest: kinds, lines: [] });
+  }
+
   /** Subscribes to every session end; returns the unsubscribe function. */
   onEnded(listener: SessionEndedListener): () => void {
     this.endedListeners.add(listener);

@@ -98,6 +98,24 @@ describe.skipIf(!testServerUrl)("session sequences", () => {
     expect(await findActiveSession(database.db, user.id)).toBeUndefined();
   });
 
+  test("continueWith turns a started session into the first part of a sequence", async () => {
+    const { sessions, started } = manager();
+    const user = await newUser();
+
+    const outcome = await sessions.start(user, "review");
+    if (!outcome.started) throw new Error("review did not start");
+    await sessions.continueWith(outcome.handle.session.id, ["vocab_new"]);
+    await started[0]?.end("finished", { line: "4 reviewed" });
+
+    expect((await findActiveSession(database.db, user.id))?.kind).toBe("vocab_new");
+    await started[1]?.end("finished", { line: "1 new word" });
+    expect(await lastSummaryLine(database.db, user.id)).toBe("4 reviewed\n1 new word");
+
+    // On a session that is over it does nothing.
+    await sessions.continueWith(outcome.handle.session.id, ["vocab_new"]);
+    expect(await findActiveSession(database.db, user.id)).toBeUndefined();
+  });
+
   test("a plain start is not a sequence", async () => {
     const { sessions, started } = manager();
     const user = await newUser();

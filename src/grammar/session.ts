@@ -54,7 +54,27 @@ function weakestTopic(state: GrammarState): string | null {
 /** The "grammar" session kind: the topic picker on start, typed answers as messages. */
 export function grammarSession(deps: GrammarDeps): SessionKindHandler {
   return {
-    async onStart(handle) {
+    async onStart(handle, ctx) {
+      const seed = ctx?.session.grammarSeed;
+      if (ctx) ctx.session.grammarSeed = undefined;
+      if (ctx && seed?.length) {
+        const fresh: GrammarState = {
+          sessionId: handle.session.id,
+          topic: null,
+          seed,
+          asked: 0,
+          answered: 0,
+          correct: 0,
+          recentTopics: [],
+          wrongByTopic: {},
+        };
+        ctx.session.grammar = fresh;
+        await handle.send(
+          deps.i18n.t(handle.locale, "grammar-practice-intro", { count: seed.length }),
+        );
+        await askNext(deps, handle, fresh);
+        return;
+      }
       const settings = await getSettings(deps.db, handle.user.id);
       const picker = topicPicker(deps.i18n, handle.locale, settings?.cefrLevel ?? null);
       await handle.send(picker.text, { reply_markup: picker.keyboard });
@@ -133,7 +153,7 @@ async function askNext(deps: GrammarDeps, handle: LearningHandle, state: Grammar
   try {
     const run = await deps.skills.runSkill(handle.user.id, "grammar-quiz", {
       recent_accuracy: accuracyOf(state),
-      topic: state.topic,
+      topic: state.seed?.length ? (state.seed[(n - 1) % state.seed.length] ?? null) : state.topic,
       item_type: ITEM_ROTATION[(n - 1) % ITEM_ROTATION.length] ?? null,
       recent_topics: state.recentTopics,
     });

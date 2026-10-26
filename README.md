@@ -73,6 +73,15 @@ schema and returns only data that passed it: an invalid answer gets one repair t
 `smart` default in `src/llm/models.ts`. User keys are stored encrypted and shown back only as a
 masked hint (`sk-…a1b2`).
 
+## Voice
+
+With Settings → Voice on, a voice message (up to 60 s) in Talk, Grammar or a typed Review answer
+is transcribed (OpenAI-compatible `audio/transcriptions`), shown as a tracked message and handled
+as if typed. Word cards get a 🔊 button that sends the pronunciation (`audio/speech`) as a voice
+note. The key is the user's own OpenAI-compatible key, else `SERVER_OPENAI_API_KEY`; with neither,
+the bot says voice needs a key and the session carries on. Generated audio is cached per lemma and
+voice under `data/tts/` (override with `TTS_CACHE_DIR`; mount it as a volume in production).
+
 ## Skills
 
 A skill is `skills/<id>/SKILL.md`: YAML frontmatter plus the system prompt. `loadSkillRegistry()`

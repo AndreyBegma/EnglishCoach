@@ -3,7 +3,7 @@ import type { BotContext } from "../bot/context";
 import { DEFAULT_LOCALE, type Locale, type Translator } from "../bot/i18n";
 import { isIgnorableDeleteError } from "../bot/telegram-errors";
 import type { Db } from "../db/client";
-import { countMistakesOn, getDailyStats, isGoalMet, markGoalMet } from "../db/repositories/daily";
+import { getDailyStats, isGoalMet, markGoalMet, mistakePatternsOn } from "../db/repositories/daily";
 import { countDueCards } from "../db/repositories/hub";
 import type { SessionKind } from "../db/repositories/sessions";
 import {
@@ -14,13 +14,14 @@ import {
 } from "../db/repositories/users";
 import type { User, UserSettings } from "../db/schema";
 import type { SettingsChanged, SettingsField } from "../events/settings-events";
-import { QUESTIONS_PER_SESSION } from "../grammar";
+import { QUESTIONS_PER_SESSION, startSeededGrammar } from "../grammar";
 import type { HubUser } from "../hub/hub-service";
 import type { Logger } from "../log";
+import { streakDays } from "../progress/streak";
 import { offerToCancel } from "../sessions/handlers";
-import type { SessionEnded, SessionManager } from "../sessions/session-manager";
+import type { SessionEnded, SessionManager, StartOutcome } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
-import { encodeRoutineCallback, type RoutineCallback, type RoutineSet } from "./callbacks";
+import { encodeRoutineCallback, type RoutineCallback } from "./callbacks";
 import type { RoutineJobs, RoutineStore } from "./ports";
 import { localDate, type RoutineSlot, safeZone, slotDate, slotSchedules } from "./time";
 
@@ -28,11 +29,11 @@ import { localDate, type RoutineSlot, safeZone, slotDate, slotSchedules } from "
 export const MAX_SNOOZES = 2;
 export const SNOOZE_MS = 60 * 60_000;
 
-/** A set is the existing sessions run back to back (docs/ARCHITECTURE.md → Daily routine). */
-export const SET_KINDS: Record<RoutineSet, readonly [SessionKind, ...SessionKind[]]> = {
-  morning: ["review", "vocab_new"],
-  evening: ["grammar", "review"],
-};
+/**
+ * A set is the existing sessions run back to back (docs/ARCHITECTURE.md → Daily routine). The
+ * evening set is seeded grammar, then review (see `startEvening`).
+ */
+export const MORNING_SET: readonly [SessionKind, ...SessionKind[]] = ["review", "vocab_new"];
 
 /** Settings that move or switch the daily jobs. */
 const SCHEDULE_FIELDS: ReadonlySet<SettingsField> = new Set<SettingsField>([
@@ -42,9 +43,6 @@ const SCHEDULE_FIELDS: ReadonlySet<SettingsField> = new Set<SettingsField>([
   "remindersEnabled",
   "cefrLevel",
 ]);
-
-/** Days in a row the goal was met, for the plan text. Owned by the progress module. */
-export type StreakSource = (userId: number, today: string) => Promise<number>;
 
 export interface RoutineDeps {
   api: Api;
@@ -57,7 +55,6 @@ export interface RoutineDeps {
   store: RoutineStore;
   /** Admins are allowed through env, not through `users.is_allowed`. */
   adminIds: readonly number[];
-  streak?: StreakSource;
   /** The clock; tests pin it. */
   now?: () => Date;
 }
@@ -267,18 +264,19 @@ export class Routine {
     const { db, log } = this.deps;
     const locale = settings.uiLang ?? DEFAULT_LOCALE;
     const evening = slot === "evening";
+    const zone = safeZone(settings.timezone);
     const [due, stats, mistakes, streak] = await Promise.all([
       countDueCards(db, user.id, this.now()),
       getDailyStats(db, user.id, date),
-      evening ? countMistakesOn(db, user.id, date, safeZone(settings.timezone)) : 0,
-      this.streak(user.id, date),
+      evening ? mistakePatternsOn(db, user.id, date, zone, QUESTIONS_PER_SESSION) : [],
+      this.streak(user.id, zone),
     ]);
     const vars = {
       slot,
       due_reviews: due,
       new_words: evening ? 0 : Math.max(0, settings.wordsPerDay - (stats?.newWords ?? 0)),
       grammar_items: evening ? QUESTIONS_PER_SESSION : 0,
-      mistakes_to_review: mistakes,
+      mistakes_to_review: mistakes.length,
       streak_days: streak,
     };
     try {
@@ -308,12 +306,14 @@ export class Routine {
     return [heading, ...(lines.length ? lines : [this.t(locale, "routine-plan-empty")])].join("\n");
   }
 
-  private async streak(userId: number, date: string): Promise<number> {
-    if (!this.deps.streak) return 0;
-    return this.deps.streak(userId, date).catch((error: unknown) => {
+  /** Days in a row the goal was met; 0 when it cannot be read (the plan still goes out). */
+  private async streak(userId: number, timezone: string): Promise<number> {
+    try {
+      return (await streakDays(this.deps.db, userId, { now: this.now(), timezone })).current;
+    } catch (error) {
       this.deps.log.warn("streak lookup failed", { userId, error });
       return 0;
-    });
+    }
   }
 
   /** Deletes the routine prompt in the chat, if there is one. */
@@ -352,8 +352,27 @@ export class Routine {
 
     await ctx.answerCallbackQuery();
     await this.removePrompt(ctx.user);
-    const outcome = await sessions.startSequence(ctx.user, SET_KINDS[callback.set], ctx);
+    const outcome =
+      callback.set === "evening"
+        ? await this.startEvening(ctx)
+        : await sessions.startSequence(ctx.user, MORNING_SET, ctx);
     if (!outcome.started) await offerToCancel(sessions, ctx, outcome.active, ctx.user);
+  }
+
+  /** Grammar seeded with today's mistake patterns (plain grammar without any), then review. */
+  private async startEvening(ctx: BotContext): Promise<StartOutcome> {
+    const { db, sessions } = this.deps;
+    const zone = safeZone(ctx.settings.timezone);
+    const patterns = await mistakePatternsOn(
+      db,
+      ctx.user.id,
+      localDate(this.now(), zone),
+      zone,
+      QUESTIONS_PER_SESSION,
+    );
+    const outcome = await startSeededGrammar(sessions, ctx, patterns);
+    if (outcome.started) await sessions.continueWith(outcome.handle.session.id, ["review"]);
+    return outcome;
   }
 
   private t(locale: Locale, key: string, variables?: Record<string, string | number>): string {

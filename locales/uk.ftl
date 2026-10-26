@@ -106,7 +106,6 @@ input-timezone-invalid = Невідомий часовий пояс. Введі�
 
 ## Progress
 progress-title = 📈 Прогрес
-progress-placeholder = Незабаром тут з'явиться ваша статистика.
 
 ## Sessions
 session-conflict = У вас є незавершене заняття. Скасувати його, щоб почати нове?
@@ -277,3 +276,35 @@ routine-start-evening = ▶️ Почати вечірній сет
 routine-later = ⏳ Пізніше (1 год)
 routine-snoozed = Нагадаю за годину.
 routine-outdated = Це нагадування вже неактуальне.
+
+# --- progress ---
+progress-level = 🎓 Рівень: { $level }
+progress-level-unset = 🎓 Рівень: ще не визначено
+progress-streak = 🔥 Серія: { $current } (рекорд: { $best })
+progress-goal = 🎯 Сьогодні: { $done }/{ $goal } нових слів · повторень: { $reviews }
+progress-goal-met = ✅
+progress-cards = 🗂 Картки: нових { $new } · у вивченні { $learning } · на повторенні { $review }
+progress-due = ⏰ До повторення: сьогодні { $today } · завтра { $tomorrow }
+progress-words = 📚 Вивчено слів: { $count }
+progress-activity = 📊 Останні 7 днів: { $spark }
+progress-grammar = ✍️ Точність у граматиці: { $week } (7 днів) · { $month } (30 днів)
+progress-weak-title = ⚠️ Слабкі місця:
+progress-weak-item = • { $pattern } ×{ $count }
+progress-weak-none = Помилок поки немає — тренувати нічого.
+progress-btn-weak = 🎯 Слабкі місця
+progress-weak-screen-title = 🎯 Слабкі місця
+progress-weak-line = { $n }. { $pattern } ×{ $count }{ "\u000A" }❌ { $wrong }{ "\u000A" }✅ { $right }
+progress-btn-practice = ✍️ Потренувати
+progress-practice-none = Поки нічого тренувати.
+grammar-practice-intro = ✍️ Тренуємо слабкі місця (патернів: { $count }), по запитанню на кожен по черзі.
+
+# --- voice ---
+voice-listen = 🔊 Послухати
+voice-transcript = 🎤 { $text }
+voice-needs-key = Для голосових відповідей і вимови потрібен OpenAI-сумісний API-ключ. Додайте його в Налаштування → Провайдер і спробуйте знову. А поки напишіть відповідь текстом.
+voice-too-long = Голосове повідомлення задовге. Вкладіться в { $seconds } секунд або напишіть відповідь текстом.
+voice-stt-failed = Не вдалося розпізнати голосове повідомлення. Спробуйте ще раз або напишіть відповідь текстом.
+voice-empty = У голосовому повідомленні не чути слів. Спробуйте ще раз або напишіть відповідь текстом.
+voice-tts-failed = Зараз не вдалося озвучити слово. Спробуйте пізніше.
+voice-disabled = Озвучення вимкнено. Увімкніть його в Налаштуваннях.
+voice-outdated = Ця кнопка більше не доступна.

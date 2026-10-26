@@ -106,7 +106,6 @@ input-timezone-invalid = Unknown time zone. Type a name like Europe/Kyiv or send
 
 ## Progress
 progress-title = 📈 Progress
-progress-placeholder = Your statistics will appear here soon.
 
 ## Sessions
 session-conflict = You have an unfinished session. Cancel it to start something new?
@@ -273,3 +272,35 @@ routine-start-evening = ▶️ Start evening set
 routine-later = ⏳ Later (1 h)
 routine-snoozed = I'll remind you in an hour.
 routine-outdated = This reminder is no longer active.
+
+# --- progress ---
+progress-level = 🎓 Level: { $level }
+progress-level-unset = 🎓 Level: not set yet
+progress-streak = 🔥 Streak: { $current } (best: { $best })
+progress-goal = 🎯 Today: { $done }/{ $goal } new words · { $reviews } reviews
+progress-goal-met = ✅
+progress-cards = 🗂 Cards: { $new } new · { $learning } learning · { $review } review
+progress-due = ⏰ Due: { $today } today · { $tomorrow } tomorrow
+progress-words = 📚 Words learned: { $count }
+progress-activity = 📊 Last 7 days: { $spark }
+progress-grammar = ✍️ Grammar accuracy: { $week } (7 days) · { $month } (30 days)
+progress-weak-title = ⚠️ Top weak spots:
+progress-weak-item = • { $pattern } ×{ $count }
+progress-weak-none = No mistakes recorded yet — nothing to practise.
+progress-btn-weak = 🎯 Weak spots
+progress-weak-screen-title = 🎯 Weak spots
+progress-weak-line = { $n }. { $pattern } ×{ $count }{ "\u000A" }❌ { $wrong }{ "\u000A" }✅ { $right }
+progress-btn-practice = ✍️ Practice these
+progress-practice-none = Nothing to practise yet.
+grammar-practice-intro = ✍️ Practising your weak spots ({ $count } patterns), one question each in turn.
+
+# --- voice ---
+voice-listen = 🔊 Listen
+voice-transcript = 🎤 { $text }
+voice-needs-key = Voice answers and pronunciation need an OpenAI-compatible API key. Add one in Settings → Provider, then try again. Meanwhile, type your answer.
+voice-too-long = That voice message is too long. Keep it under { $seconds } seconds, or type your answer.
+voice-stt-failed = I could not transcribe that voice message. Try again or type your answer.
+voice-empty = I could not hear any words in that voice message. Try again or type your answer.
+voice-tts-failed = I could not generate the pronunciation right now. Try again later.
+voice-disabled = Voice is off. Turn it on in Settings.
+voice-outdated = This button is no longer available.

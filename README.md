@@ -40,6 +40,7 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun test` | Unit tests; the Postgres/Redis integration tests run only when `DATABASE_URL` (or `DATABASE_URL_TEST`) / `REDIS_URL` are set (Bun loads `.env` automatically). DB tests create and drop a throwaway `coach_test_*` database per file on that server |
 | `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
+| `bun run db:seed:words` | Seed the CEFR frequency dictionary (`data/words/`), idempotent |
 
 ## Layout
 
@@ -56,4 +57,15 @@ drizzle/            generated SQL migrations
 src/redis.ts        Redis client
 src/log.ts          JSON logger that redacts *key* / *token* / *secret* fields
 locales/            ru, en, uk translations — every key in all three
+src/llm/            LLM providers (server, anthropic, openai, claude-code) and resolveProvider
+src/crypto/         AES-256-GCM for user API keys under MASTER_KEY
 ```
+
+## LLM providers
+
+`resolveProvider(deps, userId)` returns the user's active provider, or `server` (configured by
+`SERVER_LLM_PROVIDER` and its key in `.env`) when they have none. Every provider takes a zod
+schema and returns only data that passed it: an invalid answer gets one repair turn, then an
+`LlmOutputError`. Model choice: the user's model, else the caller's, else the backend's `fast` /
+`smart` default in `src/llm/models.ts`. User keys are stored encrypted and shown back only as a
+masked hint (`sk-…a1b2`).

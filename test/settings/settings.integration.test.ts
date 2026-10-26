@@ -31,7 +31,8 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
     const telegramId = nextUser++;
     const h = createHarness(database.db, { adminIds: [telegramId] });
     h.llm.validKeys.add(ANTHROPIC_KEY).add(OPENROUTER_KEY).add(CUSTOM_KEY);
-    await h.say(telegramId, "/start");
+    // `/start` would begin onboarding for a learner without a level; these tests start at the hub.
+    await h.say(telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, telegramId);
     const hub = user && (await getHub(database.db, user.id));
     if (!user || !hub) throw new Error("user or hub not created");

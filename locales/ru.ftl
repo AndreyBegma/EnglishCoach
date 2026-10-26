@@ -123,3 +123,28 @@ demo-summary = Демо завершено: повторено 3 сообщен�
 ## LLM providers
 provider-unavailable-runner = Запуск на вашем собственном компьютере появится в v2. Выберите другого провайдера в настройках.
 provider-unavailable-server = Серверная LLM не настроена. Добавьте свой API-ключ в настройках.
+
+# --- onboarding ---
+onboarding-welcome = 👋 Добро пожаловать в EnglishCoach! Понемногу английского каждый день: слова, грамматика и разговор. Для начала выберите язык интерфейса и объяснений.
+onboarding-provider = Какой ИИ будет вести уроки? Серверный работает сразу, а свой ключ можно подключить в настройках в любой момент.
+onboarding-provider-server = Использовать серверный (по умолчанию)
+onboarding-provider-own = Настроить свой провайдер в настройках
+onboarding-path = Как определим ваш уровень?
+onboarding-take-test = Пройти 5-минутный тест уровня
+onboarding-know-level = Я знаю свой уровень
+onboarding-choose-level = Выберите свой уровень:
+onboarding-retake-intro = Короткий адаптивный тест из не более чем { $max } вопросов заново определит ваш уровень.
+onboarding-start-test = Начать тест
+onboarding-cancel = Отмена
+onboarding-question = Вопрос { $n } из не более чем { $max }
+onboarding-error = Тест не удалось продолжить: ИИ-провайдер не дал пригодного ответа.
+onboarding-retry = Повторить
+onboarding-result = Ваш уровень: { $level }
+onboarding-result-fallback = По { $correct } верным ответам из { $total }.
+onboarding-continue = Дальше
+onboarding-words = Сколько новых слов в день?
+onboarding-morning = Когда начинать утреннюю сессию?
+onboarding-evening = А вечернюю?
+onboarding-summary-test = Тест уровня: { $level }. { $detail }
+onboarding-summary-chosen = Уровень выбран: { $level }.
+onboarding-done = Добро пожаловать!

@@ -18,6 +18,8 @@ export interface SettingsControllerDeps {
   i18n: Translator;
   events: SettingsEvents;
   providers: ProviderSettings;
+  /** Starts the placement test again (the onboarding module). */
+  placement: { retake(ctx: BotContext): Promise<void> };
 }
 
 type PendingInput = SettingsInput extends infer I
@@ -68,8 +70,8 @@ export class SettingsController {
           [callback.change.field],
         );
       case "placement":
-        await ctx.answerCallbackQuery({ text: ctx.t("hub-coming-soon") });
-        return;
+        await ctx.answerCallbackQuery();
+        return this.deps.placement.retake(ctx);
       case "provider":
         return this.chooseProvider(ctx, callback.choice);
       case "provider-key":

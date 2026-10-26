@@ -78,12 +78,33 @@ export type StartOutcome =
   | { started: true; handle: LearningHandle }
   | { started: false; active: LearningSession };
 
+/** A session that just ended, for modules that react to finished work (the daily goal). */
+export interface SessionEnded {
+  session: LearningSession;
+  user: HubUser;
+  status: EndedStatus;
+}
+
+export type SessionEndedListener = (event: SessionEnded) => void | Promise<void>;
+
+/** The parts of a sequence still to run after the current one, and the summaries so far. */
+interface Sequence {
+  rest: readonly SessionKind[];
+  lines: readonly string[];
+}
+
 /** Telegram's deleteMessages takes at most 100 IDs per call. */
 const DELETE_BATCH = 100;
 
 export class SessionManager {
   private readonly handlers = new Map<SessionKind, SessionKindHandler>();
   private readonly update = new AsyncLocalStorage<BotContext>();
+  /**
+   * Running sequences by the ID of their current part. In memory: after a restart the rest of a
+   * sequence is dropped and the learner lands on the hub, which is safe.
+   */
+  private readonly sequences = new Map<number, Sequence>();
+  private readonly endedListeners = new Set<SessionEndedListener>();
 
   constructor(private readonly deps: SessionManagerDeps) {}
 
@@ -113,13 +134,45 @@ export class SessionManager {
    * changes and the active session is returned so the caller can offer to cancel it. `ctx`
    * defaults to the update being handled, when it is this user's.
    */
-  async start(user: HubUser, kind: SessionKind, ctx?: BotContext): Promise<StartOutcome> {
+  start(user: HubUser, kind: SessionKind, ctx?: BotContext): Promise<StartOutcome> {
+    return this.begin(user, kind, ctx);
+  }
+
+  /**
+   * Starts `kinds` one after another as separate sessions (a routine set): when a part finishes,
+   * its messages are cleaned up and the next part starts in the same update instead of the hub
+   * coming back. A part that is cancelled or expires ends the whole sequence. The hub then shows
+   * the summaries of every part, joined. The outcome is that of the first part.
+   */
+  startSequence(
+    user: HubUser,
+    kinds: readonly [SessionKind, ...SessionKind[]],
+    ctx?: BotContext,
+  ): Promise<StartOutcome> {
+    const [first, ...rest] = kinds;
+    return this.begin(user, first, ctx, { rest, lines: [] });
+  }
+
+  /** Subscribes to every session end; returns the unsubscribe function. */
+  onEnded(listener: SessionEndedListener): () => void {
+    this.endedListeners.add(listener);
+    return () => this.endedListeners.delete(listener);
+  }
+
+  private async begin(
+    user: HubUser,
+    kind: SessionKind,
+    ctx?: BotContext,
+    sequence?: Sequence,
+  ): Promise<StartOutcome> {
     const handler = this.handlers.get(kind);
     if (!handler) throw new Error(`no handler registered for session kind "${kind}"`);
 
     const result = await createSession(this.deps.db, user.id, kind);
     if (!result.created) return { started: false, active: result.active };
 
+    // Before onStart: a part with nothing to do ends inside it, and must find its sequence.
+    if (sequence) this.sequences.set(result.session.id, sequence);
     await this.deps.timeouts.schedule(result.session.id);
     const settings = await getSettings(this.deps.db, user.id);
     const handle = this.handle(result.session, user, settings?.uiLang ?? DEFAULT_LOCALE);
@@ -153,7 +206,8 @@ export class SessionManager {
 
   /**
    * Ends a session: deletes every tracked message, stores the summary and re-sends the hub with
-   * it. Returns false (and does nothing) when the session was not active any more.
+   * it — or, for a finished part of a sequence, starts the next part. Returns false (and does
+   * nothing) when the session was not active any more.
    */
   async end(
     sessionId: number,
@@ -165,23 +219,45 @@ export class SessionManager {
     const user = session && (await getUserById(db, session.userId));
     if (!session || !user) return false;
 
-    if (
-      !(await endSession(
-        db,
-        sessionId,
-        status,
-        summary ?? (await this.defaultSummary(user, status)),
-      ))
-    ) {
-      return false;
-    }
+    const sequence = this.sequences.get(sessionId);
+    const next = status === "finished" ? sequence?.rest[0] : undefined;
+    const own = summary ?? (await this.defaultSummary(user, status));
+    // The last part (or the one that stopped the sequence) carries every part's line to the hub.
+    const stored = sequence && !next ? joinSummaries(sequence.lines, own) : own;
+
+    const ended = await endSession(db, sessionId, status, stored);
+    if (!ended) return false;
+    this.sequences.delete(sessionId);
 
     await timeouts.cancel(sessionId).catch((error: unknown) => {
       log.warn("session timeout cancel failed", { sessionId, error });
     });
     await this.deleteTracked(sessionId);
+    await this.notifyEnded({ session: ended, user, status });
+
+    if (sequence && next) {
+      const lines = own?.line ? [...sequence.lines, own.line] : sequence.lines;
+      const outcome = await this.begin(user, next, undefined, {
+        rest: sequence.rest.slice(1),
+        lines,
+      });
+      if (outcome.started) return true;
+    }
     await hub.bump(user);
     return true;
+  }
+
+  private async notifyEnded(event: SessionEnded): Promise<void> {
+    for (const listener of this.endedListeners) {
+      try {
+        await listener(event);
+      } catch (error) {
+        this.deps.log.warn("session ended listener failed", {
+          sessionId: event.session.id,
+          error,
+        });
+      }
+    }
   }
 
   /** Called by the inactivity timeout. */
@@ -218,4 +294,14 @@ export class SessionManager {
     }
     await deleteSessionMessages(db, sessionId);
   }
+}
+
+/** One summary for a whole sequence: earlier parts' lines, then this part's, one per line. */
+function joinSummaries(
+  lines: readonly string[],
+  own: SessionSummary | null,
+): SessionSummary | null {
+  if (!lines.length) return own;
+  const all = own?.line ? [...lines, own.line] : lines;
+  return { ...own, line: all.join("\n") };
 }

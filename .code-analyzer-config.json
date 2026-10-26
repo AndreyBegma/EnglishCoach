@@ -1,6 +1,6 @@
 {
   "orchestrator": {
-    "base": "main",
+    "base": "develop",
     "maxSlots": 4,
     "readyLabel": "cs:ready",
     "install": "bun install",

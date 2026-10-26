@@ -13,6 +13,7 @@ import { WordPicker } from "../words/picker";
 import type { VocabCallback } from "./callbacks";
 import { button, type VocabCore } from "./core";
 import { cardHtml, escapeHtml, HTML } from "./render";
+import { speakRow } from "./speak";
 import { readFlow, writeFlow } from "./state";
 import { localDate, newWordsOn } from "./stats";
 
@@ -228,6 +229,7 @@ export class LearnFlow implements SessionKindHandler {
           button(t("vocab-got-it"), { op: "got-it", cardId: card.id }),
           button(t("vocab-add-word"), { op: "add-word" }),
         ],
+        ...speakRow(t, ctx, card.id),
         [button(t("vocab-finish"), { op: "finish" })],
       ]),
     });

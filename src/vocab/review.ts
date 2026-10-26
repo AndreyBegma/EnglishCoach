@@ -14,6 +14,7 @@ import { button, isLlmFailure, type VocabCore } from "./core";
 import { modeFor } from "./modes";
 import { escapeHtml, HTML } from "./render";
 import type { RatingName } from "./scheduler";
+import { speakRow } from "./speak";
 import { readFlow, type VocabStep, writeFlow } from "./state";
 
 /** At most this many cards per Review session; the rest wait for the next one. */
@@ -260,7 +261,7 @@ export class ReviewFlow implements SessionKindHandler {
     const t = this.core.t(handle);
     await handle.send(`${text}\n\n${t("vocab-rate-prompt")}`, {
       ...HTML,
-      reply_markup: this.core.ratingKeyboard(t, cardId, suggested),
+      reply_markup: this.core.ratingKeyboard(t, cardId, suggested, speakRow(t, ctx, cardId)),
     });
     writeFlow(ctx, handle.session.id, { kind: "rate", cardId, suggested });
   }

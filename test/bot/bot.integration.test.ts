@@ -3,7 +3,7 @@ import { encodeCallback } from "../../src/bot/callbacks";
 import type { Database } from "../../src/db/client";
 import { getHub } from "../../src/db/repositories/hub";
 import { findActiveSession, getSession } from "../../src/db/repositories/sessions";
-import { findUserByTelegramId } from "../../src/db/repositories/users";
+import { findUserByTelegramId, updateSettings } from "../../src/db/repositories/users";
 import { SkillRegistry, SkillRunner } from "../../src/skills";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
 import { createHarness, type Harness, type HarnessOptions } from "./harness";
@@ -22,7 +22,8 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
   async function setup(options: HarnessOptions = {}) {
     const telegramId = nextUser++;
     const h = createHarness(database.db, { ...options, adminIds: [telegramId] });
-    await h.say(telegramId, "/start");
+    // `/start` begins onboarding for a learner without a level (test/onboarding); start at the hub.
+    await h.say(telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, telegramId);
     if (!user) throw new Error("user not created");
     return { h, telegramId, user };
@@ -36,7 +37,7 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
 
   const chatIds = (h: Harness, telegramId: number) => [...h.telegram.chat(telegramId).keys()];
 
-  test("/start deletes the command and sends one pinned hub; /menu moves it to the bottom", async () => {
+  test("/menu sends one pinned hub; /menu and /start (for a learner with a level) move it to the bottom", async () => {
     const { h, telegramId, user } = await setup();
     const first = await hubOf(user.id);
     expect(first).toMatchObject({ chatId: telegramId, pinned: true });
@@ -60,6 +61,13 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     expect(second.messageId).not.toBe(first.messageId);
     expect(chatIds(h, telegramId)).toEqual([second.messageId]);
     expect(h.telegram.pinned.get(telegramId)).toBe(second.messageId);
+
+    await updateSettings(database.db, user.id, { cefrLevel: "B1" });
+    await h.say(telegramId, "/start");
+    const third = await hubOf(user.id);
+    expect(third.messageId).not.toBe(second.messageId);
+    expect(chatIds(h, telegramId)).toEqual([third.messageId]);
+    expect(h.telegram.pinned.get(telegramId)).toBe(third.messageId);
   });
 
   test("hub sub-screens edit the one hub message and send nothing new", async () => {

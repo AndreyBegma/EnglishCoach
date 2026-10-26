@@ -1,11 +1,18 @@
 import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
+import { SettingsEvents } from "../events/settings-events";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
+import type { ProviderFactories } from "../llm";
+import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
 import { demoSession } from "../sessions/demo";
 import { offerToCancel, sessionMiddleware } from "../sessions/handlers";
 import { SessionManager, type SessionTimeouts } from "../sessions/session-manager";
+import { SettingsController } from "../settings/controller";
+import { settingsHandlers, settingsInputMiddleware } from "../settings/handlers";
+import { ProviderSettings } from "../settings/provider";
+import type { SkillRunner } from "../skills";
 import { accessMiddleware, adminCommands, type RefusalGate } from "./access";
 import type { BotContext, FlowState } from "./context";
 import { createI18n } from "./i18n";
@@ -20,13 +27,22 @@ export interface BotDeps {
   refusals: RefusalGate;
   timeouts: SessionTimeouts;
   enableDemoSession: boolean;
+  /** Decrypts and encrypts user API keys. */
+  masterKey: Buffer;
+  /** The server provider's environment (`SERVER_*`, `CLAUDE_BIN`). */
+  llmEnv: ServerEnv;
+  /** Tests replace the SDK-backed providers. */
+  llmFactories?: ProviderFactories;
+  /** Runs skills for session handlers (one runner per process). */
+  skills: SkillRunner;
   /** Tests pass `botInfo` here so the bot never calls getMe. */
   botConfig?: BotConfig<BotContext>;
 }
 
 /**
  * Composes the bot. Middleware order matters: access (sets ctx.user/settings) → i18n (reads
- * ctx.settings) → grammY session → learning session → admin → hub → fallbacks.
+ * ctx.settings) → grammY session → pending settings input → learning session → admin →
+ * settings → hub → fallbacks.
  */
 export function createBot(deps: BotDeps) {
   const { db, log } = deps;
@@ -42,14 +58,30 @@ export function createBot(deps: BotDeps) {
     i18n,
   });
 
+  const settingsEvents = new SettingsEvents(log);
+  const providers = new ProviderSettings({
+    db,
+    env: deps.llmEnv,
+    masterKey: deps.masterKey,
+    factories: deps.llmFactories,
+    log,
+  });
+  const settings = {
+    hub,
+    controller: new SettingsController({ db, hub, i18n, events: settingsEvents, providers }),
+    log,
+  };
+
   if (deps.enableDemoSession) sessions.register("talk", demoSession(i18n));
 
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(i18n);
   bot.use(session({ initial: (): FlowState => ({}), storage: deps.storage }));
+  bot.use(settingsInputMiddleware(settings));
   bot.use(sessionMiddleware(sessions));
   bot.use(adminCommands(db));
-  bot.use(hubHandlers({ db, hub, sessions }));
+  bot.use(settingsHandlers(settings));
+  bot.use(hubHandlers({ hub, sessions }));
 
   if (deps.enableDemoSession) {
     bot.command("demo", async (ctx) => {
@@ -62,7 +94,7 @@ export function createBot(deps: BotDeps) {
   // Any button that reached this point is from an older version of the bot or a dead screen.
   bot.on("callback_query", (ctx) => answerOutdated(ctx, hub));
 
-  return { bot, hub, sessions };
+  return { bot, hub, sessions, settingsEvents, skills: deps.skills };
 }
 
 export type BotApp = ReturnType<typeof createBot>;

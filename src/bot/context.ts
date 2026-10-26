@@ -2,6 +2,7 @@ import type { I18nFlavor } from "@grammyjs/i18n";
 import type { Context, SessionFlavor } from "grammy";
 import type { User, UserSettings } from "../db/schema";
 import type { LearningHandle } from "../sessions/session-manager";
+import type { ModelListState, SettingsInput } from "../settings/state";
 
 /**
  * Multi-step conversation state, kept in Redis by grammY's session plugin (`ctx.session`).
@@ -10,6 +11,8 @@ import type { LearningHandle } from "../sessions/session-manager";
  */
 export interface FlowState {
   demo?: { sessionId: number; echoed: number };
+  settingsInput?: SettingsInput;
+  modelList?: ModelListState;
 }
 
 /**

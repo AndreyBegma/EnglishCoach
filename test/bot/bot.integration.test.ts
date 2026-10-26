@@ -4,6 +4,7 @@ import type { Database } from "../../src/db/client";
 import { getHub } from "../../src/db/repositories/hub";
 import { findActiveSession, getSession } from "../../src/db/repositories/sessions";
 import { findUserByTelegramId } from "../../src/db/repositories/users";
+import { SkillRegistry, SkillRunner } from "../../src/skills";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
 import { createHarness, type Harness } from "./harness";
 
@@ -66,7 +67,7 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     const { messageId } = await hubOf(user.id);
     h.telegram.reset();
 
-    await h.press(telegramId, messageId, encodeCallback({ type: "screen", screen: "settings" }));
+    await h.press(telegramId, messageId, encodeCallback({ type: "settings", page: "root" }));
     expect(h.telegram.chat(telegramId).get(messageId)?.text).toContain(
       "Interface language: English",
     );
@@ -194,11 +195,7 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     const current = await hubOf(user.id);
 
     h.telegram.reset();
-    await h.press(
-      telegramId,
-      oldHub.messageId,
-      encodeCallback({ type: "screen", screen: "settings" }),
-    );
+    await h.press(telegramId, oldHub.messageId, encodeCallback({ type: "settings", page: "root" }));
     expect(h.telegram.callsOf("answerCallbackQuery")[0]?.payload).toMatchObject({
       text: "This menu is outdated.",
     });
@@ -211,6 +208,16 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     expect(h.telegram.callsOf("answerCallbackQuery")[0]?.payload).toMatchObject({
       text: "This menu is outdated.",
     });
+  });
+
+  test("the bot exposes the skill runner it was given, for session handlers", () => {
+    const skills = new SkillRunner({
+      registry: new SkillRegistry([]),
+      provider: () => Promise.reject(new Error("unused")),
+      learner: () => Promise.reject(new Error("unused")),
+    });
+    expect(createHarness(database.db, { skills }).skills).toBe(skills);
+    expect(createHarness(database.db).skills).toBeInstanceOf(SkillRunner);
   });
 
   test("a hub activity without a session handler answers 'coming soon'", async () => {

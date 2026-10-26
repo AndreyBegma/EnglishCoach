@@ -1,9 +1,7 @@
 import { Composer } from "grammy";
 import { type HubActivity, parseCallback } from "../bot/callbacks";
 import type { BotContext } from "../bot/context";
-import type { Db } from "../db/client";
 import type { SessionKind } from "../db/repositories/sessions";
-import { updateSettings } from "../db/repositories/users";
 import { offerToCancel } from "../sessions/handlers";
 import type { SessionManager } from "../sessions/session-manager";
 import type { HubService } from "./hub-service";
@@ -17,7 +15,6 @@ const ACTIVITY_KIND: Record<HubActivity, SessionKind> = {
 };
 
 export interface HubHandlerDeps {
-  db: Db;
   hub: HubService;
   sessions: SessionManager;
 }
@@ -28,7 +25,7 @@ export async function answerOutdated(ctx: BotContext, hub: HubService): Promise<
   await hub.bump(ctx.user);
 }
 
-export function hubHandlers({ db, hub, sessions }: HubHandlerDeps): Composer<BotContext> {
+export function hubHandlers({ hub, sessions }: HubHandlerDeps): Composer<BotContext> {
   const composer = new Composer<BotContext>();
 
   composer.command(["start", "menu"], async (ctx) => {
@@ -39,22 +36,17 @@ export function hubHandlers({ db, hub, sessions }: HubHandlerDeps): Composer<Bot
 
   composer.on("callback_query:data", async (ctx, next) => {
     const callback = parseCallback(ctx.callbackQuery.data);
-    if (callback?.type !== "screen" && callback?.type !== "activity" && callback?.type !== "lang") {
-      return next();
-    }
+    if (callback?.type !== "screen" && callback?.type !== "activity") return next();
     // Hub buttons only count on the current hub message; older copies are stale.
     const hubMessageId = await hub.messageId(ctx.user);
     if (ctx.callbackQuery.message?.message_id !== hubMessageId) return answerOutdated(ctx, hub);
+    // Leaving the settings screens abandons a value the hub was asking for.
+    ctx.session.settingsInput = undefined;
 
     switch (callback.type) {
       case "screen":
         await ctx.answerCallbackQuery();
         await hub.refresh(ctx.user, callback.screen);
-        return;
-      case "lang":
-        await updateSettings(db, ctx.user.id, { uiLang: callback.lang });
-        await ctx.answerCallbackQuery();
-        await hub.refresh(ctx.user, "settings");
         return;
       case "activity": {
         const kind = ACTIVITY_KIND[callback.activity];

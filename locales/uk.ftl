@@ -263,3 +263,17 @@ talk-summary-corrections = { $n ->
        *[other] { $n } виправлення
     }
 talk-summary-top = найчастіше: { $top }
+
+# --- routine ---
+routine-plan-morning = ☀️ Доброго ранку! План на сьогодні:
+routine-plan-evening = 🌙 Вечірня практика:
+routine-plan-reviews = • карток на повторення: { $count }
+routine-plan-words = • нових слів: { $count }
+routine-plan-grammar = • питань з граматики: { $count }
+routine-plan-empty = Зараз нічого не заплановано — коротка розмова англійською теж чудова практика.
+routine-reminder = ⏰ Ціль на сьогодні ще не виконана. Кілька хвилин зараз — і серія триватиме.
+routine-start-morning = ▶️ Почати ранковий сет
+routine-start-evening = ▶️ Почати вечірній сет
+routine-later = ⏳ Пізніше (1 год)
+routine-snoozed = Нагадаю за годину.
+routine-outdated = Це нагадування вже неактуальне.

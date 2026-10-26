@@ -259,3 +259,17 @@ talk-summary-corrections = { $n ->
        *[other] { $n } corrections
     }
 talk-summary-top = top: { $top }
+
+# --- routine ---
+routine-plan-morning = ☀️ Good morning! Today's plan:
+routine-plan-evening = 🌙 Evening practice:
+routine-plan-reviews = • cards to review: { $count }
+routine-plan-words = • new words: { $count }
+routine-plan-grammar = • grammar questions: { $count }
+routine-plan-empty = Nothing is due right now — a short chat in English is a great way to practise.
+routine-reminder = ⏰ Today's goal is still open. A few minutes now keep your streak going.
+routine-start-morning = ▶️ Start morning set
+routine-start-evening = ▶️ Start evening set
+routine-later = ⏳ Later (1 h)
+routine-snoozed = I'll remind you in an hour.
+routine-outdated = This reminder is no longer active.

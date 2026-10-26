@@ -13,6 +13,7 @@ import { SettingsController } from "../settings/controller";
 import { settingsHandlers, settingsInputMiddleware } from "../settings/handlers";
 import { ProviderSettings } from "../settings/provider";
 import type { SkillRunner } from "../skills";
+import { vocabSessions } from "../vocab";
 import { accessMiddleware, adminCommands, type RefusalGate } from "./access";
 import type { BotContext, FlowState } from "./context";
 import { createI18n } from "./i18n";
@@ -73,6 +74,9 @@ export function createBot(deps: BotDeps) {
   };
 
   if (deps.enableDemoSession) sessions.register("talk", demoSession(i18n));
+  const vocab = vocabSessions({ db, i18n, skills: deps.skills, log });
+  sessions.register("vocab_new", vocab.learn);
+  sessions.register("review", vocab.review);
 
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(i18n);
@@ -90,6 +94,8 @@ export function createBot(deps: BotDeps) {
       if (!outcome.started) await offerToCancel(sessions, ctx, outcome.active, ctx.user);
     });
   }
+
+  bot.use(vocab.composer);
 
   // Any button that reached this point is from an older version of the bot or a dead screen.
   bot.on("callback_query", (ctx) => answerOutdated(ctx, hub));

@@ -39,7 +39,8 @@ export type CardBack = {
   translation?: string;
   ipa?: string;
   pos?: string;
-  examples?: CardExample[];
+  /** Word cards store sentences with translations; grammar-pattern cards plain corrected sentences. */
+  examples?: (CardExample | string)[];
   collocations?: string[];
   mnemonic?: string;
 };

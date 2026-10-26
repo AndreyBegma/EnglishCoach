@@ -12,7 +12,7 @@ import type { LearningHandle } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { encodeVocabCallback, type VocabCallback } from "./callbacks";
 import type { VocabMode } from "./modes";
-import { exerciseHtml, HTML, type T } from "./render";
+import { exampleText, exerciseHtml, HTML, type T } from "./render";
 import { RATINGS, type RatingName, Scheduler } from "./scheduler";
 import { clearFlow, writeFlow } from "./state";
 import { addVocabStats, localDate } from "./stats";
@@ -102,7 +102,7 @@ export class VocabCore {
       lemma: card.front,
       pos: back.pos ?? null,
       translation: back.translation ?? null,
-      examples: back.examples?.map((example) => example.en) ?? [],
+      examples: back.examples?.map(exampleText) ?? [],
       distractors:
         mode === "recognition"
           ? await randomLemmas(this.deps.db, level, card.front, DISTRACTOR_LEMMAS)

@@ -160,3 +160,81 @@ vocab-summary-reviewed = повторено: { $count }
 vocab-summary-accuracy = { $percent } %
 vocab-summary-learn-empty = Цього разу без нових слів.
 vocab-review-nothing = Зараз повторювати нічого.
+
+# --- grammar ---
+grammar-pick-topic = ✍️ Практика граматики: 10 запитань. Оберіть тему або мікс.
+grammar-mixed = 🎲 Мікс (рекомендовано)
+grammar-topic-tenses = Часи
+grammar-topic-articles = Артиклі
+grammar-topic-prepositions = Прийменники
+grammar-topic-comparatives = Ступені порівняння
+grammar-topic-conditionals = Умовні речення
+grammar-topic-modals = Модальні дієслова
+grammar-topic-passive = Пасивний стан
+grammar-topic-reported-speech = Непряма мова
+grammar-topic-gerund-infinitive = Герундій / інфінітив
+grammar-topic-relative-clauses = Означальні підрядні речення
+grammar-topic-chosen = Тема: { $topic }
+grammar-question-header = ❓ Запитання { $n } з { $total }
+grammar-chosen = Ваша відповідь: { $answer }
+grammar-use-buttons = Відповідайте кнопками вище.
+grammar-verdict-correct = ✅ Правильно!
+grammar-verdict-partial = ❌ Майже, але є помилка.
+grammar-verdict-wrong = ❌ Неправильно.
+grammar-correct-answer = Правильна відповідь: { $answer }
+grammar-severity = { $marker } Серйозність: { $label }
+grammar-severity-critical = критична
+grammar-severity-moderate = середня
+grammar-severity-minor = дрібна
+grammar-card-added = 📌 Ця помилка повторюється — тепер вона у вашому повторенні.
+grammar-summary = Граматика: { $correct }/{ $total }
+grammar-summary-weak = Граматика: { $correct }/{ $total }, слабке місце: { $weak }
+grammar-error-quiz = ⚠️ Не вдалося підготувати наступне запитання.
+grammar-error-check = ⚠️ Не вдалося перевірити відповідь. Надішліть її ще раз трохи згодом.
+grammar-retry = 🔄 Спробувати знову
+grammar-stop = ⏹ Зупинити
+grammar-outdated = Це запитання застаріло.
+
+# --- talk ---
+talk-pick-topic = Про що поговоримо?
+talk-topic-free = 🎲 Про що завгодно
+talk-topic-routine = Розпорядок дня
+talk-topic-family = Сім'я та друзі
+talk-topic-food = Їжа та куховарство
+talk-topic-travel = Подорожі
+talk-topic-work = Робота та кар'єра
+talk-topic-tech = Технології
+talk-topic-society = Суспільство
+talk-topic-future = Майбутнє
+talk-topic-culture = Книжки та фільми
+talk-finish = ✅ Завершити
+talk-corrections-title = Виправлення
+talk-no-errors = Помилок немає — чудова робота!
+talk-category-grammar = Граматика
+talk-category-vocabulary = Лексика
+talk-category-spelling = Правопис
+talk-category-word_choice = Вибір слова
+talk-category-punctuation = Пунктуація
+talk-category-expression = Вираз
+talk-tip-phrase = Корисна фраза
+talk-tip-grammar = Порада з граматики
+talk-tip-level_up = Новий рівень
+talk-tip-native_pitfall = Часта помилка
+talk-error = Вибачте, не вдалося відповісти. Надішліть повідомлення ще раз.
+talk-text-only = Поки що я читаю тут лише текстові повідомлення.
+talk-opener-fallback = Hi! What have you been up to today?
+talk-summary-empty = Розмова: повідомлень немає
+talk-summary-title = Розмова
+talk-summary-messages = { $n ->
+        [one] { $n } повідомлення
+        [few] { $n } повідомлення
+        [many] { $n } повідомлень
+       *[other] { $n } повідомлення
+    }
+talk-summary-corrections = { $n ->
+        [one] { $n } виправлення
+        [few] { $n } виправлення
+        [many] { $n } виправлень
+       *[other] { $n } виправлення
+    }
+talk-summary-top = найчастіше: { $top }

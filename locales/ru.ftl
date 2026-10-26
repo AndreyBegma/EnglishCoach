@@ -160,3 +160,81 @@ vocab-summary-reviewed = повторено: { $count }
 vocab-summary-accuracy = { $percent } %
 vocab-summary-learn-empty = В этот раз без новых слов.
 vocab-review-nothing = Сейчас повторять нечего.
+
+# --- grammar ---
+grammar-pick-topic = ✍️ Практика грамматики: 10 вопросов. Выберите тему или смешанный режим.
+grammar-mixed = 🎲 Микс (рекомендуется)
+grammar-topic-tenses = Времена
+grammar-topic-articles = Артикли
+grammar-topic-prepositions = Предлоги
+grammar-topic-comparatives = Степени сравнения
+grammar-topic-conditionals = Условные предложения
+grammar-topic-modals = Модальные глаголы
+grammar-topic-passive = Страдательный залог
+grammar-topic-reported-speech = Косвенная речь
+grammar-topic-gerund-infinitive = Герундий / инфинитив
+grammar-topic-relative-clauses = Придаточные определительные
+grammar-topic-chosen = Тема: { $topic }
+grammar-question-header = ❓ Вопрос { $n } из { $total }
+grammar-chosen = Ваш ответ: { $answer }
+grammar-use-buttons = Ответьте кнопками выше.
+grammar-verdict-correct = ✅ Верно!
+grammar-verdict-partial = ❌ Почти, но есть ошибка.
+grammar-verdict-wrong = ❌ Неверно.
+grammar-correct-answer = Правильный ответ: { $answer }
+grammar-severity = { $marker } Серьёзность: { $label }
+grammar-severity-critical = критическая
+grammar-severity-moderate = средняя
+grammar-severity-minor = мелкая
+grammar-card-added = 📌 Эта ошибка повторяется — теперь она в вашем повторении.
+grammar-summary = Грамматика: { $correct }/{ $total }
+grammar-summary-weak = Грамматика: { $correct }/{ $total }, слабое место: { $weak }
+grammar-error-quiz = ⚠️ Не удалось подготовить следующий вопрос.
+grammar-error-check = ⚠️ Не удалось проверить ответ. Отправьте его ещё раз чуть позже.
+grammar-retry = 🔄 Повторить
+grammar-stop = ⏹ Остановить
+grammar-outdated = Этот вопрос устарел.
+
+# --- talk ---
+talk-pick-topic = О чём поговорим?
+talk-topic-free = 🎲 О чём угодно
+talk-topic-routine = Распорядок дня
+talk-topic-family = Семья и друзья
+talk-topic-food = Еда и готовка
+talk-topic-travel = Путешествия
+talk-topic-work = Работа и карьера
+talk-topic-tech = Технологии
+talk-topic-society = Общество
+talk-topic-future = Будущее
+talk-topic-culture = Книги и фильмы
+talk-finish = ✅ Завершить
+talk-corrections-title = Исправления
+talk-no-errors = Ошибок нет — отличная работа!
+talk-category-grammar = Грамматика
+talk-category-vocabulary = Лексика
+talk-category-spelling = Орфография
+talk-category-word_choice = Выбор слова
+talk-category-punctuation = Пунктуация
+talk-category-expression = Выражение
+talk-tip-phrase = Полезная фраза
+talk-tip-grammar = Совет по грамматике
+talk-tip-level_up = Новый уровень
+talk-tip-native_pitfall = Частая ошибка
+talk-error = Извините, не получилось ответить. Отправьте сообщение ещё раз.
+talk-text-only = Пока я читаю здесь только текстовые сообщения.
+talk-opener-fallback = Hi! What have you been up to today?
+talk-summary-empty = Разговор: сообщений нет
+talk-summary-title = Разговор
+talk-summary-messages = { $n ->
+        [one] { $n } сообщение
+        [few] { $n } сообщения
+        [many] { $n } сообщений
+       *[other] { $n } сообщения
+    }
+talk-summary-corrections = { $n ->
+        [one] { $n } исправление
+        [few] { $n } исправления
+        [many] { $n } исправлений
+       *[other] { $n } исправления
+    }
+talk-summary-top = чаще всего: { $top }

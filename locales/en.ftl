@@ -160,3 +160,77 @@ vocab-summary-reviewed = { $count } reviewed
 vocab-summary-accuracy = { $percent } %
 vocab-summary-learn-empty = No new words this time.
 vocab-review-nothing = Nothing to review right now.
+
+# --- grammar ---
+grammar-pick-topic = ✍️ Grammar practice: 10 questions. Pick a topic or practise a mix.
+grammar-mixed = 🎲 Mixed (recommended)
+grammar-topic-tenses = Tenses
+grammar-topic-articles = Articles
+grammar-topic-prepositions = Prepositions
+grammar-topic-comparatives = Comparatives
+grammar-topic-conditionals = Conditionals
+grammar-topic-modals = Modal verbs
+grammar-topic-passive = Passive voice
+grammar-topic-reported-speech = Reported speech
+grammar-topic-gerund-infinitive = Gerund / infinitive
+grammar-topic-relative-clauses = Relative clauses
+grammar-topic-chosen = Topic: { $topic }
+grammar-question-header = ❓ Question { $n } of { $total }
+grammar-chosen = Your answer: { $answer }
+grammar-use-buttons = Please answer with the buttons above.
+grammar-verdict-correct = ✅ Correct!
+grammar-verdict-partial = ❌ Almost, but there is a slip.
+grammar-verdict-wrong = ❌ Not quite.
+grammar-correct-answer = Correct answer: { $answer }
+grammar-severity = { $marker } Severity: { $label }
+grammar-severity-critical = critical
+grammar-severity-moderate = moderate
+grammar-severity-minor = minor
+grammar-card-added = 📌 This pattern keeps coming up — it is now in your Review.
+grammar-summary = Grammar: { $correct }/{ $total }
+grammar-summary-weak = Grammar: { $correct }/{ $total }, weak: { $weak }
+grammar-error-quiz = ⚠️ I could not prepare the next question.
+grammar-error-check = ⚠️ I could not check your answer. Send it again in a moment.
+grammar-retry = 🔄 Try again
+grammar-stop = ⏹ Stop
+grammar-outdated = This question is outdated.
+
+# --- talk ---
+talk-pick-topic = What shall we talk about?
+talk-topic-free = 🎲 Anything
+talk-topic-routine = Daily routine
+talk-topic-family = Family & friends
+talk-topic-food = Food & cooking
+talk-topic-travel = Travel
+talk-topic-work = Work & career
+talk-topic-tech = Technology
+talk-topic-society = Society
+talk-topic-future = The future
+talk-topic-culture = Books & films
+talk-finish = ✅ Finish
+talk-corrections-title = Corrections
+talk-no-errors = No errors — nice work!
+talk-category-grammar = Grammar
+talk-category-vocabulary = Vocabulary
+talk-category-spelling = Spelling
+talk-category-word_choice = Word choice
+talk-category-punctuation = Punctuation
+talk-category-expression = Expression
+talk-tip-phrase = Useful phrase
+talk-tip-grammar = Grammar tip
+talk-tip-level_up = Level up
+talk-tip-native_pitfall = Common mistake
+talk-error = Sorry, I could not answer that. Please send your message again.
+talk-text-only = I can only read text messages here for now.
+talk-opener-fallback = Hi! What have you been up to today?
+talk-summary-empty = Talk: no messages
+talk-summary-title = Talk
+talk-summary-messages = { $n ->
+        [one] 1 message
+       *[other] { $n } messages
+    }
+talk-summary-corrections = { $n ->
+        [one] 1 correction
+       *[other] { $n } corrections
+    }
+talk-summary-top = top: { $top }

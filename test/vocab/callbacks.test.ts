@@ -34,18 +34,12 @@ describe("vocabulary callback codec", () => {
     expect(parseCallback(data)).toBeUndefined();
   });
 
-  test.each([
-    "2:v:g:1",
-    "1:v:c:1:4",
-    "1:v:r:1:x",
-    "1:v:g:abc",
-    "1:v:g",
-    "1:v:zz",
-    "1:h:main",
-    "",
-  ])("rejects %p", (data) => {
-    expect(parseVocabCallback(data)).toBeUndefined();
-  });
+  test.each(["2:v:g:1", "1:v:c:1:4", "1:v:r:1:x", "1:v:g:abc", "1:v:g", "1:v:zz", "1:h:main", ""])(
+    "rejects %p",
+    (data) => {
+      expect(parseVocabCallback(data)).toBeUndefined();
+    },
+  );
 
   test("a stale vocabulary button is still recognised as one, so the hub never handles it", () => {
     expect(isVocabCallbackData("2:v:g:1")).toBe(true);

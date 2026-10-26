@@ -1,4 +1,4 @@
-import type { CardRow } from "../db/schema";
+import type { CardExample, CardRow } from "../db/schema";
 
 export type T = (key: string, variables?: Record<string, string | number>) => string;
 
@@ -14,6 +14,10 @@ export function promptHtml(text: string): string {
   return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
 }
 
+/** The English sentence of an example, whichever shape the card stored it in. */
+export const exampleText = (example: CardExample | string): string =>
+  typeof example === "string" ? example : example.en;
+
 /** The front and back of a word card, as Learn words shows it. */
 export function cardHtml(t: T, card: Pick<CardRow, "front" | "backJson">): string {
   const back = card.backJson;
@@ -26,7 +30,8 @@ export function cardHtml(t: T, card: Pick<CardRow, "front" | "backJson">): strin
   if (back.examples?.length) {
     lines.push("");
     for (const example of back.examples) {
-      lines.push(`• ${escapeHtml(example.en)}`, `  <i>${escapeHtml(example.translation)}</i>`);
+      lines.push(`• ${escapeHtml(exampleText(example))}`);
+      if (typeof example !== "string") lines.push(`  <i>${escapeHtml(example.translation)}</i>`);
     }
   }
   if (back.collocations?.length) {

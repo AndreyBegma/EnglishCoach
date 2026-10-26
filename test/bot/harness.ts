@@ -4,6 +4,7 @@ import type { RefusalGate } from "../../src/bot/access";
 import type { FlowState } from "../../src/bot/context";
 import { createBot } from "../../src/bot/index";
 import type { Db } from "../../src/db/client";
+import type { ProviderFactories } from "../../src/llm";
 import { createLogger } from "../../src/log";
 import type { SessionTimeouts } from "../../src/sessions/session-manager";
 import { FakeLlm } from "./fake-llm";
@@ -176,6 +177,8 @@ export class MemoryRefusalGate implements RefusalGate {
 export interface HarnessOptions {
   adminIds?: number[];
   enableDemoSession?: boolean;
+  /** Replaces the fake LLM, e.g. with the real providers over fake SDK clients. */
+  llmFactories?: ProviderFactories;
 }
 
 /** A fixed 32-byte master key; tests decrypt stored keys with it. */
@@ -202,7 +205,7 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
       SERVER_ANTHROPIC_API_KEY: "server-key",
       CLAUDE_BIN: "claude",
     },
-    llmFactories: llm.factories,
+    llmFactories: options.llmFactories ?? llm.factories,
     botConfig: { botInfo: BOT_INFO },
   });
   app.bot.api.config.use(telegram.transformer);

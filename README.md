@@ -33,8 +33,8 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun run start` | Start once |
 | `bun run lint` | Biome lint + format check (`bun run format` fixes) |
 | `bun run typecheck` | `tsc --noEmit` |
-| `bun test` | Unit tests; the Postgres/Redis probe tests run only when `DATABASE_URL` / `REDIS_URL` are set (Bun loads `.env` automatically) |
-| `bun run db:generate` | Generate a migration from `src/db/schema.ts` into `drizzle/` |
+| `bun test` | Unit tests; the Postgres/Redis integration tests run only when `DATABASE_URL` (or `DATABASE_URL_TEST`) / `REDIS_URL` are set (Bun loads `.env` automatically). DB tests create and drop a throwaway `coach_test_*` database per file on that server |
+| `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
 
 ## Layout
@@ -44,7 +44,8 @@ src/index.ts        boots HTTP + bot, graceful shutdown
 src/config/env.ts   zod-validated environment, fails fast
 src/http/           Hono app (GET /health)
 src/bot/            grammY bot and i18n (Fluent, locales/*.ftl)
-src/db/             Drizzle client and schema
+src/db/             Drizzle client, schema/ (one file per area), repositories/, FSRS mappers
+drizzle/            generated SQL migrations
 src/redis.ts        Redis client
 src/log.ts          JSON logger that redacts *key* / *token* / *secret* fields
 locales/            ru, en, uk translations — every key in all three

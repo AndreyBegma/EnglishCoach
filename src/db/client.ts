@@ -5,7 +5,7 @@ import * as schema from "./schema";
 
 export function createDb(url: string) {
   const client = postgres(url, { max: 10, onnotice: () => {} });
-  const db = drizzle(client, { schema });
+  const db = drizzle(client, { schema, casing: "snake_case" });
   return {
     db,
     /** Resolves when the database answers a trivial query. */
@@ -17,3 +17,4 @@ export function createDb(url: string) {
 }
 
 export type Database = ReturnType<typeof createDb>;
+export type Db = Database["db"];

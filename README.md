@@ -50,4 +50,15 @@ drizzle/            generated SQL migrations
 src/redis.ts        Redis client
 src/log.ts          JSON logger that redacts *key* / *token* / *secret* fields
 locales/            ru, en, uk translations — every key in all three
+src/llm/            LLM providers (server, anthropic, openai, claude-code) and resolveProvider
+src/crypto/         AES-256-GCM for user API keys under MASTER_KEY
 ```
+
+## LLM providers
+
+`resolveProvider(deps, userId)` returns the user's active provider, or `server` (configured by
+`SERVER_LLM_PROVIDER` and its key in `.env`) when they have none. Every provider takes a zod
+schema and returns only data that passed it: an invalid answer gets one repair turn, then an
+`LlmOutputError`. Model choice: the user's model, else the caller's, else the backend's `fast` /
+`smart` default in `src/llm/models.ts`. User keys are stored encrypted and shown back only as a
+masked hint (`sk-…a1b2`).

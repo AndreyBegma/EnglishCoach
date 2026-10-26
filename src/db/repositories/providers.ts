@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { decrypt, encrypt, maskSecret } from "../../crypto/secrets";
 import type { Db } from "../client";
 import { type ProviderConfig, providerConfigs } from "../schema";
@@ -57,6 +57,58 @@ export async function activateProviderConfig(
     if (!config) throw new Error("insert of provider_configs returned no row");
     return config;
   });
+}
+
+/** Every provider config the user has, active or saved, oldest first. */
+export async function listProviderConfigs(db: Db, userId: number): Promise<ProviderConfig[]> {
+  return db
+    .select()
+    .from(providerConfigs)
+    .where(eq(providerConfigs.userId, userId))
+    .orderBy(asc(providerConfigs.id));
+}
+
+/**
+ * Makes a saved config the active one again (switching back to a key entered earlier). Returns
+ * undefined, and changes nothing, when the config is not the user's.
+ */
+export async function reactivateProviderConfig(
+  db: Db,
+  userId: number,
+  configId: number,
+): Promise<ProviderConfig | undefined> {
+  return db.transaction(async (tx) => {
+    const [owned] = await tx
+      .select({ id: providerConfigs.id })
+      .from(providerConfigs)
+      .where(and(eq(providerConfigs.id, configId), eq(providerConfigs.userId, userId)));
+    if (!owned) return undefined;
+
+    await tx
+      .update(providerConfigs)
+      .set({ isActive: false })
+      .where(and(eq(providerConfigs.userId, userId), eq(providerConfigs.isActive, true)));
+    const [config] = await tx
+      .update(providerConfigs)
+      .set({ isActive: true })
+      .where(eq(providerConfigs.id, configId))
+      .returning();
+    return config;
+  });
+}
+
+/** Sets the model of the active config; `null` goes back to the default. Undefined if none is active. */
+export async function setActiveProviderModel(
+  db: Db,
+  userId: number,
+  model: string | null,
+): Promise<ProviderConfig | undefined> {
+  const [config] = await db
+    .update(providerConfigs)
+    .set({ model })
+    .where(and(eq(providerConfigs.userId, userId), eq(providerConfigs.isActive, true)))
+    .returning();
+  return config;
 }
 
 /** Decrypts the config's API key. Only provider construction may call this. */

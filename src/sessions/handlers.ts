@@ -6,7 +6,7 @@ import type { LearningSession } from "../db/schema";
 import type { HubUser } from "../hub/hub-service";
 import type { SessionManager } from "./session-manager";
 
-const isCommand = (message: Message) =>
+export const isCommand = (message: Message) =>
   message.entities?.some((entity) => entity.type === "bot_command" && entity.offset === 0) ?? false;
 
 /**

@@ -66,7 +66,7 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     const { messageId } = await hubOf(user.id);
     h.telegram.reset();
 
-    await h.press(telegramId, messageId, encodeCallback({ type: "screen", screen: "settings" }));
+    await h.press(telegramId, messageId, encodeCallback({ type: "settings", page: "root" }));
     expect(h.telegram.chat(telegramId).get(messageId)?.text).toContain(
       "Interface language: English",
     );
@@ -194,11 +194,7 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     const current = await hubOf(user.id);
 
     h.telegram.reset();
-    await h.press(
-      telegramId,
-      oldHub.messageId,
-      encodeCallback({ type: "screen", screen: "settings" }),
-    );
+    await h.press(telegramId, oldHub.messageId, encodeCallback({ type: "settings", page: "root" }));
     expect(h.telegram.callsOf("answerCallbackQuery")[0]?.payload).toMatchObject({
       text: "This menu is outdated.",
     });

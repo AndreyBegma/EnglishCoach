@@ -24,6 +24,8 @@ export interface CardsBlock {
   dueTomorrow: number;
   /** Word cards the learner has passed the first check on (not the ones still waiting in Learn). */
   wordsLearned: number;
+  /** Words the learner marked "I know this 100%"; counted apart from the learned ones. */
+  wordsKnown: number;
 }
 
 export interface GrammarBlock {
@@ -87,15 +89,16 @@ export async function cardsBlock(
                 + interval '1 day') at time zone ${zone} as end_today
     )
     select
-      count(*) filter (where c.state = 0) as "new",
-      count(*) filter (where c.state in (1, 3)) as learning,
-      count(*) filter (where c.state = 2) as review,
-      count(*) filter (where (c.item_type = 'grammar_pattern' or c.reps > 0)
+      count(*) filter (where c.known_at is null and c.state = 0) as "new",
+      count(*) filter (where c.known_at is null and c.state in (1, 3)) as learning,
+      count(*) filter (where c.known_at is null and c.state = 2) as review,
+      count(*) filter (where c.known_at is null and (c.item_type = 'grammar_pattern' or c.reps > 0)
                          and c.due < b.end_today) as "dueToday",
-      count(*) filter (where (c.item_type = 'grammar_pattern' or c.reps > 0)
+      count(*) filter (where c.known_at is null and (c.item_type = 'grammar_pattern' or c.reps > 0)
                          and c.due >= b.end_today
                          and c.due < b.end_today + interval '1 day') as "dueTomorrow",
-      count(*) filter (where c.item_type in ('word', 'user_word') and c.reps > 0) as "wordsLearned"
+      count(*) filter (where c.known_at is null and c.item_type in ('word', 'user_word') and c.reps > 0) as "wordsLearned",
+      count(*) filter (where c.known_at is not null) as "wordsKnown"
     from cards c cross join bounds b
     where c.user_id = ${userId}`);
   const row = rows[0];
@@ -106,6 +109,7 @@ export async function cardsBlock(
     dueToday: num(row?.dueToday),
     dueTomorrow: num(row?.dueTomorrow),
     wordsLearned: num(row?.wordsLearned),
+    wordsKnown: num(row?.wordsKnown),
   };
 }
 

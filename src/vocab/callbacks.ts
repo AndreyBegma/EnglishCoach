@@ -13,6 +13,10 @@ const PREFIX = `${VOCAB_CALLBACK_VERSION}:v`;
 export type VocabCallback =
   /** Learn words: the learner read the card and wants the check. */
   | { op: "got-it"; cardId: number }
+  /** Learn words: the learner knows the word 100% — mark it known and move on. */
+  | { op: "know"; cardId: number }
+  /** Learn words: take a word back out of "known". */
+  | { op: "unknow"; cardId: number }
   /** A multiple-choice answer. */
   | { op: "choice"; cardId: number; index: number }
   /** Review: the rating the learner applies after the feedback. */
@@ -45,6 +49,8 @@ const rating = z
 
 const route = z.union([
   z.tuple([z.literal("g"), id]).transform(([, cardId]) => ({ op: "got-it" as const, cardId })),
+  z.tuple([z.literal("k"), id]).transform(([, cardId]) => ({ op: "know" as const, cardId })),
+  z.tuple([z.literal("u"), id]).transform(([, cardId]) => ({ op: "unknow" as const, cardId })),
   z
     .tuple([z.literal("c"), id, index])
     .transform(([, cardId, i]) => ({ op: "choice" as const, cardId, index: i })),
@@ -63,6 +69,10 @@ function partsOf(callback: VocabCallback): (string | number)[] {
   switch (callback.op) {
     case "got-it":
       return ["g", callback.cardId];
+    case "know":
+      return ["k", callback.cardId];
+    case "unknow":
+      return ["u", callback.cardId];
     case "choice":
       return ["c", callback.cardId, callback.index];
     case "rate":

@@ -4,13 +4,17 @@ import type { Database } from "../../src/db/client";
 import {
   applyReview,
   countDueSince,
+  countKnownWords,
   createCard,
   findNextDueCard,
   findPendingCard,
   findWordCardByFront,
   getCard,
+  markCardKnown,
   reviewStatsSince,
+  unmarkCardKnown,
 } from "../../src/db/repositories/cards";
+import { countDueCards as countDueCount } from "../../src/db/repositories/hub";
 import { getOrCreateUser } from "../../src/db/repositories/users";
 import { reviewLogs, words } from "../../src/db/schema";
 import { Scheduler } from "../../src/vocab/scheduler";
@@ -65,6 +69,36 @@ describe.skipIf(!testServerUrl)("cards repository", () => {
     expect(await rate(a.id, user.id, "good", at)).toBe(true);
     expect((await findPendingCard(database.db, user.id))?.front).toBe("beta");
     expect((await findWordCardByFront(database.db, user.id, "ALPHA"))?.id).toBe(a.id);
+  });
+
+  test("a known word is not pending, not due, not counted; unmarking restores it", async () => {
+    const user = await getOrCreateUser(database.db, { telegramId: 8110 });
+    const other = await getOrCreateUser(database.db, { telegramId: 8111 });
+    const at = new Date("2026-10-26T08:00:00Z");
+    const later = new Date("2026-10-27T08:00:00Z");
+    const pending = await newCard(user.id, "house", at);
+    const rated = await newCard(user.id, "table", at);
+    await rate(rated.id, user.id, "good", at);
+    const since = new Date("2026-10-27T00:00:00Z");
+
+    expect(await countDueSince(database.db, user.id, later, since)).toBe(1);
+    expect(await markCardKnown(database.db, other.id, pending.id, at)).toBe(false);
+    expect(await markCardKnown(database.db, user.id, pending.id, at)).toBe(true);
+    expect(await markCardKnown(database.db, user.id, pending.id, at)).toBe(false);
+    expect(await markCardKnown(database.db, user.id, rated.id, at)).toBe(true);
+
+    expect(await findPendingCard(database.db, user.id)).toBeUndefined();
+    expect(await findNextDueCard(database.db, user.id, later, since)).toBeUndefined();
+    expect(await countDueSince(database.db, user.id, later, since)).toBe(0);
+    expect(await countDueCount(database.db, user.id, later)).toBe(0);
+    expect(await countKnownWords(database.db, user.id)).toBe(2);
+
+    expect(await unmarkCardKnown(database.db, user.id, pending.id)).toBe(true);
+    expect(await unmarkCardKnown(database.db, user.id, pending.id)).toBe(false);
+    expect((await findPendingCard(database.db, user.id))?.id).toBe(pending.id);
+    expect(await countDueCount(database.db, user.id, later)).toBe(0);
+    await unmarkCardKnown(database.db, user.id, rated.id);
+    expect(await countDueCount(database.db, user.id, later)).toBe(1);
   });
 
   test("applyReview writes the card and its log once; a repeat with stale reps is refused", async () => {

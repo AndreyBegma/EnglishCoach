@@ -2,7 +2,11 @@ import { describe, expect, test } from "bun:test";
 import { join } from "node:path";
 import { z } from "zod";
 import { LlmOutputError, LlmProviderError } from "../../src/llm/errors";
-import { createClaudeCodeProvider, renderConversation } from "../../src/llm/providers/claude-code";
+import {
+  createClaudeCodeProvider,
+  renderConversation,
+  resultEvent,
+} from "../../src/llm/providers/claude-code";
 
 const fake = join(import.meta.dir, "../fixtures/llm/fake-claude.ts");
 const command = (mode: string) => [process.execPath, fake, mode];
@@ -42,6 +46,21 @@ describe("claude-code provider", () => {
     expect(system).toStartWith("You are a grammar quiz.");
     expect(system).toContain("JSON Schema");
     expect([toolsFlag, tools]).toEqual(["--tools", ""]);
+  });
+
+  test("reads the result event when verbose mode prints the whole event array", () => {
+    const result = { type: "result", is_error: false, result: "{}" };
+    expect(resultEvent(result)).toBe(result);
+    // The shape claude 2.1 prints under `--output-format json` with verbose on in settings.
+    expect(
+      resultEvent([
+        { type: "system", subtype: "init" },
+        { type: "assistant" },
+        { type: "rate_limit_event" },
+        result,
+      ]),
+    ).toBe(result);
+    expect(resultEvent([{ type: "system" }])).toBeUndefined();
   });
 
   test("ignores temperature: the CLI has no sampling flag", async () => {

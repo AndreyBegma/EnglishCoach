@@ -9,8 +9,10 @@ import { createDb } from "./db/client";
 import { createApp } from "./http/app";
 import { resolveProvider } from "./llm";
 import { createLogger } from "./log";
+import { BullRoutineJobs } from "./queue/routine-jobs";
 import { BullSessionTimeouts } from "./queue/session-timeouts";
 import { createRedis } from "./redis";
+import { RedisRoutineStore } from "./routine";
 import {
   learnerContextFromDb,
   loadSkillRegistry,
@@ -67,14 +69,21 @@ redis.client.on("ready", () => {
 });
 
 // Connect now: the client fails commands fast while disconnected, and the bot needs it per update.
-redis.ping().catch((error: unknown) => log.warn("redis not reachable at startup", { error }));
+const redisReady = redis
+  .ping()
+  .then(() => true)
+  .catch((error: unknown) => {
+    log.warn("redis not reachable at startup", { error });
+    return false;
+  });
 
 const timeouts = new BullSessionTimeouts({
   redisUrl: env.REDIS_URL,
   delayMs: env.SESSION_TIMEOUT_MINUTES * 60_000,
   log,
 });
-const { bot, sessions } = createBot({
+const routineJobs = new BullRoutineJobs({ redisUrl: env.REDIS_URL, log });
+const { bot, sessions, routine } = createBot({
   token: env.TELEGRAM_BOT_TOKEN,
   db: database.db,
   log,
@@ -86,9 +95,16 @@ const { bot, sessions } = createBot({
   masterKey,
   llmEnv: env,
   skills,
+  routine: { jobs: routineJobs, store: new RedisRoutineStore(redis.client) },
 });
 bot.catch((error) => log.error("bot update failed", { error: error.error }));
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));
+routineJobs.startWorker((job) => routine.fire(job));
+// Jobs persist in Redis; this creates them for users who never got any and drops stale ones.
+// Without Redis at boot, each user's first update reconciles their jobs instead.
+redisReady
+  .then((ready) => (ready ? routine.reconcileAll() : undefined))
+  .catch((error: unknown) => log.warn("routine reconcile at startup failed", { error }));
 
 const webhookSecret = env.BOT_MODE === "webhook" ? env.TELEGRAM_WEBHOOK_SECRET : undefined;
 const app = createApp({
@@ -121,7 +137,7 @@ async function shutdown(signal: string) {
   if (shuttingDown) return;
   shuttingDown = true;
   log.info("shutting down", { signal });
-  await Promise.allSettled([bot.stop(), server.stop(), timeouts.close()]);
+  await Promise.allSettled([bot.stop(), server.stop(), timeouts.close(), routineJobs.close()]);
   await Promise.allSettled([database.close(), redis.close()]);
   process.exit(0);
 }

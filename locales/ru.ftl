@@ -263,6 +263,20 @@ talk-summary-corrections = { $n ->
     }
 talk-summary-top = чаще всего: { $top }
 
+# --- routine ---
+routine-plan-morning = ☀️ Доброе утро! План на сегодня:
+routine-plan-evening = 🌙 Вечерняя практика:
+routine-plan-reviews = • карточек на повторение: { $count }
+routine-plan-words = • новых слов: { $count }
+routine-plan-grammar = • вопросов по грамматике: { $count }
+routine-plan-empty = Сейчас ничего не запланировано — короткий разговор на английском тоже отличная практика.
+routine-reminder = ⏰ Цель на сегодня ещё не выполнена. Пара минут сейчас — и серия продолжится.
+routine-start-morning = ▶️ Начать утренний сет
+routine-start-evening = ▶️ Начать вечерний сет
+routine-later = ⏳ Позже (1 ч)
+routine-snoozed = Напомню через час.
+routine-outdated = Это напоминание уже неактуально.
+
 # --- progress ---
 progress-level = 🎓 Уровень: { $level }
 progress-level-unset = 🎓 Уровень: пока не определён

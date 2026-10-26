@@ -11,6 +11,14 @@ import type { Logger } from "../log";
 import { OnboardingFlow } from "../onboarding/flow";
 import { onboardingHandlers, placementSession } from "../onboarding/handlers";
 import { progressHandlers } from "../progress";
+import {
+  MemoryRoutineJobs,
+  MemoryRoutineStore,
+  Routine,
+  type RoutineJobs,
+  type RoutineStore,
+  routineHandlers,
+} from "../routine";
 import { demoSession } from "../sessions/demo";
 import { offerToCancel, sessionMiddleware } from "../sessions/handlers";
 import { SessionManager, type SessionTimeouts } from "../sessions/session-manager";
@@ -49,10 +57,13 @@ export interface BotDeps {
   voice?: VoiceOptions;
   /** Tests pass `botInfo` here so the bot never calls getMe. */
   botConfig?: BotConfig<BotContext>;
+  /** The daily routine's jobs and state (BullMQ and Redis in production; in memory otherwise). */
+  routine?: { jobs: RoutineJobs; store: RoutineStore };
 }
 
 /**
- * Composes the bot. Middleware order matters: access (sets ctx.user/settings) → i18n (reads
+ * Composes the bot. Middleware order matters: access (sets ctx.user/settings) → routine activity
+ * (needs ctx.user) → i18n (reads
  * ctx.settings) → grammY session → pending settings input → learning session → admin →
  * settings → hub → fallbacks.
  */
@@ -116,6 +127,21 @@ export function createBot(deps: BotDeps) {
   sessions.register("vocab_new", vocab.learn);
   sessions.register("review", vocab.review);
 
+  const routineJobs = deps.routine?.jobs ?? new MemoryRoutineJobs();
+  const routineStore = deps.routine?.store ?? new MemoryRoutineStore();
+  const routine = new Routine({
+    api: bot.api,
+    db,
+    i18n,
+    log,
+    skills: deps.skills,
+    sessions,
+    jobs: routineJobs,
+    store: routineStore,
+    adminIds: deps.adminIds,
+  });
+  settingsEvents.on("settings.changed", (event) => routine.onSettingsChanged(event));
+  sessions.onEnded((event) => routine.onSessionEnded(event));
   const voice = createVoice({
     db,
     i18n,
@@ -127,6 +153,7 @@ export function createBot(deps: BotDeps) {
   });
 
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
+  bot.use(routine.activity());
   bot.use(i18n);
   bot.use(session({ initial: (): FlowState => ({}), storage: deps.storage }));
   bot.use(settingsInputMiddleware(settings));
@@ -150,11 +177,21 @@ export function createBot(deps: BotDeps) {
 
   bot.use(vocab.composer);
   bot.use(voice.speak);
+  bot.use(routineHandlers(routine));
 
   // Any button that reached this point is from an older version of the bot or a dead screen.
   bot.on("callback_query", (ctx) => answerOutdated(ctx, hub));
 
-  return { bot, hub, sessions, settingsEvents, skills: deps.skills };
+  return {
+    bot,
+    hub,
+    sessions,
+    settingsEvents,
+    skills: deps.skills,
+    routine,
+    routineJobs,
+    routineStore,
+  };
 }
 
 export type BotApp = ReturnType<typeof createBot>;

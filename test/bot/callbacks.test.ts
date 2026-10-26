@@ -1,0 +1,41 @@
+import { describe, expect, test } from "bun:test";
+import {
+  type Callback,
+  encodeCallback,
+  MAX_CALLBACK_BYTES,
+  parseCallback,
+} from "../../src/bot/callbacks";
+
+describe("callback data", () => {
+  test.each<Callback>([
+    { type: "screen", screen: "main" },
+    { type: "screen", screen: "settings" },
+    { type: "screen", screen: "progress" },
+    { type: "activity", activity: "review" },
+    { type: "lang", lang: "uk" },
+    { type: "session-cancel", sessionId: 123456 },
+    { type: "session-keep" },
+  ])("round-trips %p", (callback) => {
+    const data = encodeCallback(callback);
+    expect(Buffer.byteLength(data)).toBeLessThanOrEqual(MAX_CALLBACK_BYTES);
+    expect(data.startsWith("1:")).toBe(true);
+    expect(parseCallback(data)).toEqual(callback);
+  });
+
+  test.each([
+    ["missing", undefined],
+    ["empty", ""],
+    ["older version", "0:h:main"],
+    ["newer version", "2:h:main"],
+    ["no version", "h:main"],
+    ["unknown route", "1:zz:main"],
+    ["unknown screen", "1:h:admin"],
+    ["unsupported language", "1:l:de"],
+    ["non-numeric session id", "1:sc:abc"],
+    ["extra segment", "1:sk:1"],
+    ["missing argument", "1:h"],
+    ["oversize", `1:h:${"x".repeat(80)}`],
+  ])("rejects %s data", (_, data) => {
+    expect(parseCallback(data)).toBeUndefined();
+  });
+});

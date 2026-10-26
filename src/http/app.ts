@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { type Context, Hono } from "hono";
 
 export type Probe = () => Promise<void>;
 
@@ -7,6 +7,8 @@ export interface AppDeps {
   checkRedis: Probe;
   /** How long a single probe may take before it counts as down. */
   probeTimeoutMs?: number;
+  /** Mounted at `POST /tg/<secret>` in webhook mode. */
+  telegramWebhook?: { secret: string; handler: (c: Context) => Promise<Response> };
 }
 
 async function isUp(probe: Probe, timeoutMs: number): Promise<boolean> {
@@ -24,8 +26,15 @@ async function isUp(probe: Probe, timeoutMs: number): Promise<boolean> {
   }
 }
 
-export function createApp({ checkDb, checkRedis, probeTimeoutMs = 1000 }: AppDeps) {
+export function createApp({
+  checkDb,
+  checkRedis,
+  probeTimeoutMs = 1000,
+  telegramWebhook,
+}: AppDeps) {
   const app = new Hono();
+
+  if (telegramWebhook) app.post(`/tg/${telegramWebhook.secret}`, telegramWebhook.handler);
 
   app.get("/health", async (c) => {
     const [db, redis] = await Promise.all([

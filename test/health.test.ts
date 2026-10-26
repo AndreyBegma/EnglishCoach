@@ -35,3 +35,24 @@ describe("GET /health", () => {
     });
   });
 });
+
+describe("POST /tg/<secret>", () => {
+  const secret = "s".repeat(32);
+
+  test("is served by the Telegram webhook handler in webhook mode", async () => {
+    const app = createApp({
+      checkDb: up,
+      checkRedis: up,
+      telegramWebhook: { secret, handler: (c) => Promise.resolve(c.text("handled")) },
+    });
+    const response = await app.request(`/tg/${secret}`, { method: "POST", body: "{}" });
+    expect(response.status).toBe(200);
+    expect(await response.text()).toBe("handled");
+    expect((await app.request("/tg/wrong", { method: "POST" })).status).toBe(404);
+  });
+
+  test("does not exist in polling mode", async () => {
+    const app = createApp({ checkDb: up, checkRedis: up });
+    expect((await app.request(`/tg/${secret}`, { method: "POST" })).status).toBe(404);
+  });
+});

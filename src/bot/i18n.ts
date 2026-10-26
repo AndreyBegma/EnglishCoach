@@ -1,14 +1,17 @@
 import { join } from "node:path";
-import { I18n, type I18nFlavor } from "@grammyjs/i18n";
-import type { Context } from "grammy";
-
-export type BotContext = Context & I18nFlavor;
+import { I18n } from "@grammyjs/i18n";
+import type { BotContext } from "./context";
 
 export const SUPPORTED_LOCALES = ["en", "ru", "uk"] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en";
 
 export const LOCALES_DIR = join(import.meta.dir, "..", "..", "locales");
+
+/** Translates outside an update (hub renders, background jobs). `I18n` satisfies it. */
+export interface Translator {
+  t(locale: string, key: string, variables?: Record<string, string | number>): string;
+}
 
 /** Maps a Telegram `language_code` (e.g. `ru`, `uk`, `en-GB`) to a supported locale. */
 export function localeFromLanguageCode(code: string | undefined): Locale {
@@ -22,6 +25,8 @@ export function createI18n() {
     directory: LOCALES_DIR,
     // Telegram does not render Unicode bidi isolation marks usefully; keep interpolated text plain.
     fluentBundleOptions: { useIsolating: false },
-    localeNegotiator: (ctx) => localeFromLanguageCode(ctx.from?.language_code),
+    // The stored UI language wins; Telegram's language_code only seeds it on first contact.
+    localeNegotiator: (ctx) =>
+      ctx.settings?.uiLang ?? localeFromLanguageCode(ctx.from?.language_code),
   });
 }

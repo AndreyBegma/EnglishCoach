@@ -23,6 +23,10 @@ curl http://localhost:18740/health # {"ok":true,"db":true,"redis":true}
 
 A missing or invalid variable stops the process with one line naming it.
 
+Only Telegram IDs in `ADMIN_TELEGRAM_IDS` can use the bot at first; they add others with
+`/allow <id>` (and `/deny <id>`, `/users`). Send `/start` or `/menu` to get the pinned hub.
+Set `ENABLE_DEMO_SESSION=true` and send `/demo` to see a session clean up after itself.
+
 To run everything in containers instead: `docker compose up -d --build`.
 
 ## Scripts
@@ -43,8 +47,11 @@ To run everything in containers instead: `docker compose up -d --build`.
 ```
 src/index.ts        boots HTTP + bot, graceful shutdown
 src/config/env.ts   zod-validated environment, fails fast
-src/http/           Hono app (GET /health)
-src/bot/            grammY bot and i18n (Fluent, locales/*.ftl)
+src/http/           Hono app (GET /health, POST /tg/<secret> in webhook mode)
+src/bot/            grammY bot: allowlist + admin commands, i18n (Fluent), callback data, Redis flow state
+src/hub/            the pinned hub (main menu) and its sub-screens
+src/sessions/       learning sessions: message tracking, cleanup, kind handlers (ctx.learning)
+src/queue/          BullMQ jobs (session inactivity timeout)
 src/db/             Drizzle client, schema/ (one file per area), repositories/, FSRS mappers
 drizzle/            generated SQL migrations
 src/redis.ts        Redis client

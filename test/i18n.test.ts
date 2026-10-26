@@ -35,9 +35,14 @@ describe("locales", () => {
   test("every key translates in every locale", () => {
     const i18n = createI18n();
     for (const locale of SUPPORTED_LOCALES) {
+      const source = readFileSync(join(LOCALES_DIR, `${locale}.ftl`), "utf8");
       for (const key of keysOf(locale)) {
         if (key.startsWith("-")) continue; // terms are referenced, not translated directly
-        const text = i18n.t(locale, key);
+        const line = source.match(new RegExp(`^${key}\\s*=.*$`, "m"))?.[0] ?? "";
+        const variables = Object.fromEntries(
+          [...line.matchAll(/\$([a-zA-Z][\w-]*)/g)].map((match) => [match[1] ?? "", "x"]),
+        );
+        const text = i18n.t(locale, key, variables);
         expect(text).not.toBe(key);
         expect(text.trim().length).toBeGreaterThan(0);
       }

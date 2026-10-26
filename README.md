@@ -34,6 +34,7 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun run lint` | Biome lint + format check (`bun run format` fixes) |
 | `bun run typecheck` | `tsc --noEmit` |
 | `bun test` | Unit tests; the Postgres/Redis integration tests run only when `DATABASE_URL` (or `DATABASE_URL_TEST`) / `REDIS_URL` are set (Bun loads `.env` automatically). DB tests create and drop a throwaway `coach_test_*` database per file on that server |
+| `LLM_LIVE_TESTS=1 bun test test/skills/live.test.ts` | Opt-in smoke test against real models: one skill call per provider whose credentials are set (`SERVER_ANTHROPIC_API_KEY`, `SERVER_OPENAI_API_KEY` [+ `SERVER_OPENAI_BASE_URL`, `LLM_LIVE_OPENAI_MODEL`], or a `claude` binary). Costs money; never runs in CI |
 | `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
 | `bun run db:seed:words` | Seed the CEFR frequency dictionary (`data/words/`), idempotent |
@@ -51,6 +52,8 @@ src/redis.ts        Redis client
 src/log.ts          JSON logger that redacts *key* / *token* / *secret* fields
 locales/            ru, en, uk translations — every key in all three
 src/llm/            LLM providers (server, anthropic, openai, claude-code) and resolveProvider
+src/skills/         skill engine: registry, prompt rendering, learner context, SkillRunner
+skills/             one SKILL.md prompt per skill (see "Skills" below)
 src/crypto/         AES-256-GCM for user API keys under MASTER_KEY
 ```
 
@@ -62,3 +65,28 @@ schema and returns only data that passed it: an invalid answer gets one repair t
 `LlmOutputError`. Model choice: the user's model, else the caller's, else the backend's `fast` /
 `smart` default in `src/llm/models.ts`. User keys are stored encrypted and shown back only as a
 masked hint (`sk-…a1b2`).
+
+## Skills
+
+A skill is `skills/<id>/SKILL.md`: YAML frontmatter plus the system prompt. `loadSkillRegistry()`
+validates every file at boot and fails naming each bad one.
+
+```yaml
+---
+id: grammar-quiz          # = directory name
+title: Grammar quiz item
+kind: quiz                # quiz | check | enrich | exercise | placement | conversation | plan
+input: GrammarQuizInput   # zod schema for the call's vars, in src/skills/schemas.ts
+output: GrammarQuizOutput # zod schema for the model's answer, in src/skills/schemas.ts
+model_hint: smart         # fast | smart (the user's chosen model still wins)
+temperature: 0.8          # optional, 0-1 (ignored by claude-code)
+max_tokens: 1500          # optional
+---
+```
+
+The body may use only `{{level}}`, `{{explain_lang}}`, `{{ui_lang}}`, `{{native_lang}}`,
+`{{native_hints}}` and `{{target_accuracy}}` — server-owned values. Learner text never goes into
+the system prompt: `SkillRunner.runSkill(userId, skillId, vars, history?)` sends the learner's
+context (interests, weak spots) and the validated `vars` as tagged JSON in the last user message.
+Editing a prompt changes behaviour without code changes; a new schema needs code in
+`src/skills/schemas.ts`.

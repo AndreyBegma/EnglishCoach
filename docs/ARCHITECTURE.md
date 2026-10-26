@@ -64,11 +64,41 @@ server applies FSRS, scores, streaks and persistence.
 ## Skills
 
 A skill is a prompt file: `skills/<id>/SKILL.md` with YAML frontmatter
-(`id`, `title`, `kind`, `output` — the name of a zod schema registered in
-code, `model_hint`) and a markdown body that is the system prompt, with
-`{{placeholders}}` for learner context (level, native/explanation language,
-weak spots, due items). Adding or editing a skill file changes behaviour
-without code changes, as long as its `output` schema exists.
+(`id`, `title`, `kind`, `input` and `output` — names of zod schemas in
+`src/skills/schemas.ts`, `model_hint` `fast|smart`, optional `temperature`
+and `max_tokens`) and a markdown body that is the system prompt. Adding or
+editing a skill file changes behaviour without code changes, as long as its
+schemas exist. `loadSkillRegistry()` validates every file at boot (bad
+frontmatter, unknown schema, unknown placeholder, id ≠ directory, a missing
+base skill) and fails naming each bad file.
+
+**Prompt-injection hygiene.** The system prompt may only contain
+server-owned placeholders: `{{level}}`, `{{explain_lang}}`, `{{ui_lang}}`,
+`{{native_lang}}`, `{{native_hints}}` (curated per-language notes in code)
+and `{{target_accuracy}}`. Everything that is or derives from learner text —
+interests, weak-spot patterns from `mistakes`, card text, answers, chat
+messages — plus the call's validated `vars` travels as tagged JSON
+(`<learner_context>`, `<task>`) in the last user message, and the prompt
+tells the model to treat it as data.
+
+**Native language.** There is no setting for it: `explain_lang` if it is
+`ru`/`uk`, else `ui_lang` if it is, else unknown (generic tips).
+
+**Running a skill.** `new SkillRunner({ registry, provider, learner })
+.runSkill(userId, skillId, vars, history?)` validates `vars`, loads the
+learner context (settings + top 5 `mistakes`), renders the prompt and calls
+the user's provider with the skill's output schema, tier and temperature.
+For the eight base skills (`BASE_SKILLS`) vars and output are typed.
+
+**Base set.** `grammar-quiz`, `grammar-check`, `vocab-enrich`,
+`vocab-exercise`, `vocab-check`, `placement-test` (multiple choice only, so
+the server grades; at most 15 items), `conversation` (reply + ≤ 5
+structured corrections + one tip of a server-rotated kind; the bot renders
+the corrections block through i18n) and `routine-plan`. Quiz and exercise
+skills take `recent_accuracy` and aim at 60–70 % success. Graders return a
+*suggestion* (verdict, FSRS rating, running CEFR estimate); the server
+decides. Correction categories are the `mistake_category` enum, so they map
+straight onto `mistakes` rows.
 
 References the base set is modelled on:
 

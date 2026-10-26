@@ -36,6 +36,7 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun test` | Unit tests; the Postgres/Redis integration tests run only when `DATABASE_URL` (or `DATABASE_URL_TEST`) / `REDIS_URL` are set (Bun loads `.env` automatically). DB tests create and drop a throwaway `coach_test_*` database per file on that server |
 | `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
+| `bun run db:seed:words` | Seed the CEFR frequency dictionary (`data/words/`), idempotent |
 
 ## Layout
 

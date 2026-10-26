@@ -123,3 +123,47 @@ demo-summary = Демо завершено: повторено 3 повідом�
 ## LLM providers
 provider-unavailable-runner = Запуск на вашому власному комп'ютері з'явиться у v2. Оберіть іншого провайдера в налаштуваннях.
 provider-unavailable-server = Серверна LLM не налаштована. Додайте свій API-ключ у налаштуваннях.
+
+# --- talk ---
+talk-pick-topic = Про що поговоримо?
+talk-topic-free = 🎲 Про що завгодно
+talk-topic-routine = Розпорядок дня
+talk-topic-family = Сім'я та друзі
+talk-topic-food = Їжа та куховарство
+talk-topic-travel = Подорожі
+talk-topic-work = Робота та кар'єра
+talk-topic-tech = Технології
+talk-topic-society = Суспільство
+talk-topic-future = Майбутнє
+talk-topic-culture = Книжки та фільми
+talk-finish = ✅ Завершити
+talk-corrections-title = Виправлення
+talk-no-errors = Помилок немає — чудова робота!
+talk-category-grammar = Граматика
+talk-category-vocabulary = Лексика
+talk-category-spelling = Правопис
+talk-category-word_choice = Вибір слова
+talk-category-punctuation = Пунктуація
+talk-category-expression = Вираз
+talk-tip-phrase = Корисна фраза
+talk-tip-grammar = Порада з граматики
+talk-tip-level_up = Новий рівень
+talk-tip-native_pitfall = Часта помилка
+talk-error = Вибачте, не вдалося відповісти. Надішліть повідомлення ще раз.
+talk-text-only = Поки що я читаю тут лише текстові повідомлення.
+talk-opener-fallback = Hi! What have you been up to today?
+talk-summary-empty = Розмова: повідомлень немає
+talk-summary-title = Розмова
+talk-summary-messages = { $n ->
+        [one] { $n } повідомлення
+        [few] { $n } повідомлення
+        [many] { $n } повідомлень
+       *[other] { $n } повідомлення
+    }
+talk-summary-corrections = { $n ->
+        [one] { $n } виправлення
+        [few] { $n } виправлення
+        [many] { $n } виправлень
+       *[other] { $n } виправлення
+    }
+talk-summary-top = найчастіше: { $top }

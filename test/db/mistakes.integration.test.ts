@@ -99,6 +99,8 @@ describe("normaliseMistakePattern", () => {
       "missing article before singular noun",
     );
     expect(normaliseMistakePattern("a/an vs the")).toBe("a/an vs the");
+    // Talk's `wrong → right` patterns keep their arrow.
+    expect(normaliseMistakePattern("we was → we were")).toBe("we was → we were");
   });
 
   test("caps the length", () => {

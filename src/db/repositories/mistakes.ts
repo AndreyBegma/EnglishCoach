@@ -13,7 +13,7 @@ export function normaliseMistakePattern(raw: string): string {
     .normalize("NFKC")
     .toLowerCase()
     .replace(/["'`“”‘’«»]/g, "")
-    .replace(/[^\p{L}\p{N}\s/+-]/gu, " ")
+    .replace(/[^\p{L}\p{N}\s/+→-]/gu, " ")
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, MAX_PATTERN_LENGTH)

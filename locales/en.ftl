@@ -157,3 +157,43 @@ grammar-error-check = ⚠️ I could not check your answer. Send it again in a m
 grammar-retry = 🔄 Try again
 grammar-stop = ⏹ Stop
 grammar-outdated = This question is outdated.
+
+# --- talk ---
+talk-pick-topic = What shall we talk about?
+talk-topic-free = 🎲 Anything
+talk-topic-routine = Daily routine
+talk-topic-family = Family & friends
+talk-topic-food = Food & cooking
+talk-topic-travel = Travel
+talk-topic-work = Work & career
+talk-topic-tech = Technology
+talk-topic-society = Society
+talk-topic-future = The future
+talk-topic-culture = Books & films
+talk-finish = ✅ Finish
+talk-corrections-title = Corrections
+talk-no-errors = No errors — nice work!
+talk-category-grammar = Grammar
+talk-category-vocabulary = Vocabulary
+talk-category-spelling = Spelling
+talk-category-word_choice = Word choice
+talk-category-punctuation = Punctuation
+talk-category-expression = Expression
+talk-tip-phrase = Useful phrase
+talk-tip-grammar = Grammar tip
+talk-tip-level_up = Level up
+talk-tip-native_pitfall = Common mistake
+talk-error = Sorry, I could not answer that. Please send your message again.
+talk-text-only = I can only read text messages here for now.
+talk-opener-fallback = Hi! What have you been up to today?
+talk-summary-empty = Talk: no messages
+talk-summary-title = Talk
+talk-summary-messages = { $n ->
+        [one] 1 message
+       *[other] { $n } messages
+    }
+talk-summary-corrections = { $n ->
+        [one] 1 correction
+       *[other] { $n } corrections
+    }
+talk-summary-top = top: { $top }

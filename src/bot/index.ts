@@ -15,6 +15,7 @@ import { SettingsController } from "../settings/controller";
 import { settingsHandlers, settingsInputMiddleware } from "../settings/handlers";
 import { ProviderSettings } from "../settings/provider";
 import type { SkillRunner } from "../skills";
+import { talkHandlers, talkSession } from "../talk";
 import { accessMiddleware, adminCommands, type RefusalGate } from "./access";
 import type { BotContext, FlowState } from "./context";
 import { createI18n } from "./i18n";
@@ -82,7 +83,8 @@ export function createBot(deps: BotDeps) {
     log,
   };
 
-  if (deps.enableDemoSession) sessions.register("talk", demoSession(i18n));
+  const talk = { db, skills: deps.skills, i18n, log };
+  sessions.register("talk", deps.enableDemoSession ? demoSession(i18n) : talkSession(talk));
   const grammar = { db, skills: deps.skills, i18n, log };
   sessions.register("grammar", grammarSession(grammar));
 
@@ -94,6 +96,7 @@ export function createBot(deps: BotDeps) {
   bot.use(adminCommands(db));
   bot.use(settingsHandlers(settings));
   bot.use(hubHandlers({ hub, sessions }));
+  bot.use(talkHandlers(talk));
   bot.use(grammarHandlers(grammar));
 
   if (deps.enableDemoSession) {

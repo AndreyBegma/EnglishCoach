@@ -35,6 +35,11 @@ export async function getOrCreateUser(db: Db, profile: TelegramProfile): Promise
   });
 }
 
+export async function getUserById(db: Db, id: number): Promise<User | undefined> {
+  const [user] = await db.select().from(users).where(eq(users.id, id));
+  return user;
+}
+
 export async function findUserByTelegramId(db: Db, telegramId: number): Promise<User | undefined> {
   const [user] = await db.select().from(users).where(eq(users.telegramId, telegramId));
   return user;

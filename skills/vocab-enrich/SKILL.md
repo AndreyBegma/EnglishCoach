@@ -38,4 +38,6 @@ common meaning at the learner's level — consistently across every field.
   idioms.
 - `mnemonic`: one short memory hook in {{explain_lang}}: a sound-alike in the learner's language, a
   vivid image, a word-family link, or a warning about a false friend if the word is one for a
-  {{native_lang}} speaker. Never offensive, never misleading about meaning.
+  {{native_lang}} speaker. Use only real words of either language — never invent or distort a
+  word to force a sound-alike; when no honest one exists, use an image or a word-family link
+  (`decide → decision`). Never offensive, never misleading about meaning.

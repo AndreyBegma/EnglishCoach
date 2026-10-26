@@ -60,6 +60,7 @@ export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): Ll
         requestModel: req.model,
         tier: req.tier,
       });
+      // `req.temperature` is ignored: `claude -p` has no sampling flag, so the CLI default applies.
       const system = `${req.system}\n\nRespond with only a JSON value that matches this JSON Schema, with no prose around it:\n${JSON.stringify(toJsonSchema(req.schema))}`;
 
       return completeWithRepair("claude-code", req.messages, req.schema, async (messages) => {

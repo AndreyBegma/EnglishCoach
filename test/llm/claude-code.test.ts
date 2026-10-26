@@ -44,6 +44,13 @@ describe("claude-code provider", () => {
     expect([toolsFlag, tools]).toEqual(["--tools", ""]);
   });
 
+  test("ignores temperature: the CLI has no sampling flag", async () => {
+    const provider = createClaudeCodeProvider({ command: command("echo"), model: "opus" });
+    const plain = await provider.complete(request);
+    const warm = await provider.complete({ ...request, temperature: 0.9 });
+    expect(warm.data.argv).toEqual(plain.data.argv);
+  });
+
   test("falls back to the tier default when no model is chosen", async () => {
     const provider = createClaudeCodeProvider({ command: command("echo") });
     const { data } = await provider.complete({ ...request, tier: "fast" });

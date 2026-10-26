@@ -69,6 +69,20 @@ describe("anthropic provider", () => {
     expect(params?.model).toBe("claude-sonnet-5-5");
   });
 
+  test("passes temperature only when the request sets it", async () => {
+    const { client, calls } = fakeClient({
+      inputs: [
+        { word: "a", level: "A1" },
+        { word: "b", level: "A1" },
+      ],
+    });
+    const provider = createAnthropicProvider({ apiKey, client });
+    await provider.complete({ ...request, temperature: 0.2 });
+    await provider.complete(request);
+    expect(calls[0]?.temperature).toBe(0.2);
+    expect(calls[1]).not.toHaveProperty("temperature");
+  });
+
   test("the user's model wins over the request model and the tier", async () => {
     const { client, calls } = fakeClient({ inputs: [{ word: "a", level: "A1" }] });
     await createAnthropicProvider({ apiKey, client, model: "claude-opus-5-5" }).complete({

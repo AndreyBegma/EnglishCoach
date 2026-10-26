@@ -80,6 +80,15 @@ describe("openai provider (fake client)", () => {
     expect(calls[0]?.max_completion_tokens).toBeUndefined();
   });
 
+  test("passes temperature only when the request sets it", async () => {
+    const { client, calls } = fakeClient([valid, valid]);
+    const provider = createOpenAiProvider({ apiKey, client });
+    await provider.complete({ ...request, temperature: 0.3 });
+    await provider.complete(request);
+    expect(calls[0]?.temperature).toBe(0.3);
+    expect(calls[1]).not.toHaveProperty("temperature");
+  });
+
   test("falls back to json_object, with the schema in the prompt, and remembers it", async () => {
     const { client, calls } = fakeClient([
       apiError(400, "Invalid parameter: 'response_format' of type 'json_schema' is not supported"),

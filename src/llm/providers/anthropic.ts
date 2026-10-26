@@ -15,6 +15,7 @@ export type AnthropicClient = {
     create(params: {
       model: string;
       max_tokens: number;
+      temperature?: number;
       system: string;
       messages: ChatMessage[];
       tools: { name: string; description: string; input_schema: { type: "object" } }[];
@@ -59,6 +60,7 @@ export function createAnthropicProvider(options: AnthropicProviderOptions): LlmP
           response = await client.messages.create({
             model,
             max_tokens: req.maxTokens ?? DEFAULT_MAX_TOKENS,
+            ...(req.temperature === undefined ? {} : { temperature: req.temperature }),
             system: req.system,
             messages,
             tools: [

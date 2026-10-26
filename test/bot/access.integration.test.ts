@@ -44,7 +44,7 @@ describe.skipIf(!testServerUrl)("allowlist", () => {
   test("an admin is always allowed and is created with their Telegram language", async () => {
     const ukAdmin = 800_010;
     const h = createHarness(database.db, { adminIds: [ukAdmin] });
-    await h.say(ukAdmin, "/start", "uk");
+    await h.say(ukAdmin, "/menu", "uk");
     expect(await findUserByTelegramId(database.db, ukAdmin)).toBeDefined();
     expect(replies(h, ukAdmin)[0]).toContain("EnglishCoach — чим займемося?");
 
@@ -65,7 +65,7 @@ describe.skipIf(!testServerUrl)("allowlist", () => {
       `Allowed users:\n${FRIEND}`,
     ]);
 
-    await h.say(FRIEND, "/start");
+    await h.say(FRIEND, "/menu");
     const friend = await findUserByTelegramId(database.db, FRIEND);
     expect(friend).toMatchObject({ isAllowed: true, username: `user${FRIEND}` });
     expect(replies(h, FRIEND)[0]).toContain("EnglishCoach — what shall we do?");

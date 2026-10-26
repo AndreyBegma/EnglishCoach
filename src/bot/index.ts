@@ -8,6 +8,8 @@ import { HubService } from "../hub/hub-service";
 import type { ProviderFactories } from "../llm";
 import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
+import { OnboardingFlow } from "../onboarding/flow";
+import { onboardingHandlers, placementSession } from "../onboarding/handlers";
 import { demoSession } from "../sessions/demo";
 import { offerToCancel, sessionMiddleware } from "../sessions/handlers";
 import { SessionManager, type SessionTimeouts } from "../sessions/session-manager";
@@ -80,14 +82,32 @@ export function createBot(deps: BotDeps) {
   });
   const settings = {
     hub,
-    controller: new SettingsController({ db, hub, i18n, events: settingsEvents, providers }),
+    controller: new SettingsController({
+      db,
+      hub,
+      i18n,
+      events: settingsEvents,
+      providers,
+      placement: { retake: (ctx) => onboarding.retake(ctx) },
+    }),
     log,
   };
+  const onboarding = new OnboardingFlow({
+    db,
+    i18n,
+    skills: deps.skills,
+    sessions,
+    events: settingsEvents,
+    hub,
+    log,
+    openProviderSettings: (ctx) => settings.controller.show(ctx, { page: "provider" }),
+  });
 
   const talk = { db, skills: deps.skills, i18n, log };
   sessions.register("talk", deps.enableDemoSession ? demoSession(i18n) : talkSession(talk));
   const grammar = { db, skills: deps.skills, i18n, log };
   sessions.register("grammar", grammarSession(grammar));
+  sessions.register("placement", placementSession);
   const vocab = vocabSessions({ db, i18n, skills: deps.skills, log });
   sessions.register("vocab_new", vocab.learn);
   sessions.register("review", vocab.review);
@@ -99,9 +119,10 @@ export function createBot(deps: BotDeps) {
   bot.use(sessionMiddleware(sessions));
   bot.use(adminCommands(db));
   bot.use(settingsHandlers(settings));
-  bot.use(hubHandlers({ hub, sessions }));
+  bot.use(hubHandlers({ hub, sessions, onboarding }));
   bot.use(talkHandlers(talk));
   bot.use(grammarHandlers(grammar));
+  bot.use(onboardingHandlers(onboarding));
 
   if (deps.enableDemoSession) {
     bot.command("demo", async (ctx) => {

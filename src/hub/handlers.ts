@@ -2,6 +2,7 @@ import { Composer } from "grammy";
 import { type HubActivity, parseCallback } from "../bot/callbacks";
 import type { BotContext } from "../bot/context";
 import type { SessionKind } from "../db/repositories/sessions";
+import type { OnboardingFlow } from "../onboarding/flow";
 import { offerToCancel } from "../sessions/handlers";
 import type { SessionManager } from "../sessions/session-manager";
 import type { HubService } from "./hub-service";
@@ -17,6 +18,8 @@ const ACTIVITY_KIND: Record<HubActivity, SessionKind> = {
 export interface HubHandlerDeps {
   hub: HubService;
   sessions: SessionManager;
+  /** Takes over `/start` for a learner who has not finished onboarding. */
+  onboarding?: OnboardingFlow;
 }
 
 /** Answers a button nobody can handle any more and moves the user to a fresh hub. */
@@ -25,12 +28,13 @@ export async function answerOutdated(ctx: BotContext, hub: HubService): Promise<
   await hub.bump(ctx.user);
 }
 
-export function hubHandlers({ hub, sessions }: HubHandlerDeps): Composer<BotContext> {
+export function hubHandlers({ hub, sessions, onboarding }: HubHandlerDeps): Composer<BotContext> {
   const composer = new Composer<BotContext>();
 
   composer.command(["start", "menu"], async (ctx) => {
     // Outside a session the command would linger under the hub; inside one it is tracked anyway.
     if (!ctx.learning) await ctx.deleteMessage().catch(() => {});
+    if (ctx.message?.text?.startsWith("/start") && (await onboarding?.onStart(ctx))) return;
     await hub.bump(ctx.user);
   });
 

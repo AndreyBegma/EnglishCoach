@@ -38,7 +38,7 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun run lint` | Biome lint + format check (`bun run format` fixes) |
 | `bun run typecheck` | `tsc --noEmit` |
 | `bun test` | Unit tests; the Postgres/Redis integration tests run only when `DATABASE_URL` (or `DATABASE_URL_TEST`) / `REDIS_URL` are set (Bun loads `.env` automatically). DB tests create and drop a throwaway `coach_test_*` database per file on that server |
-| `LLM_LIVE_TESTS=1 bun test test/skills/live.test.ts` | Opt-in smoke test against real models: one skill call per provider whose credentials are set (`SERVER_ANTHROPIC_API_KEY`, `SERVER_OPENAI_API_KEY` [+ `SERVER_OPENAI_BASE_URL`, `LLM_LIVE_OPENAI_MODEL`], or a `claude` binary). Costs money; never runs in CI |
+| `LLM_LIVE_TESTS=1 bun test test/skills/live.test.ts` | Opt-in smoke test against real models: one skill call per provider whose credentials are set — Anthropic once per tier on its default model — (`SERVER_ANTHROPIC_API_KEY`, `SERVER_OPENAI_API_KEY` [+ `SERVER_OPENAI_BASE_URL`, `LLM_LIVE_OPENAI_MODEL`], or a `claude` binary). Costs money; never runs in CI |
 | `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
 | `bun run db:seed:words` | Seed the CEFR frequency dictionary (`data/words/`), idempotent |
@@ -95,7 +95,7 @@ kind: quiz                # quiz | check | enrich | exercise | placement | conve
 input: GrammarQuizInput   # zod schema for the call's vars, in src/skills/schemas.ts
 output: GrammarQuizOutput # zod schema for the model's answer, in src/skills/schemas.ts
 model_hint: smart         # fast | smart (the user's chosen model still wins)
-temperature: 0.8          # optional, 0-1 (ignored by claude-code)
+temperature: 0.8          # optional, 0-1; sent only to models that accept it (see src/llm/models.ts)
 max_tokens: 1500          # optional
 ---
 ```

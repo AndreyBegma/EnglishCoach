@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { DEFAULT_MODELS } from "../../src/llm/models";
 import { createAnthropicProvider } from "../../src/llm/providers/anthropic";
 import { createClaudeCodeProvider } from "../../src/llm/providers/claude-code";
 import { createOpenAiProvider } from "../../src/llm/providers/openai";
@@ -47,9 +48,11 @@ async function smoke(provider: LlmProvider) {
 }
 
 describe.skipIf(!live)("live skill smoke test (LLM_LIVE_TESTS=1)", () => {
-  test.skipIf(!env.SERVER_ANTHROPIC_API_KEY)(
-    "anthropic runs grammar-quiz",
-    () => smoke(createAnthropicProvider({ apiKey: env.SERVER_ANTHROPIC_API_KEY ?? "" })),
+  // Both tiers, each on its default model.
+  test.skipIf(!env.SERVER_ANTHROPIC_API_KEY).each(Object.values(DEFAULT_MODELS.anthropic))(
+    "anthropic runs grammar-quiz on %s",
+    (model) =>
+      smoke(createAnthropicProvider({ apiKey: env.SERVER_ANTHROPIC_API_KEY ?? "", model })),
     TIMEOUT_MS,
   );
 

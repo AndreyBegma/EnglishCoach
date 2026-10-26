@@ -152,4 +152,18 @@ describe("anthropic provider", () => {
       CURATED_MODELS.anthropic,
     );
   });
+
+  test("listModels rethrows 401/403 as a scrubbed LlmProviderError instead of falling back", async () => {
+    for (const status of [401, 403]) {
+      const rejected = fakeClient({
+        models: Object.assign(new Error(`${status} invalid x-api-key ${apiKey}`), { status }),
+      });
+      const error = await createAnthropicProvider({ apiKey, client: rejected.client })
+        .listModels?.()
+        .catch((caught: unknown) => caught);
+      expect(error).toBeInstanceOf(LlmProviderError);
+      expect((error as LlmProviderError).status).toBe(status);
+      expect((error as Error).message).not.toContain(apiKey);
+    }
+  });
 });

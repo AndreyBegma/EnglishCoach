@@ -138,6 +138,18 @@ describe("openai provider (fake client)", () => {
     expect((error as Error).message).not.toContain(apiKey);
   });
 
+  test("listModels rethrows 401/403 as a scrubbed LlmProviderError instead of falling back", async () => {
+    for (const status of [401, 403]) {
+      const rejected = fakeClient([], apiError(status, `Incorrect API key provided: ${apiKey}`));
+      const error = await createOpenAiProvider({ apiKey, client: rejected.client })
+        .listModels?.()
+        .catch((caught: unknown) => caught);
+      expect(error).toBeInstanceOf(LlmProviderError);
+      expect((error as LlmProviderError).status).toBe(status);
+      expect((error as Error).message).not.toContain(apiKey);
+    }
+  });
+
   test("listModels sorts the live list and falls back to the curated list on error", async () => {
     const live = fakeClient([], ["gpt-6-luna", "gpt-6-astra"]);
     expect(await createOpenAiProvider({ apiKey, client: live.client }).listModels?.()).toEqual([
@@ -155,7 +167,7 @@ describe("openai provider (fake client)", () => {
 describe("openai provider (real SDK, custom base URL)", () => {
   const seen: { path: string; auth: string | null; body?: Record<string, unknown> }[] = [];
   let server: ReturnType<typeof Bun.serve>;
-  let modelsFail = false;
+  let modelsStatus: number | undefined;
 
   beforeAll(() => {
     server = Bun.serve({
@@ -167,8 +179,10 @@ describe("openai provider (real SDK, custom base URL)", () => {
         seen.push({ path: url.pathname, auth: req.headers.get("authorization"), body });
 
         if (url.pathname === "/router/v1/models") {
-          // 403, not 5xx: the SDK retries 5xx with backoff, which would only slow the test down.
-          if (modelsFail) return Response.json({ error: { message: "nope" } }, { status: 403 });
+          // 4xx, not 5xx: the SDK retries 5xx with backoff, which would only slow the test down.
+          if (modelsStatus) {
+            return Response.json({ error: { message: "nope" } }, { status: modelsStatus });
+          }
           return Response.json({
             object: "list",
             data: [
@@ -219,8 +233,15 @@ describe("openai provider (real SDK, custom base URL)", () => {
     const provider = createOpenAiProvider({ apiKey, baseUrl: baseUrl() });
     expect(await provider.listModels?.()).toEqual(["vendor/model-a", "vendor/model-b"]);
 
-    modelsFail = true;
+    modelsStatus = 404;
     const fallback = createOpenAiProvider({ apiKey, baseUrl: baseUrl() });
     expect(await fallback.listModels?.()).toEqual(CURATED_MODELS.openai);
+
+    modelsStatus = 401;
+    const error = await createOpenAiProvider({ apiKey, baseUrl: baseUrl() })
+      .listModels?.()
+      .catch((caught: unknown) => caught);
+    expect(error).toBeInstanceOf(LlmProviderError);
+    expect((error as LlmProviderError).status).toBe(401);
   });
 });

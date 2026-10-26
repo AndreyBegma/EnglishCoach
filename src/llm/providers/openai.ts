@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { toProviderError } from "../errors";
+import { isAuthError, toProviderError } from "../errors";
 import { CURATED_MODELS, pickModel } from "../models";
 import { completeWithRepair, toJsonSchema } from "../structured";
 import type { CompletionRequest, LlmProvider } from "../types";
@@ -125,7 +125,9 @@ export function createOpenAiProvider(options: OpenAiProviderOptions): LlmProvide
         const ids: string[] = [];
         for await (const model of client.models.list()) ids.push(model.id);
         return ids.length > 0 ? ids.sort() : CURATED_MODELS.openai;
-      } catch {
+      } catch (error) {
+        // A rejected key must surface (settings validates keys this way); anything else falls back.
+        if (isAuthError(error)) throw toProviderError("openai", error, [apiKey]);
         return CURATED_MODELS.openai;
       }
     },

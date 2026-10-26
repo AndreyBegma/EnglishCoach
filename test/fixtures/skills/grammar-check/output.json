@@ -1,0 +1,8 @@
+{
+  "verdict": "wrong",
+  "normalized_answer": "has worked",
+  "severity": "critical",
+  "category": "grammar",
+  "pattern": "present simple instead of present perfect with \"since\"",
+  "explanation": "З «since» дія почалася в минулому й триває досі, тому потрібен present perfect: «She has worked here since 2019». Present simple «works» тут не підходить — це типова калька з «працює з 2019 року»."
+}

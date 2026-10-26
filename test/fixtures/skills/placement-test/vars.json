@@ -1,0 +1,10 @@
+{
+  "answers": [
+    { "level": "A2", "skill": "grammar", "topic": "past simple irregular verbs", "correct": true },
+    { "level": "B1", "skill": "vocabulary", "topic": "phrasal verbs: look after", "correct": true },
+    { "level": "B2", "skill": "reading", "topic": "inferring attitude", "correct": false },
+    { "level": "B1", "skill": "grammar", "topic": "first conditional", "correct": true },
+    { "level": "B2", "skill": "grammar", "topic": "third conditional", "correct": false }
+  ],
+  "max_items": 15
+}

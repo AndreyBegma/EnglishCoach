@@ -1,0 +1,8 @@
+{
+  "mode": "recognition",
+  "instruction": "Выберите значение выделенного слова.",
+  "prompt": "I forgot my umbrella, so I had to **borrow** one from my neighbour.",
+  "options": ["давать взаймы", "брать взаймы", "украсть", "быть должным"],
+  "correct_index": 1,
+  "accepted_answers": ["брать взаймы"]
+}

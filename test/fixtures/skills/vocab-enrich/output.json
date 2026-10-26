@@ -1,0 +1,18 @@
+{
+  "lemma": "decision",
+  "translation": "решение",
+  "ipa": "/dɪˈsɪʒn/",
+  "pos": "noun",
+  "examples": [
+    {
+      "en": "Moving to another city was a difficult decision.",
+      "translation": "Переезд в другой город был трудным решением."
+    },
+    {
+      "en": "The coach made a quick decision to change the goalkeeper.",
+      "translation": "Тренер быстро принял решение заменить вратаря."
+    }
+  ],
+  "collocations": ["make a decision", "a difficult decision", "the final decision"],
+  "mnemonic": "По-английски решение «делают», а не «принимают»: make a decision. Корень тот же, что в «decide» — «де-САЙД»: решил, на какую сторону (side) встать."
+}

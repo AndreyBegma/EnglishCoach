@@ -1,0 +1,7 @@
+{
+  "type": "gap_fill",
+  "question": "She ___ (work) here since 2019.",
+  "instruction": "Fill the gap with the correct form of the verb.",
+  "accepted_answers": ["has worked", "has been working", "'s worked", "'s been working"],
+  "learner_answer": "works"
+}

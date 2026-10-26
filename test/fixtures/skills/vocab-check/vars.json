@@ -1,0 +1,8 @@
+{
+  "mode": "cloze",
+  "lemma": "receive",
+  "prompt": "Did you ___ my email yesterday? (получить)",
+  "accepted_answers": ["receive"],
+  "learner_answer": "recieve",
+  "response_seconds": 9.5
+}

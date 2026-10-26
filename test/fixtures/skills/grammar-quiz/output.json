@@ -1,0 +1,11 @@
+{
+  "type": "multiple_choice",
+  "topic": "present perfect vs past simple",
+  "difficulty": "B1",
+  "instruction": "Выберите вариант, который правильно заполняет пропуск.",
+  "question": "I ___ in this city since I started university, so I know all the best cafés.",
+  "options": ["live", "lived", "have lived", "am living"],
+  "correct_index": 2,
+  "accepted_answers": ["have lived"],
+  "explanation": "С «since» действие началось в прошлом и продолжается сейчас, поэтому нужен present perfect: «have lived». «Lived» (past simple) означало бы, что вы там больше не живёте, а «live» после «since» — типичная калька с русского «живу с тех пор»."
+}

@@ -1,0 +1,9 @@
+{
+  "mode": "recognition",
+  "recent_accuracy": 0.6,
+  "lemma": "borrow",
+  "pos": "verb",
+  "translation": "брать взаймы, одалживать (у кого-то)",
+  "examples": ["Can I borrow your pen?"],
+  "distractors": ["lend", "steal", "owe"]
+}

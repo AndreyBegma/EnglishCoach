@@ -80,6 +80,15 @@ describe("openai provider (fake client)", () => {
     expect(calls[0]?.max_completion_tokens).toBeUndefined();
   });
 
+  test("passes temperature only when the request sets it", async () => {
+    const { client, calls } = fakeClient([valid, valid]);
+    const provider = createOpenAiProvider({ apiKey, client });
+    await provider.complete({ ...request, temperature: 0.3 });
+    await provider.complete(request);
+    expect(calls[0]?.temperature).toBe(0.3);
+    expect(calls[1]).not.toHaveProperty("temperature");
+  });
+
   test("falls back to json_object, with the schema in the prompt, and remembers it", async () => {
     const { client, calls } = fakeClient([
       apiError(400, "Invalid parameter: 'response_format' of type 'json_schema' is not supported"),
@@ -129,6 +138,18 @@ describe("openai provider (fake client)", () => {
     expect((error as Error).message).not.toContain(apiKey);
   });
 
+  test("listModels rethrows 401/403 as a scrubbed LlmProviderError instead of falling back", async () => {
+    for (const status of [401, 403]) {
+      const rejected = fakeClient([], apiError(status, `Incorrect API key provided: ${apiKey}`));
+      const error = await createOpenAiProvider({ apiKey, client: rejected.client })
+        .listModels?.()
+        .catch((caught: unknown) => caught);
+      expect(error).toBeInstanceOf(LlmProviderError);
+      expect((error as LlmProviderError).status).toBe(status);
+      expect((error as Error).message).not.toContain(apiKey);
+    }
+  });
+
   test("listModels sorts the live list and falls back to the curated list on error", async () => {
     const live = fakeClient([], ["gpt-6-luna", "gpt-6-astra"]);
     expect(await createOpenAiProvider({ apiKey, client: live.client }).listModels?.()).toEqual([
@@ -146,7 +167,7 @@ describe("openai provider (fake client)", () => {
 describe("openai provider (real SDK, custom base URL)", () => {
   const seen: { path: string; auth: string | null; body?: Record<string, unknown> }[] = [];
   let server: ReturnType<typeof Bun.serve>;
-  let modelsFail = false;
+  let modelsStatus: number | undefined;
 
   beforeAll(() => {
     server = Bun.serve({
@@ -158,8 +179,10 @@ describe("openai provider (real SDK, custom base URL)", () => {
         seen.push({ path: url.pathname, auth: req.headers.get("authorization"), body });
 
         if (url.pathname === "/router/v1/models") {
-          // 403, not 5xx: the SDK retries 5xx with backoff, which would only slow the test down.
-          if (modelsFail) return Response.json({ error: { message: "nope" } }, { status: 403 });
+          // 4xx, not 5xx: the SDK retries 5xx with backoff, which would only slow the test down.
+          if (modelsStatus) {
+            return Response.json({ error: { message: "nope" } }, { status: modelsStatus });
+          }
           return Response.json({
             object: "list",
             data: [
@@ -210,8 +233,15 @@ describe("openai provider (real SDK, custom base URL)", () => {
     const provider = createOpenAiProvider({ apiKey, baseUrl: baseUrl() });
     expect(await provider.listModels?.()).toEqual(["vendor/model-a", "vendor/model-b"]);
 
-    modelsFail = true;
+    modelsStatus = 404;
     const fallback = createOpenAiProvider({ apiKey, baseUrl: baseUrl() });
     expect(await fallback.listModels?.()).toEqual(CURATED_MODELS.openai);
+
+    modelsStatus = 401;
+    const error = await createOpenAiProvider({ apiKey, baseUrl: baseUrl() })
+      .listModels?.()
+      .catch((caught: unknown) => caught);
+    expect(error).toBeInstanceOf(LlmProviderError);
+    expect((error as LlmProviderError).status).toBe(401);
   });
 });

@@ -59,6 +59,13 @@ export function scrubSecrets(text: string, secrets: readonly string[] = []): str
   return scrubbed.replace(KEY_LIKE, "[redacted]");
 }
 
+/** An HTTP 401/403: the key is wrong or lacks access, which no fallback can paper over. */
+export function isAuthError(error: unknown): boolean {
+  if (typeof error !== "object" || error === null || !("status" in error)) return false;
+  const status = Number(error.status);
+  return status === 401 || status === 403;
+}
+
 /** Wraps any thrown value into an `LlmProviderError` whose message cannot leak `secrets`. */
 export function toProviderError(
   kind: ProviderKind,

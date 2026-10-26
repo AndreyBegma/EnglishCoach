@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { toProviderError } from "../errors";
+import { isAuthError, toProviderError } from "../errors";
 import { CURATED_MODELS, pickModel } from "../models";
 import { completeWithRepair, toJsonSchema } from "../structured";
 import type { CompletionRequest, LlmProvider } from "../types";
@@ -20,6 +20,7 @@ export type OpenAiClient = {
         response_format: ResponseFormat;
         max_tokens?: number;
         max_completion_tokens?: number;
+        temperature?: number;
       }): Promise<{
         choices: { message: { content: string | null } }[];
         usage?: { prompt_tokens: number; completion_tokens: number } | null;
@@ -69,12 +70,14 @@ export function createOpenAiProvider(options: OpenAiProviderOptions): LlmProvide
       const maxTokens = req.maxTokens ?? DEFAULT_MAX_TOKENS;
       // api.openai.com wants max_completion_tokens; routers broadly still only read max_tokens.
       const limit = baseURL ? { max_tokens: maxTokens } : { max_completion_tokens: maxTokens };
+      const sampling = req.temperature === undefined ? {} : { temperature: req.temperature };
 
       return completeWithRepair("openai", req.messages, req.schema, async (messages) => {
         const send = (format: "json_schema" | "json_object") =>
           client.chat.completions.create({
             model,
             ...limit,
+            ...sampling,
             messages: [
               {
                 role: "system",
@@ -122,7 +125,9 @@ export function createOpenAiProvider(options: OpenAiProviderOptions): LlmProvide
         const ids: string[] = [];
         for await (const model of client.models.list()) ids.push(model.id);
         return ids.length > 0 ? ids.sort() : CURATED_MODELS.openai;
-      } catch {
+      } catch (error) {
+        // A rejected key must surface (settings validates keys this way); anything else falls back.
+        if (isAuthError(error)) throw toProviderError("openai", error, [apiKey]);
         return CURATED_MODELS.openai;
       }
     },

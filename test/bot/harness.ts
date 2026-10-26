@@ -4,6 +4,7 @@ import type { RefusalGate } from "../../src/bot/access";
 import type { FlowState } from "../../src/bot/context";
 import { createBot } from "../../src/bot/index";
 import type { Db } from "../../src/db/client";
+import type { SessionKind } from "../../src/db/repositories/sessions";
 import { type ProviderFactories, resolveProvider } from "../../src/llm";
 import type { ServerEnv } from "../../src/llm/providers/server";
 import { createLogger } from "../../src/log";
@@ -179,6 +180,8 @@ export class MemoryRefusalGate implements RefusalGate {
 export interface HarnessOptions {
   adminIds?: number[];
   enableDemoSession?: boolean;
+  /** Session kinds to leave without a handler, whoever registers them. */
+  withoutSessionKinds?: SessionKind[];
   /** Replaces the fake LLM, e.g. with the real providers over fake SDK clients. */
   llmFactories?: ProviderFactories;
   /** Replaces the skill runner session handlers get as `deps.skills`. */
@@ -209,6 +212,7 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
     refusals,
     timeouts,
     enableDemoSession: options.enableDemoSession ?? true,
+    withoutSessionKinds: options.withoutSessionKinds,
     masterKey: TEST_MASTER_KEY,
     llmEnv,
     llmFactories,

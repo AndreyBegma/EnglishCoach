@@ -1,5 +1,6 @@
 import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
+import type { SessionKind } from "../db/repositories/sessions";
 import { SettingsEvents } from "../events/settings-events";
 import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
@@ -28,6 +29,8 @@ export interface BotDeps {
   refusals: RefusalGate;
   timeouts: SessionTimeouts;
   enableDemoSession: boolean;
+  /** Session kinds whose `sessions.register` is ignored; tests use it to get a kind with no handler. */
+  withoutSessionKinds?: readonly SessionKind[];
   /** Decrypts and encrypts user API keys. */
   masterKey: Buffer;
   /** The server provider's environment (`SERVER_*`, `CLAUDE_BIN`). */
@@ -58,6 +61,12 @@ export function createBot(deps: BotDeps) {
     log,
     i18n,
   });
+
+  const skippedKinds = new Set(deps.withoutSessionKinds);
+  const registerKind = sessions.register.bind(sessions);
+  sessions.register = (kind, handler) => {
+    if (!skippedKinds.has(kind)) registerKind(kind, handler);
+  };
 
   const settingsEvents = new SettingsEvents(log);
   const providers = new ProviderSettings({

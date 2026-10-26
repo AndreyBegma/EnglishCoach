@@ -10,6 +10,7 @@ import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
 import { OnboardingFlow } from "../onboarding/flow";
 import { onboardingHandlers, placementSession } from "../onboarding/handlers";
+import { progressHandlers } from "../progress";
 import { demoSession } from "../sessions/demo";
 import { offerToCancel, sessionMiddleware } from "../sessions/handlers";
 import { SessionManager, type SessionTimeouts } from "../sessions/session-manager";
@@ -120,6 +121,7 @@ export function createBot(deps: BotDeps) {
   bot.use(adminCommands(db));
   bot.use(settingsHandlers(settings));
   bot.use(hubHandlers({ hub, sessions, onboarding }));
+  bot.use(progressHandlers({ db, hub, sessions, i18n }));
   bot.use(talkHandlers(talk));
   bot.use(grammarHandlers(grammar));
   bot.use(onboardingHandlers(onboarding));

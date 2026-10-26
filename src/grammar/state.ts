@@ -11,6 +11,8 @@ export interface GrammarState {
   sessionId: number;
   /** The syllabus tag the learner chose; null for Mixed. */
   topic: string | null;
+  /** Weak-spot patterns this session practises, in turn, instead of a syllabus topic. */
+  seed?: string[];
   /** Questions sent so far. */
   asked: number;
   answered: number;
@@ -26,5 +28,7 @@ export interface GrammarState {
 declare module "../bot/context" {
   interface FlowState {
     grammar?: GrammarState;
+    /** Set by Progress's "Practice these" just before it starts the grammar session. */
+    grammarSeed?: string[];
   }
 }

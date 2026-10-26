@@ -106,7 +106,6 @@ input-timezone-invalid = Невідомий часовий пояс. Введі�
 
 ## Progress
 progress-title = 📈 Прогрес
-progress-placeholder = Незабаром тут з'явиться ваша статистика.
 
 ## Sessions
 session-conflict = У вас є незавершене заняття. Скасувати його, щоб почати нове?
@@ -263,3 +262,24 @@ talk-summary-corrections = { $n ->
        *[other] { $n } виправлення
     }
 talk-summary-top = найчастіше: { $top }
+
+# --- progress ---
+progress-level = 🎓 Рівень: { $level }
+progress-level-unset = 🎓 Рівень: ще не визначено
+progress-streak = 🔥 Серія: { $current } (рекорд: { $best })
+progress-goal = 🎯 Сьогодні: { $done }/{ $goal } нових слів · повторень: { $reviews }
+progress-goal-met = ✅
+progress-cards = 🗂 Картки: нових { $new } · у вивченні { $learning } · на повторенні { $review }
+progress-due = ⏰ До повторення: сьогодні { $today } · завтра { $tomorrow }
+progress-words = 📚 Вивчено слів: { $count }
+progress-activity = 📊 Останні 7 днів: { $spark }
+progress-grammar = ✍️ Точність у граматиці: { $week } (7 днів) · { $month } (30 днів)
+progress-weak-title = ⚠️ Слабкі місця:
+progress-weak-item = • { $pattern } ×{ $count }
+progress-weak-none = Помилок поки немає — тренувати нічого.
+progress-btn-weak = 🎯 Слабкі місця
+progress-weak-screen-title = 🎯 Слабкі місця
+progress-weak-line = { $n }. { $pattern } ×{ $count }{ "\u000A" }❌ { $wrong }{ "\u000A" }✅ { $right }
+progress-btn-practice = ✍️ Потренувати
+progress-practice-none = Поки нічого тренувати.
+grammar-practice-intro = ✍️ Тренуємо слабкі місця (патернів: { $count }), по запитанню на кожен по черзі.

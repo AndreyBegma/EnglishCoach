@@ -1,4 +1,5 @@
 import { InlineKeyboard } from "grammy";
+import type { InlineKeyboardButton } from "grammy/types";
 import type { BotContext } from "../bot/context";
 import type { Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
@@ -167,8 +168,14 @@ export class VocabCore {
   }
 
   /** Again · Hard · Good · Easy, the suggestion marked. */
-  ratingKeyboard(t: T, cardId: number, suggested?: RatingName): InlineKeyboard {
+  ratingKeyboard(
+    t: T,
+    cardId: number,
+    suggested?: RatingName,
+    extraRows: InlineKeyboardButton[][] = [],
+  ): InlineKeyboard {
     return InlineKeyboard.from([
+      ...extraRows,
       RATINGS.map((rating) =>
         button(`${rating === suggested ? "✓ " : ""}${t(`vocab-rate-${rating}`)}`, {
           op: "rate",

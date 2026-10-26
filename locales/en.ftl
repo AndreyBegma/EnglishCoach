@@ -259,3 +259,14 @@ talk-summary-corrections = { $n ->
        *[other] { $n } corrections
     }
 talk-summary-top = top: { $top }
+
+# --- voice ---
+voice-listen = 🔊 Listen
+voice-transcript = 🎤 { $text }
+voice-needs-key = Voice answers and pronunciation need an OpenAI-compatible API key. Add one in Settings → Provider, then try again. Meanwhile, type your answer.
+voice-too-long = That voice message is too long. Keep it under { $seconds } seconds, or type your answer.
+voice-stt-failed = I could not transcribe that voice message. Try again or type your answer.
+voice-empty = I could not hear any words in that voice message. Try again or type your answer.
+voice-tts-failed = I could not generate the pronunciation right now. Try again later.
+voice-disabled = Voice is off. Turn it on in Settings.
+voice-outdated = This button is no longer available.

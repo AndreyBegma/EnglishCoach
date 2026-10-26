@@ -19,6 +19,7 @@ import { ProviderSettings } from "../settings/provider";
 import type { SkillRunner } from "../skills";
 import { talkHandlers, talkSession } from "../talk";
 import { vocabSessions } from "../vocab";
+import { createVoice, type VoiceOptions } from "../voice";
 import { accessMiddleware, adminCommands, type RefusalGate } from "./access";
 import type { BotContext, FlowState } from "./context";
 import { createI18n } from "./i18n";
@@ -43,6 +44,8 @@ export interface BotDeps {
   llmFactories?: ProviderFactories;
   /** Runs skills for session handlers (one runner per process). */
   skills: SkillRunner;
+  /** Voice (STT/TTS) overrides; tests replace the HTTP client and the cache directory. */
+  voice?: VoiceOptions;
   /** Tests pass `botInfo` here so the bot never calls getMe. */
   botConfig?: BotConfig<BotContext>;
 }
@@ -112,10 +115,21 @@ export function createBot(deps: BotDeps) {
   sessions.register("vocab_new", vocab.learn);
   sessions.register("review", vocab.review);
 
+  const voice = createVoice({
+    db,
+    i18n,
+    sessions,
+    llmEnv: deps.llmEnv,
+    masterKey: deps.masterKey,
+    log,
+    options: deps.voice,
+  });
+
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(i18n);
   bot.use(session({ initial: (): FlowState => ({}), storage: deps.storage }));
   bot.use(settingsInputMiddleware(settings));
+  bot.use(voice.stt);
   bot.use(sessionMiddleware(sessions));
   bot.use(adminCommands(db));
   bot.use(settingsHandlers(settings));
@@ -133,6 +147,7 @@ export function createBot(deps: BotDeps) {
   }
 
   bot.use(vocab.composer);
+  bot.use(voice.speak);
 
   // Any button that reached this point is from an older version of the bot or a dead screen.
   bot.on("callback_query", (ctx) => answerOutdated(ctx, hub));

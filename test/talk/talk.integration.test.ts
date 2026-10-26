@@ -84,7 +84,8 @@ describe.skipIf(!testServerUrl)("Talk session", () => {
       enableDemoSession: false,
       skills,
     });
-    await h.say(telegramId, "/start");
+    // `/start` begins onboarding for a learner without a level; these tests start at the hub.
+    await h.say(telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, telegramId);
     if (!user) throw new Error("user not created");
     return { h, telegramId, user, requests };

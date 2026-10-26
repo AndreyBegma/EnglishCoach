@@ -124,6 +124,31 @@ demo-summary = Демо завершено: повторено 3 повідом�
 provider-unavailable-runner = Запуск на вашому власному комп'ютері з'явиться у v2. Оберіть іншого провайдера в налаштуваннях.
 provider-unavailable-server = Серверна LLM не налаштована. Додайте свій API-ключ у налаштуваннях.
 
+# --- onboarding ---
+onboarding-welcome = 👋 Ласкаво просимо до EnglishCoach! Потроху англійської щодня: слова, граматика й розмова. Спершу оберіть мову інтерфейсу та пояснень.
+onboarding-provider = Який ШІ вестиме уроки? Серверний працює одразу, а власний ключ можна підключити в налаштуваннях будь-коли.
+onboarding-provider-server = Використати серверний (за замовчуванням)
+onboarding-provider-own = Налаштувати власного провайдера в налаштуваннях
+onboarding-path = Як визначимо ваш рівень?
+onboarding-take-test = Пройти 5-хвилинний тест рівня
+onboarding-know-level = Я знаю свій рівень
+onboarding-choose-level = Оберіть свій рівень:
+onboarding-retake-intro = Короткий адаптивний тест не більш як із { $max } запитань знову визначить ваш рівень.
+onboarding-start-test = Почати тест
+onboarding-cancel = Скасувати
+onboarding-question = Запитання { $n } із не більш як { $max }
+onboarding-error = Тест не вдалося продовжити: ШІ-провайдер не дав придатної відповіді.
+onboarding-retry = Повторити
+onboarding-result = Ваш рівень: { $level }
+onboarding-result-fallback = За { $correct } правильними відповідями з { $total }.
+onboarding-continue = Далі
+onboarding-words = Скільки нових слів на день?
+onboarding-morning = Коли починати ранкову сесію?
+onboarding-evening = А вечірню?
+onboarding-summary-test = Тест рівня: { $level }. { $detail }
+onboarding-summary-chosen = Рівень обрано: { $level }.
+onboarding-done = Ласкаво просимо!
+
 # --- grammar ---
 grammar-pick-topic = ✍️ Практика граматики: 10 запитань. Оберіть тему або мікс.
 grammar-mixed = 🎲 Мікс (рекомендовано)

@@ -64,7 +64,8 @@ describe.skipIf(!testServerUrl)("key validation through the real provider code",
         adminIds: [telegramId],
         llmFactories: realProviders,
       });
-      await h.say(telegramId, "/start");
+      // `/start` would begin onboarding for a learner without a level; this test starts at the hub.
+      await h.say(telegramId, "/menu");
       const user = await findUserByTelegramId(database.db, telegramId);
       const hub = user && (await getHub(database.db, user.id));
       if (!user || !hub) throw new Error("user or hub not created");

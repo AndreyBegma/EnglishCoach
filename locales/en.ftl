@@ -124,6 +124,31 @@ demo-summary = Demo finished: 3 messages echoed.
 provider-unavailable-runner = Running on your own machine is coming in v2. Choose another provider in Settings.
 provider-unavailable-server = The server LLM is not configured. Add your own API key in Settings.
 
+# --- onboarding ---
+onboarding-welcome = 👋 Welcome to EnglishCoach! A little English every day, with words, grammar and conversation. First, choose the language for the interface and explanations.
+onboarding-provider = Which AI should run your lessons? The server's works out of the box; you can switch to your own key in Settings at any time.
+onboarding-provider-server = Use the server (default)
+onboarding-provider-own = Set up my own provider in Settings
+onboarding-path = How shall we find your level?
+onboarding-take-test = Take a 5-minute placement test
+onboarding-know-level = I know my level
+onboarding-choose-level = Pick your level:
+onboarding-retake-intro = A short adaptive test of up to { $max } questions will find your level again.
+onboarding-start-test = Start the test
+onboarding-cancel = Cancel
+onboarding-question = Question { $n } of up to { $max }
+onboarding-error = The test could not continue: the AI provider did not give a usable answer.
+onboarding-retry = Try again
+onboarding-result = Your level: { $level }
+onboarding-result-fallback = Based on { $correct } correct answers out of { $total }.
+onboarding-continue = Continue
+onboarding-words = How many new words per day?
+onboarding-morning = When shall I start your morning session?
+onboarding-evening = And your evening session?
+onboarding-summary-test = Placement test: { $level }. { $detail }
+onboarding-summary-chosen = Level set: { $level }.
+onboarding-done = Welcome aboard!
+
 # --- grammar ---
 grammar-pick-topic = ✍️ Grammar practice: 10 questions. Pick a topic or practise a mix.
 grammar-mixed = 🎲 Mixed (recommended)

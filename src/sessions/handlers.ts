@@ -17,6 +17,9 @@ export const isCommand = (message: Message) =>
 export function sessionMiddleware(sessions: SessionManager): Composer<BotContext> {
   const composer = new Composer<BotContext>();
 
+  // Everything downstream runs as this update, so a session it starts gets `ctx` in `onStart`.
+  composer.use((ctx, next) => sessions.inUpdate(ctx, next));
+
   composer.use(async (ctx, next) => {
     const active = await sessions.findActive(ctx.user.id);
     if (!active) return next();

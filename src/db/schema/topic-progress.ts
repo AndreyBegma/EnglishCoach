@@ -30,6 +30,19 @@ export type TopicItem = {
   at: string;
 };
 
+/** How one grammar session went on a topic, for the spaced part of the mastery rule. */
+export type TopicSession = {
+  /** The `learning_sessions` id. */
+  session: number;
+  /** ISO time of the session's first item on the topic. */
+  at: string;
+  /** Sum of the item scores and their count: the session's accuracy is their ratio. */
+  scoreSum: number;
+  items: number;
+  /** The exercise types it used. */
+  types: string[];
+};
+
 /** A mastered topic's FSRS card, 1:1 with the ts-fsrs 5 `Card`, dates as ISO strings. */
 export type TopicFsrs = {
   due: string;
@@ -49,7 +62,7 @@ export type TopicMethod = Record<string, unknown>;
 
 /**
  * The learner's progress on one syllabus topic (`src/grammar/mastery.ts` holds the rules).
- * Server-owned: only `recordTopicItem` and `recordTopicUses` write here. The syllabus is a file,
+ * Server-owned: only `recordTopicItem` and `recordTransfer` write here. The syllabus is a file,
  * so `topic_id` has no FK; it is validated against it before it is written.
  */
 export const topicProgress = pgTable(
@@ -64,12 +77,12 @@ export const topicProgress = pgTable(
     recentItems: jsonb().$type<TopicItem[]>().notNull().default([]),
     /** Mean score per exercise type over `recent_items`; derived, kept for readers. */
     accuracyByType: jsonb().$type<Record<string, number>>().notNull().default({}),
-    /** Correct uses of the topic in free production (Talk), tagged by the correction skills. */
+    /** The latest grammar sessions on the topic, oldest first. */
+    sessionResults: jsonb().$type<TopicSession[]>().notNull().default([]),
+    /** Correct uses of the topic in free production, tagged by the correction skills. */
     transferEvidence: integer().notNull().default(0),
-    /** When the accuracy rule last started to hold; the spaced confirmation counts from here. */
-    criteriaMetAt: timestamp({ withTimezone: true }),
-    /** When an item at least the confirmation interval after `criteria_met_at` still met it. */
-    confirmedAt: timestamp({ withTimezone: true }),
+    /** The latest error tagged to the topic in free production; mirrors `transfer_events`. */
+    lastErrorAt: timestamp({ withTimezone: true }),
     masteredAt: timestamp({ withTimezone: true }),
     /** The first time the topic was ever mastered; the mastery XP is paid once, on it. */
     firstMasteredAt: timestamp({ withTimezone: true }),

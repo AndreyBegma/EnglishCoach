@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { cefrLevelEnum, mistakeCategoryEnum } from "../db/schema/enums";
+import { correctionTopic, topicUses } from "./topic-tags";
 
 // Every skill names one input and one output schema from this file in its frontmatter.
 // Outputs are root objects with flat, required (nullable) fields: structured-output modes want an
@@ -431,9 +432,6 @@ export const ConversationInput = z.object({
   syllabus_topics: syllabusTopicList,
 });
 
-/** Topics one turn may tag as used correctly; more would be guessing. */
-export const MAX_TOPIC_USES = 3;
-
 export const ConversationOutput = z.object({
   reply: text.describe("Natural English reply that keeps the conversation going"),
   corrections: z
@@ -444,16 +442,12 @@ export const ConversationOutput = z.object({
         category,
         severity,
         why: text.describe("One line, in explain_lang"),
+        topic_id: correctionTopic,
       }),
     )
     .max(MAX_CORRECTIONS),
   tip: z.object({ kind: tipKind, text: text.describe("In explain_lang, English examples inline") }),
-  /** Only a hint: the server keeps the ids that are in the syllabus and drops the rest. */
-  topic_uses: z
-    .array(z.string())
-    .max(MAX_TOPIC_USES)
-    .default([])
-    .describe("Ids from task.syllabus_topics the learner's message used correctly"),
+  topic_uses: topicUses,
 });
 
 // ---------------------------------------------------------------- routine-plan

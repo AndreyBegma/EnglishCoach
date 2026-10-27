@@ -44,6 +44,8 @@ are things the learner likes; use them to make the chat personal.
 - `severity`: critical (meaning unclear or a core rule at their level), moderate (clearly wrong,
   meaning survives), minor (a small slip).
 - `why`: one line in {{explain_lang}} with the rule — not just "this is wrong".
+- `topic_id`: the id from `task.syllabus_topics` whose rule this error breaks (a wrong past form →
+  the past simple topic); null when none fits, for vocabulary and spelling slips, or when unsure.
 - A correct message gets an empty list. Do not invent errors.
 
 ## `topic_uses` — at most 3

@@ -7,7 +7,7 @@ import {
   awardTalkTurn,
   awardTopicMastered,
 } from "../gamification/awards";
-import { recordTopicItem, recordTopicUses } from "../grammar/progress";
+import { recordTopicItem, recordTransfer } from "../grammar/progress";
 import { topicById } from "../grammar/topics";
 import { type Difficulty, getLevels, recordGradedItem, seedLevels } from "./levels";
 import { PRIOR, parseCefr } from "./model";
@@ -60,14 +60,15 @@ export async function recordPlacement(
 export const GRAMMAR_SCORES = { correct: 1, partial: 0.5, wrong: 0 } as const;
 
 /**
- * A graded quiz answer, into the grammar level, its XP and its syllabus topic's mastery; a
- * topic's first mastery earns the mastery bonus.
+ * A graded quiz answer in grammar session `sessionId`, into the grammar level, its XP and its
+ * syllabus topic's mastery; a topic's first mastery earns the mastery bonus.
  */
 export async function recordGrammarItem(
   db: Db,
   userId: number,
   item: { topic_id: string | null; difficulty: CefrLevel; type: string },
   verdict: keyof typeof GRAMMAR_SCORES,
+  sessionId: number,
 ): Promise<void> {
   const difficulty = grammarItemDifficulty(item);
   const score = GRAMMAR_SCORES[verdict];
@@ -81,7 +82,11 @@ export async function recordGrammarItem(
     itemLevel: graded.itemLevel,
     rating: graded.before,
   });
-  const step = await recordTopicItem(db, userId, item.topic_id, { type: item.type, score });
+  const step = await recordTopicItem(db, userId, item.topic_id, {
+    type: item.type,
+    score,
+    session: sessionId,
+  });
   if (step?.event?.first) {
     await awardTopicMastered(db, userId, {
       topicId: step.event.topicId,
@@ -150,21 +155,43 @@ export function turnScore(
 }
 
 /**
- * A corrected conversation turn, into the writing level and XP, and the syllabus topics it used
- * correctly (`topicUses`) into their mastery as transfer evidence; a too-short turn records nothing.
+ * A corrected conversation turn, into the writing level and XP, and its syllabus topic tags — the
+ * corrections' `topic_id`s and the topics it used correctly (`transfer.topicUses`) — into their
+ * mastery as transfer events of session `transfer.sessionId`, message `transfer.messageId`; a
+ * too-short turn records nothing.
  */
 export async function recordTalkTurn(
   db: Db,
   userId: number,
   text: string,
-  corrections: readonly { severity: keyof typeof CORRECTION_PENALTY }[],
-  topicUses: readonly string[] = [],
+  corrections: readonly {
+    severity: keyof typeof CORRECTION_PENALTY;
+    topic_id?: string | null;
+  }[],
+  transfer: {
+    topicUses?: readonly string[];
+    sessionId?: number | null;
+    messageId?: number | null;
+  } = {},
 ): Promise<void> {
   const score = turnScore(text, corrections);
   if (score === null) return;
   await recordGradedItem(db, userId, "writing", null, score, { expected: ITEM_EXPECTED.turn });
   await awardTalkTurn(db, userId, score);
-  const mastered = (await recordTopicUses(db, userId, topicUses)).filter((event) => event.first);
+  const tagged = await recordTransfer(
+    db,
+    userId,
+    {
+      source: "talk",
+      sessionId: transfer.sessionId ?? null,
+      messageId: transfer.messageId ?? null,
+    },
+    {
+      correct: transfer.topicUses ?? [],
+      errors: corrections.flatMap((c) => (c.topic_id ? [c.topic_id] : [])),
+    },
+  );
+  const mastered = tagged.filter((event) => event.first);
   if (mastered.length === 0) return;
   // A topic mastered in conversation is pitched against the learner's grammar level.
   const levels = await getLevels(db, userId);

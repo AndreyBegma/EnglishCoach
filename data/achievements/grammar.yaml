@@ -1,0 +1,306 @@
+# Grammar achievements. Per-topic "Mastered: <topic>" entries are generated from the syllabus
+# (`data/grammar/syllabus/`), so they are not listed here.
+series:
+  - id: grammar_answers
+    category: grammar
+    metric: grammar_answers
+    emoji: "✍️"
+    title:
+      en: "Grammar answers: {n}"
+      ru: "Ответов по грамматике: {n}"
+      uk: "Відповідей з граматики: {n}"
+    description:
+      en: "Answer {n} grammar questions"
+      ru: "Ответь на вопросы по грамматике — всего {n}"
+      uk: "Дай відповідь на питання з граматики — усього {n}"
+    steps:
+      bronze: [10, 25]
+      silver: [50, 100]
+      gold: [250, 500]
+      platinum: [1000, 2000]
+      legend: [3500, 5000]
+
+  - id: grammar_correct
+    category: grammar
+    metric: grammar_correct
+    emoji: "✅"
+    title:
+      en: "Correct answers: {n}"
+      ru: "Верных ответов: {n}"
+      uk: "Правильних відповідей: {n}"
+    description:
+      en: "Get {n} grammar questions right"
+      ru: "Ответь верно на вопросы по грамматике — всего {n}"
+      uk: "Відповідай правильно на питання з граматики — усього {n}"
+    steps:
+      bronze: [5, 20]
+      silver: [50, 100]
+      gold: [200, 400]
+      platinum: [750, 1500]
+      legend: [3000, 4500]
+
+  - id: grammar_correct_a1
+    category: grammar
+    metric: grammar_correct_a1
+    emoji: "🌱"
+    title:
+      en: "A1 grammar: {n} right"
+      ru: "Грамматика A1: верно {n}"
+      uk: "Граматика A1: правильно {n}"
+    description:
+      en: "Get {n} questions on A1 topics right"
+      ru: "Ответь верно на вопросы по темам A1 — всего {n}"
+      uk: "Відповідай правильно на питання з тем A1 — усього {n}"
+    steps:
+      bronze: [5, 10]
+      silver: [25, 50]
+      gold: [100, 200]
+      platinum: [400, 600]
+      legend: [800, 1000]
+
+  - id: grammar_correct_a2
+    category: grammar
+    metric: grammar_correct_a2
+    emoji: "🌿"
+    title:
+      en: "A2 grammar: {n} right"
+      ru: "Грамматика A2: верно {n}"
+      uk: "Граматика A2: правильно {n}"
+    description:
+      en: "Get {n} questions on A2 topics right"
+      ru: "Ответь верно на вопросы по темам A2 — всего {n}"
+      uk: "Відповідай правильно на питання з тем A2 — усього {n}"
+    steps:
+      bronze: [5, 10]
+      silver: [25, 50]
+      gold: [100, 200]
+      platinum: [400, 600]
+      legend: [800, 1000]
+
+  - id: grammar_correct_b1
+    category: grammar
+    metric: grammar_correct_b1
+    emoji: "🌳"
+    title:
+      en: "B1 grammar: {n} right"
+      ru: "Грамматика B1: верно {n}"
+      uk: "Граматика B1: правильно {n}"
+    description:
+      en: "Get {n} questions on B1 topics right"
+      ru: "Ответь верно на вопросы по темам B1 — всего {n}"
+      uk: "Відповідай правильно на питання з тем B1 — усього {n}"
+    steps:
+      bronze: [5, 10]
+      silver: [25, 50]
+      gold: [100, 200]
+      platinum: [400, 600]
+      legend: [800, 1000]
+
+  - id: grammar_correct_b2
+    category: grammar
+    metric: grammar_correct_b2
+    emoji: "🏔️"
+    title:
+      en: "B2 grammar: {n} right"
+      ru: "Грамматика B2: верно {n}"
+      uk: "Граматика B2: правильно {n}"
+    description:
+      en: "Get {n} questions on B2 topics right"
+      ru: "Ответь верно на вопросы по темам B2 — всего {n}"
+      uk: "Відповідай правильно на питання з тем B2 — усього {n}"
+    steps:
+      bronze: [5, 10]
+      silver: [25, 50]
+      gold: [100, 200]
+      platinum: [400, 600]
+      legend: [800, 1000]
+
+  - id: grammar_correct_c1
+    category: grammar
+    metric: grammar_correct_c1
+    emoji: "🦅"
+    title:
+      en: "C1 grammar: {n} right"
+      ru: "Грамматика C1: верно {n}"
+      uk: "Граматика C1: правильно {n}"
+    description:
+      en: "Get {n} questions on C1 topics right"
+      ru: "Ответь верно на вопросы по темам C1 — всего {n}"
+      uk: "Відповідай правильно на питання з тем C1 — усього {n}"
+    steps:
+      bronze: [5, 10]
+      silver: [25, 50]
+      gold: [100, 200]
+      platinum: [400, 600]
+      legend: [800, 1000]
+
+  - id: grammar_correct_c2
+    category: grammar
+    metric: grammar_correct_c2
+    emoji: "👑"
+    title:
+      en: "C2 grammar: {n} right"
+      ru: "Грамматика C2: верно {n}"
+      uk: "Граматика C2: правильно {n}"
+    description:
+      en: "Get {n} questions on C2 topics right"
+      ru: "Ответь верно на вопросы по темам C2 — всего {n}"
+      uk: "Відповідай правильно на питання з тем C2 — усього {n}"
+    steps:
+      bronze: [5, 10]
+      silver: [25, 50]
+      gold: [100, 200]
+      platinum: [400, 600]
+      legend: [800, 1000]
+
+  - id: grammar_run
+    category: accuracy
+    metric: grammar_run
+    emoji: "🎯"
+    title:
+      en: "Flawless run: {n}"
+      ru: "Без ошибок подряд: {n}"
+      uk: "Без помилок поспіль: {n}"
+    description:
+      en: "Answer {n} grammar questions in a row without a mistake"
+      ru: "Ответь подряд без ошибок на вопросы по грамматике — {n} подряд"
+      uk: "Дай поспіль без помилок відповіді з граматики — {n} поспіль"
+    steps:
+      bronze: [3, 5]
+      silver: [7, 10]
+      gold: [15, 20]
+      platinum: [25, 30]
+      legend: [40, 50]
+
+  - id: topics_mastered
+    category: topics
+    metric: topics_mastered
+    emoji: "🧠"
+    title:
+      en: "Topics mastered: {n}"
+      ru: "Освоено тем: {n}"
+      uk: "Опановано тем: {n}"
+    description:
+      en: "Master grammar topics until the count reaches {n}"
+      ru: "Осваивай темы грамматики, пока счёт не дойдёт до {n}"
+      uk: "Опановуй теми граматики, доки рахунок не сягне {n}"
+    steps:
+      bronze: [1, 3]
+      silver: [5, 10]
+      gold: [15, 25]
+      platinum: [35, 50]
+      legend: [70, 90]
+
+  - id: topics_mastered_a1
+    category: topics
+    metric: topics_mastered_a1
+    emoji: "🌱"
+    title:
+      en: "A1 topics mastered: {n}"
+      ru: "Освоено тем A1: {n}"
+      uk: "Опановано тем A1: {n}"
+    description:
+      en: "Master {n} A1 grammar topics"
+      ru: "Освой темы грамматики A1 — всего {n}"
+      uk: "Опануй теми граматики A1 — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [5]
+      platinum: [7]
+      legend: [9]
+
+  - id: topics_mastered_a2
+    category: topics
+    metric: topics_mastered_a2
+    emoji: "🌿"
+    title:
+      en: "A2 topics mastered: {n}"
+      ru: "Освоено тем A2: {n}"
+      uk: "Опановано тем A2: {n}"
+    description:
+      en: "Master {n} A2 grammar topics"
+      ru: "Освой темы грамматики A2 — всего {n}"
+      uk: "Опануй теми граматики A2 — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [11]
+      legend: [15]
+
+  - id: topics_mastered_b1
+    category: topics
+    metric: topics_mastered_b1
+    emoji: "🌳"
+    title:
+      en: "B1 topics mastered: {n}"
+      ru: "Освоено тем B1: {n}"
+      uk: "Опановано тем B1: {n}"
+    description:
+      en: "Master {n} B1 grammar topics"
+      ru: "Освой темы грамматики B1 — всего {n}"
+      uk: "Опануй теми граматики B1 — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [5]
+      gold: [10]
+      platinum: [15]
+      legend: [20]
+
+  - id: topics_mastered_b2
+    category: topics
+    metric: topics_mastered_b2
+    emoji: "🏔️"
+    title:
+      en: "B2 topics mastered: {n}"
+      ru: "Освоено тем B2: {n}"
+      uk: "Опановано тем B2: {n}"
+    description:
+      en: "Master {n} B2 grammar topics"
+      ru: "Освой темы грамматики B2 — всего {n}"
+      uk: "Опануй теми граматики B2 — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [5]
+      gold: [10]
+      platinum: [15]
+      legend: [20]
+
+  - id: topics_mastered_c1
+    category: topics
+    metric: topics_mastered_c1
+    emoji: "🦅"
+    title:
+      en: "C1 topics mastered: {n}"
+      ru: "Освоено тем C1: {n}"
+      uk: "Опановано тем C1: {n}"
+    description:
+      en: "Master {n} C1 grammar topics"
+      ru: "Освой темы грамматики C1 — всего {n}"
+      uk: "Опануй теми граматики C1 — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [5]
+      gold: [10]
+      platinum: [15]
+      legend: [20]
+
+  - id: topics_mastered_c2
+    category: topics
+    metric: topics_mastered_c2
+    emoji: "👑"
+    title:
+      en: "C2 topics mastered: {n}"
+      ru: "Освоено тем C2: {n}"
+      uk: "Опановано тем C2: {n}"
+    description:
+      en: "Master {n} C2 grammar topics"
+      ru: "Освой темы грамматики C2 — всего {n}"
+      uk: "Опануй теми граматики C2 — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [11]
+      legend: [15]

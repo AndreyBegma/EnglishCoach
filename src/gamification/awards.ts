@@ -2,14 +2,15 @@ import { State } from "ts-fsrs";
 import type { Db } from "../db/client";
 import { addToXpTotal, countXpEvents, insertXpEvent, setXpLevel } from "../db/repositories/xp";
 import type { XpSource } from "../db/schema";
+import { domainEvents } from "../events/domain-events";
 import { type XpAwarded, xpEvents, xpLog } from "./events";
 import {
   DAILY_GOAL_XP,
+  difficultyMultiplier,
   itemXp,
   profileLevel,
   streakXp,
   TOPIC_MASTERED_XP,
-  topicJustMastered,
 } from "./xp";
 
 export type XpAward = { source: XpSource; amount: number; meta?: Record<string, unknown> };
@@ -56,10 +57,7 @@ async function safely(userId: number, what: string, award: () => Promise<void>):
 /** Where an item sat for the learner: its level and theirs, on the level model's scale. */
 export type ItemPitch = { itemLevel: number; rating: number };
 
-/**
- * A graded quiz answer. A correct answer that is the learner's `MASTERY_CORRECT`-th rewarded one
- * on its syllabus topic also masters the topic, once.
- */
+/** A graded quiz answer. */
 export function awardGrammarItem(
   db: Db,
   userId: number,
@@ -67,22 +65,37 @@ export function awardGrammarItem(
   now?: Date,
 ): Promise<void> {
   return safely(userId, "grammar_item", async () => {
+    await domainEvents.emit("grammar.answered", {
+      userId,
+      topicId: item.topicId,
+      verdict: item.verdict,
+      score: item.score,
+      at: now ?? new Date(),
+    });
     const amount = itemXp("grammar_item", item.score, item.itemLevel, item.rating);
     const meta = { verdict: item.verdict, ...(item.topicId ? { topicId: item.topicId } : {}) };
-    const awarded = await awardXp(db, userId, { source: "grammar_item", amount, meta }, now);
-    if (!awarded || item.verdict !== "correct" || !item.topicId) return;
-    const correct = await countXpEvents(db, userId, "grammar_item", {
-      topicId: item.topicId,
-      verdict: "correct",
-    });
-    if (topicJustMastered(correct)) {
-      await awardXp(
-        db,
-        userId,
-        { source: "topic_mastered", amount: TOPIC_MASTERED_XP, meta: { topicId: item.topicId } },
-        now,
-      );
-    }
+    await awardXp(db, userId, { source: "grammar_item", amount, meta }, now);
+  });
+}
+
+/**
+ * A syllabus topic's first mastery (`topic.mastered` with `first`), once per topic: a topic that
+ * already earned it — also under the old count-based rule — earns nothing again. The bonus takes
+ * the topic level's difficulty multiplier, so a topic far below the learner earns nothing.
+ */
+export function awardTopicMastered(
+  db: Db,
+  userId: number,
+  topic: ItemPitch & { topicId: string },
+  now?: Date,
+): Promise<void> {
+  return safely(userId, "topic_mastered", async () => {
+    const { topicId } = topic;
+    if ((await countXpEvents(db, userId, "topic_mastered", { topicId })) > 0) return;
+    const amount = Math.floor(
+      TOPIC_MASTERED_XP * difficultyMultiplier(topic.itemLevel, topic.rating),
+    );
+    await awardXp(db, userId, { source: "topic_mastered", amount, meta: { topicId } }, now);
   });
 }
 
@@ -97,13 +110,32 @@ export function awardCardRating(
   now?: Date,
 ): Promise<void> {
   return safely(userId, "card", async () => {
-    if (card.score <= 0) return;
+    const at = now ?? new Date();
     const learning = card.state === State.New || card.state === State.Learning;
     const learned =
-      learning && (await countXpEvents(db, userId, "word_learned", { cardId: card.cardId })) === 0;
+      card.score > 0 &&
+      learning &&
+      (await countXpEvents(db, userId, "word_learned", { cardId: card.cardId })) === 0;
+    await domainEvents.emit("card.rated", {
+      userId,
+      cardId: card.cardId,
+      score: card.score,
+      learned,
+      at,
+    });
+    if (card.score <= 0) return;
     const source = learned ? "word_learned" : "review";
     const amount = itemXp(source, card.score, card.itemLevel, card.rating);
-    await awardXp(db, userId, { source, amount, meta: { cardId: card.cardId } }, now);
+    const awarded = await awardXp(
+      db,
+      userId,
+      { source, amount, meta: { cardId: card.cardId } },
+      now,
+    );
+    // Once per card, like the ledger row that says it was learned.
+    if (learned && awarded) {
+      await domainEvents.emit("card.learned", { userId, cardId: card.cardId, at });
+    }
   });
 }
 

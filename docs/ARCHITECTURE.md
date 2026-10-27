@@ -253,9 +253,10 @@ logged and never fails the grader.
 | `word_learned` | the first passing rating of a card still New or Learning, once per card | 6 × score × multiplier |
 | `review` | any other passing card rating (Again earns nothing) | 4 × score × multiplier |
 | `talk_turn` | a talk turn long enough to count | 8 × score (at the learner's level) |
-| `topic_mastered` | the 5th rewarded correct answer on a syllabus topic, once | 50 |
+| `topic_mastered` | a syllabus topic's first mastery (`topic.mastered` with `first`), once per topic | 50 × multiplier |
 | `daily_goal` | the day's goal was just met (`markGoalMet` flipped it) | 30 |
 | `streak` | the same moment, from day 2 of a streak | 5 × streak days, at most 50 |
+| `achievement` | an achievement was just unlocked, once per achievement | the entry's `xp_reward` |
 
 **Difficulty multiplier and anti-farming.** With `gap` = item level − the
 learner's rating in that skill before the item: 1 + 0.5·min(gap, 1) above the
@@ -274,9 +275,53 @@ award.
 
 **Profile screen.** Hub → 👤 Profile edits the hub: profile level, XP bar to
 the next level, streak, the overall CEFR decimal and every skill's (`~` marks a
-skill with no graded items yet), the last three achievements (a placeholder
-until achievements exist) and all-time totals. Its button rides the progress
-callback codec (`<v>:p:u`).
+skill with no graded items yet), the last three achievements and all-time
+totals. Its button rides the progress callback codec (`<v>:p:u`).
+
+## Achievements
+
+**Catalogue.** `data/achievements/*.yaml`, declarative. A file holds *series* —
+one metric, ascending thresholds grouped by tier (bronze, silver, gold,
+platinum, legend), an emoji, and a title and description in every UI locale
+with `{n}` for the threshold (phrased "Words learned: {n}" so Russian and
+Ukrainian need no plural forms; `format: cefr` shows a band index as its band)
+— and standalone *entries* (the secret ones). A series expands into one entry
+per step, `<series>_<threshold>`; one "Mastered: <topic>" entry per syllabus
+topic (`topic_<id>`) is generated from the syllabus. Every entry has `id`,
+`category`, `metric`, `threshold`, `tier`, `emoji`, `xp_reward` (by tier unless
+given), `secret`, and its texts. `src/gamification/achievements/catalogue.ts`
+validates it with zod (known metric, every locale, unique ids, thresholds rising
+within a series) and the bot loads it at boot, so a bad file fails boot.
+
+**Metrics and events.** Counters live in `achievement_progress` (one row per
+learner and metric); `src/gamification/achievements/metrics.ts` lists every
+metric and the event that moves it. Events travel on `domainEvents`
+(`src/events/domain-events.ts`, the `settings.changed` contract): `xp.awarded`
+(XP total, profile level, goal days, day streak, Talk turns),
+`grammar.answered` and `card.rated` (from `src/gamification/awards.ts`, every
+graded answer, wrong ones included), `card.learned`, `session.ended` (bridged
+from `SessionManager.onEnded`: sessions per kind, perfect sessions, learner-local
+morning / night / weekend, seasonal date windows) and `talk.correction_fixed`
+(subscribed by name, not emitted yet — the Talk card that tracks fixed
+corrections will). Per-topic entries listen to `topic.mastered` on
+`topicEvents` (`src/grammar/events.ts`); a topic counts once, re-masteries
+included. Each skill's CEFR milestone reads
+the level model after a graded item. A perfect session is a finished one with at
+least five graded items and no miss.
+
+**Evaluator.** `AchievementEngine.record` applies the counter updates and, in the
+same transaction, inserts every entry whose counter reached its threshold into
+`user_achievements` with `on conflict do nothing`. Only the rows that insert
+actually created award their XP (`source = achievement`), after the commit — so
+a replayed or concurrent event never unlocks or pays twice. A failure is logged
+and never fails the grader or the session that raised the event.
+
+**Notification and screens.** An unlock sends no message of its own: the next
+render of the hub's main screen carries one line ("🏆 Unlocked: …", three by
+name and "+N"), and the unlocks are marked shown (`notified_at`) once that hub
+is on screen. Profile → 🏆 Achievements is a paginated hub screen (`<v>:p:a:<page>`):
+unlocked count, grammar topics mastered, then per series the latest unlocked step
+and a progress bar to the next one; secret entries show only once found.
 
 ## Grammar syllabus
 
@@ -293,7 +338,7 @@ with its cause) and `exercise_types` (grammar-quiz item types).
 no topic refers to itself, no prerequisite sits above its topic's level, the
 prerequisite graph is acyclic, every title locale is present. It is loaded
 when the grammar module loads, so an invalid file fails boot. The grammar
-picker offers the learner's band (B1 without a placement level); a button
+picker offers the learner's grammar band (B1 without a level); a button
 carries the topic id, and the quiz gets the topic's English title, its
 syllabus entry and only its exercise types. `mistakes.topic_id` maps a
 pattern to a syllabus topic: grammar-quiz names the item's topic (forced to
@@ -301,6 +346,46 @@ the picked one; otherwise chosen from the learner's band and its neighbours),
 grammar-check may name another for the main error, and the server keeps only
 ids that exist in the syllabus. A later occurrence without an id keeps the
 stored one.
+
+## Topic mastery
+
+`topic_progress` holds one row per learner and syllabus topic: `status`
+(`not_started` ⬜ · `learning` 🔴 · `shaky` 🟡 · `mastered` ✅), the rolling
+window of the last 8 graded items (`recent_items`, with `accuracy_by_type`
+derived from it), `transfer_evidence`, the confirmation clock
+(`criteria_met_at`, `confirmed_at`), the FSRS card of a mastered topic
+(`fsrs`, `review_due`), the scores of a running check (`check_scores`) and
+`method_history` (for the adaptive-methods card). The rules are pure, in
+`src/grammar/mastery.ts`; only `recordTopicItem` and `recordTopicUses`
+(`src/grammar/progress.ts`) write the table, under a row lock.
+
+- **Items.** Every graded grammar-quiz answer with a validated `topic_id`
+  feeds its topic (`recordGrammarItem`, after `recordGradedItem`), with the
+  item type and its score. The first one moves `not_started` → `learning`.
+- **Transfer.** The `conversation` skill gets `syllabus_topics` around the
+  learner's grammar band and returns `topic_uses`, the ids its message used
+  correctly; a counted Talk turn adds one piece of evidence per known id.
+- **Mastery rule** (`masteryRule`, one function — C-58 replaces it): the
+  window is full, its mean score ≥ 85 % and it spans ≥ 2 exercise types; that
+  still holds on an item ≥ 3 days after it first held; and ≥ 1 transfer
+  evidence. A window that breaks before the confirmation restarts the clock.
+- **Shaky.** A mastered topic whose window falls below 85 % becomes `shaky`
+  and has to earn the confirmation again.
+- **FSRS.** A topic that becomes mastered is rated Good on its card (a new one
+  the first time; ts-fsrs without short-term steps, so intervals are days).
+  When it is due, its next 3 items are the check: a wrong one rates Again and
+  sends the topic back to `learning`; three passes rate Good (Hard if any was
+  partial).
+- **`topic.mastered`.** `topicEvents` (`src/grammar/events.ts`, the same
+  contract as `xp.awarded`) emits `{ userId, topicId, at, first }` on every
+  mastery; `first` is the topic's first ever. The level helpers pay
+  `topic_mastered` XP on `first`, at most once per topic.
+- **Next topic** (`nextTopic`): due reviews (most overdue first) → shaky
+  topics → not-started topics at the learner's grammar band whose
+  prerequisites are mastered or below that band → topics at the band still
+  being learned. The grammar band is the grammar skill's level, else the
+  overall one, else B1. The grammar picker leads with it and marks every
+  topic with its status.
 
 ## Telegram UX rules
 

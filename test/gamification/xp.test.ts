@@ -5,12 +5,10 @@ import {
   difficultyMultiplier,
   itemXp,
   LEVEL_BASE_XP,
-  MASTERY_CORRECT,
   MAX_MULTIPLIER,
   profileLevel,
   STREAK_XP_CAP,
   streakXp,
-  topicJustMastered,
   xpToNext,
 } from "../../src/gamification/xp";
 import { bandCentre } from "../../src/levels";
@@ -84,12 +82,6 @@ describe("goal, streak and mastery", () => {
     expect(streakXp(2)).toBe(10);
     expect(streakXp(5)).toBe(25);
     expect(streakXp(100)).toBe(STREAK_XP_CAP);
-  });
-
-  test("a topic is mastered exactly on the threshold answer, so only once", () => {
-    expect(topicJustMastered(MASTERY_CORRECT - 1)).toBe(false);
-    expect(topicJustMastered(MASTERY_CORRECT)).toBe(true);
-    expect(topicJustMastered(MASTERY_CORRECT + 1)).toBe(false);
   });
 });
 

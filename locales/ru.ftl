@@ -221,7 +221,11 @@ onboarding-done = Добро пожаловать!
 
 # --- grammar ---
 grammar-pick-topic = ✍️ Практика грамматики: 10 вопросов. Выберите тему или смешанный режим.
-grammar-mixed = 🎲 Микс (рекомендуется)
+grammar-mixed = 🎲 Микс
+grammar-next-review = 🔁 Повторить: { $topic }
+grammar-next-shaky = 🟡 Закрепить: { $topic }
+grammar-next-new = ▶ Дальше: { $topic }
+grammar-next-learning = ▶ Продолжить: { $topic }
 grammar-topic-chosen = Тема: { $topic }
 grammar-question-header = ❓ Вопрос { $n } из { $total }
 grammar-chosen = Ваш ответ: { $answer }
@@ -338,9 +342,23 @@ profile-skill = • { $skill }: { $level }
 profile-skill-seeded = • { $skill }: ~{ $level }
 profile-achievements-title = 🏆 Последние достижения
 profile-achievement = • { $title }
-profile-achievements-none = Достижения скоро появятся.
+profile-achievements-none = Достижений пока нет — первое уже через одно занятие.
+profile-achievements-btn = 🏆 Достижения
 profile-totals-title = 📦 За всё время
 profile-totals = 📚 выучено слов: { $words } · 🔁 повторений: { $reviews } · ✍️ ответов по грамматике: { $grammar } · 🎯 дней с выполненной целью: { $days }
+
+# --- achievements ---
+achievements-title = 🏆 Достижения · открыто { $unlocked } из { $total }
+achievements-page = Страница { $page } из { $pages }
+achievements-progress = { $bar } { $value }/{ $threshold } → { $title }
+achievements-topics = 🧩 Освоено тем грамматики: { $count } из { $total }
+achievements-secrets = 🔒 Найдено секретных достижений: { $count } из { $total }
+achievements-prev = ◀️ Назад
+achievements-next = Дальше ▶️
+achievements-back = 👤 Профиль
+hub-achievements-unlocked = 🏆 Открыто: { $list }
+hub-achievements-more = { $list } и ещё { $count }
+
 progress-btn-practice = ✍️ Потренировать
 progress-practice-none = Пока нечего тренировать.
 grammar-practice-intro = ✍️ Тренируем слабые места (паттернов: { $count }), по вопросу на каждый по очереди.

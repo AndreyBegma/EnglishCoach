@@ -8,12 +8,12 @@ import {
   awardCardRating,
   awardGoalMet,
   awardGrammarItem,
+  awardTopicMastered,
   awardXp,
   BASE_XP,
   xpEvents as bus,
   DAILY_GOAL_XP,
   loadProfile,
-  MASTERY_CORRECT,
   streakXp,
   TOPIC_MASTERED_XP,
   type XpAwarded,
@@ -85,27 +85,48 @@ describe.skipIf(!testServerUrl)("XP ledger in the database", () => {
     expect(await ledger()).toHaveLength(1);
   });
 
-  test("a grammar topic is mastered once, on the threshold correct answer", async () => {
-    const answer = (verdict: string, score: number) =>
-      awardGrammarItem(database.db, userId, {
+  test("correct grammar answers alone never pay the mastery bonus", async () => {
+    for (let i = 0; i < 10; i++) {
+      await awardGrammarItem(database.db, userId, {
         topicId: "g010",
-        verdict,
-        score,
+        verdict: "correct",
+        score: 1,
         itemLevel: B1,
         rating: B1,
       });
-    await answer("wrong", 0);
-    await answer("partial", 0.5);
-    for (let i = 0; i < MASTERY_CORRECT + 2; i++) await answer("correct", 1);
+    }
     const rows = await ledger();
-    const mastered = rows.filter((row) => row.source === "topic_mastered");
-    expect(mastered).toHaveLength(1);
-    expect(mastered[0]).toMatchObject({ amount: TOPIC_MASTERED_XP, meta: { topicId: "g010" } });
-    expect(rows.filter((row) => row.source === "grammar_item")).toHaveLength(MASTERY_CORRECT + 3);
+    expect(rows.filter((row) => row.source === "grammar_item")).toHaveLength(10);
+    expect(rows.filter((row) => row.source === "topic_mastered")).toHaveLength(0);
   });
 
-  test("anti-farming: a far-below grammar item earns nothing and never masters", async () => {
-    for (let i = 0; i < MASTERY_CORRECT; i++) {
+  test("a topic's mastery bonus is paid once, also after one paid under the old rule", async () => {
+    const master = (topicId: string) =>
+      awardTopicMastered(database.db, userId, { topicId, itemLevel: B1, rating: B1 });
+    await master("g010");
+    await master("g010");
+    await awardXp(database.db, userId, {
+      source: "topic_mastered",
+      amount: TOPIC_MASTERED_XP,
+      meta: { topicId: "g020" },
+    });
+    await master("g020");
+    const mastered = (await ledger()).filter((row) => row.source === "topic_mastered");
+    expect(mastered.map((row) => row.meta)).toEqual([{ topicId: "g010" }, { topicId: "g020" }]);
+    expect(mastered[0]?.amount).toBe(TOPIC_MASTERED_XP);
+  });
+
+  test("anti-farming: a topic far below the learner earns no mastery bonus", async () => {
+    await awardTopicMastered(database.db, userId, {
+      topicId: "g001",
+      itemLevel: bandCentre("A1"),
+      rating: bandCentre("C1"),
+    });
+    expect(await ledger()).toHaveLength(0);
+  });
+
+  test("anti-farming: a far-below grammar item earns nothing", async () => {
+    for (let i = 0; i < 5; i++) {
       await awardGrammarItem(database.db, userId, {
         topicId: "g001",
         verdict: "correct",

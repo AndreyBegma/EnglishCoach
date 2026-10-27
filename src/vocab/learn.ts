@@ -346,6 +346,7 @@ export class LearnFlow implements SessionKindHandler {
     const t = this.core.t(handle);
     const image = await this.imageFor(card);
     const caption = image && cardCaption(t, card, image, lead?.line);
+    const speak = await speakRow(t, ctx, card, this.core.deps.speech);
     const rows = (photo: boolean) => [
       [
         button(t("vocab-got-it"), { op: "got-it", cardId: card.id }),
@@ -353,7 +354,7 @@ export class LearnFlow implements SessionKindHandler {
       ],
       ...(photo ? [[button(t("vocab-image-next"), { op: "next-image", cardId: card.id })]] : []),
       [button(t("vocab-add-word"), { op: "add-word" })],
-      ...speakRow(t, ctx, card.id),
+      ...speak,
       [button(t("vocab-finish"), { op: "finish" })],
     ];
     const shown =

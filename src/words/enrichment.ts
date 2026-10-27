@@ -20,6 +20,7 @@ import {
   SkillRunner,
 } from "../skills";
 import { DEFAULT_LEVEL } from "../vocab/core";
+import type { EnglishVariant } from "../voice/engines";
 import { WordPicker } from "./picker";
 
 export interface WordEnricherDeps {
@@ -36,6 +37,13 @@ export interface WordEnricherDeps {
   adminTelegramIds?: readonly number[];
   /** Pictures for the prefetched words; absent when no stock-photo key is set. */
   images?: WordImages;
+  /** Voices the prefetched words and their examples ahead of time; absent without TTS. */
+  speech?: SpeechPrewarm;
+}
+
+/** The part of the TTS the prefetch uses. `prewarm` never rejects and paces itself. */
+export interface SpeechPrewarm {
+  prewarm(texts: readonly string[], variant: EnglishVariant): Promise<unknown>;
 }
 
 const DEFAULT_BATCH = 10;
@@ -169,7 +177,25 @@ export class WordEnricher {
     );
     const written = await this.enrich(upcoming, settings.explainLang);
     await this.fetchImages(upcoming, settings.explainLang);
+    await this.prewarmSpeech(upcoming, settings.explainLang, settings.englishVariant);
     return written;
+  }
+
+  /**
+   * Queues the upcoming words and their first example sentences for voicing in the learner's
+   * variant, so the first 🔊 tap is instant. Not awaited: the TTS uploads one note every few
+   * seconds, and the job does not hold its worker slot for that.
+   */
+  private async prewarmSpeech(list: Word[], lang: Language, variant: EnglishVariant) {
+    const { speech, db } = this.deps;
+    if (!speech || list.length === 0) return;
+    const texts: string[] = [];
+    for (const word of list) {
+      texts.push(word.lemma);
+      const [example] = (await getWordEnrichment(db, word.id, lang))?.examples ?? [];
+      if (example) texts.push(typeof example === "string" ? example : example.en);
+    }
+    void speech.prewarm(texts, variant);
   }
 
   /**

@@ -5,12 +5,19 @@ import { parseSttEnv, parseTtsEnv, type SttEnv, type TtsEnv } from "../config/en
 import type { Db } from "../db/client";
 import { getCard } from "../db/repositories/cards";
 import type { SessionKind } from "../db/repositories/sessions";
-import { findTtsFileId, saveTtsFileId } from "../db/repositories/voice";
+import {
+  findTtsFileId,
+  getStatusBoard,
+  saveStatusBoard,
+  saveTtsFileId,
+} from "../db/repositories/voice";
 import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
 import type { SessionManager } from "../sessions/session-manager";
 import { escapeHtml, HTML } from "../vocab/render";
+import { firstExample } from "../vocab/speak";
 import { readFlow } from "../vocab/state";
+import { VoiceBackfill } from "./backfill";
 import { isVoiceCallbackData, parseVoiceCallback } from "./callbacks";
 import { type CredentialDeps, resolveAudioCredentials } from "./credentials";
 import {
@@ -20,6 +27,7 @@ import {
   type SpeechEngine,
   SpeechError,
 } from "./engines";
+import { StatusBoard } from "./status-board";
 import { openAiTarget, type SttTarget, transcribeWithFallback, whisperTarget } from "./transcribe";
 import { Tts, type TtsOptions } from "./tts";
 
@@ -44,6 +52,8 @@ export interface VoiceOptions extends Pick<TtsOptions, "dir" | "prewarmIntervalM
   tts?: TtsEnv;
   /** STT settings; default: `STT_*` from the environment. */
   stt?: SttEnv;
+  /** The voice backfill's and status board's clock (ms); tests pin it. */
+  now?: () => number;
 }
 
 export interface VoiceDeps {
@@ -55,6 +65,8 @@ export interface VoiceDeps {
   llmEnv: ServerEnv;
   masterKey: Buffer;
   log: Logger;
+  /** `ADMIN_TELEGRAM_IDS`, for the backfill's learners and the status board's language. */
+  adminTelegramIds?: readonly number[];
   options?: VoiceOptions;
 }
 
@@ -119,7 +131,7 @@ export function createVoice(deps: VoiceDeps) {
     // The voice message is the learner's message: track it, and tell them why nothing happened.
     const refuse = async (key: string, vars?: Record<string, string | number>) => {
       if (ctx.chat) await sessions.recordIncoming(active, ctx.chat.id, ctx.message.message_id);
-      await handle.send(t(key, vars));
+      await handle.window.flashNote(t(key, vars));
     };
 
     const { voice } = ctx.message;
@@ -165,7 +177,8 @@ export function createVoice(deps: VoiceDeps) {
     }
     if (!transcript) return refuse("voice-empty");
 
-    await handle.send(t("voice-transcript", { text: escapeHtml(transcript) }), HTML);
+    // What was heard, for a few seconds: the session's window carries the answer itself.
+    await handle.window.flashNote(t("voice-transcript", { text: escapeHtml(transcript) }), HTML);
     // From here on it is a typed message, as far as every later handler can tell.
     (ctx.message as { text?: string }).text = transcript;
     return next();
@@ -185,28 +198,65 @@ export function createVoice(deps: VoiceDeps) {
 
     const card = await getCard(db, ctx.user.id, callback.cardId);
     if (!card || card.itemType === "grammar_pattern") return alert("voice-outdated");
+    const text = callback.target === "example" ? firstExample(card) : card.front;
+    if (!text) return alert("voice-outdated");
 
-    let message: Awaited<ReturnType<Tts["play"]>>;
-    try {
-      message = await tts.play(
-        ctx.api,
-        chatId,
-        card.front,
-        ctx.settings.englishVariant,
-        ctx.user.id,
-      );
-    } catch (error) {
-      if (!(error instanceof SpeechError)) throw error;
-      log.warn("speech generation failed", {
-        userId: ctx.user.id,
-        cardId: card.id,
-        error: error.message,
-      });
-      return alert((await tts.available(ctx.user.id)) ? "voice-tts-failed" : "voice-needs-key");
-    }
-    await ctx.answerCallbackQuery();
-    await handle.track(message.message_id);
+    // Not `acceptAnswer`: 🔊 leaves the card on screen, so it keeps its keyboard and text. It
+    // takes the same lock, so it never races an answer that is moving the session on.
+    let stale = false;
+    const ran = await handle.withLock(async () => {
+      // 🔊 is on a new word's card and on review feedback, nowhere else.
+      const step = readFlow(ctx, handle.session.id);
+      if ((step?.kind !== "card" && step?.kind !== "rate") || step.cardId !== card.id) {
+        stale = true;
+        return;
+      }
+      void ctx.api.sendChatAction(chatId, "record_voice").catch(() => {});
+      let message: Awaited<ReturnType<Tts["play"]>>;
+      try {
+        message = await tts.play(ctx.api, chatId, text, ctx.settings.englishVariant, ctx.user.id);
+      } catch (error) {
+        if (!(error instanceof SpeechError)) throw error;
+        log.warn("speech generation failed", {
+          userId: ctx.user.id,
+          cardId: card.id,
+          error: error.message,
+        });
+        await alert((await tts.available(ctx.user.id)) ? "voice-tts-failed" : "voice-needs-key");
+        return;
+      }
+      await ctx.answerCallbackQuery();
+      await handle.track(message.message_id);
+    });
+    if (stale) await ctx.answerCallbackQuery({ text: ctx.t("answer-stale") });
+    else if (!ran) await ctx.answerCallbackQuery({ text: ctx.t("answer-busy") });
   });
 
-  return { stt, speak, tts };
+  const storageChatId = ttsEnv.TTS_STORAGE_CHAT_ID;
+  const board =
+    storageChatId !== undefined && deps.api
+      ? new StatusBoard({
+          api: deps.api,
+          chatId: storageChatId,
+          store: {
+            messageId: async () =>
+              (await getStatusBoard(db, storageChatId))?.messageId ?? undefined,
+            setMessageId: (messageId) =>
+              saveStatusBoard(db, storageChatId, { messageId: messageId ?? null }),
+          },
+          log,
+          now: deps.options?.now,
+        })
+      : undefined;
+  const backfill = new VoiceBackfill({
+    db,
+    tts,
+    i18n,
+    log,
+    board,
+    adminTelegramIds: deps.adminTelegramIds,
+    now: deps.options?.now && (() => new Date(deps.options?.now?.() ?? Date.now())),
+  });
+  const storageChatIds = storageChatId === undefined ? [] : [storageChatId];
+  return { stt, speak, tts, backfill, storageChatIds };
 }

@@ -12,6 +12,7 @@ import { createLogger } from "../../src/log";
 import type { SessionLocks } from "../../src/sessions/locks";
 import type { SessionTimeouts } from "../../src/sessions/session-manager";
 import { learnerContextFromDb, loadSkillRegistry, SkillRunner } from "../../src/skills";
+import type { VoiceOptions } from "../../src/voice";
 import { FakeLlm } from "./fake-llm";
 
 export const BOT_INFO: UserFromGetMe = {
@@ -203,6 +204,19 @@ export class FakeTelegram {
         await this.onPinNotice?.(chatId, id, Number(p.message_id));
         return ok(true);
       }
+      case "sendVoice": {
+        const id = this.nextId++;
+        // A file_id is replayed as is; an upload gets a new one.
+        const fileId = typeof p.voice === "string" ? p.voice : `voice-file-${id}`;
+        this.chat(chatId).set(id, { id, from: "bot", text: "[voice]", buttons: [], labels: [] });
+        return ok({
+          message_id: id,
+          date: Math.floor(Date.now() / 1000),
+          chat: { id: chatId, type: chatId < 0 ? "supergroup" : "private" },
+          from: BOT_INFO,
+          voice: { file_id: fileId, file_unique_id: `u${id}`, duration: 1 },
+        });
+      }
       case "answerCallbackQuery":
         return ok(true);
       default:
@@ -254,6 +268,8 @@ export interface HarnessOptions {
   pinUpdates?: "deliver" | "silent";
   /** Pictures on new-word cards, over a mocked stock-photo HTTP client. */
   images?: WordImages;
+  /** Voice overrides: the fake speech services, the cache directory, the storage chat. */
+  voice?: VoiceOptions;
   /** Replaces the in-memory answer locks. */
   locks?: SessionLocks;
 }
@@ -299,6 +315,7 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
         learner: learnerContextFromDb(db),
       }),
     images: options.images,
+    voice: options.voice,
     botConfig: { botInfo: BOT_INFO },
     locks: options.locks,
   });
@@ -317,17 +334,22 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
     app.bot.handleUpdate({ update_id: updateId++, ...update } as Update);
 
   if ((options.pinUpdates ?? "deliver") === "deliver") {
+    // A negative chat id is a group (the TTS storage chat); the rest are private chats.
+    const chatOf = (chatId: number) =>
+      chatId < 0
+        ? { id: chatId, type: "supergroup", title: "storage" }
+        : { id: chatId, type: "private", first_name: `User${chatId}` };
     telegram.onPinNotice = (chatId, noticeId, pinnedId) =>
       send({
         message: {
           message_id: noticeId,
           date: Math.floor(Date.now() / 1000),
-          chat: { id: chatId, type: "private", first_name: `User${chatId}` },
+          chat: chatOf(chatId),
           from: BOT_INFO,
           pinned_message: {
             message_id: pinnedId,
             date: 0,
-            chat: { id: chatId, type: "private", first_name: `User${chatId}` },
+            chat: chatOf(chatId),
             from: BOT_INFO,
             text: telegram.chat(chatId).get(pinnedId)?.text ?? "",
           },

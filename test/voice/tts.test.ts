@@ -395,5 +395,47 @@ describe("Tts", () => {
       await tts.prewarm(["decide"], "us");
       expect(net.state.calls).toHaveLength(0);
     });
+
+    test("says what became of each text: generated, already stored, or failed", async () => {
+      let now = 0;
+      const { tts, net, tg } = setup({ openaiKey: false, now: () => now });
+      await tts.play(tg.api, LEARNER_CHAT, "decide", "us", 1);
+      expect(await tts.prewarm(["decide", "borrow"], "us")).toEqual({
+        generated: 1,
+        stored: 1,
+        failed: 0,
+      });
+      net.state.kokoroUp = false;
+      now = 60_000;
+      expect(await tts.prewarm(["lend"], "us")).toEqual({ generated: 0, stored: 0, failed: 1 });
+      // Texts already prewarmed in this process are skipped, not counted.
+      expect(await tts.prewarm(["borrow"], "us")).toEqual({ generated: 0, stored: 0, failed: 0 });
+    });
+  });
+
+  describe("canPlay", () => {
+    test("true when an engine is up, or when the text was voiced before", async () => {
+      let now = 0;
+      const { tts, net, tg } = setup({ openaiKey: false, now: () => now });
+      expect(await tts.canPlay("decide", "us", 1)).toBe(true);
+      await tts.play(tg.api, LEARNER_CHAT, "decide", "us", 1);
+
+      net.state.kokoroUp = false;
+      now = 60_000;
+      expect(await tts.canPlay("Decide ", "us", 1)).toBe(true);
+      expect(await tts.canPlay("borrow", "us", 1)).toBe(false);
+      // The other variant is another voice, not voiced yet.
+      expect(await tts.canPlay("decide", "uk", 1)).toBe(false);
+      expect(await tts.canPlay("  ", "us", 1)).toBe(false);
+    });
+
+    test("a disk-cached text plays without a storage chat or an engine", async () => {
+      let now = 0;
+      const { tts, net, tg } = setup({ storage: false, openaiKey: false, now: () => now });
+      await tts.play(tg.api, LEARNER_CHAT, "decide", "us", 1);
+      net.state.kokoroUp = false;
+      now = 60_000;
+      expect(await tts.canPlay("decide", "us", 1)).toBe(true);
+    });
   });
 });

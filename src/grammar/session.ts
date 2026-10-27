@@ -4,6 +4,7 @@ import type { Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
 import { upsertMistake } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
+import { recordGrammarItem } from "../levels";
 import type { Logger } from "../log";
 import { acceptAnswer } from "../sessions/answer";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
@@ -174,6 +175,7 @@ async function settle(
 
   const settings = await getSettings(deps.db, handle.user.id);
   await recordGrammarAnswer(deps.db, handle.user.id, settings?.timezone ?? "UTC", graded.correct);
+  await recordGrammarItem(deps.db, handle.user.id, current.item, graded.verdict);
 
   state.answered += 1;
   let cardAdded = false;

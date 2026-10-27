@@ -301,6 +301,13 @@ routine-outdated = Це нагадування вже неактуальне.
 # --- progress ---
 progress-level = 🎓 Рівень: { $level }
 progress-level-unset = 🎓 Рівень: ще не визначено
+progress-skills = 📊 { $list }
+progress-skill-grammar = Граматика
+progress-skill-vocabulary = Словник
+progress-skill-reading = Читання
+progress-skill-listening = Аудіювання
+progress-skill-writing = Письмо
+progress-skill-speaking = Говоріння
 progress-streak = 🔥 Серія: { $current } (рекорд: { $best })
 progress-goal = 🎯 Сьогодні: { $done }/{ $goal } нових слів · повторень: { $reviews }
 progress-goal-met = ✅

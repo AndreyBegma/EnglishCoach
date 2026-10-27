@@ -28,6 +28,8 @@ export type SettingsView =
 export interface SettingsModel {
   locale: Locale;
   settings: UserSettings;
+  /** The overall level from the level model, "B1.6"; undefined until there is one. */
+  level?: string;
   /** Undefined means no config was ever chosen: the server provider. */
   provider?: ProviderView;
 }
@@ -99,7 +101,7 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
     "",
     t("settings-ui-lang", { lang: t(`lang-${settings.uiLang}`) }),
     t("settings-explain-lang", { lang: t(`lang-${settings.explainLang}`) }),
-    t("settings-level", { level: settings.cefrLevel ?? t("settings-level-unset") }),
+    t("settings-level", { level: model.level ?? t("settings-level-unset") }),
     t("settings-words", { count: settings.wordsPerDay }),
     t("settings-timezone", { timezone: settings.timezone }),
     t("settings-times", {
@@ -315,7 +317,7 @@ export function renderSettings(
     case "level":
       return {
         text: t("settings-choose-level", {
-          level: settings.cefrLevel ?? t("settings-level-unset"),
+          level: model.level ?? t("settings-level-unset"),
         }),
         keyboard: Keyboard.from([
           ...chunk(CEFR_LEVELS, 3).map((row) =>

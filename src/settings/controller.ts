@@ -6,6 +6,7 @@ import { setActiveProviderModel } from "../db/repositories/providers";
 import { getSettings, type SettingsPatch, updateSettings } from "../db/repositories/users";
 import type { SettingsEvents, SettingsField } from "../events/settings-events";
 import type { HubService } from "../hub/hub-service";
+import { getOverallLevel, seedLevels } from "../levels";
 import { whileTyping } from "../sessions/answer";
 import { type ByokChoice, MODEL_PAGE_SIZE, type ProviderChoice } from "./options";
 import type { Notice, ProviderSettings } from "./provider";
@@ -47,12 +48,18 @@ export class SettingsController {
   show(ctx: BotContext, view: SettingsView): Promise<void> {
     const { db, hub, i18n, providers } = this.deps;
     return hub.present(ctx.user, async () => {
-      const [settings, provider] = await Promise.all([
+      const [settings, provider, level] = await Promise.all([
         getSettings(db, ctx.user.id),
         providers.active(ctx.user.id),
+        getOverallLevel(db, ctx.user.id),
       ]);
       if (!settings) throw new Error(`user ${ctx.user.id} has no settings`);
-      return renderSettings(i18n, view, { locale: settings.uiLang, settings, provider });
+      return renderSettings(i18n, view, {
+        locale: settings.uiLang,
+        settings,
+        level: level?.label,
+        provider,
+      });
     });
   }
 
@@ -190,6 +197,10 @@ export class SettingsController {
   }
 
   private async apply(ctx: BotContext, patch: SettingsPatch, changed: SettingsField[]) {
+    // A chosen level restarts the level model there; re-picking the current band keeps it.
+    if (patch.cefrLevel && patch.cefrLevel !== ctx.settings.cefrLevel) {
+      await seedLevels(this.deps.db, ctx.user.id, patch.cefrLevel, "chosen");
+    }
     await updateSettings(this.deps.db, ctx.user.id, patch);
     await this.changed(ctx, changed);
     await this.show(ctx, { page: "root" });

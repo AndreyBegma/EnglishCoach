@@ -1,0 +1,275 @@
+{
+  "id": "g050",
+  "position": 50,
+  "cefrLevel": "B2",
+  "title": "Словообразование: приставки un-, dis-, in-, mis-, re-, over-, under-",
+  "plannedFrom": "2027-05-03",
+  "plannedTo": "2027-05-08",
+  "sections": {
+    "why": [
+      "Приставки позволяют из одного слова сделать несколько новых, как в русском «не-», «раз-», «пере-», «недо-». Если знаешь значение приставки, можно понять и угадать десятки слов, которых ты ещё не учил: unlock, disconnect, misspell, rewrite, overwork, underestimate."
+    ],
+    "formation": [
+      "Приставка + основное слово. Написание основного слова не меняется: happy → unhappy, agree → disagree.",
+      "• un- — отрицание или противоположное действие: unhappy, unlock, unusual, unable.",
+      "• dis- — отрицание, противоположность: disagree, dislike, disappear, dishonest, disconnect.",
+      "• in- — отрицание: incorrect, invisible, incomplete. Перед l — il-, перед r — ir-, перед m и p — im-: illegal, irregular, impossible, impatient, immature.",
+      "• mis- — «неправильно, ошибочно»: misunderstand, misspell, misplace, misread.",
+      "• re- — «снова, ещё раз»: rewrite, restart, rebuild, reuse, replay.",
+      "• over- — «слишком много, через край»: overwork, overeat, overcook, overestimate.",
+      "• under- — «слишком мало, недостаточно»: underpaid, undercook, underestimate."
+    ],
+    "usage": [
+      "1. Противоположность: She is unhappy. (Она несчастлива.) It is impossible. (Это невозможно.)",
+      "2. Ошибка: I misunderstood your question. (Я неправильно понял ваш вопрос.)",
+      "3. Повтор: Please restart the server. (Пожалуйста, перезапустите сервер.)",
+      "4. Излишек: He overworked and got ill. (Он переработал и заболел.)",
+      "5. Нехватка: The chicken was undercooked. (Курица была недожарена.)"
+    ],
+    "signalWords": [
+      "Если в русском слове есть «не-», «пере-», «недо-», «пере…ть заново», «ошибочно», ищем английскую приставку. Однако приставку к слову нельзя подбирать наугад: многие сочетания нужно просто учить вместе со словом."
+    ],
+    "mistakes": [
+      "✗ unpossible → ✓ impossible. Перед p ставим im-, а не un-.",
+      "✗ inlegal → ✓ illegal. Перед l ставим il-.",
+      "✗ misagree → ✓ disagree. «Не соглашаться» — это dis-, а не mis-.",
+      "✗ unpolite → ✓ impolite. Противоположность polite — impolite.",
+      "✗ underestimate = «оценить слишком высоко» → ✓ overestimate — это «переоценить», underestimate — «недооценить»."
+    ],
+    "remember": [
+      "un-, dis-, in- — «не»; mis- — «неправильно»; re- — «снова»; over- — «слишком много»; under- — «слишком мало»."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Образуйте слово с приставкой из слова в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is very ___ (happy) because he lost his job.",
+          "answer": "unhappy"
+        },
+        {
+          "number": 2,
+          "prompt": "I ___ (agree) with you; I think it's a bad idea.",
+          "answer": "disagree"
+        },
+        {
+          "number": 3,
+          "prompt": "Your answer is ___ (correct).",
+          "answer": "incorrect"
+        },
+        {
+          "number": 4,
+          "prompt": "It is ___ (possible) to finish this today.",
+          "answer": "impossible"
+        },
+        {
+          "number": 5,
+          "prompt": "Sorry, I ___ (understand) your question.",
+          "answer": "misunderstood"
+        },
+        {
+          "number": 6,
+          "prompt": "Please ___ (start) the server.",
+          "answer": "restart"
+        },
+        {
+          "number": 7,
+          "prompt": "He ___ (work) so much that he got ill.",
+          "answer": "overworked"
+        },
+        {
+          "number": 8,
+          "prompt": "The soup was ___ (cook), and the carrots were still hard.",
+          "answer": "undercooked"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I can't ___ the door. (a) unlock (b) dislock (c) inlock",
+          "answer": "(a) unlock"
+        },
+        {
+          "number": 2,
+          "prompt": "You ___ my message. I didn't ask for that. (a) misunderstood (b) disunderstood (c) ununderstood",
+          "answer": "(a) misunderstood"
+        },
+        {
+          "number": 3,
+          "prompt": "Nobody believes this story. It's ___. (a) unbelievable (b) misbelievable (c) rebelievable",
+          "answer": "(a) unbelievable"
+        },
+        {
+          "number": 4,
+          "prompt": "Teachers are often ___: their salaries are too low. (a) overpaid (b) underpaid (c) mispaid",
+          "answer": "(b) underpaid"
+        },
+        {
+          "number": 5,
+          "prompt": "Don't ___ the chicken, or it will be dry. (a) overcook (b) undercook (c) discook",
+          "answer": "(a) overcook"
+        },
+        {
+          "number": 6,
+          "prompt": "The two reports ___: they say different things. (a) disagree (b) misagree (c) unagree",
+          "answer": "(a) disagree"
+        },
+        {
+          "number": 7,
+          "prompt": "He ___ the difficulty of the task, so he didn't prepare. (a) overestimated (b) underestimated (c) reestimated",
+          "answer": "(b) underestimated"
+        },
+        {
+          "number": 8,
+          "prompt": "He ___ the word in his email. (a) unspelled (b) misspelled (c) overspelled",
+          "answer": "(b) misspelled"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Напишите слово с противоположным значением (с приставкой)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "patient",
+          "answer": "impatient"
+        },
+        {
+          "number": 2,
+          "prompt": "visible",
+          "answer": "invisible"
+        },
+        {
+          "number": 3,
+          "prompt": "honest",
+          "answer": "dishonest"
+        },
+        {
+          "number": 4,
+          "prompt": "regular",
+          "answer": "irregular"
+        },
+        {
+          "number": 5,
+          "prompt": "perfect",
+          "answer": "imperfect"
+        },
+        {
+          "number": 6,
+          "prompt": "logical",
+          "answer": "illogical"
+        },
+        {
+          "number": 7,
+          "prompt": "connect",
+          "answer": "disconnect"
+        },
+        {
+          "number": 8,
+          "prompt": "mature",
+          "answer": "immature"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и исправьте предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This task is unpossible.",
+          "answer": "This task is impossible."
+        },
+        {
+          "number": 2,
+          "prompt": "I'm sorry, I misagree with you.",
+          "answer": "I'm sorry, I disagree with you."
+        },
+        {
+          "number": 3,
+          "prompt": "Parking here is inlegal.",
+          "answer": "Parking here is illegal."
+        },
+        {
+          "number": 4,
+          "prompt": "We need to unwrite this paragraph.",
+          "answer": "We need to rewrite this paragraph."
+        },
+        {
+          "number": 5,
+          "prompt": "He underworked and was exhausted.",
+          "answer": "He overworked and was exhausted."
+        },
+        {
+          "number": 6,
+          "prompt": "The meat is raw. You overcooked it.",
+          "answer": "The meat is raw. You undercooked it."
+        },
+        {
+          "number": 7,
+          "prompt": "That's a very unpolite answer.",
+          "answer": "That's a very impolite answer."
+        },
+        {
+          "number": 8,
+          "prompt": "The file is disreadable.",
+          "answer": "The file is unreadable."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я не согласен с этим решением.",
+          "answer": "I disagree with this decision. / I don't agree with this decision."
+        },
+        {
+          "number": 2,
+          "prompt": "Мне нужно перезапустить компьютер.",
+          "answer": "I need to restart my computer."
+        },
+        {
+          "number": 3,
+          "prompt": "Это невозможно сделать за один день.",
+          "answer": "It's impossible to do it in one day. / It's impossible to do this in a day."
+        },
+        {
+          "number": 4,
+          "prompt": "Он недооценил эту проблему.",
+          "answer": "He underestimated this problem."
+        },
+        {
+          "number": 5,
+          "prompt": "Извините, я неправильно вас понял.",
+          "answer": "Sorry, I misunderstood you."
+        },
+        {
+          "number": 6,
+          "prompt": "Сотрудникам мало платят.",
+          "answer": "The employees are underpaid. / Employees are underpaid."
+        },
+        {
+          "number": 7,
+          "prompt": "Не переедай перед сном.",
+          "answer": "Don't overeat before bed. / Don't overeat before bedtime."
+        },
+        {
+          "number": 8,
+          "prompt": "Это нелегальное программное обеспечение.",
+          "answer": "This is illegal software. / This software is illegal."
+        }
+      ]
+    }
+  ]
+}

@@ -8,6 +8,9 @@ import {
   type ByokChoice,
   CEFR_LEVELS,
   COMMON_TIMEZONES,
+  INTEREST_SUGGESTIONS,
+  LEARNER_GOALS,
+  MAX_INTERESTS,
   MODEL_PAGE_SIZE,
   type ProviderChoice,
   TIME_PAGE_SIZE,
@@ -28,6 +31,8 @@ export type SettingsView =
 export interface SettingsModel {
   locale: Locale;
   settings: UserSettings;
+  /** The overall level from the level model, "B1.6"; undefined until there is one. */
+  level?: string;
   /** Undefined means no config was ever chosen: the server provider. */
   provider?: ProviderView;
 }
@@ -83,8 +88,13 @@ function choiceLabel(t: T, choice: ByokChoice): string {
 const hasModelChoice = (provider: ProviderView | undefined) =>
   provider !== undefined && provider.kind !== "server" && provider.kind !== "runner";
 
-const withNotice = (t: T, lines: string[], notice: Notice | undefined) =>
-  notice ? [...lines, "", t(notice.key, notice.vars)] : lines;
+function withNotice(t: T, lines: string[], notice: Notice | undefined): string[] {
+  if (!notice) return lines;
+  const said = notice.detail ? [t("provider-error-detail", { detail: notice.detail })] : [];
+  return [...lines, "", t(notice.key, notice.vars), ...said];
+}
+
+const isAnthropic = (provider: ProviderView | undefined) => provider?.kind === "anthropic";
 
 function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen {
   const { settings } = model;
@@ -94,7 +104,7 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
     "",
     t("settings-ui-lang", { lang: t(`lang-${settings.uiLang}`) }),
     t("settings-explain-lang", { lang: t(`lang-${settings.explainLang}`) }),
-    t("settings-level", { level: settings.cefrLevel ?? t("settings-level-unset") }),
+    t("settings-level", { level: model.level ?? t("settings-level-unset") }),
     t("settings-words", { count: settings.wordsPerDay }),
     t("settings-timezone", { timezone: settings.timezone }),
     t("settings-times", {
@@ -103,6 +113,7 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
     }),
     t("settings-reminders", { state: onOff(settings.remindersEnabled) }),
     t("settings-voice", { state: onOff(settings.voiceEnabled) }),
+    t("settings-english-variant", { variant: t(`english-variant-${settings.englishVariant}`) }),
     t("settings-provider", { provider: providerLabel(t, model.provider) }),
   ];
   const page = (label: string, target: SettingsPage) =>
@@ -124,8 +135,101 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
           change: { field: "voiceEnabled", value: !settings.voiceEnabled },
         }),
       ],
+      [
+        button(
+          t("settings-btn-english-variant", {
+            variant: t(`english-variant-${settings.englishVariant}`),
+          }),
+          {
+            type: "set",
+            change: {
+              field: "englishVariant",
+              value: settings.englishVariant === "us" ? "uk" : "us",
+            },
+          },
+        ),
+      ],
+      [page("settings-btn-profile", "profile")],
       [page("settings-btn-provider", "provider")],
       [button(t("hub-back"), { type: "screen", screen: "main" })],
+    ]),
+  };
+}
+
+/** How an interest reads: a suggestion through its label, a typed one as typed. */
+export function interestLabel(t: T, interest: string): string {
+  return (INTEREST_SUGGESTIONS as readonly string[]).includes(interest)
+    ? t(`interest-${interest}`)
+    : interest;
+}
+
+/** The learner's interests as one line, or the "none" placeholder. */
+export function interestsLine(t: T, interests: readonly string[]): string {
+  return interests.length > 0
+    ? interests.map((interest) => interestLabel(t, interest)).join(", ")
+    : t("profile-none");
+}
+
+function profileScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen {
+  const { goals, interests, profession } = model.settings;
+  const lines = [
+    t("profile-goals-title"),
+    "",
+    t("profile-goals", {
+      goals:
+        goals.length > 0 ? goals.map((goal) => t(`goal-${goal}`)).join(", ") : t("profile-none"),
+    }),
+    t("profile-interests", { interests: interestsLine(t, interests) }),
+    t("profile-profession", { profession: profession ?? t("profile-none") }),
+  ];
+  const professionRow = [
+    button(t("profile-btn-profession"), { type: "input", input: "profession" }),
+  ];
+  if (profession) {
+    professionRow.push(
+      button(t("profile-btn-clear-profession"), { type: "profile-clear", field: "profession" }),
+    );
+  }
+  return {
+    text: withNotice(t, lines, notice).join("\n"),
+    keyboard: Keyboard.from([
+      ...chunk(LEARNER_GOALS, 2).map((row) =>
+        row.map((goal) =>
+          button(mark(t(`goal-${goal}`), goals.includes(goal)), { type: "goal", goal }),
+        ),
+      ),
+      [button(t("profile-btn-interests"), { type: "settings", page: "interests" })],
+      professionRow,
+      [button(t("hub-back"), { type: "settings", page: "root" })],
+    ]),
+  };
+}
+
+function interestsScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen {
+  const { interests } = model.settings;
+  const chosen = new Set(interests.map((interest) => interest.toLowerCase()));
+  const lines = [
+    t("profile-interests-title", { max: MAX_INTERESTS }),
+    "",
+    t("profile-interests", { interests: interestsLine(t, interests) }),
+  ];
+  const actions = [button(t("profile-btn-type-interests"), { type: "input", input: "interests" })];
+  if (interests.length > 0) {
+    actions.push(button(t("profile-btn-clear"), { type: "profile-clear", field: "interests" }));
+  }
+  return {
+    text: withNotice(t, lines, notice).join("\n"),
+    keyboard: Keyboard.from([
+      ...chunk(INTEREST_SUGGESTIONS, 3).map((row) =>
+        row.map((id) =>
+          button(mark(t(`interest-${id}`), chosen.has(id)), {
+            type: "interest",
+            index: INTEREST_SUGGESTIONS.indexOf(id),
+          }),
+        ),
+      ),
+      actions,
+      [button(t("hub-back"), { type: "settings", page: "profile" })],
     ]),
   };
 }
@@ -136,12 +240,16 @@ function providerScreen(t: T, model: SettingsModel, notice?: Notice): RenderedSc
   const lines = [
     t("provider-title"),
     "",
-    t("settings-provider", { provider: providerLabel(t, provider) }),
+    // The title already says "AI provider"; the line under it names only the choice.
+    t("provider-current", { provider: providerLabel(t, provider) }),
   ];
   if (hasModelChoice(provider)) {
     lines.push(t("provider-model", { model: provider?.model ?? t("provider-model-default") }));
   }
   if (provider?.keyHint) lines.push(t("provider-key-hint", { hint: provider.keyHint }));
+  if (provider?.workspaceId) {
+    lines.push(t("provider-workspace", { workspace: provider.workspaceId }));
+  }
 
   const choose = (choice: ProviderChoice, label: string) =>
     button(mark(label, selected === choice), { type: "provider", choice });
@@ -156,7 +264,17 @@ function providerScreen(t: T, model: SettingsModel, notice?: Notice): RenderedSc
   if (hasModelChoice(provider)) {
     actions.unshift(button(t("provider-btn-model"), { type: "settings", page: "model" }));
   }
-  rows.push(actions, [button(t("hub-back"), { type: "settings", page: "root" })]);
+  rows.push(actions);
+  if (isAnthropic(provider)) {
+    const workspace = [button(t("provider-btn-workspace"), { type: "input", input: "workspace" })];
+    if (provider?.workspaceId) {
+      workspace.push(
+        button(t("provider-btn-workspace-clear"), { type: "provider-workspace-clear" }),
+      );
+    }
+    rows.push(workspace);
+  }
+  rows.push([button(t("hub-back"), { type: "settings", page: "root" })]);
   return { text: withNotice(t, lines, notice).join("\n"), keyboard: Keyboard.from(rows) };
 }
 
@@ -232,7 +350,12 @@ function inputScreen(
   const text =
     input.kind === "key"
       ? t("input-key", { provider: choiceLabel(t, input.choice) })
-      : t(`input-${input.kind}`, { model: model.provider?.model ?? t("provider-model-default") });
+      : t(`input-${input.kind}`, {
+          model: model.provider?.model ?? t("provider-model-default"),
+          workspace: model.provider?.workspaceId ?? "—",
+          profession: model.settings.profession ?? "—",
+          max: MAX_INTERESTS,
+        });
   return {
     text: withNotice(t, [text], view.notice).join("\n"),
     keyboard: Keyboard.from([[button(t("input-cancel"), { type: "input-cancel" })]]),
@@ -278,7 +401,7 @@ export function renderSettings(
     case "level":
       return {
         text: t("settings-choose-level", {
-          level: settings.cefrLevel ?? t("settings-level-unset"),
+          level: model.level ?? t("settings-level-unset"),
         }),
         keyboard: Keyboard.from([
           ...chunk(CEFR_LEVELS, 3).map((row) =>
@@ -331,6 +454,10 @@ export function renderSettings(
       return timeScreen(t, model, view.page, view.n);
     case "provider":
       return providerScreen(t, model, view.notice);
+    case "profile":
+      return profileScreen(t, model, view.notice);
+    case "interests":
+      return interestsScreen(t, model, view.notice);
     case "model":
       return modelScreen(t, model, view);
     case "setup":

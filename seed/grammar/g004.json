@@ -1,0 +1,270 @@
+{
+  "id": "g004",
+  "position": 4,
+  "cefrLevel": "A2",
+  "title": "Артикли a/an, the и нулевой артикль: основы",
+  "plannedFrom": "2026-10-22",
+  "plannedTo": "2026-10-22",
+  "sections": {
+    "why": [
+      "В русском артиклей нет, поэтому мы привыкли обходиться без них. В английском перед существительным почти всегда стоит a/an, the или ничего, и это показывает, о чём мы говорим: о любом предмете («какая-то собака») или о конкретном, известном обоим («та самая собака»)."
+    ],
+    "formation": [
+      "• a + слово, которое начинается с согласного ЗВУКА: a laptop, a university (звук [ju]), a hotel.",
+      "• an + слово, которое начинается с гласного ЗВУКА: an engineer, an hour (h не читается), an idea.",
+      "• the — одна форма для всех: the laptop, the engineers.",
+      "• Нулевой артикль (ничего): с множественным числом и неисчисляемыми, когда говорим вообще: I like dogs. I love music.",
+      "A/an — только с исчисляемыми в единственном числе."
+    ],
+    "usage": [
+      "1. A/an — первое упоминание или «один из многих», профессия: I have a dog. (У меня есть собака.) She is a teacher. (Она учитель.)",
+      "2. The — собеседник понимает, о каком предмете речь; второе упоминание: I have a dog. The dog is friendly. (У меня есть собака. Эта собака дружелюбная.) Close the door, please. (Закрой дверь, пожалуйста.)",
+      "3. The — единственный в своём роде и превосходная степень: the sun, the Internet, the best developer. (солнце, интернет, лучший разработчик)",
+      "4. The — с музыкальными инструментами и в некоторых названиях стран: play the piano, the United States, the UK.",
+      "5. Без артикля — о людях и вещах вообще, названия городов и стран, приёмы пищи, язык, фразы go home, go to work: I like tea. She lives in Paris. We have breakfast at 8. I'm going home."
+    ],
+    "signalWords": [
+      "первый раз → a/an; уже упоминали или ясно из ситуации → the; вообще о всех → без артикля. Слова one, any, some, my, this заменяют артикль."
+    ],
+    "mistakes": [
+      "✗ She is teacher. → ✓ She is a teacher. Профессия в единственном числе требует a/an.",
+      "✗ I have a breakfast at 8. → ✓ I have breakfast at 8. Приёмы пищи — без артикля.",
+      "✗ I'm going to the home. → ✓ I'm going home. Home без артикля и без to.",
+      "✗ He is an university student. → ✓ He is a university student. Смотрим на звук [ju], а не на букву.",
+      "✗ I like the tea. → ✓ I like tea. Когда говорим вообще, артикль не нужен."
+    ],
+    "remember": ["A — «какой-то», the — «тот самый», без артикля — «вообще»."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте a или an",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She is ___ engineer.",
+          "answer": "an"
+        },
+        {
+          "number": 2,
+          "prompt": "I need ___ umbrella.",
+          "answer": "an"
+        },
+        {
+          "number": 3,
+          "prompt": "He has ___ new laptop.",
+          "answer": "a"
+        },
+        {
+          "number": 4,
+          "prompt": "We have ___ hour to finish the task.",
+          "answer": "an"
+        },
+        {
+          "number": 5,
+          "prompt": "She studies at ___ university.",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "He ate ___ orange for lunch.",
+          "answer": "an"
+        },
+        {
+          "number": 7,
+          "prompt": "My father is ___ honest man.",
+          "answer": "an"
+        },
+        {
+          "number": 8,
+          "prompt": "It's ___ useful app.",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Вставьте a / an или the",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have a car. ___ car is red.",
+          "answer": "The"
+        },
+        {
+          "number": 2,
+          "prompt": "Please close ___ door. It's cold in the room.",
+          "answer": "the"
+        },
+        {
+          "number": 3,
+          "prompt": "___ sun is very hot today.",
+          "answer": "The"
+        },
+        {
+          "number": 4,
+          "prompt": "She plays ___ piano.",
+          "answer": "the"
+        },
+        {
+          "number": 5,
+          "prompt": "Can you open ___ window? It's hot.",
+          "answer": "the"
+        },
+        {
+          "number": 6,
+          "prompt": "I saw ___ interesting film yesterday.",
+          "answer": "an"
+        },
+        {
+          "number": 7,
+          "prompt": "Is there ___ bank near here?",
+          "answer": "a"
+        },
+        {
+          "number": 8,
+          "prompt": "We live in ___ small flat in Kyiv.",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Вставьте a / an / the или – (если артикль не нужен, пишите –)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I love ___ music.",
+          "answer": "–"
+        },
+        {
+          "number": 2,
+          "prompt": "He lives in ___ United States.",
+          "answer": "the"
+        },
+        {
+          "number": 3,
+          "prompt": "I usually have ___ breakfast at eight.",
+          "answer": "–"
+        },
+        {
+          "number": 4,
+          "prompt": "My son goes to ___ school by bus.",
+          "answer": "–"
+        },
+        {
+          "number": 5,
+          "prompt": "___ Paris is a beautiful city.",
+          "answer": "–"
+        },
+        {
+          "number": 6,
+          "prompt": "Do you like ___ dogs?",
+          "answer": "–"
+        },
+        {
+          "number": 7,
+          "prompt": "What's ___ time? I'm late.",
+          "answer": "the"
+        },
+        {
+          "number": 8,
+          "prompt": "She is ___ best developer in our team.",
+          "answer": "the"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку с артиклем и напишите правильное предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She is teacher.",
+          "answer": "She is a teacher."
+        },
+        {
+          "number": 2,
+          "prompt": "I have a breakfast at 8.",
+          "answer": "I have breakfast at 8."
+        },
+        {
+          "number": 3,
+          "prompt": "He plays a guitar well.",
+          "answer": "He plays the guitar well."
+        },
+        {
+          "number": 4,
+          "prompt": "The life is hard.",
+          "answer": "Life is hard."
+        },
+        {
+          "number": 5,
+          "prompt": "I'm going to the home.",
+          "answer": "I'm going home."
+        },
+        {
+          "number": 6,
+          "prompt": "He is an university student.",
+          "answer": "He is a university student."
+        },
+        {
+          "number": 7,
+          "prompt": "I like the tea.",
+          "answer": "I like tea."
+        },
+        {
+          "number": 8,
+          "prompt": "I have a dog. A dog is very friendly.",
+          "answer": "I have a dog. The dog is very friendly."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Моя сестра дизайнер.",
+          "answer": "My sister is a designer."
+        },
+        {
+          "number": 2,
+          "prompt": "У меня есть собака. Собака очень дружелюбная.",
+          "answer": "I have a dog. The dog is very friendly."
+        },
+        {
+          "number": 3,
+          "prompt": "Закройте, пожалуйста, дверь.",
+          "answer": "Please close the door. / Close the door, please."
+        },
+        {
+          "number": 4,
+          "prompt": "Я люблю кофе.",
+          "answer": "I love coffee. / I like coffee."
+        },
+        {
+          "number": 5,
+          "prompt": "Мы живём в маленькой квартире.",
+          "answer": "We live in a small apartment. / We live in a small flat."
+        },
+        {
+          "number": 6,
+          "prompt": "Он идёт домой.",
+          "answer": "He is going home. / He's going home."
+        },
+        {
+          "number": 7,
+          "prompt": "Это лучший отель в городе.",
+          "answer": "It is the best hotel in the city. / It's the best hotel in the city. / It's the best hotel in town."
+        },
+        {
+          "number": 8,
+          "prompt": "Мне нужен новый ноутбук.",
+          "answer": "I need a new laptop."
+        }
+      ]
+    }
+  ]
+}

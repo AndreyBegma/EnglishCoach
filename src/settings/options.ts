@@ -1,8 +1,39 @@
 import { cefrLevelEnum } from "../db/schema/enums";
+import { LEARNER_GOALS, type LearnerGoal } from "../db/schema/users";
+import type { EnglishVariant } from "../voice/engines";
 
 /** The closed answer spaces of the settings screens. Callback data carries these values. */
 
 export const CEFR_LEVELS = cefrLevelEnum.enumValues;
+
+export { LEARNER_GOALS, type LearnerGoal };
+
+/**
+ * Interests offered as buttons. A chosen one is stored as this id (English, which the model reads
+ * best) and shown through its `interest-<id>` label; typed interests are stored as typed.
+ */
+export const INTEREST_SUGGESTIONS = [
+  "technology",
+  "music",
+  "movies",
+  "books",
+  "sports",
+  "travel",
+  "cooking",
+  "games",
+  "science",
+  "business",
+  "art",
+  "health",
+] as const;
+
+/** Bounds of the learner profile; they keep the profile within a prompt's budget. */
+export const MAX_INTERESTS = 10;
+export const MAX_INTEREST_LENGTH = 40;
+export const MAX_PROFESSION_LENGTH = 80;
+
+/** Pronunciation the bot voices words in; the settings button switches between the two. */
+export const ENGLISH_VARIANTS = ["us", "uk"] as const satisfies readonly EnglishVariant[];
 
 export const WORDS_PER_DAY = [3, 5, 10, 15, 20] as const;
 export type WordsPerDay = (typeof WORDS_PER_DAY)[number];

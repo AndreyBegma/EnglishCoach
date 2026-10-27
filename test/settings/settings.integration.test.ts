@@ -207,11 +207,21 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
     await s.h.say(s.telegramId, ANTHROPIC_KEY);
     s.h.llm.models = Array.from({ length: 10 }, (_, i) => `model-${i}`);
 
+    // Listing asks the provider: a loading toast and "typing" while it does.
+    s.h.telegram.reset();
     await s.press({ type: "settings", page: "model" });
+    expect(s.h.telegram.callsOf("answerCallbackQuery")[0]?.payload).toMatchObject({
+      text: "⏳ Loading models…",
+    });
+    expect(s.h.telegram.callsOf("sendChatAction")).toHaveLength(1);
     expect(s.hubLabels()).toContain("model-7");
     expect(s.hubLabels()).not.toContain("model-8");
     expect(s.hubText()).toContain("Page 1 of 2");
+    // A page turn reuses the list: nothing to wait for.
+    s.h.telegram.reset();
     await s.press({ type: "settings", page: "model", n: 1 });
+    expect(s.h.telegram.callsOf("answerCallbackQuery")[0]?.payload.text).toBeUndefined();
+    expect(s.h.telegram.callsOf("sendChatAction")).toHaveLength(0);
     expect(s.hubLabels()).toContain("model-9");
 
     await s.press({ type: "model", index: 9 });
@@ -240,15 +250,29 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
     expect(s.hubLabels()).toContain("🧪 Test provider");
   });
 
-  test("test provider reports OK with latency, and an error by status", async () => {
+  test("test provider reports OK with latency, and an error by class with the provider's words", async () => {
     const s = await setup();
     await s.press({ type: "provider-test" });
     expect(s.hubText()).toMatch(/Provider works \(\d+ ms\)/);
 
-    s.h.llm.completeError = new LlmProviderError("anthropic", "anthropic request failed: 529", 529);
+    s.h.llm.completeError = new LlmProviderError(
+      "anthropic",
+      "anthropic request failed: 529",
+      529,
+      "Overloaded",
+      "overloaded_error",
+    );
     await s.press({ type: "provider-test" });
-    expect(s.hubText()).toMatch(/HTTP 529, \d+ ms/);
+    expect(s.hubText()).toContain("overloaded or down (HTTP 529)");
+    expect(s.hubText()).toContain("Provider says: Overloaded");
     expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
+  });
+
+  test("the provider screen names the provider once under its title", async () => {
+    const s = await setup();
+    await s.press({ type: "settings", page: "provider" });
+    expect(s.hubText()).toStartWith("🤖 AI provider\n\nProvider: Server");
+    expect(s.hubText()).not.toContain("AI provider:");
   });
 
   test("the runner is shown but cannot be chosen", async () => {
@@ -271,6 +295,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       { type: "set", change: { field: "eveningTime", value: "21:30" } },
       { type: "set", change: { field: "remindersEnabled", value: false } },
       { type: "set", change: { field: "voiceEnabled", value: true } },
+      { type: "set", change: { field: "englishVariant", value: "uk" } },
     ];
     for (const change of changes) await s.press(change);
 
@@ -283,6 +308,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       eveningTime: "21:30:00",
       remindersEnabled: false,
       voiceEnabled: true,
+      englishVariant: "uk",
     });
     const text = s.hubText();
     for (const line of [
@@ -293,6 +319,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       "Morning 07:00 · Evening 21:30",
       "Reminders: off",
       "Voice: on",
+      "Pronunciation: 🇬🇧 British",
     ]) {
       expect(text).toContain(line);
     }
@@ -305,6 +332,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       ["eveningTime"],
       ["remindersEnabled"],
       ["voiceEnabled"],
+      ["englishVariant"],
     ]);
     expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
     expect(s.h.telegram.callsOf("editMessageText")).toHaveLength(changes.length);
@@ -322,6 +350,8 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       "morning",
       "evening",
       "provider",
+      "profile",
+      "interests",
     ] as const;
     for (const lang of ["ru", "uk", "en"] as const) {
       await s.press({ type: "lang", lang });
@@ -331,6 +361,66 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       await s.press({ type: "input-cancel" });
     }
     expect(s.hubText()).toContain("Your time zone");
+    expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
+    expect(s.chatIds()).toEqual([s.hub.messageId]);
+  });
+
+  test("Profile & goals edits goals, interests and the profession in the hub", async () => {
+    const s = await setup();
+    const saved = async () => {
+      const settings = await getSettings(database.db, s.user.id);
+      return {
+        goals: settings?.goals,
+        interests: settings?.interests,
+        profession: settings?.profession,
+      };
+    };
+    await s.press({ type: "settings", page: "root" });
+    expect(s.hubLabels()).toContain("👤 Profile & goals");
+    await s.press({ type: "settings", page: "profile" });
+    expect(s.hubText()).toContain("Goals: —");
+
+    await s.press({ type: "goal", goal: "exam" });
+    await s.press({ type: "goal", goal: "it" });
+    await s.press({ type: "goal", goal: "exam" });
+    expect(s.hubText()).toContain("Goals: 💻 IT");
+    expect(s.hubLabels()).toContain("✓ 💻 IT");
+
+    await s.press({ type: "settings", page: "interests" });
+    await s.press({ type: "interest", index: 0 });
+    await s.press({ type: "input", input: "interests" });
+    await s.h.say(s.telegramId, `chess, ${"x".repeat(60)}`);
+    expect(s.hubText()).toContain("each up to 40 characters");
+    await s.h.say(s.telegramId, "chess, Technology");
+    expect(s.hubText()).toContain("Interests: Technology, chess");
+
+    await s.press({ type: "settings", page: "profile" });
+    await s.press({ type: "input", input: "profession" });
+    await s.press({ type: "input-cancel" });
+    expect(s.hubText()).toContain("Profession: —");
+    await s.press({ type: "input", input: "profession" });
+    await s.h.say(s.telegramId, "QA engineer");
+    expect(s.hubText()).toContain("Profession: QA engineer");
+    expect(await saved()).toEqual({
+      goals: ["it"],
+      interests: ["technology", "chess"],
+      profession: "QA engineer",
+    });
+
+    await s.press({ type: "profile-clear", field: "profession" });
+    await s.press({ type: "settings", page: "interests" });
+    await s.press({ type: "profile-clear", field: "interests" });
+    expect(await saved()).toEqual({ goals: ["it"], interests: [], profession: null });
+    expect(s.events.flatMap((event) => event.changed)).toEqual([
+      "goals",
+      "goals",
+      "goals",
+      "interests",
+      "interests",
+      "profession",
+      "profession",
+      "interests",
+    ]);
     expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
     expect(s.chatIds()).toEqual([s.hub.messageId]);
   });

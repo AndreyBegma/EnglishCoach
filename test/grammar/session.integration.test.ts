@@ -8,6 +8,7 @@ import { cards, dailyStats, learningSessions, mistakes } from "../../src/db/sche
 import { QUESTIONS_PER_SESSION } from "../../src/grammar";
 import { encodeGrammarCallback } from "../../src/grammar/callbacks";
 import { localDate } from "../../src/grammar/stats";
+import { topicById, topicsForLevel } from "../../src/grammar/topics";
 import { LlmProviderError } from "../../src/llm";
 import { createHarness, type Harness } from "../bot/harness";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
@@ -43,13 +44,17 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     return last;
   };
 
-  /** The feedback on the last answer: the message just before the next question (or error). */
-  const feedback = (h: Harness, telegramId: number) => {
-    const messages = [...h.telegram.chat(telegramId).values()].filter((m) => m.from === "bot");
-    const message = messages.at(-2);
-    if (!message) throw new Error("no feedback message");
-    return message;
-  };
+  /** The feedback on the last answer: the lead of the next question (or error), in the window. */
+  const feedback = lastBot;
+
+  /** One window per session: once notes have faded, the chat holds the hub and the window only. */
+  async function expectOneWindow(h: Harness, telegramId: number, userId: number) {
+    await h.sessions.flushNotes();
+    const hub = await getHub(database.db, userId);
+    const chat = [...h.telegram.chat(telegramId).values()];
+    expect(chat.map((m) => m.id)).toEqual([hub?.messageId ?? -1, lastBot(h, telegramId).id]);
+    return lastBot(h, telegramId);
+  }
 
   async function startGrammar(h: Harness, telegramId: number, userId: number) {
     const hub = await getHub(database.db, userId);
@@ -60,6 +65,12 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     );
     return lastBot(h, telegramId);
   }
+
+  /** The `<task>` variables of the i-th skill call. */
+  const taskOf = (requests: { messages: { content: string }[] }[], i: number) => {
+    const content = requests[i]?.messages.at(-1)?.content ?? "";
+    return JSON.parse(content.split("<task>")[1]?.split("</task>")[0] ?? "{}");
+  };
 
   const answer = (h: Harness, telegramId: number, n: number, option: number) =>
     h.press(
@@ -84,26 +95,44 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     const { h, telegramId, user, requests } = await setup(queue);
 
     const picker = await startGrammar(h, telegramId, user.id);
-    // Mixed first, then every topic offered to a learner without a level (treated as B1).
-    expect(picker.buttons[0]).toEqual([encodeGrammarCallback({ type: "topic", index: null })]);
-    expect(picker.labels.flat()).toContain("Tenses");
-    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", index: null }));
+    // The selector's next topic, Mixed, then every topic offered to a learner without a level
+    // (treated as B1), each not started yet.
+    const b1 = topicsForLevel("B1");
+    expect(picker.buttons[0]).toEqual([
+      encodeGrammarCallback({ type: "topic", id: b1[0]?.id ?? "" }),
+    ]);
+    expect(picker.labels[0]).toEqual([`▶ Next: ${b1[0]?.title.en}`]);
+    expect(picker.buttons[1]).toEqual([encodeGrammarCallback({ type: "topic", id: null })]);
+    expect(picker.labels.flat().slice(2)).toEqual(b1.map((t) => `⬜ ${t.title.en}`));
+    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", id: null }));
 
-    // 1: multiple choice, right option.
-    expect(lastBot(h, telegramId).text).toContain("Question 1 of 10");
-    expect(lastBot(h, telegramId).labels.flat()).toEqual(OPTIONS);
+    // 1: multiple choice, right option. The question is the picker, edited in place.
+    const window = await expectOneWindow(h, telegramId, user.id);
+    expect(window.id).toBe(picker.id);
+    expect(window.text).toStartWith("Topic: 🎲 Mixed");
+    expect(window.text).toContain("Question 1 of 10");
+    expect(window.labels.flat()).toEqual(OPTIONS);
+    // A typed message on a multiple-choice question: a note that fades, and the message is gone.
+    const stray = await h.say(telegramId, "has lived");
+    expect(h.telegram.chat(telegramId).has(stray)).toBe(false);
+    expect(lastBot(h, telegramId).text).toBe("Please answer with the buttons above.");
+    await expectOneWindow(h, telegramId, user.id);
     await answer(h, telegramId, 1, 0);
-    expect(feedback(h, telegramId).text).toContain("✅ Correct!");
+    expect(feedback(h, telegramId).text).toStartWith("Your answer: has lived\n✅ Correct!");
     expect(feedback(h, telegramId).text).not.toContain("Severity");
+    expect((await expectOneWindow(h, telegramId, user.id)).id).toBe(picker.id);
 
     // 2: typed, exact match: no grammar-check call.
     expect(requests.at(-1)?.messages.at(-1)?.content).toMatch(/"recent_accuracy": 1\b/);
-    await h.say(telegramId, "  Has lived. ");
+    const typed = await h.say(telegramId, "  Has lived. ");
+    expect(h.telegram.chat(telegramId).has(typed)).toBe(false);
     expect(feedback(h, telegramId).text).toContain("✅ Correct!");
     expect(requests).toHaveLength(3);
+    await expectOneWindow(h, telegramId, user.id);
 
     // 3: typed, wrong: graded by the model, first sighting of the pattern.
     await h.say(telegramId, "I bought car");
+    await expectOneWindow(h, telegramId, user.id);
     const wrong = feedback(h, telegramId).text;
     expect(wrong).toContain("❌ Not quite.");
     expect(wrong).toContain("Correct answer: I bought a car.");
@@ -194,7 +223,7 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     ]);
 
     const picker = await startGrammar(h, telegramId, user.id);
-    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", index: 5 }));
+    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", id: "g032" }));
     const failed = lastBot(h, telegramId);
     expect(failed.text).toContain("could not prepare");
     expect(failed.buttons.flat()).toEqual([
@@ -206,9 +235,12 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     expect(lastBot(h, telegramId).text).toContain("Question 1 of 10");
     await answer(h, telegramId, 1, 0);
 
-    // Question 2 is typed; the grader is down, so the answer is not lost and nothing is counted.
+    // Question 2 is typed; the grader is down, so the question stays open and nothing is counted.
     await h.say(telegramId, "must to");
-    expect(lastBot(h, telegramId).text).toContain("could not check your answer");
+    const open = lastBot(h, telegramId).text;
+    expect(open).toStartWith("⚠️ I could not check your answer");
+    expect(open).toContain("Question 2 of 10");
+    await expectOneWindow(h, telegramId, user.id);
     expect(
       await database.db.select().from(mistakes).where(eq(mistakes.userId, user.id)),
     ).toHaveLength(0);
@@ -217,10 +249,74 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     expect(queue).toHaveLength(0);
   });
 
-  test("a button of an earlier question does nothing", async () => {
+  test("mistakes keep the syllabus topic: the picked one, a real one the check names, never an invented one", async () => {
+    const { h, telegramId, user, requests } = await setup([
+      choice("articles", 1),
+      typedItem("gap_fill", "articles", "He is ___ engineer.", ["an"]),
+      wrongCheck("article before a vowel sound", "an", "g041"),
+      typedItem("gap_fill", "articles", "I saw ___ moon.", ["the"]),
+      wrongCheck("the with unique objects", "the", "g999"),
+      choice("articles"),
+    ]);
+    const picker = await startGrammar(h, telegramId, user.id);
+    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", id: "g004" }));
+
+    const quiz = taskOf(requests, 0);
+    expect(quiz.syllabus_topic.id).toBe("g004");
+    expect(quiz.syllabus_topics).toEqual([]);
+
+    await answer(h, telegramId, 1, 0);
+    await h.say(telegramId, "a");
+    const check = taskOf(requests, 2);
+    expect(check.topic_id).toBe("g004");
+    // The check may name topics around the learner's grammar level (A2 after a wrong A2 answer);
+    // g041 (B2) is outside them, yet a real id the check names is still kept below.
+    const offered = check.syllabus_topics.map((t: { id: string }) => t.id);
+    expect(offered).toContain("g004");
+    expect(offered).not.toContain("g041");
+    await h.say(telegramId, "a");
+
+    const rows = await database.db
+      .select({ pattern: mistakes.pattern, topicId: mistakes.topicId })
+      .from(mistakes)
+      .where(eq(mistakes.userId, user.id));
+    expect(Object.fromEntries(rows.map((row) => [row.pattern, row.topicId]))).toEqual({
+      articles: "g004",
+      "article before a vowel sound": "g041",
+      "the with unique objects": "g004",
+    });
+  });
+
+  test("in Mixed, the quiz names the topic from the learner's bands; an invented id is dropped", async () => {
+    const { h, telegramId, user, requests } = await setup([
+      { ...choice("present perfect", 1), topic_id: "g015" },
+      { ...choice("made up", 1), topic_id: "g500" },
+      choice("modals"),
+    ]);
+    const picker = await startGrammar(h, telegramId, user.id);
+    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", id: null }));
+
+    const quiz = taskOf(requests, 0);
+    expect(quiz.syllabus_topic).toBeNull();
+    const bands = new Set(quiz.syllabus_topics.map((t: { id: string }) => topicById(t.id)?.band));
+    expect([...bands].sort()).toEqual(["A2", "B1", "B2"]);
+
+    await answer(h, telegramId, 1, 0);
+    await answer(h, telegramId, 2, 0);
+    const rows = await database.db
+      .select({ pattern: mistakes.pattern, topicId: mistakes.topicId })
+      .from(mistakes)
+      .where(eq(mistakes.userId, user.id));
+    expect(Object.fromEntries(rows.map((row) => [row.pattern, row.topicId]))).toEqual({
+      "present perfect": "g015",
+      "made up": null,
+    });
+  });
+
+  test("a button of an earlier question does nothing but say it is answered", async () => {
     const { h, telegramId, user } = await setup([choice("modals"), choice("modals")]);
     const picker = await startGrammar(h, telegramId, user.id);
-    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", index: null }));
+    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", id: null }));
     const first = lastBot(h, telegramId);
     await answer(h, telegramId, 1, 0);
     const before = h.telegram.chat(telegramId).size;
@@ -232,5 +328,14 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     );
     expect(h.telegram.chat(telegramId).size).toBe(before);
     expect(lastBot(h, telegramId).text).toContain("Question 2 of 10");
+    expect(h.telegram.callsOf("answerCallbackQuery").at(-1)?.payload).toMatchObject({
+      text: "This question is already answered",
+    });
+
+    // The topic picker is answered too.
+    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", id: null }));
+    expect(h.telegram.callsOf("answerCallbackQuery").at(-1)?.payload).toMatchObject({
+      text: "This question is already answered",
+    });
   });
 });

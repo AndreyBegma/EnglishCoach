@@ -1,0 +1,420 @@
+# Grammar syllabus, band C1. Keys are topic ids; see src/grammar/syllabus.ts for the format.
+
+g053:
+  level: C1.1
+  title:
+    en: "Inversion after negative adverbials: Never, Rarely, Hardly…when, No sooner…than"
+    ru: "Инверсия после отрицательных наречий: Never, Rarely, Hardly…when, No sooner…than"
+    uk: "Інверсія після заперечних прислівників: Never, Rarely, Hardly…when, No sooner…than"
+  prerequisites: [g027, g040]
+  contrast_with: [g054, g079]
+  examples:
+    - "Never have I seen such a mess in a codebase."
+    - "Hardly had we started the demo when the server crashed."
+    - "No sooner had she sent the email than she noticed the typo."
+  interference:
+    - wrong: "Never I have seen such a mess."
+      right: "Never have I seen such a mess."
+      cause: "Russian and Ukrainian keep subject-verb order after «никогда/ніколи», so the auxiliary is not moved before the subject."
+    - wrong: "Hardly we had started when it crashed."
+      right: "Hardly had we started when it crashed."
+      cause: "Free word order in Russian and Ukrainian hides that the fronted negative adverb forces question-like inversion."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g054:
+  level: C1.2
+  title:
+    en: "Inversion: Not until, Only then, Little; conditionals without if (Had I known…)"
+    ru: "Инверсия: Not until, Only then, Little; условные без if (Had I known…)"
+    uk: "Інверсія: Not until, Only then, Little; умовні речення без if (Had I known…)"
+  prerequisites: [g053, g033]
+  contrast_with: [g075]
+  examples:
+    - "Not until the release did we notice the bug."
+    - "Only then did I understand what he meant."
+    - "Had I known about the deadline, I would have started earlier."
+  interference:
+    - wrong: "Not until the release we noticed the bug."
+      right: "Not until the release did we notice the bug."
+      cause: "Russian «Только после релиза мы заметили» has no auxiliary to invert, so learners keep plain order."
+    - wrong: "If had I known, I would have come."
+      right: "Had I known, I would have come."
+      cause: "Learners translate «если бы» literally and keep if together with the inverted form."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g055:
+  level: C1.2
+  title:
+    en: "Cleft sentences: It was… that…, What I need is…"
+    ru: "Выделительные конструкции: It was… that…, What I need is…"
+    uk: "Видільні конструкції: It was… that…, What I need is…"
+  prerequisites: [g024]
+  contrast_with: [g056, g079]
+  examples:
+    - "It was Anna who fixed the build, not me."
+    - "What I need is a quiet place to work."
+    - "All I did was ask a question."
+  interference:
+    - wrong: "Exactly Anna fixed the build."
+      right: "It was Anna who fixed the build."
+      cause: "Russian «Именно Анна…» stresses with a particle and word order; English needs a cleft structure."
+    - wrong: "What I need it is a break."
+      right: "What I need is a break."
+      cause: "Learners add a resumptive «it» as in «то, что мне нужно, — это…»."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g056:
+  level: C1.3
+  title:
+    en: "Emphasis: do/does/did, such, so, the very, itself"
+    ru: "Эмфаза: do/does/did, such, so, the very, itself"
+    uk: "Емфаза: do/does/did, such, so, the very, itself"
+  prerequisites: [g055, g002]
+  contrast_with: [g082]
+  examples:
+    - "I do understand your point, but I disagree."
+    - "She did call you yesterday."
+    - "That is the very thing I was looking for."
+  interference:
+    - wrong: "I really understand you, but…"
+      right: "I do understand you, but…"
+      cause: "Russian stresses with intonation or «правда/действительно»; emphatic do has no direct equivalent."
+    - wrong: "She did called you."
+      right: "She did call you."
+      cause: "Learners mark the past twice because emphatic did is new and feels like an extra word, not the tense carrier."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g057:
+  level: C1.4
+  title:
+    en: "Subjunctive: suggest that he be, It's time you went, I'd rather you did"
+    ru: "Сослагательное наклонение: suggest that he be, It's time you went, I'd rather you did"
+    uk: "Умовний спосіб: suggest that he be, It's time you went, I'd rather you did"
+  prerequisites: [g035, g046]
+  contrast_with: [g035]
+  examples:
+    - "The manager insisted that he be present at the meeting."
+    - "It's time we went home."
+    - "I'd rather you didn't tell anyone."
+  interference:
+    - wrong: "It's time we go home."
+      right: "It's time we went home."
+      cause: "Russian «пора идти» uses no past form, so a past tense for the present feels wrong."
+    - wrong: "I'd rather you don't tell anyone."
+      right: "I'd rather you didn't tell anyone."
+      cause: "Russian «я бы предпочёл, чтобы ты не…» marks the mood with «чтобы», not with a backshifted tense."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g058:
+  level: C1.4
+  title:
+    en: "Ellipsis and substitution: so / not, do so, one / ones"
+    ru: "Эллипсис и замены: so / not, do so, one / ones"
+    uk: "Еліпсис і заміни: so / not, do so, one / ones"
+  prerequisites: [g031]
+  contrast_with: [g031]
+  examples:
+    - "Will it rain tomorrow? I hope not."
+    - "Is he coming? I think so."
+    - "I don't like the red shirt; I prefer the blue one."
+  interference:
+    - wrong: "I think yes."
+      right: "I think so."
+      cause: "Literal translation of «думаю, да»."
+    - wrong: "I prefer the blue."
+      right: "I prefer the blue one."
+      cause: "Russian adjectives stand alone as nouns («синюю»), so the substitute one is dropped."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g059:
+  level: C1.5
+  title:
+    en: "Modal nuances: needn't have vs didn't need to, be to, be bound to, be supposed to"
+    ru: "Модальные нюансы: needn't have vs didn't need to, be to, be bound to, be supposed to"
+    uk: "Модальні нюанси: needn't have vs didn't need to, be to, be bound to, be supposed to"
+  prerequisites: [g038, g014]
+  contrast_with: [g080]
+  examples:
+    - "You needn't have brought food — we had plenty."
+    - "I didn't need to wait, so I left at once."
+    - "You're supposed to sign in before you start."
+  interference:
+    - wrong: "I didn't need to bring food, but I brought it anyway."
+      right: "I needn't have brought food."
+      cause: "Russian «мне не нужно было» covers both meanings, so the 'did it unnecessarily' form is missed."
+    - wrong: "He is bound to come? Maybe."
+      right: "He is bound to come — I'm sure of it."
+      cause: "Learners read bound to as obligation («обязан») rather than near-certainty."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g060:
+  level: C1.5
+  title:
+    en: "Future in the past: was going to, was about to, would"
+    ru: "Будущее в прошлом: was going to, was about to, would"
+    uk: "Майбутнє в минулому: was going to, was about to, would"
+  prerequisites: [g013, g025]
+  contrast_with: [g039]
+  examples:
+    - "I was going to call you, but I forgot."
+    - "We were about to leave when the phone rang."
+    - "She knew he would be late again."
+  interference:
+    - wrong: "I knew he will be late."
+      right: "I knew he would be late."
+      cause: "Russian keeps the future tense in reported clauses («знал, что он опоздает»)."
+    - wrong: "I wanted to call you, but forgot."
+      right: "I was going to call you, but I forgot."
+      cause: "«Собирался» is rendered with want, losing the unfulfilled-plan meaning."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g061:
+  level: C1.6
+  title:
+    en: "Dependent prepositions after verbs, adjectives and nouns"
+    ru: "Зависимые предлоги после глаголов, прилагательных и существительных"
+    uk: "Залежні прийменники після дієслів, прикметників та іменників"
+  prerequisites: [g010]
+  contrast_with: [g070]
+  examples:
+    - "It depends on the budget."
+    - "She is good at explaining things."
+    - "There has been an increase in demand."
+  interference:
+    - wrong: "It depends from the budget."
+      right: "It depends on the budget."
+      cause: "Literal translation of «зависит от»."
+    - wrong: "I'm married with her."
+      right: "I'm married to her."
+      cause: "Russian «женат на / замужем за» and Ukrainian «одружений з» suggest on or with."
+    - wrong: "We discussed about the plan."
+      right: "We discussed the plan."
+      cause: "Russian «обсудить о» in speech and «говорить о» transfer a preposition English does not use."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g062:
+  level: C1.6
+  title:
+    en: "whoever / whatever / whenever / however in clauses"
+    ru: "whoever / whatever / whenever / however в придаточных"
+    uk: "whoever / whatever / whenever / however у підрядних реченнях"
+  prerequisites: [g024]
+  contrast_with: [g044]
+  examples:
+    - "Whoever wrote this code knew what they were doing."
+    - "Call me whenever you need help."
+    - "However hard I try, I can't remember his name."
+  interference:
+    - wrong: "However I try hard, I can't remember."
+      right: "However hard I try, I can't remember."
+      cause: "Russian «как бы я ни старался» puts the adverb after the subject; English moves it straight after however."
+    - wrong: "Whatever you will decide, I'll support you."
+      right: "Whatever you decide, I'll support you."
+      cause: "Russian uses a future form in the clause («что бы ты ни решил»), which learners copy."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g063:
+  level: C1.7
+  title:
+    en: "Nominalisation and formal academic style"
+    ru: "Номинализация и формальный академический стиль"
+    uk: "Номіналізація та формальний академічний стиль"
+  prerequisites: [g051]
+  contrast_with: [g072]
+  examples:
+    - "The implementation of the new policy led to a reduction in costs."
+    - "There was a significant improvement in performance."
+  interference:
+    - wrong: "The realisation of the project was in 2020."
+      right: "The project was carried out in 2020."
+      cause: "False friend: Russian «реализация» means implementation, English realisation means understanding."
+    - wrong: "The increase of prices was big."
+      right: "The increase in prices was significant."
+      cause: "Russian genitive «рост цен» suggests of after nouns of change."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g064:
+  level: C1.7
+  title:
+    en: "Passive: with get, with two objects, need doing"
+    ru: "Пассив: с get, с двумя дополнениями, need doing"
+    uk: "Пасив: з get, з двома додатками, need doing"
+  prerequisites: [g036, g037]
+  contrast_with: [g036]
+  examples:
+    - "He got fired last month."
+    - "I was given a second chance."
+    - "The car needs washing."
+  interference:
+    - wrong: "To me was given a second chance."
+      right: "I was given a second chance."
+      cause: "Russian «мне дали» keeps the recipient in the dative; English makes it the subject."
+    - wrong: "The car needs to wash."
+      right: "The car needs washing. / The car needs to be washed."
+      cause: "Russian «машину нужно помыть» has an active infinitive with a passive meaning."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g065:
+  level: C1.8
+  title:
+    en: "Complex infinitive forms: to have done, to be doing, to have been done"
+    ru: "Сложные формы инфинитива: to have done, to be doing, to have been done"
+    uk: "Складні форми інфінітива: to have done, to be doing, to have been done"
+  prerequisites: [g019, g047]
+  contrast_with: [g066]
+  examples:
+    - "He seems to have forgotten about the meeting."
+    - "She appears to be working from home today."
+    - "The report is said to have been written in a week."
+  interference:
+    - wrong: "He seems to forget about the meeting."
+      right: "He seems to have forgotten about the meeting."
+      cause: "Russian «кажется, он забыл» puts the past on the main verb; English marks it on the infinitive."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g066:
+  level: C1.8
+  title:
+    en: "Complex gerund and participle forms: having done, being done"
+    ru: "Сложные формы герундия и причастия: having done, being done"
+    uk: "Складні форми герундія та дієприкметника: having done, being done"
+  prerequisites: [g065, g043]
+  contrast_with: [g065, g077]
+  examples:
+    - "He denied having taken the money."
+    - "I hate being interrupted."
+    - "Having finished the report, she went home."
+  interference:
+    - wrong: "I hate when somebody interrupts me."
+      right: "I hate being interrupted."
+      cause: "Russian has no passive gerund and rephrases with a «когда» clause."
+    - wrong: "Finishing the report, she went home."
+      right: "Having finished the report, she went home."
+      cause: "Russian «закончив» is perfective by itself; English needs having to mark the earlier action."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g067:
+  level: C1.8
+  title:
+    en: "Determiners: each / every, either / neither, all / whole, none / no"
+    ru: "Определители: each / every, either / neither, all / whole, none / no"
+    uk: "Означальні слова: each / every, either / neither, all / whole, none / no"
+  prerequisites: [g005, g028]
+  contrast_with: [g095]
+  examples:
+    - "Each of the students got a certificate."
+    - "Neither option is perfect."
+    - "I spent the whole day coding."
+  interference:
+    - wrong: "Neither of them don't work."
+      right: "Neither of them works."
+      cause: "Russian double negation («ни один не работает») adds a second negative."
+    - wrong: "I spent all the day coding."
+      right: "I spent the whole day coding."
+      cause: "Russian «весь день» maps onto all, not whole."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g068:
+  level: C1.9
+  title:
+    en: "Discourse markers in speech and writing: in fact, mind you, as it happens, after all"
+    ru: "Дискурсивные маркеры в речи и письме: in fact, mind you, as it happens, after all"
+    uk: "Дискурсивні маркери в мовленні та на письмі: in fact, mind you, as it happens, after all"
+  prerequisites: [g044]
+  contrast_with: [g069]
+  examples:
+    - "It's expensive. Mind you, it's very well made."
+    - "I didn't need the umbrella after all."
+    - "As it happens, I know the author personally."
+  interference:
+    - wrong: "Actually, the meeting is at five. (meaning 'currently')"
+      right: "Currently, the meeting is at five."
+      cause: "False friend: Russian «актуально/фактически» pushes actually toward 'at the moment'."
+    - wrong: "After all, I finished the report. (meaning 'finally')"
+      right: "In the end, I finished the report."
+      cause: "Russian «в конце концов» covers both meanings; English after all is not 'finally'."
+  exercise_types: [multiple_choice, gap_fill]
+
+g069:
+  level: C1.9
+  title:
+    en: "Hedging: tend to, appear to, it seems, arguably"
+    ru: "Смягчение высказываний (hedging): tend to, appear to, it seems, arguably"
+    uk: "Пом'якшення висловлювань (hedging): tend to, appear to, it seems, arguably"
+  prerequisites: [g068, g032]
+  contrast_with: [g082]
+  examples:
+    - "Users tend to ignore long error messages."
+    - "The results appear to confirm our hypothesis."
+    - "This is arguably the best solution."
+  interference:
+    - wrong: "It seems me that it is wrong."
+      right: "It seems to me that it is wrong."
+      cause: "Russian «мне кажется» has a bare dative; English needs to."
+    - wrong: "This solution is the best."
+      right: "This is arguably the best solution."
+      cause: "Russian academic style tolerates categorical claims; English academic style expects hedging."
+  exercise_types: [multiple_choice, transformation]
+
+g070:
+  level: C1.9
+  title:
+    en: "Three-part phrasal verbs: put up with, get away with, come up with"
+    ru: "Трёхчастные фразовые глаголы: put up with, get away with, come up with"
+    uk: "Тричастинні фразові дієслова: put up with, get away with, come up with"
+  prerequisites: [g029]
+  contrast_with: [g061]
+  examples:
+    - "I can't put up with this noise any longer."
+    - "She came up with a brilliant idea."
+    - "He thinks he can get away with being late."
+  interference:
+    - wrong: "She came up a brilliant idea."
+      right: "She came up with a brilliant idea."
+      cause: "Russian «придумала идею» takes a direct object, so the final preposition is dropped."
+    - wrong: "I can't put up this noise."
+      right: "I can't put up with this noise."
+      cause: "Russian «терпеть шум» is transitive."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g071:
+  level: C1.9
+  title:
+    en: "Idioms and set phrases in everyday speech"
+    ru: "Идиомы и устойчивые выражения в живой речи"
+    uk: "Ідіоми та сталі вирази в живому мовленні"
+  prerequisites: [g070, g052]
+  contrast_with: [g081]
+  examples:
+    - "Let's call it a day."
+    - "The new feature was a piece of cake to build."
+    - "I'll keep you in the loop."
+  interference:
+    - wrong: "It's not my cup of coffee."
+      right: "It's not my cup of tea."
+      cause: "Learners substitute words in idioms as Russian set phrases feel freer to vary."
+    - wrong: "To kill two hares with one shot."
+      right: "To kill two birds with one stone."
+      cause: "Literal translation of «убить двух зайцев одним выстрелом»."
+  exercise_types: [multiple_choice, gap_fill]
+
+g072:
+  level: C1.9
+  title:
+    en: "Register: formal and informal English"
+    ru: "Регистр: формальный и неформальный английский"
+    uk: "Регістр: формальна та неформальна англійська"
+  prerequisites: [g063, g068]
+  contrast_with: [g063, g081]
+  examples:
+    - "Could you possibly send me the file? / Can you send me the file?"
+    - "We regret to inform you that your application was unsuccessful."
+    - "Sorry, we can't take you on this time."
+  interference:
+    - wrong: "Give me the report until Friday."
+      right: "Could you send me the report by Friday?"
+      cause: "Russian imperatives with «пожалуйста» are polite; English expects a modal question, and «до» is by, not until."
+    - wrong: "Dear Sir, I want to know the price."
+      right: "Dear Sir, I would like to know the price."
+      cause: "Russian business letters use plain «хочу узнать»; English formal register softens it."
+  exercise_types: [multiple_choice, transformation]

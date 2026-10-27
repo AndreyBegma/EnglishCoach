@@ -1,10 +1,12 @@
 import type { Db } from "../../src/db/client";
 import type { CompletionRequest, LlmProvider } from "../../src/llm/types";
 import {
+  ExampleCheckOutput,
   learnerContextFromDb,
   loadSkillRegistry,
   SkillRunner,
   VocabCheckOutput,
+  VocabEnrichBatchOutput,
   VocabEnrichOutput,
   VocabExerciseOutput,
 } from "../../src/skills";
@@ -18,6 +20,11 @@ function taskOf(req: CompletionRequest<unknown>): Task {
   return JSON.parse(json) as Task;
 }
 
+/** The words of a `vocab-enrich-batch` call. */
+function batchTask(req: CompletionRequest<unknown>): { id: number; lemma: string }[] {
+  return (taskOf(req) as unknown as { words: { id: number; lemma: string }[] }).words;
+}
+
 export const meaningOf = (lemma: string) => `meaning of ${lemma}`;
 
 /**
@@ -27,6 +34,8 @@ export const meaningOf = (lemma: string) => `meaning of ${lemma}`;
  */
 export function vocabSkills(db: Db) {
   const calls = { enrich: 0, exercise: 0, check: 0 };
+  /** `vocab-enrich-batch` calls and the words they carried (the prefetch job's skill). */
+  const batch = { calls: 0, words: 0 };
   const checks: unknown[] = [];
   /** Set to make the next model call throw it. */
   const failure: { next?: Error } = {};
@@ -53,6 +62,8 @@ export function vocabSkills(db: Db) {
             ],
             collocations: [`${task.lemma} fast`, `${task.lemma} well`, `never ${task.lemma}`],
             mnemonic: `Think of ${task.lemma}.`,
+            image_query: `${task.lemma} scene`,
+            emoji: null,
           }),
         };
       }
@@ -85,6 +96,38 @@ export function vocabSkills(db: Db) {
           ),
         };
       }
+      if (skill === VocabEnrichBatchOutput) {
+        batch.calls++;
+        batch.words += batchTask(req as CompletionRequest<unknown>).length;
+        return {
+          data: req.schema.parse({
+            cards: batchTask(req as CompletionRequest<unknown>).map((word) => ({
+              id: word.id,
+              translation: `${word.lemma}-cached`,
+              ipa: `/${word.lemma}-model/`,
+              pos: "verb",
+              examples: [
+                { en: `Model sentence one with ${word.lemma}.`, translation: "first translated" },
+                { en: `Model sentence two with ${word.lemma}.`, translation: "second translated" },
+              ],
+              collocations: [`${word.lemma} a`, `${word.lemma} b`, `${word.lemma} c`],
+              mnemonic: `Cached hook for ${word.lemma}.`,
+              image_query: `${word.lemma} picture`,
+              emoji: null,
+            })),
+          }),
+        };
+      }
+      if (skill === ExampleCheckOutput) {
+        // The validation pass after enrichment: every model example passes here.
+        const items = (taskOf(req as CompletionRequest<unknown>) as unknown as { items: unknown[] })
+          .items;
+        return {
+          data: req.schema.parse({
+            results: items.map((_, index) => ({ index, ok: true, problem: null })),
+          }),
+        };
+      }
       if (skill === VocabCheckOutput) {
         calls.check++;
         const next = checks.shift();
@@ -99,5 +142,5 @@ export function vocabSkills(db: Db) {
     provider: async () => provider,
     learner: learnerContextFromDb(db),
   });
-  return { skills, calls, checks, failure };
+  return { skills, provider, calls, batch, checks, failure };
 }

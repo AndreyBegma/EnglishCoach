@@ -5,6 +5,10 @@ import {
   type ByokChoice,
   CEFR_LEVELS,
   COMMON_TIMEZONES,
+  ENGLISH_VARIANTS,
+  INTEREST_SUGGESTIONS,
+  LEARNER_GOALS,
+  type LearnerGoal,
   PROVIDER_CHOICES,
   type ProviderChoice,
   TIME_SLOTS,
@@ -40,11 +44,19 @@ export const SETTINGS_PAGES = [
   "evening",
   "provider",
   "model",
+  "profile",
+  "interests",
 ] as const;
 export type SettingsPage = (typeof SETTINGS_PAGES)[number];
 
 /** Settings that take free text (or a location) instead of a button. */
-export const SETTINGS_TEXT_INPUTS = ["timezone", "model"] as const;
+export const SETTINGS_TEXT_INPUTS = [
+  "timezone",
+  "model",
+  "workspace",
+  "interests",
+  "profession",
+] as const;
 export type SettingsTextInput = (typeof SETTINGS_TEXT_INPUTS)[number];
 
 /** One settings value picked from a closed list. */
@@ -54,7 +66,8 @@ export type SettingChange =
   | { field: "wordsPerDay"; value: WordsPerDay }
   | { field: "timezone"; value: (typeof COMMON_TIMEZONES)[number] }
   | { field: "morningTime" | "eveningTime"; value: string }
-  | { field: "remindersEnabled" | "voiceEnabled"; value: boolean };
+  | { field: "remindersEnabled" | "voiceEnabled"; value: boolean }
+  | { field: "englishVariant"; value: (typeof ENGLISH_VARIANTS)[number] };
 
 export type Callback =
   | { type: "screen"; screen: HubScreen }
@@ -75,7 +88,18 @@ export type Callback =
   | { type: "input"; input: SettingsTextInput }
   | { type: "input-cancel" }
   | { type: "provider-test" }
-  | { type: "placement" };
+  /** Clears the Anthropic workspace ID of the active provider. */
+  | { type: "provider-workspace-clear" }
+  | { type: "placement" }
+  /** Settings → Profile & goals: toggles a goal. */
+  | { type: "goal"; goal: LearnerGoal }
+  /** Toggles a suggested interest, by its index in `INTEREST_SUGGESTIONS`. */
+  | { type: "interest"; index: number }
+  | { type: "profile-clear"; field: ProfileClearField };
+
+/** Profile fields the profile screens can empty with one button. */
+export const PROFILE_CLEAR_FIELDS = ["interests", "profession"] as const;
+export type ProfileClearField = (typeof PROFILE_CLEAR_FIELDS)[number];
 
 /** Callbacks handled by the settings module; all of them live on the hub message. */
 export const SETTINGS_CALLBACKS = [
@@ -89,7 +113,11 @@ export const SETTINGS_CALLBACKS = [
   "input",
   "input-cancel",
   "provider-test",
+  "provider-workspace-clear",
   "placement",
+  "goal",
+  "interest",
+  "profile-clear",
 ] as const satisfies readonly Callback["type"][];
 export type SettingsCallback = Extract<Callback, { type: (typeof SETTINGS_CALLBACKS)[number] }>;
 
@@ -168,6 +196,7 @@ const route = z.union([
   set("et", timeSlot)("eveningTime"),
   set("rm", flag)("remindersEnabled"),
   set("vc", flag)("voiceEnabled"),
+  set("ev", z.enum(ENGLISH_VARIANTS))("englishVariant"),
   z.tuple([z.literal("pv"), z.enum(PROVIDER_CHOICES)]).transform(([, choice]) => ({
     type: "provider" as const,
     choice,
@@ -194,7 +223,19 @@ const route = z.union([
   })),
   z.tuple([z.literal("px")]).transform(() => ({ type: "input-cancel" as const })),
   z.tuple([z.literal("pt")]).transform(() => ({ type: "provider-test" as const })),
+  z.tuple([z.literal("pw")]).transform(() => ({ type: "provider-workspace-clear" as const })),
   z.tuple([z.literal("pp")]).transform(() => ({ type: "placement" as const })),
+  z.tuple([z.literal("pg"), z.enum(LEARNER_GOALS)]).transform(([, goal]) => ({
+    type: "goal" as const,
+    goal,
+  })),
+  z
+    .tuple([z.literal("pn"), smallInt.pipe(z.number().max(INTEREST_SUGGESTIONS.length - 1))])
+    .transform(([, index]) => ({ type: "interest" as const, index })),
+  z.tuple([z.literal("pc"), z.enum(PROFILE_CLEAR_FIELDS)]).transform(([, field]) => ({
+    type: "profile-clear" as const,
+    field,
+  })),
 ]);
 
 const SET_CODES: Record<SettingChange["field"], string> = {
@@ -206,6 +247,7 @@ const SET_CODES: Record<SettingChange["field"], string> = {
   eveningTime: "et",
   remindersEnabled: "rm",
   voiceEnabled: "vc",
+  englishVariant: "ev",
 };
 
 function encodeSetValue(change: SettingChange): string | number {
@@ -253,8 +295,16 @@ function partsOf(callback: Callback): (string | number)[] {
       return ["px"];
     case "provider-test":
       return ["pt"];
+    case "provider-workspace-clear":
+      return ["pw"];
     case "placement":
       return ["pp"];
+    case "goal":
+      return ["pg", callback.goal];
+    case "interest":
+      return ["pn", callback.index];
+    case "profile-clear":
+      return ["pc", callback.field];
   }
 }
 

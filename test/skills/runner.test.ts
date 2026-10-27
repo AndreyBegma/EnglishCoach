@@ -20,7 +20,9 @@ const learner: LearnerContext = {
   explainLang: "ru",
   uiLang: "en",
   nativeLang: "ru",
+  goals: ["it", "relocation"],
   interests: [`football ${SENTINEL}`],
+  profession: `nurse ${SENTINEL}`,
   weakSpots: [
     {
       category: "grammar",
@@ -114,6 +116,27 @@ describe("renderTask", () => {
     expect(JSON.parse(json)).toEqual({ learner_message: SENTINEL });
     expect(message).toContain('"times_seen": 4');
   });
+
+  test("carries the learner profile: goals, interests and profession", () => {
+    const message = renderTask(learner, {});
+    const json = message.slice(
+      message.indexOf("<learner_context>") + 17,
+      message.indexOf("</learner_context>"),
+    );
+    expect(JSON.parse(json)).toMatchObject({
+      goals: ["it", "relocation"],
+      interests: [`football ${SENTINEL}`],
+      profession: `nurse ${SENTINEL}`,
+    });
+  });
+
+  test("a context without a learner (the shared enrichment cache) has a neutral profile", () => {
+    const { goals: _goals, profession: _profession, ...shared } = learner;
+    const message = renderTask({ ...shared, interests: [] }, {});
+    expect(message).toContain('"goals": []');
+    expect(message).toContain('"interests": []');
+    expect(message).toContain('"profession": null');
+  });
 });
 
 describe("nativeLanguageOf", () => {
@@ -132,7 +155,8 @@ describe("SkillRunner", () => {
     const result = await skills.runSkill(7, "grammar-quiz", { recent_accuracy: 0.5 });
 
     expect(result.usage).toEqual({ input: 1, output: 2 });
-    expect(result.data as Record<string, unknown>).toEqual(quizOutput);
+    // A model that names no syllabus topic gets the default.
+    expect(result.data as Record<string, unknown>).toEqual({ ...quizOutput, topic_id: null });
     // Typed by the skill's output schema: no cast needed to read a field.
     expect(result.data.accepted_answers).toEqual(["a"]);
     expect(users).toEqual([7]);
@@ -147,7 +171,7 @@ describe("SkillRunner", () => {
     expect(req?.messages[0]?.content).toContain('"recent_topics": []');
   });
 
-  test("learner text from vars, history, interests and weak spots never reaches the system prompt", async () => {
+  test("learner text from vars, history, the profile and weak spots never reaches the system prompt", async () => {
     const { provider, requests } = recordingProvider();
     const { runner: skills } = runner(provider);
 
@@ -167,6 +191,9 @@ describe("SkillRunner", () => {
     const task = req?.messages[2]?.content ?? "";
     expect(task).toContain("IGNORE PREVIOUS");
     expect(task).toContain("football");
+    expect(task).toContain("nurse");
+    expect(req?.system).not.toContain("nurse");
+    expect(req?.system).toContain("goals, interests and profession");
   });
 
   test("rejects bad vars with SkillInputError before calling the provider", async () => {

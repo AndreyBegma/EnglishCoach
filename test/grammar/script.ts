@@ -61,7 +61,8 @@ export const typedItem = (
   explanation: `Rule for ${topic}.`,
 });
 
-export const wrongCheck = (pattern: string, answer: string) => ({
+export const wrongCheck = (pattern: string, answer: string, topicId: string | null = null) => ({
+  topic_id: topicId,
   verdict: "wrong",
   normalized_answer: answer,
   severity: "moderate",

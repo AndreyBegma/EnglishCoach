@@ -1,0 +1,279 @@
+{
+  "id": "g016",
+  "position": 16,
+  "cefrLevel": "B1",
+  "title": "Present Perfect с since/for, already/yet/just/ever/never",
+  "plannedFrom": "2026-11-05",
+  "plannedTo": "2026-11-07",
+  "sections": {
+    "why": [
+      "Present Perfect связывает прошлое с настоящим: действие началось раньше и длится до сих пор, либо только что закончилось и важно сейчас. В русском мы говорим «Я живу здесь с 2019 года» (настоящее время), а в английском для этого нужно Present Perfect."
+    ],
+    "formation": [
+      "• Утверждение: have/has + V3 (третья форма глагола): I have worked, she has lived.",
+      "• Отрицание: haven't / hasn't + V3: We haven't finished.",
+      "• Вопрос: Have/Has + подлежащее + V3?: Have you seen it?",
+      "• Краткие формы: I've, she's, they've, hasn't."
+    ],
+    "usage": [
+      "1. Состояние или действие длится до сейчас, и мы называем срок. Для периода используем for, для начальной точки since.",
+      "• I have lived here for five years. (Я живу здесь пять лет.)",
+      "• I have worked here since 2021. (Я работаю здесь с 2021 года.)",
+      "2. Только что закончилось (just) или уже случилось (already).",
+      "• I've just sent the email. (Я только что отправил письмо.)",
+      "• She has already left. (Она уже ушла.)",
+      "3. Ожидаемое ещё не произошло (yet): в отрицаниях и вопросах, обычно в конце фразы.",
+      "• I haven't finished yet. (Я ещё не закончил.)",
+      "• Have you called him yet? (Ты уже ему позвонил?)",
+      "4. Жизненный опыт: ever (когда-либо) в вопросах, never (никогда) в утверждениях.",
+      "• Have you ever been to Japan? (Ты когда-нибудь был в Японии?)",
+      "• I have never tried sushi. (Я никогда не пробовал суши.)"
+    ],
+    "signalWords": [
+      "for + период (for two weeks, for a long time); since + точка (since Monday, since 2020, since I moved); already, yet, just, ever, never, so far (пока), recently, lately.",
+      "Место слов: already, just, ever, never стоят между have и V3 (I have just finished). Yet стоит в конце предложения."
+    ],
+    "mistakes": [
+      "✗ I live here since 2019. → ✓ I have lived here since 2019. Русское настоящее время здесь заменяем на Present Perfect.",
+      "✗ I have worked here since three years. → ✓ I have worked here for three years. Since называет точку начала, for называет длительность.",
+      "✗ I didn't finish yet. → ✓ I haven't finished yet. С yet обычно нужен Present Perfect.",
+      "✗ Have you ever been to Paris yesterday? → ✓ Did you go to Paris yesterday? Слово yesterday требует Past Simple.",
+      "✗ I have never seen him yet. → ✓ I haven't seen him yet. Never уже отрицание, yet с ним не ставим."
+    ],
+    "remember": [
+      "For = сколько времени (for 3 years), since = с какого момента (since 2021); yet только в конце, already и just в середине."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте for или since",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have known Anna ___ ten years.",
+          "answer": "for"
+        },
+        {
+          "number": 2,
+          "prompt": "He has worked at this company ___ 2020.",
+          "answer": "since"
+        },
+        {
+          "number": 3,
+          "prompt": "We have lived in Kyiv ___ I was born.",
+          "answer": "since"
+        },
+        {
+          "number": 4,
+          "prompt": "She has been ill ___ three days.",
+          "answer": "for"
+        },
+        {
+          "number": 5,
+          "prompt": "They have been married ___ June.",
+          "answer": "since"
+        },
+        {
+          "number": 6,
+          "prompt": "I haven't seen him ___ a long time.",
+          "answer": "for"
+        },
+        {
+          "number": 7,
+          "prompt": "My laptop has been broken ___ Monday.",
+          "answer": "since"
+        },
+        {
+          "number": 8,
+          "prompt": "How long have you studied English? I've studied it ___ two years.",
+          "answer": "for"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I've (a) already (b) yet finished my tasks for today.",
+          "answer": "a / already"
+        },
+        {
+          "number": 2,
+          "prompt": "Have you finished the report (a) just (b) yet?",
+          "answer": "b / yet"
+        },
+        {
+          "number": 3,
+          "prompt": "She has (a) ever (b) never been to London, so she wants to go.",
+          "answer": "b / never"
+        },
+        {
+          "number": 4,
+          "prompt": "Have you (a) ever (b) never eaten Thai food?",
+          "answer": "a / ever"
+        },
+        {
+          "number": 5,
+          "prompt": "He hasn't answered my message (a) already (b) yet.",
+          "answer": "b / yet"
+        },
+        {
+          "number": 6,
+          "prompt": "Wait! I've (a) just (b) yet remembered his name.",
+          "answer": "a / just"
+        },
+        {
+          "number": 7,
+          "prompt": "I've (a) never (b) ever seen such a big dog. It was huge!",
+          "answer": "a / never"
+        },
+        {
+          "number": 8,
+          "prompt": "We have (a) yet (b) already booked the hotel, so don't worry.",
+          "answer": "b / already"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Поставьте глагол в Present Perfect",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (not / finish) my homework yet.",
+          "answer": "haven't finished"
+        },
+        {
+          "number": 2,
+          "prompt": "She ___ (just / leave) the office.",
+          "answer": "has just left"
+        },
+        {
+          "number": 3,
+          "prompt": "___ you ever ___ (be) to Italy?",
+          "answer": "Have / been"
+        },
+        {
+          "number": 4,
+          "prompt": "They ___ (already / buy) the tickets.",
+          "answer": "have already bought"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ (never / drive) a truck.",
+          "answer": "has never driven"
+        },
+        {
+          "number": 6,
+          "prompt": "We ___ (live) in this flat since March.",
+          "answer": "have lived"
+        },
+        {
+          "number": 7,
+          "prompt": "___ the meeting ___ (start) yet?",
+          "answer": "Has / started"
+        },
+        {
+          "number": 8,
+          "prompt": "I ___ (work) as a developer for six years.",
+          "answer": "have worked"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I work here since 2022.",
+          "answer": "I have worked here since 2022."
+        },
+        {
+          "number": 2,
+          "prompt": "She has studied French since five years.",
+          "answer": "She has studied French for five years."
+        },
+        {
+          "number": 3,
+          "prompt": "I didn't see this film yet.",
+          "answer": "I haven't seen this film yet."
+        },
+        {
+          "number": 4,
+          "prompt": "Have you yet done the test?",
+          "answer": "Have you done the test yet?"
+        },
+        {
+          "number": 5,
+          "prompt": "He has finished already just.",
+          "answer": "He has just finished. / He has already finished."
+        },
+        {
+          "number": 6,
+          "prompt": "We know each other since childhood.",
+          "answer": "We have known each other since childhood."
+        },
+        {
+          "number": 7,
+          "prompt": "I have never been to Spain yet.",
+          "answer": "I have never been to Spain. / I haven't been to Spain yet."
+        },
+        {
+          "number": 8,
+          "prompt": "They have lived in Berlin since ten years.",
+          "answer": "They have lived in Berlin for ten years."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я работаю программистом уже пять лет.",
+          "answer": "I have worked as a programmer for five years. / I have been a programmer for five years."
+        },
+        {
+          "number": 2,
+          "prompt": "Ты уже обедал?",
+          "answer": "Have you had lunch yet? / Have you already had lunch?"
+        },
+        {
+          "number": 3,
+          "prompt": "Я ещё не видел новую версию сайта.",
+          "answer": "I haven't seen the new version of the website yet."
+        },
+        {
+          "number": 4,
+          "prompt": "Мы знакомы с 2018 года.",
+          "answer": "We have known each other since 2018."
+        },
+        {
+          "number": 5,
+          "prompt": "Я только что отправил тебе файл.",
+          "answer": "I have just sent you the file. / I've just sent you the file."
+        },
+        {
+          "number": 6,
+          "prompt": "Ты когда-нибудь летал на самолёте?",
+          "answer": "Have you ever flown on a plane? / Have you ever been on a plane?"
+        },
+        {
+          "number": 7,
+          "prompt": "Он никогда не был в Америке.",
+          "answer": "He has never been to America."
+        },
+        {
+          "number": 8,
+          "prompt": "Они живут в этом городе с прошлого года.",
+          "answer": "They have lived in this city since last year."
+        }
+      ]
+    }
+  ]
+}

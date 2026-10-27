@@ -73,6 +73,7 @@ describe("rendering", () => {
       },
     ],
     tip: { kind: "phrase" as const, text: "Say <it> like this" },
+    topic_uses: [],
   };
 
   test("escapes everything the model wrote and shows the correction format", () => {

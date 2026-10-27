@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import type { Database } from "../../src/db/client";
 import { cards, dailyStats, mistakes, userSettings, users } from "../../src/db/schema";
+import { recordGradedItem, seedLevels } from "../../src/levels";
 import { loadProgress } from "../../src/progress/queries";
 import { streakDays } from "../../src/progress/streak";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
@@ -30,6 +31,8 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       { userId, cefrLevel: "B1", wordsPerDay: 5, timezone: TZ },
       { userId: otherId, timezone: TZ },
     ]);
+    await seedLevels(db, userId, "B1", "chosen", NOW);
+    await recordGradedItem(db, userId, "grammar", "B1", 1, { now: NOW });
 
     const day = (
       date: string,
@@ -114,13 +117,12 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
   afterAll(() => database.close());
 
   test("every block of the Progress screen", async () => {
-    const data = await loadProgress(
-      database.db,
-      userId,
-      { cefrLevel: "B1", wordsPerDay: 5, timezone: TZ },
-      NOW,
-    );
-    expect(data.level).toBe("B1");
+    const data = await loadProgress(database.db, userId, { wordsPerDay: 5, timezone: TZ }, NOW);
+    // Seeded at B1's centre; one passed grammar item lifts grammar, and with it the overall level.
+    expect(data.level?.overall).toMatch(/^B1\.[5-9]$/);
+    expect(data.level?.skills).toEqual([
+      { skill: "grammar", label: expect.stringMatching(/^B1\.[6-9]$/) },
+    ]);
     // Today is the 16th in Kyiv; the run 12-15 ended yesterday, the older run 01-06 is the best.
     expect(data.streak).toEqual({ current: 4, best: 6 });
     expect(data.today).toEqual({ newWords: 3, reviews: 7, goalMet: false });
@@ -131,6 +133,7 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       dueToday: 3,
       dueTomorrow: 2,
       wordsLearned: 5,
+      wordsKnown: 0,
     });
     expect(data.activity).toEqual([0, 0, 19, 5, 10, 11, 15]);
     expect(data.grammar).toEqual({ answered7: 15, correct7: 13, answered30: 25, correct30: 18 });
@@ -157,6 +160,7 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       dueToday: 0,
       dueTomorrow: 0,
       wordsLearned: 0,
+      wordsKnown: 0,
     });
     expect(data.activity).toEqual([0, 0, 0, 0, 0, 0, 0]);
     expect(data.weak).toEqual([]);

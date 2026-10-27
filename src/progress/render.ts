@@ -53,7 +53,16 @@ export function renderProgress(
   const lines = [
     t("progress-title"),
     "",
-    data.level ? t("progress-level", { level: data.level }) : t("progress-level-unset"),
+    data.level ? t("progress-level", { level: data.level.overall }) : t("progress-level-unset"),
+    ...(data.level?.skills.length
+      ? [
+          t("progress-skills", {
+            list: data.level.skills
+              .map(({ skill, label }) => `${t(`progress-skill-${skill}`)} ${label}`)
+              .join(" · "),
+          }),
+        ]
+      : []),
     t("progress-streak", { current: streak.current, best: streak.best }),
     t("progress-goal", { done: today.newWords, goal: data.wordsPerDay, reviews: today.reviews }) +
       (today.goalMet ? ` ${t("progress-goal-met")}` : ""),
@@ -61,6 +70,7 @@ export function renderProgress(
     t("progress-cards", { new: cards.new, learning: cards.learning, review: cards.review }),
     t("progress-due", { today: cards.dueToday, tomorrow: cards.dueTomorrow }),
     t("progress-words", { count: cards.wordsLearned }),
+    ...(cards.wordsKnown > 0 ? [t("progress-known", { count: cards.wordsKnown })] : []),
     "",
     t("progress-activity", { spark: sparkline(data.activity) }),
     t("progress-grammar", {

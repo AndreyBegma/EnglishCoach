@@ -1,0 +1,273 @@
+{
+  "id": "g037",
+  "position": 37,
+  "cefrLevel": "B2",
+  "title": "have / get something done",
+  "plannedFrom": "2027-02-01",
+  "plannedTo": "2027-02-06",
+  "sections": {
+    "why": [
+      "Конструкция have something done описывает ситуацию, когда действие выполняем не мы сами, а кто-то другой, обычно за услугу: «Я подстригся (в парикмахерской)» = I had my hair cut. Также её используют, когда с нами случается неприятность: «У него украли телефон». В русском для этого хватает одного глагола, а в английском без этой конструкции получится, что вы сделали всё сами."
+    ],
+    "formation": [
+      "Формула: have + что-то (объект) + V3 (третья форма глагола). Время показывает только have.",
+      "• Present Simple: I have my car washed every week.",
+      "• Past Simple: I had my car washed yesterday.",
+      "• Present Continuous: I am having my car washed now.",
+      "• Present Perfect: I have had my car washed.",
+      "• Future: I will have my car washed tomorrow.",
+      "• С модальным: You should have your eyes checked.",
+      "Отрицание и вопросы строим как с обычным смысловым have, через do/does/did: Do you have your hair cut here? I didn't have my laptop repaired. Where did you have your suit made?",
+      "Разговорный вариант: get + объект + V3 — I got my phone fixed."
+    ],
+    "usage": [
+      "1. Услуга, которую нам оказывают: We are having our flat painted. (Нам красят квартиру.)",
+      "2. Неприятное событие, которое с нами случилось: She had her bag stolen on the bus. (У неё украли сумку в автобусе.)",
+      "3. Просьба или совет: You need to have your passport renewed. (Вам нужно обновить паспорт.)",
+      "4. Неформально: I need to get my car serviced. (Мне нужно отдать машину на обслуживание.)"
+    ],
+    "signalWords": [
+      "Услуги и специалисты: hairdresser, dentist, mechanic, tailor, plumber, at the salon, every month, twice a year."
+    ],
+    "mistakes": [
+      "✗ I cut my hair yesterday. (в парикмахерской) → ✓ I had my hair cut yesterday. (иначе получается, что вы сами стригли себя)",
+      "✗ I had my car repair. → ✓ I had my car repaired. (после объекта нужна третья форма)",
+      "✗ I had repaired my car. → ✓ I had my car repaired. (had repaired — это Past Perfect, и ремонт сделали вы сами)",
+      "✗ Where do you have cut your hair? → ✓ Where do you have your hair cut? (объект стоит между have и V3)",
+      "✗ She has her hair cutted. → ✓ She has her hair cut. (cut — неправильный глагол, форма не меняется)"
+    ],
+    "remember": ["have + что-то + V3 = «мне это сделали»; время меняем только у have."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Заполните пропуски (два пропуска, ответы через /)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ my laptop ___ (fix) last week.",
+          "answer": "had / fixed"
+        },
+        {
+          "number": 2,
+          "prompt": "We ___ our house ___ (paint) at the moment.",
+          "answer": "are having / painted"
+        },
+        {
+          "number": 3,
+          "prompt": "She ___ her hair ___ (cut) every two months.",
+          "answer": "has / cut"
+        },
+        {
+          "number": 4,
+          "prompt": "Where do you ___ your car ___ (wash)?",
+          "answer": "have / washed"
+        },
+        {
+          "number": 5,
+          "prompt": "They will ___ a new kitchen ___ (install) next month.",
+          "answer": "have / installed"
+        },
+        {
+          "number": 6,
+          "prompt": "I ___ my teeth ___ (check) yesterday.",
+          "answer": "had / checked"
+        },
+        {
+          "number": 7,
+          "prompt": "He ___ his passport ___ (renew) already.",
+          "answer": "has had / renewed"
+        },
+        {
+          "number": 8,
+          "prompt": "Can I ___ this package ___ (deliver) to the office?",
+          "answer": "have / delivered"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I (a) cut my hair (b) had my hair cut (c) had cut my hair at the salon yesterday.",
+          "answer": "(b) had my hair cut"
+        },
+        {
+          "number": 2,
+          "prompt": "We are having our windows (a) clean (b) cleaned (c) cleaning today.",
+          "answer": "(b) cleaned"
+        },
+        {
+          "number": 3,
+          "prompt": "I need to (a) have checked my eyes (b) have my eyes checked (c) have my eyes check.",
+          "answer": "(b) have my eyes checked"
+        },
+        {
+          "number": 4,
+          "prompt": "Yesterday I (a) stole my wallet (b) had my wallet stolen (c) had stolen my wallet on the train.",
+          "answer": "(b) had my wallet stolen"
+        },
+        {
+          "number": 5,
+          "prompt": "I'll (a) get (b) make (c) do my car serviced tomorrow.",
+          "answer": "(a) get"
+        },
+        {
+          "number": 6,
+          "prompt": "Where did you (a) have made (b) have your suit made (c) make your suit have?",
+          "answer": "(b) have your suit made"
+        },
+        {
+          "number": 7,
+          "prompt": "He (a) got his bike stolen (b) stole his bike (c) got stolen his bike last night.",
+          "answer": "(a) got his bike stolen"
+        },
+        {
+          "number": 8,
+          "prompt": "How often do you (a) have your teeth checked (b) have checked your teeth (c) have your teeth check?",
+          "answer": "(a) have your teeth checked"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите с конструкцией have something done",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "A mechanic repaired my car yesterday. (I ...)",
+          "answer": "I had my car repaired yesterday."
+        },
+        {
+          "number": 2,
+          "prompt": "A photographer is taking our photo. (We ...)",
+          "answer": "We are having our photo taken."
+        },
+        {
+          "number": 3,
+          "prompt": "Someone delivers our groceries every Friday. (We ...)",
+          "answer": "We have our groceries delivered every Friday."
+        },
+        {
+          "number": 4,
+          "prompt": "A plumber will fix my sink tomorrow. (I ...)",
+          "answer": "I will have my sink fixed tomorrow."
+        },
+        {
+          "number": 5,
+          "prompt": "A dentist checks Tom's teeth twice a year. (Tom ...)",
+          "answer": "Tom has his teeth checked twice a year."
+        },
+        {
+          "number": 6,
+          "prompt": "Someone broke into her car last night. (She ...)",
+          "answer": "She had her car broken into last night."
+        },
+        {
+          "number": 7,
+          "prompt": "A tailor shortened my trousers. (I ...)",
+          "answer": "I had my trousers shortened."
+        },
+        {
+          "number": 8,
+          "prompt": "Someone cut down the old tree in our garden last week. (We ...)",
+          "answer": "We had the old tree in our garden cut down last week."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Составьте вопрос или отрицание",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Make a question: you / your hair / cut / where (present simple)",
+          "answer": "Where do you have your hair cut?"
+        },
+        {
+          "number": 2,
+          "prompt": "Make it negative: I had my car washed.",
+          "answer": "I didn't have my car washed. / I did not have my car washed."
+        },
+        {
+          "number": 3,
+          "prompt": "Make a yes/no question: She had her flat painted.",
+          "answer": "Did she have her flat painted?"
+        },
+        {
+          "number": 4,
+          "prompt": "Make it negative: We are having the roof repaired.",
+          "answer": "We aren't having the roof repaired. / We are not having the roof repaired."
+        },
+        {
+          "number": 5,
+          "prompt": "Make a yes/no question: He has his shirts ironed.",
+          "answer": "Does he have his shirts ironed?"
+        },
+        {
+          "number": 6,
+          "prompt": "Make a question (past): when / you / your laptop / fix",
+          "answer": "When did you have your laptop fixed?"
+        },
+        {
+          "number": 7,
+          "prompt": "Make it negative: They will have the windows replaced.",
+          "answer": "They won't have the windows replaced. / They will not have the windows replaced."
+        },
+        {
+          "number": 8,
+          "prompt": "Make a question: You've had your eyes tested.",
+          "answer": "Have you had your eyes tested?"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я стригусь раз в месяц.",
+          "answer": "I have my hair cut once a month."
+        },
+        {
+          "number": 2,
+          "prompt": "Вчера мне починили ноутбук.",
+          "answer": "I had my laptop repaired yesterday. / I had my laptop fixed yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "Нам сейчас красят квартиру.",
+          "answer": "We are having our apartment painted now. / We are having our flat painted now."
+        },
+        {
+          "number": 4,
+          "prompt": "У него украли телефон в метро.",
+          "answer": "He had his phone stolen on the subway. / He got his phone stolen on the subway."
+        },
+        {
+          "number": 5,
+          "prompt": "Где ты обслуживаешь машину?",
+          "answer": "Where do you have your car serviced?"
+        },
+        {
+          "number": 6,
+          "prompt": "Мне нужно проверить зрение.",
+          "answer": "I need to have my eyes checked. / I need to have my eyes tested."
+        },
+        {
+          "number": 7,
+          "prompt": "Завтра нам установят новый кондиционер.",
+          "answer": "We are having a new air conditioner installed tomorrow. / We will have a new air conditioner installed tomorrow."
+        },
+        {
+          "number": 8,
+          "prompt": "Она сфотографировалась для паспорта.",
+          "answer": "She had her photo taken for her passport. / She had her picture taken for her passport."
+        }
+      ]
+    }
+  ]
+}

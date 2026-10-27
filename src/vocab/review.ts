@@ -1,4 +1,3 @@
-import { InlineKeyboard } from "grammy";
 import type { BotContext } from "../bot/context";
 import {
   countDueSince,
@@ -57,18 +56,16 @@ export class ReviewFlow implements SessionKindHandler {
       await this.core.finish(handle, ctx, "vocab-review-nothing");
       return;
     }
-    await handle.send(t("vocab-review-header", { count: Math.min(due, REVIEW_CAP) }), {
-      reply_markup: InlineKeyboard.from([
-        [button(t("vocab-start"), { op: "start" }), button(t("vocab-finish"), { op: "finish" })],
-      ]),
-    });
+    await this.core.show(handle, t("vocab-review-header", { count: Math.min(due, REVIEW_CAP) }), [
+      [button(t("vocab-start"), { op: "start" }), button(t("vocab-finish"), { op: "finish" })],
+    ]);
     writeFlow(ctx, handle.session.id, { kind: "idle" });
   }
 
   async onMessage(handle: LearningHandle, ctx: BotContext): Promise<void> {
     const step = readFlow(ctx, handle.session.id);
     if (step?.kind !== "typed") {
-      await handle.send(this.core.t(handle)("vocab-use-buttons"));
+      await handle.window.flashNote(this.core.t(handle)("vocab-use-buttons"));
       return;
     }
     await this.judgeTyped(handle, ctx, step, ctx.message?.text ?? "");
@@ -170,12 +167,9 @@ export class ReviewFlow implements SessionKindHandler {
     const t = this.core.t(handle);
     const mistake = await findMistakeForCard(this.core.deps.db, card.id);
     const sentence = mistake?.exampleWrong ?? card.front;
-    await handle.send(`${t("vocab-pattern-prompt")}\n<i>${escapeHtml(sentence)}</i>`, {
-      ...HTML,
-      reply_markup: InlineKeyboard.from([
-        [button(t("vocab-pattern-reveal"), { op: "reveal", cardId: card.id })],
-      ]),
-    });
+    await this.core.show(handle, `${t("vocab-pattern-prompt")}\n<i>${escapeHtml(sentence)}</i>`, [
+      [button(t("vocab-pattern-reveal"), { op: "reveal", cardId: card.id })],
+    ]);
     writeFlow(ctx, handle.session.id, { kind: "reveal", cardId: card.id });
   }
 
@@ -187,7 +181,8 @@ export class ReviewFlow implements SessionKindHandler {
     const lines = [t("vocab-pattern-answer", { sentence: escapeHtml(right) })];
     if (mistake?.explanation) lines.push(escapeHtml(mistake.explanation));
     lines.push("", t("vocab-rate-prompt"));
-    await handle.send(lines.join("\n"), {
+    await handle.window.show({
+      text: lines.join("\n"),
       ...HTML,
       reply_markup: this.core.ratingKeyboard(t, cardId),
     });
@@ -204,13 +199,15 @@ export class ReviewFlow implements SessionKindHandler {
     if (!card) return;
     const answer = normaliseAnswer(text);
     const target = escapeHtml(step.accepted[0] ?? card.front);
+    // The learner's message is deleted once read, so the feedback repeats it.
+    const yours = t("vocab-your-answer", { answer: escapeHtml(text.trim()) });
 
     if (step.accepted.some((accepted) => normaliseAnswer(accepted) === answer)) {
       await this.feedback(
         handle,
         ctx,
         card.id,
-        t("vocab-review-right"),
+        `${yours}\n${t("vocab-review-right")}`,
         this.fastOrGood(step.askedAt),
       );
       return;
@@ -238,7 +235,13 @@ export class ReviewFlow implements SessionKindHandler {
         data.verdict === "wrong"
           ? t("vocab-review-wrong", { answer: target })
           : t("vocab-review-right");
-      await this.feedback(handle, ctx, card.id, `${head}\n${escapeHtml(data.feedback)}`, suggested);
+      await this.feedback(
+        handle,
+        ctx,
+        card.id,
+        `${yours}\n${head}\n${escapeHtml(data.feedback)}`,
+        suggested,
+      );
     } catch (error) {
       if (!isLlmFailure(error)) throw error;
       // Without a judge the learner still sees the answer and grades themselves.
@@ -247,7 +250,12 @@ export class ReviewFlow implements SessionKindHandler {
         sessionId: handle.session.id,
         error: error.message,
       });
-      await this.feedback(handle, ctx, card.id, t("vocab-check-unavailable", { answer: target }));
+      await this.feedback(
+        handle,
+        ctx,
+        card.id,
+        `${yours}\n${t("vocab-check-unavailable", { answer: target })}`,
+      );
     }
   }
 
@@ -259,9 +267,12 @@ export class ReviewFlow implements SessionKindHandler {
     suggested?: RatingName,
   ) {
     const t = this.core.t(handle);
-    await handle.send(`${text}\n\n${t("vocab-rate-prompt")}`, {
+    const card = await getCard(this.core.deps.db, handle.user.id, cardId);
+    const speak = card ? await speakRow(t, ctx, card, this.core.deps.speech) : [];
+    await handle.window.show({
+      text: `${text}\n\n${t("vocab-rate-prompt")}`,
       ...HTML,
-      reply_markup: this.core.ratingKeyboard(t, cardId, suggested, speakRow(t, ctx, cardId)),
+      reply_markup: this.core.ratingKeyboard(t, cardId, suggested, speak),
     });
     writeFlow(ctx, handle.session.id, { kind: "rate", cardId, suggested });
   }

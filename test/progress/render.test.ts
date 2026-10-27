@@ -23,14 +23,29 @@ const mistake = (n: number, patternText = long): Mistake => ({
   count: 1_000_000 + n,
   lastSeenAt: new Date("2026-03-01T00:00:00Z"),
   cardId: null,
+  topicId: null,
 });
 
 const data = (overrides: Partial<ProgressData> = {}): ProgressData => ({
-  level: "B1",
+  level: {
+    overall: "B1.6",
+    skills: [
+      { skill: "grammar", label: "B1.4" },
+      { skill: "vocabulary", label: "B2.1" },
+    ],
+  },
   wordsPerDay: 5,
   streak: { current: 4, best: 6 },
   today: { newWords: 3, reviews: 7, goalMet: true },
-  cards: { new: 2, learning: 2, review: 3, dueToday: 3, dueTomorrow: 2, wordsLearned: 5 },
+  cards: {
+    new: 2,
+    learning: 2,
+    review: 3,
+    dueToday: 3,
+    dueTomorrow: 2,
+    wordsLearned: 5,
+    wordsKnown: 0,
+  },
   activity: [0, 0, 19, 5, 10, 11, 15],
   grammar: { answered7: 15, correct7: 13, answered30: 25, correct30: 18 },
   weak: [mistake(1), mistake(2), mistake(3), mistake(4), mistake(5)],
@@ -48,7 +63,8 @@ describe("sparkline", () => {
 describe("Progress screen", () => {
   test("shows every block with the expected numbers", () => {
     const { text, keyboard } = renderProgress(i18n, "en", data({ weak: [mistake(1, "articles")] }));
-    expect(text).toContain("Level: B1");
+    expect(text).toContain("Level: B1.6");
+    expect(text).toContain("📊 Grammar B1.4 · Vocabulary B2.1");
     expect(text).toContain("Streak: 4 (best: 6)");
     expect(text).toContain("Today: 3/5 new words · 7 reviews ✅");
     expect(text).toContain("Cards: 2 new · 2 learning · 3 review");
@@ -84,6 +100,7 @@ describe("Progress screen", () => {
           dueToday: 9_999_999,
           dueTomorrow: 9_999_999,
           wordsLearned: 9_999_999,
+          wordsKnown: 9_999_999,
         },
         today: { newWords: 9_999, reviews: 9_999_999, goalMet: true },
       });

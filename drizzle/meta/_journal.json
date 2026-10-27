@@ -8,6 +8,111 @@
       "when": 1793036086395,
       "tag": "0000_init",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793051280953,
+      "tag": "0001_card_known_at",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793088845865,
+      "tag": "0002_futuristic_iceman",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793089994153,
+      "tag": "0003_provider_workspace_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793090171790,
+      "tag": "0004_owner_words_enrichment",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793091133142,
+      "tag": "0005_owner_course",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793091510713,
+      "tag": "0006_word_images",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793091751179,
+      "tag": "0007_english_variant",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793092719148,
+      "tag": "0008_mistake_topic",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793093141436,
+      "tag": "0009_pronunciation",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793093415067,
+      "tag": "0010_tts_status_board",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1793093631404,
+      "tag": "0011_skill_levels",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1793094027062,
+      "tag": "0012_famous_wallow",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1793094842680,
+      "tag": "0013_learner_profile",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1793095054905,
+      "tag": "0014_example_sentences",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1793095893818,
+      "tag": "0015_topic_progress",
+      "breakpoints": true
     }
   ]
 }

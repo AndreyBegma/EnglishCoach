@@ -38,10 +38,96 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun run lint` | Biome lint + format check (`bun run format` fixes) |
 | `bun run typecheck` | `tsc --noEmit` |
 | `bun test` | Unit tests; the Postgres/Redis integration tests run only when `DATABASE_URL` (or `DATABASE_URL_TEST`) / `REDIS_URL` are set (Bun loads `.env` automatically). DB tests create and drop a throwaway `coach_test_*` database per file on that server |
-| `LLM_LIVE_TESTS=1 bun test test/skills/live.test.ts` | Opt-in smoke test against real models: one skill call per provider whose credentials are set (`SERVER_ANTHROPIC_API_KEY`, `SERVER_OPENAI_API_KEY` [+ `SERVER_OPENAI_BASE_URL`, `LLM_LIVE_OPENAI_MODEL`], or a `claude` binary). Costs money; never runs in CI |
+| `LLM_LIVE_TESTS=1 bun test test/skills/live.test.ts` | Opt-in smoke test against real models: one skill call per provider whose credentials are set — Anthropic once per tier on its default model — (`SERVER_ANTHROPIC_API_KEY`, `SERVER_OPENAI_API_KEY` [+ `SERVER_OPENAI_BASE_URL`, `LLM_LIVE_OPENAI_MODEL`], or a `claude` binary). Costs money; never runs in CI |
 | `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
-| `bun run db:seed:words` | Seed the CEFR frequency dictionary (`data/words/`), idempotent |
+| `bun run db:seed` | Seed everything the repository carries: the dictionary, then the owner's content from `seed/` — idempotent, see below |
+| `bun run db:seed:words` | Seed only the CEFR frequency dictionary (`data/words/`), idempotent |
+| `bun run db:import:owner-words <path>` | Import the owner's curated word list (.xlsx) over the dictionary, with its example sentences, idempotent — see below |
+| `bun run db:import:pronunciation` | Fill every word's dictionary IPA (US, UK), syllables and stress from `data/pronunciation/` (CMUdict, Wiktionary); run after the two above, idempotent |
+| `bun run seed:generate <path>` | Regenerate `seed/` from the owner's workbook — see below |
+
+## The owner's content
+
+The owner's workbook (word list, grammar course, phrasal verbs, daily plan) stays **outside the
+repository** — keep it in `data/private/` (git-ignored) or anywhere else. What it holds reaches the
+database two ways:
+
+- **`seed/` (committed)** — everything the owner wrote, plus the word list **without its `Пример`
+  column**: per word the part of speech, IPA, Russian translation, level, topic and curriculum
+  position (`words/stage-0…6.json`), the removed list (`removed.json`), the grammar course — 85
+  topics with their rule sections, 425 exercises and every item's answer, one file per topic
+  (`grammar/g001.json` …; the id is stable and other modules refer to it) — the phrasal verbs with
+  the owner's examples (`phrasal-verbs.json`) and the plan (`plan.json`).
+- **`db:import:owner-words` (private)** — the word sheets' example sentences come from Oxford
+  dictionaries and are not redistributable: they never go into git and arrive only through this
+  import.
+
+```sh
+bun run db:seed                                         # dictionary + seed/, no LLM needed
+bun run db:import:owner-words data/private/owner-words.xlsx   # optional: adds the examples
+bun run db:import:pronunciation                         # dictionary IPA, syllables, stress
+```
+
+Both are idempotent and can run in either order: the seed never overwrites an example the import
+set. The importer reads the sheets `0 Проверка A1–A2`, `1 B1` … `6 Редкие III` (day-header rows
+skipped) and `Убрано` (lemmas never offered). The owner's level, part of speech, IPA, Russian
+translation, example and topic win over the dictionary's; its frequency rank stays. Learn words
+then follows the owner's order at the learner's level.
+
+### Regenerating `seed/`
+
+After the owner changes the workbook:
+
+```sh
+bun run seed:generate data/private/owner-words.xlsx
+OWNER_WORKBOOK=data/private/owner-words.xlsx bun test test/seed   # guard: no word-sheet example in seed/
+```
+
+The generator is deterministic (same workbook → same files, already Biome-formatted) and refuses
+to write while an exercise item has no answer or an answer has no item — it lists each mismatch.
+`test/seed/committed-seed.test.ts` pins the counts; update them with the regenerated seed. With
+`OWNER_WORKBOOK` set it also fails if any seed file carries one of the word sheets' examples.
+
+With `SERVER_LLM_PROVIDER` set, a BullMQ job keeps the next `WORD_PREFETCH_DAYS` × words-per-day
+new words of every learner enriched ahead of time (after each Learn words session, on a level /
+language / daily-goal change and nightly), and a low-rate backfill works through the rest of the
+list (`WORD_BACKFILL_EVERY_MINUTES`, `WORD_BACKFILL_WORDS`). Cards then read the shared cache; a
+miss falls back to inline enrichment and logs `metric: vocab.enrich.cache_miss`.
+
+New-word cards carry a stock photo when `PEXELS_API_KEY` (tried first) or `UNSPLASH_ACCESS_KEY`
+is set — both free developer keys. Each word's picture is fetched once, shared by every learner
+and credited in the caption; the prefetch job fetches pictures of upcoming words too. With neither
+key, cards stay text.
+
+## Example sentences (Tatoeba)
+
+Word cards prefer human-written example sentences to model-written ones. They come from
+[Tatoeba](https://tatoeba.org), whose sentences are licensed
+[CC BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/): **example sentences and their
+translations © Tatoeba contributors**. Each card that shows one credits it in the caption with a
+link to the sentence's page, which names its author and translators. The export is not part of
+this repository; only a small fixture under `test/fixtures/tatoeba/` is.
+
+```sh
+bun run db:import:tatoeba [dir]    # after db:seed and db:import:owner-words
+```
+
+The import reads Tatoeba's per-language exports (`eng_sentences_detailed.tsv`,
+`rus_`/`ukr_sentences_detailed.tsv`, `eng-rus`/`eng-ukr_links.tsv`) from `dir` (default:
+`$TATOEBA_DIR`, else `tatoeba/` in the system temp directory), downloading any that are missing
+from `downloads.tatoeba.org` and decompressing them with `bzip2`. It keeps English sentences
+with a Russian or Ukrainian translation, 4–15 words long, every word known to the dictionary
+(names aside), estimates each sentence's CEFR level from its hardest word, and keeps the best 10
+per word and language — at or below the word's level first — in `example_sentences`, linked to
+their lemmas in `example_sentence_words`. It is idempotent: a rerun upserts by Tatoeba id and
+removes what is no longer chosen.
+
+Enrichment then fills a card's two examples in this order: the owner's sentence (from the private
+import), Tatoeba sentences, and only then the model's own, which pass a validation call
+(`example-check`: grammar, the word in the card's sense, the translation) or are dropped
+(`metric: vocab.example.rejected`). Learners who study in English get model examples only — the
+export carries no English-to-English paraphrase.
 
 ## Layout
 
@@ -52,7 +138,8 @@ src/http/           Hono app (GET /health, POST /tg/<secret> in webhook mode)
 src/bot/            grammY bot: allowlist + admin commands, i18n (Fluent), callback data, Redis flow state
 src/hub/            the pinned hub (main menu) and its sub-screens
 src/sessions/       learning sessions: message tracking, cleanup, kind handlers (ctx.learning)
-src/queue/          BullMQ jobs (session inactivity timeout)
+src/queue/          BullMQ jobs (session inactivity timeout, routine, word enrichment)
+src/words/          dictionary seed, owner list importer, word picker, enrichment cache filler
 src/db/             Drizzle client, schema/ (one file per area), repositories/, FSRS mappers
 drizzle/            generated SQL migrations
 src/redis.ts        Redis client
@@ -76,11 +163,103 @@ masked hint (`sk-…a1b2`).
 ## Voice
 
 With Settings → Voice on, a voice message (up to 60 s) in Talk, Grammar or a typed Review answer
-is transcribed (OpenAI-compatible `audio/transcriptions`), shown as a tracked message and handled
-as if typed. Word cards get a 🔊 button that sends the pronunciation (`audio/speech`) as a voice
-note. The key is the user's own OpenAI-compatible key, else `SERVER_OPENAI_API_KEY`; with neither,
-the bot says voice needs a key and the session carries on. Generated audio is cached per lemma and
-voice under `data/tts/` (override with `TTS_CACHE_DIR`; mount it as a volume in production).
+is transcribed (OpenAI-compatible `audio/transcriptions`), shown for a few seconds as a note and
+handled as if typed. New-word cards (text or photo) and review feedback get a 🔊 button that sends
+the word's pronunciation (`audio/speech`) as a voice note, and a "🔊 Example" button for the first
+example sentence, in the learner's English variant. A button is shown only when it can work: an
+engine can voice the text for that learner, or the text was voiced before. The key is the user's
+own OpenAI-compatible key, else `SERVER_OPENAI_API_KEY`; with neither (and no Kokoro), there is no
+🔊 and the session carries on.
+
+Pronunciations come from a local Kokoro-82M first: the `tts` service in `docker-compose.yml`
+(Kokoro-FastAPI, CPU only, host port `18880`, `TTS_HOST_PORT` to change it; the app reaches it at
+`TTS_URL=http://tts:8880`). Voices: `af_heart` for US English, `bf_emma` for UK
+(`TTS_VOICE_US`, `TTS_VOICE_UK`). Its health is checked at most every 30 s; while it is down the
+OpenAI-compatible key is used instead. The first start downloads nothing but takes a while to
+load the model. Generated audio is cached per text and voice under `data/tts/` (override with
+`TTS_CACHE_DIR`; compose mounts it as a volume).
+
+**Speech recognition** tries, in order: the user's own OpenAI-compatible key, `SERVER_OPENAI_API_KEY`,
+then local faster-whisper — so voice works with no key at all. The `stt` service in
+`docker-compose.yml` (speaches, CPU only, host port `18890`, `STT_HOST_PORT` to change it; the app
+reaches it at `STT_URL=http://stt:8000`) serves `Systran/faster-whisper-small.en` by default
+(`STT_MODEL`). The first start downloads the model into the `stt-cache` volume. A failing engine
+falls through to the next; unset `STT_URL` to disable local STT. Transcripts carry word timestamps
+and, from whisper, per-word confidence. Voice messages over 60 s are rejected before any engine runs.
+
+**Storage chat.** Create a private channel (or group), add the bot as an admin and put its id
+(negative, e.g. `-1001234567890`) in `TTS_STORAGE_CHAT_ID`. Each voice note is then uploaded there
+once, its Telegram `file_id` is stored in `tts_audio`, and every later play is
+`sendVoice(file_id)` — instant, no upload, never a forward. Without it each send uploads the file.
+
+**Voicing ahead of time** (needs the storage chat). The word prefetch voices each learner's
+upcoming words and their first example sentences. With Kokoro (`TTS_URL`) a backfill voices the
+whole owner's list too — words first, in curriculum order, then example sentences, in each variant
+learners use — `VOICE_BACKFILL_TEXTS` texts (default 200) every `VOICE_BACKFILL_EVERY_MINUTES`
+(default 15; 0 turns it off), one upload every 3 s. It keeps one pinned status message in the
+storage chat, edited in place (at most once a minute while running, plus at start and end):
+words and examples voiced / total with a bar, remaining and ETA, generated today and in the last
+24 h, failures today, engine and voice. If the message is deleted, the next update sends and pins
+a new one; the "pinned a message" notice is deleted. Paid keys are never used for this.
+
+## Deploy
+
+One Linux host with Docker (Compose v2.24+), `curl` and `git`; a clone of the repository with a filled
+`.env` (`TELEGRAM_BOT_TOKEN`, `MASTER_KEY`, `ADMIN_TELEGRAM_IDS`, LLM keys — see `.env.example`).
+
+```sh
+scripts/deploy.sh      # first install and every update
+```
+
+It pulls `develop` (fast-forward only; it refuses a dirty tree), runs
+`docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build`, waits for `/health`
+on `127.0.0.1:${HTTP_HOST_PORT:-18740}` and prints the status table. If the app is not healthy within
+`DEPLOY_TIMEOUT` (240 s) it prints the last app log lines and exits 1. Re-running with nothing new
+changes nothing. `DEPLOY_BRANCH` deploys another branch, `DEPLOY_SKIP_PULL=1` deploys the tree as it
+is. Only `HTTP_HOST_PORT` is read from `.env`; no value is ever printed.
+
+`docker-compose.prod.yml` adds to the base file: `restart: unless-stopped` and rotating logs
+(`json-file`, 5 × 10 MB per service), an app healthcheck on `/health` (Postgres and Redis reachable),
+long polling regardless of `BOT_MODE` in `.env`, and loopback-only published ports.
+Logs: `docker compose -f docker-compose.yml -f docker-compose.prod.yml logs -f app`.
+
+On every start the app container (`scripts/entrypoint.sh`) applies pending migrations, then runs the
+idempotent seeds (dictionary, owner's word list, grammar, phrasal verbs) and the pronunciation import
+(`db:import:pronunciation`), then starts the bot. An empty
+database comes up fully loaded; a second start changes no row. A failed migration or seed stops the
+container, and the restart policy retries it.
+
+**Surviving a reboot** needs the Docker daemon enabled at boot (`sudo systemctl enable docker`); the
+restart policy then brings every service back, and `depends_on` healthchecks order them. Check:
+`sudo reboot`, then `docker compose -f docker-compose.yml -f docker-compose.prod.yml ps` — every
+service `running`/`healthy` (tts and stt take a minute to load their models) and
+`curl localhost:18740/health` answers `{"ok":true,"db":true,"redis":true}`.
+
+## Backups
+
+The `backup` compose service runs `pg_dump -Fc` daily at `BACKUP_HOUR` (UTC, default 03) into
+`./backups/coach-YYYYMMDD-HHMMSS.dump` (git-ignored; it also dumps once at start). Each dump is
+checked with `pg_restore --list`, then `scripts/backup-rotate.sh` keeps the newest dump of each of
+the last 7 days, 4 ISO weeks and 3 months and deletes the rest.
+
+Once a week (`BACKUP_CHECK_DAY`, default Sunday) right after the dump, `scripts/restore-check.sh`
+restores the newest dump into a throwaway database, counts the restored tables, drops it, and
+appends the result to `backups/restore-check.log`. Failures print `BACKUP FAILED` /
+`restore-check: FAILED` on stderr (`docker compose logs backup`); passwords are never printed.
+Last result: `tail backups/restore-check.log`. Run either by hand:
+`docker compose exec backup /scripts/backup.sh` (or `restore-check.sh`).
+
+**Manual restore.** Restore into a new database first and look at it:
+
+```sh
+docker compose exec backup /scripts/restore.sh /backups/coach-20261027-030000.dump coach_restored
+docker compose exec postgres psql -U coach -d coach_restored
+```
+
+To replace the live data: `docker compose stop app`, then
+`docker compose exec postgres dropdb -U coach coach`, `createdb -U coach coach`, and
+`docker compose exec backup pg_restore --no-owner -d coach /backups/<file>.dump`; start `app` again.
+Copy dumps off the host too — a backup on the same disk does not survive the disk.
 
 ## Skills
 
@@ -95,7 +274,7 @@ kind: quiz                # quiz | check | enrich | exercise | placement | conve
 input: GrammarQuizInput   # zod schema for the call's vars, in src/skills/schemas.ts
 output: GrammarQuizOutput # zod schema for the model's answer, in src/skills/schemas.ts
 model_hint: smart         # fast | smart (the user's chosen model still wins)
-temperature: 0.8          # optional, 0-1 (ignored by claude-code)
+temperature: 0.8          # optional, 0-1; sent only to models that accept it (see src/llm/models.ts)
 max_tokens: 1500          # optional
 ---
 ```

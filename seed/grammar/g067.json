@@ -1,0 +1,273 @@
+{
+  "id": "g067",
+  "position": 67,
+  "cefrLevel": "C1",
+  "title": "Определители: each / every, either / neither, all / whole, none / no",
+  "plannedFrom": "2027-08-30",
+  "plannedTo": "2027-09-04",
+  "sections": {
+    "why": [
+      "Эти слова отвечают на вопрос «сколько?» и «кто именно?»: каждый, любой из двух, ни один, весь. В русском мы часто говорим просто «каждый» или «весь», а в английском выбор слова зависит от того, сколько предметов (два или больше) и в каком числе стоит существительное."
+    ],
+    "formation": [
+      "• each / every + существительное в единственном числе + глагол в единственном числе: Every student has a laptop.",
+      "• each of / every one of + the / my / these + множественное число + глагол в ед. числе: Each of the rooms has a window.",
+      "• either / neither — только про ДВА предмета: either of the two options; neither of them. Neither уже отрицательное, второе отрицание не нужно.",
+      "• all + мн. число или неисчисляемое: all people, all money; all of the / all my + сущ.",
+      "• whole = «целый», стоит после the / my / a и с исчисляемым в ед. числе: the whole day, my whole family.",
+      "• no + существительное: no time. none (of) = «ни один / никто», без существительного или с of: none of the files."
+    ],
+    "usage": [
+      "1. Each — каждый по отдельности, every — все без исключения (3 и больше): Each child got a gift. (Каждый ребёнок получил подарок.) Every developer here uses Git. (Все разработчики здесь используют Git.)",
+      "2. Either — любой из двух или оба: You can sit on either side. (Можно сесть с любой стороны.)",
+      "3. Neither — ни тот, ни другой: Neither of the answers is correct. (Ни один из двух ответов не верен.) Neither tea nor coffee works for me.",
+      "4. All и whole: I worked all day = I worked the whole day. (Я работал весь день.) The whole team came. (Пришла вся команда.)",
+      "5. No и none: There is no milk. (Молока нет.) None of my friends knows. (Никто из моих друзей не знает.)"
+    ],
+    "signalWords": [
+      "both / either / neither (два предмета); three or more → none, any, every; the whole + ед. число; all + мн. число."
+    ],
+    "mistakes": [
+      "✗ Every students has a badge → ✓ Every student has a badge (после every — только единственное число).",
+      "✗ I worked the all day → ✓ I worked all day / the whole day (all и the whole вместе не ставим).",
+      "✗ I don't know neither of them → ✓ I don't know either of them (двойное отрицание в английском не используется).",
+      "✗ None student came → ✓ No student came / None of the students came (none без of не стоит перед существительным).",
+      "✗ Each of the employee has a laptop → ✓ Each of the employees has a laptop (после of — множественное число)."
+    ],
+    "remember": [
+      "Every / each + единственное число, either / neither — только для двух, whole — после the, none — без существительного (none of ...), no — с существительным."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте подходящее слово (each, every, all, whole, no, none, either, neither)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___ student in the class has a laptop.",
+          "answer": "Every / Each"
+        },
+        {
+          "number": 2,
+          "prompt": "I've been working ___ day.",
+          "answer": "all"
+        },
+        {
+          "number": 3,
+          "prompt": "There are two buttons, but ___ of them works.",
+          "answer": "neither"
+        },
+        {
+          "number": 4,
+          "prompt": "I asked ten people, but ___ of them knew the answer.",
+          "answer": "none"
+        },
+        {
+          "number": 5,
+          "prompt": "We have ___ time left. It's already midnight.",
+          "answer": "no"
+        },
+        {
+          "number": 6,
+          "prompt": "You can pay by card or in cash. ___ way is fine.",
+          "answer": "Either"
+        },
+        {
+          "number": 7,
+          "prompt": "He ate the ___ pizza by himself.",
+          "answer": "whole"
+        },
+        {
+          "number": 8,
+          "prompt": "___ my colleagues are friendly.",
+          "answer": "All"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Every of (b) Each of the developers has a separate desk.",
+          "answer": "(b) Each of"
+        },
+        {
+          "number": 2,
+          "prompt": "Each of the rooms (a) have (b) has a view of the sea.",
+          "answer": "(b) has"
+        },
+        {
+          "number": 3,
+          "prompt": "I read the (a) all (b) whole book in one night.",
+          "answer": "(b) whole"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) No (b) None of the emails were important.",
+          "answer": "(b) None"
+        },
+        {
+          "number": 5,
+          "prompt": "I don't like (a) either (b) neither of these two laptops.",
+          "answer": "(a) either"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Every (b) All people in my team speak English.",
+          "answer": "(b) All"
+        },
+        {
+          "number": 7,
+          "prompt": "She has two sisters. (a) Neither (b) None of them lives in the UK.",
+          "answer": "(a) Neither"
+        },
+        {
+          "number": 8,
+          "prompt": "The (a) whole (b) all family went to the beach.",
+          "answer": "(a) whole"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение с указанным словом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "No students passed the test. (Use: None of ...)",
+          "answer": "None of the students passed the test."
+        },
+        {
+          "number": 2,
+          "prompt": "He doesn't like tea and he doesn't like coffee. (Use: neither ... nor)",
+          "answer": "He likes neither tea nor coffee."
+        },
+        {
+          "number": 3,
+          "prompt": "I spent all the day at the airport. (Use: whole)",
+          "answer": "I spent the whole day at the airport."
+        },
+        {
+          "number": 4,
+          "prompt": "Each child got a present. (Use: Every)",
+          "answer": "Every child got a present."
+        },
+        {
+          "number": 5,
+          "prompt": "I haven't seen either of the films. (Use: neither)",
+          "answer": "I have seen neither of the films. / I've seen neither of the films."
+        },
+        {
+          "number": 6,
+          "prompt": "There isn't any milk in the fridge. (Use: no)",
+          "answer": "There is no milk in the fridge."
+        },
+        {
+          "number": 7,
+          "prompt": "Every employee received an email. (Begin with: All)",
+          "answer": "All the employees received an email. / All employees received an email."
+        },
+        {
+          "number": 8,
+          "prompt": "The entire team worked on the project. (Use: whole)",
+          "answer": "The whole team worked on the project."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Every students has a badge.",
+          "answer": "Every student has a badge."
+        },
+        {
+          "number": 2,
+          "prompt": "I worked the all night.",
+          "answer": "I worked all night. / I worked the whole night."
+        },
+        {
+          "number": 3,
+          "prompt": "None student came to the meeting.",
+          "answer": "No student came to the meeting. / None of the students came to the meeting."
+        },
+        {
+          "number": 4,
+          "prompt": "I don't know neither of them.",
+          "answer": "I don't know either of them. / I know neither of them."
+        },
+        {
+          "number": 5,
+          "prompt": "Each of the employee has a laptop.",
+          "answer": "Each of the employees has a laptop."
+        },
+        {
+          "number": 6,
+          "prompt": "There were three candidates, but neither of them was suitable.",
+          "answer": "There were three candidates, but none of them was suitable."
+        },
+        {
+          "number": 7,
+          "prompt": "I lost my all money.",
+          "answer": "I lost all my money."
+        },
+        {
+          "number": 8,
+          "prompt": "Everyone have finished the test.",
+          "answer": "Everyone has finished the test."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Каждый разработчик в нашей команде работает удалённо.",
+          "answer": "Every developer on our team works remotely. / Each developer on our team works remotely."
+        },
+        {
+          "number": 2,
+          "prompt": "Я проработал весь день и очень устал.",
+          "answer": "I worked all day and I'm very tired. / I worked the whole day and I'm very tired."
+        },
+        {
+          "number": 3,
+          "prompt": "Ни один из двух вариантов мне не нравится.",
+          "answer": "I don't like either of the two options. / I like neither of the two options."
+        },
+        {
+          "number": 4,
+          "prompt": "У нас нет времени.",
+          "answer": "We have no time. / We don't have any time."
+        },
+        {
+          "number": 5,
+          "prompt": "Никто из моих коллег не знает ответа.",
+          "answer": "None of my colleagues knows the answer. / None of my colleagues know the answer."
+        },
+        {
+          "number": 6,
+          "prompt": "Все мои друзья любят путешествовать.",
+          "answer": "All my friends love traveling."
+        },
+        {
+          "number": 7,
+          "prompt": "Можно оплатить любым из двух способов.",
+          "answer": "You can pay either way. / You can pay in either of the two ways."
+        },
+        {
+          "number": 8,
+          "prompt": "Он потратил все свои деньги на новый ноутбук.",
+          "answer": "He spent all his money on a new laptop."
+        }
+      ]
+    }
+  ]
+}

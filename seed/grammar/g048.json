@@ -1,0 +1,270 @@
+{
+  "id": "g048",
+  "position": 48,
+  "cefrLevel": "B2",
+  "title": "Сложное дополнение: want him to do, make/let him do, see him doing",
+  "plannedFrom": "2027-04-19",
+  "plannedTo": "2027-04-24",
+  "sections": {
+    "why": [
+      "Когда мы хотим сказать, что один человек хочет, чтобы другой что-то сделал, заставил или разрешил ему это, в русском нам нужна придаточная часть: «я хочу, чтобы ты пришёл». В английском всё короче: после глагола идёт сразу человек (в форме me, him, her, us, them), а затем глагол. Это сложное дополнение (object + infinitive)."
+    ],
+    "formation": [
+      "• want / expect / ask / tell / advise / allow + кто-то + to + глагол: I want you to help me.",
+      "• Отрицание: tell / ask + кто-то + not to + глагол: She told me not to touch it.",
+      "• make / let + кто-то + глагол БЕЗ to: The boss made us work. / She let him go.",
+      "• see / hear / watch / notice / feel + кто-то + глагол (целое действие) или V-ing (в процессе): I saw him cross the road. / I saw him crossing the road.",
+      "• Пассив с make: He was made to work late (в пассиве to возвращается).",
+      "• Вместо let в пассиве используем be allowed to: He was allowed to go."
+    ],
+    "usage": [
+      "1. Желание, просьба, совет: My manager wants me to finish today. (Начальник хочет, чтобы я закончил сегодня.)",
+      "2. Принуждение: The teacher made us repeat the text. (Учитель заставил нас повторить текст.)",
+      "3. Разрешение: Her parents let her stay out late. (Родители разрешили ей гулять допоздна.)",
+      "4. Восприятие: I heard someone playing the piano. (Я слышал, как кто-то играет на пианино.) I saw her enter the room. (Я видел, как она вошла в комнату.)"
+    ],
+    "signalWords": [
+      "want, would like, expect, ask, tell, advise, allow, get — потом to. make, let, have — без to. see, hear, watch, notice, feel — глагол или -ing."
+    ],
+    "mistakes": [
+      "✗ I want that you help me → ✓ I want you to help me. Здесь нет that и придаточной части.",
+      "✗ She made me to wait → ✓ She made me wait. После make и let частицы to нет.",
+      "✗ I want he comes → ✓ I want him to come. Нужно дополнение (him), а не подлежащее (he).",
+      "✗ He was made work late → ✓ He was made to work late. В пассиве после made частица to нужна.",
+      "✗ She told me don't touch it → ✓ She told me not to touch it. Отрицание — not to."
+    ],
+    "remember": ["want him TO do, но make him do и let him do. Видел процесс — see him doing."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My boss wants me ___ (finish) the report today.",
+          "answer": "to finish"
+        },
+        {
+          "number": 2,
+          "prompt": "The teacher made us ___ (repeat) the text.",
+          "answer": "repeat"
+        },
+        {
+          "number": 3,
+          "prompt": "Her parents let her ___ (stay) out late.",
+          "answer": "stay"
+        },
+        {
+          "number": 4,
+          "prompt": "I saw him ___ (run) to the station. He was in a hurry.",
+          "answer": "running / run"
+        },
+        {
+          "number": 5,
+          "prompt": "We expect them ___ (arrive) at noon.",
+          "answer": "to arrive"
+        },
+        {
+          "number": 6,
+          "prompt": "The noise made the baby ___ (cry).",
+          "answer": "cry"
+        },
+        {
+          "number": 7,
+          "prompt": "I heard someone ___ (play) the piano when I passed the house.",
+          "answer": "playing / play"
+        },
+        {
+          "number": 8,
+          "prompt": "She asked me ___ (help) her with the project.",
+          "answer": "to help"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I want (a) that you call (b) you to call (c) you call me later.",
+          "answer": "(b) you to call"
+        },
+        {
+          "number": 2,
+          "prompt": "They made him (a) to pay (b) pay (c) paying the fine.",
+          "answer": "(b) pay"
+        },
+        {
+          "number": 3,
+          "prompt": "She let the children (a) to play (b) playing (c) play in the garden.",
+          "answer": "(c) play"
+        },
+        {
+          "number": 4,
+          "prompt": "I watched the kids (a) to play (b) playing (c) played football for an hour.",
+          "answer": "(b) playing"
+        },
+        {
+          "number": 5,
+          "prompt": "The doctor advised him (a) stop (b) to stop (c) stopping smoking.",
+          "answer": "(b) to stop"
+        },
+        {
+          "number": 6,
+          "prompt": "He was made (a) work (b) to work (c) working overtime.",
+          "answer": "(b) to work"
+        },
+        {
+          "number": 7,
+          "prompt": "Do you want me (a) help (b) to help (c) helping you?",
+          "answer": "(b) to help"
+        },
+        {
+          "number": 8,
+          "prompt": "I felt the ground (a) to shake (b) shake (c) to shaking.",
+          "answer": "(b) shake"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите фразу с указанным глаголом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "'Please send me the file,' Tom said to Anna. (asked)",
+          "answer": "Tom asked Anna to send him the file."
+        },
+        {
+          "number": 2,
+          "prompt": "'You must wait here,' the guard said to us. (made)",
+          "answer": "The guard made us wait here. / The guard made us wait there."
+        },
+        {
+          "number": 3,
+          "prompt": "'You can use my car,' Dad said to me. (let)",
+          "answer": "Dad let me use his car."
+        },
+        {
+          "number": 4,
+          "prompt": "I saw her. She was entering the building. (saw)",
+          "answer": "I saw her entering the building. / I saw her enter the building."
+        },
+        {
+          "number": 5,
+          "prompt": "'Don't be late,' the manager told Sam. (told)",
+          "answer": "The manager told Sam not to be late."
+        },
+        {
+          "number": 6,
+          "prompt": "'You may leave early,' she said to the students. (allowed)",
+          "answer": "She allowed the students to leave early."
+        },
+        {
+          "number": 7,
+          "prompt": "The film was so sad that I cried. (made)",
+          "answer": "The film made me cry."
+        },
+        {
+          "number": 8,
+          "prompt": "I heard Mike. He was singing in the shower. (heard)",
+          "answer": "I heard Mike singing in the shower. / I heard Mike sing in the shower."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и исправьте предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I want that you help me.",
+          "answer": "I want you to help me."
+        },
+        {
+          "number": 2,
+          "prompt": "She made me to wait for an hour.",
+          "answer": "She made me wait for an hour."
+        },
+        {
+          "number": 3,
+          "prompt": "They let us to enter the room.",
+          "answer": "They let us enter the room."
+        },
+        {
+          "number": 4,
+          "prompt": "I saw him to cross the road.",
+          "answer": "I saw him cross the road. / I saw him crossing the road."
+        },
+        {
+          "number": 5,
+          "prompt": "My manager wants that I work on weekends.",
+          "answer": "My manager wants me to work on weekends."
+        },
+        {
+          "number": 6,
+          "prompt": "He was made work late.",
+          "answer": "He was made to work late."
+        },
+        {
+          "number": 7,
+          "prompt": "I want he comes tomorrow.",
+          "answer": "I want him to come tomorrow."
+        },
+        {
+          "number": 8,
+          "prompt": "She told me don't touch it.",
+          "answer": "She told me not to touch it."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я хочу, чтобы ты мне помог.",
+          "answer": "I want you to help me."
+        },
+        {
+          "number": 2,
+          "prompt": "Начальник заставил нас работать в выходные.",
+          "answer": "The boss made us work on the weekend. / The boss made us work on weekends. / The boss made us work at the weekend."
+        },
+        {
+          "number": 3,
+          "prompt": "Родители не разрешили ему пойти на вечеринку.",
+          "answer": "His parents didn't let him go to the party. / His parents didn't allow him to go to the party."
+        },
+        {
+          "number": 4,
+          "prompt": "Я видел, как она выходила из офиса.",
+          "answer": "I saw her leaving the office. / I saw her leave the office."
+        },
+        {
+          "number": 5,
+          "prompt": "Врач посоветовал мне больше спать.",
+          "answer": "The doctor advised me to sleep more."
+        },
+        {
+          "number": 6,
+          "prompt": "Мы ожидаем, что клиент ответит завтра.",
+          "answer": "We expect the client to reply tomorrow. / We expect the client to respond tomorrow. / We expect the client to answer tomorrow."
+        },
+        {
+          "number": 7,
+          "prompt": "Я слышал, как кто-то плачет в соседней комнате.",
+          "answer": "I heard someone crying in the next room. / I heard someone cry in the next room."
+        },
+        {
+          "number": 8,
+          "prompt": "Попроси его не опаздывать.",
+          "answer": "Ask him not to be late."
+        }
+      ]
+    }
+  ]
+}

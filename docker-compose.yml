@@ -16,6 +16,27 @@ services:
       retries: 10
     restart: unless-stopped
 
+  # Daily pg_dump -Fc into ./backups with 7 daily / 4 weekly / 3 monthly rotation, plus a weekly
+  # restore check into a throwaway database. See README "Backups".
+  backup:
+    image: postgres:16
+    entrypoint: ["bash", "/scripts/backup-loop.sh"]
+    environment:
+      PGHOST: postgres
+      PGUSER: coach
+      PGPASSWORD: coach
+      PGDATABASE: coach
+      BACKUP_DIR: /backups
+      BACKUP_HOUR: "${BACKUP_HOUR:-3}"
+      BACKUP_CHECK_DAY: "${BACKUP_CHECK_DAY:-7}"
+    volumes:
+      - ./backups:/backups
+      - ./scripts:/scripts:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
   redis:
     image: redis:7
     command: ["redis-server", "--appendonly", "yes"]
@@ -30,6 +51,37 @@ services:
       retries: 10
     restart: unless-stopped
 
+  # Kokoro-82M (Apache 2.0) behind Kokoro-FastAPI, CPU only: word pronunciations as Ogg/Opus.
+  tts:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:v0.9.0
+    ports:
+      - "${TTS_HOST_PORT:-18880}:8880"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8880/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+
+  # faster-whisper behind speaches (OpenAI-compatible audio/transcriptions), CPU only.
+  stt:
+    image: ghcr.io/speaches-ai/speaches:0.9.0-rc.3-cpu
+    environment:
+      # Downloaded on the first start into the hf-cache volume, then loaded from it.
+      PRELOAD_MODELS: '["${STT_MODEL:-Systran/faster-whisper-small.en}"]'
+    ports:
+      - "${STT_HOST_PORT:-18890}:8000"
+    volumes:
+      - stt-cache:/home/ubuntu/.cache/huggingface/hub
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 30
+      start_period: 60s
+    restart: unless-stopped
+
   app:
     build: .
     env_file: .env
@@ -37,15 +89,27 @@ services:
       DATABASE_URL: postgres://coach:coach@postgres:5432/coach
       REDIS_URL: redis://redis:6379
       HTTP_PORT: "18740"
+      TTS_URL: http://tts:8880
+      STT_URL: http://stt:8000
     ports:
       - "${HTTP_HOST_PORT:-18740}:18740"
+    volumes:
+      - tts-cache:/app/data/tts
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
+      # The bot runs without local TTS (OpenAI fallback), so it does not wait for the model to load.
+      tts:
+        condition: service_started
+      # Same for STT: without the container voice falls back to an OpenAI-compatible key.
+      stt:
+        condition: service_started
     restart: unless-stopped
 
 volumes:
+  stt-cache:
   postgres-data:
   redis-data:
+  tts-cache:

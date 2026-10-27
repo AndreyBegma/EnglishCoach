@@ -1,0 +1,318 @@
+# Grammar syllabus, band C2. Keys are topic ids; see src/grammar/syllabus.ts for the format.
+
+g073:
+  level: C2.1
+  title:
+    en: "Articles and generalisations: the + adjective, abstract nouns"
+    ru: "Артикли и обобщения: the + прилагательное, абстрактные существительные"
+    uk: "Артиклі та узагальнення: the + прикметник, абстрактні іменники"
+  prerequisites: [g041, g067]
+  contrast_with: [g004, g041]
+  examples:
+    - "The rich should pay more taxes."
+    - "Life is too short to waste on bad code."
+    - "The history of this city is fascinating."
+  interference:
+    - wrong: "The life is too short."
+      right: "Life is too short."
+      cause: "Russian has no articles, and learners overcorrect by adding the to every abstract noun."
+    - wrong: "The rich people should pay more. / Rich should pay more."
+      right: "The rich should pay more."
+      cause: "A Russian substantivised adjective («богатые») is a plain noun, so the + adjective without people feels incomplete or loses its the."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g074:
+  level: C2.2
+  title:
+    en: "Tense subtleties: Present Simple in narrative, Present Perfect in news, the past for politeness"
+    ru: "Тонкости времён: Present Simple в рассказе, Present Perfect в новостях, Past для вежливости"
+    uk: "Тонкощі часів: Present Simple в розповіді, Present Perfect у новинах, Past для ввічливості"
+  prerequisites: [g040, g017, g060]
+  contrast_with: [g017]
+  examples:
+    - "So this guy walks into a bar and orders a coffee."
+    - "The government has announced new tax rules."
+    - "I was wondering if you could help me."
+  interference:
+    - wrong: "I wonder, can you help me?"
+      right: "I was wondering if you could help me."
+      cause: "Russian politeness uses «не могли бы вы», not a past tense, so the polite past is unfamiliar."
+    - wrong: "The government announced today new rules."
+      right: "The government has announced new rules."
+      cause: "Russian has one past form for news and stories; the news-style Present Perfect is not felt."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g075:
+  level: C2.3
+  title:
+    en: "Advanced conditionals: should you, were it not for, but for, provided, otherwise"
+    ru: "Продвинутые условные: should you, were it not for, but for, provided, otherwise"
+    uk: "Складні умовні речення: should you, were it not for, but for, provided, otherwise"
+  prerequisites: [g054, g034]
+  contrast_with: [g054, g034]
+  examples:
+    - "Should you need any help, just let me know."
+    - "Were it not for your support, I would have given up."
+    - "You can borrow the car provided you bring it back by six."
+  interference:
+    - wrong: "If should you need help, call me."
+      right: "Should you need help, call me."
+      cause: "Learners keep «если» as if and add the inverted should on top."
+    - wrong: "Provided you will bring it back, you can take it."
+      right: "Provided you bring it back, you can take it."
+      cause: "Russian «при условии, что вернёшь» uses a future form in the condition."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g076:
+  level: C2.4
+  title:
+    en: "Complex relative structures: of which, whereby, in which case"
+    ru: "Сложные относительные конструкции: of which, whereby, in which case"
+    uk: "Складні відносні конструкції: of which, whereby, in which case"
+  prerequisites: [g042, g024, g062]
+  contrast_with: [g042]
+  examples:
+    - "We tested ten tools, three of which were useful."
+    - "They introduced a system whereby users can vote on features."
+    - "The train may be late, in which case we'll take a taxi."
+  interference:
+    - wrong: "We tested ten tools, three of them were useful."
+      right: "We tested ten tools, three of which were useful."
+      cause: "Russian «три из которых» is often rendered with them, producing a comma splice."
+    - wrong: "The train may be late, in this case we'll take a taxi."
+      right: "The train may be late, in which case we'll take a taxi."
+      cause: "Russian «в этом случае» starts a new sentence; English links it with which."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g077:
+  level: C2.4
+  title:
+    en: "Absolute participle constructions: Weather permitting, All things considered"
+    ru: "Абсолютные причастные конструкции: Weather permitting, All things considered"
+    uk: "Абсолютні дієприкметникові конструкції: Weather permitting, All things considered"
+  prerequisites: [g043, g066]
+  contrast_with: [g043]
+  examples:
+    - "Weather permitting, we'll have the party outside."
+    - "All things considered, the project was a success."
+    - "The meeting over, everyone went back to work."
+  interference:
+    - wrong: "Permitting weather, we'll go outside."
+      right: "Weather permitting, we'll go outside."
+      cause: "Russian puts participles before the noun («при условии хорошей погоды»), so the order is reversed."
+    - wrong: "Walking to the office, the rain started."
+      right: "As I was walking to the office, the rain started."
+      cause: "Russian tolerates a dangling «идя на работу»; English requires the participle's subject to match."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g078:
+  level: C2.5
+  title:
+    en: "Double comparatives and intensifying: the more… the more, ever-increasing, far / much / by far"
+    ru: "Двойное сравнение и усиление: the more… the more, ever-increasing, far / much / by far"
+    uk: "Подвійне порівняння та підсилення: the more… the more, ever-increasing, far / much / by far"
+  prerequisites: [g012, g056]
+  contrast_with: [g082]
+  examples:
+    - "The more you practise, the easier it gets."
+    - "This version is far faster than the old one."
+    - "She is by far the best developer on the team."
+  interference:
+    - wrong: "More you practise, more easy it gets."
+      right: "The more you practise, the easier it gets."
+      cause: "Russian «чем больше…, тем легче» has no article, so the is dropped."
+    - wrong: "This version is very faster."
+      right: "This version is much faster."
+      cause: "Russian «гораздо/намного» is translated with very, which cannot modify comparatives."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g079:
+  level: C2.6
+  title:
+    en: "Fronting and word order for emphasis"
+    ru: "Фронтирование и порядок слов для акцента"
+    uk: "Фронтування та порядок слів для акценту"
+  prerequisites: [g053, g055]
+  contrast_with: [g053, g055]
+  examples:
+    - "This I can't accept."
+    - "Strange as it may seem, I enjoy debugging."
+    - "Into the room walked a tall man."
+  interference:
+    - wrong: "Strange as it may seems, I like it. / As strange it may seem…"
+      right: "Strange as it may seem, I like it."
+      cause: "Russian «как ни странно» is a fixed phrase; the English adjective + as + clause pattern is unfamiliar."
+    - wrong: "This book I read it yesterday."
+      right: "This book I read yesterday."
+      cause: "Russian topicalisation with a resumptive pronoun in speech carries over."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g080:
+  level: C2.6
+  title:
+    en: "Modality: might well, may as well, could hardly, would sooner"
+    ru: "Модальность: might well, may as well, could hardly, would sooner"
+    uk: "Модальність: might well, may as well, could hardly, would sooner"
+  prerequisites: [g059, g038]
+  contrast_with: [g059]
+  examples:
+    - "He might well be right about that."
+    - "The bus is late, so we may as well walk."
+    - "I could hardly believe my eyes."
+  interference:
+    - wrong: "I could hardly not believe it."
+      right: "I could hardly believe it."
+      cause: "Russian double negation («едва не…», «чуть не») adds a not that English hardly already contains."
+    - wrong: "We can as well walk."
+      right: "We may as well walk."
+      cause: "Russian «можно и пешком» maps onto can."
+  exercise_types: [multiple_choice, gap_fill]
+
+g081:
+  level: C2.7
+  title:
+    en: "Spoken English: gonna/wanna contractions, reduction, particles"
+    ru: "Разговорный английский: сокращения gonna/wanna, редукция, частицы"
+    uk: "Розмовна англійська: скорочення gonna/wanna, редукція, частки"
+  prerequisites: [g072]
+  contrast_with: [g072]
+  examples:
+    - "I'm gonna grab a coffee."
+    - "Do you wanna come along?"
+    - "Well, I mean, it's kind of complicated."
+  interference:
+    - wrong: "Dear Mr Smith, I'm gonna send the report tomorrow."
+      right: "Dear Mr Smith, I am going to send the report tomorrow."
+      cause: "Learners see gonna in films and use it in writing; Russian has no register gap this sharp in spelling."
+    - wrong: "He wanna come."
+      right: "He wants to come."
+      cause: "Wanna is only a reduction of want to after I/you/we/they; Russian has no such phonetic contractions to model it."
+  exercise_types: [multiple_choice, transformation]
+
+g082:
+  level: C2.7
+  title:
+    en: "Intensifiers and softeners: quite, rather, fairly, utterly, somewhat"
+    ru: "Усилители и смягчители: quite, rather, fairly, utterly, somewhat"
+    uk: "Підсилювачі та пом'якшувачі: quite, rather, fairly, utterly, somewhat"
+  prerequisites: [g056, g030]
+  contrast_with: [g078, g069]
+  examples:
+    - "The film was rather disappointing."
+    - "I'm utterly exhausted."
+    - "The task is fairly easy."
+  interference:
+    - wrong: "I'm very exhausted."
+      right: "I'm utterly exhausted."
+      cause: "Russian «очень» combines with any adjective; English extreme adjectives reject very."
+    - wrong: "The test was quite easy. (meaning 'very easy')"
+      right: "The test was really easy."
+      cause: "Russian «вполне/довольно» blurs quite as 'fairly' vs 'completely'."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g083:
+  level: C2.8
+  title:
+    en: "Punctuation: comma, semicolon, colon, apostrophe"
+    ru: "Пунктуация: запятая, точка с запятой, двоеточие, апостроф"
+    uk: "Пунктуація: кома, крапка з комою, двокрапка, апостроф"
+  prerequisites: [g042, g011, g072]
+  contrast_with: [g042]
+  examples:
+    - "I think that the plan will work."
+    - "The deadline is tomorrow; we need to hurry."
+    - "It's the company's policy, not its choice."
+  interference:
+    - wrong: "I think, that the plan will work."
+      right: "I think that the plan will work."
+      cause: "Russian always puts a comma before «что»; English does not before that."
+    - wrong: "The company changed it's policy."
+      right: "The company changed its policy."
+      cause: "The possessive its has no apostrophe; learners generalise from 's."
+  exercise_types: [multiple_choice, error_correction]
+
+g084:
+  level: C2.9
+  title:
+    en: "Typical mistakes of Russian speakers: a full review"
+    ru: "Типичные ошибки русскоговорящих: большой разбор"
+    uk: "Типові помилки російськомовних і україномовних: великий розбір"
+  prerequisites: [g073, g074, g075, g083, g072]
+  contrast_with: [g085]
+  examples:
+    - "I have been working here for three years."
+    - "She asked me where I lived."
+    - "I'm interested in programming."
+  interference:
+    - wrong: "I work here since 2020."
+      right: "I have worked here since 2020."
+      cause: "Russian uses the present tense for an action continuing from the past."
+    - wrong: "She asked me where do I live."
+      right: "She asked me where I lived."
+      cause: "Russian indirect questions keep direct-question word order and tense."
+    - wrong: "I'm interesting in programming."
+      right: "I'm interested in programming."
+      cause: "Russian «интересуюсь» is one reflexive verb; the -ed / -ing split has no equivalent."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g098:
+  level: C2.6
+  title:
+    en: "Advanced clefts and pseudo-clefts: What happened was…, The reason why… is that…, reversed pseudo-clefts"
+    ru: "Продвинутые выделительные конструкции: What happened was…, The reason why… is that…, обратные псевдорасщеплённые"
+    uk: "Просунуті видільні конструкції: What happened was…, The reason why… is that…, обернені псевдорозщеплені"
+  prerequisites: [g055, g056]
+  contrast_with: [g055, g079]
+  examples:
+    - "What happened was that the cache expired."
+    - "The reason why it failed is that nobody tested it."
+    - "A quiet place to work is what I need."
+  interference:
+    - wrong: "The reason why it failed is because nobody tested it."
+      right: "The reason why it failed is that nobody tested it."
+      cause: "Russian «причина в том, потому что…» allows a causal conjunction after the copula; English needs a that-clause."
+    - wrong: "What I need it is a quiet place."
+      right: "What I need is a quiet place."
+      cause: "Russian pronoun resumption («что мне нужно, это тихое место») is carried over as an extra it."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g099:
+  level: C2.4
+  title:
+    en: "Formal should and the subjunctive: It is essential that he should…, lest, whether it be"
+    ru: "Формальное should и сослагательное: It is essential that he should…, lest, whether it be"
+    uk: "Формальне should та умовний спосіб: It is essential that he should…, lest, whether it be"
+  prerequisites: [g057, g059]
+  contrast_with: [g057]
+  examples:
+    - "It is essential that he should attend the meeting."
+    - "She spoke quietly lest anyone overhear."
+    - "Be it a bug or a feature, the team must document it."
+  interference:
+    - wrong: "It is essential that he attends the meeting."
+      right: "It is essential that he attend / should attend the meeting."
+      cause: "Russian «чтобы он присутствовал» has no special mood marker, so the plain present is used."
+    - wrong: "She spoke quietly lest anyone would overhear."
+      right: "She spoke quietly lest anyone overhear."
+      cause: "Russian «чтобы никто не» is translated with a negative-purpose would; lest already carries the negation."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g085:
+  level: C2.9
+  title:
+    en: "Final review: all the grammar in one test"
+    ru: "Финальное повторение: вся грамматика в одном тесте"
+    uk: "Фінальне повторення: уся граматика в одному тесті"
+  prerequisites: [g084, g054]
+  contrast_with: [g084]
+  examples:
+    - "Had I known about the bug, I would have fixed it before the release."
+    - "Not only did she finish early, but she also helped the others."
+  interference:
+    - wrong: "If I would know, I would tell you."
+      right: "If I knew, I would tell you."
+      cause: "Russian «если бы» marks both clauses with «бы», so would lands in the if-clause."
+    - wrong: "I'm agree with you."
+      right: "I agree with you."
+      cause: "Russian «я согласен» is an adjective with a dropped copula, so learners add am."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]

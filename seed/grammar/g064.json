@@ -1,0 +1,273 @@
+{
+  "id": "g064",
+  "position": 64,
+  "cefrLevel": "C1",
+  "title": "Пассив: с get, с двумя дополнениями, need doing",
+  "plannedFrom": "2027-08-09",
+  "plannedTo": "2027-08-14",
+  "sections": {
+    "why": [
+      "Вы уже знаете обычный пассив (The email was sent). Здесь три особых случая, которые делают речь естественнее: пассив с get (разговорный, для неожиданных или неприятных событий), пассив с глаголами, у которых два дополнения (give, send, offer), и конструкция need doing («нуждается в ремонте/мытье»). По-русски мы часто говорим «меня уволили», «мне дали», «машину надо помыть», и английский требует для этого отдельных форм."
+    ],
+    "formation": [
+      "• пассив с get: get/got + V3 (третья форма): He got fired. They got married. Нет вопросов и отрицаний без do: Did he get fired? He didn't get invited.",
+      "• два дополнения: give someone something.",
+      "Вариант 1 (чаще): человек становится подлежащим: She was offered a job. (be + V3 + вещь)",
+      "Вариант 2: вещь становится подлежащим: A job was offered to her. (to + человек)",
+      "• need + -ing = need to be + V3 (значение пассивное): The car needs washing = The car needs to be washed.",
+      "• get something done (сделать что-то силами других): I got my hair cut. I need to get my laptop repaired."
+    ],
+    "usage": [
+      "1. Get-пассив для случайных, неожиданных, часто неприятных событий в разговорной речи: He got fired last week. (Его уволили на прошлой неделе.) The email got sent to the wrong person. (Письмо ушло не тому человеку.)",
+      "2. Get-пассив с действиями, которые человек сам с собой делает или с ним происходят: get married (пожениться), get lost (потеряться), get dressed (одеться), get promoted (получить повышение).",
+      "3. Глаголы give, send, offer, show, tell, ask, lend, teach, pay, promise чаще всего ставят в пассиве на первое место человека: I was given a new laptop. (Мне дали новый ноутбук.) We were told the truth. (Нам сказали правду.)",
+      "4. Когда важна вещь, а не человек: The wrong files were sent to us. (Нам отправили не те файлы.)",
+      "5. Need doing, когда предмет «просит» действия: This code needs rewriting. (Этот код нужно переписать.) Your hair needs cutting. (Тебя пора подстричь.)"
+    ],
+    "signalWords": [
+      "Get-пассив: accidentally, suddenly, unexpectedly, easily, often (случайно, внезапно, легко). Для need doing: dirty, broken, old, messy (грязный, сломанный, старый, запутанный)."
+    ],
+    "mistakes": [
+      "✗ I was been fired yesterday → ✓ I got fired yesterday (get + V3, без дополнительного be)",
+      "✗ He was given to me a book → ✓ I was given a book (после be given нет to, если человек подлежащее)",
+      "✗ The car needs to wash → ✓ The car needs washing / needs to be washed (смысл пассивный)",
+      "✗ The plants need watered → ✓ The plants need watering / need to be watered",
+      "✗ I cut my hair at the salon (когда стригли вас) → ✓ I got my hair cut (сами себя вы не стрижёте)"
+    ],
+    "remember": [
+      "Get + V3 для неожиданного, give/send/offer начинай с человека (I was given), а вещь «нуждается» в -ing: needs fixing."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в пассив с get (где возможно, допустим и be)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Be careful on the ice or you ___ (hurt).",
+          "answer": "will get hurt"
+        },
+        {
+          "number": 2,
+          "prompt": "They ___ (marry) in June.",
+          "answer": "got married"
+        },
+        {
+          "number": 3,
+          "prompt": "The email ___ (send) to the wrong person.",
+          "answer": "got sent / was sent"
+        },
+        {
+          "number": 4,
+          "prompt": "Her car ___ (damage) in the parking lot yesterday.",
+          "answer": "got damaged / was damaged"
+        },
+        {
+          "number": 5,
+          "prompt": "I ___ (lose) on the way to the airport.",
+          "answer": "got lost"
+        },
+        {
+          "number": 6,
+          "prompt": "We ___ (invite) to the party last Friday.",
+          "answer": "got invited / were invited"
+        },
+        {
+          "number": 7,
+          "prompt": "The office ___ (clean) every morning.",
+          "answer": "gets cleaned / is cleaned"
+        },
+        {
+          "number": 8,
+          "prompt": "He ___ (promote) twice last year.",
+          "answer": "got promoted / was promoted"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Перепишите в пассиве, начиная с человека",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "They gave me a new laptop.",
+          "answer": "I was given a new laptop."
+        },
+        {
+          "number": 2,
+          "prompt": "The manager offered her a job.",
+          "answer": "She was offered a job."
+        },
+        {
+          "number": 3,
+          "prompt": "Someone sent us the wrong files.",
+          "answer": "We were sent the wrong files."
+        },
+        {
+          "number": 4,
+          "prompt": "They told the students the results.",
+          "answer": "The students were told the results."
+        },
+        {
+          "number": 5,
+          "prompt": "The bank lent him some money.",
+          "answer": "He was lent some money."
+        },
+        {
+          "number": 6,
+          "prompt": "The company showed the visitors the new office.",
+          "answer": "The visitors were shown the new office."
+        },
+        {
+          "number": 7,
+          "prompt": "They asked her a difficult question.",
+          "answer": "She was asked a difficult question."
+        },
+        {
+          "number": 8,
+          "prompt": "They will teach us a new method.",
+          "answer": "We will be taught a new method."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите в пассиве, начиная с вещи",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "They gave me a new laptop.",
+          "answer": "A new laptop was given to me."
+        },
+        {
+          "number": 2,
+          "prompt": "Someone offered her a job.",
+          "answer": "A job was offered to her."
+        },
+        {
+          "number": 3,
+          "prompt": "They sent us the wrong files.",
+          "answer": "The wrong files were sent to us."
+        },
+        {
+          "number": 4,
+          "prompt": "They showed the visitors the office.",
+          "answer": "The office was shown to the visitors."
+        },
+        {
+          "number": 5,
+          "prompt": "The school taught the children music.",
+          "answer": "Music was taught to the children."
+        },
+        {
+          "number": 6,
+          "prompt": "They promised him a bonus.",
+          "answer": "A bonus was promised to him."
+        },
+        {
+          "number": 7,
+          "prompt": "The bank lent him money.",
+          "answer": "Money was lent to him."
+        },
+        {
+          "number": 8,
+          "prompt": "Somebody wrote her a letter.",
+          "answer": "A letter was written to her."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Need doing и get something done",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The car is dirty. It needs ___ (wash).",
+          "answer": "washing / to be washed"
+        },
+        {
+          "number": 2,
+          "prompt": "Your hair is too long. It needs ___ (cut).",
+          "answer": "cutting / to be cut"
+        },
+        {
+          "number": 3,
+          "prompt": "The code is a mess. It needs ___ (refactor).",
+          "answer": "refactoring / to be refactored"
+        },
+        {
+          "number": 4,
+          "prompt": "Rewrite with need + -ing: This shirt must be ironed.",
+          "answer": "This shirt needs ironing."
+        },
+        {
+          "number": 5,
+          "prompt": "Rewrite with need to be + V3: The windows need cleaning.",
+          "answer": "The windows need to be cleaned."
+        },
+        {
+          "number": 6,
+          "prompt": "I need to get my passport ___ (renew) before the trip.",
+          "answer": "renewed"
+        },
+        {
+          "number": 7,
+          "prompt": "Correct the mistake: The bug needs to fix.",
+          "answer": "The bug needs fixing. / The bug needs to be fixed."
+        },
+        {
+          "number": 8,
+          "prompt": "Correct the mistake: The plants need watered.",
+          "answer": "The plants need watering. / The plants need to be watered."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Меня уволили в прошлом месяце.",
+          "answer": "I got fired last month. / I was fired last month."
+        },
+        {
+          "number": 2,
+          "prompt": "Мне дали новый ноутбук.",
+          "answer": "I was given a new laptop. / A new laptop was given to me."
+        },
+        {
+          "number": 3,
+          "prompt": "Моей машине нужен ремонт.",
+          "answer": "My car needs repairing. / My car needs to be repaired."
+        },
+        {
+          "number": 4,
+          "prompt": "Им не сказали правду.",
+          "answer": "They weren't told the truth."
+        },
+        {
+          "number": 5,
+          "prompt": "Мне нужно подстричься.",
+          "answer": "I need to get a haircut. / I need to get my hair cut."
+        },
+        {
+          "number": 6,
+          "prompt": "Нас пригласили на конференцию.",
+          "answer": "We got invited to the conference. / We were invited to the conference."
+        },
+        {
+          "number": 7,
+          "prompt": "Этот код нужно переписать.",
+          "answer": "This code needs rewriting. / This code needs to be rewritten."
+        },
+        {
+          "number": 8,
+          "prompt": "Ей предложили новую должность.",
+          "answer": "She was offered a new position. / She was offered a new job."
+        }
+      ]
+    }
+  ]
+}

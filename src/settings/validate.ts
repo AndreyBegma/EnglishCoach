@@ -1,5 +1,6 @@
 import { isIP } from "node:net";
 import tzLookup from "@photostructure/tz-lookup";
+import { MAX_INTEREST_LENGTH, MAX_INTERESTS, MAX_PROFESSION_LENGTH } from "./options";
 
 /** Checks of free text the user types into settings. Each returns undefined for unusable input. */
 
@@ -93,8 +94,68 @@ export function parseModelId(input: string): string | undefined {
   return /^[\w.:/@-]{1,200}$/.test(id) ? id : undefined;
 }
 
+/**
+ * An Anthropic workspace ID as the Console shows it (`wrkspc_01AbC…`). Anything shaped like an
+ * API key is refused, so a key pasted into the wrong prompt is never stored in plain text.
+ */
+export function parseWorkspaceId(input: string): string | undefined {
+  const id = input.trim();
+  if (/^(?:sk|pk|or)-/i.test(id)) return undefined;
+  return /^wrkspc_[A-Za-z0-9]{8,64}$/.test(id) ? id : undefined;
+}
+
 /** An API key as pasted: one token, no whitespace inside. Its validity is checked with the provider. */
 export function parseApiKey(input: string): string | undefined {
   const key = input.trim();
   return /^\S{8,512}$/.test(key) ? key : undefined;
+}
+
+/** One line of learner text: control characters dropped, whitespace collapsed. */
+function profileText(input: string): string {
+  return input
+    .replace(/\p{Cc}/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** Looks like a provider key; never stored in the profile, which travels to every prompt. */
+const looksLikeKey = (text: string) => /\b(?:sk|pk|or)-\S{8,}/i.test(text);
+
+/**
+ * Interests typed as a list: split on commas, semicolons and new lines. Undefined when there is
+ * none, or one is longer than `MAX_INTEREST_LENGTH` or looks like a key.
+ */
+export function parseInterests(input: string): string[] | undefined {
+  const tags = input
+    .split(/[,;\n]/)
+    .map(profileText)
+    .filter(Boolean);
+  if (tags.length === 0) return undefined;
+  const usable = tags.every((tag) => tag.length <= MAX_INTEREST_LENGTH && !looksLikeKey(tag));
+  return usable ? tags : undefined;
+}
+
+/** `added` after `current`, without case-insensitive repeats, capped at `MAX_INTERESTS`. */
+export function mergeInterests(current: readonly string[], added: readonly string[]): string[] {
+  const merged = new Map<string, string>();
+  for (const tag of [...current, ...added]) {
+    const key = tag.toLowerCase();
+    if (!merged.has(key)) merged.set(key, tag);
+  }
+  return [...merged.values()].slice(0, MAX_INTERESTS);
+}
+
+/** Adds the interest, or removes it when already there. */
+export function toggleInterest(current: readonly string[], interest: string): string[] {
+  const key = interest.toLowerCase();
+  return current.some((tag) => tag.toLowerCase() === key)
+    ? current.filter((tag) => tag.toLowerCase() !== key)
+    : mergeInterests(current, [interest]);
+}
+
+/** A profession or job title, one line. */
+export function parseProfession(input: string): string | undefined {
+  const text = profileText(input);
+  if (!text || text.length > MAX_PROFESSION_LENGTH || looksLikeKey(text)) return undefined;
+  return text;
 }

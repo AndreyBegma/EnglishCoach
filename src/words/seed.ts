@@ -1,7 +1,7 @@
-import { sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { z } from "zod";
 import type { Db } from "../db/client";
-import { cefrLevelEnum, words } from "../db/schema";
+import { cefrLevelEnum, OWNER_LIST_SOURCE, words } from "../db/schema";
 
 const CSV_HEADER = "lemma,pos,cefr_level,frequency_rank";
 const BATCH_SIZE = 1000;
@@ -39,10 +39,23 @@ function sourceFor(level: WordRow["cefrLevel"]): string {
   return level === "C1" || level === "C2" ? "octanove-c1c2-1.0" : "cefr-j-1.5";
 }
 
-/** Idempotent upsert on (lemma, pos); returns the number of rows written. */
+/**
+ * Idempotent upsert on (lemma, pos); returns the number of rows in the file. A lemma the owner's
+ * list covers is left as the import wrote it: the import may have changed its part of speech, so
+ * a seed row for it would come back as a duplicate.
+ */
 export async function seedWords(db: Db, rows: WordRow[]): Promise<number> {
-  for (let start = 0; start < rows.length; start += BATCH_SIZE) {
-    const batch = rows.slice(start, start + BATCH_SIZE).map((row) => ({
+  const owned = new Set(
+    (
+      await db
+        .selectDistinct({ lemma: words.lemma })
+        .from(words)
+        .where(eq(words.source, OWNER_LIST_SOURCE))
+    ).map((row) => row.lemma),
+  );
+  const seeded = rows.filter((row) => !owned.has(row.lemma));
+  for (let start = 0; start < seeded.length; start += BATCH_SIZE) {
+    const batch = seeded.slice(start, start + BATCH_SIZE).map((row) => ({
       lemma: row.lemma,
       pos: row.pos,
       cefrLevel: row.cefrLevel,

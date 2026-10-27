@@ -1,0 +1,272 @@
+{
+  "id": "g073",
+  "position": 73,
+  "cefrLevel": "C2",
+  "title": "Артикли и обобщения: the + прилагательное, абстрактные существительные",
+  "plannedFrom": "2027-10-11",
+  "plannedTo": "2027-10-16",
+  "sections": {
+    "why": [
+      "Когда мы говорим о целых группах и общих понятиях («богатые», «жизнь», «любовь», «дельфины»), в русском артиклей нет совсем, а в английском выбор the / a / ноль меняет смысл. На уровне C2 важно чувствовать, когда мы обобщаем, а когда говорим о чём-то конкретном."
+    ],
+    "formation": [
+      "• the + прилагательное = группа людей: the rich, the poor, the young, the elderly, the unemployed, the blind. Глагол во множественном числе: The rich are getting richer.",
+      "• Абстрактное существительное в общем смысле — без артикля: Life is short. Knowledge is power.",
+      "• Если понятие уточнено (of ..., который ...), нужен the: the life of a freelancer, the knowledge that we gained.",
+      "• Обобщение о всех представителях: множественное число без артикля (Dogs are loyal.) или the + единственное число в научном стиле (The whale is a mammal.)."
+    ],
+    "usage": [
+      "1. the + прилагательное для групп людей: The young learn fast. (Молодёжь учится быстро.) The unemployed need support. (Безработным нужна поддержка.)",
+      "2. Абстракции без артикля: Honesty is important. (Честность важна.) Love is blind. (Любовь слепа.) Но: I admire the honesty of this report. (Я ценю честность этого отчёта.)",
+      "3. Национальности на -sh, -ch, -ese, -ss и т.п. с the: the British, the French, the Dutch, the Swiss. Есть форма и для отдельного человека: a Frenchman, a Dutchman.",
+      "4. the + изобретения и музыкальные инструменты: He plays the guitar. The telephone changed everything. Но обычно во множественном: Phones changed everything.",
+      "5. the + десятилетия: in the 1990s. Но: the internet, the media, the press — с the, а society, nature, education — без артикля в общем смысле: Technology has changed education."
+    ],
+    "signalWords": [
+      "of ... после существительного (the life of, the beauty of) требует the. Слова generally, in general, as a rule часто сигналят об обобщении без артикля."
+    ],
+    "mistakes": [
+      "✗ The life is short. → ✓ Life is short. (общее понятие)",
+      "✗ The love is blind. → ✓ Love is blind.",
+      "✗ I'm afraid of the spiders. → ✓ I'm afraid of spiders. (все пауки вообще)",
+      "✗ Rich should pay more tax. → ✓ The rich should pay more tax. (нужен the)",
+      "✗ He was born in 1990s. → ✓ in the 1990s.",
+      "✗ The rich is happy. → ✓ The rich are happy. (группа людей, глагол во мн. числе)"
+    ],
+    "remember": [
+      "Общее понятие — без артикля; группа людей — the + прилагательное; уточнили — ставим the."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте the или поставьте прочерк (–), если артикль не нужен",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___ rich should help ___ poor.",
+          "answer": "The, the"
+        },
+        {
+          "number": 2,
+          "prompt": "___ happiness depends on many things.",
+          "answer": "–"
+        },
+        {
+          "number": 3,
+          "prompt": "He plays ___ guitar in a band.",
+          "answer": "the"
+        },
+        {
+          "number": 4,
+          "prompt": "___ Dutch are famous for cycling.",
+          "answer": "The"
+        },
+        {
+          "number": 5,
+          "prompt": "She was born in ___ 1990s.",
+          "answer": "the"
+        },
+        {
+          "number": 6,
+          "prompt": "___ time is money.",
+          "answer": "–"
+        },
+        {
+          "number": 7,
+          "prompt": "___ unemployed need support from the state.",
+          "answer": "The"
+        },
+        {
+          "number": 8,
+          "prompt": "___ internet has changed ___ education.",
+          "answer": "The, –"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Life (b) The life is full of surprises.",
+          "answer": "(a) Life"
+        },
+        {
+          "number": 2,
+          "prompt": "(a) The life of a freelancer (b) Life of a freelancer is often unpredictable.",
+          "answer": "(a) The life of a freelancer"
+        },
+        {
+          "number": 3,
+          "prompt": "(a) The elderly (b) The elderlies need more care.",
+          "answer": "(a) The elderly"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) The whale (b) Whale is a mammal, not a fish.",
+          "answer": "(a) The whale"
+        },
+        {
+          "number": 5,
+          "prompt": "(a) The history of our company (b) History of our company is interesting.",
+          "answer": "(a) The history of our company"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Beauty (b) The beauty is in the eye of the beholder.",
+          "answer": "(a) Beauty"
+        },
+        {
+          "number": 7,
+          "prompt": "(a) The knowledge (b) Knowledge is power.",
+          "answer": "(b) Knowledge"
+        },
+        {
+          "number": 8,
+          "prompt": "I admire (a) the courage (b) courage of those firefighters.",
+          "answer": "(a) the courage"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, используя the + прилагательное",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "People who are poor need help.",
+          "answer": "The poor need help."
+        },
+        {
+          "number": 2,
+          "prompt": "People who are young often like new technology.",
+          "answer": "The young often like new technology."
+        },
+        {
+          "number": 3,
+          "prompt": "We should respect people who are old.",
+          "answer": "We should respect the old. / We should respect the elderly."
+        },
+        {
+          "number": 4,
+          "prompt": "People who were injured were taken to a clinic.",
+          "answer": "The injured were taken to a clinic."
+        },
+        {
+          "number": 5,
+          "prompt": "People who are blind use special software.",
+          "answer": "The blind use special software."
+        },
+        {
+          "number": 6,
+          "prompt": "People from France love cheese. (use the)",
+          "answer": "The French love cheese."
+        },
+        {
+          "number": 7,
+          "prompt": "People who are unemployed receive support.",
+          "answer": "The unemployed receive support."
+        },
+        {
+          "number": 8,
+          "prompt": "People who are wealthy pay higher taxes.",
+          "answer": "The wealthy pay higher taxes. / The rich pay higher taxes."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку с артиклем и исправьте предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The life is short.",
+          "answer": "Life is short."
+        },
+        {
+          "number": 2,
+          "prompt": "The love is blind.",
+          "answer": "Love is blind."
+        },
+        {
+          "number": 3,
+          "prompt": "I'm afraid of the spiders.",
+          "answer": "I'm afraid of spiders."
+        },
+        {
+          "number": 4,
+          "prompt": "Rich should pay more tax.",
+          "answer": "The rich should pay more tax."
+        },
+        {
+          "number": 5,
+          "prompt": "She plays piano every evening.",
+          "answer": "She plays the piano every evening."
+        },
+        {
+          "number": 6,
+          "prompt": "He was born in 1990s.",
+          "answer": "He was born in the 1990s."
+        },
+        {
+          "number": 7,
+          "prompt": "Dutch are friendly people.",
+          "answer": "The Dutch are friendly people. / Dutch people are friendly."
+        },
+        {
+          "number": 8,
+          "prompt": "Computers have changed the education.",
+          "answer": "Computers have changed education."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Жизнь слишком коротка, чтобы тратить её на плохой код.",
+          "answer": "Life is too short to waste on bad code. / Life is too short to spend on bad code."
+        },
+        {
+          "number": 2,
+          "prompt": "Богатые становятся богаче.",
+          "answer": "The rich get richer. / The rich are getting richer."
+        },
+        {
+          "number": 3,
+          "prompt": "Знание - сила.",
+          "answer": "Knowledge is power."
+        },
+        {
+          "number": 4,
+          "prompt": "Он играет на гитаре и на пианино.",
+          "answer": "He plays the guitar and the piano."
+        },
+        {
+          "number": 5,
+          "prompt": "Я люблю музыку 90-х.",
+          "answer": "I love music from the 1990s. / I love the music of the 1990s. / I love 1990s music."
+        },
+        {
+          "number": 6,
+          "prompt": "Молодёжь сегодня проводит много времени в интернете.",
+          "answer": "The young spend a lot of time on the internet these days. / Young people spend a lot of time on the internet these days."
+        },
+        {
+          "number": 7,
+          "prompt": "Дети любят животных.",
+          "answer": "Children love animals."
+        },
+        {
+          "number": 8,
+          "prompt": "Безработным нужна поддержка.",
+          "answer": "The unemployed need support."
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,11 @@ import type { Locale, Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
 import { upsertMistake } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
+import { grammarBand } from "../grammar/progress";
+import { topicChoices } from "../grammar/topics";
+import { recordTalkTurn } from "../levels";
 import type { Logger } from "../log";
+import { acceptAnswer } from "../sessions/answer";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { encodeTalkCallback, parseTalkCallback } from "./callbacks";
@@ -34,8 +38,15 @@ function talkState(ctx: BotContext, sessionId: number): TalkState | undefined {
 }
 
 /** One learner message through the `conversation` skill; the reply goes out as a session message. */
-async function takeTurn(deps: TalkDeps, session: LearningHandle, state: TalkState, text: string) {
+async function takeTurn(
+  deps: TalkDeps,
+  session: LearningHandle,
+  ctx: BotContext,
+  state: TalkState,
+  text: string,
+) {
   const { db, skills, i18n, log } = deps;
+  const learnerMessage = ctx.message?.message_id;
   const { id: userId } = session.user;
   const tipKind = TIP_KINDS[state.messages % TIP_KINDS.length] ?? "phrase";
 
@@ -44,13 +55,19 @@ async function takeTurn(deps: TalkDeps, session: LearningHandle, state: TalkStat
     ({ data: turn } = await skills.runSkill(
       userId,
       "conversation",
-      { topic: state.topic, learner_message: text, tip_kind: tipKind },
+      {
+        topic: state.topic,
+        learner_message: text,
+        tip_kind: tipKind,
+        syllabus_topics: topicChoices(await grammarBand(db, userId)),
+      },
       state.history,
     ));
   } catch (error) {
     // Nothing was stored, so the learner can simply send the message again.
     log.warn("talk turn failed", { sessionId: session.session.id, error });
-    await session.send(i18n.t(session.locale, "talk-error"));
+    if (learnerMessage !== undefined) state.exchange = [...(state.exchange ?? []), learnerMessage];
+    await session.window.flashNote(i18n.t(session.locale, "talk-error"));
     return;
   }
 
@@ -65,10 +82,17 @@ async function takeTurn(deps: TalkDeps, session: LearningHandle, state: TalkStat
     state.categories[c.category] = (state.categories[c.category] ?? 0) + 1;
   }
 
-  await session.send(renderTurn(i18n, session.locale, turn, state.messages % TIP_EVERY === 0), {
-    parse_mode: "HTML",
-    reply_markup: finishKeyboard(session.session.id, i18n.t(session.locale, "talk-finish")),
-  });
+  const reply = await session.send(
+    renderTurn(i18n, session.locale, turn, state.messages % TIP_EVERY === 0),
+    {
+      parse_mode: "HTML",
+      reply_markup: finishKeyboard(session.session.id, i18n.t(session.locale, "talk-finish")),
+    },
+  );
+  // The chat keeps the latest exchange only; older ones (and failed attempts) go.
+  await session.window.discard(state.exchange ?? []);
+  state.exchange =
+    learnerMessage === undefined ? [reply.message_id] : [learnerMessage, reply.message_id];
 
   // The learner already has their answer; a failed write must not take the conversation down.
   for (const c of turn.corrections) {
@@ -82,6 +106,11 @@ async function takeTurn(deps: TalkDeps, session: LearningHandle, state: TalkStat
       log.warn("talk mistake upsert failed", { sessionId: session.session.id, error });
     });
   }
+  await recordTalkTurn(db, userId, text, turn.corrections, turn.topic_uses).catch(
+    (error: unknown) => {
+      log.warn("talk level update failed", { sessionId: session.session.id, error });
+    },
+  );
 }
 
 /** The bot's opening question, from the model or, if that fails, a fixed one. */
@@ -103,9 +132,10 @@ async function open(deps: TalkDeps, session: LearningHandle, state: TalkState) {
     log.warn("talk opener failed", { sessionId: session.session.id, error });
     text = i18n.t(session.locale, "talk-opener-fallback");
   }
-  await session.send(text, {
+  const opener = await session.send(text, {
     reply_markup: finishKeyboard(session.session.id, i18n.t(session.locale, "talk-finish")),
   });
+  state.exchange = [opener.message_id];
 }
 
 function topicKeyboard(
@@ -131,6 +161,8 @@ function topicKeyboard(
 
 export function talkSession(deps: TalkDeps): SessionKindHandler {
   return {
+    // A chat: the latest exchange stays on screen, `takeTurn` prunes the older ones.
+    keepsLearnerMessages: true,
     async onStart(session) {
       const settings = await getSettings(deps.db, session.user.id);
       const topics = suggestTopics({
@@ -145,7 +177,8 @@ export function talkSession(deps: TalkDeps): SessionKindHandler {
     async onMessage(session, ctx) {
       const text = ctx.message?.text?.trim();
       if (!text) {
-        await session.send(deps.i18n.t(session.locale, "talk-text-only"));
+        await session.window.flashNote(deps.i18n.t(session.locale, "talk-text-only"));
+        if (ctx.message) await session.window.consumeUserMessage(ctx.message.message_id);
         return;
       }
       // Typing before picking a topic is a free conversation: the learner went first.
@@ -155,7 +188,7 @@ export function talkSession(deps: TalkDeps): SessionKindHandler {
         ctx.session.talk = state;
       }
       state.started = true;
-      await takeTurn(deps, session, state, text);
+      await takeTurn(deps, session, ctx, state, text);
     },
   };
 }
@@ -174,9 +207,8 @@ export function talkHandlers(deps: TalkDeps): Composer<BotContext> {
       await ctx.deleteMessage().catch(() => {});
       return;
     }
-    await ctx.answerCallbackQuery();
-
     if (callback.type === "finish") {
+      await ctx.answerCallbackQuery();
       await session.end(
         "finished",
         summarise(deps.i18n, session.locale, talkState(ctx, callback.sessionId)),
@@ -184,13 +216,20 @@ export function talkHandlers(deps: TalkDeps): Composer<BotContext> {
       return;
     }
 
-    if (talkState(ctx, callback.sessionId)?.started) return; // the chat is already going
     const topics = suggestTopics(ctx.settings);
     const topic = callback.topic === "free" ? undefined : topics[callback.topic];
-    const state = newTalkState(callback.sessionId, topic?.text ?? null, true);
-    ctx.session.talk = state;
-    await ctx.deleteMessage().catch(() => {});
-    await open(deps, session, state);
+    // The picker shows the choice and no buttons until the opener is there, then goes. Once the
+    // chat is going (a topic was picked, or the learner wrote first) the picker is stale.
+    await acceptAnswer(
+      ctx,
+      { lock: session.withLock, current: () => !talkState(ctx, callback.sessionId)?.started },
+      async () => {
+        const state = newTalkState(callback.sessionId, topic?.text ?? null, true);
+        ctx.session.talk = state;
+        await open(deps, session, state);
+        await ctx.deleteMessage().catch(() => {});
+      },
+    );
   });
 
   return composer;

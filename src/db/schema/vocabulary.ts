@@ -14,18 +14,49 @@ import {
 import { cardItemTypeEnum, cefrLevelEnum } from "./enums";
 import { users } from "./users";
 
-/** The seeded CEFR-levelled frequency dictionary. */
+/** `words.source` of a word imported from the owner's curated list (see `src/words/owner-list.ts`). */
+export const OWNER_LIST_SOURCE = "owner_list";
+
+/**
+ * The seeded CEFR-levelled frequency dictionary, overlaid by the owner's curated list. Owner rows
+ * (`source = owner_list`) carry the owner's level, fields and a curriculum position; the picker
+ * follows that order. The owner's words are committed under `seed/` without their example
+ * sentences (dictionary text); those arrive only from the private workbook import.
+ */
 export const words = pgTable(
   "words",
   {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     lemma: text().notNull(),
+    /** Comma-separated for an owner word listed with several parts of speech; "" when unknown. */
     pos: text().notNull(),
     cefrLevel: cefrLevelEnum().notNull(),
     frequencyRank: integer(),
     source: text().notNull(),
+    topic: text(),
+    /** The owner's transcription; the fallback behind the dictionary IPA (see `src/words/pronunciation.ts`). */
+    ipa: text(),
+    /** Dictionary IPA, General American (CMUdict, Wiktionary fallback); null when no source has it. */
+    ipaUs: text(),
+    /** Dictionary IPA, British (Wiktionary); null when no source has it. */
+    ipaUk: text(),
+    /** Written syllables joined by `·` (`wa·ter`); null when they could not be checked against a dictionary. */
+    syllables: text(),
+    /** 0-based index into `syllables` of the syllable with primary stress. */
+    stressIndex: smallint(),
+    /** The owner's example sentence (English, untranslated). */
+    example: text(),
+    translationRu: text(),
+    /** Owner list sheet: 0 = the A1–A2 check, 1–3 = B1–C1, 4–6 = the rare bands. */
+    curriculumStage: smallint(),
+    /** Row number (№) inside the sheet. */
+    curriculumIndex: integer(),
   },
-  (table) => [unique("words_lemma_pos_unique").on(table.lemma, table.pos)],
+  (table) => [
+    unique("words_lemma_pos_unique").on(table.lemma, table.pos),
+    index("words_lemma_idx").on(table.lemma),
+    index("words_curriculum_idx").on(table.curriculumStage, table.curriculumIndex),
+  ],
 );
 
 /** An example sentence on a card and its translation into the learner's language. */
@@ -43,6 +74,10 @@ export type CardBack = {
   examples?: (CardExample | string)[];
   collocations?: string[];
   mnemonic?: string;
+  /** A stock-photo query for the card's picture; null or absent: no picture. */
+  imageQuery?: string | null;
+  /** An abstract word's emoji, shown in place of a picture. */
+  emoji?: string | null;
 };
 
 /** FSRS state columns, 1:1 with the ts-fsrs 5 `Card` (see `src/db/fsrs.ts`). */
@@ -68,6 +103,12 @@ export const cards = pgTable(
     // ts-fsrs `State`: 0 New, 1 Learning, 2 Review, 3 Relearning.
     state: smallint().notNull(),
     lastReview: timestamp({ withTimezone: true }),
+    /**
+     * Set when the learner marked the word "I know this 100%": the card is never offered as new,
+     * never reviewed and never due. Orthogonal to FSRS (the state columns stay untouched), so
+     * returning the word to learning is just clearing it.
+     */
+    knownAt: timestamp({ withTimezone: true }),
     createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [

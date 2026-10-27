@@ -1,0 +1,272 @@
+{
+  "id": "g044",
+  "position": 44,
+  "cefrLevel": "B2",
+  "title": "Союзы контраста: although, even though, despite, in spite of, however, whereas",
+  "plannedFrom": "2027-03-22",
+  "plannedTo": "2027-03-27",
+  "sections": {
+    "why": [
+      "Эти слова показывают контраст или уступку: \"хотя\", \"несмотря на\", \"однако\", \"тогда как\". В русском мы их легко меняем местами, а в английском каждое слово требует после себя определённую конструкцию: предложение, существительное или -ing. Именно здесь русскоязычные чаще всего ошибаются."
+    ],
+    "formation": [
+      "• although / though / even though + подлежащее + глагол: Although it was late, we kept working.",
+      "• despite / in spite of + существительное или V-ing: Despite the rain, ... / In spite of being tired, ...",
+      "• despite / in spite of + the fact that + предложение: Despite the fact that he was late, ...",
+      "• however, + предложение (отдельное предложение или после точки с запятой): It was cheap. However, it was poor quality.",
+      "• whereas / while + предложение (сравнение двух вещей): Tom is tall, whereas his brother is short."
+    ],
+    "usage": [
+      "1. Although / though / even though: неожиданный контраст. Even though сильнее, чем although. (Хотя шёл дождь, мы пошли гулять. — Although it was raining, we went for a walk.)",
+      "2. Despite / in spite of: то же значение, но дальше идёт существительное или -ing, а не целое предложение. (Несмотря на усталость, он закончил бег. — Despite being tired, he finished the run.)",
+      "3. However: связывает два отдельных предложения, после него запятая. (Предложение было хорошим. Однако я отказался. — It was a good offer. However, I turned it down.)",
+      "4. Whereas / while: противопоставление двух фактов. (Мой брат любит чай, а я люблю кофе. — My brother likes tea, whereas I like coffee.)",
+      "5. Though в конце фразы в разговорной речи: It's a nice car. Expensive, though. (Хотя дорогая.)"
+    ],
+    "signalWords": [
+      "\"Хотя\" + глагол → although; \"несмотря на\" + существительное → despite; \"однако\" между двумя предложениями → however; \"а\" при сравнении → whereas."
+    ],
+    "mistakes": [
+      "✗ Although he was tired, but he worked → ✓ Although he was tired, he worked (but не нужен)",
+      "✗ Despite of the rain → ✓ Despite the rain / In spite of the rain (of только в in spite of)",
+      "✗ Despite he was late → ✓ Despite being late / Although he was late (после despite нет подлежащего с глаголом)",
+      "✗ It was cold, however we went out → ✓ It was cold. However, we went out (however не соединяет предложения запятой)",
+      "✗ In spite the weather → ✓ In spite of the weather (of обязательно)"
+    ],
+    "remember": [
+      "Although + предложение, despite + существительное или -ing, however — всегда с запятой после него; и никакого \"but\" после although."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Although (b) Despite it was late, we kept working.",
+          "answer": "(a) Although"
+        },
+        {
+          "number": 2,
+          "prompt": "(a) Although (b) Despite the traffic, we arrived on time.",
+          "answer": "(b) Despite"
+        },
+        {
+          "number": 3,
+          "prompt": "He passed the test (a) although (b) despite not studying much.",
+          "answer": "(b) despite"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Even though (b) In spite of she is rich, she lives simply.",
+          "answer": "(a) Even though"
+        },
+        {
+          "number": 5,
+          "prompt": "I fell asleep (a) although (b) despite the noise.",
+          "answer": "(b) despite"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Though (b) In spite of the bad reviews, the movie made a lot of money.",
+          "answer": "(b) In spite of"
+        },
+        {
+          "number": 7,
+          "prompt": "She went to work (a) even though (b) despite she had a fever.",
+          "answer": "(a) even though"
+        },
+        {
+          "number": 8,
+          "prompt": "Despite ___ tired, he finished the run. (a) he was (b) being",
+          "answer": "(b) being"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Вставьте although, despite, in spite of, however или whereas",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was a good offer. ___, I turned it down.",
+          "answer": "However"
+        },
+        {
+          "number": 2,
+          "prompt": "___ the app is free, it has no ads.",
+          "answer": "Although / Though / Even though"
+        },
+        {
+          "number": 3,
+          "prompt": "My sister loves sports, ___ I prefer reading.",
+          "answer": "whereas / while"
+        },
+        {
+          "number": 4,
+          "prompt": "We stayed at the beach ___ the rain.",
+          "answer": "despite / in spite of"
+        },
+        {
+          "number": 5,
+          "prompt": "___ he works hard, he earns very little.",
+          "answer": "Although / Though / Even though"
+        },
+        {
+          "number": 6,
+          "prompt": "She smiled ___ feeling nervous.",
+          "answer": "despite / in spite of"
+        },
+        {
+          "number": 7,
+          "prompt": "Python is easy to learn, ___ C++ is much harder.",
+          "answer": "whereas / while"
+        },
+        {
+          "number": 8,
+          "prompt": "___ the fact that he was late, the boss stayed calm.",
+          "answer": "Despite / In spite of"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Соедините предложения, используя слово в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was raining. We went for a walk. (although)",
+          "answer": "Although it was raining, we went for a walk. / We went for a walk although it was raining."
+        },
+        {
+          "number": 2,
+          "prompt": "She was ill. She went to work. (despite)",
+          "answer": "Despite being ill, she went to work. / Despite her illness, she went to work."
+        },
+        {
+          "number": 3,
+          "prompt": "The car is old. It runs well. (even though)",
+          "answer": "Even though the car is old, it runs well. / The car runs well even though it is old."
+        },
+        {
+          "number": 4,
+          "prompt": "He studied a lot. He failed the exam. (in spite of)",
+          "answer": "In spite of studying a lot, he failed the exam. / He failed the exam in spite of studying a lot."
+        },
+        {
+          "number": 5,
+          "prompt": "Tom is very tall. His brother is short. (whereas)",
+          "answer": "Tom is very tall, whereas his brother is short."
+        },
+        {
+          "number": 6,
+          "prompt": "The hotel was cheap. It was very clean. (however)",
+          "answer": "The hotel was cheap. However, it was very clean."
+        },
+        {
+          "number": 7,
+          "prompt": "I was tired. I couldn't sleep. (despite the fact that)",
+          "answer": "Despite the fact that I was tired, I couldn't sleep. / I couldn't sleep despite the fact that I was tired."
+        },
+        {
+          "number": 8,
+          "prompt": "The movie was long. I enjoyed it. (although)",
+          "answer": "Although the movie was long, I enjoyed it. / I enjoyed the movie although it was long."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и перепишите предложение правильно",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Although he was tired, but he kept working.",
+          "answer": "Although he was tired, he kept working."
+        },
+        {
+          "number": 2,
+          "prompt": "Despite of the rain, we played football.",
+          "answer": "Despite the rain, we played football. / In spite of the rain, we played football."
+        },
+        {
+          "number": 3,
+          "prompt": "Despite he was late, nobody was angry.",
+          "answer": "Although he was late, nobody was angry. / Despite being late, nobody was angry."
+        },
+        {
+          "number": 4,
+          "prompt": "It was cold, however we went swimming.",
+          "answer": "It was cold. However, we went swimming. / It was cold; however, we went swimming."
+        },
+        {
+          "number": 5,
+          "prompt": "In spite the weather, the flight was on time.",
+          "answer": "In spite of the weather, the flight was on time."
+        },
+        {
+          "number": 6,
+          "prompt": "Despite the salary is high, the job is boring.",
+          "answer": "Although the salary is high, the job is boring. / Despite the high salary, the job is boring."
+        },
+        {
+          "number": 7,
+          "prompt": "I like him despite he is rude.",
+          "answer": "I like him although he is rude. / I like him despite the fact that he is rude. / I like him despite his being rude."
+        },
+        {
+          "number": 8,
+          "prompt": "I like tea, however my wife prefers coffee.",
+          "answer": "I like tea, whereas my wife prefers coffee. / I like tea. However, my wife prefers coffee."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Хотя шёл дождь, мы пошли гулять.",
+          "answer": "Although it was raining, we went for a walk."
+        },
+        {
+          "number": 2,
+          "prompt": "Несмотря на усталость, он закончил проект.",
+          "answer": "Despite being tired, he finished the project. / In spite of being tired, he finished the project."
+        },
+        {
+          "number": 3,
+          "prompt": "Он много работает, однако зарабатывает мало.",
+          "answer": "He works a lot. However, he earns very little. / He works a lot; however, he earns very little."
+        },
+        {
+          "number": 4,
+          "prompt": "Мой брат любит город, а я люблю деревню.",
+          "answer": "My brother likes the city, whereas I like the countryside."
+        },
+        {
+          "number": 5,
+          "prompt": "Хотя я плохо спал, я чувствую себя хорошо.",
+          "answer": "Even though I slept badly, I feel fine. / Although I slept badly, I feel fine."
+        },
+        {
+          "number": 6,
+          "prompt": "Несмотря на пробки, мы приехали вовремя.",
+          "answer": "Despite the traffic, we arrived on time. / In spite of the traffic, we arrived on time."
+        },
+        {
+          "number": 7,
+          "prompt": "Несмотря на то что у него нет опыта, его взяли на работу.",
+          "answer": "Despite the fact that he has no experience, he got the job. / In spite of the fact that he has no experience, he was hired."
+        },
+        {
+          "number": 8,
+          "prompt": "Приложение дорогое. Однако оно того стоит.",
+          "answer": "The app is expensive. However, it is worth it."
+        }
+      ]
+    }
+  ]
+}

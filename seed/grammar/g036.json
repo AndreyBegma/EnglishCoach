@@ -1,0 +1,274 @@
+{
+  "id": "g036",
+  "position": 36,
+  "cefrLevel": "B2",
+  "title": "Пассивный залог во всех временах и с модальными глаголами",
+  "plannedFrom": "2027-01-25",
+  "plannedTo": "2027-01-30",
+  "sections": {
+    "why": [
+      "Пассив (страдательный залог) нужен, когда важно, что произошло с предметом, а не кто это сделал: «Баг исправили», «Сайт был создан в 2020 году». В русском мы часто говорим «исправили», «сказали» без подлежащего, а в английском подлежащее обязательно, поэтому используем пассив."
+    ],
+    "formation": [
+      "Формула: to be (в нужном времени) + V3 (третья форма глагола). Меняется только форма to be.",
+      "• Present Simple: am/is/are + V3 — The code is checked every day.",
+      "• Past Simple: was/were + V3 — The code was checked yesterday.",
+      "• Future Simple: will be + V3 — The code will be checked tomorrow.",
+      "• Present Continuous: am/is/are being + V3 — The code is being checked now.",
+      "• Past Continuous: was/were being + V3 — The code was being checked at five.",
+      "• Present Perfect: have/has been + V3 — The code has been checked.",
+      "• Past Perfect: had been + V3 — The code had been checked before the release.",
+      "• С модальными: modal + be + V3 — The code must be checked. The file can't be opened.",
+      "Отрицание: not ставится после первого вспомогательного (is not checked, hasn't been checked). Вопрос: первый вспомогательный выходит вперёд (Was the code checked? Has it been checked?)."
+    ],
+    "usage": [
+      "1. Исполнитель неизвестен или неважен: My bike was stolen. (У меня украли велосипед.)",
+      "2. Важен результат, а не деятель: The bug has been fixed. (Баг исправлен.)",
+      "3. Официальный, научный или технический стиль: Passwords must be changed every 90 days. (Пароли нужно менять каждые 90 дней.)",
+      "4. Если исполнитель всё же важен, добавляем by: The app was developed by our team. (Приложение разработала наша команда.)"
+    ],
+    "signalWords": [
+      "by (кем), yesterday / in 1990 (Past Simple), already / just / yet (Present Perfect), now / at the moment (being), by the time (had been), every day (Present Simple)."
+    ],
+    "mistakes": [
+      "✗ The house is building now. → ✓ The house is being built now. (в Continuous нужно being + V3)",
+      "✗ My phone was stole. → ✓ My phone was stolen. (после to be только третья форма)",
+      "✗ It was happened yesterday. → ✓ It happened yesterday. (глаголы без дополнения — happen, arrive, die, sleep — не имеют пассива)",
+      "✗ The tickets have booked. → ✓ The tickets have been booked. (забыли been)",
+      "✗ The report must send today. → ✓ The report must be sent today. (после модального нужен be + V3)"
+    ],
+    "remember": ["Пассив = to be в нужном времени + V3; время меняем только у to be."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в пассивную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The report ___ (send) yesterday.",
+          "answer": "was sent"
+        },
+        {
+          "number": 2,
+          "prompt": "English ___ (speak) in many countries.",
+          "answer": "is spoken"
+        },
+        {
+          "number": 3,
+          "prompt": "The new app ___ (release) next week.",
+          "answer": "will be released"
+        },
+        {
+          "number": 4,
+          "prompt": "My laptop ___ (repair) at the moment.",
+          "answer": "is being repaired"
+        },
+        {
+          "number": 5,
+          "prompt": "The bug ___ (just / fix).",
+          "answer": "has just been fixed"
+        },
+        {
+          "number": 6,
+          "prompt": "These photos ___ (take) in Italy last summer.",
+          "answer": "were taken"
+        },
+        {
+          "number": 7,
+          "prompt": "The office ___ (clean) every evening.",
+          "answer": "is cleaned"
+        },
+        {
+          "number": 8,
+          "prompt": "The server ___ (move) to the cloud by the time I joined the team.",
+          "answer": "had been moved"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The letter (a) wrote (b) was written (c) has written by my boss.",
+          "answer": "(b) was written"
+        },
+        {
+          "number": 2,
+          "prompt": "The new bridge (a) is building (b) is being built (c) is build now.",
+          "answer": "(b) is being built"
+        },
+        {
+          "number": 3,
+          "prompt": "The tickets (a) have been booked (b) have booked (c) are booking already.",
+          "answer": "(a) have been booked"
+        },
+        {
+          "number": 4,
+          "prompt": "This problem (a) can solve (b) can be solved (c) can be solving easily.",
+          "answer": "(b) can be solved"
+        },
+        {
+          "number": 5,
+          "prompt": "The match (a) postponed (b) was postponed (c) was postponing because of the rain.",
+          "answer": "(b) was postponed"
+        },
+        {
+          "number": 6,
+          "prompt": "All passwords (a) must change (b) must be changed (c) must been changed every 90 days.",
+          "answer": "(b) must be changed"
+        },
+        {
+          "number": 7,
+          "prompt": "By Friday the contract (a) will be signed (b) will sign (c) is signing by both sides.",
+          "answer": "(a) will be signed"
+        },
+        {
+          "number": 8,
+          "prompt": "When I arrived, the room (a) was already cleaning (b) had already been cleaned (c) has already been cleaned.",
+          "answer": "(b) had already been cleaned"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение в пассиве",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "They built this bridge in 1990.",
+          "answer": "This bridge was built in 1990."
+        },
+        {
+          "number": 2,
+          "prompt": "Someone has stolen my bike.",
+          "answer": "My bike has been stolen."
+        },
+        {
+          "number": 3,
+          "prompt": "The company will announce the results tomorrow.",
+          "answer": "The results will be announced tomorrow. / The results will be announced by the company tomorrow."
+        },
+        {
+          "number": 4,
+          "prompt": "You must not open this file.",
+          "answer": "This file must not be opened."
+        },
+        {
+          "number": 5,
+          "prompt": "They are repairing the road.",
+          "answer": "The road is being repaired."
+        },
+        {
+          "number": 6,
+          "prompt": "People speak Spanish in Mexico.",
+          "answer": "Spanish is spoken in Mexico."
+        },
+        {
+          "number": 7,
+          "prompt": "The manager had already signed the documents.",
+          "answer": "The documents had already been signed. / The documents had already been signed by the manager."
+        },
+        {
+          "number": 8,
+          "prompt": "We can't finish the project today.",
+          "answer": "The project can't be finished today."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The house is building now.",
+          "answer": "The house is being built now."
+        },
+        {
+          "number": 2,
+          "prompt": "My phone was stole yesterday.",
+          "answer": "My phone was stolen yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "The bug has been fix by Anna.",
+          "answer": "The bug has been fixed by Anna."
+        },
+        {
+          "number": 4,
+          "prompt": "It was happened last week.",
+          "answer": "It happened last week."
+        },
+        {
+          "number": 5,
+          "prompt": "The documents must be send today.",
+          "answer": "The documents must be sent today."
+        },
+        {
+          "number": 6,
+          "prompt": "The new office will opened in May.",
+          "answer": "The new office will be opened in May. / The new office will open in May."
+        },
+        {
+          "number": 7,
+          "prompt": "She was gave a new laptop.",
+          "answer": "She was given a new laptop."
+        },
+        {
+          "number": 8,
+          "prompt": "The cake was ate by the children.",
+          "answer": "The cake was eaten by the children."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Этот сайт был создан в 2020 году.",
+          "answer": "This website was created in 2020. / This site was created in 2020."
+        },
+        {
+          "number": 2,
+          "prompt": "Мою машину сейчас ремонтируют.",
+          "answer": "My car is being repaired now. / My car is being fixed now."
+        },
+        {
+          "number": 3,
+          "prompt": "Все письма уже отправлены.",
+          "answer": "All the emails have already been sent."
+        },
+        {
+          "number": 4,
+          "prompt": "Нам сказали, что встреча отменена.",
+          "answer": "We were told that the meeting was canceled. / We were told that the meeting had been canceled."
+        },
+        {
+          "number": 5,
+          "prompt": "Новую функцию выпустят в пятницу.",
+          "answer": "The new feature will be released on Friday."
+        },
+        {
+          "number": 6,
+          "prompt": "Этот код нельзя изменять.",
+          "answer": "This code must not be changed. / This code can't be changed."
+        },
+        {
+          "number": 7,
+          "prompt": "Меня пригласили на собеседование.",
+          "answer": "I was invited to an interview. / I have been invited to an interview."
+        },
+        {
+          "number": 8,
+          "prompt": "Перед релизом было найдено много багов.",
+          "answer": "Many bugs were found before the release."
+        }
+      ]
+    }
+  ]
+}

@@ -36,8 +36,55 @@ const flag = z
   .default("false")
   .transform((value) => value === "true" || value === "1");
 
+/** Kokoro voice ids look like `af_heart`: a language/gender prefix and a name. */
+const kokoroVoice = requiredString.regex(/^[a-z]{2}_[a-z0-9_]+$/, "must be a Kokoro voice id");
+
+/**
+ * Text to speech. Read by `src/voice` at startup (`parseTtsEnv`) and validated with the rest of
+ * the environment, so a bad value fails the boot instead of the first 🔊 tap.
+ */
+const ttsShape = {
+  // Base URL of the Kokoro-FastAPI service; unset means no local TTS.
+  TTS_URL: unsetIfBlank(url.optional()),
+  TTS_VOICE_US: unsetIfBlank(kokoroVoice.default("af_heart")),
+  TTS_VOICE_UK: unsetIfBlank(kokoroVoice.default("bf_emma")),
+  // A private channel or group (negative id) where the bot uploads each voice note once.
+  TTS_STORAGE_CHAT_ID: unsetIfBlank(
+    z.coerce.number({ error: "must be a Telegram chat id" }).int().negative().optional(),
+  ),
+};
+
+const ttsSchema = z.object(ttsShape);
+export type TtsEnv = z.infer<typeof ttsSchema>;
+
+/** The TTS variables alone. Throws `EnvError` like `parseEnv`. */
+export function parseTtsEnv(source: Record<string, string | undefined> = process.env): TtsEnv {
+  return report(ttsSchema.safeParse(source));
+}
+
+/**
+ * Speech to text. Read by `src/voice` at startup (`parseSttEnv`) and validated with the rest of
+ * the environment.
+ */
+const sttShape = {
+  // Base URL of the faster-whisper service; unset means no local STT.
+  STT_URL: unsetIfBlank(url.optional()),
+  // The model id the service is asked for; compose loads the same one.
+  STT_MODEL: unsetIfBlank(requiredString.default("Systran/faster-whisper-small.en")),
+};
+
+const sttSchema = z.object(sttShape);
+export type SttEnv = z.infer<typeof sttSchema>;
+
+/** The STT variables alone. Throws `EnvError` like `parseEnv`. */
+export function parseSttEnv(source: Record<string, string | undefined> = process.env): SttEnv {
+  return report(sttSchema.safeParse(source));
+}
+
 const envSchema = z
   .object({
+    ...ttsShape,
+    ...sttShape,
     NODE_ENV: unsetIfBlank(z.enum(["development", "production", "test"]).default("development")),
     LOG_LEVEL: unsetIfBlank(z.enum(["debug", "info", "warn", "error"]).default("info")),
     TELEGRAM_BOT_TOKEN: unsetIfBlank(requiredString),
@@ -71,6 +118,21 @@ const envSchema = z
     PUBLIC_URL: unsetIfBlank(url.optional()),
     SESSION_TIMEOUT_MINUTES: unsetIfBlank(z.coerce.number().int().min(1).max(1440).default(20)),
     ENABLE_DEMO_SESSION: unsetIfBlank(flag),
+    // Word card enrichment ahead of time (server provider only).
+    WORD_PREFETCH_DAYS: unsetIfBlank(z.coerce.number().int().min(1).max(14).default(3)),
+    WORD_ENRICH_BATCH: unsetIfBlank(z.coerce.number().int().min(1).max(20).default(10)),
+    WORD_ENRICH_CONCURRENCY: unsetIfBlank(z.coerce.number().int().min(1).max(10).default(1)),
+    WORD_BACKFILL_EVERY_MINUTES: unsetIfBlank(z.coerce.number().int().min(0).max(1440).default(30)),
+    WORD_BACKFILL_WORDS: unsetIfBlank(z.coerce.number().int().min(1).max(200).default(20)),
+    // Voicing the owner's list ahead of time (needs TTS_URL and TTS_STORAGE_CHAT_ID).
+    VOICE_BACKFILL_EVERY_MINUTES: unsetIfBlank(
+      z.coerce.number().int().min(0).max(1440).default(15),
+    ),
+    // Texts per run; each new one costs one storage-chat upload, 3 s apart.
+    VOICE_BACKFILL_TEXTS: unsetIfBlank(z.coerce.number().int().min(1).max(1000).default(200)),
+    // Pictures on new-word cards: Pexels first, Unsplash as the fallback. Neither: no pictures.
+    PEXELS_API_KEY: unsetIfBlank(requiredString.optional()),
+    UNSPLASH_ACCESS_KEY: unsetIfBlank(requiredString.optional()),
   })
   .superRefine((env, ctx) => {
     if (env.BOT_MODE !== "webhook") return;
@@ -88,7 +150,10 @@ export class EnvError extends Error {
 }
 
 export function parseEnv(source: Record<string, string | undefined> = process.env): Env {
-  const result = envSchema.safeParse(source);
+  return report(envSchema.safeParse(source));
+}
+
+function report<T>(result: z.ZodSafeParseResult<T>): T {
   if (result.success) return result.data;
 
   const problems = result.error.issues.map(

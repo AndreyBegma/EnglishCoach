@@ -6,19 +6,28 @@ import { redisStorage } from "./bot/storage";
 import { EnvError, parseEnv } from "./config/env";
 import { masterKeyFromBase64 } from "./crypto/secrets";
 import { createDb } from "./db/client";
+import type { SettingsField } from "./events/settings-events";
 import { createApp } from "./http/app";
-import { resolveProvider } from "./llm";
+import { createWordImages } from "./images";
+import { createServerProvider, defaultFactories, resolveProvider } from "./llm";
 import { createLogger } from "./log";
 import { BullRoutineJobs } from "./queue/routine-jobs";
 import { BullSessionTimeouts } from "./queue/session-timeouts";
+import { BullVoiceBackfill } from "./queue/voice-backfill";
+import { BullWordEnrichment } from "./queue/word-enrichment";
 import { createRedis } from "./redis";
 import { RedisRoutineStore } from "./routine";
+import { RedisSessionLocks } from "./sessions/locks";
 import {
   learnerContextFromDb,
   loadSkillRegistry,
   SkillDefinitionError,
   SkillRunner,
 } from "./skills";
+import { WordEnricher } from "./words/enrichment";
+
+/** Settings that change which words come next, or in which language they are explained. */
+const PREFETCH_SETTINGS = new Set<SettingsField>(["cefrLevel", "explainLang", "wordsPerDay"]);
 
 function loadEnvOrExit() {
   try {
@@ -83,7 +92,8 @@ const timeouts = new BullSessionTimeouts({
   log,
 });
 const routineJobs = new BullRoutineJobs({ redisUrl: env.REDIS_URL, log });
-const { bot, sessions, routine } = createBot({
+const images = createWordImages(env, { db: database.db, log });
+const { bot, sessions, routine, settingsEvents, voice } = createBot({
   token: env.TELEGRAM_BOT_TOKEN,
   db: database.db,
   log,
@@ -92,12 +102,77 @@ const { bot, sessions, routine } = createBot({
   refusals: redisRefusalGate(redis.client),
   timeouts,
   enableDemoSession: env.ENABLE_DEMO_SESSION,
+  images,
   masterKey,
   llmEnv: env,
   skills,
   routine: { jobs: routineJobs, store: new RedisRoutineStore(redis.client) },
+  locks: new RedisSessionLocks(redis.client),
 });
 bot.catch((error) => log.error("bot update failed", { error: error.error }));
+
+// Word cards are enriched ahead of time with the server's provider; without one, Learn words
+// enriches each card inline as before.
+const wordEnrichment = env.SERVER_LLM_PROVIDER
+  ? new BullWordEnrichment({
+      redisUrl: env.REDIS_URL,
+      log,
+      concurrency: env.WORD_ENRICH_CONCURRENCY,
+      backfillEveryMinutes: env.WORD_BACKFILL_EVERY_MINUTES,
+    })
+  : undefined;
+if (wordEnrichment) {
+  const enricher = new WordEnricher({
+    db: database.db,
+    registry: skillRegistry,
+    provider: () => createServerProvider(env, defaultFactories),
+    log,
+    batchSize: env.WORD_ENRICH_BATCH,
+    prefetchDays: env.WORD_PREFETCH_DAYS,
+    adminTelegramIds: env.ADMIN_TELEGRAM_IDS,
+    images,
+    speech: voice.tts,
+  });
+  const requestPrefetch = (userId: number) =>
+    wordEnrichment
+      .requestPrefetch(userId)
+      .catch((error: unknown) => log.warn("word prefetch request failed", { userId, error }));
+  wordEnrichment.startWorker({
+    prefetch: (userId) => enricher.prefetchUser(userId),
+    prefetchAll: () => enricher.prefetchAll(),
+    backfill: () => enricher.backfill(env.WORD_BACKFILL_WORDS),
+  });
+  sessions.onEnded(({ session, user }) => {
+    if (session.kind === "vocab_new") void requestPrefetch(user.id);
+  });
+  settingsEvents.on("settings.changed", ({ userId, changed }) => {
+    if (changed.some((field) => PREFETCH_SETTINGS.has(field))) void requestPrefetch(userId);
+  });
+  redisReady
+    .then((ready) => (ready ? wordEnrichment.schedule() : undefined))
+    .catch((error: unknown) => log.warn("word enrichment scheduling failed", { error }));
+} else {
+  log.info("word prefetch off: SERVER_LLM_PROVIDER is not set");
+}
+
+// The owner's list is voiced ahead of time with the local engine, uploaded once to the storage
+// chat; without either, 🔊 voices each text on its first tap.
+const voiceBackfill =
+  env.TTS_URL && env.TTS_STORAGE_CHAT_ID !== undefined
+    ? new BullVoiceBackfill({
+        redisUrl: env.REDIS_URL,
+        log,
+        everyMinutes: env.VOICE_BACKFILL_EVERY_MINUTES,
+      })
+    : undefined;
+if (voiceBackfill) {
+  voiceBackfill.startWorker(() => voice.backfill.run(env.VOICE_BACKFILL_TEXTS));
+  redisReady
+    .then((ready) => (ready ? voiceBackfill.schedule() : undefined))
+    .catch((error: unknown) => log.warn("voice backfill scheduling failed", { error }));
+} else {
+  log.info("voice backfill off: TTS_URL or TTS_STORAGE_CHAT_ID is not set");
+}
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));
 routineJobs.startWorker((job) => routine.fire(job));
 // Jobs persist in Redis; this creates them for users who never got any and drops stale ones.
@@ -137,7 +212,14 @@ async function shutdown(signal: string) {
   if (shuttingDown) return;
   shuttingDown = true;
   log.info("shutting down", { signal });
-  await Promise.allSettled([bot.stop(), server.stop(), timeouts.close(), routineJobs.close()]);
+  await Promise.allSettled([
+    bot.stop(),
+    server.stop(),
+    timeouts.close(),
+    routineJobs.close(),
+    wordEnrichment?.close(),
+    voiceBackfill?.close(),
+  ]);
   await Promise.allSettled([database.close(), redis.close()]);
   process.exit(0);
 }

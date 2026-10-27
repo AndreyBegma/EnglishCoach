@@ -1,0 +1,281 @@
+{
+  "id": "g085",
+  "position": 85,
+  "cefrLevel": "C2",
+  "title": "Финальное повторение: вся грамматика в одном тесте",
+  "plannedFrom": "2028-01-03",
+  "plannedTo": "2028-01-08",
+  "sections": {
+    "why": [
+      "Это карта всего курса на одной странице. Перед финальным тестом пройдись по ней и проверь: какую форму и какое время ты выберешь, чтобы выразить нужный смысл."
+    ],
+    "formation": [
+      "ВРЕМЕНА",
+      "• Present Simple: V / V-s. Present Continuous: am / is / are + V-ing.",
+      "• Present Perfect: have / has + V3. Present Perfect Continuous: have / has been + V-ing.",
+      "• Past Simple: V2 / did + V. Past Continuous: was / were + V-ing.",
+      "• Past Perfect: had + V3. Past Perfect Continuous: had been + V-ing.",
+      "• Будущее: will + V / be going to + V; Future Continuous: will be + V-ing; Future Perfect: will have + V3.",
+      "УСЛОВНЫЕ",
+      "• Zero: if + Present, Present. First: if + Present, will + V.",
+      "• Second: if + Past, would + V (If I were you...). Third: if + Past Perfect, would have + V3.",
+      "• Mixed: if + Past Perfect, would + V. Wish: wish + Past Simple (сейчас), wish + Past Perfect (прошлое).",
+      "ПАССИВ: be + V3 (is done, was done, has been done, will be done).",
+      "КОСВЕННАЯ РЕЧЬ: сдвиг времён на шаг назад (is → was, will → would, Past Simple → Past Perfect); вопрос превращается в утверждение: She asked where I lived. Say + that, tell + человек.",
+      "МОДАЛЬНЫЕ: must be (наверняка), can't be (не может быть), might / may have + V3 (возможно, было), should have + V3 (надо было), needn't have + V3 (зря сделал).",
+      "ИНВЕРСИЯ: Never have I seen..., Hardly had I left when..., Not only did he..., Had I known..., Were I you..."
+    ],
+    "usage": [
+      "1. Выбор времени: спроси себя, о каком периоде речь и важна ли связь с настоящим (Perfect) или указано точное время (Past Simple).",
+      "2. Условие: реально ли оно (First), нереально сейчас (Second) или уже невозможно (Third).",
+      "3. Пассив: важно действие или результат, а не исполнитель. (The bug was fixed. — Баг исправлен.)",
+      "4. Косвенная речь: пересказываешь чужие слова, поэтому сдвигаешь время и порядок слов.",
+      "5. Инверсия: усиливаешь мысль в формальном или литературном стиле."
+    ],
+    "signalWords": [
+      "since / for / already / yet (Perfect), ago / yesterday (Past Simple), by the time (Past Perfect), if / unless (условные), never / hardly / no sooner (инверсия)."
+    ],
+    "mistakes": [
+      "✗ I live here since 2020 → ✓ I've lived here since 2020",
+      "✗ If I will have time → ✓ If I have time",
+      "✗ He asked where do I work → ✓ He asked where I worked",
+      "✗ I wish I would have time → ✓ I wish I had time",
+      "✗ Hardly I had left → ✓ Hardly had I left"
+    ],
+    "remember": [
+      "Сначала смысл, потом форма: когда, насколько реально, кто важнее и что хочу подчеркнуть."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She ___ (work) here since 2019.",
+          "answer": "has worked / has been working"
+        },
+        {
+          "number": 2,
+          "prompt": "If I ___ (be) you, I would call him.",
+          "answer": "were / was"
+        },
+        {
+          "number": 3,
+          "prompt": "The report ___ (send) yesterday.",
+          "answer": "was sent"
+        },
+        {
+          "number": 4,
+          "prompt": "He said that he ___ (be) tired.",
+          "answer": "was"
+        },
+        {
+          "number": 5,
+          "prompt": "By the time we arrived, the film ___ (already / start).",
+          "answer": "had already started"
+        },
+        {
+          "number": 6,
+          "prompt": "Never ___ (I / see) such a mess.",
+          "answer": "have I seen"
+        },
+        {
+          "number": 7,
+          "prompt": "We ___ (not / finish) yet.",
+          "answer": "haven't finished / have not finished"
+        },
+        {
+          "number": 8,
+          "prompt": "You ___ (not / have to) come; it's optional.",
+          "answer": "don't have to / do not have to"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I've known her ___ 2015. (a) for (b) since (c) ago",
+          "answer": "since"
+        },
+        {
+          "number": 2,
+          "prompt": "If it rains tomorrow, we ___ at home. (a) stay (b) will stay (c) would stay",
+          "answer": "will stay"
+        },
+        {
+          "number": 3,
+          "prompt": "I wish I ___ more time. (a) have (b) had (c) would have",
+          "answer": "had"
+        },
+        {
+          "number": 4,
+          "prompt": "The bridge ___ in 1990. (a) built (b) is built (c) was built",
+          "answer": "was built"
+        },
+        {
+          "number": 5,
+          "prompt": "She asked me where ___. (a) did I live (b) I lived (c) do I live",
+          "answer": "I lived"
+        },
+        {
+          "number": 6,
+          "prompt": "He ___ be at home; I just saw him leave. (a) must (b) can't (c) should",
+          "answer": "can't"
+        },
+        {
+          "number": 7,
+          "prompt": "___ had we sat down than the phone rang. (a) No sooner (b) Hardly (c) Only",
+          "answer": "No sooner"
+        },
+        {
+          "number": 8,
+          "prompt": "I'm used to ___ early. (a) get up (b) getting up (c) got up",
+          "answer": "getting up"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Преобразуйте предложение по заданию",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Passive: They fixed the bug yesterday.",
+          "answer": "The bug was fixed yesterday."
+        },
+        {
+          "number": 2,
+          "prompt": "Reported speech: \"I am tired,\" she said.",
+          "answer": "She said (that) she was tired. / She said she was tired. / She said that she was tired."
+        },
+        {
+          "number": 3,
+          "prompt": "Third conditional (If...): I didn't study, so I failed.",
+          "answer": "If I had studied, I wouldn't have failed. / If I had studied, I would have passed."
+        },
+        {
+          "number": 4,
+          "prompt": "Wish: I don't have a car. (I wish...)",
+          "answer": "I wish I had a car."
+        },
+        {
+          "number": 5,
+          "prompt": "Inversion: I have never seen such a view. (Never...)",
+          "answer": "Never have I seen such a view."
+        },
+        {
+          "number": 6,
+          "prompt": "Reported question: \"Where do you work?\" he asked me.",
+          "answer": "He asked me where I worked."
+        },
+        {
+          "number": 7,
+          "prompt": "Relative clause (who): The developer is my friend. He fixed the bug.",
+          "answer": "The developer who fixed the bug is my friend."
+        },
+        {
+          "number": 8,
+          "prompt": "Modal (might): Perhaps she missed the train.",
+          "answer": "She might have missed the train."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I live here since 2020.",
+          "answer": "I've lived here since 2020. / I have lived here since 2020. / I have been living here since 2020. / I've been living here since 2020."
+        },
+        {
+          "number": 2,
+          "prompt": "If I will have time, I'll help you.",
+          "answer": "If I have time, I'll help you."
+        },
+        {
+          "number": 3,
+          "prompt": "He asked me where do I work.",
+          "answer": "He asked me where I worked."
+        },
+        {
+          "number": 4,
+          "prompt": "She suggested to go to the cinema.",
+          "answer": "She suggested going to the cinema."
+        },
+        {
+          "number": 5,
+          "prompt": "I'm used to get up early.",
+          "answer": "I'm used to getting up early."
+        },
+        {
+          "number": 6,
+          "prompt": "The meeting has been cancel.",
+          "answer": "The meeting has been canceled. / The meeting has been cancelled."
+        },
+        {
+          "number": 7,
+          "prompt": "Hardly I had left when the phone rang.",
+          "answer": "Hardly had I left when the phone rang."
+        },
+        {
+          "number": 8,
+          "prompt": "I wish I would have more free time.",
+          "answer": "I wish I had more free time."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я работаю в этой компании с 2021 года.",
+          "answer": "I've worked at this company since 2021. / I have worked at this company since 2021. / I have been working at this company since 2021. / I've been working at this company since 2021."
+        },
+        {
+          "number": 2,
+          "prompt": "Если завтра будет дождь, мы отменим поездку.",
+          "answer": "If it rains tomorrow, we will cancel the trip. / If it rains tomorrow, we'll cancel the trip."
+        },
+        {
+          "number": 3,
+          "prompt": "Если бы я знал об этом раньше, я бы тебе помог.",
+          "answer": "If I had known about it earlier, I would have helped you. / If I'd known about it earlier, I'd have helped you."
+        },
+        {
+          "number": 4,
+          "prompt": "Этот баг был исправлен вчера.",
+          "answer": "This bug was fixed yesterday. / The bug was fixed yesterday."
+        },
+        {
+          "number": 5,
+          "prompt": "Он сказал, что закончил отчёт.",
+          "answer": "He said he had finished the report. / He said that he had finished the report."
+        },
+        {
+          "number": 6,
+          "prompt": "Хотел бы я говорить по-английски лучше.",
+          "answer": "I wish I spoke English better. / I wish I could speak English better."
+        },
+        {
+          "number": 7,
+          "prompt": "Он, должно быть, дома: свет горит.",
+          "answer": "He must be at home; the light is on. / He must be at home: the lights are on. / He must be at home; the lights are on."
+        },
+        {
+          "number": 8,
+          "prompt": "Никогда ещё я не видел такого сложного кода.",
+          "answer": "Never have I seen such complicated code. / Never before have I seen such complicated code."
+        }
+      ]
+    }
+  ]
+}

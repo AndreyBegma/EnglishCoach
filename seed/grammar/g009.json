@@ -1,0 +1,269 @@
+{
+  "id": "g009",
+  "position": 9,
+  "cefrLevel": "A2",
+  "title": "Предлоги времени: in / on / at",
+  "plannedFrom": "2026-10-27",
+  "plannedTo": "2026-10-27",
+  "sections": {
+    "why": [
+      "Предлоги in, on, at показывают, когда что-то происходит. В русском мы часто обходимся без предлога (в понедельник, весной — а иногда: в 2020 году, в пять часов), а в английском нужно выбрать один из трёх, и выбор зависит от длины отрезка времени."
+    ],
+    "formation": [
+      "Мысленно представьте воронку: от большого отрезка времени к точке.",
+      "• IN — длинные периоды: месяцы, годы, века, времена года, части суток. in May, in 2024, in the 21st century, in summer, in the morning / afternoon / evening.",
+      "• ON — дни и даты: on Monday, on July 5th, on my birthday, on Friday evening, on New Year's Day, on weekends (американский вариант).",
+      "• AT — точное время и точки: at 6 o'clock, at noon, at midnight, at night, at the weekend (британский вариант), at Christmas, at the moment.",
+      "• Без предлога: this week, last year, next Monday, every day, tomorrow, yesterday, today."
+    ],
+    "usage": [
+      "1. In — когда что-то случилось внутри периода. (She was born in 1995. — Она родилась в 1995 году.) (We often travel in summer. — Мы часто путешествуем летом.)",
+      "2. On — когда есть конкретный день или дата. (The meeting is on Tuesday. — Встреча во вторник.) (My exam is on June 3rd. — Мой экзамен 3 июня.)",
+      "3. At — когда указываем точное время или момент. (The film starts at 8:30. — Фильм начинается в 8:30.) (I don't like to drive at night. — Я не люблю ездить ночью.)",
+      "4. Выражения «через какое-то время»: in + период. (The bus will come in ten minutes. — Автобус приедет через десять минут.)"
+    ],
+    "signalWords": [
+      "Месяц / год / сезон → in. День недели / дата → on. Часы / ночь / полдень → at."
+    ],
+    "mistakes": [
+      "• ✗ in Monday → ✓ on Monday. Любой день недели требует on.",
+      "• ✗ in the night → ✓ at night. Исключение из правила частей суток.",
+      "• ✗ at the morning → ✓ in the morning. Утро, день, вечер — только in.",
+      "• ✗ on next Friday → ✓ next Friday. Со словами next, last, this, every предлог не ставим.",
+      "• ✗ at 2024 → ✓ in 2024. Год — это длинный период."
+    ],
+    "remember": ["IN — большой период, ON — день, AT — точка. Но: in the morning, и at night."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте in, on или at",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My birthday is ___ October.",
+          "answer": "in"
+        },
+        {
+          "number": 2,
+          "prompt": "The meeting starts ___ 10 o'clock.",
+          "answer": "at"
+        },
+        {
+          "number": 3,
+          "prompt": "We have a day off ___ Saturday.",
+          "answer": "on"
+        },
+        {
+          "number": 4,
+          "prompt": "She was born ___ 1998.",
+          "answer": "in"
+        },
+        {
+          "number": 5,
+          "prompt": "I usually go to bed ___ midnight.",
+          "answer": "at"
+        },
+        {
+          "number": 6,
+          "prompt": "It is very cold here ___ winter.",
+          "answer": "in"
+        },
+        {
+          "number": 7,
+          "prompt": "They are getting married ___ June 12th.",
+          "answer": "on"
+        },
+        {
+          "number": 8,
+          "prompt": "I drink coffee ___ the morning.",
+          "answer": "in"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I don't sleep well (a) in night (b) at night.",
+          "answer": "b (at night)"
+        },
+        {
+          "number": 2,
+          "prompt": "The party is (a) on Friday evening (b) in Friday evening.",
+          "answer": "a (on Friday evening)"
+        },
+        {
+          "number": 3,
+          "prompt": "We see each other (a) on every Sunday (b) every Sunday.",
+          "answer": "b (every Sunday)"
+        },
+        {
+          "number": 4,
+          "prompt": "He starts work (a) at 9 a.m. (b) in 9 a.m.",
+          "answer": "a (at 9 a.m.)"
+        },
+        {
+          "number": 5,
+          "prompt": "The company was founded (a) on 2010 (b) in 2010.",
+          "answer": "b (in 2010)"
+        },
+        {
+          "number": 6,
+          "prompt": "Let's meet (a) on next Monday (b) next Monday.",
+          "answer": "b (next Monday)"
+        },
+        {
+          "number": 7,
+          "prompt": "The train leaves (a) in ten minutes (b) at ten minutes.",
+          "answer": "a (in ten minutes)"
+        },
+        {
+          "number": 8,
+          "prompt": "I read books (a) in the evening (b) at the evening.",
+          "answer": "a (in the evening)"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Вставьте in, on, at или X (если предлог не нужен)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I will call you ___ tomorrow.",
+          "answer": "X"
+        },
+        {
+          "number": 2,
+          "prompt": "The conference is ___ March.",
+          "answer": "in"
+        },
+        {
+          "number": 3,
+          "prompt": "We usually have lunch ___ noon.",
+          "answer": "at"
+        },
+        {
+          "number": 4,
+          "prompt": "He visited us ___ last week.",
+          "answer": "X"
+        },
+        {
+          "number": 5,
+          "prompt": "The shop is closed ___ Sundays.",
+          "answer": "on"
+        },
+        {
+          "number": 6,
+          "prompt": "She often works ___ weekends.",
+          "answer": "on"
+        },
+        {
+          "number": 7,
+          "prompt": "I'll be back ___ five minutes.",
+          "answer": "in"
+        },
+        {
+          "number": 8,
+          "prompt": "They traveled to Italy ___ the summer of 2022.",
+          "answer": "in"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку с предлогом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have an interview in Wednesday.",
+          "answer": "I have an interview on Wednesday."
+        },
+        {
+          "number": 2,
+          "prompt": "She wakes up at the morning.",
+          "answer": "She wakes up in the morning."
+        },
+        {
+          "number": 3,
+          "prompt": "We met on 2019.",
+          "answer": "We met in 2019."
+        },
+        {
+          "number": 4,
+          "prompt": "He studies in night.",
+          "answer": "He studies at night."
+        },
+        {
+          "number": 5,
+          "prompt": "The film starts in 7:45.",
+          "answer": "The film starts at 7:45."
+        },
+        {
+          "number": 6,
+          "prompt": "My exam is in May 20th.",
+          "answer": "My exam is on May 20th."
+        },
+        {
+          "number": 7,
+          "prompt": "I'll see you on next week.",
+          "answer": "I'll see you next week."
+        },
+        {
+          "number": 8,
+          "prompt": "Many people travel at summer.",
+          "answer": "Many people travel in summer."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Встреча в понедельник в три часа.",
+          "answer": "The meeting is on Monday at three o'clock. / The meeting is on Monday at 3 p.m."
+        },
+        {
+          "number": 2,
+          "prompt": "Я родился в мае 1995 года.",
+          "answer": "I was born in May 1995."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы обычно ужинаем в семь вечера.",
+          "answer": "We usually have dinner at seven p.m. / We usually have dinner at seven in the evening."
+        },
+        {
+          "number": 4,
+          "prompt": "Релиз запланирован на 15 ноября.",
+          "answer": "The release is planned for November 15th. / The release is scheduled for November 15th."
+        },
+        {
+          "number": 5,
+          "prompt": "Летом я люблю гулять вечером.",
+          "answer": "In summer I like to walk in the evening. / In the summer I like to go for a walk in the evening."
+        },
+        {
+          "number": 6,
+          "prompt": "Я не работаю по выходным.",
+          "answer": "I don't work on weekends. / I don't work at weekends."
+        },
+        {
+          "number": 7,
+          "prompt": "Мой рейс вылетает в полночь.",
+          "answer": "My flight leaves at midnight."
+        },
+        {
+          "number": 8,
+          "prompt": "Я закончу этот проект через две недели.",
+          "answer": "I will finish this project in two weeks. / I'll finish this project in two weeks."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "id": "g078",
+  "position": 78,
+  "cefrLevel": "C2",
+  "title": "Двойное сравнение и усиление: the more… the more, ever-increasing, far / much / by far",
+  "plannedFrom": "2027-11-15",
+  "plannedTo": "2027-11-20",
+  "sections": {
+    "why": [
+      "Эти конструкции показывают, как одно изменение тянет за собой другое («чем больше... тем больше»), и позволяют точно регулировать силу сравнения: «намного», «чуть-чуть», «безусловно самый». Так звучит живая и точная речь на уровне C2."
+    ],
+    "formation": [
+      "• The + сравнительная степень..., the + сравнительная степень...: The more you practice, the better you get.",
+      "• comparative and comparative: more and more popular, colder and colder",
+      "• ever- + причастие/прилагательное: ever-increasing, ever-growing, ever-changing",
+      "• усилители перед сравнительной степенью: far / much / a lot / a great deal / considerably / even / still + more expensive; ослабители: slightly / a bit / a little",
+      "• by far + превосходная степень: by far the best",
+      "• twice / three times / half as + прилагательное + as"
+    ],
+    "usage": [
+      "1. Параллельное изменение: The longer the meeting lasted, the more bored people became. (Чем дольше длилась встреча, тем скучнее становилось людям.) Краткий вариант: The sooner, the better. (Чем раньше, тем лучше.)",
+      "2. Постоянное нарастание: It's getting harder and harder. (Становится всё труднее.) An ever-increasing number of users prefer dark mode. (Всё растущее число пользователей предпочитает тёмную тему.)",
+      "3. Усиление сравнения: This is far more difficult than I expected. (Это намного сложнее, чем я ожидал.)",
+      "4. Усиление превосходной степени: She is by far the best designer in our team. (Она, безусловно, лучший дизайнер в нашей команде.)",
+      "5. Кратность: This laptop is twice as expensive as that one. (Этот ноутбук вдвое дороже того.)"
+    ],
+    "signalWords": [
+      "far, much, a lot, a great deal, considerably, slightly, a bit, even, still, by far, twice as, ever-."
+    ],
+    "mistakes": [
+      "✗ More you practice, more you learn. → ✓ The more you practice, the more you learn. (артикль the обязателен в обеих частях)",
+      "✗ She is very more experienced. → ✓ She is far / much more experienced. (very не сочетается со сравнительной степенью)",
+      "✗ He is by far taller than me. → ✓ He is much taller than me. (by far работает только с превосходной: by far the tallest)",
+      "✗ the more harder you work → ✓ the harder you work (more и -er вместе не ставим)",
+      "✗ It is more and more cold. → ✓ It is colder and colder. (короткие прилагательные: -er and -er)"
+    ],
+    "remember": [
+      "The more..., the more...; very не усиливает сравнение, а by far усиливает только превосходную степень."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте слово в нужной форме",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The more you practice, the ___ (good) you become.",
+          "answer": "better"
+        },
+        {
+          "number": 2,
+          "prompt": "The ___ (early) we start, the sooner we finish.",
+          "answer": "earlier"
+        },
+        {
+          "number": 3,
+          "prompt": "This is ___ ___ the most useful tool we have.",
+          "answer": "by far"
+        },
+        {
+          "number": 4,
+          "prompt": "The app is getting more ___ more popular every month.",
+          "answer": "and"
+        },
+        {
+          "number": 5,
+          "prompt": "The longer the meeting lasted, the more ___ (bored) people became.",
+          "answer": "bored"
+        },
+        {
+          "number": 6,
+          "prompt": "The less you worry, the ___ (easy) it gets.",
+          "answer": "easier"
+        },
+        {
+          "number": 7,
+          "prompt": "An ___-increasing number of users prefer dark mode.",
+          "answer": "ever"
+        },
+        {
+          "number": 8,
+          "prompt": "This laptop costs $2000 and that one $1000: this one is ___ as expensive as that one.",
+          "answer": "twice"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She is ___ more experienced than me. (a) very (b) far",
+          "answer": "(b) far"
+        },
+        {
+          "number": 2,
+          "prompt": "It's ___ the best hotel in town. (a) much (b) by far",
+          "answer": "(b) by far"
+        },
+        {
+          "number": 3,
+          "prompt": "The ___ you reply, the better. (a) sooner (b) soon",
+          "answer": "(a) sooner"
+        },
+        {
+          "number": 4,
+          "prompt": "The situation is ___ better than last week. (a) slightly (b) by far",
+          "answer": "(a) slightly"
+        },
+        {
+          "number": 5,
+          "prompt": "He's ___ taller than his brother. (a) by far (b) much",
+          "answer": "(b) much"
+        },
+        {
+          "number": 6,
+          "prompt": "The more expensive the hotel, ___ it is. (a) the more comfortable (b) more comfortable",
+          "answer": "(a) the more comfortable"
+        },
+        {
+          "number": 7,
+          "prompt": "The test was ___ than I thought. (a) a great deal easier (b) a great deal more easy",
+          "answer": "(a) a great deal easier"
+        },
+        {
+          "number": 8,
+          "prompt": "We have ___ demand for this product. (a) ever-increasing (b) ever-increase",
+          "answer": "(a) ever-increasing"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, используя слово в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If you study more, you learn more. (The more...)",
+          "answer": "The more you study, the more you learn."
+        },
+        {
+          "number": 2,
+          "prompt": "As the code gets longer, it gets harder to read. (The longer...)",
+          "answer": "The longer the code gets, the harder it is to read. / The longer the code gets, the harder it gets to read."
+        },
+        {
+          "number": 3,
+          "prompt": "No other course is as good as this one. (by far)",
+          "answer": "This is by far the best course."
+        },
+        {
+          "number": 4,
+          "prompt": "The number of bugs keeps growing all the time. (ever-growing)",
+          "answer": "There is an ever-growing number of bugs. / The number of bugs is ever-growing."
+        },
+        {
+          "number": 5,
+          "prompt": "My flat is 50 square meters. Yours is 100. (twice as)",
+          "answer": "Your flat is twice as big as mine."
+        },
+        {
+          "number": 6,
+          "prompt": "The plane was a bit cheaper than the train. (slightly)",
+          "answer": "The plane was slightly cheaper than the train."
+        },
+        {
+          "number": 7,
+          "prompt": "Jon is much more careful than Tim. (Use far)",
+          "answer": "Jon is far more careful than Tim."
+        },
+        {
+          "number": 8,
+          "prompt": "As it gets darker, it gets colder. (The...the...)",
+          "answer": "The darker it gets, the colder it gets."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "More you practice, more you learn.",
+          "answer": "The more you practice, the more you learn."
+        },
+        {
+          "number": 2,
+          "prompt": "She is very more experienced than me.",
+          "answer": "She is far more experienced than me. / She is much more experienced than me."
+        },
+        {
+          "number": 3,
+          "prompt": "This is the most best option.",
+          "answer": "This is the best option."
+        },
+        {
+          "number": 4,
+          "prompt": "The sooner is the better.",
+          "answer": "The sooner, the better."
+        },
+        {
+          "number": 5,
+          "prompt": "He is by far taller than his brother.",
+          "answer": "He is much taller than his brother. / He is far taller than his brother."
+        },
+        {
+          "number": 6,
+          "prompt": "It is more and more cold every day.",
+          "answer": "It is colder and colder every day."
+        },
+        {
+          "number": 7,
+          "prompt": "The more harder you work, the more you earn.",
+          "answer": "The harder you work, the more you earn."
+        },
+        {
+          "number": 8,
+          "prompt": "Prices are ever-increase.",
+          "answer": "Prices are ever-increasing."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Чем больше я работаю, тем больше устаю.",
+          "answer": "The more I work, the more tired I get. / The more I work, the more tired I become."
+        },
+        {
+          "number": 2,
+          "prompt": "Чем раньше вы начнёте, тем лучше.",
+          "answer": "The sooner you start, the better."
+        },
+        {
+          "number": 3,
+          "prompt": "Это намного сложнее, чем я думал.",
+          "answer": "It is much harder than I thought. / It is far more difficult than I thought."
+        },
+        {
+          "number": 4,
+          "prompt": "Это, безусловно, лучший фреймворк.",
+          "answer": "This is by far the best framework."
+        },
+        {
+          "number": 5,
+          "prompt": "Всё больше людей работают удалённо.",
+          "answer": "More and more people work remotely."
+        },
+        {
+          "number": 6,
+          "prompt": "Этот ноутбук вдвое дороже того.",
+          "answer": "This laptop is twice as expensive as that one."
+        },
+        {
+          "number": 7,
+          "prompt": "Всё растущее число пользователей жалуется на медленную загрузку.",
+          "answer": "An ever-increasing number of users complain about slow loading."
+        },
+        {
+          "number": 8,
+          "prompt": "Чем сложнее задача, тем интереснее её решать.",
+          "answer": "The harder the task, the more interesting it is to solve."
+        }
+      ]
+    }
+  ]
+}

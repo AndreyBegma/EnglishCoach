@@ -260,9 +260,12 @@ describe.skipIf(!testServerUrl)("Talk session", () => {
     expect(requests).toHaveLength(1);
     expect(requests[0]?.messages.at(-1)?.content).toContain('"topic": null');
 
-    // Picking now does not restart the chat.
+    // Picking now does not restart the chat, and says so.
     await h.press(telegramId, picker.id, picker.buttons[0]?.[0] ?? "");
     expect(requests).toHaveLength(1);
+    expect(h.telegram.callsOf("answerCallbackQuery").at(-1)?.payload).toMatchObject({
+      text: "This question is already answered",
+    });
 
     // A Finish button of some other session is outdated.
     h.telegram.reset();
@@ -280,8 +283,38 @@ describe.skipIf(!testServerUrl)("Talk session", () => {
   test("a non-text message gets a notice and no model call", async () => {
     const { h, telegramId, user, requests } = await setup([]);
     await openTalk(h, telegramId, user.id);
-    await h.shareLocation(telegramId, 1, 2);
+    const location = await h.shareLocation(telegramId, 1, 2);
     expect(requests).toHaveLength(0);
     expect(lastBot(h, telegramId).text).toBe("I can only read text messages here for now.");
+    expect(h.telegram.chat(telegramId).has(location)).toBe(false);
+  });
+
+  test("the chat keeps the latest exchange: older ones and failed attempts are deleted", async () => {
+    const { h, telegramId, user } = await setup([
+      clean("Hi! What did you do today?"),
+      wentWrong(),
+      new Error("model down"),
+      clean("Nice. And then?"),
+    ]);
+    const { picker } = await openTalk(h, telegramId, user.id);
+    await h.press(telegramId, picker.id, picker.buttons[0]?.[0] ?? "");
+    const opener = lastBot(h, telegramId);
+    const hub = (await getHub(database.db, user.id))?.messageId ?? -1;
+    const ids = () => [...h.telegram.chat(telegramId).keys()];
+
+    const first = await h.say(telegramId, "Yesterday I go to the park, I very like it");
+    const firstReply = lastBot(h, telegramId);
+    // The learner's message stays with its reply and corrections; the opener is gone.
+    expect(ids()).toEqual([hub, first, firstReply.id]);
+    expect(firstReply.text).toContain("Yesterday I went");
+
+    // A failed turn: a note that fades; the attempt stays until the next reply lands.
+    const failed = await h.say(telegramId, "We play football");
+    await h.sessions.flushNotes();
+    expect(ids()).toEqual([hub, first, firstReply.id, failed]);
+
+    const retry = await h.say(telegramId, "We played football");
+    expect(ids()).toEqual([hub, retry, lastBot(h, telegramId).id]);
+    expect(h.telegram.chat(telegramId).has(opener.id)).toBe(false);
   });
 });

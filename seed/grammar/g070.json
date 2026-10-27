@@ -1,0 +1,275 @@
+{
+  "id": "g070",
+  "position": 70,
+  "cefrLevel": "C1",
+  "title": "Трёхчастные фразовые глаголы: put up with, get away with, come up with",
+  "plannedFrom": "2027-09-20",
+  "plannedTo": "2027-09-25",
+  "sections": {
+    "why": [
+      "Трёхчастные фразовые глаголы (глагол + наречие + предлог) очень часты в живой речи и рабочей переписке: «мириться с», «придумать», «уйти от наказания». Их значение нельзя угадать по отдельным словам, поэтому их учат как единое целое."
+    ],
+    "formation": [
+      "глагол + частица + предлог + объект: put up with the noise, come up with an idea.",
+      "• Эти глаголы НЕРАЗДЕЛИМЫ: объект всегда стоит в конце, даже местоимение: I put up with it (не ✗ I put it up with).",
+      "• Глагол меняется по временам как обычно: puts up with, put up with, putting up with.",
+      "• Последнее слово — предлог, поэтому после него идёт существительное или герундий: look forward to meeting you.",
+      "• В вопросах предлог остаётся в конце: What are you looking forward to? Who came up with this idea?"
+    ],
+    "usage": [
+      "1. Терпеть, мириться: I can't put up with this noise. (Я не могу мириться с этим шумом.)",
+      "2. Придумать: Who came up with this name? (Кто придумал это название?) She came up with an excuse. (Она придумала отговорку.)",
+      "3. Избежать наказания: He got away with it. (Ему это сошло с рук.)",
+      "4. Закончиться, иссякнуть: We've run out of coffee. (У нас закончился кофе.)",
+      "5. С нетерпением ждать: I'm looking forward to the weekend. (Жду выходных с нетерпением.)",
+      "6. Не отставать, нагонять: I can't keep up with new technologies. We'll catch up with the others next week. (Я не успеваю за новыми технологиями. Мы нагоним остальных на следующей неделе.)",
+      "7. Сокращать: We need to cut down on spending. (Нам нужно сократить расходы.)",
+      "8. Уважать, защищать, компенсировать: I look up to my mentor. She stood up for her colleague. I'll make up for it. (Я равняюсь на наставника. Она заступилась за коллегу. Я это исправлю.)"
+    ],
+    "signalWords": [
+      "У всех этих глаголов последнее слово — with, to, of, on, for, up to: put up WITH, look forward TO, run out OF, cut down ON, stand up FOR."
+    ],
+    "mistakes": [
+      "✗ I can't put up this noise → ✓ I can't put up with this noise (предлог with нельзя пропускать).",
+      "✗ I put it up with → ✓ I put up with it (трёхчастные глаголы неразделимы).",
+      "✗ I'm looking forward to see you → ✓ I'm looking forward to seeing you (to здесь предлог, после него -ing).",
+      "✗ We ran out the milk → ✓ We ran out of the milk (нужен of).",
+      "✗ What are you looking forward? → ✓ What are you looking forward to? (предлог остаётся в конце вопроса)."
+    ],
+    "remember": [
+      "Часть 1 + часть 2 + предлог, всё вместе: объект ставим только в конце (put up with IT), после to-предлога идёт -ing."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте пропущенное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I can't put ___ with this noise any longer.",
+          "answer": "up"
+        },
+        {
+          "number": 2,
+          "prompt": "She came ___ with a great idea for the app.",
+          "answer": "up"
+        },
+        {
+          "number": 3,
+          "prompt": "We've run ___ of coffee.",
+          "answer": "out"
+        },
+        {
+          "number": 4,
+          "prompt": "I'm really looking forward ___ seeing you.",
+          "answer": "to"
+        },
+        {
+          "number": 5,
+          "prompt": "He got away ___ cheating on the test.",
+          "answer": "with"
+        },
+        {
+          "number": 6,
+          "prompt": "Slow down! I can't keep up ___ you.",
+          "answer": "with"
+        },
+        {
+          "number": 7,
+          "prompt": "It's time to cut down ___ sugar.",
+          "answer": "on"
+        },
+        {
+          "number": 8,
+          "prompt": "She looks up ___ her older brother.",
+          "answer": "to"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "We need to (a) come up with (b) get on with a better plan.",
+          "answer": "(a) come up with"
+        },
+        {
+          "number": 2,
+          "prompt": "He's looking forward (a) to see (b) to seeing his family.",
+          "answer": "(b) to seeing"
+        },
+        {
+          "number": 3,
+          "prompt": "I'll (a) catch up with (b) get away with you later; start without me.",
+          "answer": "(a) catch up with"
+        },
+        {
+          "number": 4,
+          "prompt": "Nobody (a) gets away with (b) makes up for breaking the rules in this company.",
+          "answer": "(a) gets away with"
+        },
+        {
+          "number": 5,
+          "prompt": "Please (a) get on with (b) look out for your work; the deadline is tomorrow.",
+          "answer": "(a) get on with"
+        },
+        {
+          "number": 6,
+          "prompt": "I'll buy you dinner to (a) make up for (b) run out of missing your birthday.",
+          "answer": "(a) make up for"
+        },
+        {
+          "number": 7,
+          "prompt": "We must (a) face up to (b) walk out on the problem; we can't ignore it any longer.",
+          "answer": "(a) face up to"
+        },
+        {
+          "number": 8,
+          "prompt": "Be careful! (a) Look out for (b) Look up to pickpockets in the metro.",
+          "answer": "(a) Look out for"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, используя фразовый глагол в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I can't tolerate his behavior. (put up with)",
+          "answer": "I can't put up with his behavior."
+        },
+        {
+          "number": 2,
+          "prompt": "She invented an excuse. (come up with)",
+          "answer": "She came up with an excuse."
+        },
+        {
+          "number": 3,
+          "prompt": "We have no more paper. (run out of)",
+          "answer": "We have run out of paper. / We've run out of paper."
+        },
+        {
+          "number": 4,
+          "prompt": "He wasn't punished for the mistake. (get away with)",
+          "answer": "He got away with the mistake."
+        },
+        {
+          "number": 5,
+          "prompt": "I admire my mentor. (look up to)",
+          "answer": "I look up to my mentor."
+        },
+        {
+          "number": 6,
+          "prompt": "We should reduce our spending. (cut down on)",
+          "answer": "We should cut down on our spending."
+        },
+        {
+          "number": 7,
+          "prompt": "She defended her colleague at the meeting. (stand up for)",
+          "answer": "She stood up for her colleague at the meeting."
+        },
+        {
+          "number": 8,
+          "prompt": "I eagerly anticipate the holiday. (look forward to)",
+          "answer": "I'm looking forward to the holiday. / I look forward to the holiday."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Замените слова местоимением, сделайте отрицание или вопрос",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Replace the noun with a pronoun: I put up with the noise.",
+          "answer": "I put up with it."
+        },
+        {
+          "number": 2,
+          "prompt": "Replace the noun with a pronoun: We came up with the plan yesterday.",
+          "answer": "We came up with it yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "Replace the noun with a pronoun: They ran out of the milk.",
+          "answer": "They ran out of it."
+        },
+        {
+          "number": 4,
+          "prompt": "Replace the noun with a pronoun: She is looking forward to the trip.",
+          "answer": "She is looking forward to it."
+        },
+        {
+          "number": 5,
+          "prompt": "Replace the noun with a pronoun: I can't keep up with the new colleagues.",
+          "answer": "I can't keep up with them."
+        },
+        {
+          "number": 6,
+          "prompt": "Make it negative (past): They put up with the delays.",
+          "answer": "They didn't put up with the delays."
+        },
+        {
+          "number": 7,
+          "prompt": "Ask a question about 'the weekend': You are looking forward to the weekend.",
+          "answer": "What are you looking forward to?"
+        },
+        {
+          "number": 8,
+          "prompt": "Make a question with Who: Tom came up with this idea.",
+          "answer": "Who came up with this idea?"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я не могу мириться с этим багом.",
+          "answer": "I can't put up with this bug."
+        },
+        {
+          "number": 2,
+          "prompt": "Кто придумал это название?",
+          "answer": "Who came up with this name?"
+        },
+        {
+          "number": 3,
+          "prompt": "У нас закончился кофе.",
+          "answer": "We've run out of coffee. / We have run out of coffee."
+        },
+        {
+          "number": 4,
+          "prompt": "Я с нетерпением жду встречи с командой.",
+          "answer": "I'm looking forward to meeting the team."
+        },
+        {
+          "number": 5,
+          "prompt": "Ему всё сошло с рук.",
+          "answer": "He got away with it."
+        },
+        {
+          "number": 6,
+          "prompt": "Я не успеваю за новыми технологиями.",
+          "answer": "I can't keep up with new technologies. / I can't keep up with the new technology."
+        },
+        {
+          "number": 7,
+          "prompt": "Врач сказал мне есть меньше сладкого.",
+          "answer": "The doctor told me to cut down on sweets. / The doctor told me to cut down on sugar."
+        },
+        {
+          "number": 8,
+          "prompt": "Мы нагоним остальных на следующей неделе.",
+          "answer": "We'll catch up with the others next week."
+        }
+      ]
+    }
+  ]
+}

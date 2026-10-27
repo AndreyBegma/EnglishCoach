@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { encodeCallback } from "../../src/bot/callbacks";
+import { type Callback, encodeCallback } from "../../src/bot/callbacks";
 import type { Database } from "../../src/db/client";
 import { getHub } from "../../src/db/repositories/hub";
 import { getActiveProviderConfig, listProviderConfigs } from "../../src/db/repositories/providers";
@@ -31,12 +31,34 @@ const unused = () => {
   throw new Error("not used by this test");
 };
 
+const badRequest = (message: string) => Object.assign(new Error(`400 ${message}`), { status: 400 });
+
+/**
+ * Messages as Claude 5.5 models answer under API version 2026-10-21: forced tool use and sampling
+ * parameters are a 400; `output_config.format` returns the JSON as a text block.
+ */
+const create: AnthropicClient["messages"]["create"] = async (params) => {
+  if (params.tool_choice) {
+    throw badRequest('tool_choice: type "tool" and "any" are not supported for this model.');
+  }
+  if ("temperature" in params) throw badRequest("temperature: Extra inputs are not permitted");
+  if (params.output_config?.format.type !== "json_schema") return unused();
+  // Adaptive thinking spends part of the budget before the answer.
+  if (params.max_tokens < 256) {
+    return { content: [{ type: "thinking" }], usage: { input_tokens: 30, output_tokens: 32 } };
+  }
+  return {
+    content: [{ type: "thinking" }, { type: "text", text: '{"ok": true}' }],
+    usage: { input_tokens: 30, output_tokens: 90 },
+  };
+};
+
 /** The real providers (and their error handling) over fake SDK clients. */
 const realProviders: ProviderFactories = {
   anthropic: (options) =>
     createAnthropicProvider({
       ...options,
-      client: { messages: { create: unused }, models: models(options.apiKey) } as AnthropicClient,
+      client: { messages: { create }, models: models(options.apiKey) },
     }),
   openai: (options) =>
     createOpenAiProvider({
@@ -86,4 +108,21 @@ describe.skipIf(!testServerUrl)("key validation through the real provider code",
       expect(hubText()).toContain("Key checked and saved.");
     },
   );
+
+  test("anthropic: Test provider succeeds with a valid key on a Claude 5.5 model", async () => {
+    const telegramId = 920_003;
+    const h = createHarness(database.db, { adminIds: [telegramId], llmFactories: realProviders });
+    await h.say(telegramId, "/menu");
+    const user = await findUserByTelegramId(database.db, telegramId);
+    const hub = user && (await getHub(database.db, user.id));
+    if (!user || !hub) throw new Error("user or hub not created");
+    const press = (callback: Callback) =>
+      h.press(telegramId, hub.messageId, encodeCallback(callback));
+    const hubText = () => h.telegram.chat(telegramId).get(hub.messageId)?.text ?? "";
+
+    await press({ type: "provider", choice: "anthropic" });
+    await h.say(telegramId, GOOD_KEY);
+    await press({ type: "provider-test" });
+    expect(hubText()).toMatch(/Provider works \(\d+ ms\)/);
+  });
 });

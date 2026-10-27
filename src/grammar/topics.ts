@@ -1,39 +1,38 @@
 import type { CefrLevel } from "../db/schema";
 import { CEFR_LEVELS } from "../settings/options";
+import { loadSyllabus, type SyllabusTopic } from "./syllabus";
 
-export type GrammarTopic = {
-  /** Stable key: the callback index and the i18n key suffix (`grammar-topic-<id>`). */
-  id: string;
-  /** English tag handed to the `grammar-quiz` skill as `topic`. */
-  tag: string;
-  /** Levels the topic is offered at, inclusive. */
-  from: CefrLevel;
-  to: CefrLevel;
-};
-
-/** Order is part of the callback wire format (the button carries the index): only append. */
-export const GRAMMAR_TOPICS: readonly GrammarTopic[] = [
-  { id: "tenses", tag: "verb tenses", from: "A1", to: "C2" },
-  { id: "articles", tag: "articles: a/an/the/zero", from: "A1", to: "C1" },
-  { id: "prepositions", tag: "prepositions", from: "A1", to: "C1" },
-  { id: "comparatives", tag: "comparatives and superlatives", from: "A1", to: "B2" },
-  { id: "conditionals", tag: "conditionals", from: "A2", to: "C2" },
-  { id: "modals", tag: "modal verbs", from: "A2", to: "C2" },
-  { id: "passive", tag: "passive voice", from: "B1", to: "C2" },
-  { id: "reported_speech", tag: "reported speech", from: "B1", to: "C2" },
-  { id: "gerund_infinitive", tag: "gerund vs infinitive", from: "B1", to: "C2" },
-  { id: "relative_clauses", tag: "relative clauses", from: "B1", to: "C2" },
-];
+/**
+ * The grammar syllabus, read once when the module loads: an invalid syllabus file fails boot
+ * instead of the first grammar session.
+ */
+export const SYLLABUS = loadSyllabus();
 
 /** Learners who have not taken the placement test are treated as intermediate. */
 export const DEFAULT_TOPIC_LEVEL: CefrLevel = "B1";
 
-const rank = (level: CefrLevel) => CEFR_LEVELS.indexOf(level);
+/** The topics offered at `level`: its CEFR band, in syllabus order. */
+export function topicsForLevel(level: CefrLevel | null): SyllabusTopic[] {
+  const band = level ?? DEFAULT_TOPIC_LEVEL;
+  return SYLLABUS.topics.filter((topic) => topic.band === band);
+}
 
-/** The topics worth offering at `level`, with their callback indexes. */
-export function topicsForLevel(level: CefrLevel | null): { index: number; topic: GrammarTopic }[] {
-  const at = rank(level ?? DEFAULT_TOPIC_LEVEL);
-  return GRAMMAR_TOPICS.flatMap((topic, index) =>
-    rank(topic.from) <= at && at <= rank(topic.to) ? [{ index, topic }] : [],
-  );
+export function topicById(id: string): SyllabusTopic | undefined {
+  return SYLLABUS.byId.get(id);
+}
+
+/** A topic id a model named, kept only when it is in the syllabus. */
+export function knownTopicId(id: string | null | undefined): string | null {
+  return id && SYLLABUS.byId.has(id) ? id : null;
+}
+
+/**
+ * The topics a model may name for a learner at `level`: its band and the bands next to it, as
+ * `{id, title}` with the English title.
+ */
+export function topicChoices(level: CefrLevel | null): { id: string; title: string }[] {
+  const at = CEFR_LEVELS.indexOf(level ?? DEFAULT_TOPIC_LEVEL);
+  return SYLLABUS.topics
+    .filter((topic) => Math.abs(CEFR_LEVELS.indexOf(topic.band) - at) <= 1)
+    .map((topic) => ({ id: topic.id, title: topic.title.en }));
 }

@@ -5,11 +5,14 @@ import type { FlowState } from "../../src/bot/context";
 import { createBot } from "../../src/bot/index";
 import type { Db } from "../../src/db/client";
 import type { SessionKind } from "../../src/db/repositories/sessions";
+import type { WordImages } from "../../src/images";
 import { type ProviderFactories, resolveProvider } from "../../src/llm";
 import type { ServerEnv } from "../../src/llm/providers/server";
 import { createLogger } from "../../src/log";
+import type { SessionLocks } from "../../src/sessions/locks";
 import type { SessionTimeouts } from "../../src/sessions/session-manager";
 import { learnerContextFromDb, loadSkillRegistry, SkillRunner } from "../../src/skills";
+import type { VoiceOptions } from "../../src/voice";
 import { FakeLlm } from "./fake-llm";
 
 export const BOT_INFO: UserFromGetMe = {
@@ -39,7 +42,12 @@ export interface ChatMessage {
   buttons: string[][];
   /** Button labels, row by row. */
   labels: string[][];
+  /** Set for a photo message (`text` is then its caption): the file ID or URL sent. */
+  photo?: string;
 }
+
+/** The text of the service message the fake adds when a message is pinned. */
+export const PIN_NOTICE = "📌 pinned a message";
 
 type Markup = { inline_keyboard?: { text: string; callback_data?: string }[][] };
 
@@ -52,6 +60,8 @@ export class FakeTelegram {
   /** chatId → messageId → message. */
   readonly chats = new Map<number, Map<number, ChatMessage>>();
   readonly pinned = new Map<number, number>();
+  /** Delivers the pin notice as an update; left unset, the notice arrives silently. */
+  onPinNotice?: (chatId: number, noticeId: number, pinnedId: number) => Promise<void>;
   private nextId = 100;
 
   chat(chatId: number): Map<number, ChatMessage> {
@@ -108,9 +118,40 @@ export class FakeTelegram {
           text: p.text,
         });
       }
+      case "sendPhoto": {
+        const id = this.nextId++;
+        this.chat(chatId).set(id, {
+          id,
+          from: "bot",
+          text: String(p.caption ?? ""),
+          photo: String(p.photo),
+          ...keyboardOf(p.reply_markup as Markup | undefined),
+        });
+        return ok({
+          message_id: id,
+          date: Math.floor(Date.now() / 1000),
+          chat: { id: chatId, type: "private", first_name: "Learner" },
+          from: BOT_INFO,
+          photo: [{ file_id: String(p.photo), file_unique_id: "u", width: 1, height: 1 }],
+        });
+      }
+      case "editMessageMedia": {
+        const message = this.chat(chatId).get(Number(p.message_id));
+        if (!message) return fail("message to edit not found");
+        // Telegram cannot turn a text message into a photo.
+        if (message.photo === undefined) return fail("there is no media in the message to edit");
+        const media = p.media as { media: string; caption?: string };
+        Object.assign(
+          message,
+          { photo: String(media.media), text: String(media.caption ?? "") },
+          keyboardOf(p.reply_markup as Markup | undefined),
+        );
+        return ok(true);
+      }
       case "editMessageText": {
         const message = this.chat(chatId).get(Number(p.message_id));
         if (!message) return fail("message to edit not found");
+        if (message.photo !== undefined) return fail("there is no text in the message to edit");
         const next = keyboardOf(p.reply_markup as Markup | undefined);
         if (
           message.text === p.text &&
@@ -126,6 +167,25 @@ export class FakeTelegram {
           text: p.text,
         });
       }
+      case "editMessageCaption": {
+        const message = this.chat(chatId).get(Number(p.message_id));
+        if (!message) return fail("message to edit not found");
+        if (message.photo === undefined) return fail("there is no caption in the message to edit");
+        Object.assign(
+          message,
+          { text: String(p.caption ?? "") },
+          keyboardOf(p.reply_markup as Markup | undefined),
+        );
+        return ok(true);
+      }
+      case "editMessageReplyMarkup": {
+        const message = this.chat(chatId).get(Number(p.message_id));
+        if (!message) return fail("message to edit not found");
+        Object.assign(message, keyboardOf(p.reply_markup as Markup | undefined));
+        return ok(true);
+      }
+      case "sendChatAction":
+        return ok(true);
       case "deleteMessage": {
         if (!this.chat(chatId).delete(Number(p.message_id))) {
           return fail("message to delete not found");
@@ -136,9 +196,27 @@ export class FakeTelegram {
         for (const id of p.message_ids as number[]) this.chat(chatId).delete(id);
         return ok(true);
       }
-      case "pinChatMessage":
+      case "pinChatMessage": {
         this.pinned.set(chatId, Number(p.message_id));
+        // A private chat shows a "… pinned a message" notice the API never names.
+        const id = this.nextId++;
+        this.chat(chatId).set(id, { id, from: "bot", text: PIN_NOTICE, buttons: [], labels: [] });
+        await this.onPinNotice?.(chatId, id, Number(p.message_id));
         return ok(true);
+      }
+      case "sendVoice": {
+        const id = this.nextId++;
+        // A file_id is replayed as is; an upload gets a new one.
+        const fileId = typeof p.voice === "string" ? p.voice : `voice-file-${id}`;
+        this.chat(chatId).set(id, { id, from: "bot", text: "[voice]", buttons: [], labels: [] });
+        return ok({
+          message_id: id,
+          date: Math.floor(Date.now() / 1000),
+          chat: { id: chatId, type: chatId < 0 ? "supergroup" : "private" },
+          from: BOT_INFO,
+          voice: { file_id: fileId, file_unique_id: `u${id}`, duration: 1 },
+        });
+      }
       case "answerCallbackQuery":
         return ok(true);
       default:
@@ -186,6 +264,14 @@ export interface HarnessOptions {
   llmFactories?: ProviderFactories;
   /** Replaces the skill runner session handlers get as `deps.skills`. */
   skills?: SkillRunner;
+  /** Whether Telegram sends the bot its own pin notice as an update (default "deliver"). */
+  pinUpdates?: "deliver" | "silent";
+  /** Pictures on new-word cards, over a mocked stock-photo HTTP client. */
+  images?: WordImages;
+  /** Voice overrides: the fake speech services, the cache directory, the storage chat. */
+  voice?: VoiceOptions;
+  /** Replaces the in-memory answer locks. */
+  locks?: SessionLocks;
 }
 
 /** A fixed 32-byte master key; tests decrypt stored keys with it. */
@@ -228,7 +314,10 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
           ),
         learner: learnerContextFromDb(db),
       }),
+    images: options.images,
+    voice: options.voice,
     botConfig: { botInfo: BOT_INFO },
+    locks: options.locks,
   });
   app.bot.api.config.use(telegram.transformer);
 
@@ -243,6 +332,30 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
 
   const send = (update: Omit<Update, "update_id">) =>
     app.bot.handleUpdate({ update_id: updateId++, ...update } as Update);
+
+  if ((options.pinUpdates ?? "deliver") === "deliver") {
+    // A negative chat id is a group (the TTS storage chat); the rest are private chats.
+    const chatOf = (chatId: number) =>
+      chatId < 0
+        ? { id: chatId, type: "supergroup", title: "storage" }
+        : { id: chatId, type: "private", first_name: `User${chatId}` };
+    telegram.onPinNotice = (chatId, noticeId, pinnedId) =>
+      send({
+        message: {
+          message_id: noticeId,
+          date: Math.floor(Date.now() / 1000),
+          chat: chatOf(chatId),
+          from: BOT_INFO,
+          pinned_message: {
+            message_id: pinnedId,
+            date: 0,
+            chat: chatOf(chatId),
+            from: BOT_INFO,
+            text: telegram.chat(chatId).get(pinnedId)?.text ?? "",
+          },
+        },
+      } as Omit<Update, "update_id">);
+  }
 
   return {
     ...app,
@@ -299,6 +412,14 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
             chat: { id: from, type: "private", first_name: `User${from}` },
             from: BOT_INFO,
             text: message?.text ?? "",
+            reply_markup: {
+              inline_keyboard: (message?.buttons ?? []).map((row, r) =>
+                row.map((callback_data, b) => ({
+                  text: message?.labels[r]?.[b] ?? "",
+                  callback_data,
+                })),
+              ),
+            },
           },
         },
       });

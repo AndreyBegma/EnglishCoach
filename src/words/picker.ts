@@ -33,4 +33,17 @@ export class WordPicker {
     }
     return [...base, ...up];
   }
+
+  /**
+   * The next `n` words Learn words will show, in order, if the learner takes them one at a time:
+   * a single pick has no level-up share, so it is the learner's level until it runs dry, then the
+   * level above. Prefetch enriches exactly these.
+   */
+  async upcoming(userId: number, level: CefrLevel, n: number): Promise<Word[]> {
+    if (n <= 0) return [];
+    const base = await findUnseenWords(this.db, userId, level, n);
+    const upper = nextLevel(level);
+    if (base.length >= n || !upper) return base;
+    return [...base, ...(await findUnseenWords(this.db, userId, upper, n - base.length))];
+  }
 }

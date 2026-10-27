@@ -1,0 +1,271 @@
+{
+  "id": "g007",
+  "position": 7,
+  "cefrLevel": "A2",
+  "title": "Past Continuous и Past Simple вместе",
+  "plannedFrom": "2026-10-24",
+  "plannedTo": "2026-10-24",
+  "sections": {
+    "why": [
+      "Past Continuous показывает процесс, который шёл в какой-то момент в прошлом (я работал, когда...), а Past Simple — короткое законченное событие. Вместе они дают картинку: на фоне длительного действия что-то произошло. По-русски эту разницу часто передают видом глагола (читал / прочитал), в английском — формой времени."
+    ],
+    "formation": [
+      "• Past Continuous: was/were + V-ing (глагол с окончанием -ing). I was working. They were playing.",
+      "• Отрицание: wasn't / weren't + V-ing. She wasn't sleeping.",
+      "• Вопрос: Was/Were + подлежащее + V-ing? What were you doing?",
+      "• Past Simple для сравнения: V2 / did + V1. I saw, I didn't see, Did I see?",
+      "• Часто соединяют двумя словами: when (когда) + Past Simple, while (пока) + Past Continuous."
+    ],
+    "usage": [
+      "1. Процесс в конкретный момент прошлого. (At 8 p.m. I was cooking dinner. — В 8 вечера я готовил ужин.)",
+      "2. Длительное действие прервано коротким. Длинное — Past Continuous, короткое — Past Simple. (I was walking home when it started to rain. — Я шёл домой, когда начался дождь.)",
+      "3. Два процесса идут одновременно. (While she was reading, he was watching TV. — Пока она читала, он смотрел телевизор.)",
+      "4. Фон для рассказа. (The sun was shining and the birds were singing when we arrived. — Светило солнце и пели птицы, когда мы приехали.)"
+    ],
+    "signalWords": [
+      "while (пока), when (когда), as (в то время как), at that moment, at 5 o'clock yesterday, all evening, suddenly."
+    ],
+    "mistakes": [
+      "• ✗ I was see him at the station. → ✓ I saw him at the station. Законченное короткое событие — Past Simple.",
+      "• ✗ While I walked home, it started to rain. → ✓ While I was walking home, it started to rain. После while обычно идёт процесс.",
+      "• ✗ I was working when he was coming. → ✓ I was working when he came. Короткое событие, которое прервало процесс, ставим в Past Simple.",
+      "• ✗ She were sleeping. → ✓ She was sleeping. С I/he/she/it — was, с you/we/they — were.",
+      "• ✗ I was knowing the answer. → ✓ I knew the answer. Глаголы состояния (know, want, like) обычно не используем с -ing."
+    ],
+    "remember": [
+      "Past Continuous — фон и процесс (was doing), Past Simple — событие, которое на этом фоне случилось (did)."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Past Continuous",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "At nine o'clock last night I ___ (work) on my laptop.",
+          "answer": "was working"
+        },
+        {
+          "number": 2,
+          "prompt": "They ___ (play) football at 5 p.m. yesterday.",
+          "answer": "were playing"
+        },
+        {
+          "number": 3,
+          "prompt": "She ___ (not / sleep) when I called.",
+          "answer": "wasn't sleeping / was not sleeping"
+        },
+        {
+          "number": 4,
+          "prompt": "What ___ you ___ (do) at midnight?",
+          "answer": "were / doing"
+        },
+        {
+          "number": 5,
+          "prompt": "We ___ (have) lunch at one o'clock.",
+          "answer": "were having"
+        },
+        {
+          "number": 6,
+          "prompt": "He ___ (listen) to music all evening.",
+          "answer": "was listening"
+        },
+        {
+          "number": 7,
+          "prompt": "It ___ (rain) when we left the office.",
+          "answer": "was raining"
+        },
+        {
+          "number": 8,
+          "prompt": "The children ___ (not / watch) TV at that moment.",
+          "answer": "weren't watching / were not watching"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I (a) was walking (b) walked in the park when I met my old friend.",
+          "answer": "a (was walking)"
+        },
+        {
+          "number": 2,
+          "prompt": "While we (a) had (b) were having dinner, the phone rang.",
+          "answer": "b (were having)"
+        },
+        {
+          "number": 3,
+          "prompt": "She (a) was cutting (b) cut her finger while she was cooking.",
+          "answer": "b (cut)"
+        },
+        {
+          "number": 4,
+          "prompt": "He (a) was working (b) worked when the power went out.",
+          "answer": "a (was working)"
+        },
+        {
+          "number": 5,
+          "prompt": "When I (a) was arriving (b) arrived, the meeting was already going on.",
+          "answer": "b (arrived)"
+        },
+        {
+          "number": 6,
+          "prompt": "What (a) were you doing (b) did you do at 7 p.m. yesterday?",
+          "answer": "a (were you doing)"
+        },
+        {
+          "number": 7,
+          "prompt": "They (a) were meeting (b) met at university in 2015.",
+          "answer": "b (met)"
+        },
+        {
+          "number": 8,
+          "prompt": "The sun (a) was shining (b) shone, and people (a) were walking (b) walked along the beach.",
+          "answer": "a (was shining), a (were walking)"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Поставьте глаголы в Past Continuous или Past Simple",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (drive) to work when I ___ (see) an accident.",
+          "answer": "was driving / saw"
+        },
+        {
+          "number": 2,
+          "prompt": "While she ___ (study), her brother ___ (play) video games.",
+          "answer": "was studying / was playing"
+        },
+        {
+          "number": 3,
+          "prompt": "He ___ (fall) asleep while he ___ (watch) a film.",
+          "answer": "fell / was watching"
+        },
+        {
+          "number": 4,
+          "prompt": "We ___ (wait) for the bus when it ___ (start) to snow.",
+          "answer": "were waiting / started"
+        },
+        {
+          "number": 5,
+          "prompt": "When the manager ___ (come) in, we ___ (discuss) the budget.",
+          "answer": "came / were discussing"
+        },
+        {
+          "number": 6,
+          "prompt": "I ___ (not / hear) the alarm because I ___ (sleep).",
+          "answer": "didn't hear / was sleeping"
+        },
+        {
+          "number": 7,
+          "prompt": "She ___ (break) her phone while she ___ (run) for the train.",
+          "answer": "broke / was running"
+        },
+        {
+          "number": 8,
+          "prompt": "What ___ you ___ (do) when I ___ (call) you?",
+          "answer": "were / doing / called"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку в предложении",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I was see a strange man near my house.",
+          "answer": "I saw a strange man near my house."
+        },
+        {
+          "number": 2,
+          "prompt": "While I walked to the station, I lost my wallet.",
+          "answer": "While I was walking to the station, I lost my wallet."
+        },
+        {
+          "number": 3,
+          "prompt": "She were cooking when the guests arrived.",
+          "answer": "She was cooking when the guests arrived."
+        },
+        {
+          "number": 4,
+          "prompt": "When we were arriving at the hotel, they gave us the keys.",
+          "answer": "When we arrived at the hotel, they gave us the keys."
+        },
+        {
+          "number": 5,
+          "prompt": "He didn't working when I came in.",
+          "answer": "He wasn't working when I came in."
+        },
+        {
+          "number": 6,
+          "prompt": "What you were doing at 10 p.m.?",
+          "answer": "What were you doing at 10 p.m.?"
+        },
+        {
+          "number": 7,
+          "prompt": "I was wanting a coffee, so I went to the kitchen.",
+          "answer": "I wanted a coffee, so I went to the kitchen."
+        },
+        {
+          "number": 8,
+          "prompt": "They was talking when the teacher came in.",
+          "answer": "They were talking when the teacher came in."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Когда ты позвонил, я принимал душ.",
+          "answer": "I was taking a shower when you called. / When you called, I was taking a shower."
+        },
+        {
+          "number": 2,
+          "prompt": "Пока я писал код, коллега готовил кофе.",
+          "answer": "While I was writing code, my colleague was making coffee."
+        },
+        {
+          "number": 3,
+          "prompt": "Что ты делал вчера в восемь вечера?",
+          "answer": "What were you doing at eight o'clock yesterday evening?"
+        },
+        {
+          "number": 4,
+          "prompt": "Мы ждали самолёт, когда объявили задержку.",
+          "answer": "We were waiting for the plane when they announced a delay."
+        },
+        {
+          "number": 5,
+          "prompt": "Она упала, когда бежала по лестнице.",
+          "answer": "She fell when she was running up the stairs. / She fell while she was running up the stairs."
+        },
+        {
+          "number": 6,
+          "prompt": "Шёл дождь, и мы остались дома.",
+          "answer": "It was raining, so we stayed at home. / It was raining and we stayed at home."
+        },
+        {
+          "number": 7,
+          "prompt": "Я не слышал звонок, потому что слушал музыку.",
+          "answer": "I didn't hear the bell because I was listening to music. / I didn't hear the phone because I was listening to music."
+        },
+        {
+          "number": 8,
+          "prompt": "Сервер упал, пока мы проводили презентацию.",
+          "answer": "The server crashed while we were giving a presentation. / The server went down while we were giving a presentation."
+        }
+      ]
+    }
+  ]
+}

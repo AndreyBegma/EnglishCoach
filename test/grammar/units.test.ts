@@ -1,14 +1,17 @@
 import { describe, expect, test } from "bun:test";
 import { MAX_CALLBACK_BYTES, parseCallback } from "../../src/bot/callbacks";
+import { createI18n } from "../../src/bot/i18n";
 import { encodeGrammarCallback, parseGrammarCallback } from "../../src/grammar/callbacks";
 import { matchesAccepted, normaliseAnswer } from "../../src/grammar/grading";
+import { topicPicker } from "../../src/grammar/screens";
 import { localDate } from "../../src/grammar/stats";
-import { GRAMMAR_TOPICS, topicsForLevel } from "../../src/grammar/topics";
+import { SYLLABUS, topicById, topicsForLevel } from "../../src/grammar/topics";
+import { CEFR_LEVELS } from "../../src/settings/options";
 
 describe("grammar callbacks", () => {
   const all = [
-    { type: "topic", index: null },
-    { type: "topic", index: 9 },
+    { type: "topic", id: null },
+    { type: "topic", id: "g015" },
     { type: "answer", question: 10, option: 3 },
     { type: "retry" },
     { type: "stop" },
@@ -30,6 +33,8 @@ describe("grammar callbacks", () => {
       "1:g:a:1",
       "1:g:a:x:1",
       "1:g:t:-1",
+      "1:g:t:9",
+      "1:g:t:g15",
       "1:g:r:1",
       "",
       "g:x",
@@ -41,27 +46,54 @@ describe("grammar callbacks", () => {
 });
 
 describe("grammar topics", () => {
-  test("the list is filtered by level; unset means intermediate", () => {
-    const ids = (level: Parameters<typeof topicsForLevel>[0]) =>
-      topicsForLevel(level).map(({ topic }) => topic.id);
-    expect(ids("A1")).toEqual(["tenses", "articles", "prepositions", "comparatives"]);
-    expect(ids("C2")).toEqual([
-      "tenses",
-      "conditionals",
-      "modals",
-      "passive",
-      "reported_speech",
-      "gerund_infinitive",
-      "relative_clauses",
-    ]);
-    expect(ids(null)).toEqual(ids("B1"));
-    expect(ids("B1")).toHaveLength(GRAMMAR_TOPICS.length);
+  test("the picker offers the learner's band of the syllabus; unset means intermediate", () => {
+    for (const level of CEFR_LEVELS) {
+      const topics = topicsForLevel(level);
+      expect(topics.length).toBeGreaterThan(0);
+      expect(topics.every((topic) => topic.band === level)).toBe(true);
+    }
+    expect(topicsForLevel(null)).toEqual(topicsForLevel("B1"));
+    expect(topicsForLevel("B1").map((topic) => topic.id)).toContain("g015");
   });
 
-  test("callback indexes point at the same topic in the full list", () => {
-    for (const { index, topic } of topicsForLevel("B2")) {
-      expect(GRAMMAR_TOPICS[index]).toBe(topic);
+  test("every topic id fits a topic button", () => {
+    for (const topic of SYLLABUS.topics) {
+      const data = encodeGrammarCallback({ type: "topic", id: topic.id });
+      expect(parseGrammarCallback(data)).toEqual({ type: "topic", id: topic.id });
+      expect(topicById(topic.id)).toBe(topic);
     }
+  });
+});
+
+describe("topic picker", () => {
+  const i18n = createI18n();
+  const [first, second, third] = topicsForLevel("B1");
+
+  test("the next topic leads with its reason, every topic carries its status marker", () => {
+    if (!first || !second || !third) throw new Error("B1 has fewer than three topics");
+    const progress = new Map([
+      [first.id, { status: "mastered" as const, reviewDue: new Date(0) }],
+      [second.id, { status: "shaky" as const, reviewDue: null }],
+      [third.id, { status: "learning" as const, reviewDue: null }],
+    ]);
+    const { keyboard } = topicPicker(i18n, "en", "B1", progress, {
+      topic: first,
+      reason: "review",
+    });
+    const labels = keyboard.inline_keyboard.map((row) => row.map((button) => button.text));
+    expect(labels[0]).toEqual([`🔁 Review: ${first.title.en}`]);
+    expect(labels[1]).toEqual(["🎲 Mixed"]);
+    expect(labels.slice(2, 5).flat()).toEqual([
+      `✅ ${first.title.en}`,
+      `🟡 ${second.title.en}`,
+      `🔴 ${third.title.en}`,
+    ]);
+    expect(labels[5]?.[0]).toStartWith("⬜ ");
+  });
+
+  test("without a next topic, Mixed comes first", () => {
+    const { keyboard } = topicPicker(i18n, "ru", "B1");
+    expect(keyboard.inline_keyboard[0]?.[0]?.text).toBe("🎲 Микс");
   });
 });
 

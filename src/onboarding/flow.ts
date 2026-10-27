@@ -1,19 +1,27 @@
 import type { BotContext } from "../bot/context";
 import { DEFAULT_LOCALE, type Locale, type Translator } from "../bot/i18n";
-import { isMessageGoneError, isNotModifiedError } from "../bot/telegram-errors";
 import type { Db } from "../db/client";
 import { getSettings, type SettingsPatch, updateSettings } from "../db/repositories/users";
 import type { CefrLevel } from "../db/schema/enums";
 import type { SettingsEvents, SettingsField } from "../events/settings-events";
 import { answerOutdated } from "../hub/handlers";
 import type { HubService } from "../hub/hub-service";
+import { recordPlacement, seedLevels } from "../levels";
 import type { Logger } from "../log";
+import { acceptAnswer, tappedLabel } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
 import type { LearningHandle, SessionManager } from "../sessions/session-manager";
+import { INTEREST_SUGGESTIONS } from "../settings/options";
+import {
+  mergeInterests,
+  parseInterests,
+  parseProfession,
+  toggleInterest,
+} from "../settings/validate";
 import { PLACEMENT_MAX_ITEMS, type SkillRunner } from "../skills";
 import type { OnboardingCallback } from "./callbacks";
 import { firstSentence, grade, nextStep, type PlacementStep } from "./placement";
-import { renderOnboarding } from "./screens";
+import { OPTION_LETTERS, renderOnboarding } from "./screens";
 import type { OnboardingMode, OnboardingState, OnboardingStep } from "./state";
 
 export interface OnboardingDeps {
@@ -100,8 +108,99 @@ export class OnboardingFlow {
       return;
     }
 
-    await ctx.answerCallbackQuery();
     const on = (...steps: OnboardingStep[]) => steps.includes(state.step);
+    // The buttons that call the placement skill answer the tap themselves, through acceptAnswer.
+    const accept = (chosen: string, task: () => Promise<void>, current?: () => boolean) =>
+      acceptAnswer(ctx, { lock: learning.withLock, chosen, current }, task).then(() => {});
+    if (callback.type === "answer") {
+      const letter = OPTION_LETTERS[callback.index] ?? "";
+      const option = state.item?.options[callback.index];
+      return accept(
+        option === undefined ? letter : `${letter}) ${option}`,
+        async () => {
+          if (!state.item) return;
+          state.answers.push(grade(state.item, callback.index));
+          state.item = undefined;
+          await this.advance(ctx, learning, state);
+        },
+        () => on("question") && state.item !== undefined && callback.seq === state.itemSeq,
+      );
+    }
+    if (callback.type === "take-test") {
+      return accept(
+        ctx.t("onboarding-take-test"),
+        async () => {
+          state.answers = [];
+          await this.advance(ctx, learning, state);
+        },
+        () => on("path", "retake-intro"),
+      );
+    }
+    // The profile steps: toggles re-show the card; each step's values are saved when it is done.
+    if (callback.type === "goal") {
+      return accept(
+        tappedLabel(ctx) ?? "",
+        () => {
+          const goals = state.goals ?? [];
+          state.goals = goals.includes(callback.goal)
+            ? goals.filter((goal) => goal !== callback.goal)
+            : [...goals, callback.goal];
+          return this.show(ctx, learning, state);
+        },
+        () => on("goals"),
+      );
+    }
+    if (callback.type === "goals-done") {
+      if (on("goals") && !state.goals?.length) {
+        await ctx.answerCallbackQuery({ text: ctx.t("onboarding-goals-empty") });
+        return;
+      }
+      return accept(
+        ctx.t("onboarding-next"),
+        async () => {
+          await this.save(ctx, { goals: state.goals ?? [] }, ["goals"]);
+          await this.goto(ctx, learning, state, "interests");
+        },
+        () => on("goals") && (state.goals?.length ?? 0) > 0,
+      );
+    }
+    if (callback.type === "interest") {
+      return accept(
+        tappedLabel(ctx) ?? "",
+        async () => {
+          const id = INTEREST_SUGGESTIONS[callback.index] ?? "";
+          state.interests = toggleInterest(state.interests ?? [], id);
+          await this.show(ctx, learning, state);
+        },
+        () => on("interests"),
+      );
+    }
+    if (callback.type === "interests-done") {
+      return accept(
+        tappedLabel(ctx) ?? "",
+        async () => {
+          await this.save(ctx, { interests: state.interests ?? [] }, ["interests"]);
+          await this.goto(ctx, learning, state, "profession");
+        },
+        () => on("interests"),
+      );
+    }
+    if (callback.type === "profession-skip") {
+      return accept(
+        ctx.t("onboarding-skip"),
+        () => this.goto(ctx, learning, state, "provider"),
+        () => on("profession"),
+      );
+    }
+    if (callback.type === "retry") {
+      return accept(
+        ctx.t("onboarding-retry"),
+        () => this.advance(ctx, learning, state),
+        () => on("error"),
+      );
+    }
+
+    await ctx.answerCallbackQuery();
 
     switch (callback.type) {
       case "lang":
@@ -110,36 +209,23 @@ export class OnboardingFlow {
           "uiLang",
           "explainLang",
         ]);
-        return this.goto(ctx, learning, state, "provider");
+        return this.goto(ctx, learning, state, "goals");
       case "provider":
         if (!on("provider")) return;
         state.wantsOwnProvider = callback.choice === "own";
         return this.goto(ctx, learning, state, "path");
-      case "take-test":
-        if (!on("path", "retake-intro")) return;
-        state.answers = [];
-        return this.advance(ctx, learning, state);
       case "know-level":
         if (!on("path", "error") || state.mode !== "onboarding") return;
         return this.goto(ctx, learning, state, "level");
       case "level": {
         if (!on("level")) return;
+        await seedLevels(this.deps.db, ctx.user.id, callback.level, "chosen");
         await this.save(ctx, { cefrLevel: callback.level }, ["cefrLevel"]);
         state.summaryLine = this.deps.i18n.t(await this.locale(ctx), "onboarding-summary-chosen", {
           level: callback.level,
         });
         return this.goto(ctx, learning, state, "words");
       }
-      case "answer": {
-        const item = state.item;
-        if (!on("question") || !item) return;
-        state.answers.push(grade(item, callback.index));
-        state.item = undefined;
-        return this.advance(ctx, learning, state);
-      }
-      case "retry":
-        if (!on("error")) return;
-        return this.advance(ctx, learning, state);
       case "continue":
         if (!on("result")) return;
         if (state.mode === "retake") return this.finish(ctx, learning, state);
@@ -164,6 +250,32 @@ export class OnboardingFlow {
     }
   }
 
+  /**
+   * A message typed during the session: interests and the profession are free text. The session
+   * manager deletes the message afterwards; anything typed where a button is expected gets a note.
+   */
+  async onMessage(ctx: BotContext, learning: LearningHandle): Promise<void> {
+    const state = ctx.session.onboarding;
+    if (state?.sessionId !== learning.session.id) return;
+    const t = this.deps.i18n;
+    const locale = await this.locale(ctx);
+    const text = ctx.message?.text ?? "";
+
+    if (state.step === "interests") {
+      const added = parseInterests(text);
+      if (!added) return learning.window.flashNote(t.t(locale, "input-interests-invalid"));
+      state.interests = mergeInterests(state.interests ?? [], added);
+      return this.show(ctx, learning, state);
+    }
+    if (state.step === "profession") {
+      const profession = parseProfession(text);
+      if (!profession) return learning.window.flashNote(t.t(locale, "input-profession-invalid"));
+      await this.save(ctx, { profession }, ["profession"]);
+      return this.goto(ctx, learning, state, "provider");
+    }
+    await learning.window.flashNote(t.t(locale, "onboarding-use-buttons"));
+  }
+
   /** Asks the skill for the next item, or the verdict, and moves to the matching step. */
   private async advance(
     ctx: BotContext,
@@ -184,10 +296,13 @@ export class OnboardingFlow {
 
     if (step.kind === "item") {
       state.item = step.item;
+      state.itemSeq = (state.itemSeq ?? 0) + 1;
       return this.goto(ctx, learning, state, "question");
     }
 
-    await this.save(ctx, { cefrLevel: step.level }, ["cefrLevel"]);
+    await recordPlacement(this.deps.db, ctx.user.id, step.level, state.answers);
+    // The cache now holds the model's band, which the graded items may have moved off the result.
+    await this.deps.events.emit({ userId: ctx.user.id, changed: ["cefrLevel"] });
     state.result = { level: step.level, summary: step.summary };
     state.item = undefined;
     state.summaryLine = await this.testSummaryLine(ctx, state, step.level, step.summary);
@@ -231,7 +346,10 @@ export class OnboardingFlow {
     return this.show(ctx, learning, state);
   }
 
-  /** Renders the card: edits it in place, or sends it (again) when `fresh` or it is gone. */
+  /**
+   * Renders the card in the session window: edited in place, or sent again at the bottom when
+   * `fresh` (a repeated /start) or when it is gone.
+   */
   private async show(
     ctx: BotContext,
     learning: LearningHandle,
@@ -239,24 +357,7 @@ export class OnboardingFlow {
     options: { fresh?: boolean } = {},
   ): Promise<void> {
     const { text, keyboard } = renderOnboarding(this.deps.i18n, await this.locale(ctx), state);
-    const chatId = ctx.user.telegramId;
-
-    if (state.messageId !== undefined && options.fresh) {
-      await ctx.api.deleteMessage(chatId, state.messageId).catch(() => {});
-      state.messageId = undefined;
-    }
-    if (state.messageId !== undefined) {
-      try {
-        await ctx.api.editMessageText(chatId, state.messageId, text, { reply_markup: keyboard });
-        ctx.session.onboarding = state;
-        return;
-      } catch (error) {
-        if (isNotModifiedError(error)) return;
-        if (!isMessageGoneError(error)) throw error;
-      }
-    }
-    const message = await learning.send(text, { reply_markup: keyboard });
-    state.messageId = message.message_id;
+    state.messageId = await learning.window.show({ text, reply_markup: keyboard }, options);
     ctx.session.onboarding = state;
   }
 

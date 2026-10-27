@@ -9,7 +9,10 @@ export type SettingsInput = { since: number } & (
   | { kind: "key"; choice: ByokChoice; baseUrl?: string }
   | { kind: "base-url" }
   | { kind: "model" }
+  | { kind: "workspace" }
   | { kind: "timezone" }
+  | { kind: "interests" }
+  | { kind: "profession" }
 );
 
 /** A pending input older than this is dropped; the message is then handled as usual. */

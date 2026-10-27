@@ -1,0 +1,278 @@
+{
+  "id": "g019",
+  "position": 19,
+  "cefrLevel": "B1",
+  "title": "Герундий или инфинитив после глаголов (enjoy doing / want to do)",
+  "plannedFrom": "2026-11-16",
+  "plannedTo": "2026-11-18",
+  "sections": {
+    "why": [
+      "Когда два глагола стоят рядом, второй принимает особую форму: V-ing (герундий) или to + V (инфинитив). В русском оба варианта это просто «неопределённая форма» (любить читать, хотеть читать), а в английском выбор зависит от первого глагола, и его нужно запоминать."
+    ],
+    "formation": [
+      "• Глагол + V-ing: I enjoy working here. She avoids driving.",
+      "• Глагол + to + V: I want to learn. He decided to leave.",
+      "• Отрицание: not ставим перед второй формой: I decided not to go. I enjoy not working.",
+      "• После предлога всегда V-ing: He is good at solving problems. Thanks for helping."
+    ],
+    "usage": [
+      "1. Только V-ing после глаголов: enjoy, mind, avoid, finish, keep, suggest, practise, give up, imagine, consider.",
+      "• I enjoy coding in the evening. (Мне нравится программировать вечером.)",
+      "• Do you mind opening the window? (Вы не против открыть окно?)",
+      "2. Только to + V после глаголов: want, need, decide, hope, plan, agree, promise, learn, manage, refuse, afford, would like.",
+      "• We decided to start earlier. (Мы решили начать раньше.)",
+      "• She hopes to find a new job. (Она надеется найти новую работу.)",
+      "3. Оба варианта без разницы в смысле: like, love, hate, prefer, start, begin.",
+      "• I like to cook. = I like cooking. (Я люблю готовить.)",
+      "4. Оба варианта, но смысл меняется: stop, remember, forget.",
+      "• I stopped smoking. (Я бросил курить.) / I stopped to smoke. (Я остановился, чтобы покурить.)",
+      "• Remember to lock the door. (Не забудь закрыть дверь, это ещё предстоит.) / I remember locking the door. (Я помню, что закрыл дверь, это уже было.)",
+      "5. После глаголов let и make после дополнения идёт инфинитив без to: She let me go. They made him wait."
+    ],
+    "signalWords": [
+      "Сначала смотрим на первый глагол. Планы, желания, решения (want, decide, hope, plan) обычно дают to + V. Чувства и действия-процессы (enjoy, mind, avoid, finish, keep) дают V-ing."
+    ],
+    "mistakes": [
+      "✗ I enjoy to read. → ✓ I enjoy reading. После enjoy только V-ing.",
+      "✗ I want going home. → ✓ I want to go home. После want нужен to + V.",
+      "✗ I'm interested in learn English. → ✓ I'm interested in learning English. После предлога ставим V-ing.",
+      "✗ She suggested to go out. → ✓ She suggested going out. После suggest идёт V-ing.",
+      "✗ I look forward to see you. → ✓ I look forward to seeing you. Здесь to является предлогом, значит нужен V-ing."
+    ],
+    "remember": [
+      "Want, need, decide, hope, plan + to V; enjoy, mind, avoid, finish, keep + V-ing; после предлога всегда V-ing."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте глагол в форме V-ing или to + V",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I enjoy ___ (play) football on weekends.",
+          "answer": "playing"
+        },
+        {
+          "number": 2,
+          "prompt": "She wants ___ (buy) a new phone.",
+          "answer": "to buy"
+        },
+        {
+          "number": 3,
+          "prompt": "We decided ___ (take) a taxi.",
+          "answer": "to take"
+        },
+        {
+          "number": 4,
+          "prompt": "He avoids ___ (talk) about his salary.",
+          "answer": "talking"
+        },
+        {
+          "number": 5,
+          "prompt": "They hope ___ (move) to a bigger flat.",
+          "answer": "to move"
+        },
+        {
+          "number": 6,
+          "prompt": "Do you mind ___ (wait) for a minute?",
+          "answer": "waiting"
+        },
+        {
+          "number": 7,
+          "prompt": "I need ___ (finish) this task today.",
+          "answer": "to finish"
+        },
+        {
+          "number": 8,
+          "prompt": "She has finished ___ (write) the report.",
+          "answer": "writing"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I can't afford (a) buying (b) to buy a car.",
+          "answer": "b / to buy"
+        },
+        {
+          "number": 2,
+          "prompt": "He keeps (a) asking (b) to ask the same question.",
+          "answer": "a / asking"
+        },
+        {
+          "number": 3,
+          "prompt": "We plan (a) visiting (b) to visit Spain next summer.",
+          "answer": "b / to visit"
+        },
+        {
+          "number": 4,
+          "prompt": "She suggested (a) going (b) to go to the cinema.",
+          "answer": "a / going"
+        },
+        {
+          "number": 5,
+          "prompt": "They refused (a) paying (b) to pay for the repair.",
+          "answer": "b / to pay"
+        },
+        {
+          "number": 6,
+          "prompt": "I'm good at (a) solve (b) solving puzzles.",
+          "answer": "b / solving"
+        },
+        {
+          "number": 7,
+          "prompt": "He promised (a) calling (b) to call me back.",
+          "answer": "b / to call"
+        },
+        {
+          "number": 8,
+          "prompt": "Thanks for (a) helping (b) to help me with my homework.",
+          "answer": "a / helping"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Смысл меняется: поставьте глагол в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm tired. Let's stop ___ (have) a rest.",
+          "answer": "to have"
+        },
+        {
+          "number": 2,
+          "prompt": "He stopped ___ (eat) sweets because of his health.",
+          "answer": "eating"
+        },
+        {
+          "number": 3,
+          "prompt": "Remember ___ (send) the invoice tomorrow.",
+          "answer": "to send"
+        },
+        {
+          "number": 4,
+          "prompt": "I remember ___ (meet) her at a party years ago.",
+          "answer": "meeting"
+        },
+        {
+          "number": 5,
+          "prompt": "Don't forget ___ (turn off) the lights when you leave.",
+          "answer": "to turn off"
+        },
+        {
+          "number": 6,
+          "prompt": "I'll never forget ___ (see) the sea for the first time.",
+          "answer": "seeing"
+        },
+        {
+          "number": 7,
+          "prompt": "She stopped ___ (talk) when the boss came in.",
+          "answer": "talking"
+        },
+        {
+          "number": 8,
+          "prompt": "On the way home I stopped ___ (buy) some bread.",
+          "answer": "to buy"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I enjoy to cook for my friends.",
+          "answer": "I enjoy cooking for my friends."
+        },
+        {
+          "number": 2,
+          "prompt": "She decided going to the gym.",
+          "answer": "She decided to go to the gym."
+        },
+        {
+          "number": 3,
+          "prompt": "He is afraid of to fly.",
+          "answer": "He is afraid of flying."
+        },
+        {
+          "number": 4,
+          "prompt": "We finished to work at six.",
+          "answer": "We finished working at six."
+        },
+        {
+          "number": 5,
+          "prompt": "I look forward to meet you.",
+          "answer": "I look forward to meeting you."
+        },
+        {
+          "number": 6,
+          "prompt": "They want buy a house.",
+          "answer": "They want to buy a house."
+        },
+        {
+          "number": 7,
+          "prompt": "I decided to not tell him.",
+          "answer": "I decided not to tell him."
+        },
+        {
+          "number": 8,
+          "prompt": "Do you mind to open the window?",
+          "answer": "Do you mind opening the window?"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я люблю программировать по вечерам.",
+          "answer": "I like coding in the evenings. / I like to code in the evenings. / I love coding in the evenings. / I love to code in the evenings."
+        },
+        {
+          "number": 2,
+          "prompt": "Мы решили начать новый проект.",
+          "answer": "We decided to start a new project."
+        },
+        {
+          "number": 3,
+          "prompt": "Она надеется найти хорошую работу.",
+          "answer": "She hopes to find a good job."
+        },
+        {
+          "number": 4,
+          "prompt": "Ты не против закрыть окно?",
+          "answer": "Do you mind closing the window? / Would you mind closing the window?"
+        },
+        {
+          "number": 5,
+          "prompt": "Он продолжает задавать вопросы.",
+          "answer": "He keeps asking questions. / He keeps on asking questions."
+        },
+        {
+          "number": 6,
+          "prompt": "Я хочу выучить английский до конца года.",
+          "answer": "I want to learn English by the end of the year."
+        },
+        {
+          "number": 7,
+          "prompt": "Я бросил пить кофе по вечерам.",
+          "answer": "I stopped drinking coffee in the evenings. / I gave up drinking coffee in the evenings."
+        },
+        {
+          "number": 8,
+          "prompt": "Спасибо, что пришёл.",
+          "answer": "Thanks for coming. / Thank you for coming."
+        }
+      ]
+    }
+  ]
+}

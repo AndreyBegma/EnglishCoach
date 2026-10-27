@@ -14,10 +14,12 @@ import {
 } from "../db/repositories/users";
 import type { User, UserSettings } from "../db/schema";
 import type { SettingsChanged, SettingsField } from "../events/settings-events";
+import { awardGoalMet } from "../gamification/awards";
 import { QUESTIONS_PER_SESSION, startSeededGrammar } from "../grammar";
 import type { HubUser } from "../hub/hub-service";
 import type { Logger } from "../log";
 import { streakDays } from "../progress/streak";
+import { acceptAnswer } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
 import type { SessionEnded, SessionManager, StartOutcome } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
@@ -131,7 +133,8 @@ export class Routine {
 
   /**
    * Session-end listener: sets `goal_met` for the learner-local days the session touched (the day
-   * it started and the day it ended — a session across midnight counts its answers to both).
+   * it started and the day it ended — a session across midnight counts its answers to both). A day
+   * whose goal this call met earns the goal and streak XP, once: the flag never flips back.
    */
   async onSessionEnded({ session, user }: SessionEnded): Promise<void> {
     const settings = await getSettings(this.deps.db, user.id);
@@ -141,7 +144,12 @@ export class Routine {
       localDate(this.now(), settings.timezone),
     ]);
     for (const date of dates) {
-      await markGoalMet(this.deps.db, user.id, date, settings.wordsPerDay);
+      if (!(await markGoalMet(this.deps.db, user.id, date, settings.wordsPerDay))) continue;
+      const streak = await streakDays(this.deps.db, user.id, {
+        now: this.now(),
+        timezone: settings.timezone,
+      });
+      await awardGoalMet(this.deps.db, user.id, { date, streak: streak.current });
     }
   }
 
@@ -318,11 +326,16 @@ export class Routine {
 
   /** Deletes the routine prompt in the chat, if there is one. */
   private async removePrompt(user: HubUser): Promise<void> {
-    const { api, store, log } = this.deps;
+    const { store } = this.deps;
     const prompt = await store.getPrompt(user.id);
     if (!prompt) return;
     await store.clearPrompt(user.id);
-    await api.deleteMessage(user.telegramId, prompt.messageId).catch((error: unknown) => {
+    await this.deletePrompt(user, prompt.messageId);
+  }
+
+  private async deletePrompt(user: HubUser, messageId: number): Promise<void> {
+    const { api, log } = this.deps;
+    await api.deleteMessage(user.telegramId, messageId).catch((error: unknown) => {
       if (!isIgnorableDeleteError(error)) {
         log.warn("routine prompt cleanup failed", { userId: user.id, error });
       }
@@ -350,13 +363,21 @@ export class Routine {
       return;
     }
 
-    await ctx.answerCallbackQuery();
-    await this.removePrompt(ctx.user);
-    const outcome =
-      callback.set === "evening"
-        ? await this.startEvening(ctx)
-        : await sessions.startSequence(ctx.user, MORNING_SET, ctx);
-    if (!outcome.started) await offerToCancel(sessions, ctx, outcome.active, ctx.user);
+    // The prompt shows the choice and no buttons while the set starts (its first part may call
+    // the model), and goes once the set is on screen.
+    const lock = (task: () => Promise<void>) => sessions.withLock(`routine:${ctx.user.id}`, task);
+    await acceptAnswer(ctx, { lock }, async () => {
+      await store.clearPrompt(ctx.user.id);
+      try {
+        const outcome =
+          callback.set === "evening"
+            ? await this.startEvening(ctx)
+            : await sessions.startSequence(ctx.user, MORNING_SET, ctx);
+        if (!outcome.started) await offerToCancel(sessions, ctx, outcome.active, ctx.user);
+      } finally {
+        await this.deletePrompt(ctx.user, prompt.messageId);
+      }
+    });
   }
 
   /** Grammar seeded with today's mistake patterns (plain grammar without any), then review. */

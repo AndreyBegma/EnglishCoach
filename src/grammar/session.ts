@@ -4,11 +4,15 @@ import type { Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
 import { upsertMistake } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
+import { recordGrammarItem } from "../levels";
 import type { Logger } from "../log";
+import { acceptAnswer } from "../sessions/answer";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { parseGrammarCallback } from "./callbacks";
 import { type Graded, gradeChoice, gradeTyped } from "./grading";
+import { nextTopic } from "./next-topic";
+import { grammarBand, topicProgressMap } from "./progress";
 import { GRAMMAR_CARD_THRESHOLD, promoteMistakeToCard } from "./promotion";
 import {
   feedbackText,
@@ -20,7 +24,7 @@ import {
 } from "./screens";
 import type { GrammarState } from "./state";
 import { recordGrammarAnswer } from "./stats";
-import { GRAMMAR_TOPICS } from "./topics";
+import { knownTopicId, SYLLABUS, topicById, topicChoices } from "./topics";
 
 export interface GrammarDeps {
   db: Db;
@@ -69,39 +73,85 @@ export function grammarSession(deps: GrammarDeps): SessionKindHandler {
           wrongByTopic: {},
         };
         ctx.session.grammar = fresh;
-        await handle.send(
+        await askNext(
+          deps,
+          handle,
+          fresh,
           deps.i18n.t(handle.locale, "grammar-practice-intro", { count: seed.length }),
         );
-        await askNext(deps, handle, fresh);
         return;
       }
-      const settings = await getSettings(deps.db, handle.user.id);
-      const picker = topicPicker(deps.i18n, handle.locale, settings?.cefrLevel ?? null);
-      await handle.send(picker.text, { reply_markup: picker.keyboard });
+      const band = await grammarBand(deps.db, handle.user.id);
+      const progress = await topicProgressMap(deps.db, handle.user.id);
+      const next = nextTopic(SYLLABUS.topics, progress, band, new Date());
+      const picker = topicPicker(deps.i18n, handle.locale, band, progress, next);
+      await handle.window.show({ text: picker.text, reply_markup: picker.keyboard });
     },
 
     async onMessage(handle, ctx) {
       const text = ctx.message?.text?.trim();
       const state = ownState(ctx, handle);
-      if (!text || !state?.current) return;
+      if (!text || !state?.current) {
+        await handle.window.flashNote(deps.i18n.t(handle.locale, "grammar-use-buttons"));
+        return;
+      }
 
       const { item } = state.current;
       if (item.type === "multiple_choice") {
-        await handle.send(deps.i18n.t(handle.locale, "grammar-use-buttons"));
+        await handle.window.flashNote(deps.i18n.t(handle.locale, "grammar-use-buttons"));
         return;
       }
 
+      // The answer is on screen, buttons off, while the model checks it.
+      const t = (key: string, vars?: Record<string, string>) =>
+        deps.i18n.t(handle.locale, key, vars);
+      const question = questionText(deps.i18n, handle.locale, state.current.n, totalOf(deps), item);
+      await handle.window.show({
+        text: `${question}\n\n${t("grammar-chosen", { answer: text })}\n${t("answer-preparing")}`,
+      });
+
       let graded: Graded;
       try {
-        graded = await gradeTyped(deps.skills, handle.user.id, item, text);
+        graded = await gradeTyped(
+          deps.skills,
+          handle.user.id,
+          item,
+          text,
+          await choicesFor(deps, handle),
+        );
       } catch (error) {
         deps.log.warn("grammar answer check failed", { sessionId: handle.session.id, error });
-        await handle.send(deps.i18n.t(handle.locale, "grammar-error-check"));
+        // The question stays on screen with the error above it; the learner sends the answer again.
+        await showQuestion(
+          deps,
+          handle,
+          state.current,
+          deps.i18n.t(handle.locale, "grammar-error-check"),
+        );
         return;
       }
-      await settle(deps, handle, state, graded);
+      await settle(deps, handle, state, graded, text);
     },
   };
+}
+
+/** Shows question `current` in the session window, `lead` (the previous result) above it. */
+async function showQuestion(
+  deps: GrammarDeps,
+  handle: LearningHandle,
+  current: NonNullable<GrammarState["current"]>,
+  lead?: string,
+) {
+  const question = questionText(deps.i18n, handle.locale, current.n, totalOf(deps), current.item);
+  await handle.window.show({
+    text: lead ? `${lead}\n\n${question}` : question,
+    reply_markup: questionKeyboard(current.n, current.item),
+  });
+}
+
+/** The syllabus topics around the learner's level a model may name. */
+async function choicesFor(deps: GrammarDeps, handle: LearningHandle) {
+  return topicChoices(await grammarBand(deps.db, handle.user.id));
 }
 
 /** The state of the session this update belongs to, or undefined when it is stale or not begun. */
@@ -110,12 +160,16 @@ function ownState(ctx: BotContext, handle: LearningHandle): GrammarState | undef
   return state?.sessionId === handle.session.id ? state : undefined;
 }
 
-/** Records a graded answer, shows the feedback and moves on (or ends the session). */
+/**
+ * Records a graded answer and moves on (or ends the session): the learner's `answer` and the
+ * feedback lead the next question.
+ */
 async function settle(
   deps: GrammarDeps,
   handle: LearningHandle,
   state: GrammarState,
   graded: Graded,
+  answer: string,
 ): Promise<void> {
   const current = state.current;
   if (!current) return;
@@ -124,6 +178,7 @@ async function settle(
 
   const settings = await getSettings(deps.db, handle.user.id);
   await recordGrammarAnswer(deps.db, handle.user.id, settings?.timezone ?? "UTC", graded.correct);
+  await recordGrammarItem(deps.db, handle.user.id, current.item, graded.verdict);
 
   state.answered += 1;
   let cardAdded = false;
@@ -141,40 +196,67 @@ async function settle(
     }
   }
 
-  await handle.send(feedbackText(deps.i18n, handle.locale, graded, cardAdded));
-  if (state.answered >= totalOf(deps)) await finish(deps, handle, state);
-  else await askNext(deps, handle, state);
+  if (state.answered >= totalOf(deps)) {
+    await finish(deps, handle, state);
+    return;
+  }
+  const lead = [
+    deps.i18n.t(handle.locale, "grammar-chosen", { answer }),
+    feedbackText(deps.i18n, handle.locale, graded, cardAdded),
+  ].join("\n");
+  await askNext(deps, handle, state, lead);
 }
 
-/** Sends the next question, or an error with a retry button when the quiz skill fails. */
-async function askNext(deps: GrammarDeps, handle: LearningHandle, state: GrammarState) {
+/**
+ * Shows the next question, or an error with a retry button when the quiz skill fails. `lead` is
+ * the previous step's result, the first lines of either.
+ */
+async function askNext(
+  deps: GrammarDeps,
+  handle: LearningHandle,
+  state: GrammarState,
+  lead?: string,
+) {
   const n = state.asked + 1;
+  const syllabusTopic = state.seed?.length || !state.topic ? undefined : topicById(state.topic);
+  // A syllabus topic is practised only in the item types it lists.
+  const rotation = syllabusTopic?.exerciseTypes ?? ITEM_ROTATION;
   let item: NonNullable<GrammarState["current"]>["item"];
   try {
     const run = await deps.skills.runSkill(handle.user.id, "grammar-quiz", {
       recent_accuracy: accuracyOf(state),
-      topic: state.seed?.length ? (state.seed[(n - 1) % state.seed.length] ?? null) : state.topic,
-      item_type: ITEM_ROTATION[(n - 1) % ITEM_ROTATION.length] ?? null,
+      topic: state.seed?.length
+        ? (state.seed[(n - 1) % state.seed.length] ?? null)
+        : (syllabusTopic?.title.en ?? null),
+      syllabus_topic: syllabusTopic
+        ? {
+            id: syllabusTopic.id,
+            level: syllabusTopic.level,
+            examples: syllabusTopic.examples,
+            interference: syllabusTopic.interference,
+          }
+        : null,
+      item_type: rotation[(n - 1) % rotation.length] ?? null,
       recent_topics: state.recentTopics,
+      syllabus_topics: syllabusTopic ? [] : await choicesFor(deps, handle),
     });
-    item = run.data;
+    // The topic the learner picked is the item's topic; a model-named id is kept only if real.
+    item = { ...run.data, topic_id: syllabusTopic?.id ?? knownTopicId(run.data.topic_id) };
   } catch (error) {
     deps.log.warn("grammar question failed", { sessionId: handle.session.id, error });
-    await handle.send(deps.i18n.t(handle.locale, "grammar-error-quiz"), {
+    const failed = deps.i18n.t(handle.locale, "grammar-error-quiz");
+    await handle.window.show({
+      text: lead ? `${lead}\n\n${failed}` : failed,
       reply_markup: retryKeyboard(deps.i18n, handle.locale),
     });
     return;
   }
 
-  const message = await handle.send(
-    questionText(deps.i18n, handle.locale, n, totalOf(deps), item),
-    {
-      reply_markup: questionKeyboard(n, item),
-    },
-  );
+  const current = { n, item };
+  await showQuestion(deps, handle, current, lead);
   state.asked = n;
   state.recentTopics.push(item.topic);
-  state.current = { n, item, messageId: message.message_id };
+  state.current = current;
 }
 
 async function finish(deps: GrammarDeps, handle: LearningHandle, state: GrammarState) {
@@ -200,59 +282,73 @@ export function grammarHandlers(deps: GrammarDeps): Composer<BotContext> {
       await ctx.deleteMessage().catch(() => {});
       return;
     }
-    const state = ownState(ctx, handle);
+    // Buttons off and the choice marked at once, while the grading and the next question run.
+    // Whether the tap is still current is asked holding the lock, from the state as it is then.
+    const accept = (chosen: string, task: () => Promise<void>, current: () => boolean) =>
+      acceptAnswer(ctx, { lock: handle.withLock, chosen, current }, task).then(() => {});
 
     switch (callback.type) {
       case "topic": {
-        const topic = callback.index === null ? undefined : GRAMMAR_TOPICS[callback.index];
-        if (state || (callback.index !== null && !topic)) {
+        const topic = callback.id === null ? undefined : topicById(callback.id);
+        if (callback.id !== null && !topic) {
           return void (await ctx.answerCallbackQuery({ text: ctx.t("grammar-outdated") }));
         }
-        await ctx.answerCallbackQuery();
-        const fresh: GrammarState = {
-          sessionId: handle.session.id,
-          topic: topic?.tag ?? null,
-          asked: 0,
-          answered: 0,
-          correct: 0,
-          recentTopics: [],
-          wrongByTopic: {},
-        };
-        ctx.session.grammar = fresh;
-        const chosen = topic
-          ? ctx.t(`grammar-topic-${topic.id.replaceAll("_", "-")}`)
-          : ctx.t("grammar-mixed");
-        await ctx.editMessageText(ctx.t("grammar-topic-chosen", { topic: chosen })).catch(() => {});
-        await askNext(deps, handle, fresh);
-        return;
+        const chosen = topic ? topic.title[handle.locale] : ctx.t("grammar-mixed");
+        return accept(
+          chosen,
+          async () => {
+            const fresh: GrammarState = {
+              sessionId: handle.session.id,
+              topic: topic?.id ?? null,
+              asked: 0,
+              answered: 0,
+              correct: 0,
+              recentTopics: [],
+              wrongByTopic: {},
+            };
+            ctx.session.grammar = fresh;
+            await askNext(deps, handle, fresh, ctx.t("grammar-topic-chosen", { topic: chosen }));
+          },
+          () => !ownState(ctx, handle),
+        );
       }
 
       case "answer": {
-        const current = state?.current;
-        if (!state || !current || current.n !== callback.question) {
-          return void (await ctx.answerCallbackQuery({ text: ctx.t("grammar-outdated") }));
-        }
-        await ctx.answerCallbackQuery();
-        const chosen = current.item.options?.[callback.option] ?? "";
-        const graded = gradeChoice(current.item, callback.option);
-        // Drop the buttons and show what was picked, so the question reads as answered.
-        await ctx
-          .editMessageText(
-            `${questionText(deps.i18n, handle.locale, current.n, totalOf(deps), current.item)}\n\n${ctx.t("grammar-chosen", { answer: chosen })}`,
-          )
-          .catch(() => {});
-        await settle(deps, handle, state, graded);
-        return;
+        const asked = () => {
+          const state = ownState(ctx, handle);
+          return state?.current?.n === callback.question ? { state, current: state.current } : null;
+        };
+        const chosen = asked()?.current.item.options?.[callback.option] ?? "";
+        return accept(
+          chosen,
+          async () => {
+            const at = asked();
+            if (!at) return;
+            await settle(
+              deps,
+              handle,
+              at.state,
+              gradeChoice(at.current.item, callback.option),
+              chosen,
+            );
+          },
+          () => asked() !== null,
+        );
       }
 
       case "retry": {
-        if (!state || state.current) {
-          return void (await ctx.answerCallbackQuery({ text: ctx.t("grammar-outdated") }));
-        }
-        await ctx.answerCallbackQuery();
-        await ctx.deleteMessage().catch(() => {});
-        await askNext(deps, handle, state);
-        return;
+        const failed = () => {
+          const state = ownState(ctx, handle);
+          return state && !state.current ? state : undefined;
+        };
+        return accept(
+          ctx.t("grammar-retry"),
+          async () => {
+            const state = failed();
+            if (state) await askNext(deps, handle, state);
+          },
+          () => failed() !== undefined,
+        );
       }
 
       case "stop":

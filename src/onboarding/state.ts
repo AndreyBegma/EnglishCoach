@@ -1,10 +1,14 @@
 import type { CefrLevel } from "../db/schema/enums";
+import type { LearnerGoal } from "../db/schema/users";
 import type { PlacementAnswer, PlacementItem } from "./placement";
 
 export type OnboardingMode = "onboarding" | "retake";
 
 export type OnboardingStep =
   | "language"
+  | "goals"
+  | "interests"
+  | "profession"
   | "provider"
   | "path"
   | "level"
@@ -30,11 +34,19 @@ export interface OnboardingState {
   messageId?: number;
   answers: PlacementAnswer[];
   item?: PlacementItem;
+  /**
+   * Counts every item shown in this session, retries included; the answer buttons carry it, so a
+   * tap meant for an earlier item never answers the one on screen.
+   */
+  itemSeq?: number;
   result?: { level: CefrLevel; summary: string | null };
   /** The line folded into the hub when the session ends. */
   summaryLine?: string;
   /** The learner wants to set up their own provider once the hub is back. */
   wantsOwnProvider: boolean;
+  /** Goals and interests picked so far; saved when their step is done. */
+  goals?: LearnerGoal[];
+  interests?: string[];
 }
 
 declare module "../bot/context" {

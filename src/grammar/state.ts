@@ -9,7 +9,7 @@ export type QuizItem = SkillOutput<"grammar-quiz">;
 export interface GrammarState {
   /** The `learning_sessions` row this state belongs to; a state of another session is stale. */
   sessionId: number;
-  /** The syllabus tag the learner chose; null for Mixed. */
+  /** The syllabus topic id the learner chose (`g015`); null for Mixed. */
   topic: string | null;
   /** Weak-spot patterns this session practises, in turn, instead of a syllabus topic. */
   seed?: string[];
@@ -21,8 +21,8 @@ export interface GrammarState {
   recentTopics: string[];
   /** Wrong answers per topic tag, for the "weak" part of the summary. */
   wrongByTopic: Record<string, number>;
-  /** The question waiting for an answer. */
-  current?: { n: number; item: QuizItem; messageId: number };
+  /** The question waiting for an answer; it is on screen in the session window. */
+  current?: { n: number; item: QuizItem };
 }
 
 declare module "../bot/context" {

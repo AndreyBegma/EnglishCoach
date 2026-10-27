@@ -4,4 +4,9 @@ dist/
 .env.local
 *.log
 coverage/
+# Non-redistributable data (the owner's word list): never committed.
+data/private/
 .orchestrator-*.md
+# Database dumps (contain user data): never committed.
+backups/*
+!backups/.gitkeep

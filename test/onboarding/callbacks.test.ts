@@ -9,12 +9,17 @@ import {
 describe("onboarding callback data", () => {
   test.each<OnboardingCallback>([
     { type: "lang", lang: "uk" },
+    { type: "goal", goal: "work_business" },
+    { type: "goals-done" },
+    { type: "interest", index: 11 },
+    { type: "interests-done" },
+    { type: "profession-skip" },
     { type: "provider", choice: "server" },
     { type: "provider", choice: "own" },
     { type: "take-test" },
     { type: "know-level" },
     { type: "level", level: "C2" },
-    { type: "answer", index: 3 },
+    { type: "answer", seq: 15, index: 3 },
     { type: "continue" },
     { type: "words", count: 15 },
     { type: "morning", time: "06:30" },
@@ -36,11 +41,17 @@ describe("onboarding callback data", () => {
     "1:o",
     "1:o:zz",
     "1:o:a:4",
+    "1:o:a:1:4",
+    // An answer button from before items were numbered: stale, not an answer to the current item.
+    "1:o:a:2",
     "1:o:lv:D1",
     "1:o:wd:7",
     "1:o:mt:0800",
     "1:o:et:0830",
     "1:o:l:fr",
+    "1:o:g:cooking",
+    "1:o:i:12",
+    "1:o:i:-1",
   ])("rejects %p", (data) => {
     expect(parseOnboardingCallback(data)).toBeUndefined();
   });

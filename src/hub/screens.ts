@@ -1,6 +1,7 @@
 import { InlineKeyboard } from "grammy";
 import { encodeCallback, type HubScreen } from "../bot/callbacks";
 import type { Locale, Translator } from "../bot/i18n";
+import { encodeProgressCallback } from "../progress/callbacks";
 import type { ProgressData } from "../progress/queries";
 import { renderProgress } from "../progress/render";
 
@@ -50,8 +51,9 @@ export function renderScreen(
           ],
           [
             button(t("hub-progress"), { type: "screen", screen: "progress" }),
-            button(t("hub-settings"), { type: "settings", page: "root" }),
+            InlineKeyboard.text(t("hub-profile"), encodeProgressCallback({ type: "profile" })),
           ],
+          [button(t("hub-settings"), { type: "settings", page: "root" })],
         ]),
       };
     }

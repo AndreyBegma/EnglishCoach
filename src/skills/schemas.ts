@@ -2,10 +2,11 @@ import { z } from "zod";
 import { cefrLevelEnum, mistakeCategoryEnum } from "../db/schema/enums";
 
 // Every skill names one input and one output schema from this file in its frontmatter.
-// Outputs are root objects with flat, required (nullable) fields: the Anthropic provider sends the
-// schema as a tool's `input_schema`, which must be an object, and flat shapes survive every
-// backend's structured-output mode better than unions. Cross-field rules live in `superRefine`;
-// they do not reach the JSON Schema the model sees, but a violation earns the repair turn.
+// Outputs are root objects with flat, required (nullable) fields: structured-output modes want an
+// object at the root (Anthropic's forced-tool fallback needs one as a tool's `input_schema`), and
+// flat shapes survive every backend better than unions. Cross-field rules live in `superRefine`,
+// and bounds such as `.min()` are only hinted to Anthropic models; neither is enforced by the
+// backend, but zod checks both and a violation earns the repair turn.
 
 const cefr = z.enum(cefrLevelEnum.enumValues);
 const category = z.enum(mistakeCategoryEnum.enumValues);
@@ -51,6 +52,19 @@ const GAP = "___";
 
 // ---------------------------------------------------------------- grammar-quiz
 
+/** Syllabus topics a model may name, as `{id, title}`; the server picks which. */
+const syllabusTopicList = z.array(z.object({ id: text, title: text })).default([]);
+
+/**
+ * The syllabus topic id a model names. Only a hint: the server keeps it only when it is a real
+ * syllabus id, so a missing or invented one never fails the call.
+ */
+const syllabusTopicId = z
+  .string()
+  .nullable()
+  .default(null)
+  .describe("Id from task.syllabus_topics this is about, e.g. 'g015'; null if none fits");
+
 export const grammarItemType = z.enum([
   "multiple_choice",
   "gap_fill",
@@ -62,16 +76,29 @@ export const GrammarQuizInput = z.object({
   recent_accuracy: recentAccuracy,
   /** A topic the server wants practised (a weak spot or the next syllabus point); null = model picks. */
   topic: text.nullable().default(null),
+  /** The syllabus entry behind `topic` when the learner picked one; null otherwise. */
+  syllabus_topic: z
+    .object({
+      id: text,
+      level: text,
+      examples: z.array(text),
+      interference: z.array(z.object({ wrong: text, right: text, cause: text })),
+    })
+    .nullable()
+    .default(null),
   /** The item type the server rotated to; null = model picks. */
   item_type: grammarItemType.nullable().default(null),
   /** Topics asked in this session already, to avoid repeating them. */
   recent_topics: z.array(text).default([]),
+  /** Syllabus topics around the learner's level, to name the one the item tests. */
+  syllabus_topics: syllabusTopicList,
 });
 
 export const GrammarQuizOutput = z
   .object({
     type: grammarItemType,
     topic: text.describe("Short English tag, e.g. 'present perfect vs past simple'"),
+    topic_id: syllabusTopicId,
     difficulty: cefr,
     instruction: text.describe("What the learner must do, in explain_lang"),
     question: text.describe("The English item; gap_fill marks the gap with ___"),
@@ -97,6 +124,10 @@ export const GrammarCheckInput = z.object({
   accepted_answers: answers,
   /** What the learner typed. The server has already ruled out an exact match. */
   learner_answer: z.string(),
+  /** The syllabus topic the item tests, when known. */
+  topic_id: z.string().nullable().default(null),
+  /** Syllabus topics around the learner's level, to name the one the error belongs to. */
+  syllabus_topics: syllabusTopicList,
 });
 
 export const GrammarCheckOutput = z
@@ -108,6 +139,7 @@ export const GrammarCheckOutput = z
     pattern: text
       .nullable()
       .describe("Short reusable English label of the error; null when correct"),
+    topic_id: syllabusTopicId,
     explanation: text.describe("In explain_lang"),
   })
   .superRefine((value, ctx) => {
@@ -142,6 +174,17 @@ export const VocabEnrichOutput = z.object({
     .describe("Two level-appropriate sentences and their translations"),
   collocations: z.array(text).length(3),
   mnemonic: text.describe("In explain_lang"),
+  image_query: text
+    .max(80)
+    .nullable()
+    .describe("A short English stock-photo query for the first example's sense; null if abstract"),
+  emoji: z
+    .string()
+    .trim()
+    .min(1)
+    .max(16)
+    .nullable()
+    .describe("One emoji for an abstract word (image_query null), else null"),
 });
 
 // ---------------------------------------------------------------- vocab-exercise
@@ -272,7 +315,12 @@ export const ConversationInput = z.object({
   learner_message: text,
   /** The tip kind the server rotated to for this turn. */
   tip_kind: tipKind,
+  /** Syllabus topics around the learner's level the model may tag as used correctly. */
+  syllabus_topics: syllabusTopicList,
 });
+
+/** Topics one turn may tag as used correctly; more would be guessing. */
+export const MAX_TOPIC_USES = 3;
 
 export const ConversationOutput = z.object({
   reply: text.describe("Natural English reply that keeps the conversation going"),
@@ -288,6 +336,12 @@ export const ConversationOutput = z.object({
     )
     .max(MAX_CORRECTIONS),
   tip: z.object({ kind: tipKind, text: text.describe("In explain_lang, English examples inline") }),
+  /** Only a hint: the server keeps the ids that are in the syllabus and drops the rest. */
+  topic_uses: z
+    .array(z.string())
+    .max(MAX_TOPIC_USES)
+    .default([])
+    .describe("Ids from task.syllabus_topics the learner's message used correctly"),
 });
 
 // ---------------------------------------------------------------- routine-plan
@@ -305,6 +359,89 @@ export const RoutinePlanOutput = z.object({
   text: text.max(800).describe("The plan message in ui_lang"),
 });
 
+// ---------------------------------------------------------------- vocab-enrich-batch
+
+/** Words per batch call: enough to amortise the prompt, few enough to keep answers reliable. */
+export const ENRICH_BATCH_MAX = 20;
+
+export const VocabEnrichBatchInput = z.object({
+  words: z
+    .array(
+      z.object({
+        id: z.number().int().positive(),
+        lemma: text,
+        pos: text.nullable().default(null),
+        word_level: cefr.nullable().default(null),
+        /** Fields the curated list already has, in explain_lang; the model keeps them. */
+        translation: text.nullable().default(null),
+        ipa: text.nullable().default(null),
+        /** An English sentence that must be the first example. */
+        example: text.nullable().default(null),
+        /** Human-written examples with translations that follow it, kept unchanged. */
+        given_examples: z
+          .array(z.object({ en: text, translation: text }))
+          .max(2)
+          .default([]),
+      }),
+    )
+    .min(1)
+    .max(ENRICH_BATCH_MAX),
+});
+
+export const VocabEnrichBatchOutput = z.object({
+  cards: z
+    .array(
+      z.object({
+        id: z.number().int().describe("The `id` of the word in task.words"),
+        translation: VocabEnrichOutput.shape.translation,
+        ipa: VocabEnrichOutput.shape.ipa,
+        pos: text,
+        examples: VocabEnrichOutput.shape.examples,
+        collocations: VocabEnrichOutput.shape.collocations,
+        mnemonic: VocabEnrichOutput.shape.mnemonic,
+        image_query: VocabEnrichOutput.shape.image_query,
+        emoji: VocabEnrichOutput.shape.emoji,
+      }),
+    )
+    .describe("One card per word of task.words, same ids"),
+});
+
+// ---------------------------------------------------------------- example-check
+
+/** Examples per check call: two per word of a full enrichment batch. */
+export const EXAMPLE_CHECK_MAX = 2 * ENRICH_BATCH_MAX;
+
+export const ExampleCheckInput = z.object({
+  items: z
+    .array(
+      z.object({
+        index: z.number().int().nonnegative(),
+        lemma: text,
+        pos: text.nullable().default(null),
+        /** The card's translation of the word, in explain_lang: the sense the example must show. */
+        sense: text,
+        en: text,
+        translation: text,
+      }),
+    )
+    .min(1)
+    .max(EXAMPLE_CHECK_MAX),
+});
+
+export const ExampleCheckOutput = z.object({
+  results: z
+    .array(
+      z.object({
+        index: z.number().int().describe("The `index` of the item in task.items"),
+        ok: z
+          .boolean()
+          .describe("Grammatical, natural, uses the word in the given sense, translation faithful"),
+        problem: text.nullable().describe("What is wrong, in English, when ok is false; else null"),
+      }),
+    )
+    .describe("One verdict per item of task.items, same indexes"),
+});
+
 // ---------------------------------------------------------------- registries
 
 export const inputSchemas = {
@@ -316,6 +453,8 @@ export const inputSchemas = {
   PlacementTestInput,
   ConversationInput,
   RoutinePlanInput,
+  VocabEnrichBatchInput,
+  ExampleCheckInput,
 } satisfies Record<string, z.ZodObject>;
 
 // `satisfies ZodObject` is what guarantees a root object for every output (see top of file).
@@ -328,6 +467,8 @@ export const outputSchemas = {
   PlacementTestOutput,
   ConversationOutput,
   RoutinePlanOutput,
+  VocabEnrichBatchOutput,
+  ExampleCheckOutput,
 } satisfies Record<string, z.ZodObject>;
 
 export type InputSchemaName = keyof typeof inputSchemas;
@@ -343,6 +484,8 @@ export const BASE_SKILLS = {
   "placement-test": { input: "PlacementTestInput", output: "PlacementTestOutput" },
   conversation: { input: "ConversationInput", output: "ConversationOutput" },
   "routine-plan": { input: "RoutinePlanInput", output: "RoutinePlanOutput" },
+  "vocab-enrich-batch": { input: "VocabEnrichBatchInput", output: "VocabEnrichBatchOutput" },
+  "example-check": { input: "ExampleCheckInput", output: "ExampleCheckOutput" },
 } as const satisfies Record<string, { input: InputSchemaName; output: OutputSchemaName }>;
 
 export type BaseSkillId = keyof typeof BASE_SKILLS;

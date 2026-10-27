@@ -1,0 +1,10 @@
+{
+  "results": [
+    { "index": 0, "ok": true, "problem": null },
+    {
+      "index": 1,
+      "ok": false,
+      "problem": "uses \"bank\" as a river bank, not a financial institution"
+    }
+  ]
+}

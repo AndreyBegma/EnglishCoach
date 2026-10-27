@@ -21,6 +21,8 @@ import { getSettings, getUserById } from "../db/repositories/users";
 import type { LearningSession } from "../db/schema";
 import type { HubService, HubUser } from "../hub/hub-service";
 import type { Logger } from "../log";
+import { arrivedWhileHeld, MemorySessionLocks, type SessionLocks } from "./locks";
+import { type SessionWindow, SessionWindows } from "./window";
 
 /** Schedules the inactivity timeout of a session. Implemented by BullMQ in production. */
 export interface SessionTimeouts {
@@ -37,12 +39,25 @@ export interface LearningHandle {
   readonly user: HubUser;
   /** The user's UI language, for texts the session sends. */
   readonly locale: Locale;
+  /**
+   * The session's one window: steps are shown with `window.show`, hints with `window.flashNote`.
+   * Prefer it to `send`, which adds a message that stays until the session ends.
+   */
+  readonly window: SessionWindow;
   /** Sends a message into the session's chat and tracks it for cleanup. */
   send(text: string, options?: SendOptions): Promise<Message.TextMessage>;
   /** Alias of `send`; sessions run in the private chat, so a reply is a send. */
   reply(text: string, options?: SendOptions): Promise<Message.TextMessage>;
-  /** Tracks a message that was sent some other way (a photo, a voice note…). */
+  /**
+   * Tracks a message sent some other way (a voice note…) as part of the step on screen: it is
+   * deleted when the window shows the next step.
+   */
   track(messageId: number): Promise<void>;
+  /**
+   * Runs `task` while no other answer of this session is being graded or the next item prepared.
+   * Returns false, without running it, when one is: the caller tells the learner to wait.
+   */
+  withLock(task: () => Promise<void>): Promise<boolean>;
   end(status: EndedStatus, summary?: SessionSummary | null): Promise<boolean>;
 }
 
@@ -54,8 +69,13 @@ export interface SessionKindHandler {
    * outside an update (a scheduled routine).
    */
   onStart(session: LearningHandle, ctx?: BotContext): Promise<void>;
-  /** A user message inside the session. The message is already tracked. */
+  /**
+   * A user message inside the session. The message is already tracked, and deleted once this
+   * returns unless `keepsLearnerMessages` is set.
+   */
   onMessage?(session: LearningHandle, ctx: BotContext): Promise<void>;
+  /** The learner's messages are the session's content (a chat): the kind prunes them itself. */
+  keepsLearnerMessages?: boolean;
 }
 
 export interface SessionManagerDeps {
@@ -65,6 +85,10 @@ export interface SessionManagerDeps {
   timeouts: SessionTimeouts;
   log: Logger;
   i18n: Translator;
+  /** How long flash notes stay on screen; defaults to `NOTE_TTL_MS`. */
+  noteTtlMs?: number;
+  /** The in-flight answer locks; in memory unless Redis is passed. */
+  locks?: SessionLocks;
 }
 
 /** Summary line for a session that ended without one. A finished session supplies its own. */
@@ -105,8 +129,52 @@ export class SessionManager {
    */
   private readonly sequences = new Map<number, Sequence>();
   private readonly endedListeners = new Set<SessionEndedListener>();
+  private readonly windows: SessionWindows;
+  private readonly locks: SessionLocks;
 
-  constructor(private readonly deps: SessionManagerDeps) {}
+  constructor(private readonly deps: SessionManagerDeps) {
+    this.windows = new SessionWindows({ api: deps.api, log: deps.log, noteTtlMs: deps.noteTtlMs });
+    this.locks = deps.locks ?? new MemorySessionLocks();
+  }
+
+  /**
+   * Runs `task` holding the lock of `key`, released however `task` ends; false, without running
+   * it, when the lock is held. The lock expires on its own if this process dies holding it.
+   *
+   * `openedAt` is when the update asking began. An update that began while the lock was held
+   * (webhooks run updates side by side) read its flow state before that hold wrote it, so it is
+   * refused as well, even when it gets to the lock after the release.
+   */
+  async withLock(key: string, task: () => Promise<void>, openedAt?: number): Promise<boolean> {
+    const lease = await this.locks.acquire(key);
+    if (!lease) return false;
+    if (openedAt !== undefined && ((await this.locks.lastHeld(key))?.to ?? -1) > openedAt) {
+      await lease.release({ record: false });
+      return false;
+    }
+    try {
+      await task();
+    } finally {
+      await lease.release().catch((error: unknown) => {
+        this.deps.log.warn("session lock release failed", { key, error });
+      });
+    }
+    return true;
+  }
+
+  /**
+   * True when a message Telegram dated `dateSeconds` was sent while `key` was last held. Polling
+   * handles updates one at a time, so such a message is only read after the lock is released:
+   * it was typed while the previous answer was being handled, and is dropped like a concurrent one.
+   */
+  async queuedBehind(key: string, dateSeconds: number): Promise<boolean> {
+    return arrivedWhileHeld(dateSeconds, await this.locks.lastHeld(key));
+  }
+
+  /** Deletes every live flash note now instead of after its delay (tests, shutdown). */
+  flushNotes(): Promise<void> {
+    return this.windows.flushNotes();
+  }
 
   register(kind: SessionKind, handler: SessionKindHandler): void {
     if (this.handlers.has(kind)) throw new Error(`a handler for "${kind}" is already registered`);
@@ -185,25 +253,44 @@ export class SessionManager {
     if (sequence) this.sequences.set(result.session.id, sequence);
     await this.deps.timeouts.schedule(result.session.id);
     const settings = await getSettings(this.deps.db, user.id);
-    const handle = this.handle(result.session, user, settings?.uiLang ?? DEFAULT_LOCALE);
     const current = ctx ?? this.update.getStore();
-    await handler.onStart(handle, current?.user.id === user.id ? current : undefined);
+    const own = current?.user.id === user.id ? current : undefined;
+    const handle = this.handle(result.session, user, settings?.uiLang ?? DEFAULT_LOCALE, own);
+    await handler.onStart(handle, own);
     return { started: true, handle };
   }
 
-  handle(session: LearningSession, user: HubUser, locale: Locale): LearningHandle {
+  /**
+   * The handle of an active session. `ctx` is the user's update being handled, if any: the window
+   * keeps a copy of its state in its grammY session so a restart edits instead of stacking.
+   */
+  handle(
+    session: LearningSession,
+    user: HubUser,
+    locale: Locale,
+    ctx?: BotContext,
+  ): LearningHandle {
+    const openedAt = Date.now();
     const send = async (text: string, options?: SendOptions) => {
       const message = await this.deps.api.sendMessage(user.telegramId, text, options);
       await trackMessage(this.deps.db, session.id, message.chat.id, message.message_id);
       return message;
     };
+    const window = this.windows.open(
+      session.id,
+      user.telegramId,
+      (messageId) => trackMessage(this.deps.db, session.id, user.telegramId, messageId),
+      ctx,
+    );
     return {
       session,
       user,
       locale,
+      window,
       send,
       reply: send,
-      track: (messageId) => trackMessage(this.deps.db, session.id, user.telegramId, messageId),
+      track: (messageId) => window.attach(messageId),
+      withLock: (task) => this.withLock(sessionLockKey(session.id), task, openedAt),
       end: (status, summary) => this.end(session.id, status, summary),
     };
   }
@@ -238,6 +325,7 @@ export class SessionManager {
     const ended = await endSession(db, sessionId, status, stored);
     if (!ended) return false;
     this.sequences.delete(sessionId);
+    this.windows.forget(sessionId);
 
     await timeouts.cancel(sessionId).catch((error: unknown) => {
       log.warn("session timeout cancel failed", { sessionId, error });
@@ -305,6 +393,9 @@ export class SessionManager {
     await deleteSessionMessages(db, sessionId);
   }
 }
+
+/** The lock a session's answers take: one is handled at a time. */
+export const sessionLockKey = (sessionId: number) => `session:${sessionId}`;
 
 /** One summary for a whole sequence: earlier parts' lines, then this part's, one per line. */
 function joinSummaries(

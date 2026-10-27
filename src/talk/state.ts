@@ -20,6 +20,11 @@ export interface TalkState {
   messages: number;
   corrections: number;
   categories: Partial<Record<MistakeCategory, number>>;
+  /**
+   * Messages of the last exchange (the learner's message and the reply) plus failed attempts since:
+   * deleted when the next reply arrives, so the chat keeps only the latest exchange.
+   */
+  exchange?: number[];
 }
 
 // Per-session state lives in grammY's session (Redis in production), next to the other flows.

@@ -260,9 +260,12 @@ describe.skipIf(!testServerUrl)("Talk session", () => {
     expect(requests).toHaveLength(1);
     expect(requests[0]?.messages.at(-1)?.content).toContain('"topic": null');
 
-    // Picking now does not restart the chat.
+    // Picking now does not restart the chat, and says so.
     await h.press(telegramId, picker.id, picker.buttons[0]?.[0] ?? "");
     expect(requests).toHaveLength(1);
+    expect(h.telegram.callsOf("answerCallbackQuery").at(-1)?.payload).toMatchObject({
+      text: "This question is already answered",
+    });
 
     // A Finish button of some other session is outdated.
     h.telegram.reset();

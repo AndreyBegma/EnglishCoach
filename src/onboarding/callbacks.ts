@@ -15,7 +15,8 @@ export type OnboardingCallback =
   | { type: "take-test" }
   | { type: "know-level" }
   | { type: "level"; level: (typeof CEFR_LEVELS)[number] }
-  | { type: "answer"; index: number }
+  /** `seq` is the item the button belongs to (`OnboardingState.itemSeq`); another item's is stale. */
+  | { type: "answer"; seq: number; index: number }
   | { type: "continue" }
   | { type: "words"; count: (typeof WORDS_PER_DAY)[number] }
   | { type: "morning"; time: string }
@@ -47,10 +48,13 @@ const route = z.union([
     type: "level" as const,
     level,
   })),
-  z.tuple([z.literal("a"), z.enum(["0", "1", "2", "3"])]).transform(([, index]) => ({
-    type: "answer" as const,
-    index: Number(index),
-  })),
+  z
+    .tuple([z.literal("a"), z.string().regex(/^\d{1,4}$/), z.enum(["0", "1", "2", "3"])])
+    .transform(([, seq, index]) => ({
+      type: "answer" as const,
+      seq: Number(seq),
+      index: Number(index),
+    })),
   z.tuple([z.literal("c")]).transform(() => ({ type: "continue" as const })),
   z
     .tuple([
@@ -87,7 +91,7 @@ function partsOf(callback: OnboardingCallback): (string | number)[] {
     case "level":
       return ["lv", callback.level];
     case "answer":
-      return ["a", callback.index];
+      return ["a", callback.seq, callback.index];
     case "continue":
       return ["c"];
     case "words":

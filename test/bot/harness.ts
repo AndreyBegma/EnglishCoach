@@ -8,6 +8,7 @@ import type { SessionKind } from "../../src/db/repositories/sessions";
 import { type ProviderFactories, resolveProvider } from "../../src/llm";
 import type { ServerEnv } from "../../src/llm/providers/server";
 import { createLogger } from "../../src/log";
+import type { SessionLocks } from "../../src/sessions/locks";
 import type { SessionTimeouts } from "../../src/sessions/session-manager";
 import { learnerContextFromDb, loadSkillRegistry, SkillRunner } from "../../src/skills";
 import { FakeLlm } from "./fake-llm";
@@ -159,6 +160,25 @@ export class FakeTelegram {
           text: p.text,
         });
       }
+      case "editMessageCaption": {
+        const message = this.chat(chatId).get(Number(p.message_id));
+        if (!message) return fail("message to edit not found");
+        if (message.photo === undefined) return fail("there is no caption in the message to edit");
+        Object.assign(
+          message,
+          { text: String(p.caption ?? "") },
+          keyboardOf(p.reply_markup as Markup | undefined),
+        );
+        return ok(true);
+      }
+      case "editMessageReplyMarkup": {
+        const message = this.chat(chatId).get(Number(p.message_id));
+        if (!message) return fail("message to edit not found");
+        Object.assign(message, keyboardOf(p.reply_markup as Markup | undefined));
+        return ok(true);
+      }
+      case "sendChatAction":
+        return ok(true);
       case "deleteMessage": {
         if (!this.chat(chatId).delete(Number(p.message_id))) {
           return fail("message to delete not found");
@@ -219,6 +239,8 @@ export interface HarnessOptions {
   llmFactories?: ProviderFactories;
   /** Replaces the skill runner session handlers get as `deps.skills`. */
   skills?: SkillRunner;
+  /** Replaces the in-memory answer locks. */
+  locks?: SessionLocks;
 }
 
 /** A fixed 32-byte master key; tests decrypt stored keys with it. */
@@ -262,6 +284,7 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
         learner: learnerContextFromDb(db),
       }),
     botConfig: { botInfo: BOT_INFO },
+    locks: options.locks,
   });
   app.bot.api.config.use(telegram.transformer);
 
@@ -332,6 +355,14 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
             chat: { id: from, type: "private", first_name: `User${from}` },
             from: BOT_INFO,
             text: message?.text ?? "",
+            reply_markup: {
+              inline_keyboard: (message?.buttons ?? []).map((row, r) =>
+                row.map((callback_data, b) => ({
+                  text: message?.labels[r]?.[b] ?? "",
+                  callback_data,
+                })),
+              ),
+            },
           },
         },
       });

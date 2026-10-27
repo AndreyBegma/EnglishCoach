@@ -3,6 +3,7 @@ import { type HubActivity, parseCallback } from "../bot/callbacks";
 import type { BotContext } from "../bot/context";
 import type { SessionKind } from "../db/repositories/sessions";
 import type { OnboardingFlow } from "../onboarding/flow";
+import { whileTyping } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
 import type { SessionManager } from "../sessions/session-manager";
 import type { HubService } from "./hub-service";
@@ -58,9 +59,12 @@ export function hubHandlers({ hub, sessions, onboarding }: HubHandlerDeps): Comp
           await ctx.answerCallbackQuery({ text: ctx.t("hub-coming-soon") });
           return;
         }
-        await ctx.answerCallbackQuery();
-        const outcome = await sessions.start(ctx.user, kind);
-        if (!outcome.started) await offerToCancel(sessions, ctx, outcome.active, ctx.user);
+        // A session's first step may wait on the model: say so until it is on screen.
+        await ctx.answerCallbackQuery({ text: ctx.t("answer-starting") });
+        await whileTyping(ctx, async () => {
+          const outcome = await sessions.start(ctx.user, kind);
+          if (!outcome.started) await offerToCancel(sessions, ctx, outcome.active, ctx.user);
+        });
         return;
       }
     }

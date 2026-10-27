@@ -105,7 +105,12 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
       return hub;
     };
     const start = () => h.say(telegramId, "/start", languageCode);
-    const answer = (index = 1) => tap({ type: "answer", index });
+    /** Taps option `index` of the item on screen: its buttons carry the item's number. */
+    const answer = (index = 1) => {
+      const data = card().buttons[0]?.[index];
+      if (!data) throw new Error("the card shows no answer buttons");
+      return h.press(telegramId, card().id, data);
+    };
 
     return {
       h,

@@ -132,7 +132,25 @@ export function createBot(deps: BotDeps) {
   const grammar = { db, skills: deps.skills, i18n, log };
   sessions.register("grammar", grammarSession(grammar));
   sessions.register("placement", placementSession);
-  const vocab = vocabSessions({ db, i18n, skills: deps.skills, log, images: deps.images });
+  const voice = createVoice({
+    db,
+    api: bot.api,
+    i18n,
+    sessions,
+    llmEnv: deps.llmEnv,
+    masterKey: deps.masterKey,
+    log,
+    adminTelegramIds: deps.adminIds,
+    options: deps.voice,
+  });
+  const vocab = vocabSessions({
+    db,
+    i18n,
+    skills: deps.skills,
+    log,
+    images: deps.images,
+    speech: voice.tts,
+  });
   sessions.register("vocab_new", vocab.learn);
   sessions.register("review", vocab.review);
 
@@ -151,19 +169,9 @@ export function createBot(deps: BotDeps) {
   });
   settingsEvents.on("settings.changed", (event) => routine.onSettingsChanged(event));
   sessions.onEnded((event) => routine.onSessionEnded(event));
-  const voice = createVoice({
-    db,
-    api: bot.api,
-    i18n,
-    sessions,
-    llmEnv: deps.llmEnv,
-    masterKey: deps.masterKey,
-    log,
-    options: deps.voice,
-  });
 
   // Before access, which drops updates from bots: the pin notice is the bot's own message.
-  bot.use(pinNoticeCleanup(log));
+  bot.use(pinNoticeCleanup(log, { chatIds: voice.storageChatIds }));
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(routine.activity());
   bot.use(i18n);

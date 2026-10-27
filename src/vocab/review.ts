@@ -267,10 +267,12 @@ export class ReviewFlow implements SessionKindHandler {
     suggested?: RatingName,
   ) {
     const t = this.core.t(handle);
+    const card = await getCard(this.core.deps.db, handle.user.id, cardId);
+    const speak = card ? await speakRow(t, ctx, card, this.core.deps.speech) : [];
     await handle.window.show({
       text: `${text}\n\n${t("vocab-rate-prompt")}`,
       ...HTML,
-      reply_markup: this.core.ratingKeyboard(t, cardId, suggested, speakRow(t, ctx, cardId)),
+      reply_markup: this.core.ratingKeyboard(t, cardId, suggested, speak),
     });
     writeFlow(ctx, handle.session.id, { kind: "rate", cardId, suggested });
   }

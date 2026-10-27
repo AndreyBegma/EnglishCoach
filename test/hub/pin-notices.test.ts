@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { Bot, type Transformer } from "grammy";
 import type { Chat, Message, Update } from "grammy/types";
-import { pinNoticeCleanup } from "../../src/hub/pin-notices";
+import { type PinNoticeOptions, pinNoticeCleanup } from "../../src/hub/pin-notices";
 import { createLogger } from "../../src/log";
 import { BOT_INFO } from "../bot/harness";
 
@@ -11,7 +11,7 @@ const learner = { id: CHAT, is_bot: false, first_name: "Learner" };
 const hub = { message_id: 10, date: 0, chat, text: "hub" } as Message;
 
 /** A bot with only the cleanup in front, over a Telegram that records deletes. */
-function setup() {
+function setup(options: PinNoticeOptions = {}) {
   const deleted: number[] = [];
   const telegram: Transformer = async (_prev, method, payload) => {
     if (method === "deleteMessage") {
@@ -23,7 +23,7 @@ function setup() {
   const bot = new Bot("123:test", { botInfo: BOT_INFO });
   bot.api.config.use(telegram);
   const passed: number[] = [];
-  bot.use(pinNoticeCleanup(createLogger({ write: () => {} })));
+  bot.use(pinNoticeCleanup(createLogger({ write: () => {} }), options));
   bot.on("message", (ctx) => {
     passed.push(ctx.message.message_id);
   });
@@ -65,5 +65,16 @@ describe("pinNoticeCleanup", () => {
     const group: Chat.GroupChat = { id: -5, type: "group", title: "g" };
     await t.deliver({ message_id: 11, chat: group, from: BOT_INFO, pinned_message: hub });
     expect(t.deleted).toEqual([]);
+  });
+
+  test("deletes the bot's pin notice in a listed group, and only there", async () => {
+    const t = setup({ chatIds: [-100_5] });
+    const storage: Chat.SupergroupChat = { id: -100_5, type: "supergroup", title: "voice" };
+    const other: Chat.SupergroupChat = { id: -100_6, type: "supergroup", title: "other" };
+    await t.deliver({ message_id: 21, chat: storage, from: BOT_INFO, pinned_message: hub });
+    await t.deliver({ message_id: 22, chat: other, from: BOT_INFO, pinned_message: hub });
+    await t.deliver({ message_id: 23, chat: storage, pinned_message: hub });
+    expect(t.deleted).toEqual([21]);
+    expect(t.passed).toEqual([22, 23]);
   });
 });

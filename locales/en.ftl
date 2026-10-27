@@ -328,6 +328,7 @@ grammar-practice-intro = ✍️ Practising your weak spots ({ $count } patterns)
 
 # --- voice ---
 voice-listen = 🔊 Listen
+voice-listen-example = 🔊 Example
 voice-transcript = 🎤 { $text }
 voice-needs-key = Voice answers and pronunciation need an OpenAI-compatible API key. Add one in Settings → Provider, then try again. Meanwhile, type your answer.
 voice-too-long = That voice message is too long. Keep it under { $seconds } seconds, or type your answer.
@@ -336,6 +337,18 @@ voice-empty = I could not hear any words in that voice message. Try again or typ
 voice-tts-failed = I could not generate the pronunciation right now. Try again later.
 voice-disabled = Voice is off. Turn it on in Settings.
 voice-outdated = This button is no longer available.
+voice-board-running = 🔊 Voicing the word list — running
+voice-board-idle = 🔊 Voicing the word list — paused until the next run
+voice-board-words = Words: { $done } / { $total } ({ $percent }%) { $bar }
+voice-board-examples = Examples: { $done } / { $total } ({ $percent }%) { $bar }
+voice-board-remaining = Remaining: { $remaining } · ETA: { $eta }
+voice-board-eta = about { $hours } h { $minutes } min at { $rate } per hour
+voice-board-eta-unknown = unknown (nothing generated in the last hour)
+voice-board-eta-none = done
+voice-board-recent = Generated today: { $today } · last 24 h: { $day }
+voice-board-failures = Failures today: { $count }
+voice-board-engine = Engine: { $engine } · voice: { $voices }
+voice-board-updated = Updated: { $time } UTC
 
 # --- answer feedback (one answer at a time) ---
 answer-accepted = Answer “{ $answer }” accepted

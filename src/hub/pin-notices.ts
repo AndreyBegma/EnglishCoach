@@ -2,9 +2,14 @@ import type { Context, MiddlewareFn } from "grammy";
 import { isIgnorableDeleteError } from "../bot/telegram-errors";
 import type { Logger } from "../log";
 
+export interface PinNoticeOptions {
+  /** Group chats whose bot pin notices are deleted too (the TTS storage chat's status board). */
+  chatIds?: readonly number[];
+}
+
 /**
  * Deletes the "… pinned a message" notice Telegram adds to a private chat when the bot pins the
- * hub (docs/ARCHITECTURE.md → Telegram UX rules). `pinChatMessage` returns only `true`, so the
+ * hub (docs/ARCHITECTURE.md → Telegram UX rules), and in the group chats `chatIds` lists. `pinChatMessage` returns only `true`, so the
  * notice is known only from its own update: a private-chat message carrying `pinned_message`
  * whose sender is this bot. Exactly that message is deleted, and nothing else.
  *
@@ -14,13 +19,17 @@ import type { Logger } from "../log";
  *
  * Runs before access control, which drops every update from a bot.
  */
-export function pinNoticeCleanup(log: Logger): MiddlewareFn<Context> {
+export function pinNoticeCleanup(
+  log: Logger,
+  options: PinNoticeOptions = {},
+): MiddlewareFn<Context> {
+  const groups = new Set(options.chatIds);
   return async (ctx, next) => {
     const message = ctx.message;
     if (
-      message?.chat.type !== "private" ||
-      !message.pinned_message ||
-      message.from?.id !== ctx.me.id
+      !message?.pinned_message ||
+      message.from?.id !== ctx.me.id ||
+      (message.chat.type !== "private" && !groups.has(message.chat.id))
     ) {
       return next();
     }

@@ -332,6 +332,7 @@ grammar-practice-intro = ✍️ Тренируем слабые места (па
 
 # --- voice ---
 voice-listen = 🔊 Послушать
+voice-listen-example = 🔊 Пример
 voice-transcript = 🎤 { $text }
 voice-needs-key = Для голосовых ответов и произношения нужен OpenAI-совместимый API-ключ. Добавьте его в Настройки → Провайдер и попробуйте снова. А пока напишите ответ текстом.
 voice-too-long = Голосовое сообщение слишком длинное. Уложитесь в { $seconds } секунд или напишите ответ текстом.
@@ -340,6 +341,18 @@ voice-empty = В голосовом сообщении не слышно сло�
 voice-tts-failed = Сейчас не получилось озвучить слово. Попробуйте позже.
 voice-disabled = Озвучка выключена. Включите её в Настройках.
 voice-outdated = Эта кнопка больше не доступна.
+voice-board-running = 🔊 Озвучка списка слов — идёт
+voice-board-idle = 🔊 Озвучка списка слов — пауза до следующего запуска
+voice-board-words = Слова: { $done } / { $total } ({ $percent }%) { $bar }
+voice-board-examples = Примеры: { $done } / { $total } ({ $percent }%) { $bar }
+voice-board-remaining = Осталось: { $remaining } · ETA: { $eta }
+voice-board-eta = примерно { $hours } ч { $minutes } мин при { $rate } в час
+voice-board-eta-unknown = неизвестно (за последний час ничего не создано)
+voice-board-eta-none = готово
+voice-board-recent = Создано сегодня: { $today } · за 24 ч: { $day }
+voice-board-failures = Ошибок сегодня: { $count }
+voice-board-engine = Движок: { $engine } · голос: { $voices }
+voice-board-updated = Обновлено: { $time } UTC
 
 # --- answer feedback (one answer at a time) ---
 answer-accepted = Ответ «{ $answer }» принят

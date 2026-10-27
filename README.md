@@ -132,10 +132,13 @@ masked hint (`sk-…a1b2`).
 ## Voice
 
 With Settings → Voice on, a voice message (up to 60 s) in Talk, Grammar or a typed Review answer
-is transcribed (OpenAI-compatible `audio/transcriptions`), shown as a tracked message and handled
-as if typed. Word cards get a 🔊 button that sends the pronunciation (`audio/speech`) as a voice
-note. The key is the user's own OpenAI-compatible key, else `SERVER_OPENAI_API_KEY`; with neither,
-the bot says voice needs a key and the session carries on.
+is transcribed (OpenAI-compatible `audio/transcriptions`), shown for a few seconds as a note and
+handled as if typed. New-word cards (text or photo) and review feedback get a 🔊 button that sends
+the word's pronunciation (`audio/speech`) as a voice note, and a "🔊 Example" button for the first
+example sentence, in the learner's English variant. A button is shown only when it can work: an
+engine can voice the text for that learner, or the text was voiced before. The key is the user's
+own OpenAI-compatible key, else `SERVER_OPENAI_API_KEY`; with neither (and no Kokoro), there is no
+🔊 and the session carries on.
 
 Pronunciations come from a local Kokoro-82M first: the `tts` service in `docker-compose.yml`
 (Kokoro-FastAPI, CPU only, host port `18880`, `TTS_HOST_PORT` to change it; the app reaches it at
@@ -157,6 +160,16 @@ and, from whisper, per-word confidence. Voice messages over 60 s are rejected be
 (negative, e.g. `-1001234567890`) in `TTS_STORAGE_CHAT_ID`. Each voice note is then uploaded there
 once, its Telegram `file_id` is stored in `tts_audio`, and every later play is
 `sendVoice(file_id)` — instant, no upload, never a forward. Without it each send uploads the file.
+
+**Voicing ahead of time** (needs the storage chat). The word prefetch voices each learner's
+upcoming words and their first example sentences. With Kokoro (`TTS_URL`) a backfill voices the
+whole owner's list too — words first, in curriculum order, then example sentences, in each variant
+learners use — `VOICE_BACKFILL_TEXTS` texts (default 200) every `VOICE_BACKFILL_EVERY_MINUTES`
+(default 15; 0 turns it off), one upload every 3 s. It keeps one pinned status message in the
+storage chat, edited in place (at most once a minute while running, plus at start and end):
+words and examples voiced / total with a bar, remaining and ETA, generated today and in the last
+24 h, failures today, engine and voice. If the message is deleted, the next update sends and pins
+a new one; the "pinned a message" notice is deleted. Paid keys are never used for this.
 
 ## Backups
 

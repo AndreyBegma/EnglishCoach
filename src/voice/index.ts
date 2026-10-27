@@ -1,9 +1,11 @@
-import { Composer, InputFile } from "grammy";
+import { type Api, Composer } from "grammy";
 import type { BotContext } from "../bot/context";
 import type { Translator } from "../bot/i18n";
+import { parseTtsEnv, type TtsEnv } from "../config/env";
 import type { Db } from "../db/client";
 import { getCard } from "../db/repositories/cards";
 import type { SessionKind } from "../db/repositories/sessions";
+import { findTtsFileId, saveTtsFileId } from "../db/repositories/voice";
 import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
 import type { SessionManager } from "../sessions/session-manager";
@@ -11,10 +13,23 @@ import { escapeHtml, HTML } from "../vocab/render";
 import { readFlow } from "../vocab/state";
 import { isVoiceCallbackData, parseVoiceCallback } from "./callbacks";
 import { type CredentialDeps, resolveAudioCredentials } from "./credentials";
+import {
+  type EnglishVariant,
+  type FetchLike,
+  KokoroEngine,
+  OpenAiSpeechEngine,
+  type SpeechEngine,
+  SpeechError,
+} from "./engines";
 import { transcribe } from "./transcribe";
-import { type FetchLike, SpeechError, Tts, type TtsOptions } from "./tts";
+import { Tts, type TtsOptions } from "./tts";
 
 export { encodeVoiceCallback } from "./callbacks";
+export type { EnglishVariant } from "./engines";
+export type { Tts } from "./tts";
+
+/** Until learners can pick UK or US English, everyone hears US. */
+export const DEFAULT_ENGLISH_VARIANT: EnglishVariant = "us";
 
 /** Longest voice message that is transcribed. */
 export const MAX_VOICE_SECONDS = 60;
@@ -26,13 +41,17 @@ const TELEGRAM_FILE_ROOT = "https://api.telegram.org/file";
 /** Sessions whose typed answers a voice message can stand in for. */
 const STT_KINDS: ReadonlySet<SessionKind> = new Set(["talk", "grammar", "review"]);
 
-export interface VoiceOptions extends Pick<TtsOptions, "dir"> {
+export interface VoiceOptions extends Pick<TtsOptions, "dir" | "prewarmIntervalMs" | "sleep"> {
   /** Tests replace the HTTP client for Telegram file downloads and the audio endpoints. */
   fetch?: FetchLike;
+  /** TTS settings; default: `TTS_*` from the environment. */
+  tts?: TtsEnv;
 }
 
 export interface VoiceDeps {
   db: Db;
+  /** The bot's API, for background prewarm uploads; without it `prewarm` does nothing. */
+  api?: Api;
   i18n: Translator;
   sessions: SessionManager;
   llmEnv: ServerEnv;
@@ -44,14 +63,50 @@ export interface VoiceDeps {
 /**
  * Voice for the learning sessions. `stt` turns a voice message into a text update before the
  * session handlers run, so talk, grammar and review stay unchanged; `tts` answers the 🔊 button of
- * a vocabulary card with a pronunciation voice note. Both respect `user_settings.voice_enabled`
- * and degrade to a localized explanation when no OpenAI-compatible key is available.
+ * a vocabulary card with a pronunciation voice note — local Kokoro first, then an
+ * OpenAI-compatible key. Both respect `user_settings.voice_enabled` and degrade to a localized
+ * explanation when nothing can do the job. `tts.available(userId)` tells card renderers whether
+ * to show 🔊 at all; `tts.prewarm(texts, variant)` voices upcoming words ahead of time.
  */
 export function createVoice(deps: VoiceDeps) {
   const { db, i18n, sessions, log } = deps;
   const credentialDeps: CredentialDeps = { db, env: deps.llmEnv, masterKey: deps.masterKey };
   const fetcher: FetchLike = deps.options?.fetch ?? ((url, init) => globalThis.fetch(url, init));
-  const tts = new Tts({ dir: deps.options?.dir, fetch: fetcher });
+  const ttsEnv = deps.options?.tts ?? parseTtsEnv();
+
+  const engines: SpeechEngine[] = [];
+  if (ttsEnv.TTS_URL) {
+    engines.push(
+      new KokoroEngine({
+        url: ttsEnv.TTS_URL,
+        voices: { us: ttsEnv.TTS_VOICE_US, uk: ttsEnv.TTS_VOICE_UK },
+        fetch: fetcher,
+      }),
+    );
+  }
+  engines.push(
+    new OpenAiSpeechEngine({
+      credentials: async (userId) => {
+        if (userId !== undefined) return resolveAudioCredentials(credentialDeps, userId);
+        const apiKey = deps.llmEnv.SERVER_OPENAI_API_KEY;
+        return apiKey ? { apiKey, baseUrl: deps.llmEnv.SERVER_OPENAI_BASE_URL } : undefined;
+      },
+      fetch: fetcher,
+    }),
+  );
+  const tts = new Tts({
+    engines,
+    fileIds: {
+      find: (key) => findTtsFileId(db, key),
+      save: (key, fileId) => saveTtsFileId(db, key, fileId),
+    },
+    storageChatId: ttsEnv.TTS_STORAGE_CHAT_ID,
+    api: deps.api,
+    log,
+    dir: deps.options?.dir,
+    prewarmIntervalMs: deps.options?.prewarmIntervalMs,
+    sleep: deps.options?.sleep,
+  });
 
   const stt = new Composer<BotContext>();
   stt.on("message:voice", async (ctx, next) => {
@@ -123,24 +178,19 @@ export function createVoice(deps: VoiceDeps) {
     const card = await getCard(db, ctx.user.id, callback.cardId);
     if (!card || card.itemType === "grammar_pattern") return alert("voice-outdated");
 
-    let audio = await tts.cached(card.front);
-    if (!audio) {
-      const credentials = await resolveAudioCredentials(credentialDeps, ctx.user.id);
-      if (!credentials) return alert("voice-needs-key");
-      try {
-        audio = await tts.speak(card.front, credentials);
-      } catch (error) {
-        if (!(error instanceof SpeechError)) throw error;
-        log.warn("speech generation failed", {
-          userId: ctx.user.id,
-          cardId: card.id,
-          error: error.message,
-        });
-        return alert("voice-tts-failed");
-      }
+    let message: Awaited<ReturnType<Tts["play"]>>;
+    try {
+      message = await tts.play(ctx.api, chatId, card.front, DEFAULT_ENGLISH_VARIANT, ctx.user.id);
+    } catch (error) {
+      if (!(error instanceof SpeechError)) throw error;
+      log.warn("speech generation failed", {
+        userId: ctx.user.id,
+        cardId: card.id,
+        error: error.message,
+      });
+      return alert((await tts.available(ctx.user.id)) ? "voice-tts-failed" : "voice-needs-key");
     }
     await ctx.answerCallbackQuery();
-    const message = await ctx.api.sendVoice(chatId, new InputFile(audio, "word.ogg"));
     await handle.track(message.message_id);
   });
 

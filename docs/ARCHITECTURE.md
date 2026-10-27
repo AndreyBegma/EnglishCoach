@@ -9,6 +9,8 @@ This document records the decisions taken on 2026-10-26. Each GitHub issue
 implements a part of it; when an issue and this file disagree, the issue is
 newer and wins, and the issue's pull request updates this file.
 
+Product decisions for v2 (what the app is meant to do): [PRODUCT.md](PRODUCT.md).
+
 ## Stack
 
 | Concern | Choice |

@@ -4,6 +4,7 @@ import type { Locale, Translator } from "../bot/i18n";
 import { encodeProgressCallback } from "../progress/callbacks";
 import type { ProgressData } from "../progress/queries";
 import { renderProgress } from "../progress/render";
+import { encodeSizeTestCallback } from "../sizetest/callbacks";
 
 export interface ScreenModel {
   locale: Locale;
@@ -16,6 +17,8 @@ export interface ScreenModel {
   progress?: ProgressData;
   /** No level yet: learning waits for the placement test, the hub offers only it and Settings. */
   locked?: boolean;
+  /** The monthly vocabulary size test is due (`sizeTestDue`): the main screen offers it. */
+  sizeTestDue?: boolean;
 }
 
 export interface RenderedScreen {
@@ -69,6 +72,16 @@ export function renderScreen(
             button(t("hub-progress"), { type: "screen", screen: "progress" }),
             InlineKeyboard.text(t("hub-profile"), encodeProgressCallback({ type: "profile" })),
           ],
+          ...(model.sizeTestDue
+            ? [
+                [
+                  InlineKeyboard.text(
+                    t("sizetest-offer"),
+                    encodeSizeTestCallback({ type: "start" }),
+                  ),
+                ],
+              ]
+            : []),
           [button(t("hub-settings"), { type: "settings", page: "root" })],
         ]),
       };

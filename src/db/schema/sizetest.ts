@@ -20,10 +20,9 @@ export type SizeTestAnswer = number | null;
 export type SizeTestBand = { band: number; share: number };
 
 /**
- * Vocabulary size tests (`src/sizetest/`). A row is created when the test starts and holds the
- * run in progress (`items`, `answers`); `finishedAt` and the result are set once, at the end, so
- * the finished rows are the learner's size history. Server-owned: answers are option indexes the
- * server grades against its own `items`.
+ * Finished vocabulary size tests (`src/sizetest/`): the learner's size history. A test in
+ * progress lives only in the session's flow state, so a row is written once, at the end, with
+ * what was asked, what was answered and the server's estimate.
  */
 export const vocabSizeTests = pgTable(
   "vocab_size_tests",
@@ -34,16 +33,16 @@ export const vocabSizeTests = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
     sessionId: integer().references(() => learningSessions.id, { onDelete: "set null" }),
     items: jsonb().$type<SizeTestItem[]>().notNull(),
-    answers: jsonb().$type<SizeTestAnswer[]>().notNull().default([]),
-    startedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
-    finishedAt: timestamp({ withTimezone: true }),
+    answers: jsonb().$type<SizeTestAnswer[]>().notNull(),
+    startedAt: timestamp({ withTimezone: true }).notNull(),
+    finishedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
     /** Estimated known words among the 10k most frequent, rounded. */
-    estimate: integer(),
+    estimate: integer().notNull(),
     /** Share of everyday text that size covers, in basis points (9500 = 95%). */
-    coverageBp: integer(),
-    bands: jsonb().$type<SizeTestBand[]>(),
+    coverageBp: integer().notNull(),
+    bands: jsonb().$type<SizeTestBand[]>().notNull(),
     /** Pseudo-word false-alarm rate in basis points. */
-    falseAlarmsBp: integer(),
+    falseAlarmsBp: integer().notNull(),
   },
   (table) => [index("vocab_size_tests_user_id_finished_at_idx").on(table.userId, table.finishedAt)],
 );

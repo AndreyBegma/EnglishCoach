@@ -458,3 +458,16 @@ input-interests = Надішліть інтереси через кому, на�
 input-profession = Надішліть професію чи посаду (зараз: { $profession }).
 input-interests-invalid = Надішліть короткі теми через кому, кожна до 40 символів.
 input-profession-invalid = Надішліть професію одним рядком, до 80 символів.
+
+# Vocabulary size test
+sizetest-offer = 📏 Тест словникового запасу (~5 хв)
+sizetest-intro = 📏 Скільки англійських слів ви знаєте? Оберіть значення кожного слова. Деякі слова вигадані: якщо не знаєте слово, натисніть «Не знаю» — вгадування знижує оцінку.
+sizetest-item = { $n }/{ $total } · <b>{ $word }</b>
+sizetest-unknown = ❓ Не знаю
+sizetest-stop = ✖ Завершити
+sizetest-use-buttons = Відповідайте кнопками вище.
+sizetest-outdated = Цей тест уже не триває.
+sizetest-unavailable = 📏 Тест словникового запасу поки недоступний: замало слів зі значеннями вашою мовою.
+sizetest-size = 📏 ≈{ $words } слів · ~{ $coverage }% звичайного тексту
+progress-vocab-size = 📏 Словниковий запас: ≈{ $words } слів · ~{ $coverage }% звичайного тексту
+progress-skill-vocab-size = { $label } (≈{ $words })

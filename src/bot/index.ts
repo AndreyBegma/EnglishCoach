@@ -31,6 +31,7 @@ import { SessionManager, type SessionTimeouts } from "../sessions/session-manage
 import { SettingsController } from "../settings/controller";
 import { settingsHandlers, settingsInputMiddleware } from "../settings/handlers";
 import { ProviderSettings } from "../settings/provider";
+import { sizeTestHandlers, sizeTestSession } from "../sizetest";
 import type { SkillRunner } from "../skills";
 import { talkHandlers, talkSession } from "../talk";
 import { vocabSessions } from "../vocab";
@@ -138,6 +139,8 @@ export function createBot(deps: BotDeps) {
   const grammar = { db, skills: deps.skills, i18n, log };
   sessions.register("grammar", grammarSession(grammar));
   sessions.register("placement", placementSession(onboarding));
+  const sizeTest = { db, i18n, log, sessions };
+  sessions.register("size_test", sizeTestSession(sizeTest));
   const voice = createVoice({
     db,
     api: bot.api,
@@ -204,6 +207,7 @@ export function createBot(deps: BotDeps) {
   bot.use(progressHandlers({ db, hub, sessions, i18n }));
   bot.use(talkHandlers(talk));
   bot.use(grammarHandlers(grammar));
+  bot.use(sizeTestHandlers(sizeTest));
   bot.use(onboardingHandlers(onboarding));
 
   if (deps.enableDemoSession) {

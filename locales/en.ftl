@@ -454,3 +454,16 @@ input-interests = Send your interests, separated by commas, e.g. football, jazz,
 input-profession = Send your profession or job title (current: { $profession }).
 input-interests-invalid = Send short topics separated by commas, each up to 40 characters.
 input-profession-invalid = Send your profession in one line, up to 80 characters.
+
+# Vocabulary size test
+sizetest-offer = 📏 Vocabulary size test (~5 min)
+sizetest-intro = 📏 How many English words do you know? Pick the meaning of each word. Some words are made up: if you don't know a word, tap "I don't know" — guessing lowers the estimate.
+sizetest-item = { $n }/{ $total } · <b>{ $word }</b>
+sizetest-unknown = ❓ I don't know
+sizetest-stop = ✖ Stop
+sizetest-use-buttons = Please answer with the buttons above.
+sizetest-outdated = This test is no longer running.
+sizetest-unavailable = 📏 The size test is not ready yet: too few words have meanings in your language.
+sizetest-size = 📏 ≈{ $words } words · ~{ $coverage }% of everyday text
+progress-vocab-size = 📏 Vocabulary size: ≈{ $words } words · ~{ $coverage }% of everyday text
+progress-skill-vocab-size = { $label } (≈{ $words })

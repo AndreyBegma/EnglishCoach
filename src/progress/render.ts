@@ -2,6 +2,9 @@ import { InlineKeyboard } from "grammy";
 import { encodeCallback } from "../bot/callbacks";
 import type { Locale, Translator } from "../bot/i18n";
 import type { Mistake } from "../db/schema";
+import { encodeSizeTestCallback } from "../sizetest/callbacks";
+import type { VocabSizeBlock } from "../sizetest/history";
+import { trendOf } from "../sizetest/screens";
 import { encodeProgressCallback } from "./callbacks";
 import type { ProgressData } from "./queries";
 
@@ -49,6 +52,11 @@ export function renderProgress(
   const t = (key: string, variables?: Record<string, string | number>) =>
     i18n.t(locale, key, variables);
   const { streak, today, cards, grammar } = data;
+  const size = data.vocabSize?.latest;
+  const skillLabel = (skill: string, label: string) =>
+    skill === "vocabulary" && size
+      ? t("progress-skill-vocab-size", { label, words: size.words })
+      : label;
 
   const lines = [
     t("progress-title"),
@@ -58,11 +66,14 @@ export function renderProgress(
       ? [
           t("progress-skills", {
             list: data.level.skills
-              .map(({ skill, label }) => `${t(`progress-skill-${skill}`)} ${label}`)
+              .map(
+                ({ skill, label }) => `${t(`progress-skill-${skill}`)} ${skillLabel(skill, label)}`,
+              )
               .join(" · "),
           }),
         ]
       : []),
+    ...(size ? [vocabSizeLine(t, size)] : []),
     t("progress-streak", { current: streak.current, best: streak.best }),
     t("progress-goal", { done: today.newWords, goal: data.wordsPerDay, reviews: today.reviews }) +
       (today.goalMet ? ` ${t("progress-goal-met")}` : ""),
@@ -99,10 +110,25 @@ export function renderProgress(
       InlineKeyboard.text(t("progress-btn-weak"), encodeProgressCallback({ type: "weak" })),
     ]);
   }
+  if (data.vocabSize?.due) {
+    rows.push([
+      InlineKeyboard.text(t("sizetest-offer"), encodeSizeTestCallback({ type: "start" })),
+    ]);
+  }
   rows.push([
     InlineKeyboard.text(t("hub-back"), encodeCallback({ type: "screen", screen: "main" })),
   ]);
   return { text: fit(lines), keyboard: InlineKeyboard.from(rows) };
+}
+
+/** "📏 ≈4200 words · ~94% of everyday text (+350)". */
+function vocabSizeLine(
+  t: (key: string, variables?: Record<string, string | number>) => string,
+  size: NonNullable<VocabSizeBlock["latest"]>,
+): string {
+  const line = t("progress-vocab-size", { words: size.words, coverage: size.coverage });
+  const trend = trendOf(size.words, size.previous);
+  return trend ? `${line} (${trend})` : line;
 }
 
 export function renderWeakSpots(

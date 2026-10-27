@@ -15,6 +15,7 @@ import type { User } from "../db/schema";
 import { pendingUnlocks, unlockNotice } from "../gamification/achievements/view";
 import type { Logger } from "../log";
 import { loadProgress } from "../progress/queries";
+import { sizeTestDue } from "../sizetest/history";
 import { type RenderedScreen, renderScreen } from "./screens";
 
 /** Hubs live in the private chat with the user, whose chat ID is the user's Telegram ID. */
@@ -76,6 +77,7 @@ export class HubService {
     const locale = settings?.uiLang ?? "en";
     const progress =
       screen === "progress" ? await loadProgress(this.deps.db, user.id, settings) : undefined;
+    const sizeDue = screen === "main" && (await sizeTestDue(this.deps.db, user.id));
     const rendered = renderScreen(this.deps.i18n, screen, {
       locale,
       dueCount,
@@ -83,6 +85,7 @@ export class HubService {
       unlockNotice: unlocks && unlockNotice(this.deps.i18n, locale, unlocks.entries),
       progress,
       locked: !settings?.cefrLevel,
+      sizeTestDue: sizeDue,
     });
     return unlocks?.ids.length ? { ...rendered, announced: unlocks.ids } : rendered;
   }

@@ -50,7 +50,10 @@ export function correctForGuessing(accuracy: number, falseAlarms: number): numbe
  * Least-squares non-increasing fit (pool adjacent violators), weighted by items asked: a learner
  * knows rarer words no better than commoner ones, so a band beating the one before is noise.
  */
-export function monotoneDecreasing(values: readonly number[], weights: readonly number[]): number[] {
+export function monotoneDecreasing(
+  values: readonly number[],
+  weights: readonly number[],
+): number[] {
   const blocks: { sum: number; weight: number; count: number }[] = [];
   values.forEach((value, index) => {
     const weight = weights[index] ?? 0;
@@ -78,7 +81,8 @@ function mean(block: { sum: number; weight: number }): number {
  * share through the monotone fit (weight 0), or counts as unknown when nothing follows it.
  */
 export function estimateSize(answers: SizeAnswers): SizeEstimate {
-  const falseAlarms = answers.pseudo.asked === 0 ? 0 : answers.pseudo.claimed / answers.pseudo.asked;
+  const falseAlarms =
+    answers.pseudo.asked === 0 ? 0 : answers.pseudo.claimed / answers.pseudo.asked;
   const bands = Array.from({ length: BANDS }, (_, index) => {
     const tally = answers.bands.find((entry) => entry.band === index + 1);
     const asked = tally?.asked ?? 0;

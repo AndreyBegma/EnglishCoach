@@ -458,3 +458,16 @@ input-interests = Отправьте интересы через запятую,
 input-profession = Отправьте профессию или должность (сейчас: { $profession }).
 input-interests-invalid = Отправьте короткие темы через запятую, каждая до 40 символов.
 input-profession-invalid = Отправьте профессию одной строкой, до 80 символов.
+
+# Vocabulary size test
+sizetest-offer = 📏 Тест словарного запаса (~5 мин)
+sizetest-intro = 📏 Сколько английских слов вы знаете? Выберите значение каждого слова. Некоторые слова выдуманы: если не знаете слово, нажмите «Не знаю» — угадывание снижает оценку.
+sizetest-item = { $n }/{ $total } · <b>{ $word }</b>
+sizetest-unknown = ❓ Не знаю
+sizetest-stop = ✖ Закончить
+sizetest-use-buttons = Отвечайте кнопками выше.
+sizetest-outdated = Этот тест уже не идёт.
+sizetest-unavailable = 📏 Тест словарного запаса пока недоступен: мало слов со значениями на вашем языке.
+sizetest-size = 📏 ≈{ $words } слов · ~{ $coverage }% обычного текста
+progress-vocab-size = 📏 Словарный запас: ≈{ $words } слов · ~{ $coverage }% обычного текста
+progress-skill-vocab-size = { $label } (≈{ $words })

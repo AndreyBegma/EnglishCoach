@@ -4,6 +4,7 @@ import { listTopMistakes } from "../db/repositories/mistakes";
 import { dailyStats, type Mistake, type Skill, type UserSettings } from "../db/schema";
 import { localDate } from "../grammar/stats";
 import { getLevels, type Levels, SKILLS } from "../levels";
+import { loadVocabSize, type VocabSizeBlock } from "../sizetest/history";
 import { type Streak, streakDays } from "./streak";
 
 /** Days in the activity sparkline. */
@@ -54,6 +55,8 @@ export interface ProgressData {
   activity: number[];
   grammar: GrammarBlock;
   weak: Mistake[];
+  /** The vocabulary size test's latest result and the monthly offer. */
+  vocabSize?: VocabSizeBlock;
 }
 
 /** A valid IANA zone for SQL `AT TIME ZONE`; UTC when the stored one does not parse. */
@@ -195,6 +198,7 @@ export async function loadProgress(
     activity,
     grammar,
     weak,
+    vocabSize: await loadVocabSize(db, userId, now),
   };
 }
 

@@ -141,12 +141,22 @@ describe("output rules the JSON Schema cannot express", () => {
     expect(parse("vocab-check", { ...check, accepted_as: null })).toBe(false);
   });
 
-  test("placement-test: continue carries an item, final carries a summary", async () => {
-    const next = await fixture("placement-test", "output");
-    expect(parse("placement-test", { ...next, item: null })).toBe(false);
-    const final = { ...next, status: "final", item: null, summary: "Уровень B1." };
-    expect(parse("placement-test", final)).toBe(true);
-    expect(parse("placement-test", { ...final, summary: null })).toBe(false);
+  test("placement-item: each section has its own shape", async () => {
+    const reading = await fixture("placement-item", "output");
+    expect(parse("placement-item", reading)).toBe(true);
+    const questions = reading.questions as { options: string[] }[];
+    expect(parse("placement-item", { ...reading, questions: questions.slice(0, 1) })).toBe(false);
+    expect(parse("placement-item", { ...reading, passage: null })).toBe(false);
+    expect(parse("placement-item", { ...reading, task: "Write about it." })).toBe(false);
+    const sameOptions = { ...questions[0], options: ["a", "A", "b", "c"] };
+    expect(parse("placement-item", { ...reading, questions: [sameOptions, questions[1]] })).toBe(
+      false,
+    );
+    const grammar = { ...reading, section: "grammar", passage: null, questions: [questions[0]] };
+    expect(parse("placement-item", grammar)).toBe(true);
+    const writing = { ...grammar, section: "writing", questions: [], task: "Describe your town." };
+    expect(parse("placement-item", writing)).toBe(true);
+    expect(parse("placement-item", { ...writing, task: null })).toBe(false);
   });
 
   test("conversation: at most 5 corrections", async () => {

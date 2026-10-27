@@ -125,6 +125,8 @@ export function createBot(deps: BotDeps) {
     hub,
     log,
     openProviderSettings: (ctx) => settings.controller.show(ctx, { page: "provider" }),
+    // Voice is built below; the test asks for it only once a learner reaches listening.
+    speech: () => voice.tts,
   });
 
   const talk = { db, skills: deps.skills, i18n, log };

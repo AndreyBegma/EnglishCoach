@@ -23,6 +23,9 @@ hub-settings = ⚙️ Налаштування
 hub-back = ← Назад
 hub-coming-soon = Незабаром з'явиться.
 hub-outdated = Це меню застаріло.
+hub-locked = 🧭 Уроки відкриються після тесту рівня: приблизно 20 хвилин, за один раз.
+hub-locked-toast = Спершу пройдіть тест рівня.
+hub-placement = 🧭 Тест рівня
 
 ## Settings
 settings-title = ⚙️ Налаштування
@@ -198,25 +201,35 @@ onboarding-welcome = 👋 Ласкаво просимо до EnglishCoach! По�
 onboarding-provider = Який ШІ вестиме уроки? Серверний працює одразу, а власний ключ можна підключити в налаштуваннях будь-коли.
 onboarding-provider-server = Використати серверний (за замовчуванням)
 onboarding-provider-own = Налаштувати власного провайдера в налаштуваннях
-onboarding-path = Як визначимо ваш рівень?
-onboarding-take-test = Пройти 5-хвилинний тест рівня
-onboarding-know-level = Я знаю свій рівень
-onboarding-choose-level = Оберіть свій рівень:
-onboarding-retake-intro = Короткий адаптивний тест не більш як із { $max } запитань знову визначить ваш рівень.
 onboarding-start-test = Почати тест
 onboarding-cancel = Скасувати
-onboarding-question = Запитання { $n } із не більш як { $max }
 onboarding-error = Тест не вдалося продовжити: ШІ-провайдер не дав придатної відповіді.
 onboarding-retry = Повторити
-onboarding-result = Ваш рівень: { $level }
-onboarding-result-fallback = За { $correct } правильними відповідями з { $total }.
 onboarding-continue = Далі
 onboarding-words = Скільки нових слів на день?
 onboarding-morning = Коли починати ранкову сесію?
 onboarding-evening = А вечірню?
-onboarding-summary-test = Тест рівня: { $level }. { $detail }
-onboarding-summary-chosen = Рівень обрано: { $level }.
 onboarding-done = Ласкаво просимо!
+
+# --- placement test ---
+placement-intro = 🧭 Тепер тест рівня: шість коротких розділів — граматика, словник, читання, аудіювання, письмо й говоріння — приблизно 20 хвилин, за один раз. Уроки відкриються, коли його буде пройдено. Якщо перерватися посередині, тест почнеться спочатку.
+placement-intro-retake = 🧭 Повний тест рівня знову виміряє кожну навичку: шість розділів, приблизно 20 хвилин, за один раз. Рівні зміняться лише тоді, коли ви його завершите.
+placement-section = Розділ { $n }/{ $total } · { $name }
+placement-section-question = Розділ { $n }/{ $total } · { $name } · { $k }/{ $of }
+placement-listen = 🎧 Прослухайте голосове повідомлення нижче й дайте відповідь.
+placement-task-writing = ✍️ Напишіть 3–5 речень англійською й надішліть повідомленням:
+placement-task-speaking = 🎙 Дайте відповідь голосовим повідомленням англійською (30–60 секунд):
+placement-needs-voice-listening = 🎧 У цьому розділі звучать короткі аудіо. Увімкніть голос, щоб його пройти, або пропустіть — тоді рівень аудіювання буде приблизним.
+placement-needs-voice-speaking = 🎙 У цьому розділі потрібна голосова відповідь. Увімкніть голос, щоб його пройти, або пропустіть — тоді рівень говоріння буде приблизним.
+placement-voice-on = 🔊 Увімкнути голос
+placement-skip-section = Пропустити розділ
+placement-writing-typed = У цьому розділі відповідь треба написати текстом.
+placement-speaking-voice = Будь ласка, дайте відповідь голосовим повідомленням.
+placement-writing-short = Трохи докладніше, будь ласка: 3–5 речень.
+placement-speaking-short = Трохи довше, будь ласка: 30–60 секунд.
+placement-result = 🎯 Ваш рівень: { $level }
+placement-result-skipped = ~ — навичка, яку тест не виміряв; вона уточниться під час занять.
+placement-summary = Тест рівня: { $level }.
 
 # --- grammar ---
 grammar-pick-topic = ✍️ Практика граматики: 10 запитань. Оберіть тему або мікс.

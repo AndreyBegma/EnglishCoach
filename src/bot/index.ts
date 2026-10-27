@@ -131,7 +131,7 @@ export function createBot(deps: BotDeps) {
   sessions.register("talk", deps.enableDemoSession ? demoSession(i18n) : talkSession(talk));
   const grammar = { db, skills: deps.skills, i18n, log };
   sessions.register("grammar", grammarSession(grammar));
-  sessions.register("placement", placementSession);
+  sessions.register("placement", placementSession(onboarding));
   const voice = createVoice({
     db,
     api: bot.api,

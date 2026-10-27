@@ -8,6 +8,9 @@ import {
   type ByokChoice,
   CEFR_LEVELS,
   COMMON_TIMEZONES,
+  INTEREST_SUGGESTIONS,
+  LEARNER_GOALS,
+  MAX_INTERESTS,
   MODEL_PAGE_SIZE,
   type ProviderChoice,
   TIME_PAGE_SIZE,
@@ -146,8 +149,87 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
           },
         ),
       ],
+      [page("settings-btn-profile", "profile")],
       [page("settings-btn-provider", "provider")],
       [button(t("hub-back"), { type: "screen", screen: "main" })],
+    ]),
+  };
+}
+
+/** How an interest reads: a suggestion through its label, a typed one as typed. */
+export function interestLabel(t: T, interest: string): string {
+  return (INTEREST_SUGGESTIONS as readonly string[]).includes(interest)
+    ? t(`interest-${interest}`)
+    : interest;
+}
+
+/** The learner's interests as one line, or the "none" placeholder. */
+export function interestsLine(t: T, interests: readonly string[]): string {
+  return interests.length > 0
+    ? interests.map((interest) => interestLabel(t, interest)).join(", ")
+    : t("profile-none");
+}
+
+function profileScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen {
+  const { goals, interests, profession } = model.settings;
+  const lines = [
+    t("profile-title"),
+    "",
+    t("profile-goals", {
+      goals:
+        goals.length > 0 ? goals.map((goal) => t(`goal-${goal}`)).join(", ") : t("profile-none"),
+    }),
+    t("profile-interests", { interests: interestsLine(t, interests) }),
+    t("profile-profession", { profession: profession ?? t("profile-none") }),
+  ];
+  const professionRow = [
+    button(t("profile-btn-profession"), { type: "input", input: "profession" }),
+  ];
+  if (profession) {
+    professionRow.push(
+      button(t("profile-btn-clear-profession"), { type: "profile-clear", field: "profession" }),
+    );
+  }
+  return {
+    text: withNotice(t, lines, notice).join("\n"),
+    keyboard: Keyboard.from([
+      ...chunk(LEARNER_GOALS, 2).map((row) =>
+        row.map((goal) =>
+          button(mark(t(`goal-${goal}`), goals.includes(goal)), { type: "goal", goal }),
+        ),
+      ),
+      [button(t("profile-btn-interests"), { type: "settings", page: "interests" })],
+      professionRow,
+      [button(t("hub-back"), { type: "settings", page: "root" })],
+    ]),
+  };
+}
+
+function interestsScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen {
+  const { interests } = model.settings;
+  const chosen = new Set(interests.map((interest) => interest.toLowerCase()));
+  const lines = [
+    t("profile-interests-title", { max: MAX_INTERESTS }),
+    "",
+    t("profile-interests", { interests: interestsLine(t, interests) }),
+  ];
+  const actions = [button(t("profile-btn-type-interests"), { type: "input", input: "interests" })];
+  if (interests.length > 0) {
+    actions.push(button(t("profile-btn-clear"), { type: "profile-clear", field: "interests" }));
+  }
+  return {
+    text: withNotice(t, lines, notice).join("\n"),
+    keyboard: Keyboard.from([
+      ...chunk(INTEREST_SUGGESTIONS, 3).map((row) =>
+        row.map((id) =>
+          button(mark(t(`interest-${id}`), chosen.has(id)), {
+            type: "interest",
+            index: INTEREST_SUGGESTIONS.indexOf(id),
+          }),
+        ),
+      ),
+      actions,
+      [button(t("hub-back"), { type: "settings", page: "profile" })],
     ]),
   };
 }
@@ -271,6 +353,8 @@ function inputScreen(
       : t(`input-${input.kind}`, {
           model: model.provider?.model ?? t("provider-model-default"),
           workspace: model.provider?.workspaceId ?? "—",
+          profession: model.settings.profession ?? "—",
+          max: MAX_INTERESTS,
         });
   return {
     text: withNotice(t, [text], view.notice).join("\n"),
@@ -370,6 +454,10 @@ export function renderSettings(
       return timeScreen(t, model, view.page, view.n);
     case "provider":
       return providerScreen(t, model, view.notice);
+    case "profile":
+      return profileScreen(t, model, view.notice);
+    case "interests":
+      return interestsScreen(t, model, view.notice);
     case "model":
       return modelScreen(t, model, view);
     case "setup":

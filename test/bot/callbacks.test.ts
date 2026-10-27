@@ -38,6 +38,15 @@ describe("callback data", () => {
     { type: "provider-test" },
     { type: "provider-workspace-clear" },
     { type: "placement" },
+    { type: "settings", page: "profile" },
+    { type: "settings", page: "interests" },
+    { type: "input", input: "interests" },
+    { type: "input", input: "profession" },
+    { type: "goal", goal: "relocation" },
+    { type: "interest", index: 0 },
+    { type: "interest", index: 11 },
+    { type: "profile-clear", field: "interests" },
+    { type: "profile-clear", field: "profession" },
   ])("round-trips %p", (callback) => {
     const data = encodeCallback(callback);
     expect(Buffer.byteLength(data)).toBeLessThanOrEqual(MAX_CALLBACK_BYTES);
@@ -69,6 +78,9 @@ describe("callback data", () => {
     ["key for a keyless provider", "1:pk:server"],
     ["unknown provider", "1:pv:gemini"],
     ["model index not a number", "1:pm:abc"],
+    ["unknown goal", "1:pg:cooking"],
+    ["interest suggestion out of range", "1:pn:12"],
+    ["profile field that cannot be cleared", "1:pc:goals"],
   ])("rejects %s data", (_, data) => {
     expect(parseCallback(data)).toBeUndefined();
   });

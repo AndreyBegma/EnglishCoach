@@ -8,9 +8,16 @@ import { answerOutdated } from "../hub/handlers";
 import type { HubService } from "../hub/hub-service";
 import { recordPlacement, seedLevels } from "../levels";
 import type { Logger } from "../log";
-import { acceptAnswer } from "../sessions/answer";
+import { acceptAnswer, tappedLabel } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
 import type { LearningHandle, SessionManager } from "../sessions/session-manager";
+import { INTEREST_SUGGESTIONS } from "../settings/options";
+import {
+  mergeInterests,
+  parseInterests,
+  parseProfession,
+  toggleInterest,
+} from "../settings/validate";
 import { PLACEMENT_MAX_ITEMS, type SkillRunner } from "../skills";
 import type { OnboardingCallback } from "./callbacks";
 import { firstSentence, grade, nextStep, type PlacementStep } from "./placement";
@@ -129,6 +136,62 @@ export class OnboardingFlow {
         () => on("path", "retake-intro"),
       );
     }
+    // The profile steps: toggles re-show the card; each step's values are saved when it is done.
+    if (callback.type === "goal") {
+      return accept(
+        tappedLabel(ctx) ?? "",
+        () => {
+          const goals = state.goals ?? [];
+          state.goals = goals.includes(callback.goal)
+            ? goals.filter((goal) => goal !== callback.goal)
+            : [...goals, callback.goal];
+          return this.show(ctx, learning, state);
+        },
+        () => on("goals"),
+      );
+    }
+    if (callback.type === "goals-done") {
+      if (on("goals") && !state.goals?.length) {
+        await ctx.answerCallbackQuery({ text: ctx.t("onboarding-goals-empty") });
+        return;
+      }
+      return accept(
+        ctx.t("onboarding-next"),
+        async () => {
+          await this.save(ctx, { goals: state.goals ?? [] }, ["goals"]);
+          await this.goto(ctx, learning, state, "interests");
+        },
+        () => on("goals") && (state.goals?.length ?? 0) > 0,
+      );
+    }
+    if (callback.type === "interest") {
+      return accept(
+        tappedLabel(ctx) ?? "",
+        async () => {
+          const id = INTEREST_SUGGESTIONS[callback.index] ?? "";
+          state.interests = toggleInterest(state.interests ?? [], id);
+          await this.show(ctx, learning, state);
+        },
+        () => on("interests"),
+      );
+    }
+    if (callback.type === "interests-done") {
+      return accept(
+        tappedLabel(ctx) ?? "",
+        async () => {
+          await this.save(ctx, { interests: state.interests ?? [] }, ["interests"]);
+          await this.goto(ctx, learning, state, "profession");
+        },
+        () => on("interests"),
+      );
+    }
+    if (callback.type === "profession-skip") {
+      return accept(
+        ctx.t("onboarding-skip"),
+        () => this.goto(ctx, learning, state, "provider"),
+        () => on("profession"),
+      );
+    }
     if (callback.type === "retry") {
       return accept(
         ctx.t("onboarding-retry"),
@@ -146,7 +209,7 @@ export class OnboardingFlow {
           "uiLang",
           "explainLang",
         ]);
-        return this.goto(ctx, learning, state, "provider");
+        return this.goto(ctx, learning, state, "goals");
       case "provider":
         if (!on("provider")) return;
         state.wantsOwnProvider = callback.choice === "own";
@@ -185,6 +248,32 @@ export class OnboardingFlow {
         await learning.end("cancelled");
         return;
     }
+  }
+
+  /**
+   * A message typed during the session: interests and the profession are free text. The session
+   * manager deletes the message afterwards; anything typed where a button is expected gets a note.
+   */
+  async onMessage(ctx: BotContext, learning: LearningHandle): Promise<void> {
+    const state = ctx.session.onboarding;
+    if (state?.sessionId !== learning.session.id) return;
+    const t = this.deps.i18n;
+    const locale = await this.locale(ctx);
+    const text = ctx.message?.text ?? "";
+
+    if (state.step === "interests") {
+      const added = parseInterests(text);
+      if (!added) return learning.window.flashNote(t.t(locale, "input-interests-invalid"));
+      state.interests = mergeInterests(state.interests ?? [], added);
+      return this.show(ctx, learning, state);
+    }
+    if (state.step === "profession") {
+      const profession = parseProfession(text);
+      if (!profession) return learning.window.flashNote(t.t(locale, "input-profession-invalid"));
+      await this.save(ctx, { profession }, ["profession"]);
+      return this.goto(ctx, learning, state, "provider");
+    }
+    await learning.window.flashNote(t.t(locale, "onboarding-use-buttons"));
   }
 
   /** Asks the skill for the next item, or the verdict, and moves to the matching step. */

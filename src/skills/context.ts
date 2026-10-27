@@ -1,7 +1,7 @@
 import type { Db } from "../db/client";
 import { listTopMistakes } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
-import type { CefrLevel, Language, Mistake, UserSettings } from "../db/schema";
+import type { CefrLevel, Language, LearnerGoal, Mistake, UserSettings } from "../db/schema";
 import { getOverallLevel } from "../levels";
 
 /** Native languages the prompts have curated hints for. */
@@ -18,8 +18,13 @@ export type LearnerContext = {
   explainLang: Language;
   uiLang: Language;
   nativeLang: NativeLanguage | null;
-  /** Learner-written; travels only in the user message. */
+  /**
+   * The learner profile; travels only in the user message. `goals` and `profession` are absent
+   * where there is no learner (the shared word-enrichment cache stays neutral).
+   */
+  goals?: LearnerGoal[];
   interests: string[];
+  profession?: string | null;
   /** Derived from learner text; travels only in the user message. */
   weakSpots: WeakSpot[];
 };
@@ -62,7 +67,9 @@ export function learnerContextFromDb(db: Db) {
       explainLang: settings.explainLang,
       uiLang: settings.uiLang,
       nativeLang: nativeLanguageOf(settings),
+      goals: settings.goals,
       interests: settings.interests,
+      profession: settings.profession,
       weakSpots: mistakes.map(toWeakSpot),
     };
   };

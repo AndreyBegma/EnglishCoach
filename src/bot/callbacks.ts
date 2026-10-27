@@ -6,6 +6,9 @@ import {
   CEFR_LEVELS,
   COMMON_TIMEZONES,
   ENGLISH_VARIANTS,
+  INTEREST_SUGGESTIONS,
+  LEARNER_GOALS,
+  type LearnerGoal,
   PROVIDER_CHOICES,
   type ProviderChoice,
   TIME_SLOTS,
@@ -41,11 +44,19 @@ export const SETTINGS_PAGES = [
   "evening",
   "provider",
   "model",
+  "profile",
+  "interests",
 ] as const;
 export type SettingsPage = (typeof SETTINGS_PAGES)[number];
 
 /** Settings that take free text (or a location) instead of a button. */
-export const SETTINGS_TEXT_INPUTS = ["timezone", "model", "workspace"] as const;
+export const SETTINGS_TEXT_INPUTS = [
+  "timezone",
+  "model",
+  "workspace",
+  "interests",
+  "profession",
+] as const;
 export type SettingsTextInput = (typeof SETTINGS_TEXT_INPUTS)[number];
 
 /** One settings value picked from a closed list. */
@@ -79,7 +90,16 @@ export type Callback =
   | { type: "provider-test" }
   /** Clears the Anthropic workspace ID of the active provider. */
   | { type: "provider-workspace-clear" }
-  | { type: "placement" };
+  | { type: "placement" }
+  /** Settings → Profile & goals: toggles a goal. */
+  | { type: "goal"; goal: LearnerGoal }
+  /** Toggles a suggested interest, by its index in `INTEREST_SUGGESTIONS`. */
+  | { type: "interest"; index: number }
+  | { type: "profile-clear"; field: ProfileClearField };
+
+/** Profile fields the profile screens can empty with one button. */
+export const PROFILE_CLEAR_FIELDS = ["interests", "profession"] as const;
+export type ProfileClearField = (typeof PROFILE_CLEAR_FIELDS)[number];
 
 /** Callbacks handled by the settings module; all of them live on the hub message. */
 export const SETTINGS_CALLBACKS = [
@@ -95,6 +115,9 @@ export const SETTINGS_CALLBACKS = [
   "provider-test",
   "provider-workspace-clear",
   "placement",
+  "goal",
+  "interest",
+  "profile-clear",
 ] as const satisfies readonly Callback["type"][];
 export type SettingsCallback = Extract<Callback, { type: (typeof SETTINGS_CALLBACKS)[number] }>;
 
@@ -202,6 +225,17 @@ const route = z.union([
   z.tuple([z.literal("pt")]).transform(() => ({ type: "provider-test" as const })),
   z.tuple([z.literal("pw")]).transform(() => ({ type: "provider-workspace-clear" as const })),
   z.tuple([z.literal("pp")]).transform(() => ({ type: "placement" as const })),
+  z.tuple([z.literal("pg"), z.enum(LEARNER_GOALS)]).transform(([, goal]) => ({
+    type: "goal" as const,
+    goal,
+  })),
+  z
+    .tuple([z.literal("pn"), smallInt.pipe(z.number().max(INTEREST_SUGGESTIONS.length - 1))])
+    .transform(([, index]) => ({ type: "interest" as const, index })),
+  z.tuple([z.literal("pc"), z.enum(PROFILE_CLEAR_FIELDS)]).transform(([, field]) => ({
+    type: "profile-clear" as const,
+    field,
+  })),
 ]);
 
 const SET_CODES: Record<SettingChange["field"], string> = {
@@ -265,6 +299,12 @@ function partsOf(callback: Callback): (string | number)[] {
       return ["pw"];
     case "placement":
       return ["pp"];
+    case "goal":
+      return ["pg", callback.goal];
+    case "interest":
+      return ["pn", callback.index];
+    case "profile-clear":
+      return ["pc", callback.field];
   }
 }
 

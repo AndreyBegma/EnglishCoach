@@ -19,8 +19,12 @@ export function onboardingHandlers(flow: OnboardingFlow): Composer<BotContext> {
 
 /**
  * The `placement` session kind. Whoever starts the session (the first `/start`, or the Settings
- * button) knows which flavour it is and begins the flow itself, so there is nothing to do here.
+ * button) knows which flavour it is and begins the flow itself, so there is nothing to do on
+ * start. Typed messages (interests, profession) go to the flow.
  */
-export const placementSession: SessionKindHandler = {
-  async onStart() {},
-};
+export function placementSession(flow: OnboardingFlow): SessionKindHandler {
+  return {
+    async onStart() {},
+    onMessage: (session, ctx) => flow.onMessage(ctx, session),
+  };
+}

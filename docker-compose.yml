@@ -16,6 +16,27 @@ services:
       retries: 10
     restart: unless-stopped
 
+  # Daily pg_dump -Fc into ./backups with 7 daily / 4 weekly / 3 monthly rotation, plus a weekly
+  # restore check into a throwaway database. See README "Backups".
+  backup:
+    image: postgres:16
+    entrypoint: ["bash", "/scripts/backup-loop.sh"]
+    environment:
+      PGHOST: postgres
+      PGUSER: coach
+      PGPASSWORD: coach
+      PGDATABASE: coach
+      BACKUP_DIR: /backups
+      BACKUP_HOUR: "${BACKUP_HOUR:-3}"
+      BACKUP_CHECK_DAY: "${BACKUP_CHECK_DAY:-7}"
+    volumes:
+      - ./backups:/backups
+      - ./scripts:/scripts:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
   redis:
     image: redis:7
     command: ["redis-server", "--appendonly", "yes"]

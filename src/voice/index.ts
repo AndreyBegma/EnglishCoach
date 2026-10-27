@@ -1,7 +1,7 @@
 import { type Api, Composer } from "grammy";
 import type { BotContext } from "../bot/context";
 import type { Translator } from "../bot/i18n";
-import { parseTtsEnv, type TtsEnv } from "../config/env";
+import { parseSttEnv, parseTtsEnv, type SttEnv, type TtsEnv } from "../config/env";
 import type { Db } from "../db/client";
 import { getCard } from "../db/repositories/cards";
 import type { SessionKind } from "../db/repositories/sessions";
@@ -21,7 +21,7 @@ import {
   type SpeechEngine,
   SpeechError,
 } from "./engines";
-import { transcribe } from "./transcribe";
+import { openAiTarget, type SttTarget, transcribeWithFallback, whisperTarget } from "./transcribe";
 import { Tts, type TtsOptions } from "./tts";
 
 export { encodeVoiceCallback } from "./callbacks";
@@ -46,6 +46,8 @@ export interface VoiceOptions extends Pick<TtsOptions, "dir" | "prewarmIntervalM
   fetch?: FetchLike;
   /** TTS settings; default: `TTS_*` from the environment. */
   tts?: TtsEnv;
+  /** STT settings; default: `STT_*` from the environment. */
+  stt?: SttEnv;
 }
 
 export interface VoiceDeps {
@@ -73,6 +75,7 @@ export function createVoice(deps: VoiceDeps) {
   const credentialDeps: CredentialDeps = { db, env: deps.llmEnv, masterKey: deps.masterKey };
   const fetcher: FetchLike = deps.options?.fetch ?? ((url, init) => globalThis.fetch(url, init));
   const ttsEnv = deps.options?.tts ?? parseTtsEnv();
+  const sttEnv = deps.options?.stt ?? parseSttEnv();
 
   const engines: SpeechEngine[] = [];
   if (ttsEnv.TTS_URL) {
@@ -131,7 +134,11 @@ export function createVoice(deps: VoiceDeps) {
       return refuse("voice-too-long", { seconds: MAX_VOICE_SECONDS });
     }
     const credentials = await resolveAudioCredentials(credentialDeps, ctx.user.id);
-    if (!credentials) return refuse("voice-needs-key");
+    // The learner's key, else the server key, else local whisper.
+    const targets: SttTarget[] = [];
+    if (credentials) targets.push(openAiTarget(credentials));
+    if (sttEnv.STT_URL) targets.push(whisperTarget(sttEnv.STT_URL, sttEnv.STT_MODEL));
+    if (targets.length === 0) return refuse("voice-needs-key");
 
     let transcript: string;
     try {
@@ -140,11 +147,18 @@ export function createVoice(deps: VoiceDeps) {
       const { api } = ctx;
       const download = await fetcher(`${TELEGRAM_FILE_ROOT}/bot${api.token}/${file.file_path}`);
       if (!download.ok) throw new Error(`file download failed with status ${download.status}`);
-      transcript = await transcribe(
+      // The result also carries word timestamps, for the pronunciation feedback that comes later.
+      ({ text: transcript } = await transcribeWithFallback(
         new Uint8Array(await download.arrayBuffer()),
-        credentials,
+        targets,
         fetcher,
-      );
+        (target, failure) =>
+          log.warn("voice transcription engine failed", {
+            userId: ctx.user.id,
+            engine: target.id,
+            error: failure.message,
+          }),
+      ));
     } catch (error) {
       log.warn("voice transcription failed", {
         userId: ctx.user.id,

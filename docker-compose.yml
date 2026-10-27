@@ -43,6 +43,24 @@ services:
       start_period: 30s
     restart: unless-stopped
 
+  # faster-whisper behind speaches (OpenAI-compatible audio/transcriptions), CPU only.
+  stt:
+    image: ghcr.io/speaches-ai/speaches:0.9.0-rc.3-cpu
+    environment:
+      # Downloaded on the first start into the hf-cache volume, then loaded from it.
+      PRELOAD_MODELS: '["${STT_MODEL:-Systran/faster-whisper-small.en}"]'
+    ports:
+      - "${STT_HOST_PORT:-18890}:8000"
+    volumes:
+      - stt-cache:/home/ubuntu/.cache/huggingface/hub
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sf http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 30
+      start_period: 60s
+    restart: unless-stopped
+
   app:
     build: .
     env_file: .env
@@ -51,6 +69,7 @@ services:
       REDIS_URL: redis://redis:6379
       HTTP_PORT: "18740"
       TTS_URL: http://tts:8880
+      STT_URL: http://stt:8000
     ports:
       - "${HTTP_HOST_PORT:-18740}:18740"
     volumes:
@@ -63,9 +82,13 @@ services:
       # The bot runs without local TTS (OpenAI fallback), so it does not wait for the model to load.
       tts:
         condition: service_started
+      # Same for STT: without the container voice falls back to an OpenAI-compatible key.
+      stt:
+        condition: service_started
     restart: unless-stopped
 
 volumes:
+  stt-cache:
   postgres-data:
   redis-data:
   tts-cache:

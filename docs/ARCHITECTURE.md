@@ -35,6 +35,7 @@ Product decisions for v2 (what the app is meant to do): [PRODUCT.md](PRODUCT.md)
 | PostgreSQL | 55433 |
 | Redis | 56380 |
 | TTS (Kokoro-FastAPI) | 18880 |
+| STT (faster-whisper) | 18890 |
 
 All are overridable via env; the defaults above live in `.env.example` and
 `docker-compose.yml`.

@@ -115,6 +115,14 @@ OpenAI-compatible key is used instead. The first start downloads nothing but tak
 load the model. Generated audio is cached per text and voice under `data/tts/` (override with
 `TTS_CACHE_DIR`; compose mounts it as a volume).
 
+**Speech recognition** tries, in order: the user's own OpenAI-compatible key, `SERVER_OPENAI_API_KEY`,
+then local faster-whisper — so voice works with no key at all. The `stt` service in
+`docker-compose.yml` (speaches, CPU only, host port `18890`, `STT_HOST_PORT` to change it; the app
+reaches it at `STT_URL=http://stt:8000`) serves `Systran/faster-whisper-small.en` by default
+(`STT_MODEL`). The first start downloads the model into the `stt-cache` volume. A failing engine
+falls through to the next; unset `STT_URL` to disable local STT. Transcripts carry word timestamps
+and, from whisper, per-word confidence. Voice messages over 60 s are rejected before any engine runs.
+
 **Storage chat.** Create a private channel (or group), add the bot as an admin and put its id
 (negative, e.g. `-1001234567890`) in `TTS_STORAGE_CHAT_ID`. Each voice note is then uploaded there
 once, its Telegram `file_id` is stored in `tts_audio`, and every later play is

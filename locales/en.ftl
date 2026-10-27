@@ -145,6 +145,9 @@ provider-unavailable-server = The server LLM is not configured. Add your own API
 # --- vocabulary ---
 vocab-collocations = Collocations: { $list }
 vocab-mnemonic = 💡 { $text }
+vocab-photo-credit = 📷 { $author } / { $source }
+vocab-image-next = 🔄 Another picture
+vocab-image-none = No other picture for this word.
 vocab-got-it = ✅ Got it
 vocab-know = 💯 I know this word
 vocab-known = 💯 “{ $word }” is marked as known — you won't see it again.

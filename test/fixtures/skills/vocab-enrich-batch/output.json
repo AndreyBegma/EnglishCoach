@@ -17,7 +17,8 @@
       ],
       "collocations": ["make a decision", "a difficult decision", "the final decision"],
       "mnemonic": "По-английски решение «делают»: make a decision. Корень тот же, что в «decide».",
-      "image_query": "person choosing between two roads"
+      "image_query": "person choosing between two roads",
+      "emoji": null
     },
     {
       "id": 102,
@@ -36,7 +37,8 @@
       ],
       "collocations": ["borrow money", "borrow something from someone", "borrow a book"],
       "mnemonic": "borrow — брать, lend — давать: «бОрроу» берёт, «ленд» отдаёт.",
-      "image_query": "borrowing a book from a friend"
+      "image_query": "borrowing a book from a friend",
+      "emoji": null
     }
   ]
 }

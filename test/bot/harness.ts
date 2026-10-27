@@ -5,6 +5,7 @@ import type { FlowState } from "../../src/bot/context";
 import { createBot } from "../../src/bot/index";
 import type { Db } from "../../src/db/client";
 import type { SessionKind } from "../../src/db/repositories/sessions";
+import type { WordImages } from "../../src/images";
 import { type ProviderFactories, resolveProvider } from "../../src/llm";
 import type { ServerEnv } from "../../src/llm/providers/server";
 import { createLogger } from "../../src/log";
@@ -251,6 +252,8 @@ export interface HarnessOptions {
   skills?: SkillRunner;
   /** Whether Telegram sends the bot its own pin notice as an update (default "deliver"). */
   pinUpdates?: "deliver" | "silent";
+  /** Pictures on new-word cards, over a mocked stock-photo HTTP client. */
+  images?: WordImages;
   /** Replaces the in-memory answer locks. */
   locks?: SessionLocks;
 }
@@ -295,6 +298,7 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
           ),
         learner: learnerContextFromDb(db),
       }),
+    images: options.images,
     botConfig: { botInfo: BOT_INFO },
     transport: telegram.transformer,
     pinSettleMs: 0,

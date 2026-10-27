@@ -141,6 +141,22 @@ low-rate backfill — and the curated fields override the model's. Learn words
 reads the cache; a miss falls back to inline `vocab-enrich` with the learner's
 provider and is logged as a metric.
 
+**Word pictures.** The enrichment decides whether a word is imageable: an
+`image_query` (English, from the first example's sense) or, for an abstract
+word, `null` and an `emoji` shown before the word. `WordImages`
+(`src/images/`) searches Pexels, then Unsplash (`PEXELS_API_KEY`,
+`UNSPLASH_ACCESS_KEY`, both optional — with neither, cards stay text), once per
+dictionary word, and stores the choice in `word_images` (URL, size, source,
+author and photo page for the credit, query, result index); a search that
+finds nothing is stored too. The prefetch job fetches pictures of upcoming
+words; backfill does not (the APIs' hourly limits). The new-word card is then
+one photo whose caption holds the word, IPA, translation, the first example
+(cut first to fit 1024 characters) and "📷 Author / Source" links; "🔄 Another
+picture" moves the word to the next result, for every learner, and edits the
+photo in place. Unsplash's download endpoint is called when one of its photos
+is chosen. Any picture failure shows the text card; errors are logged with
+the source and status only. A learner's own words have no picture.
+
 ## Telegram UX rules
 
 1. **The hub.** Exactly one menu message per chat with inline buttons:

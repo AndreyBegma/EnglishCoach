@@ -7,6 +7,7 @@ import { applyReview, reviewStatsSince } from "../db/repositories/cards";
 import { getSettings } from "../db/repositories/users";
 import { randomLemmas } from "../db/repositories/words";
 import type { CardRow, CefrLevel, Language } from "../db/schema";
+import type { WordImages } from "../images";
 import { LlmOutputError, LlmProviderError, ProviderUnavailableError } from "../llm";
 import type { Logger } from "../log";
 import type { LearningHandle } from "../sessions/session-manager";
@@ -32,6 +33,8 @@ export interface VocabDeps {
   i18n: Translator;
   skills: SkillRunner;
   log: Logger;
+  /** Pictures for word cards; absent when no stock-photo key is set. */
+  images?: WordImages;
   /** The clock; tests pin it. */
   now?: () => Date;
 }

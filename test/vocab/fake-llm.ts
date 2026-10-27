@@ -61,6 +61,8 @@ export function vocabSkills(db: Db) {
             ],
             collocations: [`${task.lemma} fast`, `${task.lemma} well`, `never ${task.lemma}`],
             mnemonic: `Think of ${task.lemma}.`,
+            image_query: `${task.lemma} scene`,
+            emoji: null,
           }),
         };
       }
@@ -110,6 +112,7 @@ export function vocabSkills(db: Db) {
               collocations: [`${word.lemma} a`, `${word.lemma} b`, `${word.lemma} c`],
               mnemonic: `Cached hook for ${word.lemma}.`,
               image_query: `${word.lemma} picture`,
+              emoji: null,
             })),
           }),
         };

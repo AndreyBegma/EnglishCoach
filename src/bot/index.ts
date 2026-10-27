@@ -6,6 +6,7 @@ import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
 import { PinNotices } from "../hub/pin-notices";
+import type { WordImages } from "../images";
 import type { ProviderFactories } from "../llm";
 import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
@@ -55,6 +56,8 @@ export interface BotDeps {
   llmFactories?: ProviderFactories;
   /** Runs skills for session handlers (one runner per process). */
   skills: SkillRunner;
+  /** Pictures on new-word cards; absent when no stock-photo key is set. */
+  images?: WordImages;
   /** Voice (STT/TTS) overrides; tests replace the HTTP client and the cache directory. */
   voice?: VoiceOptions;
   /** Tests pass `botInfo` here so the bot never calls getMe. */
@@ -136,7 +139,7 @@ export function createBot(deps: BotDeps) {
   const grammar = { db, skills: deps.skills, i18n, log };
   sessions.register("grammar", grammarSession(grammar));
   sessions.register("placement", placementSession);
-  const vocab = vocabSessions({ db, i18n, skills: deps.skills, log });
+  const vocab = vocabSessions({ db, i18n, skills: deps.skills, log, images: deps.images });
   sessions.register("vocab_new", vocab.learn);
   sessions.register("review", vocab.review);
 

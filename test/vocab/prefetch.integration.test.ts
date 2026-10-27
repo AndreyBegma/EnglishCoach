@@ -93,6 +93,7 @@ describe.skipIf(!testServerUrl)("word prefetch fills the shared cache ahead of L
       collocations: ["alpha a", "alpha b", "alpha c"],
       mnemonic: "Cached hook for alpha.",
       imageQuery: "alpha picture",
+      emoji: null,
     });
 
     // Already cached: a second run makes no LLM call.

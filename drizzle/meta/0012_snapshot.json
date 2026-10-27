@@ -1,5 +1,5 @@
 {
-  "id": "9dc4dff9-ac64-415b-830d-37d1a01d423b",
+  "id": "f7998da9-3ed3-4c52-9abc-087ceb592277",
   "prevId": "8eda4af6-a37a-4501-bd13-0fe4898cb4a8",
   "version": "7",
   "dialect": "postgresql",
@@ -1226,25 +1226,12 @@
           "notNull": true,
           "default": "'us'"
         },
-        "goals": {
-          "name": "goals",
-          "type": "text[]",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'{}'::text[]"
-        },
         "interests": {
           "name": "interests",
           "type": "text[]",
           "primaryKey": false,
           "notNull": true,
           "default": "'{}'::text[]"
-        },
-        "profession": {
-          "name": "profession",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
@@ -1270,10 +1257,6 @@
         "user_settings_english_variant_check": {
           "name": "user_settings_english_variant_check",
           "value": "\"user_settings\".\"english_variant\" in ('us', 'uk')"
-        },
-        "user_settings_goals_check": {
-          "name": "user_settings_goals_check",
-          "value": "\"user_settings\".\"goals\" <@ array['it', 'travel', 'work_business', 'exam', 'everyday', 'relocation']::text[]"
         }
       },
       "isRLSEnabled": false
@@ -2074,6 +2057,159 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
+    },
+    "public.user_xp": {
+      "name": "user_xp",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "total": {
+          "name": "total",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "level": {
+          "name": "level",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_xp_user_id_users_id_fk": {
+          "name": "user_xp_user_id_users_id_fk",
+          "tableFrom": "user_xp",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.xp_events": {
+      "name": "xp_events",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "xp_events_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source": {
+          "name": "source",
+          "type": "xp_source",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "meta": {
+          "name": "meta",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "xp_events_user_id_created_at_idx": {
+          "name": "xp_events_user_id_created_at_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "xp_events_user_id_users_id_fk": {
+          "name": "xp_events_user_id_users_id_fk",
+          "tableFrom": "xp_events",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
@@ -2171,6 +2307,19 @@
         "listening",
         "writing",
         "speaking"
+      ]
+    },
+    "public.xp_source": {
+      "name": "xp_source",
+      "schema": "public",
+      "values": [
+        "grammar_item",
+        "review",
+        "word_learned",
+        "talk_turn",
+        "topic_mastered",
+        "daily_goal",
+        "streak"
       ]
     }
   },

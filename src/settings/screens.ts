@@ -173,7 +173,7 @@ export function interestsLine(t: T, interests: readonly string[]): string {
 function profileScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen {
   const { goals, interests, profession } = model.settings;
   const lines = [
-    t("profile-title"),
+    t("profile-goals-title"),
     "",
     t("profile-goals", {
       goals:

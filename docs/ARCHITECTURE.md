@@ -26,6 +26,7 @@ Product decisions for v2 (what the app is meant to do): [PRODUCT.md](PRODUCT.md)
 | Lint / format | Biome |
 | Tests | `bun test` |
 | Deploy v1 | docker-compose (one host). Kubernetes/Helm is v2 |
+| Production | `docker-compose.prod.yml` on top of the base file, driven by `scripts/deploy.sh`; the app image boots through `scripts/entrypoint.sh` (migrate, seed, start) — see README "Deploy" |
 | Backups | `backup` compose service: daily `pg_dump -Fc` to `./backups`, 7 daily / 4 weekly / 3 monthly rotation, weekly restore check (`scripts/backup*.sh`, `scripts/restore*.sh`) |
 
 ## Ports (non-standard on purpose — the dev host already uses 5432, 6390, 8000, 9000)
@@ -170,6 +171,91 @@ paid key) voices the whole owner's list a slice at a time and keeps one pinned s
 the storage chat (`tts_status_board`), edited in place at most once a minute, re-sent and
 re-pinned when it is gone; `pinNoticeCleanup` deletes the pin notice there too.
 
+## Level model
+
+`skill_levels` holds one row per learner and skill (grammar, vocabulary,
+reading, listening, writing, speaking): a continuous `rating` on the CEFR scale
+(A1.0 = 0, B1.6 = 2.6, C2.9 = 5.9 — the band index plus the tenth of the band
+covered), its `uncertainty` (a standard deviation in the same units) and the
+`evidence` (graded items) behind it. `src/levels/` owns it; nothing else writes
+there.
+
+**Updates.** Every grader calls `recordGradedItem(db, userId, skill,
+difficulty, score, { expected })` once per graded item (through the helpers in
+`src/levels/items.ts`): `score` 0..1 (partial credit in between), `difficulty`
+a CEFR band (its centre), a rating, or null for an item pitched at the
+learner's own level. The model is IRT-lite: success chance
+`logistic((rating − difficulty) / 0.75)`, a Kalman-style step (variance shrinks
+by the item's information, the rating moves by the surprise times the
+variance), uncertainty floored at 0.2 and widened slowly over idle days.
+`expected` is what a learner of exactly the item's level scores on such items
+by design (quiz 0.65, FSRS review 0.9, conversation turn 0.75, placement 0.5),
+so a by-design success rate does not read as a higher level. It returns the
+new level plus the rating before the item and the item's level on the same
+scale, which is what XP is computed against.
+
+| Grader | Skill | Difficulty | Score |
+|---|---|---|---|
+| Grammar quiz | grammar | syllabus topic's level (`grammarItemDifficulty`), else the quiz's estimate | correct 1 · partial 0.5 · wrong 0 |
+| Vocabulary card rating | vocabulary | the word's CEFR level; own words at the learner's level; grammar-pattern cards do not count | again 0 · hard 0.5 · good/easy 1 |
+| Talk turn (≥ 5 words) | writing | the learner's level | 1 − 0.5·critical − 0.25·moderate − 0.1·minor |
+| Placement test | the item's skill | the item's level | 1 / 0 |
+
+**Seeding.** The placement result seeds all six skills at its band centre
+(uncertainty 0.6), then replays each graded item into its own skill. A level
+the learner chooses (onboarding, Settings) re-seeds at uncertainty 0.8.
+
+**Overall level and the cache.** The overall level is the mean of the skill
+ratings weighted by 1/uncertainty² (practised skills dominate).
+`user_settings.cefr_level` is a cache of its band, rewritten after each graded
+item; it stays null until the learner has a level, which is what sends them
+through onboarding. A learner who has the cache but no rows reads as seeded at
+that band and is backfilled on their first graded item.
+
+Progress shows the overall level as a decimal (B1.6) and each practised skill;
+Settings shows the overall decimal; skill prompts get the overall band.
+
+## XP and the profile level
+
+`xp_events` is the ledger (one row per award: `source`, `amount`, `meta`,
+never updated); `user_xp` caches the total and the profile level. Only
+`awardXp` (`src/gamification/awards.ts`) writes them, in one transaction, and
+an amount of 0 writes nothing. The rules are pure, in
+`src/gamification/xp.ts`; the graders do not call them — the level helpers in
+`src/levels/items.ts` do, right after the level update, and a failed award is
+logged and never fails the grader.
+
+| Source | When | XP |
+|---|---|---|
+| `grammar_item` | a graded quiz answer | 10 × score × multiplier |
+| `word_learned` | the first passing rating of a card still New or Learning, once per card | 6 × score × multiplier |
+| `review` | any other passing card rating (Again earns nothing) | 4 × score × multiplier |
+| `talk_turn` | a talk turn long enough to count | 8 × score (at the learner's level) |
+| `topic_mastered` | the 5th rewarded correct answer on a syllabus topic, once | 50 |
+| `daily_goal` | the day's goal was just met (`markGoalMet` flipped it) | 30 |
+| `streak` | the same moment, from day 2 of a streak | 5 × streak days, at most 50 |
+
+**Difficulty multiplier and anti-farming.** With `gap` = item level − the
+learner's rating in that skill before the item: 1 + 0.5·min(gap, 1) above the
+learner (×1.5 a band up), 1 within half a band below, and below that it halves
+every half band — two bands below is worth an eighth, and XP is rounded down,
+so items far below the learner's level earn 0 and never count toward mastery.
+
+**Level curve.** Level 1 at 0 XP; going from level n to n + 1 costs
+`round(100 × 1.15^(n − 1))` (100, 115, 132, …).
+
+**`xp.awarded`.** After each award `xpEvents` (`src/gamification/events.ts`, a
+process singleton, the same contract as `settings.changed`) emits the award
+with the new total, level and previous level; achievements and level-up
+notices subscribe there. A failing listener is logged and never fails the
+award.
+
+**Profile screen.** Hub → 👤 Profile edits the hub: profile level, XP bar to
+the next level, streak, the overall CEFR decimal and every skill's (`~` marks a
+skill with no graded items yet), the last three achievements (a placeholder
+until achievements exist) and all-time totals. Its button rides the progress
+callback codec (`<v>:p:u`).
+
 ## Grammar syllabus
 
 One topic map from A1 to C2 in `data/grammar/syllabus/*.yaml` (one file per
@@ -197,14 +283,14 @@ stored one.
 ## Telegram UX rules
 
 1. **The hub.** Exactly one menu message per chat with inline buttons:
-   Learn words · Review · Grammar · Talk · Progress · Settings. It is
+   Learn words · Review · Grammar · Talk · Progress · Profile · Settings. It is
    **pinned**, and after every session it is **re-sent at the bottom** (old
    one deleted, new one pinned). The "… pinned a message" notice each pin
    adds is deleted from its own update (`src/hub/pin-notices.ts`): a
    private-chat message with `pinned_message` sent by the bot. The Bot API
    does not promise that update in private chats and cannot read a message
    by ID, so when it is not delivered the notice stays; the bot never deletes
-   a guessed ID. Sub-screens (settings, progress) open by
+   a guessed ID. Sub-screens (settings, progress, profile) open by
    *editing* the hub message, never by sending new ones.
 2. **One window per session.** While a session runs, the chat holds the hub
    and one session window; nothing else lives longer than a few seconds.
@@ -252,7 +338,8 @@ stored one.
 Per-user timezone and two times (default 08:30 / 20:00). Morning: due
 reviews + today's new words. Evening: grammar quiz + review of the day's
 mistakes. Streak counts days where the daily goal was met; a reminder is sent
-if the evening slot passes untouched.
+if the evening slot passes untouched. The session that meets a day's goal
+earns the goal and streak XP for it.
 
 ## Out of scope for v1 (filed, not ready)
 

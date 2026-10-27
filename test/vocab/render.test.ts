@@ -5,6 +5,7 @@ import {
   cardHtml,
   MAX_CAPTION,
   type PhotoCredit,
+  type Pronunciation,
   visibleLength,
 } from "../../src/vocab/render";
 
@@ -59,6 +60,32 @@ describe("word card as a photo caption", () => {
         '📷 <a href="https://www.pexels.com/@ann?a=1&amp;b=2">Ann &lt;Lee&gt;</a> / <a href="https://www.pexels.com/photo/1/">Pexels</a>',
       ].join("\n"),
     );
+  });
+
+  test("dictionary IPA of the learner's variant and stressed syllables", () => {
+    const us = { ipa: "/ˈwɔːtɚ/", syllables: "WA·ter" };
+    const uk = { ipa: "/ˈwɔːtə/", syllables: "WA·ter" };
+    const back = { translation: "вода", ipa: "/owner/", pos: "noun" };
+    const caption = (pronunciation?: Pronunciation) =>
+      cardCaption(t, { front: "water", backJson: back, pronunciation }, credit) ?? "";
+    expect(caption(us)).toStartWith("<b>water</b> /ˈwɔːtɚ/ · <i>noun</i>\nWA·ter\nвода");
+    expect(caption(uk)).toStartWith("<b>water</b> /ˈwɔːtə/ · <i>noun</i>\nWA·ter\nвода");
+    expect(caption({ ipa: null, syllables: null })).toStartWith(
+      "<b>water</b> /owner/ · <i>noun</i>\nвода",
+    );
+  });
+
+  test("no IPA line when none is known", () => {
+    const caption = cardCaption(
+      t,
+      {
+        front: "water",
+        backJson: { translation: "вода" },
+        pronunciation: { ipa: null, syllables: null },
+      },
+      credit,
+    );
+    expect(caption).toStartWith("<b>water</b>\nвода");
   });
 
   test("too long: the example is cut first, to exactly the limit", () => {

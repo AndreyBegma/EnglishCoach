@@ -18,18 +18,26 @@ export function promptHtml(text: string): string {
 export const exampleText = (example: CardExample | string): string =>
   typeof example === "string" ? example : example.en;
 
-/** The word, its IPA and part of speech; an abstract word's emoji first. */
-function headHtml(card: Pick<CardRow, "front" | "backJson">): string {
+/** The dictionary pronunciation of a word for the learner's variant; null: not known. */
+export type Pronunciation = { ipa: string | null; syllables: string | null };
+
+/** A card, with the pronunciation of its word when it has a dictionary one. */
+export type CardView = Pick<CardRow, "front" | "backJson"> & { pronunciation?: Pronunciation };
+
+/** The word, its IPA and part of speech; an abstract word's emoji first; syllables below. */
+function headHtml(card: CardView): string {
   const back = card.backJson;
   const head = [`<b>${escapeHtml(card.front)}</b>`];
   if (back.emoji) head.unshift(escapeHtml(back.emoji));
-  if (back.ipa) head.push(escapeHtml(back.ipa));
+  const ipa = card.pronunciation?.ipa || back.ipa;
+  if (ipa) head.push(escapeHtml(ipa));
   if (back.pos) head.push(`· <i>${escapeHtml(back.pos)}</i>`);
-  return head.join(" ");
+  const syllables = card.pronunciation?.syllables;
+  return syllables ? `${head.join(" ")}\n${escapeHtml(syllables)}` : head.join(" ");
 }
 
 /** The front and back of a word card, as Learn words shows it. */
-export function cardHtml(t: T, card: Pick<CardRow, "front" | "backJson">): string {
+export function cardHtml(t: T, card: CardView): string {
   const back = card.backJson;
   const lines = [headHtml(card)];
   if (back.translation) lines.push(escapeHtml(back.translation));
@@ -102,7 +110,7 @@ export function exampleCreditHtml(t: T, credits: readonly ExampleCredit[]): stri
  */
 export function cardCaption(
   t: T,
-  card: Pick<CardRow, "front" | "backJson">,
+  card: CardView,
   credit: PhotoCredit,
   lead?: string,
 ): string | undefined {

@@ -141,6 +141,13 @@
       "when": 1793098267919,
       "tag": "0019_streak_freezes",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1793099126962,
+      "tag": "0020_fsrs_optimiser",
+      "breakpoints": true
     }
   ]
 }

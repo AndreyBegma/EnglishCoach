@@ -1,0 +1,270 @@
+{
+  "id": "g008",
+  "position": 8,
+  "cefrLevel": "A2",
+  "title": "Вопросы: вопросительные слова и вспомогательные глаголы",
+  "plannedFrom": "2026-10-26",
+  "plannedTo": "2026-10-26",
+  "sections": {
+    "why": [
+      "Вопросы нужны в каждом разговоре: узнать информацию, уточнить задачу, познакомиться. В русском мы просто меняем интонацию или добавляем слово (Ты работаешь здесь? Где ты работаешь?). В английском порядок слов строгий, и почти всегда нужен вспомогательный глагол."
+    ],
+    "formation": [
+      "• Вопрос да/нет: вспомогательный глагол + подлежащее + смысловой глагол. Do you like coffee? Does she work here? Did they come? Is he at home? Can you help me? Have you finished?",
+      "• Специальный вопрос: вопросительное слово + вспомогательный глагол + подлежащее + глагол. Where do you live? What did she say? How long have you worked here?",
+      "• Вопросительные слова: what (что), where (где / куда), when (когда), why (почему), who (кто), which (какой из), whose (чей), how (как), how much / how many (сколько), how long (как долго), how often (как часто), what time (во сколько).",
+      "• Вопрос к подлежащему (Who / What как подлежащее) — без do/does/did: Who called you? What happened? Порядок слов прямой.",
+      "• Вспомогательный глагол выбираем по времени: do/does (Present Simple), did (Past Simple), am/is/are/was/were (с to be и -ing), have/has (Present Perfect), will (будущее)."
+    ],
+    "usage": [
+      "1. Узнаём факт, место, причину. (Why did you leave? — Почему ты ушёл?)",
+      "2. Просим уточнить. (Which one do you prefer? — Какой из них ты предпочитаешь?)",
+      "3. Спрашиваем, кто выполнил действие. (Who wrote this function? — Кто написал эту функцию?)"
+    ],
+    "signalWords": [
+      "Wh-слова стоят в начале вопроса. Предлог часто уходит в конец: Who are you talking to? What are you looking for?"
+    ],
+    "mistakes": [
+      "• ✗ Where you live? → ✓ Where do you live? Нужен вспомогательный глагол.",
+      "• ✗ Does she works here? → ✓ Does she work here? После does глагол без -s.",
+      "• ✗ What did you bought? → ✓ What did you buy? После did — начальная форма.",
+      "• ✗ Who did call you? → ✓ Who called you? В вопросе к подлежащему did не нужен.",
+      "• ✗ What means this word? → ✓ What does this word mean? Подлежащее ставим после do/does."
+    ],
+    "remember": [
+      "Порядок вопроса: вопросительное слово → вспомогательный глагол → подлежащее → смысловой глагол."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте вспомогательный глагол (do / does / did / is / are / was / were / have / has)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___ you like pizza?",
+          "answer": "Do"
+        },
+        {
+          "number": 2,
+          "prompt": "___ she work in an office?",
+          "answer": "Does"
+        },
+        {
+          "number": 3,
+          "prompt": "___ they come to the party last night?",
+          "answer": "Did"
+        },
+        {
+          "number": 4,
+          "prompt": "___ your brother at home now?",
+          "answer": "Is"
+        },
+        {
+          "number": 5,
+          "prompt": "Where ___ you yesterday afternoon?",
+          "answer": "were"
+        },
+        {
+          "number": 6,
+          "prompt": "___ you ever been to Spain?",
+          "answer": "Have"
+        },
+        {
+          "number": 7,
+          "prompt": "What time ___ the train leave?",
+          "answer": "does"
+        },
+        {
+          "number": 8,
+          "prompt": "___ the children playing in the garden?",
+          "answer": "Are"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Where you live? (b) Where do you live?",
+          "answer": "b (Where do you live?)"
+        },
+        {
+          "number": 2,
+          "prompt": "(a) Does he speaks English? (b) Does he speak English?",
+          "answer": "b (Does he speak English?)"
+        },
+        {
+          "number": 3,
+          "prompt": "(a) What did you eat? (b) What did you ate?",
+          "answer": "a (What did you eat?)"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Who called you? (b) Who did call you?",
+          "answer": "a (Who called you?)"
+        },
+        {
+          "number": 5,
+          "prompt": "(a) How much costs this ticket? (b) How much does this ticket cost?",
+          "answer": "b (How much does this ticket cost?)"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Why are you late? (b) Why you are late?",
+          "answer": "a (Why are you late?)"
+        },
+        {
+          "number": 7,
+          "prompt": "(a) Can you help me? (b) You can help me?",
+          "answer": "a (Can you help me?)"
+        },
+        {
+          "number": 8,
+          "prompt": "(a) What are you looking for? (b) What for are you looking?",
+          "answer": "a (What are you looking for?)"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Задайте вопрос к выделенной части (вопросительное слово дано в скобках)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She lives in London. (Where)",
+          "answer": "Where does she live?"
+        },
+        {
+          "number": 2,
+          "prompt": "They arrived at six o'clock. (What time)",
+          "answer": "What time did they arrive?"
+        },
+        {
+          "number": 3,
+          "prompt": "He is reading a book about Python. (What)",
+          "answer": "What is he reading?"
+        },
+        {
+          "number": 4,
+          "prompt": "I go to the gym three times a week. (How often)",
+          "answer": "How often do you go to the gym?"
+        },
+        {
+          "number": 5,
+          "prompt": "She left because she was tired. (Why)",
+          "answer": "Why did she leave?"
+        },
+        {
+          "number": 6,
+          "prompt": "Mark broke the window. (Who)",
+          "answer": "Who broke the window?"
+        },
+        {
+          "number": 7,
+          "prompt": "This jacket costs fifty dollars. (How much)",
+          "answer": "How much does this jacket cost?"
+        },
+        {
+          "number": 8,
+          "prompt": "It is Anna's phone. (Whose)",
+          "answer": "Whose phone is it? / Whose phone is this?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку в вопросе",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Where you work?",
+          "answer": "Where do you work?"
+        },
+        {
+          "number": 2,
+          "prompt": "Does your sister likes tea?",
+          "answer": "Does your sister like tea?"
+        },
+        {
+          "number": 3,
+          "prompt": "What did you bought yesterday?",
+          "answer": "What did you buy yesterday?"
+        },
+        {
+          "number": 4,
+          "prompt": "Who did write this report?",
+          "answer": "Who wrote this report?"
+        },
+        {
+          "number": 5,
+          "prompt": "What means this word?",
+          "answer": "What does this word mean?"
+        },
+        {
+          "number": 6,
+          "prompt": "How many money do you need?",
+          "answer": "How much money do you need?"
+        },
+        {
+          "number": 7,
+          "prompt": "Why you didn't call me?",
+          "answer": "Why didn't you call me?"
+        },
+        {
+          "number": 8,
+          "prompt": "Do you can swim?",
+          "answer": "Can you swim?"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Где ты работаешь?",
+          "answer": "Where do you work?"
+        },
+        {
+          "number": 2,
+          "prompt": "Во сколько начинается встреча?",
+          "answer": "What time does the meeting start? / What time does the meeting begin?"
+        },
+        {
+          "number": 3,
+          "prompt": "Почему ты вчера не пришёл?",
+          "answer": "Why didn't you come yesterday?"
+        },
+        {
+          "number": 4,
+          "prompt": "Кто написал этот код?",
+          "answer": "Who wrote this code?"
+        },
+        {
+          "number": 5,
+          "prompt": "Как часто ты ездишь в командировки?",
+          "answer": "How often do you go on business trips? / How often do you travel for work?"
+        },
+        {
+          "number": 6,
+          "prompt": "Что ты ищешь?",
+          "answer": "What are you looking for?"
+        },
+        {
+          "number": 7,
+          "prompt": "Сколько стоит билет до Берлина?",
+          "answer": "How much does a ticket to Berlin cost? / How much is a ticket to Berlin?"
+        },
+        {
+          "number": 8,
+          "prompt": "Ты когда-нибудь был в Лондоне?",
+          "answer": "Have you ever been to London?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "id": "g017",
+  "position": 17,
+  "cefrLevel": "B1",
+  "title": "Present Perfect или Past Simple",
+  "plannedFrom": "2026-11-09",
+  "plannedTo": "2026-11-11",
+  "sections": {
+    "why": [
+      "Оба времени говорят о прошлом, но по-разному. Past Simple называет законченное событие в конкретное время в прошлом. Present Perfect говорит о прошлом, которое важно сейчас, и время не названо. В русском такого различия в формах нет, поэтому выбор приходится делать по смыслу."
+    ],
+    "formation": [
+      "• Past Simple: V2 (вторая форма), в вопросах и отрицаниях did/didn't + V1. I worked, Did you work?, I didn't work.",
+      "• Present Perfect: have/has + V3 (третья форма). I have worked, Have you worked?, I haven't worked."
+    ],
+    "usage": [
+      "1. Past Simple, если время названо или понятно из контекста.",
+      "• I saw him yesterday. (Я видел его вчера.)",
+      "• We moved here in 2019. (Мы переехали сюда в 2019 году.)",
+      "2. Past Simple для рассказа о последовательности событий в прошлом.",
+      "• I got up, had breakfast and went to work. (Я встал, позавтракал и пошёл на работу.)",
+      "3. Present Perfect, если время не названо, а важен результат или опыт сейчас.",
+      "• I have lost my keys. (Я потерял ключи, их нет у меня сейчас.)",
+      "• She has visited Rome three times. (Она бывала в Риме три раза.)",
+      "4. Present Perfect для незаконченного периода (today, this week, this year), пока он ещё идёт.",
+      "• I have had three coffees today. (Сегодня я выпил три кофе, день ещё не кончился.)",
+      "5. Типичная схема разговора: Present Perfect открывает тему, Past Simple даёт подробности.",
+      "• Have you been to Paris? Yes, I went there last summer. (Ты был в Париже? Да, я ездил туда прошлым летом.)"
+    ],
+    "signalWords": [
+      "Past Simple: yesterday, last week, in 2020, two days ago, when I was a child, at 5 o'clock, What time...?, When...?",
+      "Present Perfect: ever, never, just, already, yet, so far, recently, lately, since, for, today, this week."
+    ],
+    "mistakes": [
+      "✗ I have seen him yesterday. → ✓ I saw him yesterday. Yesterday называет конкретное время, нужен Past Simple.",
+      "✗ When have you arrived? → ✓ When did you arrive? Вопрос When требует Past Simple.",
+      "✗ I lost my keys last week and I can't find them. → ✓ I have lost my keys and I can't find them. Если важен результат сейчас, а время не нужно, берём Present Perfect.",
+      "✗ Did you ever try sushi? → ✓ Have you ever tried sushi? Опыт в течение всей жизни выражаем Present Perfect (в американском разговорном Did you ever... встречается, но на этом уровне держимся Present Perfect).",
+      "✗ She has died in 2010. → ✓ She died in 2010. Закончившееся событие с датой всегда Past Simple."
+    ],
+    "remember": [
+      "Есть конкретное время в прошлом (yesterday, in 2020, ago) = Past Simple; нет времени, но важен результат или опыт = Present Perfect."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Выберите правильную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I (a) saw (b) have seen that film last night.",
+          "answer": "a / saw"
+        },
+        {
+          "number": 2,
+          "prompt": "She (a) has worked (b) worked here since 2019.",
+          "answer": "a / has worked"
+        },
+        {
+          "number": 3,
+          "prompt": "(a) Did you finish (b) Have you finished the report yet?",
+          "answer": "b / Have you finished"
+        },
+        {
+          "number": 4,
+          "prompt": "We (a) went (b) have gone to Spain in 2018.",
+          "answer": "a / went"
+        },
+        {
+          "number": 5,
+          "prompt": "He (a) has just left (b) just left, so you can catch him.",
+          "answer": "a / has just left"
+        },
+        {
+          "number": 6,
+          "prompt": "Shakespeare (a) wrote (b) has written many plays.",
+          "answer": "a / wrote"
+        },
+        {
+          "number": 7,
+          "prompt": "I (a) haven't had (b) didn't have lunch today, so I'm hungry.",
+          "answer": "a / haven't had"
+        },
+        {
+          "number": 8,
+          "prompt": "When (a) did you buy (b) have you bought this laptop?",
+          "answer": "a / did you buy"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Поставьте глагол в Present Perfect или Past Simple",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (visit) Prague three times in my life.",
+          "answer": "have visited"
+        },
+        {
+          "number": 2,
+          "prompt": "We ___ (meet) at a conference two years ago.",
+          "answer": "met"
+        },
+        {
+          "number": 3,
+          "prompt": "She ___ (lose) her phone, so she can't call you now.",
+          "answer": "has lost"
+        },
+        {
+          "number": 4,
+          "prompt": "They ___ (not / see) each other since March.",
+          "answer": "haven't seen"
+        },
+        {
+          "number": 5,
+          "prompt": "I ___ (get up) at 7 o'clock this morning.",
+          "answer": "got up"
+        },
+        {
+          "number": 6,
+          "prompt": "___ you ever ___ (try) Georgian food?",
+          "answer": "Have / tried"
+        },
+        {
+          "number": 7,
+          "prompt": "He ___ (finish) university in 2015.",
+          "answer": "finished"
+        },
+        {
+          "number": 8,
+          "prompt": "___ you ___ (see) the news yet?",
+          "answer": "Have / seen"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Задайте вопрос к выделенной части (начните с данного слова)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He bought a new car last month. (When ...?)",
+          "answer": "When did he buy a new car?"
+        },
+        {
+          "number": 2,
+          "prompt": "They have lived in Poland for four years. (How long ...?)",
+          "answer": "How long have they lived in Poland?"
+        },
+        {
+          "number": 3,
+          "prompt": "She went to the cinema yesterday. (Where ...?)",
+          "answer": "Where did she go yesterday?"
+        },
+        {
+          "number": 4,
+          "prompt": "I have been to Canada. (Have ...?)",
+          "answer": "Have you been to Canada?"
+        },
+        {
+          "number": 5,
+          "prompt": "We ate pizza for dinner. (What ...?)",
+          "answer": "What did you eat for dinner? / What did we eat for dinner?"
+        },
+        {
+          "number": 6,
+          "prompt": "He has already called the client. (Has ...?)",
+          "answer": "Has he called the client yet? / Has he already called the client?"
+        },
+        {
+          "number": 7,
+          "prompt": "She lived in London in 2015. (Did ...?)",
+          "answer": "Did she live in London in 2015?"
+        },
+        {
+          "number": 8,
+          "prompt": "I have read this book. (Have ...?)",
+          "answer": "Have you read this book?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have seen her yesterday.",
+          "answer": "I saw her yesterday."
+        },
+        {
+          "number": 2,
+          "prompt": "When have you come back from Italy?",
+          "answer": "When did you come back from Italy?"
+        },
+        {
+          "number": 3,
+          "prompt": "Did you ever visit London?",
+          "answer": "Have you ever visited London? / Have you ever been to London?"
+        },
+        {
+          "number": 4,
+          "prompt": "She has moved to Berlin in 2020.",
+          "answer": "She moved to Berlin in 2020."
+        },
+        {
+          "number": 5,
+          "prompt": "I didn't finish my work yet.",
+          "answer": "I haven't finished my work yet."
+        },
+        {
+          "number": 6,
+          "prompt": "We have met two weeks ago.",
+          "answer": "We met two weeks ago."
+        },
+        {
+          "number": 7,
+          "prompt": "I lost my wallet last week and now I have no money.",
+          "answer": "I have lost my wallet and now I have no money."
+        },
+        {
+          "number": 8,
+          "prompt": "He worked here since 2018.",
+          "answer": "He has worked here since 2018."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я потерял пропуск, помоги мне найти его.",
+          "answer": "I have lost my pass, help me find it. / I've lost my pass, please help me find it."
+        },
+        {
+          "number": 2,
+          "prompt": "Вчера мы закончили проект.",
+          "answer": "We finished the project yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "Ты когда-нибудь работал в стартапе?",
+          "answer": "Have you ever worked at a startup? / Have you ever worked for a startup?"
+        },
+        {
+          "number": 4,
+          "prompt": "Когда ты начал изучать программирование?",
+          "answer": "When did you start learning programming? / When did you start to learn programming?"
+        },
+        {
+          "number": 5,
+          "prompt": "Сегодня я уже выпил три чашки кофе.",
+          "answer": "I have already had three cups of coffee today. / I've had three cups of coffee today."
+        },
+        {
+          "number": 6,
+          "prompt": "Мы переехали в Киев в 2020 году.",
+          "answer": "We moved to Kyiv in 2020."
+        },
+        {
+          "number": 7,
+          "prompt": "Она ещё не ответила на моё письмо.",
+          "answer": "She hasn't answered my email yet. / She hasn't replied to my email yet."
+        },
+        {
+          "number": 8,
+          "prompt": "В прошлом году я ездил в Турцию.",
+          "answer": "I went to Turkey last year. / Last year I went to Turkey."
+        }
+      ]
+    }
+  ]
+}

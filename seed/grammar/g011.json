@@ -1,0 +1,274 @@
+{
+  "id": "g011",
+  "position": 11,
+  "cefrLevel": "A2",
+  "title": "Притяжательные и возвратные местоимения: my/mine, 's, myself",
+  "plannedFrom": "2026-10-29",
+  "plannedTo": "2026-10-29",
+  "sections": {
+    "why": [
+      "Русское «мой» подходит для всего, а в английском есть my (перед существительным) и mine (само по себе), плюс 's для «чьё-то» и myself, когда действие возвращается к тому, кто его делает. Эти слова встречаются в каждом диалоге, поэтому ошибки с ними сразу заметны."
+    ],
+    "formation": [
+      "• Притяжательные прилагательные (всегда перед существительным): my, your, his, her, its, our, their. Пример: my laptop, her team.",
+      "• Притяжательные местоимения (без существительного): mine, yours, his, hers, ours, theirs. Пример: This laptop is mine.",
+      "• Притяжательный падеж: существительное + 's (Anna's phone). Если слово во множественном числе на -s, ставим только апостроф (the managers' room). Неправильное множественное число берёт 's (children's, women's).",
+      "• Возвратные: myself, yourself, himself, herself, itself, ourselves, yourselves, themselves (в единственном числе -self, во множественном -selves)."
+    ],
+    "usage": [
+      "1. my, your, his... вместо артикля, когда речь о принадлежности: I lost my keys. (Я потерял ключи.) She cut her hair. (Она подстриглась.) Русский часто опускает «свой», английский — нет.",
+      "2. mine, yours и т. д. без существительного: Is this pen yours? — No, it's mine. (Эта ручка твоя? — Нет, моя.)",
+      "3. 's для людей и животных: my boss's office (кабинет моего начальника). Для вещей чаще of: the end of the day.",
+      "4. a friend of mine / a colleague of hers — «один из моих друзей / её коллег».",
+      "5. Возвратные, когда подлежащее и объект — один и тот же человек: I cut myself. (Я порезался.) She taught herself Python. (Она сама выучила Python.)",
+      "6. by + -self означает «сам, без помощи»: He fixed the bug by himself. (Он сам исправил баг.) Можно и без by: He fixed it himself."
+    ],
+    "signalWords": [
+      "Whose...? (Чей?): Whose bag is this? — It's Tom's. / It's his.",
+      "by myself / by yourself... (самостоятельно, в одиночку)."
+    ],
+    "mistakes": [
+      "✗ It's my. → ✓ It's mine. Без существительного нужна форма mine.",
+      "✗ The dog wagged it's tail. → ✓ its tail. It's = it is, а притяжательное its пишется без апострофа.",
+      "✗ Anna friend is here. → ✓ Anna's friend is here. Владельца показывает 's.",
+      "✗ I feel myself tired. → ✓ I feel tired. В русском «чувствую себя», в английском feel -self не требует.",
+      "✗ He took off the jacket. → ✓ He took off his jacket. Принадлежность нужно показать.",
+      "✗ a friend of me → ✓ a friend of mine. После of нужна форма mine, yours, hers."
+    ],
+    "remember": [
+      "Перед существительным my, без существительного mine; 's показывает владельца; -self возвращает действие на самого себя."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте my, your, his, her, its, our или their",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She left ___ phone at home. (she)",
+          "answer": "her"
+        },
+        {
+          "number": 2,
+          "prompt": "We love ___ new office. (we)",
+          "answer": "our"
+        },
+        {
+          "number": 3,
+          "prompt": "The cat is licking ___ paws. (it)",
+          "answer": "its"
+        },
+        {
+          "number": 4,
+          "prompt": "Do you know ___ manager's name? (you)",
+          "answer": "your"
+        },
+        {
+          "number": 5,
+          "prompt": "They sold ___ car last year. (they)",
+          "answer": "their"
+        },
+        {
+          "number": 6,
+          "prompt": "He is proud of ___ son. (he)",
+          "answer": "his"
+        },
+        {
+          "number": 7,
+          "prompt": "I forgot ___ password again. (I)",
+          "answer": "my"
+        },
+        {
+          "number": 8,
+          "prompt": "Jack and I finished ___ project yesterday. (we)",
+          "answer": "our"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This desk isn't yours. It's (a) my (b) mine.",
+          "answer": "(b) mine"
+        },
+        {
+          "number": 2,
+          "prompt": "Is that (a) your (b) yours laptop?",
+          "answer": "(a) your"
+        },
+        {
+          "number": 3,
+          "prompt": "We painted the wall (a) us (b) ourselves.",
+          "answer": "(b) ourselves"
+        },
+        {
+          "number": 4,
+          "prompt": "Our team is bigger than (a) their (b) theirs.",
+          "answer": "(b) theirs"
+        },
+        {
+          "number": 5,
+          "prompt": "I can't find (a) my (b) mine headphones.",
+          "answer": "(a) my"
+        },
+        {
+          "number": 6,
+          "prompt": "He fixed the bug (a) himself (b) him.",
+          "answer": "(a) himself"
+        },
+        {
+          "number": 7,
+          "prompt": "Is this umbrella (a) your (b) yours?",
+          "answer": "(b) yours"
+        },
+        {
+          "number": 8,
+          "prompt": "The cat cleaned (a) itself (b) its.",
+          "answer": "(a) itself"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, используя 's или апостроф (')",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The car of my brother is new.",
+          "answer": "My brother's car is new."
+        },
+        {
+          "number": 2,
+          "prompt": "The room of the children is small.",
+          "answer": "The children's room is small."
+        },
+        {
+          "number": 3,
+          "prompt": "The offices of the managers are on the second floor.",
+          "answer": "The managers' offices are on the second floor."
+        },
+        {
+          "number": 4,
+          "prompt": "The birthday of Anna is on Friday.",
+          "answer": "Anna's birthday is on Friday."
+        },
+        {
+          "number": 5,
+          "prompt": "The laptop of my boss is expensive.",
+          "answer": "My boss's laptop is expensive. / My boss' laptop is expensive."
+        },
+        {
+          "number": 6,
+          "prompt": "The phone of James is broken.",
+          "answer": "James's phone is broken. / James' phone is broken."
+        },
+        {
+          "number": 7,
+          "prompt": "The meeting of the team starts at ten.",
+          "answer": "The team's meeting starts at ten."
+        },
+        {
+          "number": 8,
+          "prompt": "The toys of the kids are everywhere.",
+          "answer": "The kids' toys are everywhere."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку в предложении",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This bag is my.",
+          "answer": "This bag is mine."
+        },
+        {
+          "number": 2,
+          "prompt": "The dog is eating it's food.",
+          "answer": "The dog is eating its food."
+        },
+        {
+          "number": 3,
+          "prompt": "I met a friend of me yesterday.",
+          "answer": "I met a friend of mine yesterday."
+        },
+        {
+          "number": 4,
+          "prompt": "I feel myself very tired today.",
+          "answer": "I feel very tired today."
+        },
+        {
+          "number": 5,
+          "prompt": "She cut the hair last week.",
+          "answer": "She cut her hair last week."
+        },
+        {
+          "number": 6,
+          "prompt": "Anna friend works in our office.",
+          "answer": "Anna's friend works in our office."
+        },
+        {
+          "number": 7,
+          "prompt": "The womens' room is on the left.",
+          "answer": "The women's room is on the left."
+        },
+        {
+          "number": 8,
+          "prompt": "He did the whole project him.",
+          "answer": "He did the whole project himself. / He did the whole project by himself."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Это не мой ноутбук, это его.",
+          "answer": "This is not my laptop, it's his. / It's not my laptop, it's his."
+        },
+        {
+          "number": 2,
+          "prompt": "Чья это куртка? — Моя.",
+          "answer": "Whose jacket is this? — It's mine."
+        },
+        {
+          "number": 3,
+          "prompt": "Я сам написал этот код.",
+          "answer": "I wrote this code myself. / I wrote this code by myself."
+        },
+        {
+          "number": 4,
+          "prompt": "Офис нашего менеджера на третьем этаже.",
+          "answer": "Our manager's office is on the third floor."
+        },
+        {
+          "number": 5,
+          "prompt": "Она познакомила меня со своей подругой.",
+          "answer": "She introduced me to a friend of hers. / She introduced me to her friend."
+        },
+        {
+          "number": 6,
+          "prompt": "Дети сами убрали свои игрушки.",
+          "answer": "The children put away their toys themselves. / The children put away their toys by themselves. / The kids put away their toys themselves."
+        },
+        {
+          "number": 7,
+          "prompt": "Они продали свою компанию.",
+          "answer": "They sold their company."
+        },
+        {
+          "number": 8,
+          "prompt": "Будь осторожен, ты можешь пораниться.",
+          "answer": "Be careful, you can hurt yourself. / Be careful, you might hurt yourself."
+        }
+      ]
+    }
+  ]
+}

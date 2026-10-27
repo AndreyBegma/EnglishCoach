@@ -1,0 +1,279 @@
+{
+  "id": "g072",
+  "position": 72,
+  "cefrLevel": "C1",
+  "title": "Регистр: формальный и неформальный английский",
+  "plannedFrom": "2027-10-04",
+  "plannedTo": "2027-10-09",
+  "sections": {
+    "why": [
+      "Одну и ту же мысль можно сказать по-разному в зависимости от того, с кем вы говорите: с другом, коллегой или клиентом. В русском это «ты» и «вы», в английском их нет, и регистр передаётся выбором слов, контракций и структур. Если написать клиенту как другу (Hey, gimme the file!), это прозвучит грубо; если другу написать как в официальном письме, это прозвучит холодно и странно."
+    ],
+    "formation": [
+      "• Неформальный: сокращения (I'm, can't, gonna), короткие фразы, фразовые глаголы (put off, look into), простые слова, междометия (hey, cheers).",
+      "• Формальный: полные формы (I am, cannot), более длинные слова латинского происхождения (postpone, investigate), пассив, вежливые конструкции (Would you mind..., I would be grateful if...).",
+      "• Нейтральный регистр — между ними, подходит для большинства рабочих чатов."
+    ],
+    "usage": [
+      "1. Просьбы:",
+      "• Неформально: Can you send me the file? (Отправь мне файл.)",
+      "• Формально: Could you possibly send me the file? / Would you mind sending me the file? (Не могли бы вы отправить мне файл?)",
+      "2. Слова: фразовый глагол в разговоре, а в письме — одно слово.",
+      "• find out — determine; put off — postpone; turn down — decline; look into — investigate; set up — establish; go up — increase; carry out — conduct; fill in — complete; get — obtain; ask for — request; tell — inform; need — require; buy — purchase; help — assist",
+      "3. Начало и конец письма:",
+      "• Неформально: Hi Tom, / Hey guys, ... Cheers, / See you! / Thanks a bunch!",
+      "• Формально: Dear Mr. Smith, / Dear Sir or Madam, ... Yours sincerely, (если знаете имя) / Yours faithfully, (если не знаете) / Kind regards,",
+      "4. Типовые формальные фразы:",
+      "• I am writing to enquire about... / regarding... (Пишу, чтобы узнать о... / по поводу...)",
+      "• Please find the report attached. (Во вложении вы найдёте отчёт.)",
+      "• I apologize for the delay. (Приношу извинения за задержку.)",
+      "• Unfortunately, we are unable to... (К сожалению, мы не можем...)",
+      "• Thank you for your assistance. (Благодарю за помощь.)"
+    ],
+    "signalWords": [
+      "Формальные: regarding, furthermore, therefore, would like to, I would appreciate, kindly. Неформальные: hey, guys, stuff, kind of, gotta, cheers, no worries, ASAP."
+    ],
+    "mistakes": [
+      "✗ Dear Mr. Smith, Hi! Can u send the docs? → ✓ Dear Mr. Smith, Could you please send the documents? (смесь регистров в одном письме)",
+      "✗ I want a refund. → ✓ I would like to request a refund. (want звучит слишком резко)",
+      "✗ I'm writing to you for ask information → ✓ I am writing to enquire about... (после writing to нужен глагол без for)",
+      "✗ Yours faithfully, Mr. Smith (письмо начиналось с Dear Mr. Smith) → ✓ Yours sincerely, (faithfully только после Dear Sir or Madam)",
+      "✗ We can't accept it (в формальном контракте) → ✓ We cannot accept it"
+    ],
+    "remember": [
+      "Чем дальше собеседник и выше ставки, тем длиннее слова, полнее формы и мягче просьба."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Выберите более формальный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Could you possibly tell me where the office is? (b) Where's the office?",
+          "answer": "(a)"
+        },
+        {
+          "number": 2,
+          "prompt": "(a) I'm writing to ask about the job. (b) I am writing to enquire about the position.",
+          "answer": "(b)"
+        },
+        {
+          "number": 3,
+          "prompt": "(a) Thanks a bunch! (b) Thank you very much.",
+          "answer": "(b)"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Hi guys, (b) Dear Sir or Madam,",
+          "answer": "(b)"
+        },
+        {
+          "number": 5,
+          "prompt": "(a) We regret to inform you that your application was unsuccessful. (b) Sorry, but you didn't get the job.",
+          "answer": "(a)"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Cheers, (b) Yours faithfully,",
+          "answer": "(b)"
+        },
+        {
+          "number": 7,
+          "prompt": "(a) I would appreciate your prompt reply. (b) Write back ASAP!",
+          "answer": "(a)"
+        },
+        {
+          "number": 8,
+          "prompt": "(a) We cannot accept this proposal. (b) We can't accept this proposal.",
+          "answer": "(a)"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Вставьте формальное слово вместо неформального (в скобках)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "We need to ___ (get) approval from the manager.",
+          "answer": "obtain"
+        },
+        {
+          "number": 2,
+          "prompt": "Please ___ (tell) us of any changes to your address.",
+          "answer": "inform"
+        },
+        {
+          "number": 3,
+          "prompt": "I would like to ___ (ask for) a refund.",
+          "answer": "request"
+        },
+        {
+          "number": 4,
+          "prompt": "This position ___ (need) at least three years of experience.",
+          "answer": "requires"
+        },
+        {
+          "number": 5,
+          "prompt": "We will ___ (start) the project in March.",
+          "answer": "commence"
+        },
+        {
+          "number": 6,
+          "prompt": "Our team will ___ (help) you with the installation.",
+          "answer": "assist"
+        },
+        {
+          "number": 7,
+          "prompt": "The company intends to ___ (buy) a new building.",
+          "answer": "purchase"
+        },
+        {
+          "number": 8,
+          "prompt": "Thank you for your ___ (help).",
+          "answer": "assistance"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение в формальном регистре, используя подсказку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Can you send me your CV? (Would you mind...)",
+          "answer": "Would you mind sending me your CV?"
+        },
+        {
+          "number": 2,
+          "prompt": "I want to book a room. (I would like...)",
+          "answer": "I would like to book a room."
+        },
+        {
+          "number": 3,
+          "prompt": "Tell me the price. (Could you...)",
+          "answer": "Could you tell me the price? / Could you please tell me the price?"
+        },
+        {
+          "number": 4,
+          "prompt": "Sorry I'm late. (I apologize for...)",
+          "answer": "I apologize for being late."
+        },
+        {
+          "number": 5,
+          "prompt": "Thanks for your help. (...your assistance)",
+          "answer": "Thank you for your assistance."
+        },
+        {
+          "number": 6,
+          "prompt": "We can't give you a refund. (Unfortunately, we are unable...)",
+          "answer": "Unfortunately, we are unable to give you a refund. / Unfortunately, we are unable to provide you with a refund."
+        },
+        {
+          "number": 7,
+          "prompt": "What's your phone number? (Could you give me...)",
+          "answer": "Could you give me your phone number? / Could you give me your phone number, please?"
+        },
+        {
+          "number": 8,
+          "prompt": "I'm writing about my order. (regarding)",
+          "answer": "I am writing regarding my order."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Замените фразовый глагол на более формальное слово (в скобках)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "We had to put off the meeting. (postpone)",
+          "answer": "We had to postpone the meeting."
+        },
+        {
+          "number": 2,
+          "prompt": "The manager turned down my request. (decline)",
+          "answer": "The manager declined my request."
+        },
+        {
+          "number": 3,
+          "prompt": "We will look into the problem. (investigate)",
+          "answer": "We will investigate the problem."
+        },
+        {
+          "number": 4,
+          "prompt": "The company set up a new branch. (establish)",
+          "answer": "The company established a new branch."
+        },
+        {
+          "number": 5,
+          "prompt": "Prices have gone up this year. (increase)",
+          "answer": "Prices have increased this year."
+        },
+        {
+          "number": 6,
+          "prompt": "They carried out a survey. (conduct)",
+          "answer": "They conducted a survey."
+        },
+        {
+          "number": 7,
+          "prompt": "Please fill in the form. (complete)",
+          "answer": "Please complete the form."
+        },
+        {
+          "number": 8,
+          "prompt": "The engineers found out the cause. (determine)",
+          "answer": "The engineers determined the cause."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Не могли бы вы отправить мне договор до пятницы?",
+          "answer": "Could you send me the contract by Friday? / Would you be able to send me the contract by Friday?"
+        },
+        {
+          "number": 2,
+          "prompt": "Привет! Как дела? Давно не виделись.",
+          "answer": "Hi! How's it going? Long time no see. / Hi! How are you? Long time no see."
+        },
+        {
+          "number": 3,
+          "prompt": "Прошу прощения за задержку с ответом.",
+          "answer": "I apologize for the delay in replying. / I apologize for the delay in my response."
+        },
+        {
+          "number": 4,
+          "prompt": "Мне надо бежать, увидимся позже!",
+          "answer": "I gotta run, see you later! / I have to run, see you later!"
+        },
+        {
+          "number": 5,
+          "prompt": "Я пишу, чтобы узнать о вакансии разработчика.",
+          "answer": "I am writing to enquire about the developer position. / I am writing to inquire about the developer position."
+        },
+        {
+          "number": 6,
+          "prompt": "К сожалению, мы вынуждены отклонить ваше предложение.",
+          "answer": "Unfortunately, we are unable to accept your offer. / Unfortunately, we have to decline your offer."
+        },
+        {
+          "number": 7,
+          "prompt": "Эй, не мог бы ты помочь мне с этим багом?",
+          "answer": "Hey, could you help me with this bug? / Hey, can you help me with this bug?"
+        },
+        {
+          "number": 8,
+          "prompt": "Во вложении вы найдёте отчёт.",
+          "answer": "Please find the report attached. / Please find attached the report."
+        }
+      ]
+    }
+  ]
+}

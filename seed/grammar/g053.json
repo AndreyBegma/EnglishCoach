@@ -1,0 +1,276 @@
+{
+  "id": "g053",
+  "position": 53,
+  "cefrLevel": "C1",
+  "title": "Инверсия после отрицательных наречий: Never, Rarely, Hardly…when, No sooner…than",
+  "plannedFrom": "2027-05-24",
+  "plannedTo": "2027-05-29",
+  "sections": {
+    "why": [
+      "Инверсия — это обратный порядок слов, как в вопросе. Когда в начало предложения выносится слово с отрицательным или ограничительным значением (never, rarely), фраза звучит эмоциональнее и более книжно. Это письменная, формальная и ораторская речь; в русском похожий эффект даёт «Никогда ещё я не видел...»."
+    ],
+    "formation": [
+      "Обычно: I have never seen it. С инверсией:",
+      "Наречие + вспомогательный глагол + подлежащее + основной глагол",
+      "• Never have I seen such a mess. (have I, а не I have)",
+      "• Rarely does she miss a deadline. (does + базовая форма: miss)",
+      "• Seldom did we meet. (did + базовая форма)",
+      "• Hardly had I sat down when the phone rang. (had + V3, потом when)",
+      "• No sooner had we arrived than it started to rain. (had + V3, потом than)",
+      "Если вспомогательного глагола нет (Present Simple, Past Simple), добавляем do / does / did. С глаголом be он просто выходит вперёд: Rarely is he late.",
+      "Отрицание в сам глагол не добавляем: Never did I see (а не Never did I not see)."
+    ],
+    "usage": [
+      "1. Never / Never before — «никогда»: Never before had I felt so nervous. (Никогда раньше я не нервничал так сильно.)",
+      "2. Rarely / Seldom — «редко»: Seldom do they complain. (Они редко жалуются.)",
+      "3. Hardly ... when — «едва..., как»: Hardly had she closed the file when the app crashed. (Едва она закрыла файл, как приложение упало.)",
+      "4. No sooner ... than — «не успел..., как»: No sooner had he left than it began to snow. (Не успел он уйти, как пошёл снег.)",
+      "В пунктах 3 и 4 событие, о котором говорится сразу после had + V3, произошло первым, а то, что идёт после when / than, — вторым."
+    ],
+    "signalWords": [
+      "Never, never before, rarely, seldom, hardly, scarcely, no sooner. Парочки: hardly ... when, no sooner ... than."
+    ],
+    "mistakes": [
+      "✗ Never I have seen it → ✓ Never have I seen it (после наречия идёт вспомогательный глагол)",
+      "✗ Rarely he goes there → ✓ Rarely does he go there (нужен does, а глагол без -es)",
+      "✗ No sooner had he arrived when... → ✓ No sooner had he arrived than... (no sooner дружит с than)",
+      "✗ Hardly had she left than... → ✓ Hardly had she left when... (hardly дружит с when)",
+      "✗ Never did I saw → ✓ Never did I see (после did глагол в первой форме)"
+    ],
+    "remember": [
+      "Отрицательное слово вперёд, потом вспомогательный глагол, потом подлежащее; а в паре hardly — when, no sooner — than."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте вспомогательный глагол",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Never ___ I seen such a beautiful view.",
+          "answer": "have"
+        },
+        {
+          "number": 2,
+          "prompt": "Rarely ___ he work on weekends.",
+          "answer": "does"
+        },
+        {
+          "number": 3,
+          "prompt": "Seldom ___ they eat out.",
+          "answer": "do"
+        },
+        {
+          "number": 4,
+          "prompt": "Hardly ___ she sat down when the phone rang.",
+          "answer": "had"
+        },
+        {
+          "number": 5,
+          "prompt": "No sooner ___ we arrived than it started to rain.",
+          "answer": "had"
+        },
+        {
+          "number": 6,
+          "prompt": "Never before ___ I felt so tired.",
+          "answer": "have"
+        },
+        {
+          "number": 7,
+          "prompt": "Rarely ___ our team miss a deadline.",
+          "answer": "does"
+        },
+        {
+          "number": 8,
+          "prompt": "Never ___ I imagine it would be this hard.",
+          "answer": "did"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильное предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Rarely he checks his email. (b) Rarely does he check his email.",
+          "answer": "(b) Rarely does he check his email."
+        },
+        {
+          "number": 2,
+          "prompt": "(a) Hardly had I closed the app when it crashed. (b) Hardly had I closed the app than it crashed.",
+          "answer": "(a) Hardly had I closed the app when it crashed."
+        },
+        {
+          "number": 3,
+          "prompt": "(a) No sooner had she left than he arrived. (b) No sooner she had left than he arrived.",
+          "answer": "(a) No sooner had she left than he arrived."
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Seldom we go to the cinema. (b) Seldom do we go to the cinema.",
+          "answer": "(b) Seldom do we go to the cinema."
+        },
+        {
+          "number": 5,
+          "prompt": "(a) Never did I expect this result. (b) Never I expected this result.",
+          "answer": "(a) Never did I expect this result."
+        },
+        {
+          "number": 6,
+          "prompt": "(a) No sooner had he finished when the boss called. (b) No sooner had he finished than the boss called.",
+          "answer": "(b) No sooner had he finished than the boss called."
+        },
+        {
+          "number": 7,
+          "prompt": "(a) Rarely has the site been so slow. (b) Rarely the site has been so slow.",
+          "answer": "(a) Rarely has the site been so slow."
+        },
+        {
+          "number": 8,
+          "prompt": "(a) Hardly did they arrive when it started to snow. (b) Hardly had they arrived when it started to snow.",
+          "answer": "(b) Hardly had they arrived when it started to snow."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, начав с выделенного слова",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have never seen such a big server room. → Never ...",
+          "answer": "Never have I seen such a big server room."
+        },
+        {
+          "number": 2,
+          "prompt": "She rarely goes to bed late. → Rarely ...",
+          "answer": "Rarely does she go to bed late."
+        },
+        {
+          "number": 3,
+          "prompt": "He had hardly started when the lights went out. → Hardly ...",
+          "answer": "Hardly had he started when the lights went out."
+        },
+        {
+          "number": 4,
+          "prompt": "We had no sooner left than it began to rain. → No sooner ...",
+          "answer": "No sooner had we left than it began to rain."
+        },
+        {
+          "number": 5,
+          "prompt": "They seldom complain. → Seldom ...",
+          "answer": "Seldom do they complain."
+        },
+        {
+          "number": 6,
+          "prompt": "I had never been so nervous before. → Never before ...",
+          "answer": "Never before had I been so nervous."
+        },
+        {
+          "number": 7,
+          "prompt": "The manager rarely makes mistakes. → Rarely ...",
+          "answer": "Rarely does the manager make mistakes."
+        },
+        {
+          "number": 8,
+          "prompt": "I have rarely felt so relaxed. → Rarely ...",
+          "answer": "Rarely have I felt so relaxed."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Вставьте слово или расставьте слова по порядку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "No sooner had I sat down ___ the phone rang.",
+          "answer": "than"
+        },
+        {
+          "number": 2,
+          "prompt": "Hardly had we started ___ it began to rain.",
+          "answer": "when"
+        },
+        {
+          "number": 3,
+          "prompt": "No sooner had she sent the email ___ she regretted it.",
+          "answer": "than"
+        },
+        {
+          "number": 4,
+          "prompt": "Hardly had the meeting begun ___ the Wi-Fi stopped working.",
+          "answer": "when"
+        },
+        {
+          "number": 5,
+          "prompt": "Put in order: rarely / does / late / he / arrive",
+          "answer": "Rarely does he arrive late."
+        },
+        {
+          "number": 6,
+          "prompt": "Put in order: had / never / I / so / been / tired / before",
+          "answer": "Never had I been so tired before."
+        },
+        {
+          "number": 7,
+          "prompt": "Put in order: seldom / we / do / see / each other",
+          "answer": "Seldom do we see each other."
+        },
+        {
+          "number": 8,
+          "prompt": "Put in order: sooner / no / we / had / arrived / than / it / started / to snow",
+          "answer": "No sooner had we arrived than it started to snow."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Никогда я не видел такого красивого города.",
+          "answer": "Never have I seen such a beautiful city."
+        },
+        {
+          "number": 2,
+          "prompt": "Он редко опаздывает на работу.",
+          "answer": "Rarely is he late for work. / Rarely does he arrive late for work."
+        },
+        {
+          "number": 3,
+          "prompt": "Едва мы приехали в отель, как начался дождь.",
+          "answer": "Hardly had we arrived at the hotel when it started to rain. / No sooner had we arrived at the hotel than it started to rain."
+        },
+        {
+          "number": 4,
+          "prompt": "Не успел он нажать кнопку, как программа зависла.",
+          "answer": "No sooner had he pressed the button than the program froze. / Hardly had he pressed the button when the program froze."
+        },
+        {
+          "number": 5,
+          "prompt": "Мы редко ужинаем вместе.",
+          "answer": "Rarely do we have dinner together. / Seldom do we have dinner together."
+        },
+        {
+          "number": 6,
+          "prompt": "Никогда раньше я не чувствовал себя таким уставшим.",
+          "answer": "Never before had I felt so tired. / Never had I felt so tired before."
+        },
+        {
+          "number": 7,
+          "prompt": "Она редко проверяет почту по выходным.",
+          "answer": "Rarely does she check her email on weekends. / Seldom does she check her email on weekends."
+        },
+        {
+          "number": 8,
+          "prompt": "Никогда я не думал, что это будет так сложно.",
+          "answer": "Never did I think it would be so difficult. / Never did I think it would be so hard."
+        }
+      ]
+    }
+  ]
+}

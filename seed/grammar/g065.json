@@ -1,0 +1,273 @@
+{
+  "id": "g065",
+  "position": 65,
+  "cefrLevel": "C1",
+  "title": "Сложные формы инфинитива: to have done, to be doing, to have been done",
+  "plannedFrom": "2027-08-16",
+  "plannedTo": "2027-08-21",
+  "sections": {
+    "why": [
+      "Обычный инфинитив (to do) не показывает, когда произошло действие и кто его совершил. Сложные формы добавляют это: to have done (действие уже случилось), to be doing (происходит прямо сейчас), to be done (над подлежащим совершают действие), to have been done (над ним уже совершили). По-русски мы передаём это целыми придаточными («говорят, что он уехал»), а в английском хватает одной формы инфинитива."
+    ],
+    "formation": [
+      "• Continuous: to be + V-ing (to be working). Действие в процессе.",
+      "• Perfect: to have + V3 (to have finished). Действие раньше главного глагола.",
+      "• Passive: to be + V3 (to be told). Действие совершают над подлежащим.",
+      "• Perfect Passive: to have been + V3 (to have been invited). Над подлежащим уже совершили действие.",
+      "• Perfect Continuous: to have been + V-ing (to have been working). Действие длилось до момента речи.",
+      "• Отрицание: not + инфинитив: not to have noticed, not to be invited."
+    ],
+    "usage": [
+      "1. После seem, appear, happen, pretend, claim: He seems to be working hard. (Похоже, он усердно работает.) She seems to have lost her phone. (Кажется, она потеряла телефон.)",
+      "2. После is said / believed / thought / reported / expected: The company is said to have been founded in 1990. (Говорят, компания основана в 1990 году.) The new model is expected to be released in May. (Ожидают, что новая модель выйдет в мае.)",
+      "3. После would like / would love / would hate о нереальном прошлом: I'd like to have gone to the party. (Мне бы хотелось быть на вечеринке; но меня там не было.) I'd love to be there now. (Я бы хотел быть там сейчас.)",
+      "4. Когда подлежащее само получает действие (пассивный инфинитив): She doesn't like to be told what to do. (Она не любит, когда ей говорят, что делать.) He hopes to be promoted. (Он надеется получить повышение.)",
+      "5. После too ... / enough: The kids are too young to be left alone. (Дети слишком малы, чтобы оставаться одни.)"
+    ],
+    "signalWords": [
+      "seem, appear, claim, pretend, be said, be believed, be thought, be reported, be expected, would like, would love, would hate, hope, too ... to. Глаголы состояния (know, like, own) обычно не используются в to be + V-ing: He seems to know the answer (не to be knowing)."
+    ],
+    "mistakes": [
+      "✗ He seems to being tired → ✓ He seems to be tired (после to всегда начальная форма)",
+      "✗ She is said to be left last year → ✓ She is said to have left last year (прошедшее время: have + V3)",
+      "✗ He doesn't like to tell what to do → ✓ He doesn't like to be told what to do (действие совершают над ним)",
+      "✗ He is believed that he lied → ✓ He is believed to have lied / It is believed that he lied (нельзя смешивать две конструкции)",
+      "✗ I'd like to be invited to the wedding last week → ✓ I'd like to have been invited to the wedding last week (прошлое требует perfect)"
+    ],
+    "remember": [
+      "to be doing: сейчас; to have done: раньше; to be done: над ним; to have been done: над ним и уже."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте инфинитив в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He seems ___ (work) hard these days.",
+          "answer": "to be working"
+        },
+        {
+          "number": 2,
+          "prompt": "She appears ___ (forget) about our meeting yesterday.",
+          "answer": "to have forgotten"
+        },
+        {
+          "number": 3,
+          "prompt": "I'd like ___ (invite) to the party, but nobody called me.",
+          "answer": "to have been invited"
+        },
+        {
+          "number": 4,
+          "prompt": "The report is said ___ (write) by an intern.",
+          "answer": "to have been written"
+        },
+        {
+          "number": 5,
+          "prompt": "I'd love ___ (be) there last night.",
+          "answer": "to have been"
+        },
+        {
+          "number": 6,
+          "prompt": "He pretended ___ (sleep) when I came in.",
+          "answer": "to be sleeping / to be asleep"
+        },
+        {
+          "number": 7,
+          "prompt": "She hopes ___ (promote) next year.",
+          "answer": "to be promoted"
+        },
+        {
+          "number": 8,
+          "prompt": "They are believed ___ (leave) the country two days ago.",
+          "answer": "to have left"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is said (a) to work (b) to have worked (c) to be worked in Paris ten years ago.",
+          "answer": "to have worked"
+        },
+        {
+          "number": 2,
+          "prompt": "She seems (a) to be knowing (b) to know (c) to have known the answer right now.",
+          "answer": "to know"
+        },
+        {
+          "number": 3,
+          "prompt": "He doesn't like (a) to tell (b) to be told (c) to have told what to do.",
+          "answer": "to be told"
+        },
+        {
+          "number": 4,
+          "prompt": "She hoped (a) to promote (b) to be promoted (c) to have promoted by the end of the year.",
+          "answer": "to be promoted"
+        },
+        {
+          "number": 5,
+          "prompt": "I'd like (a) to see (b) to have seen (c) seeing the film last night, but I was ill.",
+          "answer": "to have seen"
+        },
+        {
+          "number": 6,
+          "prompt": "The bridge is believed (a) to build (b) to have been built (c) to have built in the 12th century.",
+          "answer": "to have been built"
+        },
+        {
+          "number": 7,
+          "prompt": "It's cold today. I'd love (a) to lie (b) to be lying (c) to have lain on a beach right now.",
+          "answer": "to be lying"
+        },
+        {
+          "number": 8,
+          "prompt": "The patient is expected (a) to release (b) to be released (c) to have released tomorrow.",
+          "answer": "to be released"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите с подлежащим и инфинитивом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It is said that he is a genius.",
+          "answer": "He is said to be a genius."
+        },
+        {
+          "number": 2,
+          "prompt": "It seems that she has lost her phone.",
+          "answer": "She seems to have lost her phone."
+        },
+        {
+          "number": 3,
+          "prompt": "It is believed that the thief entered through the window.",
+          "answer": "The thief is believed to have entered through the window."
+        },
+        {
+          "number": 4,
+          "prompt": "It appears that they are having problems.",
+          "answer": "They appear to be having problems."
+        },
+        {
+          "number": 5,
+          "prompt": "It is reported that the factory was closed last week.",
+          "answer": "The factory is reported to have been closed last week."
+        },
+        {
+          "number": 6,
+          "prompt": "It is expected that the new model will be released in May.",
+          "answer": "The new model is expected to be released in May."
+        },
+        {
+          "number": 7,
+          "prompt": "It seems that he has been working all night.",
+          "answer": "He seems to have been working all night."
+        },
+        {
+          "number": 8,
+          "prompt": "It is thought that the company was founded in 1990.",
+          "answer": "The company is thought to have been founded in 1990."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He seems to being tired.",
+          "answer": "He seems to be tired."
+        },
+        {
+          "number": 2,
+          "prompt": "She claims to be working here since 2020.",
+          "answer": "She claims to have been working here since 2020."
+        },
+        {
+          "number": 3,
+          "prompt": "The document is believed to lose last year.",
+          "answer": "The document is believed to have been lost last year."
+        },
+        {
+          "number": 4,
+          "prompt": "I'd like to have invited to the wedding, but they forgot me.",
+          "answer": "I'd like to have been invited to the wedding, but they forgot me."
+        },
+        {
+          "number": 5,
+          "prompt": "They are said to have been live in London in 2010.",
+          "answer": "They are said to have lived in London in 2010."
+        },
+        {
+          "number": 6,
+          "prompt": "She doesn't like to tell what to do.",
+          "answer": "She doesn't like to be told what to do."
+        },
+        {
+          "number": 7,
+          "prompt": "It's nice to being understood.",
+          "answer": "It's nice to be understood."
+        },
+        {
+          "number": 8,
+          "prompt": "The money seems to steal.",
+          "answer": "The money seems to have been stolen."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Похоже, он работает над этим багом с утра.",
+          "answer": "He seems to have been working on this bug since morning."
+        },
+        {
+          "number": 2,
+          "prompt": "Говорят, что эта компания основана в 1998 году.",
+          "answer": "The company is said to have been founded in 1998."
+        },
+        {
+          "number": 3,
+          "prompt": "Я бы хотел сейчас быть в отпуске.",
+          "answer": "I'd love to be on vacation right now. / I'd like to be on vacation now."
+        },
+        {
+          "number": 4,
+          "prompt": "Мне бы хотелось побывать на вчерашней конференции.",
+          "answer": "I'd like to have attended yesterday's conference. / I would have liked to attend yesterday's conference."
+        },
+        {
+          "number": 5,
+          "prompt": "Он надеется, что его возьмут на эту работу.",
+          "answer": "He hopes to be hired for this job. / He hopes to be offered this job."
+        },
+        {
+          "number": 6,
+          "prompt": "Он, кажется, потерял ключи.",
+          "answer": "He seems to have lost his keys."
+        },
+        {
+          "number": 7,
+          "prompt": "Ожидается, что новая версия будет выпущена в пятницу.",
+          "answer": "The new version is expected to be released on Friday."
+        },
+        {
+          "number": 8,
+          "prompt": "Дети слишком малы, чтобы оставаться одни.",
+          "answer": "The children are too young to be left alone."
+        }
+      ]
+    }
+  ]
+}

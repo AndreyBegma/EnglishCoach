@@ -1,0 +1,276 @@
+{
+  "id": "g055",
+  "position": 55,
+  "cefrLevel": "C1",
+  "title": "Выделительные конструкции: It was… that…, What I need is…",
+  "plannedFrom": "2027-06-07",
+  "plannedTo": "2027-06-12",
+  "sections": {
+    "why": [
+      "В русском мы выделяем главное интонацией или словами «именно», «как раз», «всё, что мне нужно, — это...». В английском интонации мало, поэтому порядок слов перестраивают: Именно Анна починила принтер = It was Anna who fixed the printer. Такие предложения называются cleft sentences («расщеплённые»)."
+    ],
+    "formation": [
+      "1. It + be + выделяемая часть + that / who + остальное предложение:",
+      "• It was Tom who broke the printer. (Именно Том сломал принтер.)",
+      "• It was in 2019 that I started coding. (Именно в 2019 году я начал программировать.)",
+      "2. What + подлежащее + глагол + is / was + выделяемая часть:",
+      "• What I need is a break. (Что мне нужно, так это перерыв.)",
+      "• What annoys me is the noise. (Меня раздражает именно шум.)",
+      "3. All / The thing / The reason + ... + is (that) ...:",
+      "• All I want is a quiet weekend. (Всё, чего я хочу, — это тихие выходные.)",
+      "• The reason I called is that I need your help.",
+      "• All I did was ask a question. (Я всего лишь задал вопрос.)"
+    ],
+    "usage": [
+      "1. Чтобы выделить, КТО сделал: It was my manager who called me. (Именно мой менеджер мне позвонил.)",
+      "2. Чтобы выделить, ГДЕ, КОГДА или ПОЧЕМУ: It was because of the storm that we canceled the trip. (Именно из-за шторма мы отменили поездку.)",
+      "3. Чтобы выделить ЧТО: What I like about this job is the flexibility. (Что мне нравится в этой работе, так это гибкость.)",
+      "4. Чтобы поправить собеседника: It wasn't the design that I disliked, it was the price. (Мне не понравился не дизайн, а цена.)"
+    ],
+    "signalWords": [
+      "It was ... that / who, What ... is, All ... is, The thing is, The reason is, The problem is, The point is. Русские сигналы: «именно», «как раз», «всё, что», «вот что»."
+    ],
+    "mistakes": [
+      "✗ It was Anna what fixed it → ✓ It was Anna who (или that) fixed it (what здесь не нужно)",
+      "✗ What I need it is a break → ✓ What I need is a break (не повторяем it)",
+      "✗ It were the users who found it → ✓ It was the users who found it (после It всегда was / is)",
+      "✗ What I want is that you help me → ✓ What I want is for you to help me",
+      "✗ It was yesterday when I met him → ✓ It was yesterday that I met him (для выделения времени берём that)"
+    ],
+    "remember": [
+      "Хочешь сказать «именно» — начни с It was ... that; хочешь сказать «что мне нужно, так это» — начни с What ... is."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте it, what, who, that, is",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was my manager ___ called me last night.",
+          "answer": "who / that"
+        },
+        {
+          "number": 2,
+          "prompt": "It was in Berlin ___ we first met.",
+          "answer": "that"
+        },
+        {
+          "number": 3,
+          "prompt": "___ I need is a good night's sleep.",
+          "answer": "What"
+        },
+        {
+          "number": 4,
+          "prompt": "___ was the new update that caused the problem.",
+          "answer": "It"
+        },
+        {
+          "number": 5,
+          "prompt": "What annoys me ___ the slow internet.",
+          "answer": "is"
+        },
+        {
+          "number": 6,
+          "prompt": "It was last Friday ___ the server crashed.",
+          "answer": "that"
+        },
+        {
+          "number": 7,
+          "prompt": "All I want ___ a quiet weekend.",
+          "answer": "is"
+        },
+        {
+          "number": 8,
+          "prompt": "___ he said surprised everyone.",
+          "answer": "What"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильное предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) It was Anna who fixed the bug. (b) It was Anna what fixed the bug.",
+          "answer": "(a) It was Anna who fixed the bug."
+        },
+        {
+          "number": 2,
+          "prompt": "(a) What I like is working from home. (b) What I like it is working from home.",
+          "answer": "(a) What I like is working from home."
+        },
+        {
+          "number": 3,
+          "prompt": "(a) It were the users who found the error. (b) It was the users who found the error.",
+          "answer": "(b) It was the users who found the error."
+        },
+        {
+          "number": 4,
+          "prompt": "(a) It was in 2019 that I moved to London. (b) It was in 2019 what I moved to London.",
+          "answer": "(a) It was in 2019 that I moved to London."
+        },
+        {
+          "number": 5,
+          "prompt": "(a) What we need are more time. (b) What we need is more time.",
+          "answer": "(b) What we need is more time."
+        },
+        {
+          "number": 6,
+          "prompt": "(a) The reason I'm calling is that I need your help. (b) The reason I'm calling it is that I need your help.",
+          "answer": "(a) The reason I'm calling is that I need your help."
+        },
+        {
+          "number": 7,
+          "prompt": "(a) All I did was ask a question. (b) All I did it was ask a question.",
+          "answer": "(a) All I did was ask a question."
+        },
+        {
+          "number": 8,
+          "prompt": "(a) It is the design that I don't like. (b) It is the design what I don't like.",
+          "answer": "(a) It is the design that I don't like."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выделите слово конструкцией It was ... that / who",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Tom broke the printer. → It was ...",
+          "answer": "It was Tom who broke the printer. / It was Tom that broke the printer."
+        },
+        {
+          "number": 2,
+          "prompt": "I met her at a conference. → It was ...",
+          "answer": "It was at a conference that I met her."
+        },
+        {
+          "number": 3,
+          "prompt": "We launched the app in March. → It was ...",
+          "answer": "It was in March that we launched the app."
+        },
+        {
+          "number": 4,
+          "prompt": "The noise woke me up. → It was ...",
+          "answer": "It was the noise that woke me up."
+        },
+        {
+          "number": 5,
+          "prompt": "Sarah wrote this report. → It was ...",
+          "answer": "It was Sarah who wrote this report. / It was Sarah that wrote this report."
+        },
+        {
+          "number": 6,
+          "prompt": "I lost my phone on the train. → It was ...",
+          "answer": "It was on the train that I lost my phone."
+        },
+        {
+          "number": 7,
+          "prompt": "They canceled the meeting because of the storm. → It was ...",
+          "answer": "It was because of the storm that they canceled the meeting."
+        },
+        {
+          "number": 8,
+          "prompt": "He called me yesterday. → It was ...",
+          "answer": "It was yesterday that he called me."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Перепишите предложение с What ... is или All ... is",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I need a holiday. → What ...",
+          "answer": "What I need is a holiday."
+        },
+        {
+          "number": 2,
+          "prompt": "The slow internet annoys me. → What ...",
+          "answer": "What annoys me is the slow internet."
+        },
+        {
+          "number": 3,
+          "prompt": "I want a simple answer. → What ...",
+          "answer": "What I want is a simple answer."
+        },
+        {
+          "number": 4,
+          "prompt": "She likes the team spirit most. → What ...",
+          "answer": "What she likes most is the team spirit."
+        },
+        {
+          "number": 5,
+          "prompt": "I only want a quiet place to work. → All ...",
+          "answer": "All I want is a quiet place to work."
+        },
+        {
+          "number": 6,
+          "prompt": "We lack time. → What ...",
+          "answer": "What we lack is time."
+        },
+        {
+          "number": 7,
+          "prompt": "I only closed the window. → All ...",
+          "answer": "All I did was close the window. / All I did was to close the window."
+        },
+        {
+          "number": 8,
+          "prompt": "I don't understand why he left. → What ...",
+          "answer": "What I don't understand is why he left."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Это Анна починила принтер.",
+          "answer": "It was Anna who fixed the printer. / It was Anna that fixed the printer."
+        },
+        {
+          "number": 2,
+          "prompt": "Именно в Лондоне мы встретились впервые.",
+          "answer": "It was in London that we first met. / It was in London that we met for the first time."
+        },
+        {
+          "number": 3,
+          "prompt": "Мне сейчас нужен хороший отдых.",
+          "answer": "What I need now is a good rest. / What I need now is a good break."
+        },
+        {
+          "number": 4,
+          "prompt": "Меня раздражает, что встречи такие длинные.",
+          "answer": "What annoys me is that the meetings are so long."
+        },
+        {
+          "number": 5,
+          "prompt": "Всё, чего я хочу, — это спокойный вечер.",
+          "answer": "All I want is a quiet evening."
+        },
+        {
+          "number": 6,
+          "prompt": "Именно из-за этой ошибки приложение упало.",
+          "answer": "It was because of this bug that the app crashed. / It was this bug that crashed the app."
+        },
+        {
+          "number": 7,
+          "prompt": "Чего я не понимаю, так это почему он отказался.",
+          "answer": "What I don't understand is why he refused."
+        },
+        {
+          "number": 8,
+          "prompt": "Именно вчера я узнал о новой вакансии.",
+          "answer": "It was yesterday that I found out about the new job opening. / It was yesterday that I heard about the new job opening."
+        }
+      ]
+    }
+  ]
+}

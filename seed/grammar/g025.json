@@ -1,0 +1,278 @@
+{
+  "id": "g025",
+  "position": 25,
+  "cefrLevel": "B1",
+  "title": "Косвенная речь: утверждения и сдвиг времён",
+  "plannedFrom": "2026-12-07",
+  "plannedTo": "2026-12-09",
+  "sections": {
+    "why": [
+      "Косвенная речь нужна, чтобы передать чужие слова: «Он сказал, что устал». В русском время в такой фразе не меняется («Он сказал: я устал» — «Он сказал, что устал»), а в английском время глагола обычно сдвигается на шаг назад: He said that he was tired."
+    ],
+    "formation": [
+      "• Прямая речь: Tom said, \"I am tired.\"",
+      "• Косвенная речь: Tom said (that) he was tired.",
+      "• Вводные глаголы: said (без дополнения) / told + кого-то (told me). He said he was tired. / He told me he was tired.",
+      "• Сдвиг времён:",
+      "Present Simple → Past Simple: \"I work\" → he said he worked",
+      "Present Continuous → Past Continuous: \"I am working\" → he said he was working",
+      "Present Perfect → Past Perfect: \"I have finished\" → he said he had finished",
+      "Past Simple → Past Perfect: \"I saw it\" → he said he had seen it",
+      "will → would: \"I will help\" → he said he would help",
+      "can → could: \"I can swim\" → he said he could swim",
+      "• Меняются местоимения и слова времени/места: I → he / she, my → his / her, now → then, today → that day, tomorrow → the next day, yesterday → the day before, here → there, this → that."
+    ],
+    "usage": [
+      "1. Пересказ чужих слов, когда вводный глагол в прошедшем времени.",
+      "She said she was busy. (Она сказала, что занята.)",
+      "2. Передача новостей и сообщений от коллег или клиентов.",
+      "The manager told us the meeting would start at ten. (Менеджер сказал нам, что встреча начнётся в десять.)",
+      "3. Если сказанное остаётся верным сейчас, сдвиг можно не делать.",
+      "He said that he lives in Paris. (Он сказал, что живёт в Париже. — и он там до сих пор.)",
+      "4. Если вводный глагол в настоящем (says, tells), время не сдвигается: He says he is tired."
+    ],
+    "signalWords": [
+      "said (that), told me (that), explained, mentioned, added, now → then, today → that day, tomorrow → the next day, yesterday → the day before."
+    ],
+    "mistakes": [
+      "✗ He said me that he was busy. → ✓ He told me that he was busy. / He said that he was busy. (после said нет дополнения, после told оно обязательно)",
+      "✗ She said that she is tired. (в пересказе прошлого) → ✓ She said that she was tired. (сдвигаем время назад)",
+      "✗ He told that he was late. → ✓ He told me that he was late. (после told нужно «кому»)",
+      "✗ She said that she will come. → ✓ She said that she would come. (will → would)",
+      "✗ He said that he saw her yesterday. → ✓ He said that he had seen her the day before. (Past Simple → Past Perfect, yesterday → the day before)"
+    ],
+    "remember": ["Said без «кому», told с «кому», а время делает шаг назад."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "\"I am tired,\" she said. -> She said that she ___ tired.",
+          "answer": "was"
+        },
+        {
+          "number": 2,
+          "prompt": "\"I work in a bank,\" he said. -> He said that he ___ in a bank.",
+          "answer": "worked"
+        },
+        {
+          "number": 3,
+          "prompt": "\"We will help you,\" they said. -> They said that they ___ help me.",
+          "answer": "would"
+        },
+        {
+          "number": 4,
+          "prompt": "\"I can drive,\" Tom said. -> Tom said that he ___ drive.",
+          "answer": "could"
+        },
+        {
+          "number": 5,
+          "prompt": "\"I have finished the report,\" she said. -> She said that she ___ finished the report.",
+          "answer": "had"
+        },
+        {
+          "number": 6,
+          "prompt": "\"I am reading a book,\" he said. -> He said that he ___ reading a book.",
+          "answer": "was"
+        },
+        {
+          "number": 7,
+          "prompt": "\"I visited Rome last year,\" Anna said. -> Anna said that she ___ visited Rome the year before.",
+          "answer": "had"
+        },
+        {
+          "number": 8,
+          "prompt": "\"We live in Kyiv,\" they said. -> They said that they ___ in Kyiv.",
+          "answer": "lived"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He (a) said me (b) told me that he was busy.",
+          "answer": "(b) told me"
+        },
+        {
+          "number": 2,
+          "prompt": "She said that she (a) is (b) was hungry.",
+          "answer": "(b) was"
+        },
+        {
+          "number": 3,
+          "prompt": "The boss (a) told (b) said that the meeting would start at ten.",
+          "answer": "(b) said"
+        },
+        {
+          "number": 4,
+          "prompt": "He said that he (a) will (b) would call me later.",
+          "answer": "(b) would"
+        },
+        {
+          "number": 5,
+          "prompt": "\"I am leaving tomorrow.\" -> She said she was leaving (a) tomorrow (b) the next day.",
+          "answer": "(b) the next day"
+        },
+        {
+          "number": 6,
+          "prompt": "\"I saw him yesterday.\" -> She said she (a) had seen (b) saw him the day before.",
+          "answer": "(a) had seen"
+        },
+        {
+          "number": 7,
+          "prompt": "They (a) told (b) said us that the train was late.",
+          "answer": "(a) told"
+        },
+        {
+          "number": 8,
+          "prompt": "\"I like this place.\" -> He said he liked (a) this (b) that place.",
+          "answer": "(b) that"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение в косвенной речи",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "\"I don't know the answer,\" she said.",
+          "answer": "She said (that) she didn't know the answer."
+        },
+        {
+          "number": 2,
+          "prompt": "\"I will call you tomorrow,\" Mark said to me.",
+          "answer": "Mark told me (that) he would call me the next day."
+        },
+        {
+          "number": 3,
+          "prompt": "\"We are working on a new project,\" they said.",
+          "answer": "They said (that) they were working on a new project."
+        },
+        {
+          "number": 4,
+          "prompt": "\"I have lost my keys,\" he said.",
+          "answer": "He said (that) he had lost his keys."
+        },
+        {
+          "number": 5,
+          "prompt": "\"I can't come to the party,\" Kate said.",
+          "answer": "Kate said (that) she couldn't come to the party."
+        },
+        {
+          "number": 6,
+          "prompt": "\"I bought a new laptop yesterday,\" Ben said.",
+          "answer": "Ben said (that) he had bought a new laptop the day before."
+        },
+        {
+          "number": 7,
+          "prompt": "\"My brother lives in Germany,\" she told me.",
+          "answer": "She told me (that) her brother lived in Germany."
+        },
+        {
+          "number": 8,
+          "prompt": "\"I am going to learn Spanish,\" Olga said to us.",
+          "answer": "Olga told us (that) she was going to learn Spanish."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She said me that she was tired.",
+          "answer": "She told me that she was tired. / She said that she was tired."
+        },
+        {
+          "number": 2,
+          "prompt": "He said that he is hungry. (He spoke an hour ago and is not hungry anymore.)",
+          "answer": "He said that he was hungry."
+        },
+        {
+          "number": 3,
+          "prompt": "They told that they would come.",
+          "answer": "They told me that they would come. / They said that they would come."
+        },
+        {
+          "number": 4,
+          "prompt": "She said that she will help me.",
+          "answer": "She said that she would help me."
+        },
+        {
+          "number": 5,
+          "prompt": "He told me that he saw her the day before.",
+          "answer": "He told me that he had seen her the day before."
+        },
+        {
+          "number": 6,
+          "prompt": "Tom said that he can speak French. (reported in the past)",
+          "answer": "Tom said that he could speak French."
+        },
+        {
+          "number": 7,
+          "prompt": "She said that she was going to call me tomorrow. (reported a day later)",
+          "answer": "She said that she was going to call me the next day. / She said that she was going to call me today."
+        },
+        {
+          "number": 8,
+          "prompt": "I told to him that I was busy.",
+          "answer": "I told him that I was busy."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Он сказал, что устал.",
+          "answer": "He said that he was tired. / He said he was tired."
+        },
+        {
+          "number": 2,
+          "prompt": "Она сказала мне, что работает в банке.",
+          "answer": "She told me that she worked in a bank. / She told me she worked in a bank."
+        },
+        {
+          "number": 3,
+          "prompt": "Менеджер сказал, что встреча начнётся в десять.",
+          "answer": "The manager said that the meeting would start at ten. / The manager said the meeting would start at ten."
+        },
+        {
+          "number": 4,
+          "prompt": "Они сказали нам, что уже закончили проект.",
+          "answer": "They told us that they had already finished the project. / They told us they had already finished the project."
+        },
+        {
+          "number": 5,
+          "prompt": "Мой друг сказал, что не может прийти.",
+          "answer": "My friend said that he couldn't come. / My friend said he couldn't come. / My friend said he could not come."
+        },
+        {
+          "number": 6,
+          "prompt": "Она сказала, что вчера была в Лондоне.",
+          "answer": "She said that she had been in London the day before. / She said she had been in London the day before."
+        },
+        {
+          "number": 7,
+          "prompt": "Он сказал мне, что позвонит завтра.",
+          "answer": "He told me that he would call the next day. / He told me he would call tomorrow."
+        },
+        {
+          "number": 8,
+          "prompt": "Клиент сказал, что ему нравится наш дизайн.",
+          "answer": "The client said that he liked our design. / The client said he liked our design. / The client said that she liked our design."
+        }
+      ]
+    }
+  ]
+}

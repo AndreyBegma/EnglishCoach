@@ -1,0 +1,271 @@
+{
+  "id": "g063",
+  "position": 63,
+  "cefrLevel": "C1",
+  "title": "Номинализация и формальный академический стиль",
+  "plannedFrom": "2027-08-02",
+  "plannedTo": "2027-08-07",
+  "sections": {
+    "why": [
+      "Номинализация — это превращение глагола или прилагательного в существительное: decide → decision, fail → failure. В академических статьях, отчётах и деловых письмах так звучит солидно и сжато: вместо «люди потеряли доверие» пишут «произошла потеря доверия». В русском то же самое называют «отглагольными существительными» (внедрение, рост, отказ)."
+    ],
+    "formation": [
+      "• глагол → существительное через суффиксы: -tion/-sion (introduce → introduction, decide → decision), -ment (develop → development), -al (refuse → refusal, arrive → arrival), -ure (fail → failure), -ence/-ance (depend → dependence, perform → performance), -ing (the meeting)",
+      "• неправильные пары: analyze → analysis, grow → growth, choose → choice, solve → solution, rise → rise (форма та же)",
+      "• прилагательное → существительное: able → ability, different → difference, safe → safety, efficient → efficiency",
+      "• схема: The + (прилагательное) + существительное + предлог + объект: the rapid development of the tool"
+    ],
+    "usage": [
+      "1. Чтобы сжать два предложения в одно: Prices rose sharply. This worried investors. → The sharp rise in prices worried investors. (Резкий рост цен встревожил инвесторов.)",
+      "2. Чтобы сделать главным подлежащим процесс или факт, а не человека: The decision to cancel the event disappointed everyone. (Решение отменить мероприятие разочаровало всех.)",
+      "3. В академическом и деловом стиле вместо разговорных глаголов: An investigation into the decline in sales was conducted. (Было проведено расследование причин падения продаж.)",
+      "4. С глаголами-связками result in, lead to, cause, contribute to: The introduction of caching led to improved performance. (Внедрение кэширования привело к росту производительности.)",
+      "Каждое существительное тянет за собой «свой» предлог: increase IN, demand FOR, solution TO, dependence ON, decision TO + инфинитив."
+    ],
+    "signalWords": [
+      "Чаще всего в таком тексте встречаются: lead to, result in, cause, contribute to, due to, as a result of, the impact of, the effect of, the role of."
+    ],
+    "mistakes": [
+      "✗ The decide to close the office → ✓ The decision to close the office (после the нужно существительное)",
+      "✗ There was a rise of prices → ✓ There was a rise in prices (rise IN, а не OF)",
+      "✗ The development of technologies are fast → ✓ The development of technology is rapid (подлежащее development, глагол единственного числа)",
+      "✗ Their refuse to help → ✓ Their refusal to help (refuse глагол, refusal существительное)",
+      "✗ Using nominalization everywhere in an email → ✓ Use it for formal writing, but keep speech and chat simple (в разговоре это звучит напыщенно)"
+    ],
+    "remember": [
+      "Глагол → существительное + предлог: «Prices rose» превращается в «the rise in prices», и предложение звучит формально."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте слово в скобках в форму существительного",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The government announced the ___ (introduce) of a new tax.",
+          "answer": "introduction"
+        },
+        {
+          "number": 2,
+          "prompt": "The ___ (fail) of the system surprised everyone.",
+          "answer": "failure"
+        },
+        {
+          "number": 3,
+          "prompt": "Her ___ (resign) was unexpected.",
+          "answer": "resignation"
+        },
+        {
+          "number": 4,
+          "prompt": "The ___ (develop) of the app took six months.",
+          "answer": "development"
+        },
+        {
+          "number": 5,
+          "prompt": "We are worried about the ___ (reduce) in sales.",
+          "answer": "reduction"
+        },
+        {
+          "number": 6,
+          "prompt": "His ___ (arrive) caused a stir.",
+          "answer": "arrival"
+        },
+        {
+          "number": 7,
+          "prompt": "The ___ (analyze) of the data showed a clear trend.",
+          "answer": "analysis"
+        },
+        {
+          "number": 8,
+          "prompt": "Their ___ (refuse) to cooperate delayed the project.",
+          "answer": "refusal"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите вариант, более подходящий для формального письма",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) We looked into why sales dropped. (b) An investigation into the decline in sales was conducted.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "(a) A lot of people don't trust banks any more. (b) There has been a growing distrust of banks.",
+          "answer": "b"
+        },
+        {
+          "number": 3,
+          "prompt": "(a) The introduction of caching led to improved performance. (b) When we introduced caching, the app ran better.",
+          "answer": "a"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Because prices rose, people bought less. (b) The rise in prices resulted in reduced consumption.",
+          "answer": "b"
+        },
+        {
+          "number": 5,
+          "prompt": "(a) It is important that people communicate well. (b) Effective communication is essential.",
+          "answer": "b"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Employees are happier, so they work harder. (b) Increased employee satisfaction leads to higher productivity.",
+          "answer": "b"
+        },
+        {
+          "number": 7,
+          "prompt": "(a) The study shows that many people are moving to cities. (b) The study shows an increase in migration to urban areas.",
+          "answer": "b"
+        },
+        {
+          "number": 8,
+          "prompt": "(a) The implementation of the new policy was delayed. (b) They put off putting the new policy into practice.",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Объедините два предложения в одно с существительным в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Prices rose sharply. This worried investors. (rise)",
+          "answer": "The sharp rise in prices worried investors."
+        },
+        {
+          "number": 2,
+          "prompt": "They failed to deliver on time. This caused a problem. (failure)",
+          "answer": "Their failure to deliver on time caused a problem."
+        },
+        {
+          "number": 3,
+          "prompt": "The engineers developed the tool quickly. This impressed us. (development)",
+          "answer": "The quick development of the tool impressed us."
+        },
+        {
+          "number": 4,
+          "prompt": "Many people criticized the plan. This surprised the mayor. (criticism)",
+          "answer": "The widespread criticism of the plan surprised the mayor."
+        },
+        {
+          "number": 5,
+          "prompt": "Companies depend heavily on cloud services. This is a risk. (dependence)",
+          "answer": "The heavy dependence of companies on cloud services is a risk. / Companies' heavy dependence on cloud services is a risk."
+        },
+        {
+          "number": 6,
+          "prompt": "The committee decided to cancel the event. This disappointed everyone. (decision)",
+          "answer": "The committee's decision to cancel the event disappointed everyone."
+        },
+        {
+          "number": 7,
+          "prompt": "The temperature rose gradually. This affected the crops. (increase)",
+          "answer": "The gradual increase in temperature affected the crops."
+        },
+        {
+          "number": 8,
+          "prompt": "Scientists discovered a new planet. This changed our view of space. (discovery)",
+          "answer": "The discovery of a new planet changed our view of space."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Вставьте существительное и предлог",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "There has been a sharp ___ (rise) ___ house prices.",
+          "answer": "rise in"
+        },
+        {
+          "number": 2,
+          "prompt": "Our ___ (depend) ___ foreign suppliers is a problem.",
+          "answer": "dependence on"
+        },
+        {
+          "number": 3,
+          "prompt": "The ___ (solve) ___ this problem is not easy to find.",
+          "answer": "solution to"
+        },
+        {
+          "number": 4,
+          "prompt": "His ___ (reply) ___ the email was very late.",
+          "answer": "reply to"
+        },
+        {
+          "number": 5,
+          "prompt": "There is a growing ___ (demand) ___ qualified developers.",
+          "answer": "demand for"
+        },
+        {
+          "number": 6,
+          "prompt": "Her ___ (interest) ___ artificial intelligence began at university.",
+          "answer": "interest in"
+        },
+        {
+          "number": 7,
+          "prompt": "The ___ (reason) ___ the delay is still unclear.",
+          "answer": "reason for"
+        },
+        {
+          "number": 8,
+          "prompt": "Their ___ (approach) ___ the problem was very practical.",
+          "answer": "approach to"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский (формальный стиль)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Внедрение новой системы заняло три месяца.",
+          "answer": "The implementation of the new system took three months."
+        },
+        {
+          "number": 2,
+          "prompt": "Рост цен привёл к снижению спроса.",
+          "answer": "The rise in prices led to a decrease in demand. / The rise in prices led to a fall in demand."
+        },
+        {
+          "number": 3,
+          "prompt": "Отказ компании сотрудничать удивил всех.",
+          "answer": "The company's refusal to cooperate surprised everyone."
+        },
+        {
+          "number": 4,
+          "prompt": "Быстрое развитие технологий меняет рынок труда.",
+          "answer": "The rapid development of technology is changing the labor market."
+        },
+        {
+          "number": 5,
+          "prompt": "Решение закрыть офис было трудным.",
+          "answer": "The decision to close the office was difficult."
+        },
+        {
+          "number": 6,
+          "prompt": "Улучшение связи повысило эффективность работы.",
+          "answer": "The improvement in communication increased the efficiency of the work. / The improvement in communication increased work efficiency."
+        },
+        {
+          "number": 7,
+          "prompt": "Недавнее открытие помогло учёным понять причину болезни.",
+          "answer": "A recent discovery helped scientists understand the cause of the disease."
+        },
+        {
+          "number": 8,
+          "prompt": "Задержка поставок вызвала недовольство клиентов.",
+          "answer": "The delay in deliveries caused customer dissatisfaction. / The delay in deliveries caused dissatisfaction among customers."
+        }
+      ]
+    }
+  ]
+}

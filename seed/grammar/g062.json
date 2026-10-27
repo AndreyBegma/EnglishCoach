@@ -1,0 +1,275 @@
+{
+  "id": "g062",
+  "position": 62,
+  "cefrLevel": "C1",
+  "title": "whoever / whatever / whenever / however в придаточных",
+  "plannedFrom": "2027-07-26",
+  "plannedTo": "2027-07-31",
+  "sections": {
+    "why": [
+      "Слова с -ever выражают «неважно кто / что / когда / где / как». По-русски это «кто бы ни», «что бы ни», «когда бы ни», «где бы ни», «как бы ни». Они позволяют одной фразой сказать: результат или правило не зависят от выбора."
+    ],
+    "formation": [
+      "• who + ever = whoever (кто бы ни; любой, кто)",
+      "• what + ever = whatever (что бы ни; всё, что)",
+      "• which + ever = whichever (какой бы ни, из ограниченного набора)",
+      "• when + ever = whenever (когда бы ни; в любое время, когда)",
+      "• where + ever = wherever (где бы ни; куда бы ни)",
+      "• how + ever = however (как бы ни)",
+      "Схема: whoever / whatever / whenever / wherever + подлежащее/сказуемое в обычном порядке слов.",
+      "However + прилагательное/наречие + подлежащее + глагол: however hard you try."
+    ],
+    "usage": [
+      "1. «Неважно кто / что» (уступка): Whatever you decide, I'll support you. (Что бы ты ни решил, я тебя поддержу.)",
+      "2. «Любой, кто / всё, что» (слово работает как подлежащее или дополнение): Whoever finishes first gets a prize. (Тот, кто закончит первым, получит приз.) Take whatever you need. (Бери всё, что нужно.)",
+      "3. «В любое время / в любом месте»: Call me whenever you need help. (Звони, когда бы тебе ни понадобилась помощь.) I can work wherever there is Wi-Fi. (Я могу работать везде, где есть Wi-Fi.)",
+      "4. «Как бы ни»: However hard I try, I can't understand this code. (Как бы я ни старался, я не понимаю этот код.) You can do it however you like. (Делай это так, как тебе нравится.)",
+      "5. Whichever вместо whatever, когда выбор ограничен: Take whichever of the two books you like. (Бери ту из двух книг, которая нравится.)"
+    ],
+    "signalWords": [
+      "no matter who / what / when / where / how (синонимичная замена: no matter who calls = whoever calls); «неважно», «любой», «в любом случае». Для however часто стоит прилагательное сразу после: however busy, however late."
+    ],
+    "mistakes": [
+      "✗ Whenever you will arrive, call me → ✓ Whenever you arrive, call me (после -ever будущее время не нужно, как после when/if)",
+      "✗ However is hard the task, we'll finish → ✓ However hard the task is, we'll finish (порядок слов обычный, а не как в вопросе)",
+      "✗ Whatever hard you work → ✓ However hard you work (для прилагательного нужно however, а не whatever)",
+      "✗ Whoever are interested can join → ✓ Whoever is interested can join (whoever считается единственным числом)",
+      "✗ I'll do how you want → ✓ I'll do it however you want (how без -ever так не используется)"
+    ],
+    "remember": [
+      "-ever = «неважно кто/что/когда/где/как»: whoever calls, whatever you say, however hard you try; после них время как после when, без will."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте whoever, whatever, whichever, whenever, wherever или however",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___ you need help, just call me.",
+          "answer": "Whenever"
+        },
+        {
+          "number": 2,
+          "prompt": "You can choose ___ color you like.",
+          "answer": "whichever / whatever"
+        },
+        {
+          "number": 3,
+          "prompt": "___ broke the server must fix it.",
+          "answer": "Whoever"
+        },
+        {
+          "number": 4,
+          "prompt": "I'll follow you ___ you go.",
+          "answer": "wherever"
+        },
+        {
+          "number": 5,
+          "prompt": "___ hard I try, I can't understand this code.",
+          "answer": "However"
+        },
+        {
+          "number": 6,
+          "prompt": "___ you decide, I'll support you.",
+          "answer": "Whatever"
+        },
+        {
+          "number": 7,
+          "prompt": "Take the train or the bus, ___ is faster.",
+          "answer": "whichever"
+        },
+        {
+          "number": 8,
+          "prompt": "___ you ask, the answer will be the same.",
+          "answer": "Whoever"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Whatever (b) Whoever (c) However opened the door left it open.",
+          "answer": "Whoever"
+        },
+        {
+          "number": 2,
+          "prompt": "I'll buy (a) whoever (b) whatever (c) wherever you recommend.",
+          "answer": "whatever"
+        },
+        {
+          "number": 3,
+          "prompt": "(a) However (b) Whatever (c) Whenever expensive it is, I want it.",
+          "answer": "However"
+        },
+        {
+          "number": 4,
+          "prompt": "She feels at home (a) whoever (b) wherever (c) whichever she is.",
+          "answer": "wherever"
+        },
+        {
+          "number": 5,
+          "prompt": "There are two plans. We'll take (a) whoever (b) whichever (c) however is cheaper.",
+          "answer": "whichever"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Whenever (b) Whoever (c) Whatever I see him, he's smiling.",
+          "answer": "Whenever"
+        },
+        {
+          "number": 7,
+          "prompt": "He does it (a) however (b) whichever (c) whoever he likes.",
+          "answer": "however"
+        },
+        {
+          "number": 8,
+          "prompt": "You can invite (a) whoever (b) whatever (c) however you want.",
+          "answer": "whoever"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение с -ever, сохранив смысл",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It doesn't matter who calls; don't open the door.",
+          "answer": "Whoever calls, don't open the door."
+        },
+        {
+          "number": 2,
+          "prompt": "It doesn't matter what you say; he won't change his mind.",
+          "answer": "Whatever you say, he won't change his mind."
+        },
+        {
+          "number": 3,
+          "prompt": "It doesn't matter where you live; you can work remotely.",
+          "answer": "Wherever you live, you can work remotely."
+        },
+        {
+          "number": 4,
+          "prompt": "Any time you visit, you're welcome.",
+          "answer": "Whenever you visit, you're welcome."
+        },
+        {
+          "number": 5,
+          "prompt": "It doesn't matter how busy she is; she always replies.",
+          "answer": "However busy she is, she always replies."
+        },
+        {
+          "number": 6,
+          "prompt": "Any person who finishes first gets a prize.",
+          "answer": "Whoever finishes first gets a prize."
+        },
+        {
+          "number": 7,
+          "prompt": "It doesn't matter which one you choose; both are good.",
+          "answer": "Whichever one you choose, both are good. / Whichever you choose, both are good."
+        },
+        {
+          "number": 8,
+          "prompt": "In any place where there is Wi-Fi, I can work.",
+          "answer": "Wherever there is Wi-Fi, I can work."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Whatever calls, tell them I'm in a meeting.",
+          "answer": "Whoever calls, tell them I'm in a meeting."
+        },
+        {
+          "number": 2,
+          "prompt": "Whenever you will arrive, call me.",
+          "answer": "Whenever you arrive, call me."
+        },
+        {
+          "number": 3,
+          "prompt": "However is hard the task, we'll finish it.",
+          "answer": "However hard the task is, we'll finish it."
+        },
+        {
+          "number": 4,
+          "prompt": "Wherever you will go, I'll find you.",
+          "answer": "Wherever you go, I'll find you."
+        },
+        {
+          "number": 5,
+          "prompt": "Whatever hard you work, you can't finish this today.",
+          "answer": "However hard you work, you can't finish this today."
+        },
+        {
+          "number": 6,
+          "prompt": "Whichever of the two you will choose is fine.",
+          "answer": "Whichever of the two you choose is fine."
+        },
+        {
+          "number": 7,
+          "prompt": "Whoever are interested can join us.",
+          "answer": "Whoever is interested can join us."
+        },
+        {
+          "number": 8,
+          "prompt": "I'll do how you want.",
+          "answer": "I'll do it however you want. / I'll do whatever you want."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Кто бы ни позвонил, скажи, что я перезвоню.",
+          "answer": "Whoever calls, tell them I'll call back."
+        },
+        {
+          "number": 2,
+          "prompt": "Что бы ты ни решил, я тебя поддержу.",
+          "answer": "Whatever you decide, I'll support you."
+        },
+        {
+          "number": 3,
+          "prompt": "Я могу работать везде, где есть интернет.",
+          "answer": "I can work wherever there is internet. / I can work wherever there is an internet connection."
+        },
+        {
+          "number": 4,
+          "prompt": "Как бы ты ни старался, ты не успеешь.",
+          "answer": "However hard you try, you won't make it in time. / However hard you try, you won't make it."
+        },
+        {
+          "number": 5,
+          "prompt": "Звони мне, когда бы тебе ни понадобилась помощь.",
+          "answer": "Call me whenever you need help."
+        },
+        {
+          "number": 6,
+          "prompt": "Выбери любую из двух книг.",
+          "answer": "Take whichever book you like. / Choose whichever of the two books you like."
+        },
+        {
+          "number": 7,
+          "prompt": "Кто бы это ни сделал, он ошибся.",
+          "answer": "Whoever did it made a mistake."
+        },
+        {
+          "number": 8,
+          "prompt": "Как бы поздно я ни вернулся, она меня ждёт.",
+          "answer": "However late I get back, she is waiting for me. / However late I get back, she waits for me."
+        }
+      ]
+    }
+  ]
+}

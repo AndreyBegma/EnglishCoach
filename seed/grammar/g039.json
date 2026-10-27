@@ -1,0 +1,274 @@
+{
+  "id": "g039",
+  "position": 39,
+  "cefrLevel": "B2",
+  "title": "Future Continuous и Future Perfect",
+  "plannedFrom": "2027-02-15",
+  "plannedTo": "2027-02-20",
+  "sections": {
+    "why": [
+      "Future Continuous показывает действие, которое будет в процессе в конкретный момент будущего: «Завтра в пять я буду ехать в поезде». Future Perfect показывает действие, которое уже завершится к определённому моменту: «К пятнице я закончу проект». В русском «буду делать» и «сделаю к...» различаются видом глагола, в английском их различают разные времена."
+    ],
+    "formation": [
+      "Future Continuous: will be + V-ing",
+      "• I will be working. / I won't be working. / Will you be working?",
+      "Future Perfect: will have + V3 (третья форма глагола)",
+      "• I will have finished. / I won't have finished. / Will you have finished?",
+      "Сокращения: I'll be working, I'll have finished, won't = will not."
+    ],
+    "usage": [
+      "Future Continuous:",
+      "1. Процесс в конкретный момент будущего: This time tomorrow I'll be flying to Berlin. (Завтра в это время я буду лететь в Берлин.)",
+      "2. Объясняем, почему человек будет занят: Don't call at 8, we'll be having dinner. (Не звони в восемь, мы будем ужинать.)",
+      "3. Вежливый вопрос о планах: Will you be using the car tonight? (Вам понадобится машина вечером?)",
+      "Future Perfect:",
+      "1. Действие завершится к моменту в будущем: By Friday I will have finished the report. (К пятнице я закончу отчёт.)",
+      "2. Накопленный результат или срок: By next June they will have lived here for ten years. (К следующему июню они проживут здесь десять лет.)",
+      "Сравните: At 5 I'll be writing the report (в 5 я буду в процессе). By 5 I'll have written the report (к 5 отчёт уже будет готов)."
+    ],
+    "signalWords": [
+      "Future Continuous: this time tomorrow, at 8 o'clock tomorrow, all day tomorrow, next week at this time.",
+      "Future Perfect: by, by then, by the time, by the end of, before, in two years' time."
+    ],
+    "mistakes": [
+      "✗ This time tomorrow I will lie on the beach. → ✓ I will be lying on the beach. (процесс в момент будущего)",
+      "✗ I will be finish the report by five. → ✓ I will have finished the report by five. (be + V-ing и have + V3 нельзя смешивать)",
+      "✗ By the time you will arrive, I will have left. → ✓ By the time you arrive, I will have left. (после by the time и when будущее не ставим)",
+      "✗ She will have finish it by Friday. → ✓ She will have finished it by Friday. (после have нужна третья форма)",
+      "✗ Will you have using the laptop at five? → ✓ Will you be using the laptop at five? (вопрос о процессе, поэтому be + V-ing)"
+    ],
+    "remember": ["will be doing — буду в процессе; will have done — уже закончу к тому времени."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Future Continuous или Future Perfect",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This time tomorrow I ___ (fly) to Berlin.",
+          "answer": "will be flying"
+        },
+        {
+          "number": 2,
+          "prompt": "By 2030 she ___ (finish) her degree.",
+          "answer": "will have finished"
+        },
+        {
+          "number": 3,
+          "prompt": "Don't call at 8. We ___ (have) dinner.",
+          "answer": "will be having"
+        },
+        {
+          "number": 4,
+          "prompt": "By the end of the month, I ___ (save) $1,000.",
+          "answer": "will have saved"
+        },
+        {
+          "number": 5,
+          "prompt": "At 10 a.m. tomorrow he ___ (give) a presentation.",
+          "answer": "will be giving"
+        },
+        {
+          "number": 6,
+          "prompt": "Next May they ___ (live) here for ten years.",
+          "answer": "will have lived"
+        },
+        {
+          "number": 7,
+          "prompt": "Next week at this time we ___ (lie) on the beach.",
+          "answer": "will be lying"
+        },
+        {
+          "number": 8,
+          "prompt": "I ___ (write) all the tests by Friday.",
+          "answer": "will have written"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Call me after six. I (a) will finish (b) will be finishing (c) will have finished work by then.",
+          "answer": "(c) will have finished"
+        },
+        {
+          "number": 2,
+          "prompt": "Don't phone at nine. I (a) will sleep (b) will be sleeping (c) will have slept.",
+          "answer": "(b) will be sleeping"
+        },
+        {
+          "number": 3,
+          "prompt": "By the time you arrive, we (a) will have left (b) would leave (c) will be leave.",
+          "answer": "(a) will have left"
+        },
+        {
+          "number": 4,
+          "prompt": "This time next week, I (a) will lie (b) will have lain (c) will be lying on a beach.",
+          "answer": "(c) will be lying"
+        },
+        {
+          "number": 5,
+          "prompt": "Hurry up! The film (a) will have started (b) will be start (c) will starting by the time we get there.",
+          "answer": "(a) will have started"
+        },
+        {
+          "number": 6,
+          "prompt": "All day tomorrow they (a) will have worked (b) will be working (c) will worked on the migration.",
+          "answer": "(b) will be working"
+        },
+        {
+          "number": 7,
+          "prompt": "She (a) will have graduated (b) will be graduating (c) graduates by next June.",
+          "answer": "(a) will have graduated"
+        },
+        {
+          "number": 8,
+          "prompt": "Don't worry: when you wake up, I (a) will cook (b) will have cooked (c) will be cook breakfast, and it will be ready.",
+          "answer": "(b) will have cooked"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Составьте вопрос или отрицание, перепишите предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Make a question: You will use the car tomorrow evening.",
+          "answer": "Will you be using the car tomorrow evening?"
+        },
+        {
+          "number": 2,
+          "prompt": "Make it negative: She will have finished the report by noon.",
+          "answer": "She won't have finished the report by noon. / She will not have finished the report by noon."
+        },
+        {
+          "number": 3,
+          "prompt": "Make a question: They will have arrived by 7.",
+          "answer": "Will they have arrived by 7?"
+        },
+        {
+          "number": 4,
+          "prompt": "Make it negative: I will be working tonight.",
+          "answer": "I won't be working tonight. / I will not be working tonight."
+        },
+        {
+          "number": 5,
+          "prompt": "Make a question: what / you / do / at 8 tomorrow",
+          "answer": "What will you be doing at 8 tomorrow?"
+        },
+        {
+          "number": 6,
+          "prompt": "Make a question: how many pages / he / write / by Friday",
+          "answer": "How many pages will he have written by Friday?"
+        },
+        {
+          "number": 7,
+          "prompt": "Rewrite: I finish my project on Thursday. The deadline is Friday. (By Friday ...)",
+          "answer": "By Friday I will have finished my project."
+        },
+        {
+          "number": 8,
+          "prompt": "Rewrite: At 9 tomorrow we are in the air. (At 9 tomorrow we / fly)",
+          "answer": "At 9 tomorrow we will be flying."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I will be finish the report by five.",
+          "answer": "I will have finished the report by five."
+        },
+        {
+          "number": 2,
+          "prompt": "This time tomorrow I will lie on the beach.",
+          "answer": "This time tomorrow I will be lying on the beach."
+        },
+        {
+          "number": 3,
+          "prompt": "She will have finish the work by Friday.",
+          "answer": "She will have finished the work by Friday."
+        },
+        {
+          "number": 4,
+          "prompt": "Will you have using the laptop at five?",
+          "answer": "Will you be using the laptop at five?"
+        },
+        {
+          "number": 5,
+          "prompt": "By the time we arrive, the film will be started.",
+          "answer": "By the time we arrive, the film will have started."
+        },
+        {
+          "number": 6,
+          "prompt": "I'm sure he will sleeping at midnight.",
+          "answer": "I'm sure he will be sleeping at midnight."
+        },
+        {
+          "number": 7,
+          "prompt": "They won't have been finish the project by May.",
+          "answer": "They won't have finished the project by May."
+        },
+        {
+          "number": 8,
+          "prompt": "In 2030 I will working in London.",
+          "answer": "In 2030 I will be working in London."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Завтра в это время я буду лететь в Лондон.",
+          "answer": "This time tomorrow I will be flying to London."
+        },
+        {
+          "number": 2,
+          "prompt": "К пятнице мы закончим проект.",
+          "answer": "We will have finished the project by Friday."
+        },
+        {
+          "number": 3,
+          "prompt": "Не звони мне в восемь, я буду ужинать.",
+          "answer": "Don't call me at eight, I will be having dinner. / Don't call me at 8, I'll be having dinner."
+        },
+        {
+          "number": 4,
+          "prompt": "Что ты будешь делать завтра в три часа?",
+          "answer": "What will you be doing at three o'clock tomorrow? / What will you be doing tomorrow at three?"
+        },
+        {
+          "number": 5,
+          "prompt": "К следующему году он накопит на машину.",
+          "answer": "By next year he will have saved enough for a car. / By next year he will have saved up enough money for a car."
+        },
+        {
+          "number": 6,
+          "prompt": "Когда ты приедешь, я уже уйду.",
+          "answer": "By the time you arrive, I will have left. / When you arrive, I will have already left."
+        },
+        {
+          "number": 7,
+          "prompt": "В это время в следующем месяце я буду работать в новом офисе.",
+          "answer": "This time next month I will be working in the new office. / This time next month I will be working in a new office."
+        },
+        {
+          "number": 8,
+          "prompt": "Ты закончишь к шести часам?",
+          "answer": "Will you have finished by six o'clock? / Will you have finished by six?"
+        }
+      ]
+    }
+  ]
+}

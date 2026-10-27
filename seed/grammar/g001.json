@@ -1,0 +1,277 @@
+{
+  "id": "g001",
+  "position": 1,
+  "cefrLevel": "A2",
+  "title": "Глагол to be и базовый порядок слов в предложении",
+  "plannedFrom": "2026-10-19",
+  "plannedTo": "2026-10-19",
+  "sections": {
+    "why": [
+      "В русском мы говорим «Я разработчик» или «Она дома» без всякого глагола. В английском так нельзя: в предложении почти всегда должен быть глагол, и если другого нет, ставится to be (быть). Кроме того, порядок слов в английском строгий: кто делает → что делает → кого/что → где → когда."
+    ],
+    "formation": [
+      "To be в настоящем времени имеет три формы:",
+      "• I am (I'm)",
+      "• he / she / it is (he's, she's, it's)",
+      "• we / you / they are (we're, you're, they're)",
+      "Отрицание: добавляем not — I am not (I'm not), he is not (isn't), they are not (aren't).",
+      "Вопрос: глагол выходит на первое место — Am I late? Is she at home? Are they ready?",
+      "Короткий ответ: Yes, I am. / No, he isn't. (не «Yes, I'm»!)",
+      "Порядок слов в обычном предложении:",
+      "Подлежащее + глагол + дополнение + место + время",
+      "I drink coffee at work every day. (Я пью кофе на работе каждый день.)"
+    ],
+    "usage": [
+      "1. Кто/что есть кто/что (профессия, национальность, описание): I am a developer. (Я разработчик.) The office is big. (Офис большой.)",
+      "2. Где находится человек или предмет: My laptop is on the table. (Мой ноутбук на столе.)",
+      "3. Состояние и чувства: We are tired. (Мы устали.) She is happy. (Она счастлива.)",
+      "4. Возраст, откуда человек: He is 30. He is from Poland. (Ему 30. Он из Польши.)",
+      "5. Погода, время: It is cold. It is five o'clock. (Холодно. Пять часов.)"
+    ],
+    "signalWords": [
+      "вопросительные слова с to be: Where is...? Who is...? How are you? What is...? Why are they...?"
+    ],
+    "mistakes": [
+      "✗ I developer. → ✓ I am a developer. В английском нужен глагол, и перед профессией — артикль a.",
+      "✗ She very tired. → ✓ She is very tired. Нельзя пропускать is/are.",
+      "✗ He am / They is... → ✓ He is / They are. Форма зависит от подлежащего.",
+      "✗ Yes, I'm. → ✓ Yes, I am. В коротком ответе am/is/are не сокращаем.",
+      "✗ I like very much music. → ✓ I like music very much. Дополнение стоит сразу после глагола, а не после наречия."
+    ],
+    "remember": [
+      "Нет глагола — нет предложения: I am, he is, they are — и подлежащее всегда перед глаголом."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте am / is / are",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ a front-end developer.",
+          "answer": "am"
+        },
+        {
+          "number": 2,
+          "prompt": "My brother ___ a doctor.",
+          "answer": "is"
+        },
+        {
+          "number": 3,
+          "prompt": "We ___ at the office now.",
+          "answer": "are"
+        },
+        {
+          "number": 4,
+          "prompt": "She ___ not happy today.",
+          "answer": "is"
+        },
+        {
+          "number": 5,
+          "prompt": "The tickets ___ expensive.",
+          "answer": "are"
+        },
+        {
+          "number": 6,
+          "prompt": "___ you ready for the meeting?",
+          "answer": "Are"
+        },
+        {
+          "number": 7,
+          "prompt": "It ___ very cold in Kyiv in winter.",
+          "answer": "is"
+        },
+        {
+          "number": 8,
+          "prompt": "They ___ from Poland.",
+          "answer": "are"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Сделайте предложение отрицательным",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is late.",
+          "answer": "He isn't late. / He's not late. / He is not late."
+        },
+        {
+          "number": 2,
+          "prompt": "I am tired.",
+          "answer": "I'm not tired. / I am not tired."
+        },
+        {
+          "number": 3,
+          "prompt": "They are at home.",
+          "answer": "They aren't at home. / They're not at home. / They are not at home."
+        },
+        {
+          "number": 4,
+          "prompt": "The office is open on Sunday.",
+          "answer": "The office isn't open on Sunday. / The office is not open on Sunday."
+        },
+        {
+          "number": 5,
+          "prompt": "We are busy today.",
+          "answer": "We aren't busy today. / We're not busy today. / We are not busy today."
+        },
+        {
+          "number": 6,
+          "prompt": "It is a big problem.",
+          "answer": "It isn't a big problem. / It's not a big problem. / It is not a big problem."
+        },
+        {
+          "number": 7,
+          "prompt": "You are wrong.",
+          "answer": "You aren't wrong. / You're not wrong. / You are not wrong."
+        },
+        {
+          "number": 8,
+          "prompt": "My laptop is new.",
+          "answer": "My laptop isn't new. / My laptop is not new."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Превратите предложение в вопрос",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She is a designer.",
+          "answer": "Is she a designer?"
+        },
+        {
+          "number": 2,
+          "prompt": "They are in the meeting.",
+          "answer": "Are they in the meeting?"
+        },
+        {
+          "number": 3,
+          "prompt": "The website is slow.",
+          "answer": "Is the website slow?"
+        },
+        {
+          "number": 4,
+          "prompt": "You are from Ukraine.",
+          "answer": "Are you from Ukraine?"
+        },
+        {
+          "number": 5,
+          "prompt": "Your sister is at work.",
+          "answer": "Is your sister at work?"
+        },
+        {
+          "number": 6,
+          "prompt": "I am late.",
+          "answer": "Am I late?"
+        },
+        {
+          "number": 7,
+          "prompt": "The files are on the server.",
+          "answer": "Are the files on the server?"
+        },
+        {
+          "number": 8,
+          "prompt": "It is time for lunch.",
+          "answer": "Is it time for lunch?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку и напишите правильное предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She very tired today.",
+          "answer": "She is very tired today. / She's very tired today."
+        },
+        {
+          "number": 2,
+          "prompt": "I every day drink coffee.",
+          "answer": "I drink coffee every day."
+        },
+        {
+          "number": 3,
+          "prompt": "They is my friends.",
+          "answer": "They are my friends."
+        },
+        {
+          "number": 4,
+          "prompt": "We not are ready.",
+          "answer": "We are not ready. / We aren't ready. / We're not ready."
+        },
+        {
+          "number": 5,
+          "prompt": "He am a manager.",
+          "answer": "He is a manager. / He's a manager."
+        },
+        {
+          "number": 6,
+          "prompt": "Are you tired? - Yes, I'm.",
+          "answer": "Are you tired? - Yes, I am."
+        },
+        {
+          "number": 7,
+          "prompt": "I like very much music.",
+          "answer": "I like music very much."
+        },
+        {
+          "number": 8,
+          "prompt": "Works she in a bank.",
+          "answer": "She works in a bank."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я разработчик.",
+          "answer": "I am a developer. / I'm a developer."
+        },
+        {
+          "number": 2,
+          "prompt": "Мой коллега сейчас на встрече.",
+          "answer": "My colleague is in a meeting now. / My colleague is in a meeting right now."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы не дома.",
+          "answer": "We aren't at home. / We're not at home. / We are not at home. / We aren't home. / We're not home."
+        },
+        {
+          "number": 4,
+          "prompt": "Вы готовы?",
+          "answer": "Are you ready?"
+        },
+        {
+          "number": 5,
+          "prompt": "Сайт очень медленный.",
+          "answer": "The website is very slow. / The site is very slow."
+        },
+        {
+          "number": 6,
+          "prompt": "Она не из Польши.",
+          "answer": "She isn't from Poland. / She's not from Poland. / She is not from Poland."
+        },
+        {
+          "number": 7,
+          "prompt": "Где мой ноутбук?",
+          "answer": "Where is my laptop?"
+        },
+        {
+          "number": 8,
+          "prompt": "Я каждый день пью кофе на работе.",
+          "answer": "I drink coffee at work every day."
+        }
+      ]
+    }
+  ]
+}

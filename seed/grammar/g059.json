@@ -1,0 +1,271 @@
+{
+  "id": "g059",
+  "position": 59,
+  "cefrLevel": "C1",
+  "title": "Модальные нюансы: needn't have vs didn't need to, be to, be bound to, be supposed to",
+  "plannedFrom": "2027-07-05",
+  "plannedTo": "2027-07-10",
+  "sections": {
+    "why": [
+      "Модальные глаголы выражают не только «могу» и «должен», но и тонкие оттенки: необходимость в прошлом, договорённость, уверенность, ожидание. Русский часто передаёт всё это одним словом «должен», поэтому английские нюансы нужно запомнить отдельно."
+    ],
+    "formation": [
+      "• needn't have + V3: сделал, но это было не нужно. I needn't have waited.",
+      "• didn't need to + инфинитив: не нужно было (и мы не знаем, делали ли это). I didn't need to wait.",
+      "• be to + инфинитив: по плану, по приказу или договорённости. We are to meet at nine.",
+      "• be bound to + инфинитив: наверняка, неизбежно. She is bound to know.",
+      "• be supposed to + инфинитив: предполагается, должен по правилам или плану. You are supposed to wear a badge."
+    ],
+    "usage": [
+      "1. Needn't have + V3 — действие было, но оказалось лишним. (I needn't have brought an umbrella; it didn't rain. = Зря я взял зонт, дождя не было.) Didn't need to — действия могло и не быть, а если было, то необязательно. (I didn't need to bring an umbrella, so I left it at home. = Зонт мне не был нужен, и я оставил его дома.)",
+      "2. Be to — официальный план, инструкция, договорённость. (The president is to visit Berlin next week. = Президент должен посетить Берлин на следующей неделе. / You are not to touch this button. = Эту кнопку трогать нельзя.)",
+      "3. Be bound to — высокая вероятность или неизбежность. (He's bound to be late; he always is. = Он наверняка опоздает, он всегда опаздывает. / With that attitude you are bound to fail. = С таким отношением ты обязательно провалишься.)",
+      "4. Be supposed to — ожидается по правилам или плану; в прошедшем времени часто означает, что этого не случилось. (The train is supposed to arrive at six. = Поезд должен прибыть в шесть. / I was supposed to call her, but I forgot. = Я должен был ей позвонить, но забыл.) Иногда значит «считается»: He is supposed to be a good doctor. = Говорят, он хороший врач."
+    ],
+    "signalWords": [
+      "unnecessarily, in the end, it turned out; according to the plan / schedule / rules; for sure, certainly, sooner or later; supposed to обычно со словами still, again, but."
+    ],
+    "mistakes": [
+      "✗ I needn't to have gone. → ✓ I needn't have gone. После needn't нет to.",
+      "✗ I didn't need to go, but I went, and it was a waste. → ✓ I needn't have gone. Если действие уже случилось зря, используем needn't have.",
+      "✗ He bound to win. → ✓ He is bound to win. Нужен глагол be.",
+      "✗ She is suppose to call. → ✓ She is supposed to call. Нужно -ed.",
+      "✗ We are to going to meet. → ✓ We are to meet. После be to идёт инфинитив без going."
+    ],
+    "remember": [
+      "Needn't have + V3 — «зря сделал»; be to — план; be bound to — «точно будет»; be supposed to — «положено»."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I took a taxi, but I ___ (not, need) it. The bus was right there. (needn't have + V3)",
+          "answer": "needn't have taken"
+        },
+        {
+          "number": 2,
+          "prompt": "He is very experienced. He is ___ to find a solution.",
+          "answer": "bound"
+        },
+        {
+          "number": 3,
+          "prompt": "You are not ___ to use your phone during the exam.",
+          "answer": "supposed"
+        },
+        {
+          "number": 4,
+          "prompt": "The conference is ___ to start at ten.",
+          "answer": "to"
+        },
+        {
+          "number": 5,
+          "prompt": "We ___ (not, hurry). The train was late. (needn't have + V3)",
+          "answer": "needn't have hurried"
+        },
+        {
+          "number": 6,
+          "prompt": "She is ___ to be angry when she hears this.",
+          "answer": "bound"
+        },
+        {
+          "number": 7,
+          "prompt": "I'm ___ to meet the client at noon.",
+          "answer": "supposed"
+        },
+        {
+          "number": 8,
+          "prompt": "You ___ (not, buy) a gift; we have everything we need. (needn't have + V3)",
+          "answer": "needn't have bought"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I (a) needn't have called (b) didn't need to called him; he was already here.",
+          "answer": "a"
+        },
+        {
+          "number": 2,
+          "prompt": "We (a) are bound (b) are to going to lose if we don't practice.",
+          "answer": "a"
+        },
+        {
+          "number": 3,
+          "prompt": "Yesterday was a holiday, so I (a) needn't have got up (b) didn't need to get up early.",
+          "answer": "b"
+        },
+        {
+          "number": 4,
+          "prompt": "The new policy (a) is to (b) is bound take effect next month.",
+          "answer": "a"
+        },
+        {
+          "number": 5,
+          "prompt": "He (a) is suppose (b) is supposed to be at the office by nine.",
+          "answer": "b"
+        },
+        {
+          "number": 6,
+          "prompt": "You (a) needn't have to (b) needn't have worried. Everything was fine.",
+          "answer": "b"
+        },
+        {
+          "number": 7,
+          "prompt": "It's a famous restaurant. It's (a) bound to (b) bound be crowded.",
+          "answer": "a"
+        },
+        {
+          "number": 8,
+          "prompt": "You (a) are to not (b) are not to enter this room.",
+          "answer": "b"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение с модальной конструкцией",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm sure she will win. (используйте bound) → She ...",
+          "answer": "She is bound to win."
+        },
+        {
+          "number": 2,
+          "prompt": "According to the schedule, the bus arrives at five. (supposed) → The bus ...",
+          "answer": "The bus is supposed to arrive at five."
+        },
+        {
+          "number": 3,
+          "prompt": "It was unnecessary for me to wait, but I waited. (needn't have) → I ...",
+          "answer": "I needn't have waited."
+        },
+        {
+          "number": 4,
+          "prompt": "The plan is that the team meets on Monday. (be to) → The team ...",
+          "answer": "The team is to meet on Monday."
+        },
+        {
+          "number": 5,
+          "prompt": "The rules say you must not park here. (supposed) → You ...",
+          "answer": "You are not supposed to park here."
+        },
+        {
+          "number": 6,
+          "prompt": "It was unnecessary to book a table, but we booked one. (needn't have) → We ...",
+          "answer": "We needn't have booked a table."
+        },
+        {
+          "number": 7,
+          "prompt": "I'm sure he will forget the password again. (bound) → He ...",
+          "answer": "He is bound to forget the password again."
+        },
+        {
+          "number": 8,
+          "prompt": "The instruction says you must not open this file. (be to) → You ...",
+          "answer": "You are not to open this file."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I needn't to have gone to the meeting.",
+          "answer": "I needn't have gone to the meeting."
+        },
+        {
+          "number": 2,
+          "prompt": "He bound to be late.",
+          "answer": "He is bound to be late."
+        },
+        {
+          "number": 3,
+          "prompt": "You are suppose to wear a helmet here.",
+          "answer": "You are supposed to wear a helmet here."
+        },
+        {
+          "number": 4,
+          "prompt": "We are to going to start at nine.",
+          "answer": "We are to start at nine."
+        },
+        {
+          "number": 5,
+          "prompt": "I needn't have worry about the exam.",
+          "answer": "I needn't have worried about the exam."
+        },
+        {
+          "number": 6,
+          "prompt": "She is bound win the competition.",
+          "answer": "She is bound to win the competition."
+        },
+        {
+          "number": 7,
+          "prompt": "They are to not enter the lab without permission.",
+          "answer": "They are not to enter the lab without permission."
+        },
+        {
+          "number": 8,
+          "prompt": "I was supposed call him yesterday.",
+          "answer": "I was supposed to call him yesterday."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Мне не нужно было вставать рано, поэтому я спал до десяти.",
+          "answer": "I didn't need to get up early, so I slept until ten."
+        },
+        {
+          "number": 2,
+          "prompt": "Зря я купил этот билет, концерт отменили.",
+          "answer": "I needn't have bought this ticket; the concert was cancelled. / I needn't have bought this ticket; the concert was canceled."
+        },
+        {
+          "number": 3,
+          "prompt": "Она наверняка знает ответ.",
+          "answer": "She is bound to know the answer."
+        },
+        {
+          "number": 4,
+          "prompt": "Релиз должен состояться в пятницу.",
+          "answer": "The release is supposed to happen on Friday. / The release is to take place on Friday. / The release is supposed to take place on Friday."
+        },
+        {
+          "number": 5,
+          "prompt": "Мы должны были встретиться в восемь, но он не пришёл.",
+          "answer": "We were supposed to meet at eight, but he didn't come. / We were supposed to meet at eight, but he didn't show up."
+        },
+        {
+          "number": 6,
+          "prompt": "Тебе не обязательно было приходить так рано.",
+          "answer": "You needn't have come so early. / You didn't need to come so early."
+        },
+        {
+          "number": 7,
+          "prompt": "Если ты не будешь тестировать код, у тебя обязательно будут баги.",
+          "answer": "If you don't test your code, you are bound to have bugs. / If you don't test the code, you are bound to have bugs."
+        },
+        {
+          "number": 8,
+          "prompt": "Сотрудникам запрещено пользоваться личными ноутбуками.",
+          "answer": "Employees are not to use personal laptops. / Employees are not supposed to use personal laptops."
+        }
+      ]
+    }
+  ]
+}

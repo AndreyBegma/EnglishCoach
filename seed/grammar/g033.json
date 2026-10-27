@@ -1,0 +1,273 @@
+{
+  "id": "g033",
+  "position": 33,
+  "cefrLevel": "B2",
+  "title": "Третье условное (нереальное прошлое)",
+  "plannedFrom": "2027-01-04",
+  "plannedTo": "2027-01-09",
+  "sections": {
+    "why": [
+      "Третье условное — это разговор о прошлом, которое уже нельзя изменить: «Если бы я тогда знал, я бы поступил иначе». В русском для этого есть «бы», а в английском нужна целая конструкция из двух частей, которая выражает сожаление, упрёк или оправдание."
+    ],
+    "formation": [
+      "• If + Past Perfect (had + V3), would have + V3",
+      "• If I had left earlier, I would have caught the train.",
+      "• Отрицание: If I hadn't left late, I wouldn't have missed the train.",
+      "• Вопрос: What would you have done if you had lost your job? / Would you have come if I had invited you?",
+      "• Части можно поменять местами, запятая нужна только когда if-часть стоит первой: I would have helped you if you had asked.",
+      "• Вместо would можно использовать could или might: If we had left earlier, we could have seen the sunrise. (мы бы смогли) / ... we might have seen it. (возможно, увидели бы)",
+      "• В речи: I'd = I had или I would, поэтому по смыслу выбираем нужное: If I'd known (had), I'd have told you (would)."
+    ],
+    "usage": [
+      "1. Сожаление о прошлом: If I had studied harder, I would have passed the exam. (Если бы я больше занимался, я бы сдал экзамен.)",
+      "2. Упрёк другому человеку: If you had told me, I would have helped. (Если бы ты сказал, я бы помог.)",
+      "3. Объяснение причины события: The bug wouldn't have reached production if we had tested the code. (Баг не попал бы в продакшен, если бы мы протестировали код.)",
+      "4. Неуверенный результат (could / might): If she had called, we might have solved it. (Если бы она позвонила, мы, возможно, решили бы это.)"
+    ],
+    "signalWords": [
+      "yesterday, last week, in 2020, then, at that time — любые слова о прошлом, а также слова if only и wish о прошлом (их разберём в теме про wish). Фраза «но этого не случилось» всегда подразумевается."
+    ],
+    "mistakes": [
+      "✗ If I would have known, I would have told you. → ✓ If I had known, I would have told you. (would нельзя ставить в if-часть)",
+      "✗ If she had studied, she would pass. → ✓ ... she would have passed. (во второй части нужен would have + V3)",
+      "✗ If we had went earlier... → ✓ If we had gone earlier... (после had нужна третья форма: gone, а не went)",
+      "✗ If he had a car yesterday, he would have come. → ✓ If he had had a car yesterday... (Past Perfect от have — had had)",
+      "✗ What would you done? → ✓ What would you have done? (have пропускать нельзя)"
+    ],
+    "remember": [
+      "Прошлое нельзя изменить, поэтому с обеих сторон прошлое: If + had V3, would have V3; и никаких would в if-части."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глаголы в правильную форму (третье условное)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I ___ (leave) earlier, I ___ (not miss) the train.",
+          "answer": "had left, wouldn't have missed"
+        },
+        {
+          "number": 2,
+          "prompt": "If she ___ (study) harder, she ___ (pass) the exam.",
+          "answer": "had studied, would have passed"
+        },
+        {
+          "number": 3,
+          "prompt": "We ___ (go) to the beach if the weather ___ (be) better.",
+          "answer": "would have gone, had been"
+        },
+        {
+          "number": 4,
+          "prompt": "If they ___ (not forget) the password, they ___ (log in).",
+          "answer": "hadn't forgotten, would have logged in"
+        },
+        {
+          "number": 5,
+          "prompt": "If you ___ (call) me, I ___ (help) you.",
+          "answer": "had called, would have helped"
+        },
+        {
+          "number": 6,
+          "prompt": "He ___ (not break) his leg if he ___ (be) more careful.",
+          "answer": "wouldn't have broken, had been"
+        },
+        {
+          "number": 7,
+          "prompt": "If I ___ (have) more time, I ___ (finish) the project.",
+          "answer": "had had, would have finished"
+        },
+        {
+          "number": 8,
+          "prompt": "If the developers ___ (test) the code, they ___ (find) the bug.",
+          "answer": "had tested, would have found"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I (a) knew (b) had known about the party, I would have come.",
+          "answer": "(b) had known"
+        },
+        {
+          "number": 2,
+          "prompt": "She would have called if she (a) had had (b) would have had your number.",
+          "answer": "(a) had had"
+        },
+        {
+          "number": 3,
+          "prompt": "If we (a) hadn't taken (b) didn't take a taxi, we would have been late.",
+          "answer": "(a) hadn't taken"
+        },
+        {
+          "number": 4,
+          "prompt": "I (a) would have bought (b) would buy the jacket if it had been cheaper.",
+          "answer": "(a) would have bought"
+        },
+        {
+          "number": 5,
+          "prompt": "If he (a) had gone (b) had went to bed earlier, he wouldn't have been tired.",
+          "answer": "(a) had gone"
+        },
+        {
+          "number": 6,
+          "prompt": "What (a) would you have done (b) would you do if you had lost your job?",
+          "answer": "(a) would you have done"
+        },
+        {
+          "number": 7,
+          "prompt": "If it (a) hadn't rained (b) wouldn't have rained, we would have had the picnic.",
+          "answer": "(a) hadn't rained"
+        },
+        {
+          "number": 8,
+          "prompt": "They (a) wouldn't have won (b) wouldn't win the game if they hadn't played so well.",
+          "answer": "(a) wouldn't have won"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите факт как третье условное",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He didn't wear a coat, so he caught a cold.",
+          "answer": "If he had worn a coat, he wouldn't have caught a cold."
+        },
+        {
+          "number": 2,
+          "prompt": "We missed the bus, so we were late.",
+          "answer": "If we hadn't missed the bus, we wouldn't have been late."
+        },
+        {
+          "number": 3,
+          "prompt": "She didn't save the file, so she lost her work.",
+          "answer": "If she had saved the file, she wouldn't have lost her work."
+        },
+        {
+          "number": 4,
+          "prompt": "I didn't have a map, so I got lost.",
+          "answer": "If I had had a map, I wouldn't have gotten lost."
+        },
+        {
+          "number": 5,
+          "prompt": "They didn't book a hotel, so they slept in the car.",
+          "answer": "If they had booked a hotel, they wouldn't have slept in the car."
+        },
+        {
+          "number": 6,
+          "prompt": "He drove too fast, so he got a ticket.",
+          "answer": "If he hadn't driven so fast, he wouldn't have gotten a ticket."
+        },
+        {
+          "number": 7,
+          "prompt": "I was hungry because I didn't have breakfast.",
+          "answer": "If I had had breakfast, I wouldn't have been hungry."
+        },
+        {
+          "number": 8,
+          "prompt": "The team didn't meet the deadline because the client changed the requirements.",
+          "answer": "If the client hadn't changed the requirements, the team would have met the deadline."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I would have known, I would have told you.",
+          "answer": "If I had known, I would have told you."
+        },
+        {
+          "number": 2,
+          "prompt": "If she had studied, she would pass the test.",
+          "answer": "If she had studied, she would have passed the test."
+        },
+        {
+          "number": 3,
+          "prompt": "If we had went earlier, we would have seen him.",
+          "answer": "If we had gone earlier, we would have seen him."
+        },
+        {
+          "number": 4,
+          "prompt": "If he had a car yesterday, he would have come.",
+          "answer": "If he had had a car yesterday, he would have come."
+        },
+        {
+          "number": 5,
+          "prompt": "I would have helped you if you would have asked.",
+          "answer": "I would have helped you if you had asked."
+        },
+        {
+          "number": 6,
+          "prompt": "If they hadn't miss the flight, they wouldn't have been late.",
+          "answer": "If they hadn't missed the flight, they wouldn't have been late."
+        },
+        {
+          "number": 7,
+          "prompt": "What would you done if you had lost your passport?",
+          "answer": "What would you have done if you had lost your passport?"
+        },
+        {
+          "number": 8,
+          "prompt": "If I had seen the message, I would replied.",
+          "answer": "If I had seen the message, I would have replied."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Если бы я знал, я бы тебе сказал.",
+          "answer": "If I had known, I would have told you."
+        },
+        {
+          "number": 2,
+          "prompt": "Если бы мы выехали раньше, мы бы не опоздали.",
+          "answer": "If we had left earlier, we wouldn't have been late."
+        },
+        {
+          "number": 3,
+          "prompt": "Если бы ты сохранил файл, ты бы не потерял работу.",
+          "answer": "If you had saved the file, you wouldn't have lost your work."
+        },
+        {
+          "number": 4,
+          "prompt": "Что бы ты сделал, если бы потерял паспорт?",
+          "answer": "What would you have done if you had lost your passport?"
+        },
+        {
+          "number": 5,
+          "prompt": "Она получила бы эту работу, если бы лучше подготовилась к собеседованию.",
+          "answer": "She would have gotten the job if she had prepared better for the interview."
+        },
+        {
+          "number": 6,
+          "prompt": "Если бы не было пробок, мы бы приехали вовремя.",
+          "answer": "If there hadn't been traffic, we would have arrived on time. / If there hadn't been a traffic jam, we would have arrived on time."
+        },
+        {
+          "number": 7,
+          "prompt": "Баг не попал бы в продакшен, если бы мы проверили код.",
+          "answer": "The bug wouldn't have gotten into production if we had checked the code."
+        },
+        {
+          "number": 8,
+          "prompt": "Если бы я не заболел, я бы поехал с вами в отпуск.",
+          "answer": "If I hadn't gotten sick, I would have gone on vacation with you. / If I hadn't been sick, I would have gone on vacation with you."
+        }
+      ]
+    }
+  ]
+}

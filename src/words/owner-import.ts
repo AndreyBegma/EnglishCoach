@@ -41,16 +41,24 @@ function targetRow(word: OwnerWord, finalPos: string | null, rows: Word[]): Word
   );
 }
 
-const ownerFields = (word: OwnerWord) => ({
+const ownerFields = (word: OwnerWord, examples: boolean) => ({
   cefrLevel: word.cefrLevel,
   source: OWNER_LIST_SOURCE,
   topic: word.topic,
   ipa: word.ipa,
-  example: word.example,
+  ...(examples ? { example: word.example } : {}),
   translationRu: word.translationRu,
   curriculumStage: word.stage,
   curriculumIndex: word.index,
 });
+
+export type OwnerImportOptions = {
+  /**
+   * Write `example` (default). The committed seed has no examples (they are dictionary sentences
+   * kept out of the repository), so loading it passes `false` and leaves the column as it is.
+   */
+  examples?: boolean;
+};
 
 /**
  * Overlays the owner's list on the dictionary in one transaction. Owner fields (level, part of
@@ -58,7 +66,11 @@ const ownerFields = (word: OwnerWord) => ({
  * The removed list replaces the owner's exclusions. Running it twice on the same list changes
  * nothing the second time.
  */
-export async function importOwnerList(db: Db, list: OwnerList): Promise<OwnerImportResult> {
+export async function importOwnerList(
+  db: Db,
+  list: OwnerList,
+  { examples = true }: OwnerImportOptions = {},
+): Promise<OwnerImportResult> {
   return db.transaction(async (tx) => {
     const lemmas = list.words.map((word) => word.lemma);
     const existing = new Map<string, Word[]>();
@@ -75,13 +87,13 @@ export async function importOwnerList(db: Db, list: OwnerList): Promise<OwnerImp
       const finalPos = word.pos.length ? word.pos.join(", ") : null;
       const target = targetRow(word, finalPos, existing.get(word.lemma) ?? []);
       if (!target) {
-        inserts.push({ lemma: word.lemma, pos: finalPos ?? "", ...ownerFields(word) });
+        inserts.push({ lemma: word.lemma, pos: finalPos ?? "", ...ownerFields(word, examples) });
         continue;
       }
       targets.add(target.id);
       await tx
         .update(words)
-        .set({ pos: finalPos ?? target.pos, ...ownerFields(word) })
+        .set({ pos: finalPos ?? target.pos, ...ownerFields(word, examples) })
         .where(eq(words.id, target.id));
       result.updated++;
     }

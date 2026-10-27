@@ -1,0 +1,274 @@
+{
+  "id": "g079",
+  "position": 79,
+  "cefrLevel": "C2",
+  "title": "Фронтирование и порядок слов для акцента",
+  "plannedFrom": "2027-11-22",
+  "plannedTo": "2027-11-27",
+  "sections": {
+    "why": [
+      "В русском порядок слов свободный: мы просто переставляем слово в начало для акцента. В английском порядок строгий, поэтому вынос слова вперёд (фронтирование) — особый приём. Он создаёт драматизм, делает текст литературным и расставляет акценты в докладах и статьях."
+    ],
+    "formation": [
+      "• Место/направление в начале + глагол + подлежащее (инверсия без do): Into the room walked a man.",
+      "• Here / There + глагол + существительное: Here comes the bus. Но с местоимением порядок прямой: Here he comes.",
+      "• Дополнение вперёд, порядок остальных слов прямой: That I did not know.",
+      "• Прилагательное + as/though + подлежащее + глагол: Tired as I was, I finished.",
+      "• Such / So + прилагательное + глагол + подлежащее: Such was the noise that... / So loud was the music that...",
+      "• Only + обстоятельство + вспомогательный глагол + подлежащее: Only then did I understand."
+    ],
+    "usage": [
+      "1. Яркая сцена: In the corner stood an old piano. (В углу стоял старый рояль.)",
+      "2. Привлечь внимание: Here comes the bus! (А вот и автобус!)",
+      "3. Противопоставление и акцент на дополнении: This colour I like, but that one I hate. (Этот цвет мне нравится, а тот ненавижу.)",
+      "4. Уступка: Strange as it may sound, I enjoy Mondays. (Как ни странно это звучит, я люблю понедельники.)",
+      "5. Сильная степень: So expensive was the hotel that we left. (Отель был настолько дорогим, что мы уехали.)",
+      "6. Ограничение со словом only: Only after the release did we see the bug. (Только после релиза мы увидели баг.)"
+    ],
+    "signalWords": [
+      "Here, there, away, down, out of, in the corner of; only then, only after, only when, not until; such, so + adjective; adjective + as."
+    ],
+    "mistakes": [
+      "✗ Here comes he! → ✓ Here he comes! (если подлежащее — местоимение, инверсии нет)",
+      "✗ Only then I understood. → ✓ Only then did I understand. (после only + обстоятельство нужен вспомогательный глагол перед подлежащим)",
+      "✗ Into the room did walk a man. → ✓ Into the room walked a man. (после места инверсия идёт сразу с основным глаголом, без do)",
+      "✗ Such the noise was that... → ✓ Such was the noise that... (глагол be выходит вперёд подлежащего)",
+      "✗ Tired though was she → ✓ Tired though she was (в обороте с as/though порядок прямой)"
+    ],
+    "remember": [
+      "Вперёд выносим то, что хотим выделить: место и only — с инверсией, дополнение и местоимение — без неё."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте пропущенное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "On the table ___ a letter for you. (lie, Past Simple)",
+          "answer": "lay"
+        },
+        {
+          "number": 2,
+          "prompt": "Down the hill ___ the children. (run, Past Simple)",
+          "answer": "ran"
+        },
+        {
+          "number": 3,
+          "prompt": "Only then ___ I realize the problem.",
+          "answer": "did"
+        },
+        {
+          "number": 4,
+          "prompt": "Such ___ the noise that nobody could sleep.",
+          "answer": "was"
+        },
+        {
+          "number": 5,
+          "prompt": "Tired ___ she was, she finished the report.",
+          "answer": "as"
+        },
+        {
+          "number": 6,
+          "prompt": "In the corner of the room ___ an old piano. (stand, Past Simple)",
+          "answer": "stood"
+        },
+        {
+          "number": 7,
+          "prompt": "Not until midnight ___ the team find the bug.",
+          "answer": "did"
+        },
+        {
+          "number": 8,
+          "prompt": "Here he ___! (come)",
+          "answer": "comes"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Here comes he! (b) Here he comes!",
+          "answer": "(b) Here he comes!"
+        },
+        {
+          "number": 2,
+          "prompt": "(a) Away ran the dog. (b) Away did run the dog.",
+          "answer": "(a) Away ran the dog."
+        },
+        {
+          "number": 3,
+          "prompt": "(a) That I do not understand. (b) That do I not understand.",
+          "answer": "(a) That I do not understand."
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Only after the release did we see the bug. (b) Only after the release we saw the bug.",
+          "answer": "(a) Only after the release did we see the bug."
+        },
+        {
+          "number": 5,
+          "prompt": "(a) Happy are the people who finish early. (b) Happy the people are who finish early.",
+          "answer": "(a) Happy are the people who finish early."
+        },
+        {
+          "number": 6,
+          "prompt": "(a) So tired was he that he fell asleep. (b) So tired he was that he fell asleep.",
+          "answer": "(a) So tired was he that he fell asleep."
+        },
+        {
+          "number": 7,
+          "prompt": "(a) Strange as it may sound, I like Mondays. (b) As strange it may sound, I like Mondays.",
+          "answer": "(a) Strange as it may sound, I like Mondays."
+        },
+        {
+          "number": 8,
+          "prompt": "(a) Hardly had we started when the power went off. (b) Hardly we had started when the power went off.",
+          "answer": "(a) Hardly had we started when the power went off."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, начав с указанных слов",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "A big old tree stood in the middle of the garden. (Begin: In the middle of the garden)",
+          "answer": "In the middle of the garden stood a big old tree."
+        },
+        {
+          "number": 2,
+          "prompt": "I don't like this colour, but I like that one. (Begin: This colour)",
+          "answer": "This colour I don't like, but that one I do. / This colour I don't like, but that one I like."
+        },
+        {
+          "number": 3,
+          "prompt": "Although she was exhausted, she kept running. (Begin: Exhausted)",
+          "answer": "Exhausted as she was, she kept running. / Exhausted though she was, she kept running."
+        },
+        {
+          "number": 4,
+          "prompt": "The noise was so loud that we couldn't talk. (Begin: So loud)",
+          "answer": "So loud was the noise that we couldn't talk."
+        },
+        {
+          "number": 5,
+          "prompt": "We understood the problem only when the results came out. (Begin: Only when)",
+          "answer": "Only when the results came out did we understand the problem."
+        },
+        {
+          "number": 6,
+          "prompt": "A letter was on the desk. (Begin: On the desk)",
+          "answer": "On the desk lay a letter. / On the desk was a letter."
+        },
+        {
+          "number": 7,
+          "prompt": "The weather was such that we stayed at home. (Begin: Such)",
+          "answer": "Such was the weather that we stayed at home."
+        },
+        {
+          "number": 8,
+          "prompt": "The bus is coming. (Begin: Here)",
+          "answer": "Here comes the bus."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Here comes he with the coffee.",
+          "answer": "Here he comes with the coffee."
+        },
+        {
+          "number": 2,
+          "prompt": "Only then I understood the joke.",
+          "answer": "Only then did I understand the joke."
+        },
+        {
+          "number": 3,
+          "prompt": "Into the room did walk a stranger.",
+          "answer": "Into the room walked a stranger."
+        },
+        {
+          "number": 4,
+          "prompt": "Such the noise was that we left.",
+          "answer": "Such was the noise that we left."
+        },
+        {
+          "number": 5,
+          "prompt": "Tired though was she, she kept working.",
+          "answer": "Tired though she was, she kept working."
+        },
+        {
+          "number": 6,
+          "prompt": "Not until I got home I noticed the message.",
+          "answer": "Not until I got home did I notice the message."
+        },
+        {
+          "number": 7,
+          "prompt": "This I did not know it.",
+          "answer": "This I did not know."
+        },
+        {
+          "number": 8,
+          "prompt": "So expensive was the hotel what we left.",
+          "answer": "So expensive was the hotel that we left."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Вот идёт автобус.",
+          "answer": "Here comes the bus."
+        },
+        {
+          "number": 2,
+          "prompt": "В углу комнаты стоял старый стол.",
+          "answer": "In the corner of the room stood an old desk."
+        },
+        {
+          "number": 3,
+          "prompt": "Только тогда я понял свою ошибку.",
+          "answer": "Only then did I understand my mistake. / Only then did I realize my mistake."
+        },
+        {
+          "number": 4,
+          "prompt": "Хоть я и устал, я закончу отчёт.",
+          "answer": "Tired as I am, I will finish the report. / Tired though I am, I will finish the report."
+        },
+        {
+          "number": 5,
+          "prompt": "Шум был такой, что никто не мог спать.",
+          "answer": "Such was the noise that nobody could sleep."
+        },
+        {
+          "number": 6,
+          "prompt": "Этого я не знал.",
+          "answer": "That I did not know. / This I did not know."
+        },
+        {
+          "number": 7,
+          "prompt": "Только после релиза мы заметили ошибку.",
+          "answer": "Only after the release did we notice the bug. / Only after the release did we notice the error."
+        },
+        {
+          "number": 8,
+          "prompt": "Из офиса он выбежал.",
+          "answer": "Out of the office he ran."
+        }
+      ]
+    }
+  ]
+}

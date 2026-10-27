@@ -1,0 +1,272 @@
+{
+  "id": "g013",
+  "position": 13,
+  "cefrLevel": "A2",
+  "title": "Будущее: will, be going to, Present Continuous для планов",
+  "plannedFrom": "2026-10-31",
+  "plannedTo": "2026-10-31",
+  "sections": {
+    "why": [
+      "В русском будущее почти всегда одно: «буду делать». В английском три основных способа, и каждый говорит о своём: решение «прямо сейчас», заранее задуманный план и договорённость на конкретное время."
+    ],
+    "formation": [
+      "• will + глагол без to. I will call you. Отрицание: will not = won't. Вопрос: Will you come?",
+      "• am/is/are + going to + глагол. She is going to study. Отрицание: I'm not going to go. Вопрос: Are they going to move?",
+      "• Present Continuous: am/is/are + глагол-ing. We are meeting the client at 3. Вопрос: Is he meeting his boss?"
+    ],
+    "usage": [
+      "1. will: решение в момент речи. The phone is ringing. — I'll answer it. (Звонит телефон. — Я отвечу.)",
+      "2. will: обещание, предложение помощи. I won't tell anyone. (Я никому не скажу.) Don't worry, I'll help you. (Не волнуйся, я помогу.)",
+      "3. will: прогноз и мнение (I think, probably, perhaps). I think it will rain tomorrow. (Думаю, завтра будет дождь.)",
+      "4. be going to: план или намерение, решённое заранее. I'm going to learn German this year. (Я собираюсь выучить немецкий в этом году.)",
+      "5. be going to: прогноз по явным признакам, которые видны сейчас. Look at those clouds! It's going to rain. (Смотри на тучи! Сейчас будет дождь.)",
+      "6. Present Continuous: договорённость, о которой уже есть время и место. I'm meeting Anna at six tomorrow. (Я встречаюсь с Анной завтра в шесть.)"
+    ],
+    "signalWords": [
+      "tomorrow, tonight, next week, soon, later, in two days; I think, probably, perhaps (чаще с will); Look! (чаще с going to)."
+    ],
+    "mistakes": [
+      "✗ I will to call you. → ✓ I will call you. После will нет to.",
+      "✗ She will goes there. → ✓ She will go there. После will глагол остаётся в начальной форме.",
+      "✗ We going to buy a car. → ✓ We are going to buy a car. Без am/is/are going to не работает.",
+      "✗ A: I forgot my wallet. B: I'm going to pay. → ✓ I'll pay. Решение принято сейчас, значит will.",
+      "✗ Look at the sky! It will rain. → ✓ It's going to rain. Есть признаки, значит going to.",
+      "✗ I'm not going go. → ✓ I'm not going to go. Между going и глаголом обязательно to."
+    ],
+    "remember": [
+      "Решил сейчас: will. Уже решил: going to. Договорился на время: Present Continuous."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте will или won't с глаголом в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm cold. I ___ (close) the window.",
+          "answer": "will close / 'll close"
+        },
+        {
+          "number": 2,
+          "prompt": "Don't worry. I ___ (not tell) anyone.",
+          "answer": "won't tell / will not tell"
+        },
+        {
+          "number": 3,
+          "prompt": "I think it ___ (rain) tomorrow.",
+          "answer": "will rain"
+        },
+        {
+          "number": 4,
+          "prompt": "The phone is ringing. I ___ (answer) it.",
+          "answer": "will answer / 'll answer"
+        },
+        {
+          "number": 5,
+          "prompt": "She probably ___ (be) late.",
+          "answer": "will be / 'll be"
+        },
+        {
+          "number": 6,
+          "prompt": "I promise I ___ (not forget) your birthday.",
+          "answer": "won't forget / will not forget"
+        },
+        {
+          "number": 7,
+          "prompt": "Don't carry that box. I ___ (help) you.",
+          "answer": "will help / 'll help"
+        },
+        {
+          "number": 8,
+          "prompt": "Perhaps he ___ (call) you later.",
+          "answer": "will call / 'll call"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите will, be going to или Present Continuous",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Look at those clouds! It (a) will rain (b) is going to rain.",
+          "answer": "(b) is going to rain"
+        },
+        {
+          "number": 2,
+          "prompt": "I've decided: I (a) will learn (b) am going to learn German this year.",
+          "answer": "(b) am going to learn"
+        },
+        {
+          "number": 3,
+          "prompt": "A: We have no milk. B: Oh, I (a) will buy (b) am going to buy some.",
+          "answer": "(a) will buy"
+        },
+        {
+          "number": 4,
+          "prompt": "I've bought the tickets. We (a) will fly (b) are flying to Berlin on Friday.",
+          "answer": "(b) are flying"
+        },
+        {
+          "number": 5,
+          "prompt": "I think people (a) will travel (b) are travelling to Mars in the future.",
+          "answer": "(a) will travel"
+        },
+        {
+          "number": 6,
+          "prompt": "Careful! You (a) will fall (b) are going to fall!",
+          "answer": "(b) are going to fall"
+        },
+        {
+          "number": 7,
+          "prompt": "He has just bought paint. He (a) will paint (b) is going to paint the room.",
+          "answer": "(b) is going to paint"
+        },
+        {
+          "number": 8,
+          "prompt": "A: I'm so tired. B: Go to bed. I (a) will wash (b) am going to wash the dishes.",
+          "answer": "(a) will wash"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Сделайте отрицание или вопрос по заданию",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She will call you tomorrow. (negative)",
+          "answer": "She won't call you tomorrow. / She will not call you tomorrow."
+        },
+        {
+          "number": 2,
+          "prompt": "They are going to move to Lviv. (question)",
+          "answer": "Are they going to move to Lviv?"
+        },
+        {
+          "number": 3,
+          "prompt": "You will come to the party. (question)",
+          "answer": "Will you come to the party?"
+        },
+        {
+          "number": 4,
+          "prompt": "I'm going to buy a car. (negative)",
+          "answer": "I'm not going to buy a car. / I am not going to buy a car."
+        },
+        {
+          "number": 5,
+          "prompt": "He is meeting his manager today. (question)",
+          "answer": "Is he meeting his manager today?"
+        },
+        {
+          "number": 6,
+          "prompt": "We will be late. (negative)",
+          "answer": "We won't be late. / We will not be late."
+        },
+        {
+          "number": 7,
+          "prompt": "She is going to study medicine. (question with What)",
+          "answer": "What is she going to study?"
+        },
+        {
+          "number": 8,
+          "prompt": "The team is going to release the update on Monday. (question with When)",
+          "answer": "When is the team going to release the update?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку в предложении",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I will to call you later.",
+          "answer": "I will call you later."
+        },
+        {
+          "number": 2,
+          "prompt": "She will goes to London next week.",
+          "answer": "She will go to London next week."
+        },
+        {
+          "number": 3,
+          "prompt": "Look at the sky! It will rain.",
+          "answer": "Look at the sky! It's going to rain. / Look at the sky! It is going to rain."
+        },
+        {
+          "number": 4,
+          "prompt": "We going to buy a new house.",
+          "answer": "We are going to buy a new house. / We're going to buy a new house."
+        },
+        {
+          "number": 5,
+          "prompt": "A: I forgot my wallet. B: Don't worry, I'm going to pay.",
+          "answer": "A: I forgot my wallet. B: Don't worry, I'll pay. / A: I forgot my wallet. B: Don't worry, I will pay."
+        },
+        {
+          "number": 6,
+          "prompt": "Will she comes to the meeting?",
+          "answer": "Will she come to the meeting?"
+        },
+        {
+          "number": 7,
+          "prompt": "I'm not going go to the party.",
+          "answer": "I'm not going to go to the party. / I am not going to go to the party."
+        },
+        {
+          "number": 8,
+          "prompt": "We are meet the client tomorrow at 10.",
+          "answer": "We are meeting the client tomorrow at 10. / We're meeting the client tomorrow at 10."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я позвоню тебе вечером.",
+          "answer": "I'll call you tonight. / I will call you tonight. / I'll call you this evening. / I will call you this evening."
+        },
+        {
+          "number": 2,
+          "prompt": "Завтра я встречаюсь с клиентом в десять.",
+          "answer": "I'm meeting a client at ten tomorrow. / I'm meeting the client at ten tomorrow. / I'm meeting a client tomorrow at ten."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы собираемся переехать в новый офис.",
+          "answer": "We are going to move to a new office. / We're going to move to a new office."
+        },
+        {
+          "number": 4,
+          "prompt": "Смотри, сейчас пойдёт дождь.",
+          "answer": "Look, it's going to rain. / Look, it is going to rain."
+        },
+        {
+          "number": 5,
+          "prompt": "Я думаю, завтра будет жарко.",
+          "answer": "I think it will be hot tomorrow."
+        },
+        {
+          "number": 6,
+          "prompt": "Не волнуйся, я тебе помогу.",
+          "answer": "Don't worry, I'll help you. / Don't worry, I will help you."
+        },
+        {
+          "number": 7,
+          "prompt": "Что ты собираешься делать в выходные?",
+          "answer": "What are you going to do at the weekend? / What are you going to do this weekend? / What are you going to do on the weekend?"
+        },
+        {
+          "number": 8,
+          "prompt": "Она не придёт на встречу.",
+          "answer": "She won't come to the meeting. / She isn't coming to the meeting. / She is not going to come to the meeting."
+        }
+      ]
+    }
+  ]
+}

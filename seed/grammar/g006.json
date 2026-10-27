@@ -1,0 +1,271 @@
+{
+  "id": "g006",
+  "position": 6,
+  "cefrLevel": "A2",
+  "title": "Past Simple: правильные и неправильные глаголы",
+  "plannedFrom": "2026-10-24",
+  "plannedTo": "2026-10-24",
+  "sections": {
+    "why": [
+      "Past Simple рассказывает о действиях, которые произошли и закончились в прошлом: что вы делали вчера, на прошлой неделе, в 2020 году. В русском для этого есть простое прошедшее время (делал, пошёл), в английском — одна форма на все лица: I worked, she worked, they worked."
+    ],
+    "formation": [
+      "• Утверждение: подлежащее + V2 (вторая форма глагола). I worked. He went.",
+      "• Правильные глаголы: V + -ed (work → worked, play → played). Если глагол оканчивается на -e, добавляем только -d (live → lived). Согласная + y → -ied (study → studied). Короткий глагол с ударной гласной + согласная удваивает её (stop → stopped).",
+      "• Неправильные глаголы нужно учить наизусть: go → went, see → saw, buy → bought, have → had, write → wrote, take → took, make → made.",
+      "• Отрицание: did not (didn't) + V1 (начальная форма). I didn't go. She didn't call.",
+      "• Вопрос: Did + подлежащее + V1? Did you see him? Where did you go?",
+      "• Глагол to be: was / were. I was tired. They were at home. Вопрос и отрицание без did: Was he late? We weren't there."
+    ],
+    "usage": [
+      "1. Законченное действие в прошлом с указанием времени. (I finished the task yesterday. — Я закончил задачу вчера.)",
+      "2. Последовательность действий в рассказе. (He opened the laptop, checked the code and fixed the bug. — Он открыл ноутбук, проверил код и исправил баг.)",
+      "3. Состояние или привычка в прошлом, которых уже нет. (We lived in Kyiv when I was a child. — Мы жили в Киеве, когда я был ребёнком.)"
+    ],
+    "signalWords": [
+      "yesterday, last week / month / year, two days ago, in 2019, when I was young, the other day, then, after that."
+    ],
+    "mistakes": [
+      "• ✗ Did you went there? → ✓ Did you go there? После did глагол всегда в начальной форме.",
+      "• ✗ I didn't saw him. → ✓ I didn't see him. Прошедшее время уже выражено в did.",
+      "• ✗ He goed home. → ✓ He went home. Неправильные глаголы не берут -ed.",
+      "• ✗ She was go to work. → ✓ She went to work. Was/were не нужны с обычным глаголом.",
+      "• ✗ I studyed English. → ✓ I studied English. Согласная + y меняется на -ied."
+    ],
+    "remember": [
+      "В вопросе и отрицании прошедшее время несёт did — а сам глагол возвращается в начальную форму."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Past Simple",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (watch) a movie last night.",
+          "answer": "watched"
+        },
+        {
+          "number": 2,
+          "prompt": "She ___ (go) to the gym yesterday.",
+          "answer": "went"
+        },
+        {
+          "number": 3,
+          "prompt": "We ___ (play) football on Sunday.",
+          "answer": "played"
+        },
+        {
+          "number": 4,
+          "prompt": "He ___ (buy) a new phone last week.",
+          "answer": "bought"
+        },
+        {
+          "number": 5,
+          "prompt": "They ___ (study) for the exam two days ago.",
+          "answer": "studied"
+        },
+        {
+          "number": 6,
+          "prompt": "I ___ (write) an email to the client this morning.",
+          "answer": "wrote"
+        },
+        {
+          "number": 7,
+          "prompt": "The meeting ___ (start) at nine o'clock.",
+          "answer": "started"
+        },
+        {
+          "number": 8,
+          "prompt": "My brother ___ (stop) the car near the bank.",
+          "answer": "stopped"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Did you (a) went (b) go to work yesterday?",
+          "answer": "b (go)"
+        },
+        {
+          "number": 2,
+          "prompt": "She (a) didn't call (b) didn't called me.",
+          "answer": "a (didn't call)"
+        },
+        {
+          "number": 3,
+          "prompt": "We (a) seen (b) saw a great film last Friday.",
+          "answer": "b (saw)"
+        },
+        {
+          "number": 4,
+          "prompt": "He (a) was (b) were at home last night.",
+          "answer": "a (was)"
+        },
+        {
+          "number": 5,
+          "prompt": "I (a) don't have (b) didn't have time yesterday.",
+          "answer": "b (didn't have)"
+        },
+        {
+          "number": 6,
+          "prompt": "Where (a) did you buy (b) you bought this jacket?",
+          "answer": "a (did you buy)"
+        },
+        {
+          "number": 7,
+          "prompt": "They (a) were (b) was very tired after the trip.",
+          "answer": "a (were)"
+        },
+        {
+          "number": 8,
+          "prompt": "The team (a) finished (b) finish the project in May.",
+          "answer": "a (finished)"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Сделайте предложение отрицательным",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ate breakfast this morning.",
+          "answer": "I didn't eat breakfast this morning."
+        },
+        {
+          "number": 2,
+          "prompt": "She called her mother yesterday.",
+          "answer": "She didn't call her mother yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "We went to the cinema last night.",
+          "answer": "We didn't go to the cinema last night."
+        },
+        {
+          "number": 4,
+          "prompt": "He was late for the meeting.",
+          "answer": "He wasn't late for the meeting."
+        },
+        {
+          "number": 5,
+          "prompt": "They took a taxi to the airport.",
+          "answer": "They didn't take a taxi to the airport."
+        },
+        {
+          "number": 6,
+          "prompt": "You made a mistake in the code.",
+          "answer": "You didn't make a mistake in the code."
+        },
+        {
+          "number": 7,
+          "prompt": "The shop opened at eight.",
+          "answer": "The shop didn't open at eight."
+        },
+        {
+          "number": 8,
+          "prompt": "My parents were at home on Saturday.",
+          "answer": "My parents weren't at home on Saturday."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Задайте вопрос к выделенной части (вопросительное слово дано в скобках)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She bought a laptop. (What)",
+          "answer": "What did she buy?"
+        },
+        {
+          "number": 2,
+          "prompt": "They went to Poland last summer. (Where)",
+          "answer": "Where did they go last summer?"
+        },
+        {
+          "number": 3,
+          "prompt": "He woke up at six. (What time)",
+          "answer": "What time did he wake up?"
+        },
+        {
+          "number": 4,
+          "prompt": "We met Anna at the conference. (Who)",
+          "answer": "Who did you meet at the conference? / Who did we meet at the conference?"
+        },
+        {
+          "number": 5,
+          "prompt": "I left the office early because I was sick. (Why)",
+          "answer": "Why did you leave the office early?"
+        },
+        {
+          "number": 6,
+          "prompt": "The film lasted two hours. (How long)",
+          "answer": "How long did the film last?"
+        },
+        {
+          "number": 7,
+          "prompt": "He came home by bus. (How)",
+          "answer": "How did he come home?"
+        },
+        {
+          "number": 8,
+          "prompt": "You saw the manager yesterday. (Yes/no question)",
+          "answer": "Did you see the manager yesterday?"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Вчера я весь день работал дома.",
+          "answer": "I worked at home all day yesterday."
+        },
+        {
+          "number": 2,
+          "prompt": "Она не позвонила мне вчера вечером.",
+          "answer": "She didn't call me last night."
+        },
+        {
+          "number": 3,
+          "prompt": "Ты вчера видел новый дизайн?",
+          "answer": "Did you see the new design yesterday?"
+        },
+        {
+          "number": 4,
+          "prompt": "Мы переехали в Киев в 2018 году.",
+          "answer": "We moved to Kyiv in 2018."
+        },
+        {
+          "number": 5,
+          "prompt": "Мой коллега исправил баг за час.",
+          "answer": "My colleague fixed the bug in an hour."
+        },
+        {
+          "number": 6,
+          "prompt": "Где ты купил этот рюкзак?",
+          "answer": "Where did you buy this backpack?"
+        },
+        {
+          "number": 7,
+          "prompt": "Мы не поехали в отпуск в прошлом году.",
+          "answer": "We didn't go on vacation last year."
+        },
+        {
+          "number": 8,
+          "prompt": "Рейс был поздно, и мы приехали в отель в полночь.",
+          "answer": "The flight was late, and we arrived at the hotel at midnight."
+        }
+      ]
+    }
+  ]
+}

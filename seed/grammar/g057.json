@@ -1,0 +1,270 @@
+{
+  "id": "g057",
+  "position": 57,
+  "cefrLevel": "C1",
+  "title": "Сослагательное наклонение: suggest that he be, It's time you went, I'd rather you did",
+  "plannedFrom": "2027-06-21",
+  "plannedTo": "2027-06-26",
+  "sections": {
+    "why": [
+      "В русском для желаний и рекомендаций есть «бы» («Я бы хотел, чтобы ты пришёл»). В английском есть несколько конструкций, где после определённых слов глагол принимает особую форму, и это не совсем то, что вы ожидаете. Они часто встречаются в деловой речи и в формальных текстах."
+    ],
+    "formation": [
+      "• Mandative subjunctive (формальный): suggest / recommend / insist / demand / propose / require + that + подлежащее + БАЗОВАЯ форма глагола (без -s и без to). Отрицание: that he not go. Британский вариант: should + глагол.",
+      "• It's (high / about) time + подлежащее + Past Simple: It's time you went.",
+      "• would rather + подлежащее + Past Simple (о настоящем и будущем) или Past Perfect (о прошлом): I'd rather you stayed. I'd rather you hadn't said that.",
+      "• Если подлежащее одно и то же: I'd rather go. (без that и без Past Simple)"
+    ],
+    "usage": [
+      "1. Рекомендация, требование, предложение. (The manager suggested that he be present. = Менеджер предложил, чтобы он присутствовал. / We recommend that she see a doctor. = Мы рекомендуем, чтобы она обратилась к врачу.) Заметьте: she see, а не she sees.",
+      "2. It's time + Past Simple означает «пора, чтобы кто-то сделал», при этом смысл настоящий. (It's time you went to bed. = Тебе пора идти спать. / It's high time we fixed this bug. = Давно пора исправить этот баг.)",
+      "3. I'd rather + кто-то сделал: предпочёл бы, чтобы кто-то сделал или не сделал. (I'd rather you didn't smoke here. = Я бы предпочёл, чтобы вы здесь не курили. / I'd rather you called me tomorrow. = Лучше позвоните мне завтра.)",
+      "4. I'd rather + Past Perfect: сожаление о прошлом. (I'd rather you hadn't told her. = Лучше бы ты ей не говорил.)"
+    ],
+    "signalWords": [
+      "suggest, recommend, insist, demand, propose, require, request, it's important / essential / vital that, it's time, it's high time, would rather, would sooner."
+    ],
+    "mistakes": [
+      "✗ He suggested that she goes. → ✓ He suggested that she go. В формальном стиле после suggest нужна базовая форма.",
+      "✗ It's time you to go. → ✓ It's time you went. После you идёт Past Simple, а не инфинитив.",
+      "✗ It's time you go home. → ✓ It's time you went home. Это Past Simple, хотя речь о настоящем.",
+      "✗ I'd rather you to stay. → ✓ I'd rather you stayed. После would rather нет to.",
+      "✗ I'd rather you didn't say that. (о прошлом) → ✓ I'd rather you hadn't said that. Если речь о прошлом, нужен Past Perfect."
+    ],
+    "remember": [
+      "После suggest/insist/demand that: базовая форма (he be, she go). После It's time и I'd rather + другое лицо: Past Simple, но смысл про настоящее."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в правильную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It's time you ___ (go) to bed.",
+          "answer": "went"
+        },
+        {
+          "number": 2,
+          "prompt": "The doctor recommended that he ___ (rest) for a week.",
+          "answer": "rest"
+        },
+        {
+          "number": 3,
+          "prompt": "I'd rather you ___ (not, tell) anyone about this.",
+          "answer": "didn't tell"
+        },
+        {
+          "number": 4,
+          "prompt": "They insisted that she ___ (be) present at the meeting.",
+          "answer": "be"
+        },
+        {
+          "number": 5,
+          "prompt": "It's high time we ___ (leave).",
+          "answer": "left"
+        },
+        {
+          "number": 6,
+          "prompt": "I suggest that he ___ (apply) for the job today.",
+          "answer": "apply"
+        },
+        {
+          "number": 7,
+          "prompt": "I'd rather you ___ (call) me after lunch.",
+          "answer": "called"
+        },
+        {
+          "number": 8,
+          "prompt": "The rules require that every user ___ (change) the password.",
+          "answer": "change"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She demanded that he (a) apologizes (b) apologize.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "It's time you (a) to start (b) started working.",
+          "answer": "b"
+        },
+        {
+          "number": 3,
+          "prompt": "I'd rather you (a) stay (b) stayed here tonight.",
+          "answer": "b"
+        },
+        {
+          "number": 4,
+          "prompt": "It's essential that the report (a) is (b) be ready by Friday.",
+          "answer": "b"
+        },
+        {
+          "number": 5,
+          "prompt": "I'd rather (a) go (b) to go home now.",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "They proposed that the meeting (a) be moved (b) is moved to Monday.",
+          "answer": "a"
+        },
+        {
+          "number": 7,
+          "prompt": "It's about time he (a) learn (b) learned to drive.",
+          "answer": "b"
+        },
+        {
+          "number": 8,
+          "prompt": "I'd rather you (a) hadn't (b) didn't said that yesterday.",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, начав с данных слов",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You should leave now. → It's time ...",
+          "answer": "It's time you left."
+        },
+        {
+          "number": 2,
+          "prompt": "I don't want you to open the window. → I'd rather ...",
+          "answer": "I'd rather you didn't open the window."
+        },
+        {
+          "number": 3,
+          "prompt": "My boss said, \"Please send me the report.\" → My boss asked that ...",
+          "answer": "My boss asked that I send him the report. / My boss asked that I send her the report. / My boss requested that I send the report."
+        },
+        {
+          "number": 4,
+          "prompt": "\"You must come with us,\" she said. → She insisted that ...",
+          "answer": "She insisted that I come with them. / She insisted that he come with them. / She insisted that we come with them."
+        },
+        {
+          "number": 5,
+          "prompt": "You should have started the project earlier. → It's high time ...",
+          "answer": "It's high time you started the project."
+        },
+        {
+          "number": 6,
+          "prompt": "I regret that you told him the secret. → I'd rather ...",
+          "answer": "I'd rather you hadn't told him the secret."
+        },
+        {
+          "number": 7,
+          "prompt": "\"Why don't you see a lawyer?\" he said to me. → He suggested that ...",
+          "answer": "He suggested that I see a lawyer."
+        },
+        {
+          "number": 8,
+          "prompt": "I prefer that Tom doesn't come. → I'd rather ...",
+          "answer": "I'd rather Tom didn't come."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He suggested that she goes to the doctor.",
+          "answer": "He suggested that she go to the doctor."
+        },
+        {
+          "number": 2,
+          "prompt": "It's time you to finish your homework.",
+          "answer": "It's time you finished your homework."
+        },
+        {
+          "number": 3,
+          "prompt": "I'd rather you to stay at home.",
+          "answer": "I'd rather you stayed at home."
+        },
+        {
+          "number": 4,
+          "prompt": "It's time we go home.",
+          "answer": "It's time we went home."
+        },
+        {
+          "number": 5,
+          "prompt": "The client insisted that the code is tested again.",
+          "answer": "The client insisted that the code be tested again."
+        },
+        {
+          "number": 6,
+          "prompt": "I'd rather you don't park here.",
+          "answer": "I'd rather you didn't park here."
+        },
+        {
+          "number": 7,
+          "prompt": "We recommend that he takes a break.",
+          "answer": "We recommend that he take a break."
+        },
+        {
+          "number": 8,
+          "prompt": "I'd rather you didn't come to the party last week.",
+          "answer": "I'd rather you hadn't come to the party last week."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Тебе пора начать искать новую работу.",
+          "answer": "It's time you started looking for a new job. / It's time you started to look for a new job."
+        },
+        {
+          "number": 2,
+          "prompt": "Я бы предпочёл, чтобы ты не опаздывал на встречи.",
+          "answer": "I'd rather you didn't come late to meetings. / I'd rather you weren't late for meetings. / I'd rather you didn't arrive late to meetings."
+        },
+        {
+          "number": 3,
+          "prompt": "Врач порекомендовал, чтобы он больше спал.",
+          "answer": "The doctor recommended that he sleep more. / The doctor recommended that he get more sleep."
+        },
+        {
+          "number": 4,
+          "prompt": "Давно пора обновить сайт.",
+          "answer": "It's high time we updated the website. / It's high time the website was updated. / It's high time we updated the site."
+        },
+        {
+          "number": 5,
+          "prompt": "Клиент потребовал, чтобы мы закончили проект до пятницы.",
+          "answer": "The client demanded that we finish the project by Friday."
+        },
+        {
+          "number": 6,
+          "prompt": "Лучше бы ты мне ничего не говорил вчера.",
+          "answer": "I'd rather you hadn't told me anything yesterday."
+        },
+        {
+          "number": 7,
+          "prompt": "Я предлагаю, чтобы она провела презентацию.",
+          "answer": "I suggest that she give the presentation. / I suggest that she do the presentation."
+        },
+        {
+          "number": 8,
+          "prompt": "Мне пора ехать домой.",
+          "answer": "It's time I went home."
+        }
+      ]
+    }
+  ]
+}

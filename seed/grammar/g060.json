@@ -1,0 +1,273 @@
+{
+  "id": "g060",
+  "position": 60,
+  "cefrLevel": "C1",
+  "title": "Будущее в прошлом: was going to, was about to, would",
+  "plannedFrom": "2027-07-12",
+  "plannedTo": "2027-07-17",
+  "sections": {
+    "why": [
+      "Когда мы рассказываем о прошлом, часто нужно сказать, что было дальше с точки зрения того момента: «Я собирался позвонить», «Он знал, что всё получится». Это будущее в прошлом. В русском оно выражается обычным прошедшим временем, а в английском нужны специальные формы."
+    ],
+    "formation": [
+      "• was/were going to + инфинитив: планировал, собирался",
+      "• was/were about to + инфинитив: вот-вот собирался (прямо в этот момент)",
+      "• would + инфинитив: в рассказе о прошлом, часто после said, knew, thought, promised",
+      "• was/were to + инфинитив: по плану, часто в литературном стиле (He was to become a famous writer.)",
+      "• was/were + V-ing: запланированное действие (We were meeting at six.)",
+      "• was/were going to have done, would have done: о том, что не произошло"
+    ],
+    "usage": [
+      "1. Was/were going to — план или намерение в прошлом; иногда план не осуществился. (I was going to call you, but I forgot. = Я собирался тебе позвонить, но забыл. / She said she was going to move to London. = Она сказала, что собирается переехать в Лондон.)",
+      "2. Was/were about to — действие вот-вот должно было начаться, когда его что-то прервало. Часто в паре с when. (I was about to leave when the phone rang. = Я уже собирался уходить, когда зазвонил телефон.)",
+      "3. Would — предсказание или обещание в рассказе о прошлом, косвенная речь. (He promised he would help. = Он пообещал, что поможет. / I knew it would be difficult. = Я знал, что будет трудно.)",
+      "4. Was/were to — судьба или официальный план. (They were to meet again ten years later. = Им предстояло встретиться снова через десять лет.)",
+      "5. Was/were V-ing — договорённость. (We were having dinner with them that evening. = В тот вечер мы ужинали с ними.)"
+    ],
+    "signalWords": [
+      "said that, thought that, knew that, promised, hoped, expected, the next day, the following week, later, when (прервало), just then."
+    ],
+    "mistakes": [
+      "✗ He said he will come. → ✓ He said he would come. После said в прошедшем нужен would.",
+      "✗ I was going call her. → ✓ I was going to call her. Пропущено to.",
+      "✗ I was about leaving when he arrived. → ✓ I was about to leave when he arrived. После about to идёт инфинитив, а не -ing.",
+      "✗ She said she is going to quit. (в рассказе о прошлом) → ✓ She said she was going to quit. Время смещается назад.",
+      "✗ I was going to call, but I called. → ✓ I was going to call, but I didn't. Was going to без реализации: потом нужно сказать, что не сделали."
+    ],
+    "remember": [
+      "Was going to — «собирался», was about to — «вот-вот собирался», would — «будет» с точки зрения прошлого."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте was/were going to, was/were about to или would",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He promised he ___ help us with the deployment.",
+          "answer": "would"
+        },
+        {
+          "number": 2,
+          "prompt": "I ___ leave the office when my boss called.",
+          "answer": "was about to"
+        },
+        {
+          "number": 3,
+          "prompt": "We ___ visit Rome, but we changed our plans.",
+          "answer": "were going to"
+        },
+        {
+          "number": 4,
+          "prompt": "She knew that the project ___ be a success.",
+          "answer": "would"
+        },
+        {
+          "number": 5,
+          "prompt": "They ___ sign the contract when the lights went out.",
+          "answer": "were about to"
+        },
+        {
+          "number": 6,
+          "prompt": "I ___ tell you about it, but I forgot.",
+          "answer": "was going to"
+        },
+        {
+          "number": 7,
+          "prompt": "He said he ___ call me back in an hour.",
+          "answer": "would"
+        },
+        {
+          "number": 8,
+          "prompt": "We ___ start the meeting when the manager walked in.",
+          "answer": "were about to"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She said she (a) will (b) would come to the party.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "I (a) was about to (b) was about call you when you called me.",
+          "answer": "a"
+        },
+        {
+          "number": 3,
+          "prompt": "He told me he (a) is (b) was going to resign.",
+          "answer": "b"
+        },
+        {
+          "number": 4,
+          "prompt": "I knew they (a) would be (b) will be late again.",
+          "answer": "a"
+        },
+        {
+          "number": 5,
+          "prompt": "We were (a) going buy (b) going to buy a new car, but it was too expensive.",
+          "answer": "b"
+        },
+        {
+          "number": 6,
+          "prompt": "She was (a) about to (b) about leaving the room when he spoke.",
+          "answer": "a"
+        },
+        {
+          "number": 7,
+          "prompt": "I hoped that things (a) would (b) will get better.",
+          "answer": "a"
+        },
+        {
+          "number": 8,
+          "prompt": "They said they (a) are meeting (b) were meeting us at six.",
+          "answer": "b"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение в прошедшем времени",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She says, \"I will help you.\" → She said ...",
+          "answer": "She said she would help me. / She said that she would help me."
+        },
+        {
+          "number": 2,
+          "prompt": "He thinks, \"It's going to be a great day.\" → He thought ...",
+          "answer": "He thought it was going to be a great day. / He thought that it was going to be a great day."
+        },
+        {
+          "number": 3,
+          "prompt": "I am going to call my mother now, but the phone rings. → I was ...",
+          "answer": "I was about to call my mother when the phone rang. / I was going to call my mother when the phone rang."
+        },
+        {
+          "number": 4,
+          "prompt": "They say, \"We will finish by Friday.\" → They said ...",
+          "answer": "They said they would finish by Friday. / They said that they would finish by Friday."
+        },
+        {
+          "number": 5,
+          "prompt": "I plan to learn Spanish this year. → Last year I ...",
+          "answer": "Last year I was going to learn Spanish."
+        },
+        {
+          "number": 6,
+          "prompt": "\"The train will be late,\" she predicted. → She predicted that ...",
+          "answer": "She predicted that the train would be late."
+        },
+        {
+          "number": 7,
+          "prompt": "He is just about to press the button, but he stops. → He was ...",
+          "answer": "He was about to press the button, but he stopped."
+        },
+        {
+          "number": 8,
+          "prompt": "\"We aren't going to win,\" they believed. → They believed that ...",
+          "answer": "They believed that they weren't going to win. / They believed that they were not going to win. / They believed that they wouldn't win."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He said he will come tomorrow.",
+          "answer": "He said he would come the next day. / He said he would come tomorrow."
+        },
+        {
+          "number": 2,
+          "prompt": "I was going call you yesterday.",
+          "answer": "I was going to call you yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "She was about leaving when I arrived.",
+          "answer": "She was about to leave when I arrived."
+        },
+        {
+          "number": 4,
+          "prompt": "They told me they are going to move.",
+          "answer": "They told me they were going to move."
+        },
+        {
+          "number": 5,
+          "prompt": "I was going to send the email, but I sent it.",
+          "answer": "I was going to send the email, but I didn't."
+        },
+        {
+          "number": 6,
+          "prompt": "He promised that he helps me.",
+          "answer": "He promised that he would help me."
+        },
+        {
+          "number": 7,
+          "prompt": "We were about to going out when it started to rain.",
+          "answer": "We were about to go out when it started to rain."
+        },
+        {
+          "number": 8,
+          "prompt": "I thought it will be easy.",
+          "answer": "I thought it would be easy."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я собирался позвонить тебе, но забыл.",
+          "answer": "I was going to call you, but I forgot."
+        },
+        {
+          "number": 2,
+          "prompt": "Он пообещал, что исправит баг до вечера.",
+          "answer": "He promised he would fix the bug by the evening. / He promised that he would fix the bug by the evening. / He promised he would fix the bug by tonight."
+        },
+        {
+          "number": 3,
+          "prompt": "Я уже собирался выйти из дома, когда пошёл дождь.",
+          "answer": "I was about to leave the house when it started to rain. / I was about to leave home when it started to rain."
+        },
+        {
+          "number": 4,
+          "prompt": "Мы думали, что поездка будет дорогой.",
+          "answer": "We thought the trip would be expensive. / We thought that the trip would be expensive."
+        },
+        {
+          "number": 5,
+          "prompt": "Она сказала, что переедет в Берлин в следующем году.",
+          "answer": "She said she would move to Berlin the following year. / She said that she would move to Berlin the following year. / She said she was going to move to Berlin the next year."
+        },
+        {
+          "number": 6,
+          "prompt": "Мы планировали запустить сайт в понедельник.",
+          "answer": "We were going to launch the website on Monday. / We were going to launch the site on Monday. / We were planning to launch the website on Monday."
+        },
+        {
+          "number": 7,
+          "prompt": "Я знал, что ты придёшь.",
+          "answer": "I knew you would come. / I knew that you would come."
+        },
+        {
+          "number": 8,
+          "prompt": "Он как раз собирался сделать презентацию, когда отключили свет.",
+          "answer": "He was just about to give the presentation when the power went out. / He was about to give the presentation when the power went out. / He was just about to do the presentation when the lights went out."
+        }
+      ]
+    }
+  ]
+}

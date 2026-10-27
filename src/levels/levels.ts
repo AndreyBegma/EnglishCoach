@@ -38,7 +38,8 @@ const asLevel = (state: LevelState): Level => ({
   band: bandOf(state.rating),
 });
 
-const levelOf = (difficulty: Difficulty, rating: number) =>
+/** A difficulty on the rating scale; null (pitched at the learner) is the learner's `rating`. */
+const levelOf = (difficulty: Difficulty, rating: number): number =>
   difficulty === null
     ? rating
     : typeof difficulty === "number"
@@ -100,6 +101,14 @@ async function backfillFromCache(
   return lockSkillLevel(tx, userId, skill);
 }
 
+/** The skill's level after a graded item, and where the item sat against the level before it. */
+export type GradedLevel = Level & {
+  /** The skill's rating before the item. */
+  before: number;
+  /** The item's level on the same scale (`levelOf` its difficulty). */
+  itemLevel: number;
+};
+
 /**
  * The one entry point every grader calls after it has graded an item: `score` is 0..1 (partial
  * credit in between), `difficulty` what the item was pitched at. Moves the skill's rating, then
@@ -112,17 +121,17 @@ export async function recordGradedItem(
   difficulty: Difficulty,
   score: number,
   { expected = 0.5, now = new Date() }: RecordOptions = {},
-): Promise<Level> {
+): Promise<GradedLevel> {
   return db.transaction(async (tx) => {
     const row =
       (await lockSkillLevel(tx, userId, skill)) ??
       (await backfillFromCache(tx, userId, skill, now));
     const current = row ? drift(row, now.getTime() - row.updatedAt.getTime()) : PRIOR;
-    const at = pitched(levelOf(difficulty, current.rating), expected);
-    const next = update(current, at, score);
+    const itemLevel = levelOf(difficulty, current.rating);
+    const next = update(current, pitched(itemLevel, expected), score);
     await putSkillLevels(tx, userId, [{ skill, ...next, evidence: (row?.evidence ?? 0) + 1 }], now);
     await refreshCache(tx, userId);
-    return asLevel(next);
+    return { ...asLevel(next), before: current.rating, itemLevel };
   });
 }
 

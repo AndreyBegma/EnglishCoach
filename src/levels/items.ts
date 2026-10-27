@@ -1,13 +1,15 @@
 import { eq } from "drizzle-orm";
 import type { Db } from "../db/client";
 import { type CardRow, type CefrLevel, type Skill, words } from "../db/schema";
+import { awardCardRating, awardGrammarItem, awardTalkTurn } from "../gamification/awards";
 import { topicById } from "../grammar/topics";
 import { type Difficulty, recordGradedItem, seedLevels } from "./levels";
 import { parseCefr } from "./model";
 
 /**
  * What each grader's item is worth to the level model: its difficulty and its score. Kept here so
- * the graders make one call and the numbers live in one place.
+ * the graders make one call and the numbers live in one place. The same call awards the item's XP
+ * (`src/gamification/`), against the learner's level before the item.
  */
 
 /**
@@ -59,8 +61,16 @@ export async function recordGrammarItem(
   verdict: keyof typeof GRAMMAR_SCORES,
 ): Promise<void> {
   const difficulty = grammarItemDifficulty(item);
-  await recordGradedItem(db, userId, "grammar", difficulty, GRAMMAR_SCORES[verdict], {
+  const score = GRAMMAR_SCORES[verdict];
+  const graded = await recordGradedItem(db, userId, "grammar", difficulty, score, {
     expected: ITEM_EXPECTED.quiz,
+  });
+  await awardGrammarItem(db, userId, {
+    topicId: item.topic_id,
+    verdict,
+    score,
+    itemLevel: graded.itemLevel,
+    rating: graded.before,
   });
 }
 
@@ -77,17 +87,29 @@ export async function cardDifficulty(db: Db, card: { wordId: number | null }): P
 /** FSRS ratings as scores: Hard is a recall that took effort. */
 export const CARD_SCORES = { again: 0, hard: 0.5, good: 1, easy: 1 } as const;
 
-/** A rated vocabulary card, into the vocabulary level. Grammar-pattern cards are not words. */
+/**
+ * A rated vocabulary card, into the vocabulary level and XP. `card` is the card as it was before
+ * the rating (its FSRS `state` says whether it was still being learned). Grammar-pattern cards
+ * are not words.
+ */
 export async function recordCardRating(
   db: Db,
   userId: number,
-  card: Pick<CardRow, "itemType" | "wordId">,
+  card: Pick<CardRow, "id" | "itemType" | "wordId" | "state">,
   rating: keyof typeof CARD_SCORES,
 ): Promise<void> {
   if (card.itemType === "grammar_pattern") return;
   const difficulty = await cardDifficulty(db, card);
-  await recordGradedItem(db, userId, "vocabulary", difficulty, CARD_SCORES[rating], {
+  const score = CARD_SCORES[rating];
+  const graded = await recordGradedItem(db, userId, "vocabulary", difficulty, score, {
     expected: ITEM_EXPECTED.card,
+  });
+  await awardCardRating(db, userId, {
+    cardId: card.id,
+    state: card.state,
+    score,
+    itemLevel: graded.itemLevel,
+    rating: graded.before,
   });
 }
 
@@ -110,7 +132,7 @@ export function turnScore(
   return Math.max(0, 1 - penalty);
 }
 
-/** A corrected conversation turn, into the writing level; a too-short turn records nothing. */
+/** A corrected conversation turn, into the writing level and XP; a too-short turn records nothing. */
 export async function recordTalkTurn(
   db: Db,
   userId: number,
@@ -120,4 +142,5 @@ export async function recordTalkTurn(
   const score = turnScore(text, corrections);
   if (score === null) return;
   await recordGradedItem(db, userId, "writing", null, score, { expected: ITEM_EXPECTED.turn });
+  await awardTalkTurn(db, userId, score);
 }

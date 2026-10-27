@@ -124,6 +124,9 @@ const envSchema = z
     WORD_ENRICH_CONCURRENCY: unsetIfBlank(z.coerce.number().int().min(1).max(10).default(1)),
     WORD_BACKFILL_EVERY_MINUTES: unsetIfBlank(z.coerce.number().int().min(0).max(1440).default(30)),
     WORD_BACKFILL_WORDS: unsetIfBlank(z.coerce.number().int().min(1).max(200).default(20)),
+    // Pictures on new-word cards: Pexels first, Unsplash as the fallback. Neither: no pictures.
+    PEXELS_API_KEY: unsetIfBlank(requiredString.optional()),
+    UNSPLASH_ACCESS_KEY: unsetIfBlank(requiredString.optional()),
   })
   .superRefine((env, ctx) => {
     if (env.BOT_MODE !== "webhook") return;

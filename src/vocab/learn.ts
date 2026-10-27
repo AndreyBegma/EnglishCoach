@@ -1,3 +1,5 @@
+import { InlineKeyboard } from "grammy";
+import type { InlineKeyboardButton } from "grammy/types";
 import type { BotContext } from "../bot/context";
 import {
   createCard,
@@ -9,12 +11,13 @@ import {
 } from "../db/repositories/cards";
 import { getWordEnrichment } from "../db/repositories/word-enrichments";
 import type { CardBack, CardRow, Language, Word, WordEnrichmentData } from "../db/schema";
+import type { WordImage } from "../images";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { SkillOutput } from "../skills";
 import { WordPicker } from "../words/picker";
 import type { VocabCallback } from "./callbacks";
 import { button, type Lead, type VocabCore } from "./core";
-import { cardHtml, escapeHtml } from "./render";
+import { cardCaption, cardHtml, escapeHtml, HTML } from "./render";
 import { speakRow } from "./speak";
 import { readFlow, writeFlow } from "./state";
 import { localDate, newWordsOn } from "./stats";
@@ -30,6 +33,8 @@ export function backFromEnrichment(data: SkillOutput<"vocab-enrich">): CardBack 
     examples: data.examples,
     collocations: data.collocations,
     mnemonic: data.mnemonic,
+    imageQuery: data.image_query,
+    emoji: data.emoji,
   };
 }
 
@@ -42,6 +47,8 @@ export function backFromCache(data: WordEnrichmentData): CardBack {
     examples: data.examples,
     collocations: data.collocations,
     mnemonic: data.mnemonic,
+    imageQuery: data.imageQuery,
+    emoji: data.emoji ?? null,
   };
 }
 
@@ -90,6 +97,8 @@ export class LearnFlow implements SessionKindHandler {
       case "got-it":
         return step?.kind === "card" && step.cardId === callback.cardId;
       case "know":
+        return step?.kind === "card" && step.cardId === callback.cardId;
+      case "next-image":
         return step?.kind === "card" && step.cardId === callback.cardId;
       case "unknow":
         // Idempotent and independent of the step; the button is only on the screen after "know".
@@ -147,6 +156,9 @@ export class LearnFlow implements SessionKindHandler {
         }
         return;
       }
+      case "next-image":
+        await this.nextImage(handle, ctx, callback.cardId);
+        return;
       case "choice":
         if (step?.kind === "choice") await this.answer(handle, ctx, step, callback.index);
         return;
@@ -296,23 +308,81 @@ export class LearnFlow implements SessionKindHandler {
     await this.showCard(handle, ctx, card);
   }
 
+  /**
+   * "Another picture": the word's next picture replaces the photo in place. With none left, the
+   * card comes back as it was (the answer lock took its buttons) under a note.
+   */
+  private async nextImage(handle: LearningHandle, ctx: BotContext, cardId: number) {
+    const { db, images, log } = this.core.deps;
+    const card = await getCard(db, handle.user.id, cardId);
+    const query = card?.backJson.imageQuery;
+    if (!card?.wordId || !query || !images) return;
+    const image = await images.next(card.wordId, query).catch((error: unknown) => {
+      log.warn("next word image failed", { wordId: card.wordId, error });
+      return undefined;
+    });
+    await this.showCard(handle, ctx, card);
+    if (!image) await handle.window.flashNote(this.core.t(handle)("vocab-image-none"));
+  }
+
+  /** The stored or freshly fetched picture of a dictionary word; undefined on any failure. */
+  private async imageFor(card: CardRow): Promise<WordImage | undefined> {
+    const { images, log } = this.core.deps;
+    const query = card.backJson.imageQuery;
+    if (!images || !card.wordId || !query) return undefined;
+    try {
+      return await images.forWord(card.wordId, query);
+    } catch (error) {
+      log.warn("word image failed", { wordId: card.wordId, error });
+      return undefined;
+    }
+  }
+
+  /**
+   * A new word's card: one photo with the card as its caption when the word has a picture, else
+   * the text card. A photo Telegram refuses falls back to the text card too.
+   */
   private async showCard(handle: LearningHandle, ctx: BotContext, card: CardRow, lead?: Lead) {
     const t = this.core.t(handle);
-    await this.core.show(
-      handle,
-      cardHtml(t, card),
+    const image = await this.imageFor(card);
+    const caption = image && cardCaption(t, card, image, lead?.line);
+    const rows = (photo: boolean) => [
       [
-        [
-          button(t("vocab-got-it"), { op: "got-it", cardId: card.id }),
-          button(t("vocab-know"), { op: "know", cardId: card.id }),
-        ],
-        [button(t("vocab-add-word"), { op: "add-word" })],
-        ...speakRow(t, ctx, card.id),
-        [button(t("vocab-finish"), { op: "finish" })],
+        button(t("vocab-got-it"), { op: "got-it", cardId: card.id }),
+        button(t("vocab-know"), { op: "know", cardId: card.id }),
       ],
-      lead,
-    );
+      ...(photo ? [[button(t("vocab-image-next"), { op: "next-image", cardId: card.id })]] : []),
+      [button(t("vocab-add-word"), { op: "add-word" })],
+      ...speakRow(t, ctx, card.id),
+      [button(t("vocab-finish"), { op: "finish" })],
+    ];
+    const shown =
+      image &&
+      caption &&
+      (await this.showPhoto(handle, image, caption, [...(lead?.rows ?? []), ...rows(true)]));
+    if (!shown) await this.core.show(handle, cardHtml(t, card), rows(false), lead);
     writeFlow(ctx, handle.session.id, { kind: "card", cardId: card.id });
+  }
+
+  /** False when Telegram would not take the photo (a URL it cannot fetch, for one). */
+  private async showPhoto(
+    handle: LearningHandle,
+    image: WordImage,
+    caption: string,
+    keyboard: InlineKeyboardButton[][],
+  ): Promise<boolean> {
+    try {
+      await handle.window.show({
+        photo: image.url,
+        caption,
+        ...HTML,
+        reply_markup: InlineKeyboard.from(keyboard),
+      });
+      return true;
+    } catch (error) {
+      this.core.deps.log.warn("word image not shown", { wordId: image.wordId, error });
+      return false;
+    }
   }
 
   private async sendIdle(handle: LearningHandle, ctx: BotContext, text: string, lead?: Lead) {

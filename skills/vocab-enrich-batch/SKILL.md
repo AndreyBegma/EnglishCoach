@@ -50,5 +50,9 @@ For each card:
   {{native_lang}} speaker. Use only real words of either language — never invent or distort a
   word to force a sound-alike; when no honest one exists, use an image or a word-family link
   (`decide → decision`). Never offensive, never misleading about meaning.
-- `image_query`: a short English phrase (2–6 words) to search a stock photo that shows this sense
-  of the word, e.g. `person choosing between two roads`.
+- `image_query`: when a photo can show this sense, a short English phrase (2–6 words) to search a
+  stock photo of the scene in the first example, e.g. `person choosing between two roads`. When
+  the word is abstract and no photo would show it honestly (`although`, `whether`, `ought`),
+  null.
+- `emoji`: when `image_query` is null, one emoji that best hints at the meaning (the mnemonic
+  carries the rest); otherwise null.

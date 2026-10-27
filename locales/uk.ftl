@@ -145,6 +145,9 @@ provider-unavailable-server = Серверна LLM не налаштована. 
 # --- vocabulary ---
 vocab-collocations = Сполучення: { $list }
 vocab-mnemonic = 💡 { $text }
+vocab-photo-credit = 📷 { $author } / { $source }
+vocab-image-next = 🔄 Інша картинка
+vocab-image-none = Іншої картинки для цього слова немає.
 vocab-got-it = ✅ Зрозуміло
 vocab-know = 💯 Знаю це слово
 vocab-known = 💯 «{ $word }» позначено як відоме — більше не покажу.

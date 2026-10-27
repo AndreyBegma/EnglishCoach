@@ -17,16 +17,14 @@ const SEVERITY_MARKER: Record<Severity, string> = {
 export function topicPicker(i18n: Translator, locale: Locale, level: CefrLevel | null) {
   const keyboard = new InlineKeyboard().text(
     i18n.t(locale, "grammar-mixed"),
-    encodeGrammarCallback({ type: "topic", index: null }),
+    encodeGrammarCallback({ type: "topic", id: null }),
   );
-  keyboard.row();
-  topicsForLevel(level).forEach(({ index, topic }, position) => {
-    keyboard.text(
-      i18n.t(locale, `grammar-topic-${topic.id.replaceAll("_", "-")}`),
-      encodeGrammarCallback({ type: "topic", index }),
-    );
-    if (position % 2 === 1) keyboard.row();
-  });
+  // One topic per row: syllabus titles are too long to share a row.
+  for (const topic of topicsForLevel(level)) {
+    keyboard
+      .row()
+      .text(topic.title[locale], encodeGrammarCallback({ type: "topic", id: topic.id }));
+  }
   return { text: i18n.t(locale, "grammar-pick-topic"), keyboard };
 }
 

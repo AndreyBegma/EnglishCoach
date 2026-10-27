@@ -79,6 +79,26 @@ describe.skipIf(!testServerUrl)("mistakes repository", () => {
     expect(other.count).toBe(1);
   });
 
+  test("upsert stores the topic id and keeps it when a later occurrence has none", async () => {
+    const user = await getOrCreateUser(database.db, { telegramId: 2005 });
+    const input = {
+      category: "grammar" as const,
+      pattern: "missing article",
+      exampleWrong: "I bought car",
+      exampleRight: "I bought a car",
+      explanation: "A singular countable noun needs an article.",
+    };
+
+    expect((await upsertMistake(database.db, user.id, input)).topicId).toBeNull();
+    expect((await upsertMistake(database.db, user.id, { ...input, topicId: "g004" })).topicId).toBe(
+      "g004",
+    );
+    expect((await upsertMistake(database.db, user.id, input)).topicId).toBe("g004");
+    expect((await upsertMistake(database.db, user.id, { ...input, topicId: "g041" })).topicId).toBe(
+      "g041",
+    );
+  });
+
   test("upsert refuses a pattern that normalises to nothing", async () => {
     const user = await getOrCreateUser(database.db, { telegramId: 2004 });
     await expect(

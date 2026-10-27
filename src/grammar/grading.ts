@@ -1,5 +1,6 @@
 import type { SkillOutput, SkillRunner } from "../skills";
 import type { QuizItem } from "./state";
+import { knownTopicId } from "./topics";
 
 export type Severity = NonNullable<SkillOutput<"grammar-check">["severity"]>;
 type MistakeCategory = NonNullable<SkillOutput<"grammar-check">["category"]>;
@@ -19,6 +20,8 @@ export type Graded = {
     pattern: string;
     exampleWrong: string;
     exampleRight: string;
+    /** A validated syllabus topic id, or null. */
+    topicId: string | null;
   } | null;
 };
 
@@ -69,6 +72,7 @@ export function gradeChoice(item: QuizItem, chosen: number): Graded {
       pattern: item.topic,
       exampleWrong: inSentence(item.question, options[chosen] ?? ""),
       exampleRight: inSentence(item.question, right),
+      topicId: knownTopicId(item.topic_id),
     },
   };
 }
@@ -83,6 +87,8 @@ export async function gradeTyped(
   userId: number,
   item: QuizItem,
   answer: string,
+  /** The syllabus topics the check may name for the error. */
+  topics: { id: string; title: string }[] = [],
 ): Promise<Graded> {
   if (item.type === "multiple_choice")
     throw new Error("a multiple-choice item has no typed answer");
@@ -104,6 +110,8 @@ export async function gradeTyped(
     instruction: item.instruction,
     accepted_answers: item.accepted_answers,
     learner_answer: answer,
+    topic_id: knownTopicId(item.topic_id),
+    syllabus_topics: topics,
   });
   if (data.verdict === "correct") {
     return {
@@ -129,6 +137,7 @@ export async function gradeTyped(
             pattern: data.pattern,
             exampleWrong: answer.trim(),
             exampleRight: data.normalized_answer,
+            topicId: knownTopicId(data.topic_id) ?? knownTopicId(item.topic_id),
           }
         : null,
   };

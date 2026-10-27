@@ -1,0 +1,190 @@
+# A1 topics the owner's course (which starts at A2) does not cover. Ids continue its numbering.
+
+g086:
+  level: A1.1
+  title:
+    en: There is / there are
+    ru: There is / there are
+    uk: There is / there are
+  prerequisites: []
+  contrast_with: [g087]
+  examples:
+    - There is a café near my office.
+    - There are two meetings today.
+    - Is there any milk in the fridge?
+  interference:
+    - wrong: In my room is a big table.
+      right: There is a big table in my room.
+      cause: Russian and Ukrainian start with the place and need no dummy subject ("В комнате стоит стол").
+    - wrong: There are a lot of work today.
+      right: There is a lot of work today.
+      cause: Learners pick the verb by the meaning "много" instead of by the uncountable noun.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g087:
+  level: A1.2
+  title:
+    en: "have / have got: possession"
+    ru: "have / have got: принадлежность"
+    uk: "have / have got: належність"
+  prerequisites: []
+  contrast_with: [g086]
+  examples:
+    - I have two brothers.
+    - She has got a new laptop.
+    - Do you have a car?
+  interference:
+    - wrong: At me is a dog.
+      right: I have a dog.
+      cause: Russian and Ukrainian express possession with "у меня есть", so learners translate it word for word.
+    - wrong: She have a cat.
+      right: She has a cat.
+      cause: The third-person form "has" has no counterpart in Russian or Ukrainian verbs of possession.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g088:
+  level: A1.2
+  title:
+    en: "Subject and object pronouns: I / me, he / him"
+    ru: "Личные местоимения в именительном и объектном падеже: I / me, he / him"
+    uk: "Особові займенники в називному та об'єктному відмінку: I / me, he / him"
+  prerequisites: []
+  contrast_with: []
+  examples:
+    - She calls me every day.
+    - We met them at the station.
+    - Tell him about it.
+  interference:
+    - wrong: Give it to I.
+      right: Give it to me.
+      cause: Russian and Ukrainian mark case with endings, so learners do not notice that English pronouns change form.
+    - wrong: Me and my friend went home.
+      right: My friend and I went home.
+      cause: The object form sounds natural in casual speech and learners copy it into the subject position.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g089:
+  level: A1.3
+  title:
+    en: this / that / these / those
+    ru: this / that / these / those
+    uk: this / that / these / those
+  prerequisites: [g088]
+  contrast_with: []
+  examples:
+    - This is my desk.
+    - Those shoes are expensive.
+    - Who is that man?
+  interference:
+    - wrong: This books are mine.
+      right: These books are mine.
+      cause: Russian "эти" and Ukrainian "ці" differ from the singular only by ending; learners forget the separate plural word.
+    - wrong: It is my sister on this photo.
+      right: This is my sister in the photo.
+      cause: Russian "это" covers both "it" and "this", so learners choose the wrong one when pointing.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g090:
+  level: A1.3
+  title:
+    en: "Imperatives and let's"
+    ru: "Повелительное наклонение и let's"
+    uk: "Наказовий спосіб і let's"
+  prerequisites: []
+  contrast_with: []
+  examples:
+    - Open the window, please.
+    - "Don't touch that!"
+    - "Let's go for a walk."
+  interference:
+    - wrong: Not open the door!
+      right: "Don't open the door!"
+      cause: Russian and Ukrainian negate the imperative with a single particle "не", so learners skip do.
+    - wrong: Let's to go.
+      right: "Let's go."
+      cause: Learners treat let's like a verb taking an infinitive with to.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g091:
+  level: A1.5
+  title:
+    en: "Past of to be: was / were"
+    ru: "Прошедшее время to be: was / were"
+    uk: "Минулий час to be: was / were"
+  prerequisites: [g088]
+  contrast_with: []
+  examples:
+    - I was at home yesterday.
+    - They were late for the meeting.
+    - Where were you last night?
+  interference:
+    - wrong: Yesterday I at home.
+      right: Yesterday I was at home.
+      cause: Russian "был" may be dropped in colloquial speech and present-tense "есть" is always dropped, so learners leave out the verb.
+    - wrong: You was right.
+      right: You were right.
+      cause: Russian "ты был / вы были" splits by number, not by the English pronoun you, which always takes were.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g092:
+  level: A1.5
+  title:
+    en: "can / can't: ability and permission"
+    ru: "can / can't: умение и разрешение"
+    uk: "can / can't: уміння та дозвіл"
+  prerequisites: [g088]
+  contrast_with: []
+  examples:
+    - I can swim, but I can't dive.
+    - Can I open the window?
+    - She can speak three languages.
+  interference:
+    - wrong: I can to drive.
+      right: I can drive.
+      cause: Russian "могу водить" and Ukrainian "можу водити" use an infinitive, so learners add to.
+    - wrong: He cans play the guitar.
+      right: He can play the guitar.
+      cause: Learners apply the third-person -s, since Russian and Ukrainian conjugate "мочь / могти".
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g093:
+  level: A1.7
+  title:
+    en: like / love / hate + -ing and would like
+    ru: like / love / hate + -ing и would like
+    uk: like / love / hate + -ing і would like
+  prerequisites: [g092]
+  contrast_with: []
+  examples:
+    - I like reading before bed.
+    - She hates waiting in queues.
+    - "I'd like a cup of tea, please."
+  interference:
+    - wrong: I like read books.
+      right: I like reading books.
+      cause: Russian "люблю читать" uses a bare infinitive, so learners put the base form after like.
+    - wrong: I like a coffee now.
+      right: "I'd like a coffee now."
+      cause: Russian and Ukrainian use one verb ("хочу") for a wish now, so learners do not separate like and would like.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g094:
+  level: A1.8
+  title:
+    en: "Linking words: and, but, or, because, so"
+    ru: "Связки: and, but, or, because, so"
+    uk: "Сполучники: and, but, or, because, so"
+  prerequisites: [g086]
+  contrast_with: []
+  examples:
+    - I was tired, so I went to bed early.
+    - "She stayed at home because it was raining."
+    - Do you want tea or coffee?
+  interference:
+    - wrong: Because I was tired, so I went home.
+      right: I was tired, so I went home.
+      cause: Russian "так как…, поэтому…" allows both linkers in one sentence; English uses one.
+    - wrong: I like tea, but also coffee.
+      right: I like tea and coffee.
+      cause: Russian "а" is translated as but where English needs and.
+  exercise_types: [multiple_choice, gap_fill, transformation]

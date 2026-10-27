@@ -9,7 +9,7 @@ export type QuizItem = SkillOutput<"grammar-quiz">;
 export interface GrammarState {
   /** The `learning_sessions` row this state belongs to; a state of another session is stale. */
   sessionId: number;
-  /** The syllabus tag the learner chose; null for Mixed. */
+  /** The syllabus topic id the learner chose (`g015`); null for Mixed. */
   topic: string | null;
   /** Weak-spot patterns this session practises, in turn, instead of a syllabus topic. */
   seed?: string[];

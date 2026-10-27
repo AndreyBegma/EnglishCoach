@@ -52,6 +52,19 @@ const GAP = "___";
 
 // ---------------------------------------------------------------- grammar-quiz
 
+/** Syllabus topics a model may name, as `{id, title}`; the server picks which. */
+const syllabusTopicList = z.array(z.object({ id: text, title: text })).default([]);
+
+/**
+ * The syllabus topic id a model names. Only a hint: the server keeps it only when it is a real
+ * syllabus id, so a missing or invented one never fails the call.
+ */
+const syllabusTopicId = z
+  .string()
+  .nullable()
+  .default(null)
+  .describe("Id from task.syllabus_topics this is about, e.g. 'g015'; null if none fits");
+
 export const grammarItemType = z.enum([
   "multiple_choice",
   "gap_fill",
@@ -63,16 +76,29 @@ export const GrammarQuizInput = z.object({
   recent_accuracy: recentAccuracy,
   /** A topic the server wants practised (a weak spot or the next syllabus point); null = model picks. */
   topic: text.nullable().default(null),
+  /** The syllabus entry behind `topic` when the learner picked one; null otherwise. */
+  syllabus_topic: z
+    .object({
+      id: text,
+      level: text,
+      examples: z.array(text),
+      interference: z.array(z.object({ wrong: text, right: text, cause: text })),
+    })
+    .nullable()
+    .default(null),
   /** The item type the server rotated to; null = model picks. */
   item_type: grammarItemType.nullable().default(null),
   /** Topics asked in this session already, to avoid repeating them. */
   recent_topics: z.array(text).default([]),
+  /** Syllabus topics around the learner's level, to name the one the item tests. */
+  syllabus_topics: syllabusTopicList,
 });
 
 export const GrammarQuizOutput = z
   .object({
     type: grammarItemType,
     topic: text.describe("Short English tag, e.g. 'present perfect vs past simple'"),
+    topic_id: syllabusTopicId,
     difficulty: cefr,
     instruction: text.describe("What the learner must do, in explain_lang"),
     question: text.describe("The English item; gap_fill marks the gap with ___"),
@@ -98,6 +124,10 @@ export const GrammarCheckInput = z.object({
   accepted_answers: answers,
   /** What the learner typed. The server has already ruled out an exact match. */
   learner_answer: z.string(),
+  /** The syllabus topic the item tests, when known. */
+  topic_id: z.string().nullable().default(null),
+  /** Syllabus topics around the learner's level, to name the one the error belongs to. */
+  syllabus_topics: syllabusTopicList,
 });
 
 export const GrammarCheckOutput = z
@@ -109,6 +139,7 @@ export const GrammarCheckOutput = z
     pattern: text
       .nullable()
       .describe("Short reusable English label of the error; null when correct"),
+    topic_id: syllabusTopicId,
     explanation: text.describe("In explain_lang"),
   })
   .superRefine((value, ctx) => {

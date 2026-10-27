@@ -21,7 +21,7 @@ import {
 } from "./screens";
 import type { GrammarState } from "./state";
 import { recordGrammarAnswer } from "./stats";
-import { GRAMMAR_TOPICS } from "./topics";
+import { knownTopicId, topicById, topicChoices } from "./topics";
 
 export interface GrammarDeps {
   db: Db;
@@ -107,7 +107,13 @@ export function grammarSession(deps: GrammarDeps): SessionKindHandler {
 
       let graded: Graded;
       try {
-        graded = await gradeTyped(deps.skills, handle.user.id, item, text);
+        graded = await gradeTyped(
+          deps.skills,
+          handle.user.id,
+          item,
+          text,
+          await choicesFor(deps, handle),
+        );
       } catch (error) {
         deps.log.warn("grammar answer check failed", { sessionId: handle.session.id, error });
         // The question stays on screen with the error above it; the learner sends the answer again.
@@ -136,6 +142,12 @@ async function showQuestion(
     text: lead ? `${lead}\n\n${question}` : question,
     reply_markup: questionKeyboard(current.n, current.item),
   });
+}
+
+/** The syllabus topics around the learner's level a model may name. */
+async function choicesFor(deps: GrammarDeps, handle: LearningHandle) {
+  const settings = await getSettings(deps.db, handle.user.id);
+  return topicChoices(settings?.cefrLevel ?? null);
 }
 
 /** The state of the session this update belongs to, or undefined when it is stale or not begun. */
@@ -201,15 +213,30 @@ async function askNext(
   lead?: string,
 ) {
   const n = state.asked + 1;
+  const syllabusTopic = state.seed?.length || !state.topic ? undefined : topicById(state.topic);
+  // A syllabus topic is practised only in the item types it lists.
+  const rotation = syllabusTopic?.exerciseTypes ?? ITEM_ROTATION;
   let item: NonNullable<GrammarState["current"]>["item"];
   try {
     const run = await deps.skills.runSkill(handle.user.id, "grammar-quiz", {
       recent_accuracy: accuracyOf(state),
-      topic: state.seed?.length ? (state.seed[(n - 1) % state.seed.length] ?? null) : state.topic,
-      item_type: ITEM_ROTATION[(n - 1) % ITEM_ROTATION.length] ?? null,
+      topic: state.seed?.length
+        ? (state.seed[(n - 1) % state.seed.length] ?? null)
+        : (syllabusTopic?.title.en ?? null),
+      syllabus_topic: syllabusTopic
+        ? {
+            id: syllabusTopic.id,
+            level: syllabusTopic.level,
+            examples: syllabusTopic.examples,
+            interference: syllabusTopic.interference,
+          }
+        : null,
+      item_type: rotation[(n - 1) % rotation.length] ?? null,
       recent_topics: state.recentTopics,
+      syllabus_topics: syllabusTopic ? [] : await choicesFor(deps, handle),
     });
-    item = run.data;
+    // The topic the learner picked is the item's topic; a model-named id is kept only if real.
+    item = { ...run.data, topic_id: syllabusTopic?.id ?? knownTopicId(run.data.topic_id) };
   } catch (error) {
     deps.log.warn("grammar question failed", { sessionId: handle.session.id, error });
     const failed = deps.i18n.t(handle.locale, "grammar-error-quiz");
@@ -257,19 +284,17 @@ export function grammarHandlers(deps: GrammarDeps): Composer<BotContext> {
 
     switch (callback.type) {
       case "topic": {
-        const topic = callback.index === null ? undefined : GRAMMAR_TOPICS[callback.index];
-        if (callback.index !== null && !topic) {
+        const topic = callback.id === null ? undefined : topicById(callback.id);
+        if (callback.id !== null && !topic) {
           return void (await ctx.answerCallbackQuery({ text: ctx.t("grammar-outdated") }));
         }
-        const chosen = topic
-          ? ctx.t(`grammar-topic-${topic.id.replaceAll("_", "-")}`)
-          : ctx.t("grammar-mixed");
+        const chosen = topic ? topic.title[handle.locale] : ctx.t("grammar-mixed");
         return accept(
           chosen,
           async () => {
             const fresh: GrammarState = {
               sessionId: handle.session.id,
-              topic: topic?.tag ?? null,
+              topic: topic?.id ?? null,
               asked: 0,
               answered: 0,
               correct: 0,

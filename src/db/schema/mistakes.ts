@@ -18,6 +18,9 @@ export const mistakes = pgTable(
     explanation: text().notNull(),
     count: integer().notNull().default(1),
     lastSeenAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    // The grammar syllabus topic (`g015`) the pattern belongs to; null when none fits or unknown.
+    // Validated against the syllabus before it is written; the syllabus is a file, so no FK.
+    topicId: text(),
     // Set when the pattern is promoted to an SRS card.
     cardId: integer().references(() => cards.id, { onDelete: "set null" }),
   },

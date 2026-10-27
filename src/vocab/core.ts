@@ -15,8 +15,17 @@ import { encodeVocabCallback, type VocabCallback } from "./callbacks";
 import type { VocabMode } from "./modes";
 import { exampleText, exerciseHtml, HTML, type T } from "./render";
 import { RATINGS, type RatingName, Scheduler } from "./scheduler";
-import { clearFlow, readFlow, writeFlow } from "./state";
+import { clearFlow, writeFlow } from "./state";
 import { addVocabStats, localDate } from "./stats";
+
+/**
+ * What the previous step leaves on the next screen: its result as the first line (HTML), and
+ * buttons that act on it (Undo) above the new step's own.
+ */
+export interface Lead {
+  line: string;
+  rows?: InlineKeyboardButton[][];
+}
 
 export interface VocabDeps {
   db: Db;
@@ -87,8 +96,23 @@ export class VocabCore {
     return total >= ACCURACY_MIN_RATINGS ? stats.passed / total : null;
   }
 
+  /** Shows `text` (HTML) in the session window, below the previous step's result. */
+  async show(
+    handle: LearningHandle,
+    text: string,
+    rows: InlineKeyboardButton[][] = [],
+    lead?: Lead,
+  ): Promise<void> {
+    const keyboard = [...(lead?.rows ?? []), ...rows];
+    await handle.window.show({
+      text: lead ? `${lead.line}\n\n${text}` : text,
+      ...HTML,
+      reply_markup: keyboard.length ? InlineKeyboard.from(keyboard) : undefined,
+    });
+  }
+
   /**
-   * Asks the LLM for one exercise on `card` and sends it: buttons for recognition, a typed answer
+   * Asks the LLM for one exercise on `card` and shows it: buttons for recognition, a typed answer
    * otherwise. Returns false when the LLM failed (the learner was told and offered a retry).
    */
   async sendExercise(
@@ -96,6 +120,7 @@ export class VocabCore {
     ctx: BotContext,
     card: CardRow,
     mode: VocabMode,
+    lead?: Lead,
   ): Promise<boolean> {
     const { level } = await this.settings(handle.user.id);
     const back = card.backJson;
@@ -111,8 +136,12 @@ export class VocabCore {
           ? await randomLemmas(this.deps.db, level, card.front, DISTRACTOR_LEMMAS)
           : [],
     };
-    const exercise = await this.llm(handle, ctx, { retry: "exercise", cardId: card.id }, () =>
-      this.deps.skills.runSkill(handle.user.id, "vocab-exercise", vars),
+    const exercise = await this.llm(
+      handle,
+      ctx,
+      { retry: "exercise", cardId: card.id },
+      () => this.deps.skills.runSkill(handle.user.id, "vocab-exercise", vars),
+      lead,
     );
     if (!exercise) return false;
 
@@ -121,14 +150,14 @@ export class VocabCore {
     const askedAt = this.now().getTime();
     if (data.mode === "recognition" && data.options && data.correct_index !== null) {
       const options = data.options;
-      await handle.send(text, {
-        ...HTML,
-        reply_markup: InlineKeyboard.from(
-          options.map((option, index) => [
-            button(label(option), { op: "choice", cardId: card.id, index }),
-          ]),
-        ),
-      });
+      await this.show(
+        handle,
+        text,
+        options.map((option, index) => [
+          button(label(option), { op: "choice", cardId: card.id, index }),
+        ]),
+        lead,
+      );
       writeFlow(ctx, handle.session.id, {
         kind: "choice",
         cardId: card.id,
@@ -139,7 +168,7 @@ export class VocabCore {
       return true;
     }
     const typedMode = data.mode === "cloze" ? "cloze" : "production";
-    await handle.send(text, HTML);
+    await this.show(handle, text, [], lead);
     writeFlow(ctx, handle.session.id, {
       kind: "typed",
       cardId: card.id,
@@ -190,24 +219,28 @@ export class VocabCore {
 
   /**
    * Runs an LLM call. A provider the user cannot use, or a failed call, is reported in the
-   * session (with Retry where retrying can help) and undefined comes back; nothing is written.
+   * session window (with Retry where retrying can help) and undefined comes back; nothing is
+   * written. The failure is a step like any other, so it replaces whatever was on screen.
    */
   async llm<R>(
     handle: LearningHandle,
     ctx: BotContext,
     failed: { retry: "next" | "exercise"; cardId?: number },
     run: () => Promise<R>,
+    lead?: Lead,
   ): Promise<R | undefined> {
     const t = this.t(handle);
     try {
       return await run();
     } catch (error) {
       if (error instanceof ProviderUnavailableError) {
-        await this.dismissFailure(ctx, handle);
-        const prompt = await handle.send(t(error.i18nKey), {
-          reply_markup: InlineKeyboard.from([[button(t("vocab-finish"), { op: "finish" })]]),
-        });
-        writeFlow(ctx, handle.session.id, { kind: "idle", promptId: prompt.message_id });
+        await this.show(
+          handle,
+          t(error.i18nKey),
+          [[button(t("vocab-finish"), { op: "finish" })]],
+          lead,
+        );
+        writeFlow(ctx, handle.session.id, { kind: "idle" });
         return undefined;
       }
       if (error instanceof LlmOutputError || error instanceof LlmProviderError) {
@@ -216,32 +249,22 @@ export class VocabCore {
           sessionId: handle.session.id,
           error: error.message,
         });
-        await this.dismissFailure(ctx, handle);
-        const prompt = await handle.send(t("vocab-llm-failed"), {
-          reply_markup: InlineKeyboard.from([
+        await this.show(
+          handle,
+          t("vocab-llm-failed"),
+          [
             [
               button(t("vocab-retry"), { op: "retry" }),
               button(t("vocab-finish"), { op: "finish" }),
             ],
-          ]),
-        });
-        writeFlow(ctx, handle.session.id, {
-          kind: "failed",
-          ...failed,
-          promptId: prompt.message_id,
-        });
+          ],
+          lead,
+        );
+        writeFlow(ctx, handle.session.id, { kind: "failed", ...failed });
         return undefined;
       }
       throw error;
     }
-  }
-
-  /** Removes the failure prompt on screen, if any: a session keeps at most one. */
-  async dismissFailure(ctx: BotContext, handle: LearningHandle): Promise<void> {
-    const step = readFlow(ctx, handle.session.id);
-    const promptId = step?.kind === "failed" || step?.kind === "idle" ? step.promptId : undefined;
-    if (promptId === undefined || !ctx.chat) return;
-    await ctx.api.deleteMessage(ctx.chat.id, promptId).catch(() => {});
   }
 
   /** Ends the session with a summary computed from what was rated in it. */

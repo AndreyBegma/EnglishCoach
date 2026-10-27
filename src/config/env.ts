@@ -36,8 +36,35 @@ const flag = z
   .default("false")
   .transform((value) => value === "true" || value === "1");
 
+/** Kokoro voice ids look like `af_heart`: a language/gender prefix and a name. */
+const kokoroVoice = requiredString.regex(/^[a-z]{2}_[a-z0-9_]+$/, "must be a Kokoro voice id");
+
+/**
+ * Text to speech. Read by `src/voice` at startup (`parseTtsEnv`) and validated with the rest of
+ * the environment, so a bad value fails the boot instead of the first 🔊 tap.
+ */
+const ttsShape = {
+  // Base URL of the Kokoro-FastAPI service; unset means no local TTS.
+  TTS_URL: unsetIfBlank(url.optional()),
+  TTS_VOICE_US: unsetIfBlank(kokoroVoice.default("af_heart")),
+  TTS_VOICE_UK: unsetIfBlank(kokoroVoice.default("bf_emma")),
+  // A private channel or group (negative id) where the bot uploads each voice note once.
+  TTS_STORAGE_CHAT_ID: unsetIfBlank(
+    z.coerce.number({ error: "must be a Telegram chat id" }).int().negative().optional(),
+  ),
+};
+
+const ttsSchema = z.object(ttsShape);
+export type TtsEnv = z.infer<typeof ttsSchema>;
+
+/** The TTS variables alone. Throws `EnvError` like `parseEnv`. */
+export function parseTtsEnv(source: Record<string, string | undefined> = process.env): TtsEnv {
+  return report(ttsSchema.safeParse(source));
+}
+
 const envSchema = z
   .object({
+    ...ttsShape,
     NODE_ENV: unsetIfBlank(z.enum(["development", "production", "test"]).default("development")),
     LOG_LEVEL: unsetIfBlank(z.enum(["debug", "info", "warn", "error"]).default("info")),
     TELEGRAM_BOT_TOKEN: unsetIfBlank(requiredString),
@@ -94,7 +121,10 @@ export class EnvError extends Error {
 }
 
 export function parseEnv(source: Record<string, string | undefined> = process.env): Env {
-  const result = envSchema.safeParse(source);
+  return report(envSchema.safeParse(source));
+}
+
+function report<T>(result: z.ZodSafeParseResult<T>): T {
   if (result.success) return result.data;
 
   const problems = result.error.issues.map(

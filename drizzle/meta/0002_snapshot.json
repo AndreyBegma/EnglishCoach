@@ -1,5 +1,5 @@
 {
-  "id": "f8852011-6b6f-4fa2-81b6-fece79c7c390",
+  "id": "31f17d74-d30d-49c7-bc09-7e9986bf0113",
   "prevId": "97cc8f70-04f3-4dcc-a2a8-7f4261ad4168",
   "version": "7",
   "dialect": "postgresql",
@@ -1175,82 +1175,9 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "topic": {
-          "name": "topic",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ipa": {
-          "name": "ipa",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "example": {
-          "name": "example",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "translation_ru": {
-          "name": "translation_ru",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "curriculum_stage": {
-          "name": "curriculum_stage",
-          "type": "smallint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "curriculum_index": {
-          "name": "curriculum_index",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
         }
       },
-      "indexes": {
-        "words_lemma_idx": {
-          "name": "words_lemma_idx",
-          "columns": [
-            {
-              "expression": "lemma",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "words_curriculum_idx": {
-          "name": "words_curriculum_idx",
-          "columns": [
-            {
-              "expression": "curriculum_stage",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "curriculum_index",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
+      "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
@@ -1267,57 +1194,48 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.excluded_lemmas": {
-      "name": "excluded_lemmas",
+    "public.tts_audio": {
+      "name": "tts_audio",
       "schema": "",
       "columns": {
-        "lemma": {
-          "name": "lemma",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "reason": {
-          "name": "reason",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "source": {
-          "name": "source",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.word_enrichments": {
-      "name": "word_enrichments",
-      "schema": "",
-      "columns": {
-        "word_id": {
-          "name": "word_id",
+        "id": {
+          "name": "id",
           "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "tts_audio_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "engine": {
+          "name": "engine",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "lang": {
-          "name": "lang",
-          "type": "language",
-          "typeSchema": "public",
+        "voice": {
+          "name": "voice",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "data": {
-          "name": "data",
-          "type": "jsonb",
+        "text_hash": {
+          "name": "text_hash",
+          "type": "char(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "telegram_file_id": {
+          "name": "telegram_file_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -1327,41 +1245,22 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "word_enrichments_word_id_words_id_fk": {
-          "name": "word_enrichments_word_id_words_id_fk",
-          "tableFrom": "word_enrichments",
-          "tableTo": "words",
-          "columnsFrom": [
-            "word_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "word_enrichments_word_id_lang_pk": {
-          "name": "word_enrichments_word_id_lang_pk",
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "tts_audio_engine_voice_text_hash_unique": {
+          "name": "tts_audio_engine_voice_text_hash_unique",
+          "nullsNotDistinct": false,
           "columns": [
-            "word_id",
-            "lang"
+            "engine",
+            "voice",
+            "text_hash"
           ]
         }
       },
-      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

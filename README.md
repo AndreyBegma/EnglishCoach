@@ -105,8 +105,20 @@ With Settings → Voice on, a voice message (up to 60 s) in Talk, Grammar or a t
 is transcribed (OpenAI-compatible `audio/transcriptions`), shown as a tracked message and handled
 as if typed. Word cards get a 🔊 button that sends the pronunciation (`audio/speech`) as a voice
 note. The key is the user's own OpenAI-compatible key, else `SERVER_OPENAI_API_KEY`; with neither,
-the bot says voice needs a key and the session carries on. Generated audio is cached per lemma and
-voice under `data/tts/` (override with `TTS_CACHE_DIR`; mount it as a volume in production).
+the bot says voice needs a key and the session carries on.
+
+Pronunciations come from a local Kokoro-82M first: the `tts` service in `docker-compose.yml`
+(Kokoro-FastAPI, CPU only, host port `18880`, `TTS_HOST_PORT` to change it; the app reaches it at
+`TTS_URL=http://tts:8880`). Voices: `af_heart` for US English, `bf_emma` for UK
+(`TTS_VOICE_US`, `TTS_VOICE_UK`). Its health is checked at most every 30 s; while it is down the
+OpenAI-compatible key is used instead. The first start downloads nothing but takes a while to
+load the model. Generated audio is cached per text and voice under `data/tts/` (override with
+`TTS_CACHE_DIR`; compose mounts it as a volume).
+
+**Storage chat.** Create a private channel (or group), add the bot as an admin and put its id
+(negative, e.g. `-1001234567890`) in `TTS_STORAGE_CHAT_ID`. Each voice note is then uploaded there
+once, its Telegram `file_id` is stored in `tts_audio`, and every later play is
+`sendVoice(file_id)` — instant, no upload, never a forward. Without it each send uploads the file.
 
 ## Skills
 

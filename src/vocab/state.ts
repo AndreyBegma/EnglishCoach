@@ -36,11 +36,9 @@ const step = z.discriminatedUnion("kind", [
     kind: z.literal("failed"),
     retry: z.enum(["next", "exercise"]),
     cardId: cardId.optional(),
-    /** The failure prompt on screen, so the next one replaces it instead of stacking. */
-    promptId: z.number().int().optional(),
   }),
   /** Nothing open: a header or "done for today" with its buttons. */
-  z.object({ kind: z.literal("idle"), promptId: z.number().int().optional() }),
+  z.object({ kind: z.literal("idle") }),
 ]);
 
 export const vocabFlow = z.object({ sessionId: z.number().int().positive(), step });

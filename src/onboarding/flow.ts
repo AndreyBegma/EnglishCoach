@@ -1,6 +1,5 @@
 import type { BotContext } from "../bot/context";
 import { DEFAULT_LOCALE, type Locale, type Translator } from "../bot/i18n";
-import { isMessageGoneError, isNotModifiedError } from "../bot/telegram-errors";
 import type { Db } from "../db/client";
 import { getSettings, type SettingsPatch, updateSettings } from "../db/repositories/users";
 import type { CefrLevel } from "../db/schema/enums";
@@ -231,7 +230,10 @@ export class OnboardingFlow {
     return this.show(ctx, learning, state);
   }
 
-  /** Renders the card: edits it in place, or sends it (again) when `fresh` or it is gone. */
+  /**
+   * Renders the card in the session window: edited in place, or sent again at the bottom when
+   * `fresh` (a repeated /start) or when it is gone.
+   */
   private async show(
     ctx: BotContext,
     learning: LearningHandle,
@@ -239,24 +241,7 @@ export class OnboardingFlow {
     options: { fresh?: boolean } = {},
   ): Promise<void> {
     const { text, keyboard } = renderOnboarding(this.deps.i18n, await this.locale(ctx), state);
-    const chatId = ctx.user.telegramId;
-
-    if (state.messageId !== undefined && options.fresh) {
-      await ctx.api.deleteMessage(chatId, state.messageId).catch(() => {});
-      state.messageId = undefined;
-    }
-    if (state.messageId !== undefined) {
-      try {
-        await ctx.api.editMessageText(chatId, state.messageId, text, { reply_markup: keyboard });
-        ctx.session.onboarding = state;
-        return;
-      } catch (error) {
-        if (isNotModifiedError(error)) return;
-        if (!isMessageGoneError(error)) throw error;
-      }
-    }
-    const message = await learning.send(text, { reply_markup: keyboard });
-    state.messageId = message.message_id;
+    state.messageId = await learning.window.show({ text, reply_markup: keyboard }, options);
     ctx.session.onboarding = state;
   }
 

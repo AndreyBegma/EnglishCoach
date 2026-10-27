@@ -144,6 +144,7 @@ export function createBot(deps: BotDeps) {
   sessions.onEnded((event) => routine.onSessionEnded(event));
   const voice = createVoice({
     db,
+    api: bot.api,
     i18n,
     sessions,
     llmEnv: deps.llmEnv,
@@ -191,6 +192,7 @@ export function createBot(deps: BotDeps) {
     routine,
     routineJobs,
     routineStore,
+    voice,
   };
 }
 

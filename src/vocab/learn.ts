@@ -1,4 +1,3 @@
-import { InlineKeyboard } from "grammy";
 import type { BotContext } from "../bot/context";
 import {
   createCard,
@@ -14,8 +13,8 @@ import type { LearningHandle, SessionKindHandler } from "../sessions/session-man
 import type { SkillOutput } from "../skills";
 import { WordPicker } from "../words/picker";
 import type { VocabCallback } from "./callbacks";
-import { button, type VocabCore } from "./core";
-import { cardHtml, escapeHtml, HTML } from "./render";
+import { button, type Lead, type VocabCore } from "./core";
+import { cardHtml, escapeHtml } from "./render";
 import { speakRow } from "./speak";
 import { readFlow, writeFlow } from "./state";
 import { localDate, newWordsOn } from "./stats";
@@ -73,12 +72,12 @@ export class LearnFlow implements SessionKindHandler {
     const t = this.core.t(handle);
     const step = readFlow(ctx, handle.session.id);
     if (step?.kind !== "add-word") {
-      await handle.send(t("vocab-use-buttons"));
+      await handle.window.flashNote(t("vocab-use-buttons"));
       return;
     }
     const text = ctx.message?.text?.trim().replace(/\s+/g, " ") ?? "";
     if (!OWN_WORD.test(text)) {
-      await handle.send(t("vocab-add-word-invalid"));
+      await handle.window.flashNote(t("vocab-add-word-invalid"));
       return;
     }
     await this.addOwnWord(handle, ctx, text);
@@ -93,7 +92,7 @@ export class LearnFlow implements SessionKindHandler {
       case "know":
         return step?.kind === "card" && step.cardId === callback.cardId;
       case "unknow":
-        // Idempotent and independent of the step: the button stays on the "known" message.
+        // Idempotent and independent of the step; the button is only on the screen after "know".
         return true;
       case "choice":
         return step?.kind === "choice" && step.cardId === callback.cardId;
@@ -124,15 +123,17 @@ export class LearnFlow implements SessionKindHandler {
         const card = await getCard(db, handle.user.id, callback.cardId);
         if (!card) return;
         // The daily counter only grows in `rate`, so a known word never uses up the limit.
-        if (await markCardKnown(db, handle.user.id, card.id, this.core.now())) {
-          await handle.send(t("vocab-known", { word: escapeHtml(card.front) }), {
-            ...HTML,
-            reply_markup: InlineKeyboard.from([
-              [button(t("vocab-known-undo"), { op: "unknow", cardId: card.id })],
-            ]),
-          });
-        }
-        await this.showNext(handle, ctx);
+        const known = await markCardKnown(db, handle.user.id, card.id, this.core.now());
+        await this.showNext(
+          handle,
+          ctx,
+          known
+            ? {
+                line: t("vocab-known", { word: escapeHtml(card.front) }),
+                rows: [[button(t("vocab-known-undo"), { op: "unknow", cardId: card.id })]],
+              }
+            : undefined,
+        );
         return;
       }
       case "unknow": {
@@ -140,7 +141,9 @@ export class LearnFlow implements SessionKindHandler {
         const card = await getCard(db, handle.user.id, callback.cardId);
         // The card is pending again (or back on its old schedule); the next pick shows it first.
         if (card && (await unmarkCardKnown(db, handle.user.id, card.id))) {
-          await handle.send(t("vocab-known-undone", { word: escapeHtml(card.front) }), HTML);
+          await this.showNext(handle, ctx, {
+            line: t("vocab-known-undone", { word: escapeHtml(card.front) }),
+          });
         }
         return;
       }
@@ -148,18 +151,15 @@ export class LearnFlow implements SessionKindHandler {
         if (step?.kind === "choice") await this.answer(handle, ctx, step, callback.index);
         return;
       case "add-word":
-        await handle.send(t("vocab-add-word-prompt"), {
-          reply_markup: InlineKeyboard.from([
-            [button(t("vocab-add-word-cancel"), { op: "add-cancel" })],
-          ]),
-        });
+        await this.core.show(handle, t("vocab-add-word-prompt"), [
+          [button(t("vocab-add-word-cancel"), { op: "add-cancel" })],
+        ]);
         writeFlow(ctx, handle.session.id, { kind: "add-word" });
         return;
       case "add-cancel":
         await this.showNext(handle, ctx);
         return;
       case "retry":
-        await this.core.dismissFailure(ctx, handle);
         if (step?.kind === "failed" && step.retry === "exercise" && step.cardId) {
           const card = await getCard(this.core.deps.db, handle.user.id, step.cardId);
           if (card) await this.core.sendExercise(handle, ctx, card, "recognition");
@@ -186,17 +186,18 @@ export class LearnFlow implements SessionKindHandler {
     const correct = index === step.correctIndex;
     if (!(await this.core.rate(handle, card, correct ? "good" : "again", "newWords"))) return;
     const answer = escapeHtml(step.options[step.correctIndex] ?? "");
-    await handle.send(
-      correct
+    await this.showNext(handle, ctx, {
+      line: correct
         ? t("vocab-learn-right", { word: escapeHtml(card.front) })
         : t("vocab-learn-wrong", { word: escapeHtml(card.front), answer }),
-      HTML,
-    );
-    await this.showNext(handle, ctx);
+    });
   }
 
-  /** Shows the next card: a pending one first, else a new word — or says today's quota is done. */
-  private async showNext(handle: LearningHandle, ctx: BotContext): Promise<void> {
+  /**
+   * Shows the next card: a pending one first, else a new word — or says today's quota is done.
+   * `lead` is the previous step's result, the first line of whatever comes next.
+   */
+  private async showNext(handle: LearningHandle, ctx: BotContext, lead?: Lead): Promise<void> {
     const { db } = this.core.deps;
     const t = this.core.t(handle);
     const settings = await this.core.settings(handle.user.id);
@@ -204,22 +205,22 @@ export class LearnFlow implements SessionKindHandler {
     const learned = await newWordsOn(db, handle.user.id, today);
 
     if (learned >= settings.wordsPerDay) {
-      await this.sendIdle(handle, ctx, t("vocab-learn-done", { count: learned }));
+      await this.sendIdle(handle, ctx, t("vocab-learn-done", { count: learned }), lead);
       return;
     }
 
     const pending = await findPendingCard(db, handle.user.id);
     if (pending) {
-      await this.showCard(handle, ctx, pending);
+      await this.showCard(handle, ctx, pending, lead);
       return;
     }
 
     const [word] = await this.picker.pickNew(handle.user.id, settings.level, 1);
     if (!word) {
-      await this.sendIdle(handle, ctx, t("vocab-learn-no-words"));
+      await this.sendIdle(handle, ctx, t("vocab-learn-no-words"), lead);
       return;
     }
-    const back = await this.backFor(handle, ctx, word, settings.explainLang);
+    const back = await this.backFor(handle, ctx, word, settings.explainLang, lead);
     if (!back) return;
     const card = await createCard(db, {
       userId: handle.user.id,
@@ -229,7 +230,7 @@ export class LearnFlow implements SessionKindHandler {
       back,
       fsrs: this.core.scheduler.newCard(this.core.now()),
     });
-    await this.showCard(handle, ctx, card);
+    await this.showCard(handle, ctx, card, lead);
   }
 
   /**
@@ -241,6 +242,7 @@ export class LearnFlow implements SessionKindHandler {
     ctx: BotContext,
     word: Word,
     lang: Language,
+    lead?: Lead,
   ): Promise<CardBack | undefined> {
     const cached = await getWordEnrichment(this.core.deps.db, word.id, lang);
     if (cached) return backFromCache(cached);
@@ -250,12 +252,17 @@ export class LearnFlow implements SessionKindHandler {
       wordId: word.id,
       lang,
     });
-    const enriched = await this.core.llm(handle, ctx, { retry: "next" }, () =>
-      this.core.deps.skills.runSkill(handle.user.id, "vocab-enrich", {
-        lemma: word.lemma,
-        pos: word.pos || null,
-        word_level: word.cefrLevel,
-      }),
+    const enriched = await this.core.llm(
+      handle,
+      ctx,
+      { retry: "next" },
+      () =>
+        this.core.deps.skills.runSkill(handle.user.id, "vocab-enrich", {
+          lemma: word.lemma,
+          pos: word.pos || null,
+          word_level: word.cefrLevel,
+        }),
+      lead,
     );
     return enriched ? backFromEnrichment(enriched.data) : undefined;
   }
@@ -265,9 +272,10 @@ export class LearnFlow implements SessionKindHandler {
     const t = this.core.t(handle);
     const existing = await findWordCardByFront(db, handle.user.id, text);
     if (existing) {
-      await handle.send(t("vocab-add-word-exists", { word: escapeHtml(existing.front) }), HTML);
-      if (existing.reps === 0 && !existing.knownAt) await this.showCard(handle, ctx, existing);
-      else await this.showNext(handle, ctx);
+      const lead = { line: t("vocab-add-word-exists", { word: escapeHtml(existing.front) }) };
+      if (existing.reps === 0 && !existing.knownAt)
+        await this.showCard(handle, ctx, existing, lead);
+      else await this.showNext(handle, ctx, lead);
       return;
     }
     const enriched = await this.core.llm(handle, ctx, { retry: "next" }, () =>
@@ -288,11 +296,12 @@ export class LearnFlow implements SessionKindHandler {
     await this.showCard(handle, ctx, card);
   }
 
-  private async showCard(handle: LearningHandle, ctx: BotContext, card: CardRow) {
+  private async showCard(handle: LearningHandle, ctx: BotContext, card: CardRow, lead?: Lead) {
     const t = this.core.t(handle);
-    await handle.send(cardHtml(t, card), {
-      ...HTML,
-      reply_markup: InlineKeyboard.from([
+    await this.core.show(
+      handle,
+      cardHtml(t, card),
+      [
         [
           button(t("vocab-got-it"), { op: "got-it", cardId: card.id }),
           button(t("vocab-know"), { op: "know", cardId: card.id }),
@@ -300,21 +309,25 @@ export class LearnFlow implements SessionKindHandler {
         [button(t("vocab-add-word"), { op: "add-word" })],
         ...speakRow(t, ctx, card.id),
         [button(t("vocab-finish"), { op: "finish" })],
-      ]),
-    });
+      ],
+      lead,
+    );
     writeFlow(ctx, handle.session.id, { kind: "card", cardId: card.id });
   }
 
-  private async sendIdle(handle: LearningHandle, ctx: BotContext, text: string) {
+  private async sendIdle(handle: LearningHandle, ctx: BotContext, text: string, lead?: Lead) {
     const t = this.core.t(handle);
-    await handle.send(text, {
-      reply_markup: InlineKeyboard.from([
+    await this.core.show(
+      handle,
+      text,
+      [
         [
           button(t("vocab-add-word"), { op: "add-word" }),
           button(t("vocab-finish"), { op: "finish" }),
         ],
-      ]),
-    });
+      ],
+      lead,
+    );
     writeFlow(ctx, handle.session.id, { kind: "idle" });
   }
 }

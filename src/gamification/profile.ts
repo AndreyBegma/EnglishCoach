@@ -6,9 +6,11 @@ import type { Db } from "../db/client";
 import { getUserXp } from "../db/repositories/xp";
 import { dailyStats, type Skill, type UserSettings } from "../db/schema";
 import { getLevels, SKILLS } from "../levels";
+import { encodeProgressCallback } from "../progress/callbacks";
 import { cardsBlock } from "../progress/queries";
 import { MAX_MESSAGE_LENGTH } from "../progress/render";
 import { type Streak, streakDays } from "../progress/streak";
+import { latestAchievements } from "./achievements/view";
 import { type ProfileLevel, profileLevel } from "./xp";
 
 export interface ProfileTotals {
@@ -27,12 +29,12 @@ export interface ProfileData {
   cefr: string | null;
   /** Every skill with a level, in course order; `practised` once it has graded items behind it. */
   skills: { skill: Skill; label: string; practised: boolean }[];
-  /** The latest achievements' titles, newest first. Empty until achievements exist. */
+  /** The latest achievements, emoji and title in the learner's locale, newest first. */
   achievements: string[];
   totals: ProfileTotals;
 }
 
-/** Shown on the profile; the achievements module will fill them. */
+/** The latest achievements the profile shows. */
 export const PROFILE_ACHIEVEMENTS = 3;
 
 async function totals(db: Db, userId: number, timezone: string, now: Date): Promise<ProfileTotals> {
@@ -59,15 +61,16 @@ async function totals(db: Db, userId: number, timezone: string, now: Date): Prom
 export async function loadProfile(
   db: Db,
   userId: number,
-  settings: Pick<UserSettings, "timezone"> | undefined,
+  settings: (Pick<UserSettings, "timezone"> & Partial<Pick<UserSettings, "uiLang">>) | undefined,
   now: Date = new Date(),
 ): Promise<ProfileData> {
   const timezone = settings?.timezone ?? "UTC";
-  const [xp, levels, streak, sums] = await Promise.all([
+  const [xp, levels, streak, sums, achievements] = await Promise.all([
     getUserXp(db, userId),
     getLevels(db, userId),
     streakDays(db, userId, { now, timezone }),
     totals(db, userId, timezone, now),
+    latestAchievements(db, userId, settings?.uiLang ?? "en", PROFILE_ACHIEVEMENTS),
   ]);
   const total = xp?.total ?? 0;
   return {
@@ -79,7 +82,7 @@ export async function loadProfile(
       const level = levels?.skills[skill];
       return level ? [{ skill, label: level.label, practised: level.evidence > 0 }] : [];
     }),
-    achievements: [],
+    achievements,
     totals: sums,
   };
 }
@@ -142,9 +145,13 @@ export function renderProfile(
   ];
 
   const text = lines.join("\n").slice(0, MAX_MESSAGE_LENGTH);
+  const achievements = InlineKeyboard.text(
+    t("profile-achievements-btn"),
+    encodeProgressCallback({ type: "achievements", page: 0 }),
+  );
   const back = InlineKeyboard.text(
     t("hub-back"),
     encodeCallback({ type: "screen", screen: "main" }),
   );
-  return { text, keyboard: InlineKeyboard.from([[back]]) };
+  return { text, keyboard: InlineKeyboard.from([[achievements], [back]]) };
 }

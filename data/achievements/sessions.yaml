@@ -1,0 +1,208 @@
+# Finished sessions: in all, per kind, perfect ones, and Talk.
+series:
+  - id: sessions_finished
+    category: sessions
+    metric: sessions_finished
+    emoji: "🏁"
+    title:
+      en: "Sessions finished: {n}"
+      ru: "Завершено занятий: {n}"
+      uk: "Завершено занять: {n}"
+    description:
+      en: "Finish {n} sessions of any kind"
+      ru: "Заверши занятия любого вида — всего {n}"
+      uk: "Заверши заняття будь-якого виду — усього {n}"
+    steps:
+      bronze: [1, 5, 10]
+      silver: [25, 50]
+      gold: [100, 200]
+      platinum: [300, 500]
+      legend: [750, 1000]
+
+  - id: sessions_vocab_new
+    category: sessions
+    metric: sessions_vocab_new
+    emoji: "🆕"
+    title:
+      en: "New-word sessions: {n}"
+      ru: "Занятий с новыми словами: {n}"
+      uk: "Занять із новими словами: {n}"
+    description:
+      en: "Finish {n} Learn words sessions"
+      ru: "Заверши занятия «Учить слова» — всего {n}"
+      uk: "Заверши заняття «Вчити слова» — усього {n}"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [200, 300]
+      legend: [500, 750]
+
+  - id: sessions_review
+    category: sessions
+    metric: sessions_review
+    emoji: "🗂️"
+    title:
+      en: "Review sessions: {n}"
+      ru: "Занятий с повторением: {n}"
+      uk: "Занять із повторенням: {n}"
+    description:
+      en: "Finish {n} Review sessions"
+      ru: "Заверши занятия «Повторение» — всего {n}"
+      uk: "Заверши заняття «Повторення» — усього {n}"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [200, 300]
+      legend: [500, 750]
+
+  - id: sessions_grammar
+    category: sessions
+    metric: sessions_grammar
+    emoji: "📝"
+    title:
+      en: "Grammar sessions: {n}"
+      ru: "Занятий грамматикой: {n}"
+      uk: "Занять граматикою: {n}"
+    description:
+      en: "Finish {n} Grammar sessions"
+      ru: "Заверши занятия «Грамматика» — всего {n}"
+      uk: "Заверши заняття «Граматика» — усього {n}"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [200, 300]
+      legend: [500, 750]
+
+  - id: sessions_talk
+    category: sessions
+    metric: sessions_talk
+    emoji: "💬"
+    title:
+      en: "Conversations: {n}"
+      ru: "Разговоров: {n}"
+      uk: "Розмов: {n}"
+    description:
+      en: "Finish {n} Talk sessions"
+      ru: "Заверши разговоры в «Разговоре» — всего {n}"
+      uk: "Заверши розмови в «Розмові» — усього {n}"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [200, 300]
+      legend: [500, 750]
+
+  - id: sessions_routine_morning
+    category: sessions
+    metric: sessions_routine_morning
+    emoji: "🌅"
+    title:
+      en: "Morning plans done: {n}"
+      ru: "Утренних планов выполнено: {n}"
+      uk: "Ранкових планів виконано: {n}"
+    description:
+      en: "Finish the morning plan {n} times"
+      ru: "Выполни утренний план — всего {n} раз"
+      uk: "Виконай ранковий план — усього {n} разів"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [200, 300]
+      legend: [500, 750]
+
+  - id: sessions_routine_evening
+    category: sessions
+    metric: sessions_routine_evening
+    emoji: "🌙"
+    title:
+      en: "Evening plans done: {n}"
+      ru: "Вечерних планов выполнено: {n}"
+      uk: "Вечірніх планів виконано: {n}"
+    description:
+      en: "Finish the evening plan {n} times"
+      ru: "Выполни вечерний план — всего {n} раз"
+      uk: "Виконай вечірній план — усього {n} разів"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [200, 300]
+      legend: [500, 750]
+
+  - id: sessions_placement
+    category: sessions
+    metric: sessions_placement
+    emoji: "🧭"
+    title:
+      en: "Placement tests: {n}"
+      ru: "Тестов уровня: {n}"
+      uk: "Тестів рівня: {n}"
+    description:
+      en: "Finish the placement test {n} times"
+      ru: "Пройди тест уровня — всего {n} раз"
+      uk: "Пройди тест рівня — усього {n} разів"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [5]
+
+  - id: perfect_sessions
+    category: perfect
+    metric: perfect_sessions
+    emoji: "💎"
+    title:
+      en: "Perfect sessions: {n}"
+      ru: "Идеальных занятий: {n}"
+      uk: "Ідеальних занять: {n}"
+    description:
+      en: "Finish {n} sessions of five or more answers without a single mistake"
+      ru: "Заверши занятия от пяти ответов без единой ошибки — всего {n}"
+      uk: "Заверши заняття від п'яти відповідей без жодної помилки — усього {n}"
+    steps:
+      bronze: [1, 3]
+      silver: [5, 10]
+      gold: [20, 35]
+      platinum: [50, 75]
+      legend: [100, 150]
+
+  - id: talk_turns
+    category: talk
+    metric: talk_turns
+    emoji: "🗨️"
+    title:
+      en: "Talk messages: {n}"
+      ru: "Сообщений в разговоре: {n}"
+      uk: "Повідомлень у розмові: {n}"
+    description:
+      en: "Send {n} messages long enough to count in Talk"
+      ru: "Отправь в «Разговоре» сообщения, достаточно длинные, чтобы засчитаться, — всего {n}"
+      uk: "Надішли в «Розмові» повідомлення, досить довгі, щоб зарахуватися, — усього {n}"
+    steps:
+      bronze: [10, 25]
+      silver: [50, 100]
+      gold: [250, 500]
+      platinum: [1000, 2000]
+      legend: [3500, 5000]
+
+  - id: corrections_fixed
+    category: talk
+    metric: corrections_fixed
+    emoji: "🩹"
+    title:
+      en: "Corrections fixed: {n}"
+      ru: "Исправлено ошибок: {n}"
+      uk: "Виправлено помилок: {n}"
+    description:
+      en: "Fix a mistake Talk corrected you on — {n} times in all"
+      ru: "Исправь ошибку, на которую указал «Разговор», — всего {n} раз"
+      uk: "Виправ помилку, на яку вказала «Розмова», — усього {n} разів"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [200, 350]
+      legend: [500, 1000]

@@ -333,9 +333,23 @@ profile-skill = • { $skill }: { $level }
 profile-skill-seeded = • { $skill }: ~{ $level }
 profile-achievements-title = 🏆 Latest achievements
 profile-achievement = • { $title }
-profile-achievements-none = Achievements are coming soon.
+profile-achievements-none = No achievements yet — your first one is a session away.
+profile-achievements-btn = 🏆 Achievements
 profile-totals-title = 📦 All time
 profile-totals = 📚 { $words } words learned · 🔁 { $reviews } reviews · ✍️ { $grammar } grammar answers · 🎯 { $days } goal days
+
+# --- achievements ---
+achievements-title = 🏆 Achievements · { $unlocked } of { $total } unlocked
+achievements-page = Page { $page } of { $pages }
+achievements-progress = { $bar } { $value }/{ $threshold } → { $title }
+achievements-topics = 🧩 Grammar topics mastered: { $count } of { $total }
+achievements-secrets = 🔒 Secret achievements found: { $count } of { $total }
+achievements-prev = ◀️ Back
+achievements-next = Next ▶️
+achievements-back = 👤 Profile
+hub-achievements-unlocked = 🏆 Unlocked: { $list }
+hub-achievements-more = { $list } and { $count } more
+
 progress-btn-practice = ✍️ Practice these
 progress-practice-none = Nothing to practise yet.
 grammar-practice-intro = ✍️ Practising your weak spots ({ $count } patterns), one question each in turn.

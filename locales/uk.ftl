@@ -337,9 +337,23 @@ profile-skill = • { $skill }: { $level }
 profile-skill-seeded = • { $skill }: ~{ $level }
 profile-achievements-title = 🏆 Останні досягнення
 profile-achievement = • { $title }
-profile-achievements-none = Досягнення незабаром з'являться.
+profile-achievements-none = Досягнень поки немає — перше вже за одне заняття.
+profile-achievements-btn = 🏆 Досягнення
 profile-totals-title = 📦 За весь час
 profile-totals = 📚 вивчено слів: { $words } · 🔁 повторень: { $reviews } · ✍️ відповідей з граматики: { $grammar } · 🎯 днів із виконаною ціллю: { $days }
+
+# --- achievements ---
+achievements-title = 🏆 Досягнення · відкрито { $unlocked } з { $total }
+achievements-page = Сторінка { $page } з { $pages }
+achievements-progress = { $bar } { $value }/{ $threshold } → { $title }
+achievements-topics = 🧩 Опановано тем граматики: { $count } з { $total }
+achievements-secrets = 🔒 Знайдено секретних досягнень: { $count } з { $total }
+achievements-prev = ◀️ Назад
+achievements-next = Далі ▶️
+achievements-back = 👤 Профіль
+hub-achievements-unlocked = 🏆 Відкрито: { $list }
+hub-achievements-more = { $list } і ще { $count }
+
 progress-btn-practice = ✍️ Потренувати
 progress-practice-none = Поки нічого тренувати.
 grammar-practice-intro = ✍️ Тренуємо слабкі місця (патернів: { $count }), по запитанню на кожен по черзі.

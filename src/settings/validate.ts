@@ -93,6 +93,16 @@ export function parseModelId(input: string): string | undefined {
   return /^[\w.:/@-]{1,200}$/.test(id) ? id : undefined;
 }
 
+/**
+ * An Anthropic workspace ID as the Console shows it (`wrkspc_01AbC…`). Anything shaped like an
+ * API key is refused, so a key pasted into the wrong prompt is never stored in plain text.
+ */
+export function parseWorkspaceId(input: string): string | undefined {
+  const id = input.trim();
+  if (/^(?:sk|pk|or)-/i.test(id)) return undefined;
+  return /^wrkspc_[A-Za-z0-9]{8,64}$/.test(id) ? id : undefined;
+}
+
 /** An API key as pasted: one token, no whitespace inside. Its validity is checked with the provider. */
 export function parseApiKey(input: string): string | undefined {
   const key = input.trim();

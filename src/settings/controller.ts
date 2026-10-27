@@ -10,7 +10,14 @@ import { type ByokChoice, MODEL_PAGE_SIZE, type ProviderChoice } from "./options
 import type { Notice, ProviderSettings } from "./provider";
 import { renderSettings, type SettingsView } from "./screens";
 import { providerKey, type SettingsInput } from "./state";
-import { parseApiKey, parseBaseUrl, parseModelId, parseTimezone, timezoneAt } from "./validate";
+import {
+  parseApiKey,
+  parseBaseUrl,
+  parseModelId,
+  parseTimezone,
+  parseWorkspaceId,
+  timezoneAt,
+} from "./validate";
 
 export interface SettingsControllerDeps {
   db: Db;
@@ -96,8 +103,19 @@ export class SettingsController {
         return this.show(ctx, { page: pending?.kind === "timezone" ? "timezone" : "provider" });
       case "provider-test": {
         await ctx.answerCallbackQuery({ text: ctx.t("provider-testing") });
-        const notice = await this.deps.providers.test(ctx.user.id);
+        const { notice, needsWorkspace } = await this.deps.providers.test(ctx.user.id);
+        // The key works only inside a workspace: ask for its ID right away.
+        if (needsWorkspace) return this.ask(ctx, { kind: "workspace" }, notice);
         return this.show(ctx, { page: "provider", notice });
+      }
+      case "provider-workspace-clear": {
+        await ctx.answerCallbackQuery();
+        const cleared = await this.deps.providers.setWorkspace(ctx.user.id, null);
+        if (cleared) await this.changed(ctx, ["provider"]);
+        return this.show(ctx, {
+          page: "provider",
+          notice: cleared ? { key: "provider-workspace-cleared" } : undefined,
+        });
       }
     }
   }
@@ -136,6 +154,17 @@ export class SettingsController {
         if (!model) return retry({ key: "input-model-invalid" });
         ctx.session.settingsInput = undefined;
         return this.setModel(ctx, model);
+      }
+      case "workspace": {
+        const workspaceId = parseWorkspaceId(text);
+        if (!workspaceId) return retry({ key: "input-workspace-invalid" });
+        ctx.session.settingsInput = undefined;
+        const saved = await this.deps.providers.setWorkspace(userId, workspaceId);
+        if (saved) await this.changed(ctx, ["provider"]);
+        return this.show(ctx, {
+          page: "provider",
+          notice: saved ? { key: "provider-workspace-set" } : undefined,
+        });
       }
       case "timezone": {
         const location = ctx.message?.location;

@@ -86,9 +86,26 @@ provider-key-rejected = ❌ The provider rejected this key. Nothing was saved. P
 provider-model-set = ✅ Model saved.
 provider-testing = Testing…
 provider-test-ok = ✅ Provider works ({ $ms } ms).
-provider-test-bad-output = ⚠️ The provider answered, but not with valid JSON ({ $ms } ms).
-provider-test-failed-status = ❌ The provider returned an error (HTTP { $status }, { $ms } ms).
-provider-test-failed = ❌ The provider could not be reached ({ $ms } ms).
+provider-current = Provider: { $provider }
+provider-workspace = Workspace: { $workspace }
+provider-btn-workspace = 🏢 Workspace ID
+provider-btn-workspace-clear = Clear workspace
+provider-workspace-set = ✅ Workspace ID saved. Test the provider again.
+provider-workspace-cleared = ✅ Workspace ID cleared.
+
+## Provider errors (Settings test; reusable in session prompts)
+provider-error-detail = Provider says: { $detail }
+provider-error-auth = ❌ The provider rejected the API key (HTTP 401). Check it or enter a new one.
+provider-error-permission = ❌ The key has no access to this (HTTP 403). Check its permissions in the provider console.
+provider-error-workspace = ❌ This key is not bound to a workspace (HTTP 400). Send the workspace ID from the Anthropic Console.
+provider-error-model = ❌ The provider does not know this model (HTTP { $status }). Pick another model.
+provider-error-rate-limit = ⏳ Rate limit reached (HTTP 429). Wait a minute and try again.
+provider-error-credits = ❌ The provider account is out of credits or has no billing set up.
+provider-error-overloaded = ⏳ The provider is overloaded or down (HTTP { $status }). Try again later.
+provider-error-bad-request = ❌ The provider refused the request (HTTP { $status }).
+provider-error-bad-output = ⚠️ The provider answered, but not with valid JSON.
+provider-error-network = ❌ The provider could not be reached.
+provider-error-unknown = ❌ The provider returned an error (HTTP { $status }).
 model-title = Model: { $model }
 model-list-empty = This provider did not list any models. Type a model ID instead.
 model-page = Page { $page } of { $pages }
@@ -102,6 +119,8 @@ input-cancel = Cancel
 input-key-invalid = That does not look like an API key. Paste the key on its own.
 input-base-url-invalid = The URL must start with https:// and must not point at a local or private address.
 input-model-invalid = That does not look like a model ID.
+input-workspace = Send the Anthropic workspace ID (Console → Settings → Workspaces), e.g. wrkspc_01Ab… Current: { $workspace }.
+input-workspace-invalid = That does not look like a workspace ID. It starts with wrkspc_.
 input-timezone-invalid = Unknown time zone. Type a name like Europe/Kyiv or send your location.
 
 ## Progress

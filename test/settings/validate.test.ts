@@ -4,6 +4,7 @@ import {
   parseBaseUrl,
   parseModelId,
   parseTimezone,
+  parseWorkspaceId,
   timezoneAt,
 } from "../../src/settings/validate";
 
@@ -86,5 +87,20 @@ describe("parseModelId and parseApiKey", () => {
     expect(parseApiKey("  sk-ant-abc123456789  ")).toBe("sk-ant-abc123456789");
     expect(parseApiKey("my key is sk-ant-abc123456789")).toBeUndefined();
     expect(parseApiKey("short")).toBeUndefined();
+  });
+});
+
+describe("parseWorkspaceId", () => {
+  test("an Anthropic workspace ID, trimmed", () => {
+    expect(parseWorkspaceId(" wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ ")).toBe(
+      "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
+    );
+  });
+
+  test("keys and anything else are refused, so a key never lands in the plain-text column", () => {
+    expect(parseWorkspaceId("sk-ant-usr-abc123456789")).toBeUndefined();
+    expect(parseWorkspaceId("wrkspc_short")).toBeUndefined();
+    expect(parseWorkspaceId("my workspace")).toBeUndefined();
+    expect(parseWorkspaceId("")).toBeUndefined();
   });
 });

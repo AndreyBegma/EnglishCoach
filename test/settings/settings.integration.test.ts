@@ -10,6 +10,7 @@ import {
 import { findActiveSession } from "../../src/db/repositories/sessions";
 import { findUserByTelegramId, getSettings } from "../../src/db/repositories/users";
 import type { SettingsChanged } from "../../src/events/settings-events";
+import { seedLevels } from "../../src/levels";
 import { LlmProviderError } from "../../src/llm";
 import { createHarness, TEST_MASTER_KEY } from "../bot/harness";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
@@ -286,6 +287,8 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
 
   test("picked values are saved, re-render the hub and emit settings.changed", async () => {
     const s = await setup();
+    // The first level comes from the placement test; after it, Settings can change it.
+    await seedLevels(database.db, s.user.id, "A2", "placement");
     const changes: Callback[] = [
       { type: "set", change: { field: "explainLang", value: "ru" } },
       { type: "set", change: { field: "cefrLevel", value: "B1" } },

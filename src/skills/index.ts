@@ -14,3 +14,4 @@ export {
 export { DATA_NOTICE, PLACEHOLDERS, renderSystem, renderTask } from "./render";
 export { SkillInputError, type SkillRun, SkillRunner, type SkillRunnerDeps } from "./runner";
 export * from "./schemas";
+export * from "./topic-tags";

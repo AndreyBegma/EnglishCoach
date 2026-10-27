@@ -122,7 +122,10 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
     text: withNotice(t, text, notice).join("\n"),
     keyboard: Keyboard.from([
       [page("settings-btn-ui-lang", "lang"), page("settings-btn-explain-lang", "explain")],
-      [page("settings-btn-level", "level"), page("settings-btn-words", "words")],
+      // No level yet means the placement test is still to take: only it sets the first one.
+      settings.cefrLevel === null
+        ? [page("settings-btn-words", "words")]
+        : [page("settings-btn-level", "level"), page("settings-btn-words", "words")],
       [page("settings-btn-timezone", "timezone")],
       [page("settings-btn-morning", "morning"), page("settings-btn-evening", "evening")],
       [

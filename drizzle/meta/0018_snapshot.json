@@ -1,5 +1,5 @@
 {
-  "id": "c7c7468a-d484-49cc-af5d-cf86392169c3",
+  "id": "81dae8d1-f71d-4bed-ba24-5821137eb609",
   "prevId": "3dfbcb82-4699-4da5-8e66-5258cc2c2bdb",
   "version": "7",
   "dialect": "postgresql",
@@ -1490,6 +1490,13 @@
           "notNull": true,
           "default": "'{}'::jsonb"
         },
+        "session_results": {
+          "name": "session_results",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
         "transfer_evidence": {
           "name": "transfer_evidence",
           "type": "integer",
@@ -1497,14 +1504,8 @@
           "notNull": true,
           "default": 0
         },
-        "criteria_met_at": {
-          "name": "criteria_met_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "confirmed_at": {
-          "name": "confirmed_at",
+        "last_error_at": {
+          "name": "last_error_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
@@ -1602,6 +1603,130 @@
           ]
         }
       },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.transfer_events": {
+      "name": "transfer_events",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "transfer_events_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "topic_id": {
+          "name": "topic_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "transfer_kind",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source": {
+          "name": "source",
+          "type": "transfer_source",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "session_id": {
+          "name": "session_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "message_id": {
+          "name": "message_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "transfer_events_user_id_topic_id_idx": {
+          "name": "transfer_events_user_id_topic_id_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "topic_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "transfer_events_user_id_users_id_fk": {
+          "name": "transfer_events_user_id_users_id_fk",
+          "tableFrom": "transfer_events",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "transfer_events_session_id_learning_sessions_id_fk": {
+          "name": "transfer_events_session_id_learning_sessions_id_fk",
+          "tableFrom": "transfer_events",
+          "tableTo": "learning_sessions",
+          "columnsFrom": [
+            "session_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -1933,19 +2058,6 @@
         },
         "known_at": {
           "name": "known_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "evidence": {
-          "name": "evidence",
-          "type": "smallint",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "learned_at": {
-          "name": "learned_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
@@ -2860,6 +2972,23 @@
         "learning",
         "shaky",
         "mastered"
+      ]
+    },
+    "public.transfer_kind": {
+      "name": "transfer_kind",
+      "schema": "public",
+      "values": [
+        "correct",
+        "error"
+      ]
+    },
+    "public.transfer_source": {
+      "name": "transfer_source",
+      "schema": "public",
+      "values": [
+        "talk",
+        "writing",
+        "speaking"
       ]
     },
     "public.xp_source": {

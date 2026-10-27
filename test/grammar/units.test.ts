@@ -3,7 +3,7 @@ import { MAX_CALLBACK_BYTES, parseCallback } from "../../src/bot/callbacks";
 import { createI18n } from "../../src/bot/i18n";
 import { encodeGrammarCallback, parseGrammarCallback } from "../../src/grammar/callbacks";
 import { matchesAccepted, normaliseAnswer } from "../../src/grammar/grading";
-import { topicPicker } from "../../src/grammar/screens";
+import { topicPicker, transferLines } from "../../src/grammar/screens";
 import { localDate } from "../../src/grammar/stats";
 import { SYLLABUS, topicById, topicsForLevel } from "../../src/grammar/topics";
 import { CEFR_LEVELS } from "../../src/settings/options";
@@ -62,6 +62,22 @@ describe("grammar topics", () => {
       expect(parseGrammarCallback(data)).toEqual({ type: "topic", id: topic.id });
       expect(topicById(topic.id)).toBe(topic);
     }
+  });
+});
+
+describe("topic transfer evidence", () => {
+  const i18n = createI18n();
+
+  test("correct uses then recent errors, per source; nothing without evidence", () => {
+    const summary = { correct: { talk: 3, writing: 1 }, recentErrors: { talk: 1 } };
+    expect(transferLines(i18n, "en", summary)).toEqual([
+      "✅ Used correctly 3× in conversation",
+      "✅ Used correctly 1× in writing",
+      "⚠️ Slips in conversation in the last 14 days: 1",
+    ]);
+    expect(transferLines(i18n, "ru", summary)[0]).toBe("✅ Использовано верно 3× в разговоре");
+    expect(transferLines(i18n, "uk", summary)[0]).toBe("✅ Використано правильно 3× у розмові");
+    expect(transferLines(i18n, "en", { correct: { talk: 0 }, recentErrors: {} })).toEqual([]);
   });
 });
 

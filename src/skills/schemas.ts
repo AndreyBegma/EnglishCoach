@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { cefrLevelEnum, mistakeCategoryEnum } from "../db/schema/enums";
+import { correctionTopic, topicUses } from "./topic-tags";
 
 // Every skill names one input and one output schema from this file in its frontmatter.
 // Outputs are root objects with flat, required (nullable) fields: structured-output modes want an
@@ -306,55 +307,119 @@ export const VocabCheckOutput = z
     }
   });
 
-// ---------------------------------------------------------------- placement-test
+// ---------------------------------------------------------------- placement-item
 
-export const PLACEMENT_MAX_ITEMS = 15;
+/** The sections of the placement test, in the order the learner takes them. */
+export const PLACEMENT_SECTIONS = [
+  "grammar",
+  "vocabulary",
+  "reading",
+  "listening",
+  "writing",
+  "speaking",
+] as const;
+export type PlacementSection = (typeof PLACEMENT_SECTIONS)[number];
 
-export const PlacementTestInput = z.object({
-  /** Items answered so far, graded by the server (placement items are multiple choice only). */
-  answers: z
-    .array(
-      z.object({
-        level: cefr,
-        skill: z.enum(["grammar", "vocabulary", "reading"]),
-        topic: text,
-        correct: z.boolean(),
-      }),
-    )
-    .max(PLACEMENT_MAX_ITEMS),
-  max_items: z.number().int().min(1).max(PLACEMENT_MAX_ITEMS).default(PLACEMENT_MAX_ITEMS),
+/** Comprehension questions per reading text or listening clip. */
+export const PLACEMENT_PASSAGE_QUESTIONS = 2;
+
+/** How many multiple-choice questions each section's item carries; 0 means a free task. */
+export const PLACEMENT_QUESTIONS: Record<PlacementSection, number> = {
+  grammar: 1,
+  vocabulary: 1,
+  reading: PLACEMENT_PASSAGE_QUESTIONS,
+  listening: PLACEMENT_PASSAGE_QUESTIONS,
+  writing: 0,
+  speaking: 0,
+};
+
+/** Past items' topics and words the model must not reuse. */
+const PLACEMENT_MAX_AVOID = 20;
+
+export const PlacementItemInput = z.object({
+  section: z.enum(PLACEMENT_SECTIONS),
+  /** The level the server pitches this item at; the test's adaptivity is the server's. */
+  level: cefr,
+  /** Grammar: the syllabus topic the item tests. */
+  topic: z
+    .object({ id: text, title: text, examples: z.array(text).max(5) })
+    .nullable()
+    .default(null),
+  /** Vocabulary: the dictionary word the item tests; null lets the model pick one at `level`. */
+  word: text.nullable().default(null),
+  /** Topics, words and subjects already used in this test. */
+  avoid: z.array(text).max(PLACEMENT_MAX_AVOID).default([]),
 });
 
-export const PlacementTestOutput = z
+const placementQuestion = z.object({
+  question: text.describe("Entirely in English, the instruction included"),
+  options: z.array(text).length(4),
+  correct_index: z.number().int().min(0).max(3),
+});
+
+export const PlacementItemOutput = z
   .object({
-    status: z.enum(["continue", "final"]),
-    estimate: z.object({ level: cefr, confidence: z.number().min(0).max(1) }),
-    item: z
-      .object({
-        level: cefr,
-        skill: z.enum(["grammar", "vocabulary", "reading"]),
-        topic: text,
-        question: text,
-        options: z.array(text).length(4),
-        correct_index: z.number().int().min(0).max(3),
-      })
+    section: z.enum(PLACEMENT_SECTIONS).describe("task.section, echoed"),
+    subject: text.describe("A short English tag of what the item is about, for task.avoid"),
+    passage: text
       .nullable()
-      .describe("The next item when status is continue, else null"),
-    summary: text.nullable().describe("When final: strengths and gaps in explain_lang, else null"),
+      .describe("Reading: the text shown. Listening: the script that is voiced. Else null"),
+    questions: z
+      .array(placementQuestion)
+      .describe("Grammar/vocabulary: 1. Reading/listening: 2, about the passage. Else empty"),
+    task: text.nullable().describe("Writing/speaking: the task, in English. Else null"),
   })
   .superRefine((value, ctx) => {
-    const final = value.status === "final";
-    if (final === (value.item !== null)) {
-      issue(ctx, "item", final ? "must be null when final" : "is required when continuing");
+    const wanted = PLACEMENT_QUESTIONS[value.section];
+    if (value.questions.length !== wanted) {
+      issue(ctx, "questions", `needs exactly ${wanted} for ${value.section}`);
     }
-    if (final === (value.summary === null)) {
-      issue(ctx, "summary", final ? "is required when final" : "must be null when continuing");
+    const passage = value.section === "reading" || value.section === "listening";
+    if (passage === (value.passage === null)) {
+      issue(ctx, "passage", passage ? `is required for ${value.section}` : "must be null");
     }
-    const options = value.item?.options;
-    if (options && new Set(options.map((o) => o.toLowerCase())).size !== 4) {
-      issue(ctx, "item", "options must be distinct");
+    const free = wanted === 0;
+    if (free === (value.task === null)) {
+      issue(ctx, "task", free ? `is required for ${value.section}` : "must be null");
     }
+    value.questions.forEach((question, index) => {
+      if (new Set(question.options.map((o) => o.toLowerCase())).size !== 4) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["questions", index, "options"],
+          message: "options must be distinct",
+        });
+      }
+    });
   });
+
+// ---------------------------------------------------------------- writing-rubric / speaking-rubric
+
+/** Each rubric criterion is scored 0 (absent) to 3 (fully at the task's level or above). */
+const criterion = z.number().int().min(0).max(3);
+
+export const RubricGradeInput = z.object({
+  /** The task the learner answered, in English. */
+  task: text,
+  /** The level the task was pitched at. */
+  level: cefr,
+  /** The learner's text, or the speech-to-text transcript of their voice answer. */
+  learner_answer: text,
+});
+
+export const RubricGradeOutput = z.object({
+  on_task: z.boolean().describe("False when the answer ignores the task or is not English"),
+  criteria: z.object({
+    task: criterion.describe("Task achievement: answers all of it, at the expected length"),
+    coherence: criterion.describe("Organisation and linking; for speech, fluency"),
+    range: criterion.describe("Range of grammar and vocabulary"),
+    accuracy: criterion.describe(
+      "Grammar, word choice, spelling; for speech, likely mispronunciations",
+    ),
+  }),
+  level: cefr.describe("The CEFR level the answer shows, by the CEFR descriptors"),
+  feedback: text.describe("One sentence in explain_lang: one strength and one gap"),
+});
 
 // ---------------------------------------------------------------- conversation
 
@@ -371,9 +436,6 @@ export const ConversationInput = z.object({
   syllabus_topics: syllabusTopicList,
 });
 
-/** Topics one turn may tag as used correctly; more would be guessing. */
-export const MAX_TOPIC_USES = 3;
-
 export const ConversationOutput = z.object({
   reply: text.describe("Natural English reply that keeps the conversation going"),
   corrections: z
@@ -384,16 +446,12 @@ export const ConversationOutput = z.object({
         category,
         severity,
         why: text.describe("One line, in explain_lang"),
+        topic_id: correctionTopic,
       }),
     )
     .max(MAX_CORRECTIONS),
   tip: z.object({ kind: tipKind, text: text.describe("In explain_lang, English examples inline") }),
-  /** Only a hint: the server keeps the ids that are in the syllabus and drops the rest. */
-  topic_uses: z
-    .array(z.string())
-    .max(MAX_TOPIC_USES)
-    .default([])
-    .describe("Ids from task.syllabus_topics the learner's message used correctly"),
+  topic_uses: topicUses,
 });
 
 // ---------------------------------------------------------------- routine-plan
@@ -502,7 +560,8 @@ export const inputSchemas = {
   VocabEnrichInput,
   VocabExerciseInput,
   VocabCheckInput,
-  PlacementTestInput,
+  PlacementItemInput,
+  RubricGradeInput,
   ConversationInput,
   RoutinePlanInput,
   VocabEnrichBatchInput,
@@ -516,7 +575,8 @@ export const outputSchemas = {
   VocabEnrichOutput,
   VocabExerciseOutput,
   VocabCheckOutput,
-  PlacementTestOutput,
+  PlacementItemOutput,
+  RubricGradeOutput,
   ConversationOutput,
   RoutinePlanOutput,
   VocabEnrichBatchOutput,
@@ -533,7 +593,9 @@ export const BASE_SKILLS = {
   "vocab-enrich": { input: "VocabEnrichInput", output: "VocabEnrichOutput" },
   "vocab-exercise": { input: "VocabExerciseInput", output: "VocabExerciseOutput" },
   "vocab-check": { input: "VocabCheckInput", output: "VocabCheckOutput" },
-  "placement-test": { input: "PlacementTestInput", output: "PlacementTestOutput" },
+  "placement-item": { input: "PlacementItemInput", output: "PlacementItemOutput" },
+  "writing-rubric": { input: "RubricGradeInput", output: "RubricGradeOutput" },
+  "speaking-rubric": { input: "RubricGradeInput", output: "RubricGradeOutput" },
   conversation: { input: "ConversationInput", output: "ConversationOutput" },
   "routine-plan": { input: "RoutinePlanInput", output: "RoutinePlanOutput" },
   "vocab-enrich-batch": { input: "VocabEnrichBatchInput", output: "VocabEnrichBatchOutput" },

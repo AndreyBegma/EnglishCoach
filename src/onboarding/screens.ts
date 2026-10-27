@@ -1,20 +1,17 @@
 import { InlineKeyboard } from "grammy";
 import { type Locale, SUPPORTED_LOCALES, type Translator } from "../bot/i18n";
 import type { RenderedScreen } from "../hub/screens";
+import { renderTest } from "../placement/screens";
 import {
-  CEFR_LEVELS,
   INTEREST_SUGGESTIONS,
   LEARNER_GOALS,
   MAX_INTERESTS,
   WORDS_PER_DAY,
 } from "../settings/options";
 import { interestsLine } from "../settings/screens";
-import { PLACEMENT_MAX_ITEMS } from "../skills";
 import { encodeOnboardingCallback, type OnboardingCallback } from "./callbacks";
 import { EVENING_SLOTS, MORNING_SLOTS } from "./options";
 import type { OnboardingState } from "./state";
-
-export const OPTION_LETTERS = ["A", "B", "C", "D"] as const;
 
 const button = (label: string, data: OnboardingCallback) =>
   InlineKeyboard.text(label, encodeOnboardingCallback(data));
@@ -98,72 +95,36 @@ export function renderOnboarding(
           [button(t("onboarding-provider-own"), { type: "provider", choice: "own" })],
         ]),
       };
-    case "path":
+    case "intro": {
+      const start = button(t("onboarding-start-test"), { type: "take-test" });
+      const intro = t(state.mode === "retake" ? "placement-intro-retake" : "placement-intro");
       return {
-        text: t("onboarding-path"),
+        text: intro,
         keyboard: InlineKeyboard.from([
-          [button(t("onboarding-take-test"), { type: "take-test" })],
-          [button(t("onboarding-know-level"), { type: "know-level" })],
+          state.mode === "retake"
+            ? [start, button(t("onboarding-cancel"), { type: "cancel" })]
+            : [start],
         ]),
       };
-    case "level":
-      return {
-        text: t("onboarding-choose-level"),
-        keyboard: InlineKeyboard.from(
-          chunk(CEFR_LEVELS, 3).map((row) =>
-            row.map((level) => button(level, { type: "level", level })),
-          ),
-        ),
-      };
-    case "retake-intro":
-      return {
-        text: t("onboarding-retake-intro", { max: PLACEMENT_MAX_ITEMS }),
-        keyboard: InlineKeyboard.from([
-          [
-            button(t("onboarding-start-test"), { type: "take-test" }),
-            button(t("onboarding-cancel"), { type: "cancel" }),
-          ],
-        ]),
-      };
-    case "question": {
-      const item = state.item;
-      if (!item) throw new Error("question step without an item");
-      const lines = [
-        t("onboarding-question", { n: state.answers.length + 1, max: PLACEMENT_MAX_ITEMS }),
-        "",
-        item.question,
-        "",
-        ...item.options.map((option, index) => `${OPTION_LETTERS[index]}) ${option}`),
-      ];
-      return {
-        text: lines.join("\n"),
-        keyboard: InlineKeyboard.from([
-          OPTION_LETTERS.map((letter, index) =>
-            button(letter, { type: "answer", seq: state.itemSeq ?? 0, index }),
-          ),
-        ]),
-      };
+    }
+    case "test": {
+      if (!state.test) throw new Error("test step without a test");
+      return renderTest(t, state.test, state.itemSeq ?? 0);
     }
     case "error":
       return {
         text: t("onboarding-error"),
         keyboard: InlineKeyboard.from([
           [button(t("onboarding-retry"), { type: "retry" })],
-          [
-            state.mode === "retake"
-              ? button(t("onboarding-cancel"), { type: "cancel" })
-              : button(t("onboarding-know-level"), { type: "know-level" }),
-          ],
+          ...(state.mode === "retake"
+            ? [[button(t("onboarding-cancel"), { type: "cancel" })]]
+            : []),
         ]),
       };
     case "result": {
-      const result = state.result;
-      if (!result) throw new Error("result step without a result");
-      const correct = state.answers.filter((answer) => answer.correct).length;
-      const detail =
-        result.summary ?? t("onboarding-result-fallback", { correct, total: state.answers.length });
+      if (!state.result) throw new Error("result step without a result");
       return {
-        text: [t("onboarding-result", { level: result.level }), "", detail].join("\n"),
+        text: state.result,
         keyboard: InlineKeyboard.from([[button(t("onboarding-continue"), { type: "continue" })]]),
       };
     }

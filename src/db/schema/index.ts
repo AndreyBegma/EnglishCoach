@@ -11,6 +11,7 @@ export * from "./providers";
 export * from "./sessions";
 export * from "./stats";
 export * from "./topic-progress";
+export * from "./transfer-events";
 export * from "./users";
 export * from "./vocabulary";
 export * from "./voice";

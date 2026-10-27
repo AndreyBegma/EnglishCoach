@@ -1,0 +1,6 @@
+{
+  "on_task": true,
+  "criteria": { "task": 2, "coherence": 2, "range": 1, "accuracy": 2 },
+  "level": "B1",
+  "feedback": "Вы отвечаете на оба вопроса связно; обратите внимание на звук th — «sink» прозвучало вместо «think»."
+}

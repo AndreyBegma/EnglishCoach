@@ -82,6 +82,7 @@ export class HubService {
       lastSummary,
       unlockNotice: unlocks && unlockNotice(this.deps.i18n, locale, unlocks.entries),
       progress,
+      locked: !settings?.cefrLevel,
     });
     return unlocks?.ids.length ? { ...rendered, announced: unlocks.ids } : rendered;
   }

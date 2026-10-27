@@ -12,7 +12,24 @@ export const providerKindEnum = pgEnum("provider_kind", [
   "runner",
 ]);
 
-export const cardItemTypeEnum = pgEnum("card_item_type", ["word", "grammar_pattern", "user_word"]);
+/** What a `words` row is: a single word, or one of the multi-word / derived lexical units. */
+export const lexicalUnitTypeEnum = pgEnum("lexical_unit_type", [
+  "word",
+  "collocation",
+  "phrasal_verb",
+  "idiom",
+  "word_family",
+]);
+
+export const cardItemTypeEnum = pgEnum("card_item_type", [
+  "word",
+  "grammar_pattern",
+  "user_word",
+  "collocation",
+  "phrasal_verb",
+  "idiom",
+  "word_family",
+]);
 
 export const mistakeCategoryEnum = pgEnum("mistake_category", [
   "grammar",
@@ -43,3 +60,4 @@ export const sessionStatusEnum = pgEnum("session_status", [
 export type Language = (typeof languageEnum.enumValues)[number];
 export type CefrLevel = (typeof cefrLevelEnum.enumValues)[number];
 export type ProviderKind = (typeof providerKindEnum.enumValues)[number];
+export type LexicalUnitType = (typeof lexicalUnitTypeEnum.enumValues)[number];

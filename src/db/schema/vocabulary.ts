@@ -14,18 +14,39 @@ import {
 import { cardItemTypeEnum, cefrLevelEnum } from "./enums";
 import { users } from "./users";
 
-/** The seeded CEFR-levelled frequency dictionary. */
+/** `words.source` of a word imported from the owner's curated list (see `src/words/owner-list.ts`). */
+export const OWNER_LIST_SOURCE = "owner_list";
+
+/**
+ * The seeded CEFR-levelled frequency dictionary, overlaid by the owner's curated list. Owner rows
+ * (`source = owner_list`) carry the owner's level, fields and a curriculum position; the picker
+ * follows that order. The owner's data lives only in the database, never in the repository.
+ */
 export const words = pgTable(
   "words",
   {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     lemma: text().notNull(),
+    /** Comma-separated for an owner word listed with several parts of speech; "" when unknown. */
     pos: text().notNull(),
     cefrLevel: cefrLevelEnum().notNull(),
     frequencyRank: integer(),
     source: text().notNull(),
+    topic: text(),
+    ipa: text(),
+    /** The owner's example sentence (English, untranslated). */
+    example: text(),
+    translationRu: text(),
+    /** Owner list sheet: 0 = the A1–A2 check, 1–3 = B1–C1, 4–6 = the rare bands. */
+    curriculumStage: smallint(),
+    /** Row number (№) inside the sheet. */
+    curriculumIndex: integer(),
   },
-  (table) => [unique("words_lemma_pos_unique").on(table.lemma, table.pos)],
+  (table) => [
+    unique("words_lemma_pos_unique").on(table.lemma, table.pos),
+    index("words_lemma_idx").on(table.lemma),
+    index("words_curriculum_idx").on(table.curriculumStage, table.curriculumIndex),
+  ],
 );
 
 /** An example sentence on a card and its translation into the learner's language. */

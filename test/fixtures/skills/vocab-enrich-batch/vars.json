@@ -1,0 +1,22 @@
+{
+  "words": [
+    {
+      "id": 101,
+      "lemma": "decision",
+      "pos": "noun",
+      "word_level": "A2",
+      "translation": "решение",
+      "ipa": "/dɪˈsɪʒn/",
+      "example": "Moving to another city was a difficult decision."
+    },
+    {
+      "id": 102,
+      "lemma": "borrow",
+      "pos": "verb",
+      "word_level": "A2",
+      "translation": null,
+      "ipa": null,
+      "example": null
+    }
+  ]
+}

@@ -1,10 +1,22 @@
-import { and, asc, eq, ne, notExists, sql } from "drizzle-orm";
+import { and, asc, eq, ne, notExists, or, sql } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 import type { Db } from "../client";
-import { type CefrLevel, cards, type Word, words } from "../schema";
+import {
+  type CefrLevel,
+  cards,
+  excludedLemmas,
+  OWNER_LIST_SOURCE,
+  type Word,
+  words,
+} from "../schema";
+
+const ownerWords = alias(words, "owner_words");
 
 /**
- * Up to `limit` words of one CEFR level that the user has no card for, most frequent first.
- * Words without a frequency rank come last; the id breaks ties so the order is deterministic.
+ * Up to `limit` words of one CEFR level that the user has no card for (a known word has one too):
+ * the owner's list first in curriculum order, then the rest most frequent first. Removed lemmas
+ * are skipped, and so is a seed row whose lemma the owner's list already covers. Words without a
+ * frequency rank come last; the id breaks ties so the order is deterministic.
  */
 export async function findUnseenWords(
   db: Db,
@@ -25,9 +37,31 @@ export async function findUnseenWords(
             .from(cards)
             .where(and(eq(cards.userId, userId), eq(cards.wordId, words.id))),
         ),
+        notExists(
+          db
+            .select({ one: sql`1` })
+            .from(excludedLemmas)
+            .where(eq(excludedLemmas.lemma, words.lemma)),
+        ),
+        or(
+          eq(words.source, OWNER_LIST_SOURCE),
+          notExists(
+            db
+              .select({ one: sql`1` })
+              .from(ownerWords)
+              .where(
+                and(eq(ownerWords.lemma, words.lemma), eq(ownerWords.source, OWNER_LIST_SOURCE)),
+              ),
+          ),
+        ),
       ),
     )
-    .orderBy(sql`${words.frequencyRank} asc nulls last`, asc(words.id))
+    .orderBy(
+      sql`${words.curriculumStage} asc nulls last`,
+      sql`${words.curriculumIndex} asc nulls last`,
+      sql`${words.frequencyRank} asc nulls last`,
+      asc(words.id),
+    )
     .limit(limit);
 }
 

@@ -8,3 +8,4 @@ export * from "./stats";
 export * from "./users";
 export * from "./vocabulary";
 export * from "./voice";
+export * from "./word-enrichment";

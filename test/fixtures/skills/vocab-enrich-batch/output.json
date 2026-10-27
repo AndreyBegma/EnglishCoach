@@ -1,0 +1,42 @@
+{
+  "cards": [
+    {
+      "id": 101,
+      "translation": "решение",
+      "ipa": "/dɪˈsɪʒn/",
+      "pos": "noun",
+      "examples": [
+        {
+          "en": "Moving to another city was a difficult decision.",
+          "translation": "Переезд в другой город был трудным решением."
+        },
+        {
+          "en": "We need to make a decision by Friday.",
+          "translation": "Нам нужно принять решение до пятницы."
+        }
+      ],
+      "collocations": ["make a decision", "a difficult decision", "the final decision"],
+      "mnemonic": "По-английски решение «делают»: make a decision. Корень тот же, что в «decide».",
+      "image_query": "person choosing between two roads"
+    },
+    {
+      "id": 102,
+      "translation": "одалживать, брать взаймы",
+      "ipa": "/ˈbɒrəʊ/",
+      "pos": "verb",
+      "examples": [
+        {
+          "en": "Can I borrow your pen for a minute?",
+          "translation": "Можно я возьму твою ручку на минутку?"
+        },
+        {
+          "en": "She borrowed some money from her brother.",
+          "translation": "Она одолжила немного денег у брата."
+        }
+      ],
+      "collocations": ["borrow money", "borrow something from someone", "borrow a book"],
+      "mnemonic": "borrow — брать, lend — давать: «бОрроу» берёт, «ленд» отдаёт.",
+      "image_query": "borrowing a book from a friend"
+    }
+  ]
+}

@@ -306,6 +306,47 @@ export const RoutinePlanOutput = z.object({
   text: text.max(800).describe("The plan message in ui_lang"),
 });
 
+// ---------------------------------------------------------------- vocab-enrich-batch
+
+/** Words per batch call: enough to amortise the prompt, few enough to keep answers reliable. */
+export const ENRICH_BATCH_MAX = 20;
+
+export const VocabEnrichBatchInput = z.object({
+  words: z
+    .array(
+      z.object({
+        id: z.number().int().positive(),
+        lemma: text,
+        pos: text.nullable().default(null),
+        word_level: cefr.nullable().default(null),
+        /** Fields the curated list already has, in explain_lang; the model keeps them. */
+        translation: text.nullable().default(null),
+        ipa: text.nullable().default(null),
+        /** An English sentence that must be the first example. */
+        example: text.nullable().default(null),
+      }),
+    )
+    .min(1)
+    .max(ENRICH_BATCH_MAX),
+});
+
+export const VocabEnrichBatchOutput = z.object({
+  cards: z
+    .array(
+      z.object({
+        id: z.number().int().describe("The `id` of the word in task.words"),
+        translation: VocabEnrichOutput.shape.translation,
+        ipa: VocabEnrichOutput.shape.ipa,
+        pos: text,
+        examples: VocabEnrichOutput.shape.examples,
+        collocations: VocabEnrichOutput.shape.collocations,
+        mnemonic: VocabEnrichOutput.shape.mnemonic,
+        image_query: text.max(80).describe("A short English image-search query for the word"),
+      }),
+    )
+    .describe("One card per word of task.words, same ids"),
+});
+
 // ---------------------------------------------------------------- registries
 
 export const inputSchemas = {
@@ -317,6 +358,7 @@ export const inputSchemas = {
   PlacementTestInput,
   ConversationInput,
   RoutinePlanInput,
+  VocabEnrichBatchInput,
 } satisfies Record<string, z.ZodObject>;
 
 // `satisfies ZodObject` is what guarantees a root object for every output (see top of file).
@@ -329,6 +371,7 @@ export const outputSchemas = {
   PlacementTestOutput,
   ConversationOutput,
   RoutinePlanOutput,
+  VocabEnrichBatchOutput,
 } satisfies Record<string, z.ZodObject>;
 
 export type InputSchemaName = keyof typeof inputSchemas;
@@ -344,6 +387,7 @@ export const BASE_SKILLS = {
   "placement-test": { input: "PlacementTestInput", output: "PlacementTestOutput" },
   conversation: { input: "ConversationInput", output: "ConversationOutput" },
   "routine-plan": { input: "RoutinePlanInput", output: "RoutinePlanOutput" },
+  "vocab-enrich-batch": { input: "VocabEnrichBatchInput", output: "VocabEnrichBatchOutput" },
 } as const satisfies Record<string, { input: InputSchemaName; output: OutputSchemaName }>;
 
 export type BaseSkillId = keyof typeof BASE_SKILLS;

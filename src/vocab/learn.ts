@@ -7,7 +7,8 @@ import {
   markCardKnown,
   unmarkCardKnown,
 } from "../db/repositories/cards";
-import type { CardBack, CardRow } from "../db/schema";
+import { getWordEnrichment } from "../db/repositories/word-enrichments";
+import type { CardBack, CardRow, Language, Word, WordEnrichmentData } from "../db/schema";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { SkillOutput } from "../skills";
 import { WordPicker } from "../words/picker";
@@ -22,6 +23,18 @@ import { localDate, newWordsOn } from "./stats";
 const OWN_WORD = /^\p{L}[\p{L}\p{M}' -]{0,59}$/u;
 
 export function backFromEnrichment(data: SkillOutput<"vocab-enrich">): CardBack {
+  return {
+    translation: data.translation,
+    ipa: data.ipa,
+    pos: data.pos,
+    examples: data.examples,
+    collocations: data.collocations,
+    mnemonic: data.mnemonic,
+  };
+}
+
+/** The card back a prefetched, shared enrichment gives a new card. */
+export function backFromCache(data: WordEnrichmentData): CardBack {
   return {
     translation: data.translation,
     ipa: data.ipa,
@@ -207,6 +220,38 @@ export class LearnFlow implements SessionKindHandler {
       await this.sendIdle(handle, ctx, t("vocab-learn-no-words"), lead);
       return;
     }
+    const back = await this.backFor(handle, ctx, word, settings.explainLang, lead);
+    if (!back) return;
+    const card = await createCard(db, {
+      userId: handle.user.id,
+      itemType: "word",
+      wordId: word.id,
+      front: word.lemma,
+      back,
+      fsrs: this.core.scheduler.newCard(this.core.now()),
+    });
+    await this.showCard(handle, ctx, card, lead);
+  }
+
+  /**
+   * The new card's back: from the shared cache the prefetch job fills, else enriched inline. A miss
+   * is logged as a metric — it should stay near zero. Undefined when the inline call failed.
+   */
+  private async backFor(
+    handle: LearningHandle,
+    ctx: BotContext,
+    word: Word,
+    lang: Language,
+    lead?: Lead,
+  ): Promise<CardBack | undefined> {
+    const cached = await getWordEnrichment(this.core.deps.db, word.id, lang);
+    if (cached) return backFromCache(cached);
+    this.core.deps.log.info("vocab enrichment cache miss", {
+      metric: "vocab.enrich.cache_miss",
+      userId: handle.user.id,
+      wordId: word.id,
+      lang,
+    });
     const enriched = await this.core.llm(
       handle,
       ctx,
@@ -214,21 +259,12 @@ export class LearnFlow implements SessionKindHandler {
       () =>
         this.core.deps.skills.runSkill(handle.user.id, "vocab-enrich", {
           lemma: word.lemma,
-          pos: word.pos,
+          pos: word.pos || null,
           word_level: word.cefrLevel,
         }),
       lead,
     );
-    if (!enriched) return;
-    const card = await createCard(db, {
-      userId: handle.user.id,
-      itemType: "word",
-      wordId: word.id,
-      front: word.lemma,
-      back: backFromEnrichment(enriched.data),
-      fsrs: this.core.scheduler.newCard(this.core.now()),
-    });
-    await this.showCard(handle, ctx, card, lead);
+    return enriched ? backFromEnrichment(enriched.data) : undefined;
   }
 
   private async addOwnWord(handle: LearningHandle, ctx: BotContext, text: string) {

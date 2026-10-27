@@ -225,7 +225,7 @@ describe.skipIf(!testServerUrl)("one answer at a time, over a mocked Telegram AP
     const picked = s.h.press(
       s.telegramId,
       picker.id,
-      encodeGrammarCallback({ type: "topic", index: null }),
+      encodeGrammarCallback({ type: "topic", id: null }),
     );
     await until(() => s.requests.length === 1);
     expect(s.card().text).toContain("✅ 🎲 Mixed");
@@ -252,11 +252,7 @@ describe.skipIf(!testServerUrl)("one answer at a time, over a mocked Telegram AP
       [typedItem("gap_fill", "tenses", "She ___ (live) here.", ["has lived"])],
       { locks },
     );
-    await s.h.press(
-      s.telegramId,
-      s.card().id,
-      encodeGrammarCallback({ type: "topic", index: null }),
-    );
+    await s.h.press(s.telegramId, s.card().id, encodeGrammarCallback({ type: "topic", id: null }));
     const question = s.card();
 
     const id = s.h.telegram.userMessage(s.telegramId, "has lived");

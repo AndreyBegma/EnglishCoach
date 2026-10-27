@@ -46,6 +46,10 @@ Judge against what the item tests (`task.type`, `task.question`, `task.instructi
 - `pattern` (null when correct): a short, reusable English label of the error that would group it
   with the same mistake in other sentences, e.g. `present perfect with "since"`,
   `missing article before singular countable noun`. No learner words, no sentence-specific detail.
+- `topic_id`: the id from `task.syllabus_topics` of the topic the **main** error belongs to —
+  usually `task.topic_id`, the topic the item tests; another id only when the error is clearly
+  about a different topic. Null when the answer is correct or no listed topic fits. Never invent an
+  id.
 - `explanation` (in {{explain_lang}}, English inline): 1-3 sentences. Name what is wrong, give the
   rule, show the fix. For `correct`, one sentence confirming why it works (mention an accepted
   variant if the learner used one). Be encouraging but never vague.

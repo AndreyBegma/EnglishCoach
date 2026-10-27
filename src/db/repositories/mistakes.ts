@@ -24,6 +24,8 @@ export type MistakeInput = Pick<Mistake, "category" | "exampleWrong" | "exampleR
   /** Raw label; normalised here, so callers never build the key themselves. */
   pattern: string;
   explanation: string;
+  /** A validated syllabus topic id. A later occurrence without one keeps the stored id. */
+  topicId?: string | null;
 };
 
 /**
@@ -43,6 +45,7 @@ export async function upsertMistake(db: Db, userId: number, input: MistakeInput)
       exampleWrong: input.exampleWrong,
       exampleRight: input.exampleRight,
       explanation: input.explanation,
+      topicId: input.topicId ?? null,
     })
     .onConflictDoUpdate({
       target: [mistakes.userId, mistakes.category, mistakes.pattern],
@@ -52,6 +55,7 @@ export async function upsertMistake(db: Db, userId: number, input: MistakeInput)
         exampleWrong: input.exampleWrong,
         exampleRight: input.exampleRight,
         explanation: input.explanation,
+        topicId: sql`coalesce(excluded.topic_id, ${mistakes.topicId})`,
       },
     })
     .returning();

@@ -1,7 +1,9 @@
 import { eq } from "drizzle-orm";
 import type { Db } from "../db/client";
-import { type CardRow, type CefrLevel, grammarTopics, type Skill, words } from "../db/schema";
+import { type CardRow, type CefrLevel, type Skill, words } from "../db/schema";
+import { topicById } from "../grammar/topics";
 import { type Difficulty, recordGradedItem, seedLevels } from "./levels";
+import { parseCefr } from "./model";
 
 /**
  * What each grader's item is worth to the level model: its difficulty and its score. Kept here so
@@ -15,22 +17,17 @@ import { type Difficulty, recordGradedItem, seedLevels } from "./levels";
  */
 export const ITEM_EXPECTED = { quiz: 0.65, card: 0.9, turn: 0.75, placement: 0.5 } as const;
 
-const SYLLABUS_TOPIC = /^g\d{3}$/;
-
 /**
- * A grammar item's difficulty: the level of its syllabus topic when the item names one (a `gNNN`
- * id of the course), else the quiz's own CEFR estimate. The one place that decides it.
+ * A grammar item's difficulty: its syllabus topic's level at step precision (`B1.4` → 2.4) when
+ * the item has a validated `topic_id`, else the quiz's own CEFR estimate. The one place that
+ * decides it.
  */
-export async function grammarItemDifficulty(
-  db: Db,
-  item: { topic: string; difficulty: CefrLevel },
-): Promise<CefrLevel> {
-  if (!SYLLABUS_TOPIC.test(item.topic)) return item.difficulty;
-  const [topic] = await db
-    .select({ cefrLevel: grammarTopics.cefrLevel })
-    .from(grammarTopics)
-    .where(eq(grammarTopics.id, item.topic));
-  return topic?.cefrLevel ?? item.difficulty;
+export function grammarItemDifficulty(item: {
+  topic_id: string | null;
+  difficulty: CefrLevel;
+}): Difficulty {
+  const level = item.topic_id ? topicById(item.topic_id)?.level : undefined;
+  return (level === undefined ? undefined : parseCefr(level)) ?? item.difficulty;
 }
 
 /**
@@ -58,10 +55,10 @@ export const GRAMMAR_SCORES = { correct: 1, partial: 0.5, wrong: 0 } as const;
 export async function recordGrammarItem(
   db: Db,
   userId: number,
-  item: { topic: string; difficulty: CefrLevel },
+  item: { topic_id: string | null; difficulty: CefrLevel },
   verdict: keyof typeof GRAMMAR_SCORES,
 ): Promise<void> {
-  const difficulty = await grammarItemDifficulty(db, item);
+  const difficulty = grammarItemDifficulty(item);
   await recordGradedItem(db, userId, "grammar", difficulty, GRAMMAR_SCORES[verdict], {
     expected: ITEM_EXPECTED.quiz,
   });

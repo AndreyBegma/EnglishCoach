@@ -189,7 +189,36 @@ export const VocabEnrichOutput = z.object({
 
 // ---------------------------------------------------------------- vocab-exercise
 
-export const vocabMode = z.enum(["recognition", "production", "cloze"]);
+/**
+ * `recognition` and `particle` are answered with buttons; the rest are typed. `particle` (phrasal
+ * verbs), `partner` (collocations), `transform` (word families) and `own_sentence` (phrasal verbs)
+ * belong to lexical units; `production` and `cloze` to words and idioms.
+ */
+export const vocabMode = z.enum([
+  "recognition",
+  "production",
+  "cloze",
+  "particle",
+  "partner",
+  "transform",
+  "own_sentence",
+]);
+
+/** The modes whose item is a choice of four options. */
+export const CHOICE_MODES = ["recognition", "particle"] as const;
+/** The typed modes whose prompt is a sentence with a `___` gap. */
+const GAP_MODES = ["cloze", "partner", "transform"] as const;
+
+/** What the card is: a word (a learner's own included) or a lexical unit. */
+export const vocabItemType = z.enum([
+  "word",
+  "collocation",
+  "phrasal_verb",
+  "idiom",
+  "word_family",
+]);
+
+const familyForm = z.object({ pos: text, form: text });
 
 export const VocabExerciseInput = z.object({
   mode: vocabMode,
@@ -198,24 +227,42 @@ export const VocabExerciseInput = z.object({
   pos: text.nullable().default(null),
   translation: text.nullable().default(null),
   examples: z.array(text).default([]),
-  /** Same-level words the server offers as distractor material for recognition. */
+  /** Same-level words (or units of the same type) the server offers as distractor material. */
   distractors: z.array(text).default([]),
+  item_type: vocabItemType.default("word"),
+  /** A phrasal verb's verb and particle (`particle` mode tests the particle). */
+  verb: text.nullable().default(null),
+  particle: text.nullable().default(null),
+  /** The collocation word the learner supplies (`partner` mode). */
+  partner: text.nullable().default(null),
+  /** A word family's forms, and the one `transform` asks for (chosen by the server). */
+  forms: z.array(familyForm).default([]),
+  target_form: familyForm.nullable().default(null),
 });
 
 export const VocabExerciseOutput = z
   .object({
     mode: vocabMode,
     instruction: text.describe("What to do, in explain_lang"),
-    prompt: text.describe("What the learner sees; cloze marks the gap with ___"),
-    options: z.array(text).nullable().describe("Exactly 4 for recognition, else null"),
-    correct_index: z.number().int().nullable().describe("0-3 for recognition, else null"),
+    prompt: text.describe(
+      "What the learner sees; cloze, partner and transform mark the gap with ___",
+    ),
+    options: z.array(text).nullable().describe("Exactly 4 for recognition and particle, else null"),
+    correct_index: z
+      .number()
+      .int()
+      .nullable()
+      .describe("0-3 for recognition and particle, else null"),
     accepted_answers: answers,
   })
   .superRefine((value, ctx) => {
-    if (value.mode === "recognition") checkChoice(value, ctx);
+    if ((CHOICE_MODES as readonly string[]).includes(value.mode)) checkChoice(value, ctx);
     else checkNoChoice(value, ctx);
-    if (value.mode === "cloze" && !value.prompt.includes(GAP)) {
-      issue(ctx, "prompt", `cloze must mark the gap with ${GAP}`);
+    if ((GAP_MODES as readonly string[]).includes(value.mode) && !value.prompt.includes(GAP)) {
+      issue(ctx, "prompt", `${value.mode} must mark the gap with ${GAP}`);
+    }
+    if (value.mode === "own_sentence" && value.prompt.includes(GAP)) {
+      issue(ctx, "prompt", "own_sentence asks for a whole sentence, not a gap");
     }
   });
 
@@ -224,7 +271,8 @@ export const VocabExerciseOutput = z
 export const fsrsRating = z.enum(["again", "hard", "good", "easy"]);
 
 export const VocabCheckInput = z.object({
-  mode: vocabMode.exclude(["recognition"]),
+  mode: vocabMode.exclude(CHOICE_MODES),
+  item_type: vocabItemType.default("word"),
   lemma: text,
   prompt: text,
   accepted_answers: answers,

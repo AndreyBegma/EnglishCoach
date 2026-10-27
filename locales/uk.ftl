@@ -149,6 +149,7 @@ provider-unavailable-server = Серверна LLM не налаштована. 
 
 # --- vocabulary ---
 vocab-collocations = Сполучення: { $list }
+vocab-word-family = Спільнокореневі: { $list }
 vocab-mnemonic = 💡 { $text }
 vocab-photo-credit = 📷 { $author } / { $source }
 vocab-example-credit = 💬 Приклад: { $source } (CC BY 2.0 FR)

@@ -149,6 +149,7 @@ provider-unavailable-server = The server LLM is not configured. Add your own API
 
 # --- vocabulary ---
 vocab-collocations = Collocations: { $list }
+vocab-word-family = Word family: { $list }
 vocab-mnemonic = 💡 { $text }
 vocab-photo-credit = 📷 { $author } / { $source }
 vocab-example-credit = 💬 Example: { $source } (CC BY 2.0 FR)

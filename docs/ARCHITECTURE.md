@@ -134,6 +134,28 @@ count as C2), fields and curriculum position; its `Убрано` sheet fills
 curriculum order first, then dictionary words by frequency, skipping known,
 removed and duplicate lemmas.
 
+**Lexical units.** Phrasal verbs, collocations, idioms and word families are
+`words` rows too (`unit_type`; `pos` is the type's name, so `decide` the verb
+and `decide` the word family are separate rows; `details` holds a phrasal
+verb's verb and particle, a collocation's partner word, a word family's
+forms), seeded from `data/lexical/` — the owner's 137 phrasal verbs plus
+generated lists that pass a deterministic second check and a cap per level
+before `db:seed` loads anything (sources in its README). A unit's card takes its
+type as `item_type` and copies `details` into `back_json.unit`; enrichment,
+pictures, voices and the level update treat it like a word. The picker mixes
+types by per-level shares (`UNIT_SHARES`) over the learner's latest 20 word-like
+cards: the next unit is the type furthest below its share, a type that runs dry
+leaves its slots to the others, and idioms are offered from B2 only — by the
+shares and, whatever the data says, by the query. The word tier and
+recognition distractors keep to single words (a unit's distractors are units of
+its type). Learn words' first check is recognition for every type; Review
+rotates per type by stability: phrasal verb → meaning, particle choice (the
+server checks the right option is the verb's particle), then an own sentence
+that is never matched exactly and always judged by `vocab-check`; collocation →
+meaning, then the partner word in a gap; word family → meaning, then a
+transform to the next other form (the server picks it and always accepts it);
+idioms like words.
+
 **Enrichment cache.** `word_enrichments` holds one card back per word and
 explanation language, shared by all learners (so it carries no learner
 context). A BullMQ job fills it ahead of time with the server provider and the

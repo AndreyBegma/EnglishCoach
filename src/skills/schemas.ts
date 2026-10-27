@@ -190,12 +190,13 @@ export const VocabEnrichOutput = z.object({
 // ---------------------------------------------------------------- vocab-exercise
 
 /**
- * `recognition` and `particle` are answered with buttons; the rest are typed. `particle` (phrasal
- * verbs), `partner` (collocations), `transform` (word families) and `own_sentence` (phrasal verbs)
- * belong to lexical units; `production` and `cloze` to words and idioms.
+ * `recognition`, `listening` and `particle` are answered with buttons; the rest are typed.
+ * `particle` (phrasal verbs), `partner` (collocations) and `transform` (word families) belong to
+ * lexical units; the others to every item. `listening` is recognition of the word heard, not read.
  */
 export const vocabMode = z.enum([
   "recognition",
+  "listening",
   "production",
   "cloze",
   "particle",
@@ -205,7 +206,7 @@ export const vocabMode = z.enum([
 ]);
 
 /** The modes whose item is a choice of four options. */
-export const CHOICE_MODES = ["recognition", "particle"] as const;
+export const CHOICE_MODES = ["recognition", "listening", "particle"] as const;
 /** The typed modes whose prompt is a sentence with a `___` gap. */
 const GAP_MODES = ["cloze", "partner", "transform"] as const;
 
@@ -247,12 +248,15 @@ export const VocabExerciseOutput = z
     prompt: text.describe(
       "What the learner sees; cloze, partner and transform mark the gap with ___",
     ),
-    options: z.array(text).nullable().describe("Exactly 4 for recognition and particle, else null"),
+    options: z
+      .array(text)
+      .nullable()
+      .describe("Exactly 4 for recognition, listening and particle, else null"),
     correct_index: z
       .number()
       .int()
       .nullable()
-      .describe("0-3 for recognition and particle, else null"),
+      .describe("0-3 for recognition, listening and particle, else null"),
     accepted_answers: answers,
   })
   .superRefine((value, ctx) => {

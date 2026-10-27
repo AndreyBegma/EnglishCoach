@@ -127,6 +127,13 @@
       "when": 1793097274642,
       "tag": "0017_lexical_units",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1793097824814,
+      "tag": "0018_card_mastery",
+      "breakpoints": true
     }
   ]
 }

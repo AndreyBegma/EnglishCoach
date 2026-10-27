@@ -11,6 +11,7 @@ import type { LearningHandle, SessionKindHandler } from "../sessions/session-man
 import type { VocabCallback } from "./callbacks";
 import { button, isLlmFailure, type VocabCore } from "./core";
 import { exerciseItemType } from "./exercise";
+import { type Evidence, evidenceEarned } from "./mastery";
 import { modeFor } from "./modes";
 import { escapeHtml, HTML } from "./render";
 import type { RatingName } from "./scheduler";
@@ -34,9 +35,9 @@ export function normaliseAnswer(text: string): string {
 }
 
 /**
- * Review (`review`): due cards, earliest first, at most `REVIEW_CAP`. Words rotate through
- * recognition, production and cloze as their stability grows; grammar patterns are corrected and
- * self-graded. The server judges what it can, the LLM judges the rest, and the learner applies the
+ * Review (`review`): due cards, earliest first, at most `REVIEW_CAP`. Words are asked for the
+ * evidence of active mastery they still lack, then rotate through recognition, production and
+ * cloze as their stability grows (`modeFor`); grammar patterns are corrected and self-graded. The server judges what it can, the LLM judges the rest, and the learner applies the
  * suggested rating or overrides it — the one FSRS write per card.
  */
 export class ReviewFlow implements SessionKindHandler {
@@ -110,6 +111,7 @@ export class ReviewFlow implements SessionKindHandler {
             correct ? t("vocab-review-right") : t("vocab-review-wrong", { answer }),
             // Picking from four options is the easiest recall: never more than Good.
             correct ? "good" : "again",
+            correct ? evidenceEarned(step.mode, "choice") : [],
           );
         }
         return;
@@ -118,7 +120,8 @@ export class ReviewFlow implements SessionKindHandler {
         return;
       case "rate": {
         const card = await getCard(this.core.deps.db, handle.user.id, callback.cardId);
-        if (card && (await this.core.rate(handle, card, callback.rating, "reviews"))) {
+        const evidence = step?.kind === "rate" ? (step.evidence ?? []) : [];
+        if (card && (await this.core.rate(handle, card, callback.rating, "reviews", evidence))) {
           await this.next(handle, ctx);
         }
         return;
@@ -160,7 +163,8 @@ export class ReviewFlow implements SessionKindHandler {
       await this.askPattern(handle, ctx, card);
       return;
     }
-    await this.core.sendExercise(handle, ctx, card, modeFor(card));
+    const context = await this.core.masteryContext(handle.user.id, card);
+    await this.core.sendExercise(handle, ctx, card, modeFor(card, context));
   }
 
   /** Error correction: the learner fixes the wrong sentence in their head, then checks. */
@@ -214,6 +218,7 @@ export class ReviewFlow implements SessionKindHandler {
         card.id,
         `${yours}\n${t("vocab-review-right")}`,
         this.fastOrGood(step.askedAt),
+        evidenceEarned(step.mode, "exact"),
       );
       return;
     }
@@ -247,6 +252,7 @@ export class ReviewFlow implements SessionKindHandler {
         card.id,
         `${yours}\n${head}\n${escapeHtml(data.feedback)}`,
         suggested,
+        data.verdict === "correct" ? evidenceEarned(step.mode, "correct") : [],
       );
     } catch (error) {
       if (!isLlmFailure(error)) throw error;
@@ -271,6 +277,7 @@ export class ReviewFlow implements SessionKindHandler {
     cardId: number,
     text: string,
     suggested?: RatingName,
+    evidence: Evidence[] = [],
   ) {
     const t = this.core.t(handle);
     const card = await getCard(this.core.deps.db, handle.user.id, cardId);
@@ -280,7 +287,7 @@ export class ReviewFlow implements SessionKindHandler {
       ...HTML,
       reply_markup: this.core.ratingKeyboard(t, cardId, suggested, speak),
     });
-    writeFlow(ctx, handle.session.id, { kind: "rate", cardId, suggested });
+    writeFlow(ctx, handle.session.id, { kind: "rate", cardId, suggested, evidence });
   }
 
   private fastOrGood(askedAt: number): RatingName {

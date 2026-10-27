@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { State } from "ts-fsrs";
+import { requiredEvidence } from "../../src/vocab/mastery";
 import { modeFor } from "../../src/vocab/modes";
 import { Scheduler } from "../../src/vocab/scheduler";
 import { localDate } from "../../src/vocab/stats";
@@ -60,12 +61,13 @@ describe("Scheduler (ts-fsrs, fixed dates)", () => {
 });
 
 describe("modeFor", () => {
-  test("rotates recognition → production → cloze as stability grows", () => {
-    expect(modeFor({ reps: 0, stability: 50 })).toBe("recognition");
-    expect(modeFor({ reps: 3, stability: 1.2 })).toBe("recognition");
-    expect(modeFor({ reps: 3, stability: 3 })).toBe("production");
-    expect(modeFor({ reps: 5, stability: 9.9 })).toBe("production");
-    expect(modeFor({ reps: 6, stability: 10 })).toBe("cloze");
+  test("with every kind of evidence held, rotates recognition → production → cloze as stability grows", () => {
+    const evidence = requiredEvidence({ earWaived: false });
+    expect(modeFor({ reps: 0, stability: 50, evidence })).toBe("recognition");
+    expect(modeFor({ reps: 3, stability: 1.2, evidence })).toBe("recognition");
+    expect(modeFor({ reps: 3, stability: 3, evidence })).toBe("production");
+    expect(modeFor({ reps: 5, stability: 9.9, evidence })).toBe("production");
+    expect(modeFor({ reps: 6, stability: 10, evidence })).toBe("cloze");
   });
 });
 

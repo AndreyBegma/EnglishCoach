@@ -130,6 +130,13 @@ export const cards = pgTable(
      * returning the word to learning is just clearing it.
      */
     knownAt: timestamp({ withTimezone: true }),
+    /**
+     * Active-mastery evidence, a bitmask of `EVIDENCE` flags (`src/vocab/mastery.ts`): recognised
+     * in text, by ear, recalled from the translation, spelled, used in an own sentence.
+     */
+    evidence: smallint().notNull().default(0),
+    /** When the card met the learned rule (`isLearned`); never cleared, so it is learned once. */
+    learnedAt: timestamp({ withTimezone: true }),
     createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [

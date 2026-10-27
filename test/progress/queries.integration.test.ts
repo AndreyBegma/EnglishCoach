@@ -9,6 +9,7 @@ import { createTestDatabase, testServerUrl } from "../db/test-database";
 // Europe/Kyiv is UTC+2 until 2026-03-29, so 22:30Z on the 15th is already 00:30 on the 16th there.
 const TZ = "Europe/Kyiv";
 const NOW = new Date("2026-03-15T22:30:00Z");
+const LEARNED = new Date("2026-03-10T09:00:00Z");
 
 describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
   let database: Database;
@@ -66,10 +67,12 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       due: string,
       front: string,
       owner = userId,
+      learnedAt: Date | null = null,
     ) => ({
       userId: owner,
       itemType,
       front,
+      learnedAt,
       due: new Date(due),
       stability: 1,
       difficulty: 5,
@@ -84,12 +87,13 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
     await db.insert(cards).values([
       card("word", 0, 0, "2026-03-10T00:00:00Z", "pending"), // new, not reviewable
       card("word", 1, 1, "2026-03-16T10:00:00Z", "learning"), // due today
-      card("word", 2, 5, "2026-03-16T21:59:00Z", "last-minute"), // due today
+      // Learned: active mastery reached (`learned_at`); only these count as words learned.
+      card("word", 2, 5, "2026-03-16T21:59:00Z", "last-minute", userId, LEARNED), // due today
       card("word", 2, 3, "2026-03-16T22:00:00Z", "first-minute"), // due tomorrow
-      card("user_word", 3, 2, "2026-03-17T21:59:00Z", "relearning"), // due tomorrow
+      card("user_word", 3, 2, "2026-03-17T21:59:00Z", "relearning", userId, LEARNED), // due tomorrow
       card("grammar_pattern", 0, 0, "2026-03-18T10:00:00Z", "pattern"), // new, later
       card("word", 2, 4, "2026-03-01T00:00:00Z", "overdue"), // due today
-      card("word", 2, 9, "2026-03-16T08:00:00Z", "someone else", otherId),
+      card("word", 2, 9, "2026-03-16T08:00:00Z", "someone else", otherId, LEARNED),
     ]);
 
     const mistake = (pattern: string, count: number, lastSeen: string, owner = userId) => ({
@@ -132,7 +136,8 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       review: 3,
       dueToday: 3,
       dueTomorrow: 2,
-      wordsLearned: 5,
+      // Passed checks alone (learning, first-minute, overdue) are not learned.
+      wordsLearned: 2,
       wordsKnown: 0,
     });
     expect(data.activity).toEqual([0, 0, 19, 5, 10, 11, 15]);

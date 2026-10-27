@@ -23,7 +23,7 @@ export interface CardsBlock {
   review: number;
   dueToday: number;
   dueTomorrow: number;
-  /** Word cards the learner has passed the first check on (not the ones still waiting in Learn). */
+  /** Word cards that met the active-mastery rule (`learned_at`, see `src/vocab/mastery.ts`). */
   wordsLearned: number;
   /** Words the learner marked "I know this 100%"; counted apart from the learned ones. */
   wordsKnown: number;
@@ -106,7 +106,7 @@ export async function cardsBlock(
       count(*) filter (where c.known_at is null and (c.item_type = 'grammar_pattern' or c.reps > 0)
                          and c.due >= b.end_today
                          and c.due < b.end_today + interval '1 day') as "dueTomorrow",
-      count(*) filter (where c.known_at is null and c.item_type <> 'grammar_pattern' and c.reps > 0) as "wordsLearned",
+      count(*) filter (where c.known_at is null and c.item_type <> 'grammar_pattern' and c.learned_at is not null) as "wordsLearned",
       count(*) filter (where c.known_at is not null) as "wordsKnown"
     from cards c cross join bounds b
     where c.user_id = ${userId}`);

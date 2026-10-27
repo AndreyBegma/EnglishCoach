@@ -8,6 +8,7 @@ import { findUserByTelegramId, updateSettings } from "../../src/db/repositories/
 import { cards, dailyStats, mistakes, reviewLogs, words } from "../../src/db/schema";
 import { LlmProviderError } from "../../src/llm";
 import { encodeVocabCallback, type VocabCallback } from "../../src/vocab/callbacks";
+import { EVIDENCE } from "../../src/vocab/mastery";
 import { Scheduler } from "../../src/vocab/scheduler";
 import { localDate } from "../../src/vocab/stats";
 import { createHarness, type Harness } from "../bot/harness";
@@ -363,6 +364,8 @@ describe.skipIf(!testServerUrl)("vocabulary sessions with a mocked Telegram API"
           front: "borrow",
           backJson: back("borrow"),
           ...reviewed(5, 2),
+          // Already recognised in text: the recall from the translation is what it lacks.
+          evidence: EVIDENCE.text,
         },
         {
           userId: user.id,

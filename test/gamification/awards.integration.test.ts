@@ -1,9 +1,9 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, test } from "bun:test";
 import { eq } from "drizzle-orm";
-import { State } from "ts-fsrs";
 import type { Database } from "../../src/db/client";
 import { getUserXp } from "../../src/db/repositories/xp";
 import { userSettings, users, xpEvents } from "../../src/db/schema";
+import { domainEvents } from "../../src/events/domain-events";
 import {
   awardCardRating,
   awardGoalMet,
@@ -138,25 +138,31 @@ describe.skipIf(!testServerUrl)("XP ledger in the database", () => {
     expect(await ledger()).toHaveLength(0);
   });
 
-  test("a word is learned once; later passes are reviews; a lapse earns nothing", async () => {
-    const rate = (state: State, score: number) =>
+  test("a word is learned once, when mastered; other passes are reviews; a lapse earns nothing", async () => {
+    const learned: number[] = [];
+    const off = domainEvents.on("card.learned", (event) => {
+      learned.push(event.cardId);
+    });
+    const rate = (mastered: boolean, score: number) =>
       awardCardRating(database.db, userId, {
         cardId: 77,
-        state,
+        learned: mastered,
         score,
         itemLevel: B1,
         rating: B1,
       });
-    await rate(State.New, 0);
-    await rate(State.Learning, 1);
-    await rate(State.Learning, 1);
-    await rate(State.Review, 1);
-    await rate(State.Review, 0);
+    await rate(false, 0);
+    await rate(false, 1);
+    await rate(true, 1);
+    await rate(true, 1);
+    await rate(false, 0);
+    off();
     expect((await ledger()).map(({ source, amount }) => ({ source, amount }))).toEqual([
+      { source: "review", amount: BASE_XP.review },
       { source: "word_learned", amount: BASE_XP.word_learned },
       { source: "review", amount: BASE_XP.review },
-      { source: "review", amount: BASE_XP.review },
     ]);
+    expect(learned).toEqual([77]);
   });
 
   test("the goal bonus, plus the streak bonus from day 2", async () => {

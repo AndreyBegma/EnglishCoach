@@ -3,7 +3,7 @@ import type { InlineKeyboardButton } from "grammy/types";
 import type { BotContext } from "../bot/context";
 import type { Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
-import { applyReview, reviewStatsSince } from "../db/repositories/cards";
+import { applyReview, recordEvidence, reviewStatsSince } from "../db/repositories/cards";
 import { getSettings } from "../db/repositories/users";
 import { randomLemmas } from "../db/repositories/words";
 import type { CardRow, CefrLevel, Language } from "../db/schema";
@@ -15,10 +15,11 @@ import type { LearningHandle } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { encodeVocabCallback, type VocabCallback } from "./callbacks";
 import { ExerciseCheckError, effectiveMode, exerciseVars, settleExercise } from "./exercise";
+import { type Evidence, evidenceBits, isLearned, type MasteryContext } from "./mastery";
 import type { VocabMode } from "./modes";
-import { exerciseHtml, HTML, type T } from "./render";
+import { escapeHtml, exerciseHtml, HTML, type T } from "./render";
 import { RATINGS, type RatingName, Scheduler } from "./scheduler";
-import type { SpeechPort } from "./speak";
+import { earWaived, type SpeechPort } from "./speak";
 import { clearFlow, writeFlow } from "./state";
 import { addVocabStats, localDate } from "./stats";
 
@@ -137,7 +138,7 @@ export class VocabCore {
     const vars = exerciseVars(card, mode, {
       recent_accuracy: await this.recentAccuracy(handle),
       distractors:
-        mode === "recognition" && unitType !== "grammar_pattern"
+        (mode === "recognition" || mode === "listening") && unitType !== "grammar_pattern"
           ? await randomLemmas(this.deps.db, level, card.front, DISTRACTOR_LEMMAS, unitType)
           : [],
     });
@@ -154,7 +155,20 @@ export class VocabCore {
     if (!exercise) return false;
 
     const data = exercise;
-    const text = exerciseHtml(data.instruction, data.prompt);
+    let text = exerciseHtml(data.instruction, data.prompt);
+    let choiceMode: "recognition" | "listening" | "particle" =
+      data.mode === "listening" || data.mode === "particle" ? data.mode : "recognition";
+    if (data.mode === "listening") {
+      // The model's words could give the word away: the server's own prompt goes with the audio.
+      const t = this.t(handle);
+      if (await this.playWord(handle, ctx, card)) {
+        text = escapeHtml(t("vocab-listening-prompt"));
+      } else {
+        // Nothing could voice it after all: the same meanings, read instead of heard.
+        choiceMode = "recognition";
+        text = exerciseHtml(t("vocab-listening-unavailable"), `**${card.front}**`);
+      }
+    }
     const askedAt = this.now().getTime();
     if (data.options && data.correct_index !== null) {
       const options = data.options;
@@ -169,6 +183,7 @@ export class VocabCore {
       writeFlow(ctx, handle.session.id, {
         kind: "choice",
         cardId: card.id,
+        mode: choiceMode,
         options,
         correctIndex: data.correct_index,
         askedAt,
@@ -176,7 +191,9 @@ export class VocabCore {
       return true;
     }
     const typedMode =
-      data.mode === "recognition" || data.mode === "particle" ? "production" : data.mode;
+      data.mode === "recognition" || data.mode === "listening" || data.mode === "particle"
+        ? "production"
+        : data.mode;
     await this.show(handle, text, [], lead);
     writeFlow(ctx, handle.session.id, {
       kind: "typed",
@@ -190,6 +207,34 @@ export class VocabCore {
   }
 
   /**
+   * Sends the card's word as a voice note into the session (tracked, so cleanup deletes it).
+   * False when there is no TTS, voice is off or nothing could voice it now.
+   */
+  private async playWord(handle: LearningHandle, ctx: BotContext, card: CardRow) {
+    const { speech } = this.deps;
+    const chatId = ctx.chat?.id;
+    if (!speech || chatId === undefined || !ctx.settings.voiceEnabled) return false;
+    try {
+      const message = await speech.play(
+        ctx.api,
+        chatId,
+        card.front,
+        ctx.settings.englishVariant,
+        handle.user.id,
+      );
+      await handle.track(message.message_id);
+      return true;
+    } catch (error) {
+      this.deps.log.warn("listening exercise could not be voiced", {
+        userId: handle.user.id,
+        cardId: card.id,
+        error: error instanceof Error ? error.message : "unknown error",
+      });
+      return false;
+    }
+  }
+
+  /**
    * Applies a rating with FSRS and counts it on today's stats. False when the card was rated in
    * the meantime (a double tap): nothing is written then.
    */
@@ -198,14 +243,57 @@ export class VocabCore {
     card: CardRow,
     rating: RatingName,
     counter: "newWords" | "reviews",
+    evidence: readonly Evidence[] = [],
   ): Promise<boolean> {
+    const { db } = this.deps;
     const now = this.now();
     const { next, log } = this.scheduler.rate(card, rating, now);
-    if (!(await applyReview(this.deps.db, card.id, card.reps, next, log))) return false;
+    if (!(await applyReview(db, card.id, card.reps, next, log))) return false;
     const { timezone } = await this.settings(handle.user.id);
-    await addVocabStats(this.deps.db, handle.user.id, localDate(now, timezone), { [counter]: 1 });
-    await recordCardRating(this.deps.db, handle.user.id, card, rating);
+    await addVocabStats(db, handle.user.id, localDate(now, timezone), { [counter]: 1 });
+    const learned = rating !== "again" && (await this.recordMastery(handle, card, evidence, now));
+    await recordCardRating(db, handle.user.id, card, rating, { learned });
     return true;
+  }
+
+  /**
+   * Whether listening evidence is waived for `card`: the learner cannot be asked by ear (see
+   * `earWaived`).
+   */
+  async masteryContext(userId: number, card: Pick<CardRow, "front">): Promise<MasteryContext> {
+    const settings = await getSettings(this.deps.db, userId);
+    return {
+      earWaived: await earWaived(
+        this.deps.speech,
+        {
+          voiceEnabled: settings?.voiceEnabled ?? false,
+          englishVariant: settings?.englishVariant ?? "us",
+        },
+        card,
+        userId,
+      ),
+    };
+  }
+
+  /**
+   * Keeps the evidence a passing rating confirmed and applies the learned rule to the rated card.
+   * True when this rating made the card learned. Grammar patterns are not words.
+   */
+  private async recordMastery(
+    handle: LearningHandle,
+    card: CardRow,
+    evidence: readonly Evidence[],
+    now: Date,
+  ): Promise<boolean> {
+    if (card.itemType === "grammar_pattern") return false;
+    const context = await this.masteryContext(handle.user.id, card);
+    return recordEvidence(
+      this.deps.db,
+      card.id,
+      evidenceBits(evidence),
+      (updated) => isLearned(updated, context),
+      now,
+    );
   }
 
   /** Again · Hard · Good · Easy, the suggestion marked. */

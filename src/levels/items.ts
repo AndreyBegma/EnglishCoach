@@ -105,15 +105,16 @@ export async function cardDifficulty(db: Db, card: { wordId: number | null }): P
 export const CARD_SCORES = { again: 0, hard: 0.5, good: 1, easy: 1 } as const;
 
 /**
- * A rated vocabulary card, into the vocabulary level and XP. `card` is the card as it was before
- * the rating (its FSRS `state` says whether it was still being learned). Grammar-pattern cards
- * are not words.
+ * A rated vocabulary card, into the vocabulary level and XP. `opts.learned`: this rating made the
+ * card learned (the active-mastery rule, `src/vocab/mastery.ts`). Grammar-pattern cards are not
+ * words.
  */
 export async function recordCardRating(
   db: Db,
   userId: number,
-  card: Pick<CardRow, "id" | "itemType" | "wordId" | "state">,
+  card: Pick<CardRow, "id" | "itemType" | "wordId">,
   rating: keyof typeof CARD_SCORES,
+  opts: { learned?: boolean } = {},
 ): Promise<void> {
   if (card.itemType === "grammar_pattern") return;
   const difficulty = await cardDifficulty(db, card);
@@ -123,7 +124,7 @@ export async function recordCardRating(
   });
   await awardCardRating(db, userId, {
     cardId: card.id,
-    state: card.state,
+    learned: opts.learned ?? false,
     score,
     itemLevel: graded.itemLevel,
     rating: graded.before,

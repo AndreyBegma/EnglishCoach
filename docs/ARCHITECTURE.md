@@ -156,6 +156,30 @@ meaning, then the partner word in a gap; word family → meaning, then a
 transform to the next other form (the server picks it and always accepts it);
 idioms like words.
 
+**Active mastery.** A word counts as learned only on active mastery
+(`src/vocab/mastery.ts`). `cards.evidence` is a bitmask of five flags, each
+set by a right answer whose rating then passes (Hard or better; a right answer
+overridden to Again proves nothing): recognised in text (recognition, particle
+choice), by ear (`listening`: the word is sent as a tracked voice note and the
+learner picks its meaning; the screen never shows the word), recalled from the
+translation (production judged correct), spelled (a typed answer that matches
+an accepted one exactly — the judge's `correct` without an exact match proves
+the recall, not the spelling), used in an own sentence (`own_sentence`, judged
+by `vocab-check`, open to every word-like type). **Learned** = every required
+flag + an FSRS interval (`scheduled_days`) above 21 days; the rating that first
+meets it stamps `cards.learned_at` (never cleared — a later lapse does not
+un-learn), passes `learned` to `recordCardRating`, and so awards `word_learned`
+XP and emits `card.learned` once. Progress and the profile count
+`learned_at is not null` as words learned. **Listening waiver:** when the
+learner has voice off or no engine can voice the word for them
+(`speech.canPlay`), the ear flag is not required and listening is never asked;
+a voice note that fails at send time falls back to the same meanings shown in
+text (proving text, not ear). **Mode selector** (`modeFor`): the first missing
+flag, in the order text → ear → recall → spelling → sentence, that the card's
+memory stage allows (text and ear from the start, recall and spelling from
+stability 3, the sentence from 10); spelling is the unit's typed gap (partner,
+transform, else cloze). With nothing allowed missing, the rotation above runs.
+
 **Enrichment cache.** `word_enrichments` holds one card back per word and
 explanation language, shared by all learners (so it carries no learner
 context). A BullMQ job fills it ahead of time with the server provider and the
@@ -250,7 +274,7 @@ logged and never fails the grader.
 | Source | When | XP |
 |---|---|---|
 | `grammar_item` | a graded quiz answer | 10 × score × multiplier |
-| `word_learned` | the first passing rating of a card still New or Learning, once per card | 6 × score × multiplier |
+| `word_learned` | the rating that makes a card learned (active mastery, see Vocabulary), once per card | 6 × score × multiplier |
 | `review` | any other passing card rating (Again earns nothing) | 4 × score × multiplier |
 | `talk_turn` | a talk turn long enough to count | 8 × score (at the learner's level) |
 | `topic_mastered` | a syllabus topic's first mastery (`topic.mastered` with `first`), once per topic | 50 × multiplier |

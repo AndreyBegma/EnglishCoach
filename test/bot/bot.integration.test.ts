@@ -50,6 +50,7 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
       "✍️ Grammar",
       "💬 Talk",
       "📈 Progress",
+      "👤 Profile",
       "⚙️ Settings",
     ]);
     expect(h.telegram.callsOf("pinChatMessage")[0]?.payload).toMatchObject({

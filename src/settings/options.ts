@@ -1,8 +1,12 @@
 import { cefrLevelEnum } from "../db/schema/enums";
+import type { EnglishVariant } from "../voice/engines";
 
 /** The closed answer spaces of the settings screens. Callback data carries these values. */
 
 export const CEFR_LEVELS = cefrLevelEnum.enumValues;
+
+/** Pronunciation the bot voices words in; the settings button switches between the two. */
+export const ENGLISH_VARIANTS = ["us", "uk"] as const satisfies readonly EnglishVariant[];
 
 export const WORDS_PER_DAY = [3, 5, 10, 15, 20] as const;
 export type WordsPerDay = (typeof WORDS_PER_DAY)[number];

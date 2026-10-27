@@ -25,6 +25,7 @@ describe("callback data", () => {
     { type: "set", change: { field: "eveningTime", value: "23:00" } },
     { type: "set", change: { field: "remindersEnabled", value: false } },
     { type: "set", change: { field: "voiceEnabled", value: true } },
+    { type: "set", change: { field: "englishVariant", value: "uk" } },
     { type: "provider", choice: "openrouter" },
     { type: "provider", choice: "claude-code" },
     { type: "provider-key", choice: "custom" },

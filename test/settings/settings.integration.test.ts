@@ -295,6 +295,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       { type: "set", change: { field: "eveningTime", value: "21:30" } },
       { type: "set", change: { field: "remindersEnabled", value: false } },
       { type: "set", change: { field: "voiceEnabled", value: true } },
+      { type: "set", change: { field: "englishVariant", value: "uk" } },
     ];
     for (const change of changes) await s.press(change);
 
@@ -307,6 +308,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       eveningTime: "21:30:00",
       remindersEnabled: false,
       voiceEnabled: true,
+      englishVariant: "uk",
     });
     const text = s.hubText();
     for (const line of [
@@ -317,6 +319,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       "Morning 07:00 · Evening 21:30",
       "Reminders: off",
       "Voice: on",
+      "Pronunciation: 🇬🇧 British",
     ]) {
       expect(text).toContain(line);
     }
@@ -329,6 +332,7 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       ["eveningTime"],
       ["remindersEnabled"],
       ["voiceEnabled"],
+      ["englishVariant"],
     ]);
     expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
     expect(s.h.telegram.callsOf("editMessageText")).toHaveLength(changes.length);

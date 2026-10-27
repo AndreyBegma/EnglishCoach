@@ -1,0 +1,2 @@
+ALTER TABLE "user_settings" ADD COLUMN "english_variant" text DEFAULT 'us' NOT NULL;--> statement-breakpoint
+ALTER TABLE "user_settings" ADD CONSTRAINT "user_settings_english_variant_check" CHECK ("user_settings"."english_variant" in ('us', 'uk'));

@@ -50,6 +50,13 @@
       "when": 1793091510713,
       "tag": "0006_word_images",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793091751179,
+      "tag": "0007_english_variant",
+      "breakpoints": true
     }
   ]
 }

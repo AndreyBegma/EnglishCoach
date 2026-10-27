@@ -35,6 +35,7 @@ describe.skipIf(!testServerUrl)("users repository", () => {
       eveningTime: "20:00:00",
       remindersEnabled: true,
       voiceEnabled: false,
+      englishVariant: "us",
       interests: [],
     });
   });

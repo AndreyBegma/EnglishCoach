@@ -372,6 +372,24 @@ describe("Tts", () => {
       expect(tg.to(STORAGE_CHAT)).toHaveLength(1);
     });
 
+    test("each variant has its own file_id cache entry; 🔊 reuses the matching one", async () => {
+      const { tts, net, tg, fileIds } = setup();
+      await tts.prewarm(["decide"], "us");
+      await tts.prewarm(["decide"], "uk");
+      expect(net.speechCalls().map((call) => call.body?.voice)).toEqual(["af_heart", "bf_emma"]);
+      const hash = speechTextHash("decide");
+      const usFileId = fileIds.rows.get(`kokoro|af_heart|${hash}`);
+      const ukFileId = fileIds.rows.get(`kokoro|bf_emma|${hash}`);
+      expect(usFileId).toBeDefined();
+      expect(ukFileId).toBeDefined();
+      expect(usFileId).not.toBe(ukFileId);
+
+      await tts.play(tg.api, LEARNER_CHAT, "decide", "uk", 1);
+      await tts.play(tg.api, LEARNER_CHAT, "decide", "us", 1);
+      expect(net.speechCalls()).toHaveLength(2);
+      expect(tg.to(LEARNER_CHAT).map((call) => call.file)).toEqual([ukFileId, usFileId]);
+    });
+
     test("does nothing without a storage chat", async () => {
       const { tts, net } = setup({ storage: false });
       await tts.prewarm(["decide"], "us");

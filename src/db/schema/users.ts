@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import {
   bigint,
   boolean,
+  check,
   integer,
   pgTable,
   smallint,
@@ -22,22 +23,30 @@ export const users = pgTable("users", {
   createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
 });
 
-export const userSettings = pgTable("user_settings", {
-  userId: integer()
-    .primaryKey()
-    .references(() => users.id, { onDelete: "cascade" }),
-  uiLang: languageEnum().notNull().default("en"),
-  explainLang: languageEnum().notNull().default("en"),
-  // Null until the placement test has run.
-  cefrLevel: cefrLevelEnum(),
-  wordsPerDay: smallint().notNull().default(5),
-  timezone: text().notNull().default("Europe/Kyiv"),
-  morningTime: time().notNull().default("08:30"),
-  eveningTime: time().notNull().default("20:00"),
-  remindersEnabled: boolean().notNull().default(true),
-  voiceEnabled: boolean().notNull().default(false),
-  interests: text().array().notNull().default(sql`'{}'::text[]`),
-});
+export const userSettings = pgTable(
+  "user_settings",
+  {
+    userId: integer()
+      .primaryKey()
+      .references(() => users.id, { onDelete: "cascade" }),
+    uiLang: languageEnum().notNull().default("en"),
+    explainLang: languageEnum().notNull().default("en"),
+    // Null until the placement test has run.
+    cefrLevel: cefrLevelEnum(),
+    wordsPerDay: smallint().notNull().default(5),
+    timezone: text().notNull().default("Europe/Kyiv"),
+    morningTime: time().notNull().default("08:30"),
+    eveningTime: time().notNull().default("20:00"),
+    remindersEnabled: boolean().notNull().default(true),
+    voiceEnabled: boolean().notNull().default(false),
+    // Which English the bot pronounces words in.
+    englishVariant: text().$type<"us" | "uk">().notNull().default("us"),
+    interests: text().array().notNull().default(sql`'{}'::text[]`),
+  },
+  (table) => [
+    check("user_settings_english_variant_check", sql`${table.englishVariant} in ('us', 'uk')`),
+  ],
+);
 
 export type User = typeof users.$inferSelect;
 export type UserSettings = typeof userSettings.$inferSelect;

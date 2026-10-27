@@ -14,7 +14,6 @@ import { readFlow } from "../vocab/state";
 import { isVoiceCallbackData, parseVoiceCallback } from "./callbacks";
 import { type CredentialDeps, resolveAudioCredentials } from "./credentials";
 import {
-  type EnglishVariant,
   type FetchLike,
   KokoroEngine,
   OpenAiSpeechEngine,
@@ -27,9 +26,6 @@ import { Tts, type TtsOptions } from "./tts";
 export { encodeVoiceCallback } from "./callbacks";
 export type { EnglishVariant } from "./engines";
 export type { Tts } from "./tts";
-
-/** Until learners can pick UK or US English, everyone hears US. */
-export const DEFAULT_ENGLISH_VARIANT: EnglishVariant = "us";
 
 /** Longest voice message that is transcribed. */
 export const MAX_VOICE_SECONDS = 60;
@@ -65,8 +61,8 @@ export interface VoiceDeps {
 /**
  * Voice for the learning sessions. `stt` turns a voice message into a text update before the
  * session handlers run, so talk, grammar and review stay unchanged; `tts` answers the 🔊 button of
- * a vocabulary card with a pronunciation voice note — local Kokoro first, then an
- * OpenAI-compatible key. Both respect `user_settings.voice_enabled` and degrade to a localized
+ * a vocabulary card with a pronunciation voice note in the learner's `english_variant` — local
+ * Kokoro first, then an OpenAI-compatible key. Both respect `user_settings.voice_enabled` and degrade to a localized
  * explanation when nothing can do the job. `tts.available(userId)` tells card renderers whether
  * to show 🔊 at all; `tts.prewarm(texts, variant)` voices upcoming words ahead of time.
  */
@@ -192,7 +188,13 @@ export function createVoice(deps: VoiceDeps) {
 
     let message: Awaited<ReturnType<Tts["play"]>>;
     try {
-      message = await tts.play(ctx.api, chatId, card.front, DEFAULT_ENGLISH_VARIANT, ctx.user.id);
+      message = await tts.play(
+        ctx.api,
+        chatId,
+        card.front,
+        ctx.settings.englishVariant,
+        ctx.user.id,
+      );
     } catch (error) {
       if (!(error instanceof SpeechError)) throw error;
       log.warn("speech generation failed", {

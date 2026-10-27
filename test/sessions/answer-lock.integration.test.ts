@@ -108,6 +108,10 @@ describe.skipIf(!testServerUrl)("one answer at a time, over a mocked Telegram AP
       s.h.press(s.telegramId, s.card().id, encodeOnboardingCallback(callback));
     await s.h.say(s.telegramId, "/start");
     await tap({ type: "lang", lang: "en" });
+    await tap({ type: "goal", goal: "everyday" });
+    await tap({ type: "goals-done" });
+    await tap({ type: "interests-done" });
+    await tap({ type: "profession-skip" });
     await tap({ type: "provider", choice: "server" });
     await tap({ type: "take-test" });
     return { ...s, tap };

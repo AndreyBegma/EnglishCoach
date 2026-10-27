@@ -44,6 +44,7 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun run db:seed` | Seed everything the repository carries: the dictionary, then the owner's content from `seed/` — idempotent, see below |
 | `bun run db:seed:words` | Seed only the CEFR frequency dictionary (`data/words/`), idempotent |
 | `bun run db:import:owner-words <path>` | Import the owner's curated word list (.xlsx) over the dictionary, with its example sentences, idempotent — see below |
+| `bun run db:import:pronunciation` | Fill every word's dictionary IPA (US, UK), syllables and stress from `data/pronunciation/` (CMUdict, Wiktionary); run after the two above, idempotent |
 | `bun run seed:generate <path>` | Regenerate `seed/` from the owner's workbook — see below |
 
 ## The owner's content
@@ -65,6 +66,7 @@ database two ways:
 ```sh
 bun run db:seed                                         # dictionary + seed/, no LLM needed
 bun run db:import:owner-words data/private/owner-words.xlsx   # optional: adds the examples
+bun run db:import:pronunciation                         # dictionary IPA, syllables, stress
 ```
 
 Both are idempotent and can run in either order: the seed never overwrites an example the import

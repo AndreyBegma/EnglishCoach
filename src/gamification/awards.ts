@@ -5,11 +5,11 @@ import type { XpSource } from "../db/schema";
 import { type XpAwarded, xpEvents, xpLog } from "./events";
 import {
   DAILY_GOAL_XP,
+  difficultyMultiplier,
   itemXp,
   profileLevel,
   streakXp,
   TOPIC_MASTERED_XP,
-  topicJustMastered,
 } from "./xp";
 
 export type XpAward = { source: XpSource; amount: number; meta?: Record<string, unknown> };
@@ -56,10 +56,7 @@ async function safely(userId: number, what: string, award: () => Promise<void>):
 /** Where an item sat for the learner: its level and theirs, on the level model's scale. */
 export type ItemPitch = { itemLevel: number; rating: number };
 
-/**
- * A graded quiz answer. A correct answer that is the learner's `MASTERY_CORRECT`-th rewarded one
- * on its syllabus topic also masters the topic, once.
- */
+/** A graded quiz answer. */
 export function awardGrammarItem(
   db: Db,
   userId: number,
@@ -69,20 +66,28 @@ export function awardGrammarItem(
   return safely(userId, "grammar_item", async () => {
     const amount = itemXp("grammar_item", item.score, item.itemLevel, item.rating);
     const meta = { verdict: item.verdict, ...(item.topicId ? { topicId: item.topicId } : {}) };
-    const awarded = await awardXp(db, userId, { source: "grammar_item", amount, meta }, now);
-    if (!awarded || item.verdict !== "correct" || !item.topicId) return;
-    const correct = await countXpEvents(db, userId, "grammar_item", {
-      topicId: item.topicId,
-      verdict: "correct",
-    });
-    if (topicJustMastered(correct)) {
-      await awardXp(
-        db,
-        userId,
-        { source: "topic_mastered", amount: TOPIC_MASTERED_XP, meta: { topicId: item.topicId } },
-        now,
-      );
-    }
+    await awardXp(db, userId, { source: "grammar_item", amount, meta }, now);
+  });
+}
+
+/**
+ * A syllabus topic's first mastery (`topic.mastered` with `first`), once per topic: a topic that
+ * already earned it — also under the old count-based rule — earns nothing again. The bonus takes
+ * the topic level's difficulty multiplier, so a topic far below the learner earns nothing.
+ */
+export function awardTopicMastered(
+  db: Db,
+  userId: number,
+  topic: ItemPitch & { topicId: string },
+  now?: Date,
+): Promise<void> {
+  return safely(userId, "topic_mastered", async () => {
+    const { topicId } = topic;
+    if ((await countXpEvents(db, userId, "topic_mastered", { topicId })) > 0) return;
+    const amount = Math.floor(
+      TOPIC_MASTERED_XP * difficultyMultiplier(topic.itemLevel, topic.rating),
+    );
+    await awardXp(db, userId, { source: "topic_mastered", amount, meta: { topicId } }, now);
   });
 }
 

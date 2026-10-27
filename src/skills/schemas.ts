@@ -315,7 +315,12 @@ export const ConversationInput = z.object({
   learner_message: text,
   /** The tip kind the server rotated to for this turn. */
   tip_kind: tipKind,
+  /** Syllabus topics around the learner's level the model may tag as used correctly. */
+  syllabus_topics: syllabusTopicList,
 });
+
+/** Topics one turn may tag as used correctly; more would be guessing. */
+export const MAX_TOPIC_USES = 3;
 
 export const ConversationOutput = z.object({
   reply: text.describe("Natural English reply that keeps the conversation going"),
@@ -331,6 +336,12 @@ export const ConversationOutput = z.object({
     )
     .max(MAX_CORRECTIONS),
   tip: z.object({ kind: tipKind, text: text.describe("In explain_lang, English examples inline") }),
+  /** Only a hint: the server keeps the ids that are in the syllabus and drops the rest. */
+  topic_uses: z
+    .array(z.string())
+    .max(MAX_TOPIC_USES)
+    .default([])
+    .describe("Ids from task.syllabus_topics the learner's message used correctly"),
 });
 
 // ---------------------------------------------------------------- routine-plan

@@ -220,7 +220,11 @@ onboarding-done = Добро пожаловать!
 
 # --- grammar ---
 grammar-pick-topic = ✍️ Практика грамматики: 10 вопросов. Выберите тему или смешанный режим.
-grammar-mixed = 🎲 Микс (рекомендуется)
+grammar-mixed = 🎲 Микс
+grammar-next-review = 🔁 Повторить: { $topic }
+grammar-next-shaky = 🟡 Закрепить: { $topic }
+grammar-next-new = ▶ Дальше: { $topic }
+grammar-next-learning = ▶ Продолжить: { $topic }
 grammar-topic-chosen = Тема: { $topic }
 grammar-question-header = ❓ Вопрос { $n } из { $total }
 grammar-chosen = Ваш ответ: { $answer }

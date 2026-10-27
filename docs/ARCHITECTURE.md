@@ -231,7 +231,7 @@ logged and never fails the grader.
 | `word_learned` | the first passing rating of a card still New or Learning, once per card | 6 × score × multiplier |
 | `review` | any other passing card rating (Again earns nothing) | 4 × score × multiplier |
 | `talk_turn` | a talk turn long enough to count | 8 × score (at the learner's level) |
-| `topic_mastered` | the 5th rewarded correct answer on a syllabus topic, once | 50 |
+| `topic_mastered` | a syllabus topic's first mastery (`topic.mastered` with `first`), once per topic | 50 × multiplier |
 | `daily_goal` | the day's goal was just met (`markGoalMet` flipped it) | 30 |
 | `streak` | the same moment, from day 2 of a streak | 5 × streak days, at most 50 |
 
@@ -271,7 +271,7 @@ with its cause) and `exercise_types` (grammar-quiz item types).
 no topic refers to itself, no prerequisite sits above its topic's level, the
 prerequisite graph is acyclic, every title locale is present. It is loaded
 when the grammar module loads, so an invalid file fails boot. The grammar
-picker offers the learner's band (B1 without a placement level); a button
+picker offers the learner's grammar band (B1 without a level); a button
 carries the topic id, and the quiz gets the topic's English title, its
 syllabus entry and only its exercise types. `mistakes.topic_id` maps a
 pattern to a syllabus topic: grammar-quiz names the item's topic (forced to
@@ -279,6 +279,46 @@ the picked one; otherwise chosen from the learner's band and its neighbours),
 grammar-check may name another for the main error, and the server keeps only
 ids that exist in the syllabus. A later occurrence without an id keeps the
 stored one.
+
+## Topic mastery
+
+`topic_progress` holds one row per learner and syllabus topic: `status`
+(`not_started` ⬜ · `learning` 🔴 · `shaky` 🟡 · `mastered` ✅), the rolling
+window of the last 8 graded items (`recent_items`, with `accuracy_by_type`
+derived from it), `transfer_evidence`, the confirmation clock
+(`criteria_met_at`, `confirmed_at`), the FSRS card of a mastered topic
+(`fsrs`, `review_due`), the scores of a running check (`check_scores`) and
+`method_history` (for the adaptive-methods card). The rules are pure, in
+`src/grammar/mastery.ts`; only `recordTopicItem` and `recordTopicUses`
+(`src/grammar/progress.ts`) write the table, under a row lock.
+
+- **Items.** Every graded grammar-quiz answer with a validated `topic_id`
+  feeds its topic (`recordGrammarItem`, after `recordGradedItem`), with the
+  item type and its score. The first one moves `not_started` → `learning`.
+- **Transfer.** The `conversation` skill gets `syllabus_topics` around the
+  learner's grammar band and returns `topic_uses`, the ids its message used
+  correctly; a counted Talk turn adds one piece of evidence per known id.
+- **Mastery rule** (`masteryRule`, one function — C-58 replaces it): the
+  window is full, its mean score ≥ 85 % and it spans ≥ 2 exercise types; that
+  still holds on an item ≥ 3 days after it first held; and ≥ 1 transfer
+  evidence. A window that breaks before the confirmation restarts the clock.
+- **Shaky.** A mastered topic whose window falls below 85 % becomes `shaky`
+  and has to earn the confirmation again.
+- **FSRS.** A topic that becomes mastered is rated Good on its card (a new one
+  the first time; ts-fsrs without short-term steps, so intervals are days).
+  When it is due, its next 3 items are the check: a wrong one rates Again and
+  sends the topic back to `learning`; three passes rate Good (Hard if any was
+  partial).
+- **`topic.mastered`.** `topicEvents` (`src/grammar/events.ts`, the same
+  contract as `xp.awarded`) emits `{ userId, topicId, at, first }` on every
+  mastery; `first` is the topic's first ever. The level helpers pay
+  `topic_mastered` XP on `first`, at most once per topic.
+- **Next topic** (`nextTopic`): due reviews (most overdue first) → shaky
+  topics → not-started topics at the learner's grammar band whose
+  prerequisites are mastered or below that band → topics at the band still
+  being learned. The grammar band is the grammar skill's level, else the
+  overall one, else B1. The grammar picker leads with it and marks every
+  topic with its status.
 
 ## Telegram UX rules
 

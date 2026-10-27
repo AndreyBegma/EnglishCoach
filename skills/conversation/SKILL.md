@@ -46,6 +46,12 @@ are things the learner likes; use them to make the chat personal.
 - `why`: one line in {{explain_lang}} with the rule — not just "this is wrong".
 - A correct message gets an empty list. Do not invent errors.
 
+## `topic_uses` — at most 3
+Ids from `task.syllabus_topics` (grammar topics around the learner's level) that
+`task.learner_message` uses **correctly** — a real, non-trivial use of the structure, not a fixed
+phrase. Never tag a topic you corrected in this message. Only ids from the list; when unsure, leave
+it out. An empty list is the normal case.
+
 ## `tip` — one per turn, of kind `task.tip_kind`
 Write it in {{explain_lang}} with English examples inline, 1-2 sentences, connected to this
 conversation when possible. Echo `task.tip_kind` in `tip.kind`.

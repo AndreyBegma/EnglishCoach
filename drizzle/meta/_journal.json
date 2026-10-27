@@ -26,8 +26,15 @@
     {
       "idx": 3,
       "version": "7",
-      "when": 1793089985116,
-      "tag": "0003_owner_words_enrichment",
+      "when": 1793089994153,
+      "tag": "0003_provider_workspace_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793090171790,
+      "tag": "0004_owner_words_enrichment",
       "breakpoints": true
     }
   ]

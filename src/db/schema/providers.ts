@@ -26,6 +26,8 @@ export const providerConfigs = pgTable(
     encryptedApiKey: bytea(),
     keyIv: bytea(),
     keyTag: bytea(),
+    // Anthropic workspace for keys not scoped to one. An identifier, not a credential: plain text.
+    workspaceId: text(),
     isActive: boolean().notNull().default(false),
     updatedAt: timestamp({ withTimezone: true })
       .notNull()

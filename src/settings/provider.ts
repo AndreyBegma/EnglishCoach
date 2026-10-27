@@ -6,15 +6,15 @@ import {
   listProviderConfigs,
   providerKeyHint,
   reactivateProviderConfig,
+  setActiveProviderWorkspace,
 } from "../db/repositories/providers";
 import type { ProviderConfig } from "../db/schema";
 import {
   defaultFactories,
-  LlmOutputError,
+  describeProviderError,
   type LlmProvider,
   LlmProviderError,
   type ProviderFactories,
-  ProviderUnavailableError,
   resolveProvider,
 } from "../llm";
 import type { ServerEnv } from "../llm/providers/server";
@@ -34,6 +34,14 @@ export interface ProviderSettingsDeps {
 export interface Notice {
   key: string;
   vars?: Record<string, string | number>;
+  /** The provider's own words (scrubbed, capped), shown verbatim under the translated line. */
+  detail?: string;
+}
+
+/** What the provider test found. `needsWorkspace`: the key works only with a workspace ID. */
+export interface TestOutcome {
+  notice: Notice;
+  needsWorkspace: boolean;
 }
 
 /** The active provider as the settings screens show it. The key appears only masked. */
@@ -44,6 +52,8 @@ export interface ProviderView {
   model: string | null;
   baseUrl: string | null;
   keyHint?: string;
+  /** The Anthropic workspace requests are sent to; null for other kinds or when unset. */
+  workspaceId: string | null;
 }
 
 const kindOf = (choice: ByokChoice) => (choice === "anthropic" ? "anthropic" : "openai");
@@ -116,7 +126,8 @@ export class ProviderSettings {
     } catch (error) {
       const status = error instanceof LlmProviderError ? error.status : undefined;
       this.deps.log.info("provider key rejected", { userId, kind, status });
-      return { ok: false, notice: { key: "provider-key-rejected" } };
+      const { detail } = describeProviderError(error);
+      return { ok: false, notice: { key: "provider-key-rejected", ...(detail ? { detail } : {}) } };
     }
 
     if (kind === "anthropic") {
@@ -143,8 +154,16 @@ export class ProviderSettings {
     }
   }
 
-  /** Runs a tiny prompt through the active provider. Errors are told by i18n key, never verbatim. */
-  async test(userId: number): Promise<Notice> {
+  /** Sets or clears the Anthropic workspace ID. False when the active provider is not Anthropic. */
+  async setWorkspace(userId: number, workspaceId: string | null): Promise<boolean> {
+    return (await setActiveProviderWorkspace(this.deps.db, userId, workspaceId)) !== undefined;
+  }
+
+  /**
+   * Runs a tiny prompt through the active provider. A failure is told by an i18n key per error
+   * class plus the provider's own scrubbed message (`describeProviderError`).
+   */
+  async test(userId: number): Promise<TestOutcome> {
     const started = performance.now();
     const ms = () => Math.round(performance.now() - started);
     try {
@@ -157,16 +176,18 @@ export class ProviderSettings {
         // Current models think before answering, and thinking counts against this budget.
         maxTokens: 1024,
       });
-      return { key: "provider-test-ok", vars: { ms: ms() } };
+      return { notice: { key: "provider-test-ok", vars: { ms: ms() } }, needsWorkspace: false };
     } catch (error) {
       this.deps.log.warn("provider test failed", { userId, error });
-      if (error instanceof ProviderUnavailableError) return { key: error.i18nKey };
-      if (error instanceof LlmOutputError)
-        return { key: "provider-test-bad-output", vars: { ms: ms() } };
-      if (error instanceof LlmProviderError && error.status) {
-        return { key: "provider-test-failed-status", vars: { status: error.status, ms: ms() } };
-      }
-      return { key: "provider-test-failed", vars: { ms: ms() } };
+      const described = describeProviderError(error);
+      return {
+        notice: {
+          key: described.key,
+          vars: { ...described.vars, ms: ms() },
+          ...(described.detail ? { detail: described.detail } : {}),
+        },
+        needsWorkspace: described.class === "workspace",
+      };
     }
   }
 
@@ -185,6 +206,7 @@ export class ProviderSettings {
       model: config.model,
       baseUrl: config.baseUrl,
       keyHint: providerKeyHint(config, this.deps.masterKey),
+      workspaceId: config.kind === "anthropic" ? config.workspaceId : null,
     };
   }
 }

@@ -9,6 +9,7 @@ export type SettingsInput = { since: number } & (
   | { kind: "key"; choice: ByokChoice; baseUrl?: string }
   | { kind: "base-url" }
   | { kind: "model" }
+  | { kind: "workspace" }
   | { kind: "timezone" }
 );
 

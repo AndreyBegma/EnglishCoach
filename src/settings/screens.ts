@@ -83,8 +83,13 @@ function choiceLabel(t: T, choice: ByokChoice): string {
 const hasModelChoice = (provider: ProviderView | undefined) =>
   provider !== undefined && provider.kind !== "server" && provider.kind !== "runner";
 
-const withNotice = (t: T, lines: string[], notice: Notice | undefined) =>
-  notice ? [...lines, "", t(notice.key, notice.vars)] : lines;
+function withNotice(t: T, lines: string[], notice: Notice | undefined): string[] {
+  if (!notice) return lines;
+  const said = notice.detail ? [t("provider-error-detail", { detail: notice.detail })] : [];
+  return [...lines, "", t(notice.key, notice.vars), ...said];
+}
+
+const isAnthropic = (provider: ProviderView | undefined) => provider?.kind === "anthropic";
 
 function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen {
   const { settings } = model;
@@ -136,12 +141,16 @@ function providerScreen(t: T, model: SettingsModel, notice?: Notice): RenderedSc
   const lines = [
     t("provider-title"),
     "",
-    t("settings-provider", { provider: providerLabel(t, provider) }),
+    // The title already says "AI provider"; the line under it names only the choice.
+    t("provider-current", { provider: providerLabel(t, provider) }),
   ];
   if (hasModelChoice(provider)) {
     lines.push(t("provider-model", { model: provider?.model ?? t("provider-model-default") }));
   }
   if (provider?.keyHint) lines.push(t("provider-key-hint", { hint: provider.keyHint }));
+  if (provider?.workspaceId) {
+    lines.push(t("provider-workspace", { workspace: provider.workspaceId }));
+  }
 
   const choose = (choice: ProviderChoice, label: string) =>
     button(mark(label, selected === choice), { type: "provider", choice });
@@ -156,7 +165,17 @@ function providerScreen(t: T, model: SettingsModel, notice?: Notice): RenderedSc
   if (hasModelChoice(provider)) {
     actions.unshift(button(t("provider-btn-model"), { type: "settings", page: "model" }));
   }
-  rows.push(actions, [button(t("hub-back"), { type: "settings", page: "root" })]);
+  rows.push(actions);
+  if (isAnthropic(provider)) {
+    const workspace = [button(t("provider-btn-workspace"), { type: "input", input: "workspace" })];
+    if (provider?.workspaceId) {
+      workspace.push(
+        button(t("provider-btn-workspace-clear"), { type: "provider-workspace-clear" }),
+      );
+    }
+    rows.push(workspace);
+  }
+  rows.push([button(t("hub-back"), { type: "settings", page: "root" })]);
   return { text: withNotice(t, lines, notice).join("\n"), keyboard: Keyboard.from(rows) };
 }
 
@@ -232,7 +251,10 @@ function inputScreen(
   const text =
     input.kind === "key"
       ? t("input-key", { provider: choiceLabel(t, input.choice) })
-      : t(`input-${input.kind}`, { model: model.provider?.model ?? t("provider-model-default") });
+      : t(`input-${input.kind}`, {
+          model: model.provider?.model ?? t("provider-model-default"),
+          workspace: model.provider?.workspaceId ?? "—",
+        });
   return {
     text: withNotice(t, [text], view.notice).join("\n"),
     keyboard: Keyboard.from([[button(t("input-cancel"), { type: "input-cancel" })]]),

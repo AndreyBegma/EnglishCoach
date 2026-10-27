@@ -1,5 +1,5 @@
 {
-  "id": "588819ba-e04c-43aa-b3cc-b4a394af3288",
+  "id": "e19e4183-cf79-4bb7-8169-1755ecb1629a",
   "prevId": "31f17d74-d30d-49c7-bc09-7e9986bf0113",
   "version": "7",
   "dialect": "postgresql",
@@ -189,6 +189,12 @@
         "key_tag": {
           "name": "key_tag",
           "type": "bytea",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "workspace_id": {
+          "name": "workspace_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -1175,82 +1181,9 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
-        },
-        "topic": {
-          "name": "topic",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ipa": {
-          "name": "ipa",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "example": {
-          "name": "example",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "translation_ru": {
-          "name": "translation_ru",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "curriculum_stage": {
-          "name": "curriculum_stage",
-          "type": "smallint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "curriculum_index": {
-          "name": "curriculum_index",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
         }
       },
-      "indexes": {
-        "words_lemma_idx": {
-          "name": "words_lemma_idx",
-          "columns": [
-            {
-              "expression": "lemma",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "words_curriculum_idx": {
-          "name": "words_curriculum_idx",
-          "columns": [
-            {
-              "expression": "curriculum_stage",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "curriculum_index",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
+      "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
@@ -1334,105 +1267,6 @@
           ]
         }
       },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.excluded_lemmas": {
-      "name": "excluded_lemmas",
-      "schema": "",
-      "columns": {
-        "lemma": {
-          "name": "lemma",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "reason": {
-          "name": "reason",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "source": {
-          "name": "source",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.word_enrichments": {
-      "name": "word_enrichments",
-      "schema": "",
-      "columns": {
-        "word_id": {
-          "name": "word_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "lang": {
-          "name": "lang",
-          "type": "language",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "data": {
-          "name": "data",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "word_enrichments_word_id_words_id_fk": {
-          "name": "word_enrichments_word_id_words_id_fk",
-          "tableFrom": "word_enrichments",
-          "tableTo": "words",
-          "columnsFrom": [
-            "word_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "word_enrichments_word_id_lang_pk": {
-          "name": "word_enrichments_word_id_lang_pk",
-          "columns": [
-            "word_id",
-            "lang"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

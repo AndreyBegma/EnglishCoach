@@ -269,6 +269,11 @@ export class SettingsController {
   }
 
   private async apply(ctx: BotContext, patch: SettingsPatch, changed: SettingsField[]) {
+    // The first level comes from the placement test (the hub stays locked until it is done); a
+    // level button from an older screen cannot skip it.
+    if (patch.cefrLevel && ctx.settings.cefrLevel === null) {
+      return this.show(ctx, { page: "root" });
+    }
     // A chosen level restarts the level model there; re-picking the current band keeps it.
     if (patch.cefrLevel && patch.cefrLevel !== ctx.settings.cefrLevel) {
       await seedLevels(this.deps.db, ctx.user.id, patch.cefrLevel, "chosen");

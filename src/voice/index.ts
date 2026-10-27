@@ -43,7 +43,7 @@ const MAX_VOICE_BYTES = 5 * 1024 * 1024;
 const TELEGRAM_FILE_ROOT = "https://api.telegram.org/file";
 
 /** Sessions whose typed answers a voice message can stand in for. */
-const STT_KINDS: ReadonlySet<SessionKind> = new Set(["talk", "grammar", "review"]);
+const STT_KINDS: ReadonlySet<SessionKind> = new Set(["talk", "grammar", "review", "placement"]);
 
 export interface VoiceOptions extends Pick<TtsOptions, "dir" | "prewarmIntervalMs" | "sleep"> {
   /** Tests replace the HTTP client for Telegram file downloads and the audio endpoints. */

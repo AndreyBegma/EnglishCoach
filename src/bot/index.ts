@@ -14,6 +14,7 @@ import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
 import { OnboardingFlow } from "../onboarding/flow";
 import { onboardingHandlers, placementSession } from "../onboarding/handlers";
+import { topicProgressWriter } from "../placement/topic-writer";
 import { progressHandlers } from "../progress";
 import {
   MemoryRoutineJobs,
@@ -127,6 +128,9 @@ export function createBot(deps: BotDeps) {
     hub,
     log,
     openProviderSettings: (ctx) => settings.controller.show(ctx, { page: "provider" }),
+    // Voice is built below; the test asks for it only once a learner reaches listening.
+    speech: () => voice.tts,
+    topicFlags: topicProgressWriter(db),
   });
 
   const talk = { db, skills: deps.skills, i18n, log };

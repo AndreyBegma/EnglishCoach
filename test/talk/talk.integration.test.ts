@@ -88,6 +88,8 @@ describe.skipIf(!testServerUrl)("Talk session", () => {
     await h.say(telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, telegramId);
     if (!user) throw new Error("user not created");
+    // Learning waits for the placement test; this learner has a level.
+    await updateSettings(database.db, user.id, { cefrLevel: "B1" });
     return { h, telegramId, user, requests };
   }
 

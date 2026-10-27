@@ -2,13 +2,17 @@ import type { BotContext } from "../bot/context";
 import { DEFAULT_LOCALE, type Locale, type Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
 import { getSettings, type SettingsPatch, updateSettings } from "../db/repositories/users";
-import type { CefrLevel } from "../db/schema/enums";
 import type { SettingsEvents, SettingsField } from "../events/settings-events";
+import type { SyllabusTopic } from "../grammar/syllabus";
+import { SYLLABUS } from "../grammar/topics";
 import { answerOutdated } from "../hub/handlers";
 import type { HubService } from "../hub/hub-service";
-import { recordPlacement, seedLevels } from "../levels";
+import { getOverallLevel } from "../levels";
 import type { Logger } from "../log";
-import { acceptAnswer, tappedLabel } from "../sessions/answer";
+import { OPTION_LETTERS, resultSummary } from "../placement/screens";
+import { PlacementTest, startTest, type TestState } from "../placement/test";
+import type { TopicFlagWriter } from "../placement/topics";
+import { acceptAnswer, tappedLabel, whileTyping } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
 import type { LearningHandle, SessionManager } from "../sessions/session-manager";
 import { INTEREST_SUGGESTIONS } from "../settings/options";
@@ -18,11 +22,14 @@ import {
   parseProfession,
   toggleInterest,
 } from "../settings/validate";
-import { PLACEMENT_MAX_ITEMS, type SkillRunner } from "../skills";
+import type { SkillRunner } from "../skills";
+import type { Tts } from "../voice/tts";
 import type { OnboardingCallback } from "./callbacks";
-import { firstSentence, grade, nextStep, type PlacementStep } from "./placement";
-import { OPTION_LETTERS, renderOnboarding } from "./screens";
+import { renderOnboarding } from "./screens";
 import type { OnboardingMode, OnboardingState, OnboardingStep } from "./state";
+
+/** What the test needs of text-to-speech: whether it can voice, and the voice note itself. */
+export type PlacementSpeech = Pick<Tts, "available" | "play">;
 
 export interface OnboardingDeps {
   db: Db;
@@ -34,16 +41,46 @@ export interface OnboardingDeps {
   log: Logger;
   /** Turns the freshly re-sent hub into Settings → AI provider. */
   openProviderSettings(ctx: BotContext): Promise<void>;
+  /** The listening section's voice; a getter, because voice is built after onboarding. */
+  speech?: () => PlacementSpeech | undefined;
+  /** Where the test's syllabus topic flags go; absent until topic progress exists. */
+  topicFlags?: TopicFlagWriter;
+  /** The syllabus the grammar section samples; the grammar module's by default. */
+  topics?: readonly SyllabusTopic[];
+  /** Index picker for topics and words; tests pin it. */
+  pick?: (count: number) => number;
 }
 
+/** A writing answer is 3–5 sentences; fewer words than this cannot show a level. */
+export const MIN_WRITING_WORDS = 15;
+/** A spoken answer shorter than this says nothing about speaking. */
+export const MIN_SPEAKING_WORDS = 8;
+/** Longer answers are cut before grading: the task asks for a few sentences. */
+const MAX_ANSWER_CHARS = 1500;
+
+const wordCount = (text: string) => text.split(/\s+/).filter(Boolean).length;
+
 /**
- * Onboarding and the placement test. Both run inside one `placement` learning session, so every
- * message (the single card the steps edit in place, and the learner's own) is tracked and the
- * session manager's cleanup leaves only the hub. The same session, minus the welcome steps, is
- * what Settings → "Retake placement test" starts.
+ * Onboarding and the full placement test. Both run inside one `placement` learning session, so
+ * every message (the single card the steps edit in place, the listening clips, and the learner's
+ * own) is tracked and the session manager's cleanup leaves only the hub. The same session, minus
+ * the welcome steps, is what the locked hub and Settings → "Retake placement test" start. The
+ * levels are written once, when the last section is done: a session that ends before that
+ * leaves nothing, and the next one starts the test over (it is taken in one go).
  */
 export class OnboardingFlow {
-  constructor(private readonly deps: OnboardingDeps) {}
+  private readonly test: PlacementTest;
+
+  constructor(private readonly deps: OnboardingDeps) {
+    this.test = new PlacementTest({
+      db: deps.db,
+      skills: deps.skills,
+      log: deps.log,
+      topics: deps.topics ?? SYLLABUS.topics,
+      topicFlags: deps.topicFlags,
+      pick: deps.pick,
+    });
+  }
 
   /**
    * The first-`/start` branch. Returns true when the command was handled here: a learner without
@@ -70,22 +107,34 @@ export class OnboardingFlow {
     return true;
   }
 
-  /** Settings → "Retake placement test". */
+  /**
+   * Settings → "Retake placement test", and the locked hub's test button. A learner without a
+   * level yet goes through onboarding (which skips the steps already saved).
+   */
   async retake(ctx: BotContext): Promise<void> {
     const outcome = await this.deps.sessions.start(ctx.user, "placement");
     if (!outcome.started) {
       await offerToCancel(this.deps.sessions, ctx, outcome.active, ctx.user);
       return;
     }
-    await this.begin(ctx, outcome.handle, "retake");
+    await this.begin(
+      ctx,
+      outcome.handle,
+      ctx.settings.cefrLevel === null ? "onboarding" : "retake",
+    );
   }
 
+  /**
+   * Starts the session's flow. Onboarding begins with the welcome steps, unless they were done
+   * in an earlier session that ended before the test did: then it goes straight to the test.
+   */
   async begin(ctx: BotContext, learning: LearningHandle, mode: OnboardingMode): Promise<void> {
+    const settings = await getSettings(this.deps.db, ctx.user.id);
+    const profileDone = (settings?.goals.length ?? 0) > 0;
     const state: OnboardingState = {
       sessionId: learning.session.id,
       mode,
-      step: mode === "onboarding" ? "language" : "retake-intro",
-      answers: [],
+      step: mode === "onboarding" && !profileDone ? "language" : "intro",
       wantsOwnProvider: false,
     };
     await this.show(ctx, learning, state, { fresh: true });
@@ -109,31 +158,56 @@ export class OnboardingFlow {
     }
 
     const on = (...steps: OnboardingStep[]) => steps.includes(state.step);
-    // The buttons that call the placement skill answer the tap themselves, through acceptAnswer.
+    // The buttons that move the test (or call a skill) answer the tap themselves, through
+    // acceptAnswer.
     const accept = (chosen: string, task: () => Promise<void>, current?: () => boolean) =>
       acceptAnswer(ctx, { lock: learning.withLock, chosen, current }, task).then(() => {});
     if (callback.type === "answer") {
       const letter = OPTION_LETTERS[callback.index] ?? "";
-      const option = state.item?.options[callback.index];
+      const test = state.test;
+      const option = test?.item?.questions[test.question]?.options[callback.index];
       return accept(
         option === undefined ? letter : `${letter}) ${option}`,
         async () => {
-          if (!state.item) return;
-          state.answers.push(grade(state.item, callback.index));
-          state.item = undefined;
+          if (!test) return;
+          this.test.answer(test, callback.index);
           await this.advance(ctx, learning, state);
         },
-        () => on("question") && state.item !== undefined && callback.seq === state.itemSeq,
+        () =>
+          on("test") &&
+          test?.item?.questions[test.question] !== undefined &&
+          callback.seq === state.itemSeq,
       );
     }
     if (callback.type === "take-test") {
       return accept(
-        ctx.t("onboarding-take-test"),
+        ctx.t("onboarding-start-test"),
         async () => {
-          state.answers = [];
+          state.test = startTest();
           await this.advance(ctx, learning, state);
         },
-        () => on("path", "retake-intro"),
+        () => on("intro"),
+      );
+    }
+    if (callback.type === "skip-section") {
+      return accept(
+        ctx.t("placement-skip-section"),
+        async () => {
+          if (!state.test) return;
+          this.test.skip(state.test);
+          await this.advance(ctx, learning, state);
+        },
+        () => on("test") && skippable(state.test),
+      );
+    }
+    if (callback.type === "voice-on") {
+      return accept(
+        ctx.t("placement-voice-on"),
+        async () => {
+          await this.save(ctx, { voiceEnabled: true }, ["voiceEnabled"]);
+          await this.advance(ctx, learning, state);
+        },
+        () => on("test") && state.test?.needsVoice === true,
       );
     }
     // The profile steps: toggles re-show the card; each step's values are saved when it is done.
@@ -213,19 +287,7 @@ export class OnboardingFlow {
       case "provider":
         if (!on("provider")) return;
         state.wantsOwnProvider = callback.choice === "own";
-        return this.goto(ctx, learning, state, "path");
-      case "know-level":
-        if (!on("path", "error") || state.mode !== "onboarding") return;
-        return this.goto(ctx, learning, state, "level");
-      case "level": {
-        if (!on("level")) return;
-        await seedLevels(this.deps.db, ctx.user.id, callback.level, "chosen");
-        await this.save(ctx, { cefrLevel: callback.level }, ["cefrLevel"]);
-        state.summaryLine = this.deps.i18n.t(await this.locale(ctx), "onboarding-summary-chosen", {
-          level: callback.level,
-        });
-        return this.goto(ctx, learning, state, "words");
-      }
+        return this.goto(ctx, learning, state, "intro");
       case "continue":
         if (!on("result")) return;
         if (state.mode === "retake") return this.finish(ctx, learning, state);
@@ -243,7 +305,7 @@ export class OnboardingFlow {
         await this.save(ctx, { eveningTime: callback.time }, ["eveningTime"]);
         return this.finish(ctx, learning, state);
       case "cancel":
-        if (!on("retake-intro", "error") || state.mode !== "retake") return;
+        if (!on("intro", "error") || state.mode !== "retake") return;
         ctx.session.onboarding = undefined;
         await learning.end("cancelled");
         return;
@@ -251,8 +313,9 @@ export class OnboardingFlow {
   }
 
   /**
-   * A message typed during the session: interests and the profession are free text. The session
-   * manager deletes the message afterwards; anything typed where a button is expected gets a note.
+   * A message typed (or spoken) during the session: interests, the profession, and the test's
+   * writing and speaking answers are free text. The session manager deletes the message
+   * afterwards; anything typed where a button is expected gets a note.
    */
   async onMessage(ctx: BotContext, learning: LearningHandle): Promise<void> {
     const state = ctx.session.onboarding;
@@ -273,55 +336,117 @@ export class OnboardingFlow {
       await this.save(ctx, { profession }, ["profession"]);
       return this.goto(ctx, learning, state, "provider");
     }
+    const item = state.step === "test" ? state.test?.item : undefined;
+    if (item?.task != null && state.test) {
+      const test = state.test;
+      // The voice middleware has turned a voice message into its transcript by now.
+      const spoken = ctx.message?.voice !== undefined;
+      if (item.section === "writing" && spoken) {
+        return learning.window.flashNote(t.t(locale, "placement-writing-typed"));
+      }
+      if (item.section === "speaking" && !spoken) {
+        return learning.window.flashNote(t.t(locale, "placement-speaking-voice"));
+      }
+      const min = item.section === "writing" ? MIN_WRITING_WORDS : MIN_SPEAKING_WORDS;
+      if (wordCount(text) < min) {
+        return learning.window.flashNote(t.t(locale, `placement-${item.section}-short`));
+      }
+      return whileTyping(ctx, async () => {
+        try {
+          await this.test.submit(ctx.user.id, test, text.slice(0, MAX_ANSWER_CHARS));
+        } catch (error) {
+          this.deps.log.warn("placement grading failed", { userId: ctx.user.id, error });
+          return this.goto(ctx, learning, state, "error");
+        }
+        await this.advance(ctx, learning, state);
+      });
+    }
     await learning.window.flashNote(t.t(locale, "onboarding-use-buttons"));
   }
 
-  /** Asks the skill for the next item, or the verdict, and moves to the matching step. */
+  /**
+   * Prepares the test's next screen — the next question, task or voice question — or stores
+   * the finished test and shows its result. A skill failure shows the retry step; the test's
+   * progress so far stays, so a retry asks for the same item again.
+   */
   private async advance(
     ctx: BotContext,
     learning: LearningHandle,
     state: OnboardingState,
   ): Promise<void> {
-    let step: PlacementStep;
+    const test = state.test;
+    if (!test) return this.goto(ctx, learning, state, "intro");
+    const userId = ctx.user.id;
+    const settings = await getSettings(this.deps.db, userId);
     try {
-      const { data } = await this.deps.skills.runSkill(ctx.user.id, "placement-test", {
-        answers: state.answers,
-        max_items: PLACEMENT_MAX_ITEMS,
+      await this.test.prepare(userId, test, {
+        enabled: settings?.voiceEnabled ?? false,
+        canSpeak: async () => (await this.deps.speech?.()?.available(userId)) ?? false,
       });
-      step = nextStep(state.answers, data);
     } catch (error) {
-      this.deps.log.warn("placement step failed", { userId: ctx.user.id, error });
+      this.deps.log.warn("placement step failed", { userId, error });
       return this.goto(ctx, learning, state, "error");
     }
 
-    if (step.kind === "item") {
-      state.item = step.item;
-      state.itemSeq = (state.itemSeq ?? 0) + 1;
-      return this.goto(ctx, learning, state, "question");
-    }
+    if (this.test.outcome(test)) return this.complete(ctx, learning, state, test);
 
-    await recordPlacement(this.deps.db, ctx.user.id, step.level, state.answers);
-    // The cache now holds the model's band, which the graded items may have moved off the result.
-    await this.deps.events.emit({ userId: ctx.user.id, changed: ["cefrLevel"] });
-    state.result = { level: step.level, summary: step.summary };
-    state.item = undefined;
-    state.summaryLine = await this.testSummaryLine(ctx, state, step.level, step.summary);
-    return this.goto(ctx, learning, state, "result");
+    state.itemSeq = (state.itemSeq ?? 0) + 1;
+    await this.goto(ctx, learning, state, "test");
+    if (test.item?.section === "listening" && test.item.passage) {
+      const played = await this.playClip(ctx, learning, test.item.passage);
+      if (!played) {
+        // No clip, no listening: the section is skipped rather than asked blind.
+        this.test.skip(test);
+        return this.advance(ctx, learning, state);
+      }
+    }
   }
 
-  private async testSummaryLine(
+  /** Sends the listening clip under the window, tied to the step. False when it could not. */
+  private async playClip(
     ctx: BotContext,
+    learning: LearningHandle,
+    script: string,
+  ): Promise<boolean> {
+    const speech = this.deps.speech?.();
+    const chatId = ctx.chat?.id;
+    if (!speech || chatId === undefined) return false;
+    try {
+      const settings = await getSettings(this.deps.db, ctx.user.id);
+      const message = await speech.play(
+        ctx.api,
+        chatId,
+        script,
+        settings?.englishVariant ?? "us",
+        ctx.user.id,
+      );
+      await learning.track(message.message_id);
+      return true;
+    } catch (error) {
+      this.deps.log.warn("placement clip failed", { userId: ctx.user.id, error });
+      return false;
+    }
+  }
+
+  /** Stores the finished test and shows its result, in the learner's explanation language. */
+  private async complete(
+    ctx: BotContext,
+    learning: LearningHandle,
     state: OnboardingState,
-    level: CefrLevel,
-    summary: string | null,
-  ): Promise<string> {
-    const t = this.deps.i18n;
-    const locale = await this.locale(ctx);
-    const correct = state.answers.filter((answer) => answer.correct).length;
-    const detail = summary
-      ? firstSentence(summary)
-      : t.t(locale, "onboarding-result-fallback", { correct, total: state.answers.length });
-    return t.t(locale, "onboarding-summary-test", { level, detail });
+    test: TestState,
+  ): Promise<void> {
+    const userId = ctx.user.id;
+    const { results } = await this.test.finish(userId, test);
+    await this.deps.events.emit({ userId, changed: ["cefrLevel"] });
+    const overall = (await getOverallLevel(this.deps.db, userId))?.label ?? "";
+    const settings = await getSettings(this.deps.db, userId);
+    const explain = settings?.explainLang ?? DEFAULT_LOCALE;
+    state.test = undefined;
+    state.result = resultSummary(this.deps.i18n, explain, overall, results);
+    state.summaryLine = this.deps.i18n.t(await this.locale(ctx), "placement-summary", {
+      level: overall,
+    });
+    return this.goto(ctx, learning, state, "result");
   }
 
   /** Ends the session: the manager deletes every tracked message and re-sends the hub. */
@@ -370,4 +495,12 @@ export class OnboardingFlow {
   private async locale(ctx: BotContext): Promise<Locale> {
     return (await getSettings(this.deps.db, ctx.user.id))?.uiLang ?? DEFAULT_LOCALE;
   }
+}
+
+/** Only the voice sections can be skipped: on their voice question, a clip, or the speaking task. */
+function skippable(test: TestState | undefined): boolean {
+  if (!test) return false;
+  if (test.needsVoice) return true;
+  const section = test.item?.section;
+  return section === "listening" || section === "speaking";
 }

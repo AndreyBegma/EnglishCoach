@@ -97,8 +97,11 @@ the user's provider with the skill's output schema, tier and temperature.
 For the eight base skills (`BASE_SKILLS`) vars and output are typed.
 
 **Base set.** `grammar-quiz`, `grammar-check`, `vocab-enrich`,
-`vocab-exercise`, `vocab-check`, `placement-test` (multiple choice only, so
-the server grades; at most 15 items), `conversation` (reply + ≤ 5
+`vocab-exercise`, `vocab-check`, `placement-item` (one item of the full
+placement test at the level and section the server asks for; multiple choice,
+so the server grades), `writing-rubric` and `speaking-rubric` (the test's
+free tasks: rubric criteria plus the CEFR level the answer shows),
+`conversation` (reply + ≤ 5
 structured corrections + one tip of a server-rotated kind; the bot renders
 the corrections block through i18n) and `routine-plan`. Quiz and exercise
 skills take `recent_accuracy` and aim at 60–70 % success. Graders return a
@@ -221,11 +224,12 @@ scale, which is what XP is computed against.
 | Grammar quiz | grammar | syllabus topic's level (`grammarItemDifficulty`), else the quiz's estimate | correct 1 · partial 0.5 · wrong 0 |
 | Vocabulary card rating | vocabulary | the word's CEFR level; own words at the learner's level; grammar-pattern cards do not count | again 0 · hard 0.5 · good/easy 1 |
 | Talk turn (≥ 5 words) | writing | the learner's level | 1 − 0.5·critical − 0.25·moderate − 0.1·minor |
-| Placement test | the item's skill | the item's level | 1 / 0 |
 
-**Seeding.** The placement result seeds all six skills at its band centre
-(uncertainty 0.6), then replays each graded item into its own skill. A level
-the learner chooses (onboarding, Settings) re-seeds at uncertainty 0.8.
+**Seeding.** The full placement test (below) writes every skill's rating,
+uncertainty and evidence once, when it is finished
+(`seedPlacementLevels`, `src/levels/seed-placement.ts`), replacing what was
+there, and sets the cache to the overall band. A level the learner chooses in
+Settings (only once they have one) re-seeds at uncertainty 0.8.
 
 **Overall level and the cache.** The overall level is the mean of the skill
 ratings weighted by 1/uncertainty² (practised skills dominate).
@@ -357,7 +361,9 @@ derived from it), `transfer_evidence`, the confirmation clock
 (`fsrs`, `review_due`), the scores of a running check (`check_scores`) and
 `method_history` (for the adaptive-methods card). The rules are pure, in
 `src/grammar/mastery.ts`; only `recordTopicItem` and `recordTopicUses`
-(`src/grammar/progress.ts`) write the table, under a row lock.
+(`src/grammar/progress.ts`) write the table, under a row lock — plus the
+placement test's topic flags (below), which place a never-practised topic as
+mastered through `placeMastered`.
 
 - **Items.** Every graded grammar-quiz answer with a validated `topic_id`
   feeds its topic (`recordGrammarItem`, after `recordGradedItem`), with the
@@ -386,6 +392,46 @@ derived from it), `transfer_evidence`, the confirmation clock
   being learned. The grammar band is the grammar skill's level, else the
   overall one, else B1. The grammar picker leads with it and marks every
   topic with its status.
+
+## Placement test
+
+One full test (~20 min) in the `placement` session, after the onboarding
+steps and from Settings → Retake. `src/placement/` owns it; the server owns
+the adaptivity, the model only writes items and grades free tasks.
+
+| # | Section | Items | Graded by |
+|---|---|---|---|
+| 1 | Grammar | 7 multiple choice, each on an unasked syllabus topic of the target band | the server |
+| 2 | Vocabulary | 7 multiple choice, each on a dictionary word of the target band | the server |
+| 3 | Reading | 2 texts × 2 questions | the server |
+| 4 | Listening | 2 TTS clips × 2 questions (the script is never shown) | the server |
+| 5 | Writing | 1 task, 3–5 typed sentences | `writing-rubric` |
+| 6 | Speaking | 1 task, a voice answer (STT transcript) | `speaking-rubric` |
+
+- **Adaptivity.** Each section keeps a running level with the level model's
+  own `update`: every item is pitched at the band of that level, so a right
+  answer sends the next one up and a wrong one down. Grammar starts at the
+  prior (B1 ± 1.5); every later section at the level measured so far ± 1.0.
+  A rubric task sets its skill at the band the answer shows (uncertainty
+  0.6); an off-task answer reads as A1.
+- **Voice.** Listening and speaking ask a learner with voice off to turn it
+  on or skip; listening is skipped on its own when no engine can voice a clip.
+  A skipped skill starts at the measured level, uncertainty 0.8, no evidence
+  (`~` in Profile).
+- **Taken in one go.** Progress lives only in the flow state; nothing is
+  written until the last section. A session that ends earlier (cancelled,
+  expired) leaves no trace and the next one starts the test over; the saved
+  onboarding steps are not asked again.
+- **Output.** The six skill levels (`seedPlacementLevels`), the topic flags
+  and a summary in the explanation language (every skill's decimal and the
+  rubric feedback). Flags (`topicFlags`): a tested topic follows its answer;
+  untested topics below the grammar band are `mastered`, in it `unknown`;
+  above it nothing. `topicProgressWriter` places a `mastered` topic only when
+  the learner has no progress on it (`placeMastered`: on FSRS, no XP, no
+  `topic.mastered`); `unknown` stays `not_started`.
+- **The lock.** While `cefr_level` is null the hub shows only 🧭 Placement
+  test and Settings, a learning button of an older hub is refused, and
+  Settings offers no level picker: only the test sets the first level.
 
 ## Telegram UX rules
 

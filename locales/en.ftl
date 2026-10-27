@@ -23,6 +23,9 @@ hub-settings = ⚙️ Settings
 hub-back = ← Back
 hub-coming-soon = Coming soon.
 hub-outdated = This menu is outdated.
+hub-locked = 🧭 Lessons open after the placement test: about 20 minutes, taken in one go.
+hub-locked-toast = Take the placement test first.
+hub-placement = 🧭 Placement test
 
 ## Settings
 settings-title = ⚙️ Settings
@@ -199,25 +202,35 @@ onboarding-welcome = 👋 Welcome to EnglishCoach! A little English every day, w
 onboarding-provider = Which AI should run your lessons? The server's works out of the box; you can switch to your own key in Settings at any time.
 onboarding-provider-server = Use the server (default)
 onboarding-provider-own = Set up my own provider in Settings
-onboarding-path = How shall we find your level?
-onboarding-take-test = Take a 5-minute placement test
-onboarding-know-level = I know my level
-onboarding-choose-level = Pick your level:
-onboarding-retake-intro = A short adaptive test of up to { $max } questions will find your level again.
 onboarding-start-test = Start the test
 onboarding-cancel = Cancel
-onboarding-question = Question { $n } of up to { $max }
 onboarding-error = The test could not continue: the AI provider did not give a usable answer.
 onboarding-retry = Try again
-onboarding-result = Your level: { $level }
-onboarding-result-fallback = Based on { $correct } correct answers out of { $total }.
 onboarding-continue = Continue
 onboarding-words = How many new words per day?
 onboarding-morning = When shall I start your morning session?
 onboarding-evening = And your evening session?
-onboarding-summary-test = Placement test: { $level }. { $detail }
-onboarding-summary-chosen = Level set: { $level }.
 onboarding-done = Welcome aboard!
+
+# --- placement test ---
+placement-intro = 🧭 Now the placement test: six short sections — grammar, vocabulary, reading, listening, writing and speaking — about 20 minutes, taken in one go. Lessons open when it is done. If you stop halfway, it starts again from the beginning.
+placement-intro-retake = 🧭 The full placement test measures every skill again: six sections, about 20 minutes, taken in one go. Your levels change only when you finish it.
+placement-section = Section { $n }/{ $total } · { $name }
+placement-section-question = Section { $n }/{ $total } · { $name } · { $k }/{ $of }
+placement-listen = 🎧 Listen to the voice note below, then answer.
+placement-task-writing = ✍️ Write 3–5 sentences in English and send them as a message:
+placement-task-speaking = 🎙 Answer with a voice message in English (30–60 seconds):
+placement-needs-voice-listening = 🎧 This section plays short audio clips. Turn voice on to take it, or skip it — your listening level will then be a rough guess.
+placement-needs-voice-speaking = 🎙 This section takes a voice answer. Turn voice on to take it, or skip it — your speaking level will then be a rough guess.
+placement-voice-on = 🔊 Turn voice on
+placement-skip-section = Skip this section
+placement-writing-typed = Please type your answer for this section.
+placement-speaking-voice = Please answer with a voice message.
+placement-writing-short = A little more, please: 3–5 sentences.
+placement-speaking-short = A little longer, please: 30–60 seconds.
+placement-result = 🎯 Your level: { $level }
+placement-result-skipped = ~ marks a skill the test did not measure; it settles as you practise.
+placement-summary = Placement test: { $level }.
 
 # --- grammar ---
 grammar-pick-topic = ✍️ Grammar practice: 10 questions. Pick a topic or practise a mix.

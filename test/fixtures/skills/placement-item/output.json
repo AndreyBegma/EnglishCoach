@@ -1,0 +1,28 @@
+{
+  "section": "reading",
+  "subject": "a library closing",
+  "passage": "Our town library will close on Saturdays from next month. The council says fewer people visit at weekends, and the money saved will pay for longer opening hours on weekday evenings. Many parents are unhappy, because Saturday is the only day their children can go. A group of them has started a petition and plans to present it at the next council meeting.",
+  "questions": [
+    {
+      "question": "What is the main idea of the text? Choose the best answer.",
+      "options": [
+        "A change to the library's opening hours has upset some parents.",
+        "The library is going to close for good next month.",
+        "The council wants to build a new library for children.",
+        "Parents want the library to open later on weekday evenings."
+      ],
+      "correct_index": 0
+    },
+    {
+      "question": "Why is the council changing the opening hours? Choose the best answer.",
+      "options": [
+        "Parents asked for it in a petition.",
+        "Few people use the library at weekends.",
+        "The library needs new books for children.",
+        "Weekday evenings are too busy."
+      ],
+      "correct_index": 1
+    }
+  ],
+  "task": null
+}

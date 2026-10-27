@@ -23,6 +23,9 @@ hub-settings = ⚙️ Настройки
 hub-back = ← Назад
 hub-coming-soon = Скоро появится.
 hub-outdated = Это меню устарело.
+hub-locked = 🧭 Уроки откроются после теста уровня: примерно 20 минут, за один раз.
+hub-locked-toast = Сначала пройдите тест уровня.
+hub-placement = 🧭 Тест уровня
 
 ## Settings
 settings-title = ⚙️ Настройки
@@ -199,25 +202,35 @@ onboarding-welcome = 👋 Добро пожаловать в EnglishCoach! По�
 onboarding-provider = Какой ИИ будет вести уроки? Серверный работает сразу, а свой ключ можно подключить в настройках в любой момент.
 onboarding-provider-server = Использовать серверный (по умолчанию)
 onboarding-provider-own = Настроить свой провайдер в настройках
-onboarding-path = Как определим ваш уровень?
-onboarding-take-test = Пройти 5-минутный тест уровня
-onboarding-know-level = Я знаю свой уровень
-onboarding-choose-level = Выберите свой уровень:
-onboarding-retake-intro = Короткий адаптивный тест из не более чем { $max } вопросов заново определит ваш уровень.
 onboarding-start-test = Начать тест
 onboarding-cancel = Отмена
-onboarding-question = Вопрос { $n } из не более чем { $max }
 onboarding-error = Тест не удалось продолжить: ИИ-провайдер не дал пригодного ответа.
 onboarding-retry = Повторить
-onboarding-result = Ваш уровень: { $level }
-onboarding-result-fallback = По { $correct } верным ответам из { $total }.
 onboarding-continue = Дальше
 onboarding-words = Сколько новых слов в день?
 onboarding-morning = Когда начинать утреннюю сессию?
 onboarding-evening = А вечернюю?
-onboarding-summary-test = Тест уровня: { $level }. { $detail }
-onboarding-summary-chosen = Уровень выбран: { $level }.
 onboarding-done = Добро пожаловать!
+
+# --- placement test ---
+placement-intro = 🧭 Теперь тест уровня: шесть коротких разделов — грамматика, словарь, чтение, аудирование, письмо и говорение — примерно 20 минут, за один раз. Уроки откроются, когда он будет пройден. Если прерваться на середине, тест начнётся сначала.
+placement-intro-retake = 🧭 Полный тест уровня заново измерит каждый навык: шесть разделов, примерно 20 минут, за один раз. Уровни изменятся только когда вы его закончите.
+placement-section = Раздел { $n }/{ $total } · { $name }
+placement-section-question = Раздел { $n }/{ $total } · { $name } · { $k }/{ $of }
+placement-listen = 🎧 Послушайте голосовое сообщение ниже и ответьте.
+placement-task-writing = ✍️ Напишите 3–5 предложений по-английски и отправьте сообщением:
+placement-task-speaking = 🎙 Ответьте голосовым сообщением по-английски (30–60 секунд):
+placement-needs-voice-listening = 🎧 В этом разделе звучат короткие аудио. Включите голос, чтобы его пройти, или пропустите — тогда уровень аудирования будет приблизительным.
+placement-needs-voice-speaking = 🎙 В этом разделе нужен голосовой ответ. Включите голос, чтобы его пройти, или пропустите — тогда уровень говорения будет приблизительным.
+placement-voice-on = 🔊 Включить голос
+placement-skip-section = Пропустить раздел
+placement-writing-typed = В этом разделе ответ нужно написать текстом.
+placement-speaking-voice = Пожалуйста, ответьте голосовым сообщением.
+placement-writing-short = Чуть подробнее, пожалуйста: 3–5 предложений.
+placement-speaking-short = Чуть дольше, пожалуйста: 30–60 секунд.
+placement-result = 🎯 Ваш уровень: { $level }
+placement-result-skipped = ~ — навык, который тест не измерил; он уточнится по ходу занятий.
+placement-summary = Тест уровня: { $level }.
 
 # --- grammar ---
 grammar-pick-topic = ✍️ Практика грамматики: 10 вопросов. Выберите тему или смешанный режим.

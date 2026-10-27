@@ -1,6 +1,5 @@
-import type { CefrLevel } from "../db/schema/enums";
 import type { LearnerGoal } from "../db/schema/users";
-import type { PlacementAnswer, PlacementItem } from "./placement";
+import type { TestState } from "../placement/test";
 
 export type OnboardingMode = "onboarding" | "retake";
 
@@ -10,10 +9,8 @@ export type OnboardingStep =
   | "interests"
   | "profession"
   | "provider"
-  | "path"
-  | "level"
-  | "retake-intro"
-  | "question"
+  | "intro"
+  | "test"
   | "error"
   | "result"
   | "words"
@@ -22,8 +19,9 @@ export type OnboardingStep =
 
 /**
  * Where the learner is in the `placement` session. Lives in grammY's session (Redis); nothing in
- * it is authoritative — the level and settings are written to the database as they are chosen.
- * `item` carries the correct answer, which is why it never goes into a button.
+ * it is authoritative — settings are written to the database as they are chosen, and the levels
+ * only when the whole test is done. `test.item` carries the correct answers, which is why it
+ * never goes into a button.
  */
 export interface OnboardingState {
   /** The learning session this state belongs to; anything else is stale. */
@@ -32,14 +30,15 @@ export interface OnboardingState {
   step: OnboardingStep;
   /** The one card message every step edits in place. */
   messageId?: number;
-  answers: PlacementAnswer[];
-  item?: PlacementItem;
+  /** The placement test, from its first item to its result. */
+  test?: TestState;
   /**
-   * Counts every item shown in this session, retries included; the answer buttons carry it, so a
-   * tap meant for an earlier item never answers the one on screen.
+   * Counts every question shown in this session, retries included; the answer buttons carry it,
+   * so a tap meant for an earlier question never answers the one on screen.
    */
   itemSeq?: number;
-  result?: { level: CefrLevel; summary: string | null };
+  /** The test's result, in the explanation language, shown on the result step. */
+  result?: string;
   /** The line folded into the hub when the session ends. */
   summaryLine?: string;
   /** The learner wants to set up their own provider once the hub is back. */

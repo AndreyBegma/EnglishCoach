@@ -1,17 +1,22 @@
 import { describe, expect, test } from "bun:test";
+import type { TopicSession } from "../../src/db/schema";
 import {
   accuracyByType,
   applyItem,
   applyTransfer,
   CHECK_ITEMS,
-  CONFIRMATION_MS,
   EMPTY_PROGRESS,
+  ERROR_FREE_MS,
   isDue,
+  MASTERY_SESSIONS,
+  MASTERY_SPREAD_MS,
+  MASTERY_TRANSFER,
   MASTERY_WINDOW,
   masteryRule,
   placeMastered,
+  sessionsHold,
   type TopicProgress,
-  windowHolds,
+  transferHolds,
 } from "../../src/grammar/mastery";
 
 const T0 = new Date("2026-10-01T10:00:00Z");
@@ -19,14 +24,14 @@ const DAY = 24 * 60 * 60 * 1000;
 const at = (days: number, minutes = 0) => new Date(T0.getTime() + days * DAY + minutes * 60_000);
 const TYPES = ["multiple_choice", "gap_fill"] as const;
 
-/** `n` items in a row, alternating two types, one minute apart from `start`. */
-function feed(progress: TopicProgress, n: number, score: number, start: Date) {
+/** `n` items of session `session` in a row, alternating two types, one minute apart from `start`. */
+function feed(progress: TopicProgress, n: number, score: number, start: Date, session = 1) {
   let current = progress;
   const steps = [];
   for (let i = 0; i < n; i++) {
     const step = applyItem(
       current,
-      { type: TYPES[i % 2] ?? "gap_fill", score },
+      { type: TYPES[i % 2] ?? "gap_fill", score, session },
       new Date(start.getTime() + i * 60_000),
     );
     steps.push(step);
@@ -35,14 +40,43 @@ function feed(progress: TopicProgress, n: number, score: number, start: Date) {
   return { progress: current, steps, last: steps.at(-1) };
 }
 
-/** A topic mastered at day 3: a full right window on day 0, one transfer, a right item on day 3. */
-function mastered(): TopicProgress {
-  const day0 = feed(EMPTY_PROGRESS, MASTERY_WINDOW, 1, at(0)).progress;
-  const used = applyTransfer(day0, 1, at(1)).progress;
-  const step = applyItem(used, { type: "gap_fill", score: 1 }, at(3, 30));
-  expect(step.progress.status).toBe("mastered");
-  return step.progress;
+/** Three right sessions on days 0, 3 and 7: the practice half of the rule holds, no transfer yet. */
+function practised(from: TopicProgress = EMPTY_PROGRESS): TopicProgress {
+  let progress = from;
+  for (const [session, day] of [
+    [1, 0],
+    [2, 3],
+    [3, 7],
+  ] as const) {
+    progress = feed(progress, 4, 1, at(day), session).progress;
+  }
+  expect(sessionsHold(progress.sessionResults)).toBe(true);
+  return progress;
 }
+
+/** `n` correct uses in free production, an hour apart from `start`. */
+function used(progress: TopicProgress, n: number, start: Date) {
+  let current = progress;
+  for (let i = 0; i < n; i++) {
+    current = applyTransfer(current, "correct", new Date(start.getTime() + i * 3_600_000)).progress;
+  }
+  return current;
+}
+
+/** A topic mastered on day 7: practised, then its second correct use. */
+function mastered(): TopicProgress {
+  const progress = used(practised(), MASTERY_TRANSFER, at(7, 60));
+  expect(progress.status).toBe("mastered");
+  return progress;
+}
+
+const session = (n: number, day: number, mean: number, types = ["a", "b"]): TopicSession => ({
+  session: n,
+  at: at(day).toISOString(),
+  scoreSum: mean * 20,
+  items: 20,
+  types,
+});
 
 describe("the rolling window", () => {
   test("keeps the last items only and derives accuracy per type", () => {
@@ -57,119 +91,231 @@ describe("the rolling window", () => {
     ).toEqual({ gap_fill: 0.5, multiple_choice: 0.5 });
     expect(progress.accuracyByType).toEqual({ multiple_choice: 1, gap_fill: 1 });
   });
+});
 
-  test("holds only when full, at least 85 % and across two types", () => {
-    const items = (n: number, score: number, types: string[]) =>
-      Array.from({ length: n }, (_, i) => ({ type: types[i % types.length] ?? "", score, at: "" }));
-    expect(windowHolds(items(MASTERY_WINDOW, 1, ["a", "b"]))).toBe(true);
-    expect(windowHolds(items(MASTERY_WINDOW - 1, 1, ["a", "b"]))).toBe(false);
-    expect(windowHolds(items(MASTERY_WINDOW, 1, ["a"]))).toBe(false);
-    const mixed = [...items(MASTERY_WINDOW - 2, 1, ["a", "b"]), ...items(2, 0.5, ["a"])];
-    expect(windowHolds(mixed)).toBe(true); // 7/8 = 0.875
-    const low = [...items(MASTERY_WINDOW - 2, 1, ["a", "b"]), ...items(2, 0, ["a"])];
-    expect(windowHolds(low)).toBe(false); // 6/8 = 0.75
+describe("session results", () => {
+  test("items of one session add up in one entry, with every type it used", () => {
+    const { progress } = feed(EMPTY_PROGRESS, 3, 0.5, at(0), 7);
+    expect(progress.sessionResults).toEqual([
+      { session: 7, at: at(0).toISOString(), scoreSum: 1.5, items: 3, types: [...TYPES] },
+    ]);
+  });
+
+  test(`only the last ${MASTERY_SESSIONS} sessions are kept, oldest first`, () => {
+    let progress = EMPTY_PROGRESS;
+    for (let s = 1; s <= MASTERY_SESSIONS + 2; s++) {
+      progress = feed(progress, 1, 1, at(s), s).progress;
+    }
+    expect(progress.sessionResults.map((s) => s.session)).toEqual([3, 4, 5]);
+  });
+
+  test("scores are clamped to 0..1", () => {
+    const step = applyItem(EMPTY_PROGRESS, { type: "gap_fill", score: 7, session: 1 }, at(0));
+    expect(step.progress.sessionResults[0]?.scoreSum).toBe(1);
+  });
+});
+
+describe("sessionsHold: ≥85 % in 3 sessions over ≥7 days across ≥2 types", () => {
+  test("holds on three accurate, varied sessions a week apart", () => {
+    expect(sessionsHold([session(1, 0, 1), session(2, 3, 0.9), session(3, 7, 0.85)])).toBe(true);
+  });
+
+  test("needs three sessions", () => {
+    expect(sessionsHold([session(1, 0, 1), session(2, 7, 1)])).toBe(false);
+    expect(sessionsHold([])).toBe(false);
+  });
+
+  test("every counted session needs 85 %", () => {
+    expect(sessionsHold([session(1, 0, 1), session(2, 3, 0.8), session(3, 7, 1)])).toBe(false);
+  });
+
+  test("the first and last session must be at least 7 days apart", () => {
+    const almost = {
+      ...session(3, 7, 1),
+      at: new Date(at(0).getTime() + MASTERY_SPREAD_MS - 1).toISOString(),
+    };
+    expect(sessionsHold([session(1, 0, 1), session(2, 3, 1), almost])).toBe(false);
+    const exact = { ...almost, at: new Date(at(0).getTime() + MASTERY_SPREAD_MS).toISOString() };
+    expect(sessionsHold([session(1, 0, 1), session(2, 3, 1), exact])).toBe(true);
+  });
+
+  test("the sessions together must span two exercise types", () => {
+    const one = ["gap_fill"];
+    expect(
+      sessionsHold([session(1, 0, 1, one), session(2, 3, 1, one), session(3, 7, 1, one)]),
+    ).toBe(false);
+    expect(
+      sessionsHold([session(1, 0, 1, one), session(2, 3, 1, one), session(3, 7, 1, ["x"])]),
+    ).toBe(true);
+  });
+
+  test("an older weak session no longer counts once three newer ones hold", () => {
+    expect(
+      sessionsHold([session(0, 0, 0), session(1, 1, 1), session(2, 4, 1), session(3, 8, 1)]),
+    ).toBe(true);
+  });
+});
+
+describe("transferHolds: ≥2 correct uses and no error in the last 14 days", () => {
+  const base = { ...EMPTY_PROGRESS, transferEvidence: MASTERY_TRANSFER };
+
+  test("needs two correct uses", () => {
+    expect(transferHolds({ ...base, transferEvidence: MASTERY_TRANSFER - 1 }, at(0))).toBe(false);
+    expect(transferHolds(base, at(0))).toBe(true);
+  });
+
+  test("an error inside the 14-day window blocks it; at 14 days it no longer does", () => {
+    const erred = { ...base, lastErrorAt: at(0) };
+    expect(transferHolds(erred, new Date(at(0).getTime() + ERROR_FREE_MS - 1))).toBe(false);
+    expect(transferHolds(erred, new Date(at(0).getTime() + ERROR_FREE_MS))).toBe(true);
+  });
+
+  test("masteryRule needs both halves", () => {
+    const practice = practised();
+    expect(masteryRule(practice, at(8))).toBe(false);
+    expect(masteryRule({ ...practice, transferEvidence: 2 }, at(8))).toBe(true);
+    expect(masteryRule({ ...practice, transferEvidence: 2, lastErrorAt: at(1) }, at(8))).toBe(
+      false,
+    );
+    expect(masteryRule({ ...EMPTY_PROGRESS, transferEvidence: 2 }, at(8))).toBe(false);
   });
 });
 
 describe("not_started → learning", () => {
   test("the first graded item starts the topic, right or wrong", () => {
-    expect(applyItem(EMPTY_PROGRESS, { type: "gap_fill", score: 0 }, at(0)).progress.status).toBe(
-      "learning",
-    );
-    const step = applyItem(EMPTY_PROGRESS, { type: "gap_fill", score: 1 }, at(0));
+    const wrong = applyItem(EMPTY_PROGRESS, { type: "gap_fill", score: 0, session: 1 }, at(0));
+    expect(wrong.progress.status).toBe("learning");
+    const step = applyItem(EMPTY_PROGRESS, { type: "gap_fill", score: 1, session: 1 }, at(0));
     expect(step).toMatchObject({ from: "not_started", mastered: false });
     expect(step.progress.status).toBe("learning");
   });
 
   test("transfer evidence alone does not start or master a topic", () => {
-    const step = applyTransfer(EMPTY_PROGRESS, 3, at(0));
-    expect(step.progress).toMatchObject({ status: "not_started", transferEvidence: 3 });
-    expect(step.mastered).toBe(false);
+    const progress = used(EMPTY_PROGRESS, 3, at(0));
+    expect(progress).toMatchObject({ status: "not_started", transferEvidence: 3 });
   });
 });
 
 describe("learning → mastered", () => {
-  test("a perfect day is not enough: the confirmation and a transfer are still missing", () => {
-    const { progress } = feed(EMPTY_PROGRESS, MASTERY_WINDOW * 2, 1, at(0));
+  test("practice alone waits for two correct uses; the second masters it, into FSRS", () => {
+    const practice = practised();
+    expect(practice.status).toBe("learning");
+    const once = applyTransfer(practice, "correct", at(7, 60));
+    expect(once).toMatchObject({ mastered: false });
+    expect(once.progress.status).toBe("learning");
+    const twice = applyTransfer(once.progress, "correct", at(7, 120));
+    expect(twice).toMatchObject({ from: "learning", mastered: true, firstMastery: true });
+    expect(twice.progress).toMatchObject({ status: "mastered", masteredAt: at(7, 120) });
+    expect(twice.progress.firstMasteredAt).toEqual(at(7, 120));
+    expect(twice.progress.fsrs).not.toBeNull();
+    expect(twice.progress.reviewDue?.getTime()).toBeGreaterThan(at(7, 120).getTime() + DAY / 2);
+  });
+
+  test("uses first: the item that completes the third session masters it", () => {
+    let progress = used(EMPTY_PROGRESS, MASTERY_TRANSFER, at(0));
+    progress = feed(progress, 4, 1, at(0), 1).progress;
+    progress = feed(progress, 4, 1, at(3), 2).progress;
     expect(progress.status).toBe("learning");
-    expect(progress.criteriaMetAt).toEqual(at(0, MASTERY_WINDOW - 1));
-    expect(progress.confirmedAt).toBeNull();
-    expect(masteryRule(progress)).toBe(false);
-  });
-
-  test("an item under three days after the rule first held does not confirm it", () => {
-    const day0 = feed(EMPTY_PROGRESS, MASTERY_WINDOW, 1, at(0)).progress;
-    const used = applyTransfer(day0, 1, at(1)).progress;
-    const early = applyItem(used, { type: "gap_fill", score: 1 }, at(2));
-    expect(early.progress.status).toBe("learning");
-    expect(early.progress.confirmedAt).toBeNull();
-  });
-
-  test("confirmed ≥3 days later with a transfer: mastered, first time, and into FSRS", () => {
-    const day0 = feed(EMPTY_PROGRESS, MASTERY_WINDOW, 1, at(0)).progress;
-    const used = applyTransfer(day0, 1, at(1)).progress;
-    const when = at(3, 10);
-    expect(when.getTime() - (day0.criteriaMetAt?.getTime() ?? 0)).toBeGreaterThanOrEqual(
-      CONFIRMATION_MS,
-    );
-    const step = applyItem(used, { type: "gap_fill", score: 1 }, when);
-    expect(step).toMatchObject({ from: "learning", mastered: true, firstMastery: true });
-    expect(step.progress).toMatchObject({ status: "mastered", masteredAt: at(3, 10) });
-    expect(step.progress.firstMasteredAt).toEqual(at(3, 10));
-    expect(step.progress.fsrs).not.toBeNull();
-    expect(step.progress.reviewDue?.getTime()).toBeGreaterThan(at(3, 10).getTime() + DAY / 2);
-  });
-
-  test("confirmed without a transfer waits; the transfer then masters it", () => {
-    const day0 = feed(EMPTY_PROGRESS, MASTERY_WINDOW, 1, at(0)).progress;
-    const confirmed = applyItem(day0, { type: "gap_fill", score: 1 }, at(4));
-    expect(confirmed.progress.status).toBe("learning");
-    expect(confirmed.progress.confirmedAt).toEqual(at(4));
-    const step = applyTransfer(confirmed.progress, 1, at(5));
+    const step = applyItem(progress, { type: "gap_fill", score: 1, session: 3 }, at(7));
     expect(step).toMatchObject({ mastered: true, firstMastery: true });
-    expect(step.progress.status).toBe("mastered");
   });
 
-  test("a window that breaks before the confirmation resets the clock", () => {
-    const day0 = feed(EMPTY_PROGRESS, MASTERY_WINDOW, 1, at(0)).progress;
-    const broken = feed(day0, 2, 0, at(1)).progress;
-    expect(broken.criteriaMetAt).toBeNull();
-    const used = applyTransfer(broken, 1, at(1)).progress;
-    // Back above the threshold on day 3: the clock restarts there, so day 3 does not confirm.
-    const again = feed(used, MASTERY_WINDOW, 1, at(3)).progress;
-    expect(again.status).toBe("learning");
-    expect(again.criteriaMetAt?.getTime()).toBeGreaterThanOrEqual(at(3).getTime());
+  test("sessions under 7 days apart do not master it", () => {
+    let progress = used(EMPTY_PROGRESS, MASTERY_TRANSFER, at(0));
+    for (const [s, day] of [
+      [1, 0],
+      [2, 2],
+      [3, 6],
+    ] as const) {
+      progress = feed(progress, 4, 1, at(day), s).progress;
+    }
+    expect(progress.status).toBe("learning");
   });
 
-  test("a window of one exercise type never masters", () => {
-    let progress = applyTransfer(EMPTY_PROGRESS, 1, at(0)).progress;
-    for (const day of [0, 4]) {
-      for (let i = 0; i < MASTERY_WINDOW; i++) {
-        progress = applyItem(progress, { type: "gap_fill", score: 1 }, at(day, i)).progress;
+  test("one exercise type never masters", () => {
+    let progress = used(EMPTY_PROGRESS, MASTERY_TRANSFER, at(0));
+    for (const [s, day] of [
+      [1, 0],
+      [2, 3],
+      [3, 7],
+    ] as const) {
+      for (let i = 0; i < 4; i++) {
+        progress = applyItem(
+          progress,
+          { type: "gap_fill", score: 1, session: s },
+          at(day, i),
+        ).progress;
       }
     }
     expect(progress.status).toBe("learning");
   });
+
+  test("an error in the last 14 days blocks mastery until the window passes", () => {
+    const erred = applyTransfer(EMPTY_PROGRESS, "error", at(5)).progress;
+    const practice = used(practised(erred), MASTERY_TRANSFER, at(7, 60));
+    expect(practice.status).toBe("learning");
+    // A session 14 days after the error: days 3, 7 and 19 still hold, and the window is clean.
+    const step = applyItem(practice, { type: "gap_fill", score: 1, session: 4 }, at(19));
+    expect(step).toMatchObject({ mastered: true, firstMastery: true });
+    const early = applyItem(practice, { type: "gap_fill", score: 1, session: 4 }, at(18));
+    expect(early.mastered).toBe(false);
+  });
 });
 
-describe("mastered → shaky → mastered", () => {
-  test("falling below the threshold makes it shaky and the confirmation is owed again", () => {
+describe("errors in free production", () => {
+  test("an error on a learning topic only restarts the error-free window", () => {
+    const learning = feed(EMPTY_PROGRESS, 2, 1, at(0)).progress;
+    const step = applyTransfer(learning, "error", at(1));
+    expect(step.progress).toMatchObject({ status: "learning", lastErrorAt: at(1) });
+    expect(step.mastered).toBe(false);
+  });
+
+  test("an error on a mastered topic makes it shaky; its first mastery and card stay", () => {
     const start = mastered();
-    // Not due yet: day 3 + a few minutes.
-    const { progress, steps } = feed(start, 2, 0, at(3, 35));
-    expect(steps[0]?.progress.status).toBe("mastered"); // 7/8 still ≥ 85 %
+    const step = applyTransfer(start, "error", at(8));
+    expect(step).toMatchObject({ from: "mastered", mastered: false });
+    expect(step.progress).toMatchObject({ status: "shaky", masteredAt: null, lastErrorAt: at(8) });
+    expect(step.progress.firstMasteredAt).toEqual(start.firstMasteredAt);
+    expect(step.progress.fsrs).toEqual(start.fsrs);
+  });
+
+  test("an error on a shaky topic keeps it shaky", () => {
+    const shaky = applyTransfer(mastered(), "error", at(8)).progress;
+    expect(applyTransfer(shaky, "error", at(9)).progress.status).toBe("shaky");
+  });
+
+  test("an older error does not move the window back", () => {
+    const erred = applyTransfer(EMPTY_PROGRESS, "error", at(10)).progress;
+    expect(applyTransfer(erred, "error", at(2)).progress.lastErrorAt).toEqual(at(10));
+  });
+
+  test("a demoted topic is mastered again on a correct use 14 days on, not for the first time", () => {
+    const shaky = applyTransfer(mastered(), "error", at(8)).progress;
+    const early = applyTransfer(shaky, "correct", new Date(at(8).getTime() + ERROR_FREE_MS - 1));
+    expect(early.progress.status).toBe("shaky");
+    const step = applyTransfer(shaky, "correct", new Date(at(8).getTime() + ERROR_FREE_MS));
+    expect(step).toMatchObject({ from: "shaky", mastered: true, firstMastery: false });
+  });
+});
+
+describe("mastered → shaky by the window", () => {
+  test("falling below the threshold makes it shaky", () => {
+    const start = mastered();
+    // Not due yet: same day, a session later. 7/8 still holds, 6/8 does not.
+    const { progress, steps } = feed(start, 2, 0, at(7, 180), 4);
+    expect(steps[0]?.progress.status).toBe("mastered");
     expect(progress.status).toBe("shaky");
-    expect(progress).toMatchObject({ criteriaMetAt: null, confirmedAt: null, masteredAt: null });
+    expect(progress.masteredAt).toBeNull();
     expect(progress.firstMasteredAt).not.toBeNull();
   });
 
-  test("a shaky topic is mastered again on the rule, not for the first time", () => {
-    const shaky = feed(mastered(), 2, 0, at(3, 35)).progress;
-    const back = feed(shaky, MASTERY_WINDOW, 1, at(4)).progress;
-    expect(back.status).toBe("shaky");
-    const step = applyItem(back, { type: "gap_fill", score: 1 }, at(8));
+  test("a shaky topic is mastered again once three newer sessions hold", () => {
+    let progress = feed(mastered(), 2, 0, at(7, 180), 4).progress;
+    progress = feed(progress, 4, 1, at(9), 5).progress;
+    progress = feed(progress, 4, 1, at(12), 6).progress;
+    expect(progress.status).toBe("shaky");
+    const step = applyItem(progress, { type: "gap_fill", score: 1, session: 7 }, at(16));
     expect(step).toMatchObject({ from: "shaky", mastered: true, firstMastery: false });
-    expect(step.progress.status).toBe("mastered");
   });
 });
 
@@ -182,14 +328,13 @@ describe("a due mastered topic is checked", () => {
   };
 
   test("not due before its FSRS date", () => {
-    const progress = mastered();
-    expect(isDue(progress, at(3, 40))).toBe(false);
+    expect(isDue(mastered(), at(7, 180))).toBe(false);
     expect(isDue(EMPTY_PROGRESS, at(100))).toBe(false);
   });
 
   test(`${CHECK_ITEMS} right items pass it and reschedule it later`, () => {
     const { progress, when } = due();
-    const { progress: after, steps } = feed(progress, CHECK_ITEMS, 1, when);
+    const { progress: after, steps } = feed(progress, CHECK_ITEMS, 1, when, 9);
     expect(steps.slice(0, -1).every((s) => s.checked === undefined)).toBe(true);
     expect(steps.at(-1)?.checked).toBe("passed");
     expect(after.status).toBe("mastered");
@@ -200,11 +345,11 @@ describe("a due mastered topic is checked", () => {
 
   test("a wrong check item sends it back to learning at once", () => {
     const { progress, when } = due();
-    const right = applyItem(progress, { type: "gap_fill", score: 1 }, when).progress;
+    const right = applyItem(progress, { type: "gap_fill", score: 1, session: 9 }, when).progress;
     expect(right.checkScores).toEqual([1]);
     const step = applyItem(
       right,
-      { type: "gap_fill", score: 0 },
+      { type: "gap_fill", score: 0, session: 9 },
       new Date(when.getTime() + 60_000),
     );
     expect(step.checked).toBe("failed");
@@ -214,8 +359,8 @@ describe("a due mastered topic is checked", () => {
 
   test("partial credit passes the check, rated Hard — sooner than Good", () => {
     const { progress, when } = due();
-    const partial = feed(progress, CHECK_ITEMS, 0.5, when);
-    const right = feed(progress, CHECK_ITEMS, 1, when);
+    const partial = feed(progress, CHECK_ITEMS, 0.5, when, 9);
+    const right = feed(progress, CHECK_ITEMS, 1, when, 9);
     expect(partial.last?.checked).toBe("passed");
     expect(partial.progress.reviewDue?.getTime()).toBeLessThan(
       right.progress.reviewDue?.getTime() ?? 0,
@@ -226,13 +371,12 @@ describe("a due mastered topic is checked", () => {
 
   test("a failed check topic is mastered again later, not for the first time", () => {
     const { progress, when } = due();
-    const failed = applyItem(progress, { type: "gap_fill", score: 0 }, when).progress;
-    const back = feed(failed, MASTERY_WINDOW, 1, new Date(when.getTime() + DAY)).progress;
-    const step = applyItem(
-      back,
-      { type: "gap_fill", score: 1 },
-      new Date(when.getTime() + 5 * DAY),
-    );
+    let failed = applyItem(progress, { type: "gap_fill", score: 0, session: 9 }, when).progress;
+    const later = (days: number) => new Date(when.getTime() + days * DAY);
+    failed = feed(failed, 4, 1, later(1), 10).progress;
+    failed = feed(failed, 4, 1, later(4), 11).progress;
+    expect(failed.status).toBe("learning");
+    const step = applyItem(failed, { type: "gap_fill", score: 1, session: 12 }, later(8));
     expect(step).toMatchObject({ from: "learning", mastered: true, firstMastery: false });
   });
 });
@@ -248,7 +392,7 @@ describe("a topic placed as mastered by the placement test", () => {
 
   test("its first earned mastery after a fall still counts as the first", () => {
     const placed = placeMastered(EMPTY_PROGRESS, T0);
-    const shaky = applyItem(placed, { type: "gap_fill", score: 0 }, at(1)).progress;
+    const shaky = applyItem(placed, { type: "gap_fill", score: 0, session: 1 }, at(1)).progress;
     expect(shaky.status).toBe("shaky");
     expect(shaky.firstMasteredAt).toBeNull();
   });

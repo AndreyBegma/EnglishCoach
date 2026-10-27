@@ -356,27 +356,44 @@ stored one.
 `topic_progress` holds one row per learner and syllabus topic: `status`
 (`not_started` ⬜ · `learning` 🔴 · `shaky` 🟡 · `mastered` ✅), the rolling
 window of the last 8 graded items (`recent_items`, with `accuracy_by_type`
-derived from it), `transfer_evidence`, the confirmation clock
-(`criteria_met_at`, `confirmed_at`), the FSRS card of a mastered topic
-(`fsrs`, `review_due`), the scores of a running check (`check_scores`) and
-`method_history` (for the adaptive-methods card). The rules are pure, in
-`src/grammar/mastery.ts`; only `recordTopicItem` and `recordTopicUses`
-(`src/grammar/progress.ts`) write the table, under a row lock — plus the
-placement test's topic flags (below), which place a never-practised topic as
-mastered through `placeMastered`.
+derived from it), the last 3 grammar sessions on the topic
+(`session_results`: session id, first item time, score sum, item count,
+types), `transfer_evidence` (correct uses in free production),
+`last_error_at` (the latest error tagged in free production), the FSRS card
+of a mastered topic (`fsrs`, `review_due`), the scores of a running check
+(`check_scores`) and `method_history` (for the adaptive-methods card). The
+rules are pure, in `src/grammar/mastery.ts`; only `recordTopicItem` and
+`recordTransfer` (`src/grammar/progress.ts`) write the table, under a row
+lock — plus the placement test's topic flags (below), which place a
+never-practised topic as mastered through `placeMastered`.
 
 - **Items.** Every graded grammar-quiz answer with a validated `topic_id`
   feeds its topic (`recordGrammarItem`, after `recordGradedItem`), with the
-  item type and its score. The first one moves `not_started` → `learning`.
-- **Transfer.** The `conversation` skill gets `syllabus_topics` around the
-  learner's grammar band and returns `topic_uses`, the ids its message used
-  correctly; a counted Talk turn adds one piece of evidence per known id.
-- **Mastery rule** (`masteryRule`, one function — C-58 replaces it): the
-  window is full, its mean score ≥ 85 % and it spans ≥ 2 exercise types; that
-  still holds on an item ≥ 3 days after it first held; and ≥ 1 transfer
-  evidence. A window that breaks before the confirmation restarts the clock.
-- **Shaky.** A mastered topic whose window falls below 85 % becomes `shaky`
-  and has to earn the confirmation again.
+  item type, its score and its learning session. The first one moves
+  `not_started` → `learning`.
+- **Topic tags.** Correction skills share one zod fragment
+  (`src/skills/topic-tags.ts`): each correction carries `topic_id`, the
+  syllabus topic its error breaks, and the turn carries `topic_uses`, up to 3
+  topics it used correctly. Both are hints from `task.syllabus_topics`;
+  unknown ids are dropped server-side. Only `conversation` uses it today; the
+  writing and speaking practice skills adopt the same fragment.
+- **Transfer events.** `transfer_events` logs one row per topic per corrected
+  message: user, topic, `kind` (`correct` / `error`), `source` (`talk` /
+  `writing` / `speaking`), session and Telegram message, time.
+  `recordTransfer` writes the row and the mastery step in one transaction; a
+  topic both corrected and "used" in one message counts as an error only. A
+  counted Talk turn (`recordTalkTurn`, ≥ 5 words) records its tags.
+- **Mastery rule** (`masteryRule(progress, at)`, one function): the last 3
+  sessions on the topic each score ≥ 85 %, the first and last are ≥ 7 days
+  apart, and together they span ≥ 2 exercise types (`sessionsHold`); and the
+  topic has ≥ 2 correct uses in free production with no error tagged to it in
+  the 14 days before `at` (`transferHolds`). It is checked on every item and
+  every correct use.
+- **Shaky.** A mastered topic becomes `shaky` when its window falls below
+  85 % or an error is tagged to it in free production; it is mastered again
+  only under the full rule (so not within 14 days of that error). The topic
+  screen (the header when a topic is picked) shows the evidence: correct uses
+  per source, and errors per source in the last 14 days.
 - **FSRS.** A topic that becomes mastered is rated Good on its card (a new one
   the first time; ts-fsrs without short-term steps, so intervals are days).
   When it is due, its next 3 items are the check: a wrong one rates Again and

@@ -43,7 +43,13 @@ describe.skipIf(!testServerUrl)("placement topic flags into topic progress", () 
   });
 
   test("a topic the learner has practised keeps its own progress", async () => {
-    await recordTopicItem(database.db, userId, "g003", { type: "gap_fill", score: 0 }, AT);
+    await recordTopicItem(
+      database.db,
+      userId,
+      "g003",
+      { type: "gap_fill", score: 0, session: 1 },
+      AT,
+    );
     await topicProgressWriter(database.db, () => AT).write(userId, [
       { topicId: "g003", status: "mastered" },
     ]);

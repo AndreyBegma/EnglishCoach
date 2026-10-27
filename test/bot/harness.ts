@@ -300,10 +300,9 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
       }),
     images: options.images,
     botConfig: { botInfo: BOT_INFO },
-    transport: telegram.transformer,
-    pinSettleMs: 0,
     locks: options.locks,
   });
+  app.bot.api.config.use(telegram.transformer);
 
   let updateId = 1;
   const user = (id: number, languageCode = "en") => ({
@@ -314,10 +313,8 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
     language_code: languageCode,
   });
 
-  const send = async (update: Omit<Update, "update_id">) => {
-    await app.bot.handleUpdate({ update_id: updateId++, ...update } as Update);
-    await app.pins.idle();
-  };
+  const send = (update: Omit<Update, "update_id">) =>
+    app.bot.handleUpdate({ update_id: updateId++, ...update } as Update);
 
   if ((options.pinUpdates ?? "deliver") === "deliver") {
     telegram.onPinNotice = (chatId, noticeId, pinnedId) =>

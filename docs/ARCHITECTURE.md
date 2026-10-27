@@ -163,11 +163,11 @@ the source and status only. A learner's own words have no picture.
    Learn words · Review · Grammar · Talk · Progress · Settings. It is
    **pinned**, and after every session it is **re-sent at the bottom** (old
    one deleted, new one pinned). The "… pinned a message" notice each pin
-   adds is deleted by `PinNotices` (`src/hub/pin-notices.ts`): from its
-   `pinned_message` update when Telegram delivers one to the bot (the Bot API
-   does not promise it in private chats), otherwise as the first unknown
-   message ID after the hub, once a later learner message proves it is not
-   theirs. Sub-screens (settings, progress) open by
+   adds is deleted from its own update (`src/hub/pin-notices.ts`): a
+   private-chat message with `pinned_message` sent by the bot. The Bot API
+   does not promise that update in private chats and cannot read a message
+   by ID, so when it is not delivered the notice stays; the bot never deletes
+   a guessed ID. Sub-screens (settings, progress) open by
    *editing* the hub message, never by sending new ones.
 2. **One window per session.** While a session runs, the chat holds the hub
    and one session window; nothing else lives longer than a few seconds.

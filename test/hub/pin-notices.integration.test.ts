@@ -34,16 +34,18 @@ describe.skipIf(!testServerUrl)("pin notices with a mocked Telegram API", () => 
     expect(h.telegram.pinned.get(telegramId)).toBe(bumped);
   });
 
-  test("when Telegram does not deliver the notice, the next learner message clears it", async () => {
+  test("when Telegram does not deliver the notice, nothing is deleted on a guess", async () => {
     const { h, telegramId, user, chat, hubId } = await setup({ pinUpdates: "silent" });
+    h.telegram.reset();
     await h.hub.bump(user);
-    // Nothing has proven the ID after the hub yet, so the notice is still there.
-    expect(chat().map((message) => message.text)).toContain(PIN_NOTICE);
+    const typed = await h.say(telegramId, "hello");
 
-    await h.say(telegramId, "/menu");
+    // The notice stays: its ID cannot be verified, so the bot leaves it.
     const hub = await hubId();
-    // Every earlier notice is gone; only the newest hub and its own notice remain.
-    expect(chat().map((message) => message.id)).toEqual([hub, hub + 1]);
-    expect(chat()[1]?.text).toBe(PIN_NOTICE);
+    expect(chat().find((message) => message.id === hub + 1)?.text).toBe(PIN_NOTICE);
+    // Only the old hub was deleted; never the notice and never the learner's message.
+    const deleted = h.telegram.callsOf("deleteMessage").map((call) => call.payload.message_id);
+    expect(deleted).not.toContain(hub + 1);
+    expect(deleted).not.toContain(typed);
   });
 });

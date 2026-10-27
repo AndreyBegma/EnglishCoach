@@ -1,11 +1,11 @@
-import { Bot, type BotConfig, type StorageAdapter, session, type Transformer } from "grammy";
+import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
 import type { SessionKind } from "../db/repositories/sessions";
 import { SettingsEvents } from "../events/settings-events";
 import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
-import { PinNotices } from "../hub/pin-notices";
+import { pinNoticeCleanup } from "../hub/pin-notices";
 import type { WordImages } from "../images";
 import type { ProviderFactories } from "../llm";
 import type { ServerEnv } from "../llm/providers/server";
@@ -62,10 +62,6 @@ export interface BotDeps {
   voice?: VoiceOptions;
   /** Tests pass `botInfo` here so the bot never calls getMe. */
   botConfig?: BotConfig<BotContext>;
-  /** Installed innermost on the Bot API, under the bot's own transformers; tests fake Telegram. */
-  transport?: Transformer;
-  /** How long the pin-notice fallback waits before deleting; tests pass 0. */
-  pinSettleMs?: number;
   /** The daily routine's jobs and state (BullMQ and Redis in production; in memory otherwise). */
   routine?: { jobs: RoutineJobs; store: RoutineStore };
   /** The in-flight answer locks (Redis in production; in memory otherwise). */
@@ -83,10 +79,7 @@ export function createBot(deps: BotDeps) {
   const { db, log } = deps;
   const bot = new Bot<BotContext>(deps.token, deps.botConfig);
   const i18n = createI18n();
-  if (deps.transport) bot.api.config.use(deps.transport);
-  const pins = new PinNotices({ api: bot.api, log, settleMs: deps.pinSettleMs });
-  bot.api.config.use(pins.transformer);
-  const hub = new HubService({ api: bot.api, db, i18n, log, pins });
+  const hub = new HubService({ api: bot.api, db, i18n, log });
   const sessions = new SessionManager({
     api: bot.api,
     db,
@@ -170,7 +163,7 @@ export function createBot(deps: BotDeps) {
   });
 
   // Before access, which drops updates from bots: the pin notice is the bot's own message.
-  bot.use(pins.middleware());
+  bot.use(pinNoticeCleanup(log));
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(routine.activity());
   bot.use(i18n);
@@ -204,7 +197,6 @@ export function createBot(deps: BotDeps) {
   return {
     bot,
     hub,
-    pins,
     sessions,
     settingsEvents,
     skills: deps.skills,

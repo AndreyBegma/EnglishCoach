@@ -162,7 +162,12 @@ the source and status only. A learner's own words have no picture.
 1. **The hub.** Exactly one menu message per chat with inline buttons:
    Learn words · Review · Grammar · Talk · Progress · Settings. It is
    **pinned**, and after every session it is **re-sent at the bottom** (old
-   one deleted, new one pinned). Sub-screens (settings, progress) open by
+   one deleted, new one pinned). The "… pinned a message" notice each pin
+   adds is deleted from its own update (`src/hub/pin-notices.ts`): a
+   private-chat message with `pinned_message` sent by the bot. The Bot API
+   does not promise that update in private chats and cannot read a message
+   by ID, so when it is not delivered the notice stays; the bot never deletes
+   a guessed ID. Sub-screens (settings, progress) open by
    *editing* the hub message, never by sending new ones.
 2. **One window per session.** While a session runs, the chat holds the hub
    and one session window; nothing else lives longer than a few seconds.

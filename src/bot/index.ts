@@ -5,6 +5,7 @@ import { SettingsEvents } from "../events/settings-events";
 import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
+import { pinNoticeCleanup } from "../hub/pin-notices";
 import type { WordImages } from "../images";
 import type { ProviderFactories } from "../llm";
 import type { ServerEnv } from "../llm/providers/server";
@@ -68,7 +69,8 @@ export interface BotDeps {
 }
 
 /**
- * Composes the bot. Middleware order matters: access (sets ctx.user/settings) → routine activity
+ * Composes the bot. Middleware order matters: pin notices (sees bot updates) → access (sets
+ * ctx.user/settings) → routine activity
  * (needs ctx.user) → i18n (reads
  * ctx.settings) → grammY session → pending settings input → learning session → admin →
  * settings → hub → fallbacks.
@@ -160,6 +162,8 @@ export function createBot(deps: BotDeps) {
     options: deps.voice,
   });
 
+  // Before access, which drops updates from bots: the pin notice is the bot's own message.
+  bot.use(pinNoticeCleanup(log));
   bot.use(accessMiddleware({ db, adminIds: deps.adminIds, refusals: deps.refusals, i18n, log }));
   bot.use(routine.activity());
   bot.use(i18n);

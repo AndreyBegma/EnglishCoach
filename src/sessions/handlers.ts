@@ -24,13 +24,20 @@ export function sessionMiddleware(sessions: SessionManager): Composer<BotContext
     const active = await sessions.findActive(ctx.user.id);
     if (!active) return next();
 
-    ctx.learning = sessions.handle(active, ctx.user, ctx.settings.uiLang);
+    const learning = sessions.handle(active, ctx.user, ctx.settings.uiLang, ctx);
+    ctx.learning = learning;
     const message = ctx.message;
     if (message && ctx.chat) {
       await sessions.recordIncoming(active, ctx.chat.id, message.message_id);
       const handler = sessions.handlerFor(active.kind);
       if (handler?.onMessage && !isCommand(message)) {
-        await handler.onMessage(ctx.learning, ctx);
+        try {
+          await handler.onMessage(learning, ctx);
+        } finally {
+          // Read once, gone: the chat keeps the window, not the learner's answers.
+          if (!handler.keepsLearnerMessages)
+            await learning.window.consumeUserMessage(message.message_id);
+        }
         return;
       }
     }
@@ -70,7 +77,7 @@ export async function offerToCancel(
   active: LearningSession,
   user: HubUser,
 ): Promise<void> {
-  const handle = ctx.learning ?? sessions.handle(active, user, ctx.settings.uiLang);
+  const handle = ctx.learning ?? sessions.handle(active, user, ctx.settings.uiLang, ctx);
   await handle.send(ctx.t("session-conflict"), {
     reply_markup: new InlineKeyboard()
       .text(

@@ -1,5 +1,5 @@
 {
-  "id": "281ee6e7-5be4-495a-bcc3-6b5dc676a2c1",
+  "id": "31f17d74-d30d-49c7-bc09-7e9986bf0113",
   "prevId": "97cc8f70-04f3-4dcc-a2a8-7f4261ad4168",
   "version": "7",
   "dialect": "postgresql",
@@ -189,12 +189,6 @@
         "key_tag": {
           "name": "key_tag",
           "type": "bytea",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "workspace_id": {
-          "name": "workspace_id",
-          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -1193,6 +1187,77 @@
           "columns": [
             "lemma",
             "pos"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tts_audio": {
+      "name": "tts_audio",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "tts_audio_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "engine": {
+          "name": "engine",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "voice": {
+          "name": "voice",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "text_hash": {
+          "name": "text_hash",
+          "type": "char(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "telegram_file_id": {
+          "name": "telegram_file_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "tts_audio_engine_voice_text_hash_unique": {
+          "name": "tts_audio_engine_voice_text_hash_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "engine",
+            "voice",
+            "text_hash"
           ]
         }
       },

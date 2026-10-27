@@ -9,6 +9,8 @@ export const DEMO_ECHOES = 3;
  */
 export function demoSession(i18n: Translator): SessionKindHandler {
   return {
+    // An echo chat: the learner's messages stay until the cleanup it demonstrates.
+    keepsLearnerMessages: true,
     async onStart(session) {
       await session.send(i18n.t(session.locale, "demo-start"));
     },

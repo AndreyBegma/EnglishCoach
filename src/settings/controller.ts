@@ -6,6 +6,7 @@ import { setActiveProviderModel } from "../db/repositories/providers";
 import { getSettings, type SettingsPatch, updateSettings } from "../db/repositories/users";
 import type { SettingsEvents, SettingsField } from "../events/settings-events";
 import type { HubService } from "../hub/hub-service";
+import { whileTyping } from "../sessions/answer";
 import { type ByokChoice, MODEL_PAGE_SIZE, type ProviderChoice } from "./options";
 import type { Notice, ProviderSettings } from "./provider";
 import { renderSettings, type SettingsView } from "./screens";
@@ -63,7 +64,12 @@ export class SettingsController {
 
     switch (callback.type) {
       case "settings":
-        await ctx.answerCallbackQuery();
+        // Opening the model picker asks the provider for its models: a loading toast meanwhile.
+        await ctx.answerCallbackQuery(
+          callback.page === "model" && callback.n === undefined
+            ? { text: ctx.t("settings-models-loading") }
+            : undefined,
+        );
         if (callback.page === "model") return this.showModels(ctx, callback.n);
         return this.show(ctx, { page: callback.page, n: callback.n });
       case "lang":
@@ -231,7 +237,8 @@ export class SettingsController {
     const key = providerKey(provider);
     let list = ctx.session.modelList;
     if (n === undefined || list?.provider !== key) {
-      list = { provider: key, ids: await this.deps.providers.listModels(ctx.user.id) };
+      const ids = await whileTyping(ctx, () => this.deps.providers.listModels(ctx.user.id));
+      list = { provider: key, ids };
       ctx.session.modelList = list;
     }
     const current = provider?.model ? list.ids.indexOf(provider.model) : -1;

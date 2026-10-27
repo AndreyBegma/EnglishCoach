@@ -336,3 +336,12 @@ voice-empty = У голосовому повідомленні не чути с�
 voice-tts-failed = Зараз не вдалося озвучити слово. Спробуйте пізніше.
 voice-disabled = Озвучення вимкнено. Увімкніть його в Налаштуваннях.
 voice-outdated = Ця кнопка більше не доступна.
+
+# --- answer feedback (one answer at a time) ---
+answer-accepted = Відповідь «{ $answer }» прийнято
+answer-chosen = ✅ { $answer }
+answer-preparing = ⏳ Готую наступне питання…
+answer-busy = Зачекайте, готую наступне питання
+answer-stale = На це питання вже є відповідь
+answer-starting = ⏳ Готую…
+settings-models-loading = ⏳ Завантажую моделі…

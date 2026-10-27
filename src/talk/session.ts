@@ -5,6 +5,7 @@ import type { Db } from "../db/client";
 import { upsertMistake } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
 import type { Logger } from "../log";
+import { acceptAnswer } from "../sessions/answer";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { encodeTalkCallback, parseTalkCallback } from "./callbacks";
@@ -193,9 +194,8 @@ export function talkHandlers(deps: TalkDeps): Composer<BotContext> {
       await ctx.deleteMessage().catch(() => {});
       return;
     }
-    await ctx.answerCallbackQuery();
-
     if (callback.type === "finish") {
+      await ctx.answerCallbackQuery();
       await session.end(
         "finished",
         summarise(deps.i18n, session.locale, talkState(ctx, callback.sessionId)),
@@ -203,13 +203,20 @@ export function talkHandlers(deps: TalkDeps): Composer<BotContext> {
       return;
     }
 
-    if (talkState(ctx, callback.sessionId)?.started) return; // the chat is already going
     const topics = suggestTopics(ctx.settings);
     const topic = callback.topic === "free" ? undefined : topics[callback.topic];
-    const state = newTalkState(callback.sessionId, topic?.text ?? null, true);
-    ctx.session.talk = state;
-    await ctx.deleteMessage().catch(() => {});
-    await open(deps, session, state);
+    // The picker shows the choice and no buttons until the opener is there, then goes. Once the
+    // chat is going (a topic was picked, or the learner wrote first) the picker is stale.
+    await acceptAnswer(
+      ctx,
+      { lock: session.withLock, current: () => !talkState(ctx, callback.sessionId)?.started },
+      async () => {
+        const state = newTalkState(callback.sessionId, topic?.text ?? null, true);
+        ctx.session.talk = state;
+        await open(deps, session, state);
+        await ctx.deleteMessage().catch(() => {});
+      },
+    );
   });
 
   return composer;

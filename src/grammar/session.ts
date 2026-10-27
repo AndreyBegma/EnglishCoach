@@ -5,6 +5,7 @@ import type { Db } from "../db/client";
 import { upsertMistake } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
 import type { Logger } from "../log";
+import { acceptAnswer } from "../sessions/answer";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { parseGrammarCallback } from "./callbacks";
@@ -95,6 +96,14 @@ export function grammarSession(deps: GrammarDeps): SessionKindHandler {
         await handle.window.flashNote(deps.i18n.t(handle.locale, "grammar-use-buttons"));
         return;
       }
+
+      // The answer is on screen, buttons off, while the model checks it.
+      const t = (key: string, vars?: Record<string, string>) =>
+        deps.i18n.t(handle.locale, key, vars);
+      const question = questionText(deps.i18n, handle.locale, state.current.n, totalOf(deps), item);
+      await handle.window.show({
+        text: `${question}\n\n${t("grammar-chosen", { answer: text })}\n${t("answer-preparing")}`,
+      });
 
       let graded: Graded;
       try {
@@ -241,58 +250,75 @@ export function grammarHandlers(deps: GrammarDeps): Composer<BotContext> {
       await ctx.deleteMessage().catch(() => {});
       return;
     }
-    const state = ownState(ctx, handle);
+    // Buttons off and the choice marked at once, while the grading and the next question run.
+    // Whether the tap is still current is asked holding the lock, from the state as it is then.
+    const accept = (chosen: string, task: () => Promise<void>, current: () => boolean) =>
+      acceptAnswer(ctx, { lock: handle.withLock, chosen, current }, task).then(() => {});
 
     switch (callback.type) {
       case "topic": {
         const topic = callback.index === null ? undefined : GRAMMAR_TOPICS[callback.index];
-        if (state || (callback.index !== null && !topic)) {
+        if (callback.index !== null && !topic) {
           return void (await ctx.answerCallbackQuery({ text: ctx.t("grammar-outdated") }));
         }
-        await ctx.answerCallbackQuery();
-        const fresh: GrammarState = {
-          sessionId: handle.session.id,
-          topic: topic?.tag ?? null,
-          asked: 0,
-          answered: 0,
-          correct: 0,
-          recentTopics: [],
-          wrongByTopic: {},
-        };
-        ctx.session.grammar = fresh;
         const chosen = topic
           ? ctx.t(`grammar-topic-${topic.id.replaceAll("_", "-")}`)
           : ctx.t("grammar-mixed");
-        const line = ctx.t("grammar-topic-chosen", { topic: chosen });
-        // Buttons off at once, while the first question is being prepared.
-        await handle.window.show({ text: line });
-        await askNext(deps, handle, fresh, line);
-        return;
+        return accept(
+          chosen,
+          async () => {
+            const fresh: GrammarState = {
+              sessionId: handle.session.id,
+              topic: topic?.tag ?? null,
+              asked: 0,
+              answered: 0,
+              correct: 0,
+              recentTopics: [],
+              wrongByTopic: {},
+            };
+            ctx.session.grammar = fresh;
+            await askNext(deps, handle, fresh, ctx.t("grammar-topic-chosen", { topic: chosen }));
+          },
+          () => !ownState(ctx, handle),
+        );
       }
 
       case "answer": {
-        const current = state?.current;
-        if (!state || !current || current.n !== callback.question) {
-          return void (await ctx.answerCallbackQuery({ text: ctx.t("grammar-outdated") }));
-        }
-        await ctx.answerCallbackQuery();
-        const chosen = current.item.options?.[callback.option] ?? "";
-        const graded = gradeChoice(current.item, callback.option);
-        // Drop the buttons and show what was picked, so the question reads as answered.
-        await handle.window.show({
-          text: `${questionText(deps.i18n, handle.locale, current.n, totalOf(deps), current.item)}\n\n${ctx.t("grammar-chosen", { answer: chosen })}`,
-        });
-        await settle(deps, handle, state, graded, chosen);
-        return;
+        const asked = () => {
+          const state = ownState(ctx, handle);
+          return state?.current?.n === callback.question ? { state, current: state.current } : null;
+        };
+        const chosen = asked()?.current.item.options?.[callback.option] ?? "";
+        return accept(
+          chosen,
+          async () => {
+            const at = asked();
+            if (!at) return;
+            await settle(
+              deps,
+              handle,
+              at.state,
+              gradeChoice(at.current.item, callback.option),
+              chosen,
+            );
+          },
+          () => asked() !== null,
+        );
       }
 
       case "retry": {
-        if (!state || state.current) {
-          return void (await ctx.answerCallbackQuery({ text: ctx.t("grammar-outdated") }));
-        }
-        await ctx.answerCallbackQuery();
-        await askNext(deps, handle, state);
-        return;
+        const failed = () => {
+          const state = ownState(ctx, handle);
+          return state && !state.current ? state : undefined;
+        };
+        return accept(
+          ctx.t("grammar-retry"),
+          async () => {
+            const state = failed();
+            if (state) await askNext(deps, handle, state);
+          },
+          () => failed() !== undefined,
+        );
       }
 
       case "stop":

@@ -308,7 +308,10 @@ export class LearnFlow implements SessionKindHandler {
     await this.showCard(handle, ctx, card);
   }
 
-  /** "Another picture": the word's next picture replaces the photo in place. */
+  /**
+   * "Another picture": the word's next picture replaces the photo in place. With none left, the
+   * card comes back as it was (the answer lock took its buttons) under a note.
+   */
   private async nextImage(handle: LearningHandle, ctx: BotContext, cardId: number) {
     const { db, images, log } = this.core.deps;
     const card = await getCard(db, handle.user.id, cardId);
@@ -318,11 +321,8 @@ export class LearnFlow implements SessionKindHandler {
       log.warn("next word image failed", { wordId: card.wordId, error });
       return undefined;
     });
-    if (!image) {
-      await handle.window.flashNote(this.core.t(handle)("vocab-image-none"));
-      return;
-    }
     await this.showCard(handle, ctx, card);
+    if (!image) await handle.window.flashNote(this.core.t(handle)("vocab-image-none"));
   }
 
   /** The stored or freshly fetched picture of a dictionary word; undefined on any failure. */

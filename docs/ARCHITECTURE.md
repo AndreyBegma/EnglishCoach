@@ -26,6 +26,7 @@ Product decisions for v2 (what the app is meant to do): [PRODUCT.md](PRODUCT.md)
 | Lint / format | Biome |
 | Tests | `bun test` |
 | Deploy v1 | docker-compose (one host). Kubernetes/Helm is v2 |
+| Backups | `backup` compose service: daily `pg_dump -Fc` to `./backups`, 7 daily / 4 weekly / 3 monthly rotation, weekly restore check (`scripts/backup*.sh`, `scripts/restore*.sh`) |
 
 ## Ports (non-standard on purpose — the dev host already uses 5432, 6390, 8000, 9000)
 
@@ -183,6 +184,18 @@ the source and status only. A learner's own words have no picture.
    - Hints and warnings ("use the buttons", validation errors) are a callback
      toast where there is a callback, otherwise `window.flashNote`: a tracked
      note that deletes itself after ~5 s. A session shows at most one note.
+   - **One answer at a time.** Every answer, choice and rating button goes
+     through `acceptAnswer` (`src/sessions/answer.ts`). It holds the session's
+     lock (`SessionLocks`, Redis `lock:session:<id>`, released in `finally`,
+     150 s TTL) while the answer is graded and the next item prepared. A tap
+     meanwhile gets a "wait" toast and is dropped, never queued; a tap whose
+     item is no longer on screen gets "already answered" — buttons carry the
+     item number or card id, checked under the lock. An accepted tap is
+     acknowledged at once: a toast, the message marked with the choice and a
+     "⏳ preparing" line with its keyboard removed, and the `typing` action
+     until the work ends. Typed answers take the same lock in the session
+     middleware; one sent while it is held (or, under polling, dated inside
+     its last hold) gets a wait note and is deleted.
 3. **Sessions clean up after themselves.** Every message of a session —
    the bot's and the learner's — is tracked; when the session ends
    (finished, cancelled, or timed out) they are all deleted (the window

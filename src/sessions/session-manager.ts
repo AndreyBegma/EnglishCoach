@@ -21,6 +21,7 @@ import { getSettings, getUserById } from "../db/repositories/users";
 import type { LearningSession } from "../db/schema";
 import type { HubService, HubUser } from "../hub/hub-service";
 import type { Logger } from "../log";
+import { arrivedWhileHeld, MemorySessionLocks, type SessionLocks } from "./locks";
 import { type SessionWindow, SessionWindows } from "./window";
 
 /** Schedules the inactivity timeout of a session. Implemented by BullMQ in production. */
@@ -52,6 +53,11 @@ export interface LearningHandle {
    * deleted when the window shows the next step.
    */
   track(messageId: number): Promise<void>;
+  /**
+   * Runs `task` while no other answer of this session is being graded or the next item prepared.
+   * Returns false, without running it, when one is: the caller tells the learner to wait.
+   */
+  withLock(task: () => Promise<void>): Promise<boolean>;
   end(status: EndedStatus, summary?: SessionSummary | null): Promise<boolean>;
 }
 
@@ -81,6 +87,8 @@ export interface SessionManagerDeps {
   i18n: Translator;
   /** How long flash notes stay on screen; defaults to `NOTE_TTL_MS`. */
   noteTtlMs?: number;
+  /** The in-flight answer locks; in memory unless Redis is passed. */
+  locks?: SessionLocks;
 }
 
 /** Summary line for a session that ended without one. A finished session supplies its own. */
@@ -122,9 +130,45 @@ export class SessionManager {
   private readonly sequences = new Map<number, Sequence>();
   private readonly endedListeners = new Set<SessionEndedListener>();
   private readonly windows: SessionWindows;
+  private readonly locks: SessionLocks;
 
   constructor(private readonly deps: SessionManagerDeps) {
     this.windows = new SessionWindows({ api: deps.api, log: deps.log, noteTtlMs: deps.noteTtlMs });
+    this.locks = deps.locks ?? new MemorySessionLocks();
+  }
+
+  /**
+   * Runs `task` holding the lock of `key`, released however `task` ends; false, without running
+   * it, when the lock is held. The lock expires on its own if this process dies holding it.
+   *
+   * `openedAt` is when the update asking began. An update that began while the lock was held
+   * (webhooks run updates side by side) read its flow state before that hold wrote it, so it is
+   * refused as well, even when it gets to the lock after the release.
+   */
+  async withLock(key: string, task: () => Promise<void>, openedAt?: number): Promise<boolean> {
+    const lease = await this.locks.acquire(key);
+    if (!lease) return false;
+    if (openedAt !== undefined && ((await this.locks.lastHeld(key))?.to ?? -1) > openedAt) {
+      await lease.release({ record: false });
+      return false;
+    }
+    try {
+      await task();
+    } finally {
+      await lease.release().catch((error: unknown) => {
+        this.deps.log.warn("session lock release failed", { key, error });
+      });
+    }
+    return true;
+  }
+
+  /**
+   * True when a message Telegram dated `dateSeconds` was sent while `key` was last held. Polling
+   * handles updates one at a time, so such a message is only read after the lock is released:
+   * it was typed while the previous answer was being handled, and is dropped like a concurrent one.
+   */
+  async queuedBehind(key: string, dateSeconds: number): Promise<boolean> {
+    return arrivedWhileHeld(dateSeconds, await this.locks.lastHeld(key));
   }
 
   /** Deletes every live flash note now instead of after its delay (tests, shutdown). */
@@ -226,6 +270,7 @@ export class SessionManager {
     locale: Locale,
     ctx?: BotContext,
   ): LearningHandle {
+    const openedAt = Date.now();
     const send = async (text: string, options?: SendOptions) => {
       const message = await this.deps.api.sendMessage(user.telegramId, text, options);
       await trackMessage(this.deps.db, session.id, message.chat.id, message.message_id);
@@ -245,6 +290,7 @@ export class SessionManager {
       send,
       reply: send,
       track: (messageId) => window.attach(messageId),
+      withLock: (task) => this.withLock(sessionLockKey(session.id), task, openedAt),
       end: (status, summary) => this.end(session.id, status, summary),
     };
   }
@@ -347,6 +393,9 @@ export class SessionManager {
     await deleteSessionMessages(db, sessionId);
   }
 }
+
+/** The lock a session's answers take: one is handled at a time. */
+export const sessionLockKey = (sessionId: number) => `session:${sessionId}`;
 
 /** One summary for a whole sequence: earlier parts' lines, then this part's, one per line. */
 function joinSummaries(

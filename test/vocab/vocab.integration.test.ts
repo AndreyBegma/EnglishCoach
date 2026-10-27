@@ -170,7 +170,7 @@ describe.skipIf(!testServerUrl)("vocabulary sessions with a mocked Telegram API"
     ]);
     await press(h, telegramId, { op: "choice", cardId: decide.id, index: 0 });
 
-    // A second tap on the answered question changes nothing.
+    // A second tap on the answered question changes nothing, and says so.
     const before = botMessages(h, telegramId).length;
     await h.press(
       telegramId,
@@ -179,7 +179,7 @@ describe.skipIf(!testServerUrl)("vocabulary sessions with a mocked Telegram API"
     );
     expect(botMessages(h, telegramId).length).toBe(before);
     expect(h.telegram.callsOf("answerCallbackQuery").at(-1)?.payload).toMatchObject({
-      text: "This question is no longer open.",
+      text: "This question is already answered",
     });
 
     // Card 2, answered wrong → Again.

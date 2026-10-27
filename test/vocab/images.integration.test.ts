@@ -177,9 +177,12 @@ describe.skipIf(!testServerUrl)("Learn words with pictures, over a mocked Telegr
 
     await h.press(telegramId, card.id, encodeVocabCallback({ op: "next-image", cardId }));
     expect(last(h, telegramId).text).toBe("No other picture for this word.");
-    expect(h.telegram.chat(telegramId).get(card.id)?.photo).toBe(
-      "https://images.pexels.com/decide-scene-3.jpg",
-    );
+    const kept = h.telegram.chat(telegramId).get(card.id);
+    expect(kept?.photo).toBe("https://images.pexels.com/decide-scene-3.jpg");
+    // The answer lock stripped the buttons while it worked; the card has them back, unmarked.
+    expect(kept?.labels.flat()).toContain("🔄 Another picture");
+    expect(kept?.text).toContain("<b>decide</b>");
+    expect(kept?.text).not.toContain("Preparing");
   });
 
   test("prefetch fetches the pictures of upcoming words too", async () => {

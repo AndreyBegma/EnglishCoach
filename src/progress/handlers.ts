@@ -3,6 +3,7 @@ import type { BotContext } from "../bot/context";
 import type { Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
 import { getSettings } from "../db/repositories/users";
+import { loadProfile, renderProfile } from "../gamification/profile";
 import { startSeededGrammar } from "../grammar";
 import { answerOutdated } from "../hub/handlers";
 import type { HubService } from "../hub/hub-service";
@@ -19,7 +20,7 @@ export interface ProgressHandlerDeps {
   i18n: Translator;
 }
 
-/** The Weak spots sub-screen and "Practice these"; both live on the hub message. */
+/** The Weak spots sub-screen, "Practice these" and the Profile screen; all live on the hub message. */
 export function progressHandlers({
   db,
   hub,
@@ -41,6 +42,15 @@ export function progressHandlers({
         await hub.present(ctx.user, async () => {
           const weak = await loadWeakSpots(db, ctx.user.id);
           return renderWeakSpots(i18n, (await getSettings(db, ctx.user.id))?.uiLang ?? "en", weak);
+        });
+        return;
+      }
+      case "profile": {
+        await ctx.answerCallbackQuery();
+        await hub.present(ctx.user, async () => {
+          const settings = await getSettings(db, ctx.user.id);
+          const profile = await loadProfile(db, ctx.user.id, settings);
+          return renderProfile(i18n, settings?.uiLang ?? "en", profile);
         });
         return;
       }

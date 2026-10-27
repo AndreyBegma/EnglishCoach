@@ -85,6 +85,13 @@
       "when": 1793093631404,
       "tag": "0011_skill_levels",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1793094027062,
+      "tag": "0012_famous_wallow",
+      "breakpoints": true
     }
   ]
 }

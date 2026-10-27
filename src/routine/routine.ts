@@ -14,6 +14,7 @@ import {
 } from "../db/repositories/users";
 import type { User, UserSettings } from "../db/schema";
 import type { SettingsChanged, SettingsField } from "../events/settings-events";
+import { awardGoalMet } from "../gamification/awards";
 import { QUESTIONS_PER_SESSION, startSeededGrammar } from "../grammar";
 import type { HubUser } from "../hub/hub-service";
 import type { Logger } from "../log";
@@ -132,7 +133,8 @@ export class Routine {
 
   /**
    * Session-end listener: sets `goal_met` for the learner-local days the session touched (the day
-   * it started and the day it ended — a session across midnight counts its answers to both).
+   * it started and the day it ended — a session across midnight counts its answers to both). A day
+   * whose goal this call met earns the goal and streak XP, once: the flag never flips back.
    */
   async onSessionEnded({ session, user }: SessionEnded): Promise<void> {
     const settings = await getSettings(this.deps.db, user.id);
@@ -142,7 +144,12 @@ export class Routine {
       localDate(this.now(), settings.timezone),
     ]);
     for (const date of dates) {
-      await markGoalMet(this.deps.db, user.id, date, settings.wordsPerDay);
+      if (!(await markGoalMet(this.deps.db, user.id, date, settings.wordsPerDay))) continue;
+      const streak = await streakDays(this.deps.db, user.id, {
+        now: this.now(),
+        timezone: settings.timezone,
+      });
+      await awardGoalMet(this.deps.db, user.id, { date, streak: streak.current });
     }
   }
 

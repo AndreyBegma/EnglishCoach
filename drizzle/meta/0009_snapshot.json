@@ -1,5 +1,5 @@
 {
-  "id": "3af3262a-67f2-46bc-87cd-14059ecb9184",
+  "id": "af59b689-f61e-4b83-9321-ffcc035a12c5",
   "prevId": "4b2e2ca1-0077-45b9-8e81-9666a12d57c2",
   "version": "7",
   "dialect": "postgresql",
@@ -1666,6 +1666,30 @@
           "primaryKey": false,
           "notNull": false
         },
+        "ipa_us": {
+          "name": "ipa_us",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ipa_uk": {
+          "name": "ipa_uk",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "syllables": {
+          "name": "syllables",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stress_index": {
+          "name": "stress_index",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": false
+        },
         "example": {
           "name": "example",
           "type": "text",
@@ -1812,51 +1836,6 @@
           ]
         }
       },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.tts_status_board": {
-      "name": "tts_status_board",
-      "schema": "",
-      "columns": {
-        "chat_id": {
-          "name": "chat_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "message_id": {
-          "name": "message_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "failures_on": {
-          "name": "failures_on",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "failures": {
-          "name": "failures",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { isAuthError, toProviderError } from "../errors";
-import { CURATED_MODELS, pickModel } from "../models";
+import { CURATED_MODELS, modelCapabilities, pickModel, samplingParams } from "../models";
 import { completeWithRepair, toJsonSchema } from "../structured";
 import type { CompletionRequest, LlmProvider } from "../types";
 
@@ -70,7 +70,7 @@ export function createOpenAiProvider(options: OpenAiProviderOptions): LlmProvide
       const maxTokens = req.maxTokens ?? DEFAULT_MAX_TOKENS;
       // api.openai.com wants max_completion_tokens; routers broadly still only read max_tokens.
       const limit = baseURL ? { max_tokens: maxTokens } : { max_completion_tokens: maxTokens };
-      const sampling = req.temperature === undefined ? {} : { temperature: req.temperature };
+      const sampling = samplingParams(modelCapabilities("openai", model), req.temperature);
 
       return completeWithRepair("openai", req.messages, req.schema, async (messages) => {
         const send = (format: "json_schema" | "json_object") =>

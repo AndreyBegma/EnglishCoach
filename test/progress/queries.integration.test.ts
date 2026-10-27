@@ -131,6 +131,7 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       dueToday: 3,
       dueTomorrow: 2,
       wordsLearned: 5,
+      wordsKnown: 0,
     });
     expect(data.activity).toEqual([0, 0, 19, 5, 10, 11, 15]);
     expect(data.grammar).toEqual({ answered7: 15, correct7: 13, answered30: 25, correct30: 18 });
@@ -157,6 +158,7 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       dueToday: 0,
       dueTomorrow: 0,
       wordsLearned: 0,
+      wordsKnown: 0,
     });
     expect(data.activity).toEqual([0, 0, 0, 0, 0, 0, 0]);
     expect(data.weak).toEqual([]);

@@ -18,8 +18,17 @@ export type ClaudeCodeProviderOptions = {
 const cliResult = z.object({
   is_error: z.boolean().optional(),
   result: z.string(),
+  /** The validated answer when `--json-schema` was given. */
+  structured_output: z.unknown().optional(),
   usage: z.object({ input_tokens: z.number(), output_tokens: z.number() }).partial().optional(),
 });
+
+/** The answer as text: the structured output when the CLI produced one, else the result text. */
+export function answerText(result: z.infer<typeof cliResult>): string {
+  return result.structured_output === undefined
+    ? result.result
+    : JSON.stringify(result.structured_output);
+}
 
 /**
  * `--output-format json` prints one result object, or — when the host's settings turn verbose mode
@@ -41,8 +50,13 @@ export function renderConversation(messages: ChatMessage[]): string {
     .join("\n\n");
 }
 
-export function claudeArgs(model: string, system: string): string[] {
+export function claudeArgs(
+  model: string,
+  system: string,
+  schema: Record<string, unknown>,
+): string[] {
   // `--tools ""` disables every built-in tool: the CLI is used as a plain completion endpoint.
+  // `--json-schema` makes the CLI validate the answer and return it as `structured_output`.
   return [
     "-p",
     "--output-format",
@@ -53,6 +67,8 @@ export function claudeArgs(model: string, system: string): string[] {
     system,
     "--tools",
     "",
+    "--json-schema",
+    JSON.stringify(schema),
   ];
 }
 
@@ -73,12 +89,13 @@ export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): Ll
         tier: req.tier,
       });
       // `req.temperature` is ignored: `claude -p` has no sampling flag, so the CLI default applies.
-      const system = `${req.system}\n\nRespond with only a JSON value that matches this JSON Schema, with no prose around it:\n${JSON.stringify(toJsonSchema(req.schema))}`;
+      const schema = toJsonSchema(req.schema);
+      const system = `${req.system}\n\nRespond with only a JSON value that matches this JSON Schema, with no prose around it:\n${JSON.stringify(schema)}`;
 
       return completeWithRepair("claude-code", req.messages, req.schema, async (messages) => {
         let proc: Bun.Subprocess<Uint8Array, "pipe", "pipe">;
         try {
-          proc = Bun.spawn([...options.command, ...claudeArgs(model, system)], {
+          proc = Bun.spawn([...options.command, ...claudeArgs(model, system, schema)], {
             stdin: new TextEncoder().encode(renderConversation(messages)),
             stdout: "pipe",
             stderr: "pipe",
@@ -125,7 +142,7 @@ export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): Ll
             );
           }
           return {
-            text: parsed.result,
+            text: answerText(parsed),
             usage:
               parsed.usage?.input_tokens !== undefined && parsed.usage.output_tokens !== undefined
                 ? { input: parsed.usage.input_tokens, output: parsed.usage.output_tokens }

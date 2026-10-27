@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { z } from "zod";
 import { LlmOutputError, LlmProviderError } from "../../src/llm/errors";
 import {
+  answerText,
   createClaudeCodeProvider,
   renderConversation,
   resultEvent,
@@ -46,6 +47,17 @@ describe("claude-code provider", () => {
     expect(system).toStartWith("You are a grammar quiz.");
     expect(system).toContain("JSON Schema");
     expect([toolsFlag, tools]).toEqual(["--tools", ""]);
+    const [schemaFlag, schema] = data.argv.slice(9);
+    expect(schemaFlag).toBe("--json-schema");
+    expect(JSON.parse(schema ?? "")).toMatchObject({
+      type: "object",
+      required: ["argv", "stdin"],
+    });
+  });
+
+  test("prefers the CLI's structured_output over the result text", () => {
+    expect(answerText({ result: "", structured_output: { ok: true } })).toBe('{"ok":true}');
+    expect(answerText({ result: '{"ok":false}' })).toBe('{"ok":false}');
   });
 
   test("reads the result event when verbose mode prints the whole event array", () => {

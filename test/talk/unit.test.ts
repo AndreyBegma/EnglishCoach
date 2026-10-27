@@ -70,6 +70,7 @@ describe("rendering", () => {
         category: "grammar" as const,
         severity: "critical" as const,
         why: "past simple & more",
+        topic_id: "g006",
       },
     ],
     tip: { kind: "phrase" as const, text: "Say <it> like this" },

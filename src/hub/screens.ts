@@ -17,6 +17,8 @@ export interface ScreenModel {
   restoreOffer?: RestoreOffer;
   /** The Progress screen's data; the hub loads it only when that screen is rendered. */
   progress?: ProgressData;
+  /** No level yet: learning waits for the placement test, the hub offers only it and Settings. */
+  locked?: boolean;
 }
 
 export interface RenderedScreen {
@@ -45,6 +47,15 @@ export function renderScreen(
       if (model.unlockNotice) lines.push("", model.unlockNotice);
       if (model.restoreOffer) {
         lines.push("", t("hub-streak-restore", { days: model.restoreOffer.days }));
+      }
+      if (model.locked) {
+        return {
+          text: [...lines, "", t("hub-locked")].join("\n"),
+          keyboard: InlineKeyboard.from([
+            [button(t("hub-placement"), { type: "placement" })],
+            [button(t("hub-settings"), { type: "settings", page: "root" })],
+          ]),
+        };
       }
       return {
         text: lines.join("\n"),

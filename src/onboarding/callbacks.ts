@@ -2,7 +2,6 @@ import { z } from "zod";
 import { CALLBACK_VERSION, MAX_CALLBACK_BYTES } from "../bot/callbacks";
 import { SUPPORTED_LOCALES } from "../bot/i18n";
 import {
-  CEFR_LEVELS,
   INTEREST_SUGGESTIONS,
   LEARNER_GOALS,
   type LearnerGoal,
@@ -25,8 +24,10 @@ export type OnboardingCallback =
   | { type: "profession-skip" }
   | { type: "provider"; choice: "server" | "own" }
   | { type: "take-test" }
-  | { type: "know-level" }
-  | { type: "level"; level: (typeof CEFR_LEVELS)[number] }
+  /** Skips the placement section on screen (a voice section the learner cannot take). */
+  | { type: "skip-section" }
+  /** Turns voice on so the placement's voice section can run. */
+  | { type: "voice-on" }
   /** `seq` is the item the button belongs to (`OnboardingState.itemSeq`); another item's is stale. */
   | { type: "answer"; seq: number; index: number }
   | { type: "continue" }
@@ -72,11 +73,8 @@ const route = z.union([
     choice: choice === "s" ? ("server" as const) : ("own" as const),
   })),
   z.tuple([z.literal("t")]).transform(() => ({ type: "take-test" as const })),
-  z.tuple([z.literal("k")]).transform(() => ({ type: "know-level" as const })),
-  z.tuple([z.literal("lv"), z.enum(CEFR_LEVELS)]).transform(([, level]) => ({
-    type: "level" as const,
-    level,
-  })),
+  z.tuple([z.literal("sk")]).transform(() => ({ type: "skip-section" as const })),
+  z.tuple([z.literal("vo")]).transform(() => ({ type: "voice-on" as const })),
   z
     .tuple([z.literal("a"), z.string().regex(/^\d{1,4}$/), z.enum(["0", "1", "2", "3"])])
     .transform(([, seq, index]) => ({
@@ -125,10 +123,10 @@ function partsOf(callback: OnboardingCallback): (string | number)[] {
       return ["pv", callback.choice === "server" ? "s" : "own"];
     case "take-test":
       return ["t"];
-    case "know-level":
-      return ["k"];
-    case "level":
-      return ["lv", callback.level];
+    case "skip-section":
+      return ["sk"];
+    case "voice-on":
+      return ["vo"];
     case "answer":
       return ["a", callback.seq, callback.index];
     case "continue":

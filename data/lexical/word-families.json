@@ -1,0 +1,528 @@
+[
+  {
+    "lemma": "act",
+    "level": "A2",
+    "forms": [["verb", "act"], ["noun", "action"], ["adjective", "active"], ["adverb", "actively"]]
+  },
+  {
+    "lemma": "begin",
+    "level": "A2",
+    "forms": [["verb", "begin"], ["noun", "beginning"], ["noun", "beginner"]]
+  },
+  {
+    "lemma": "care",
+    "level": "A2",
+    "forms": [
+      ["verb", "care"],
+      ["adjective", "careful"],
+      ["adverb", "carefully"],
+      ["adjective", "careless"]
+    ]
+  },
+  {
+    "lemma": "danger",
+    "level": "A2",
+    "forms": [["noun", "danger"], ["adjective", "dangerous"], ["adverb", "dangerously"]]
+  },
+  {
+    "lemma": "friend",
+    "level": "A2",
+    "forms": [["noun", "friend"], ["adjective", "friendly"], ["noun", "friendship"]]
+  },
+  {
+    "lemma": "happy",
+    "level": "A2",
+    "forms": [
+      ["adjective", "happy"],
+      ["noun", "happiness"],
+      ["adverb", "happily"],
+      ["adjective", "unhappy"]
+    ]
+  },
+  {
+    "lemma": "help",
+    "level": "A2",
+    "forms": [["verb", "help"], ["adjective", "helpful"], ["adjective", "helpless"]]
+  },
+  {
+    "lemma": "play",
+    "level": "A2",
+    "forms": [["verb", "play"], ["noun", "player"], ["adjective", "playful"]]
+  },
+  {
+    "lemma": "sing",
+    "level": "A2",
+    "forms": [["verb", "sing"], ["noun", "singer"], ["noun", "song"]]
+  },
+  {
+    "lemma": "teach",
+    "level": "A2",
+    "forms": [["verb", "teach"], ["noun", "teacher"], ["noun", "teaching"]]
+  },
+  {
+    "lemma": "use",
+    "level": "A2",
+    "forms": [["verb", "use"], ["adjective", "useful"], ["adjective", "useless"], ["noun", "user"]]
+  },
+  {
+    "lemma": "write",
+    "level": "A2",
+    "forms": [["verb", "write"], ["noun", "writer"], ["noun", "writing"]]
+  },
+  {
+    "lemma": "beauty",
+    "level": "B1",
+    "forms": [["noun", "beauty"], ["adjective", "beautiful"], ["adverb", "beautifully"]]
+  },
+  {
+    "lemma": "believe",
+    "level": "B1",
+    "forms": [
+      ["verb", "believe"],
+      ["noun", "belief"],
+      ["adjective", "believable"],
+      ["adjective", "unbelievable"]
+    ]
+  },
+  {
+    "lemma": "choose",
+    "level": "B1",
+    "forms": [["verb", "choose"], ["noun", "choice"], ["adjective", "choosy"]]
+  },
+  {
+    "lemma": "comfort",
+    "level": "B1",
+    "forms": [
+      ["noun", "comfort"],
+      ["adjective", "comfortable"],
+      ["adverb", "comfortably"],
+      ["adjective", "uncomfortable"]
+    ]
+  },
+  {
+    "lemma": "compete",
+    "level": "B1",
+    "forms": [
+      ["verb", "compete"],
+      ["noun", "competition"],
+      ["adjective", "competitive"],
+      ["noun", "competitor"]
+    ]
+  },
+  {
+    "lemma": "create",
+    "level": "B1",
+    "forms": [
+      ["verb", "create"],
+      ["noun", "creation"],
+      ["adjective", "creative"],
+      ["noun", "creativity"]
+    ]
+  },
+  {
+    "lemma": "decide",
+    "level": "B1",
+    "forms": [
+      ["verb", "decide"],
+      ["noun", "decision"],
+      ["adjective", "decisive"],
+      ["adverb", "decisively"]
+    ]
+  },
+  {
+    "lemma": "differ",
+    "level": "B1",
+    "forms": [
+      ["verb", "differ"],
+      ["noun", "difference"],
+      ["adjective", "different"],
+      ["adverb", "differently"]
+    ]
+  },
+  {
+    "lemma": "educate",
+    "level": "B1",
+    "forms": [["verb", "educate"], ["noun", "education"], ["adjective", "educational"]]
+  },
+  {
+    "lemma": "employ",
+    "level": "B1",
+    "forms": [
+      ["verb", "employ"],
+      ["noun", "employment"],
+      ["noun", "employer"],
+      ["noun", "employee"],
+      ["adjective", "unemployed"]
+    ]
+  },
+  {
+    "lemma": "enjoy",
+    "level": "B1",
+    "forms": [["verb", "enjoy"], ["noun", "enjoyment"], ["adjective", "enjoyable"]]
+  },
+  { "lemma": "explain", "level": "B1", "forms": [["verb", "explain"], ["noun", "explanation"]] },
+  { "lemma": "fame", "level": "B1", "forms": [["noun", "fame"], ["adjective", "famous"]] },
+  {
+    "lemma": "health",
+    "level": "B1",
+    "forms": [
+      ["noun", "health"],
+      ["adjective", "healthy"],
+      ["adjective", "unhealthy"],
+      ["adverb", "healthily"]
+    ]
+  },
+  {
+    "lemma": "imagine",
+    "level": "B1",
+    "forms": [
+      ["verb", "imagine"],
+      ["noun", "imagination"],
+      ["adjective", "imaginative"],
+      ["adjective", "imaginary"]
+    ]
+  },
+  {
+    "lemma": "important",
+    "level": "B1",
+    "forms": [["adjective", "important"], ["noun", "importance"], ["adverb", "importantly"]]
+  },
+  {
+    "lemma": "inform",
+    "level": "B1",
+    "forms": [["verb", "inform"], ["noun", "information"], ["adjective", "informative"]]
+  },
+  { "lemma": "invite", "level": "B1", "forms": [["verb", "invite"], ["noun", "invitation"]] },
+  {
+    "lemma": "lucky",
+    "level": "B1",
+    "forms": [
+      ["adjective", "lucky"],
+      ["noun", "luck"],
+      ["adverb", "luckily"],
+      ["adjective", "unlucky"]
+    ]
+  },
+  {
+    "lemma": "nature",
+    "level": "B1",
+    "forms": [["noun", "nature"], ["adjective", "natural"], ["adverb", "naturally"]]
+  },
+  {
+    "lemma": "organize",
+    "level": "B1",
+    "forms": [["verb", "organize"], ["noun", "organization"], ["noun", "organizer"]]
+  },
+  {
+    "lemma": "polite",
+    "level": "B1",
+    "forms": [
+      ["adjective", "polite"],
+      ["noun", "politeness"],
+      ["adverb", "politely"],
+      ["adjective", "impolite"]
+    ]
+  },
+  { "lemma": "prepare", "level": "B1", "forms": [["verb", "prepare"], ["noun", "preparation"]] },
+  {
+    "lemma": "succeed",
+    "level": "B1",
+    "forms": [
+      ["verb", "succeed"],
+      ["noun", "success"],
+      ["adjective", "successful"],
+      ["adverb", "successfully"]
+    ]
+  },
+  { "lemma": "suggest", "level": "B1", "forms": [["verb", "suggest"], ["noun", "suggestion"]] },
+  {
+    "lemma": "wide",
+    "level": "B1",
+    "forms": [["adjective", "wide"], ["noun", "width"], ["verb", "widen"], ["adverb", "widely"]]
+  },
+  {
+    "lemma": "able",
+    "level": "B2",
+    "forms": [
+      ["adjective", "able"],
+      ["noun", "ability"],
+      ["verb", "enable"],
+      ["adjective", "unable"]
+    ]
+  },
+  {
+    "lemma": "accept",
+    "level": "B2",
+    "forms": [
+      ["verb", "accept"],
+      ["noun", "acceptance"],
+      ["adjective", "acceptable"],
+      ["adjective", "unacceptable"]
+    ]
+  },
+  {
+    "lemma": "achieve",
+    "level": "B2",
+    "forms": [["verb", "achieve"], ["noun", "achievement"], ["adjective", "achievable"]]
+  },
+  {
+    "lemma": "analyze",
+    "level": "B2",
+    "forms": [
+      ["verb", "analyze"],
+      ["noun", "analysis"],
+      ["adjective", "analytical"],
+      ["noun", "analyst"]
+    ]
+  },
+  {
+    "lemma": "apply",
+    "level": "B2",
+    "forms": [
+      ["verb", "apply"],
+      ["noun", "application"],
+      ["noun", "applicant"],
+      ["adjective", "applicable"]
+    ]
+  },
+  { "lemma": "assume", "level": "B2", "forms": [["verb", "assume"], ["noun", "assumption"]] },
+  {
+    "lemma": "attract",
+    "level": "B2",
+    "forms": [
+      ["verb", "attract"],
+      ["noun", "attraction"],
+      ["adjective", "attractive"],
+      ["adjective", "unattractive"]
+    ]
+  },
+  {
+    "lemma": "confident",
+    "level": "B2",
+    "forms": [["adjective", "confident"], ["noun", "confidence"], ["adverb", "confidently"]]
+  },
+  {
+    "lemma": "depend",
+    "level": "B2",
+    "forms": [
+      ["verb", "depend"],
+      ["adjective", "dependent"],
+      ["adjective", "independent"],
+      ["noun", "independence"],
+      ["adjective", "dependable"]
+    ]
+  },
+  {
+    "lemma": "develop",
+    "level": "B2",
+    "forms": [
+      ["verb", "develop"],
+      ["noun", "development"],
+      ["noun", "developer"],
+      ["adjective", "developed"]
+    ]
+  },
+  {
+    "lemma": "effect",
+    "level": "B2",
+    "forms": [
+      ["noun", "effect"],
+      ["adjective", "effective"],
+      ["adverb", "effectively"],
+      ["noun", "effectiveness"]
+    ]
+  },
+  {
+    "lemma": "emphasis",
+    "level": "B2",
+    "forms": [["noun", "emphasis"], ["verb", "emphasize"], ["adjective", "emphatic"]]
+  },
+  {
+    "lemma": "expect",
+    "level": "B2",
+    "forms": [
+      ["verb", "expect"],
+      ["noun", "expectation"],
+      ["adjective", "unexpected"],
+      ["adverb", "unexpectedly"]
+    ]
+  },
+  { "lemma": "improve", "level": "B2", "forms": [["verb", "improve"], ["noun", "improvement"]] },
+  {
+    "lemma": "know",
+    "level": "B2",
+    "forms": [["verb", "know"], ["noun", "knowledge"], ["adjective", "knowledgeable"]]
+  },
+  {
+    "lemma": "length",
+    "level": "B2",
+    "forms": [
+      ["noun", "length"],
+      ["adjective", "long"],
+      ["verb", "lengthen"],
+      ["adjective", "lengthy"]
+    ]
+  },
+  {
+    "lemma": "obey",
+    "level": "B2",
+    "forms": [
+      ["verb", "obey"],
+      ["noun", "obedience"],
+      ["adjective", "obedient"],
+      ["verb", "disobey"]
+    ]
+  },
+  {
+    "lemma": "permit",
+    "level": "B2",
+    "forms": [["verb", "permit"], ["noun", "permission"], ["adjective", "permissive"]]
+  },
+  {
+    "lemma": "possible",
+    "level": "B2",
+    "forms": [
+      ["adjective", "possible"],
+      ["noun", "possibility"],
+      ["adverb", "possibly"],
+      ["adjective", "impossible"]
+    ]
+  },
+  {
+    "lemma": "produce",
+    "level": "B2",
+    "forms": [
+      ["verb", "produce"],
+      ["noun", "production"],
+      ["noun", "product"],
+      ["adjective", "productive"],
+      ["noun", "productivity"]
+    ]
+  },
+  {
+    "lemma": "rely",
+    "level": "B2",
+    "forms": [
+      ["verb", "rely"],
+      ["adjective", "reliable"],
+      ["noun", "reliability"],
+      ["adjective", "unreliable"]
+    ]
+  },
+  {
+    "lemma": "strong",
+    "level": "B2",
+    "forms": [
+      ["adjective", "strong"],
+      ["noun", "strength"],
+      ["verb", "strengthen"],
+      ["adverb", "strongly"]
+    ]
+  },
+  {
+    "lemma": "advertise",
+    "level": "C1",
+    "forms": [
+      ["verb", "advertise"],
+      ["noun", "advertisement"],
+      ["noun", "advertising"],
+      ["noun", "advertiser"]
+    ]
+  },
+  {
+    "lemma": "clarify",
+    "level": "C1",
+    "forms": [["verb", "clarify"], ["noun", "clarity"], ["noun", "clarification"]]
+  },
+  {
+    "lemma": "comprehension",
+    "level": "C1",
+    "forms": [
+      ["verb", "comprehend"],
+      ["noun", "comprehension"],
+      ["adjective", "comprehensive"],
+      ["adjective", "comprehensible"]
+    ]
+  },
+  {
+    "lemma": "consist",
+    "level": "C1",
+    "forms": [
+      ["verb", "consist"],
+      ["adjective", "consistent"],
+      ["noun", "consistency"],
+      ["adjective", "inconsistent"]
+    ]
+  },
+  {
+    "lemma": "justify",
+    "level": "C1",
+    "forms": [
+      ["verb", "justify"],
+      ["noun", "justification"],
+      ["adjective", "justifiable"],
+      ["adjective", "unjustified"]
+    ]
+  },
+  {
+    "lemma": "persuade",
+    "level": "C1",
+    "forms": [["verb", "persuade"], ["noun", "persuasion"], ["adjective", "persuasive"]]
+  },
+  {
+    "lemma": "rational",
+    "level": "C1",
+    "forms": [
+      ["adjective", "rational"],
+      ["noun", "rationality"],
+      ["verb", "rationalize"],
+      ["adjective", "irrational"]
+    ]
+  },
+  {
+    "lemma": "sustain",
+    "level": "C1",
+    "forms": [
+      ["verb", "sustain"],
+      ["adjective", "sustainable"],
+      ["noun", "sustainability"],
+      ["adjective", "unsustainable"]
+    ]
+  },
+  {
+    "lemma": "vary",
+    "level": "C1",
+    "forms": [
+      ["verb", "vary"],
+      ["noun", "variety"],
+      ["noun", "variation"],
+      ["adjective", "various"],
+      ["adjective", "variable"]
+    ]
+  },
+  {
+    "lemma": "ambiguous",
+    "level": "C2",
+    "forms": [
+      ["adjective", "ambiguous"],
+      ["noun", "ambiguity"],
+      ["adjective", "unambiguous"],
+      ["adverb", "ambiguously"]
+    ]
+  },
+  {
+    "lemma": "deterrent",
+    "level": "C2",
+    "forms": [["verb", "deter"], ["noun", "deterrent"], ["noun", "deterrence"]]
+  },
+  {
+    "lemma": "prevail",
+    "level": "C2",
+    "forms": [
+      ["verb", "prevail"],
+      ["adjective", "prevalent"],
+      ["noun", "prevalence"],
+      ["adjective", "prevailing"]
+    ]
+  }
+]

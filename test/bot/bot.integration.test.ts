@@ -26,6 +26,8 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     await h.say(telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, telegramId);
     if (!user) throw new Error("user not created");
+    // Learning waits for the placement test; this learner has a level.
+    await updateSettings(database.db, user.id, { cefrLevel: "B1" });
     return { h, telegramId, user };
   }
 
@@ -44,15 +46,8 @@ describe.skipIf(!testServerUrl)("bot with a mocked Telegram API", () => {
     expect(h.telegram.pinned.get(telegramId)).toBe(first.messageId);
     expect(chatIds(h, telegramId)).toEqual([first.messageId]);
     const hubMessage = h.telegram.chat(telegramId).get(first.messageId);
-    expect(hubMessage?.labels.flat()).toEqual([
-      "📚 Learn words",
-      "🔁 Review (0)",
-      "✍️ Grammar",
-      "💬 Talk",
-      "📈 Progress",
-      "👤 Profile",
-      "⚙️ Settings",
-    ]);
+    // Sent before the learner had a level: locked until the placement test.
+    expect(hubMessage?.labels.flat()).toEqual(["🧭 Placement test", "⚙️ Settings"]);
     expect(h.telegram.callsOf("pinChatMessage")[0]?.payload).toMatchObject({
       disable_notification: true,
     });

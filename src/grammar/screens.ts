@@ -1,9 +1,10 @@
 import { InlineKeyboard } from "grammy";
 import type { Locale, Translator } from "../bot/i18n";
-import type { CefrLevel, TopicStatus } from "../db/schema";
+import type { CefrLevel, TopicStatus, TransferSource } from "../db/schema";
 import { encodeGrammarCallback } from "./callbacks";
 import type { Graded, Severity } from "./grading";
 import type { NextTopic, TopicStanding } from "./next-topic";
+import type { TransferSummary } from "./progress";
 import type { QuizItem } from "./state";
 import { topicsForLevel } from "./topics";
 
@@ -58,6 +59,29 @@ export function topicPicker(
       );
   }
   return { text: i18n.t(locale, "grammar-pick-topic"), keyboard };
+}
+
+const TRANSFER_SOURCES: readonly TransferSource[] = ["talk", "writing", "speaking"];
+
+/**
+ * A topic's transfer evidence under its title: correct uses per source, then errors per source
+ * within the error-free window. Nothing when there is no evidence yet.
+ */
+export function transferLines(
+  i18n: Translator,
+  locale: Locale,
+  summary: TransferSummary,
+): string[] {
+  const lines = (counts: TransferSummary["correct"], key: string) =>
+    TRANSFER_SOURCES.flatMap((source) => {
+      const n = counts[source] ?? 0;
+      if (n === 0) return [];
+      return [i18n.t(locale, key, { n, source: i18n.t(locale, `grammar-transfer-in-${source}`) })];
+    });
+  return [
+    ...lines(summary.correct, "grammar-transfer-correct"),
+    ...lines(summary.recentErrors, "grammar-transfer-errors"),
+  ];
 }
 
 export function questionText(

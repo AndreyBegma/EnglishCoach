@@ -85,6 +85,7 @@ export class HubService {
       unlockNotice: unlocks && unlockNotice(this.deps.i18n, locale, unlocks.entries),
       restoreOffer,
       progress,
+      locked: !settings?.cefrLevel,
     });
     return unlocks?.ids.length ? { ...rendered, announced: unlocks.ids } : rendered;
   }

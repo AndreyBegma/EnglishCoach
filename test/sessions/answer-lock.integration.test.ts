@@ -3,7 +3,7 @@ import type { Update } from "grammy/types";
 import { encodeCallback } from "../../src/bot/callbacks";
 import type { Database } from "../../src/db/client";
 import { getHub } from "../../src/db/repositories/hub";
-import { findUserByTelegramId } from "../../src/db/repositories/users";
+import { findUserByTelegramId, updateSettings } from "../../src/db/repositories/users";
 import { encodeGrammarCallback } from "../../src/grammar/callbacks";
 import type { CompletionRequest, LlmProvider } from "../../src/llm/types";
 import { encodeOnboardingCallback, type OnboardingCallback } from "../../src/onboarding/callbacks";
@@ -52,17 +52,17 @@ function gatedSkills(db: Database["db"], queue: (unknown | Error)[]) {
 }
 
 const placementItem = (n: number) => ({
-  status: "continue",
-  estimate: { level: "B1", confidence: 0.4 },
-  item: {
-    level: "B1",
-    skill: "grammar",
-    topic: `topic ${n}`,
-    question: `Question text ${n}?`,
-    options: ["first", "second", "third", "fourth"],
-    correct_index: 1,
-  },
-  summary: null,
+  section: "grammar",
+  subject: `subject ${n}`,
+  passage: null,
+  questions: [
+    {
+      question: `Question text ${n}?`,
+      options: ["first", "second", "third", "fourth"],
+      correct_index: 1,
+    },
+  ],
+  task: null,
 });
 
 /** Resolves once `condition` holds; fails the test after about a second. */
@@ -129,7 +129,7 @@ describe.skipIf(!testServerUrl)("one answer at a time, over a mocked Telegram AP
     await s.h.press(s.telegramId, first.id, b);
 
     expect(s.requests).toHaveLength(2); // the first item, then the second: one answer graded
-    expect(s.card().text).toContain("Question 2 of up to 15");
+    expect(s.card().text).toContain("Grammar · 2/7");
     expect(s.card().text).toContain("Question text 1?");
     expect(s.toasts().slice(-3)).toEqual([
       "Answer “B) second” accepted",
@@ -137,11 +137,10 @@ describe.skipIf(!testServerUrl)("one answer at a time, over a mocked Telegram AP
       "This question is already answered",
     ]);
 
-    // The second item still takes its own answer, and the model saw one answer before it.
+    // The second item still takes its own answer: one answer each, the third item is next.
     await s.h.press(s.telegramId, s.card().id, s.card().buttons[0]?.[0] ?? "");
     expect(s.requests).toHaveLength(3);
-    const sent = s.requests.at(-1)?.messages.at(-1)?.content ?? "";
-    expect(sent.match(/"correct"/g)).toHaveLength(2);
+    expect(s.card().text).toContain("Grammar · 3/7");
   });
 
   test("the choice is marked and the keyboard removed before the model answers; taps meanwhile wait", async () => {
@@ -209,6 +208,8 @@ describe.skipIf(!testServerUrl)("one answer at a time, over a mocked Telegram AP
     const s = await setup(queue, options);
     await s.h.say(s.telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, s.telegramId);
+    // Learning waits for the placement test; this learner has a level.
+    if (user) await updateSettings(database.db, user.id, { cefrLevel: "B1" });
     const hub = user && (await getHub(database.db, user.id));
     await s.h.press(
       s.telegramId,

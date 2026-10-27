@@ -3,7 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { encodeCallback } from "../../src/bot/callbacks";
 import type { Database } from "../../src/db/client";
 import { getHub } from "../../src/db/repositories/hub";
-import { findUserByTelegramId, getSettings } from "../../src/db/repositories/users";
+import { findUserByTelegramId, getSettings, updateSettings } from "../../src/db/repositories/users";
 import { cards, dailyStats, learningSessions, mistakes } from "../../src/db/schema";
 import { QUESTIONS_PER_SESSION } from "../../src/grammar";
 import { encodeGrammarCallback } from "../../src/grammar/callbacks";
@@ -34,6 +34,8 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     await h.say(telegramId, "/menu");
     const user = await findUserByTelegramId(database.db, telegramId);
     if (!user) throw new Error("user not created");
+    // Learning waits for the placement test; this learner has a level.
+    await updateSettings(database.db, user.id, { cefrLevel: "B1" });
     return { h, telegramId, user, ...script };
   }
 

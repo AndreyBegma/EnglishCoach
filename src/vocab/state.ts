@@ -20,7 +20,7 @@ const step = z.discriminatedUnion("kind", [
   z.object({
     kind: z.literal("typed"),
     cardId,
-    mode: z.enum(["production", "cloze"]),
+    mode: z.enum(["production", "cloze", "partner", "transform", "own_sentence"]),
     prompt: z.string(),
     accepted: z.array(z.string()),
     askedAt: z.number(),

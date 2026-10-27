@@ -106,7 +106,7 @@ export async function cardsBlock(
       count(*) filter (where c.known_at is null and (c.item_type = 'grammar_pattern' or c.reps > 0)
                          and c.due >= b.end_today
                          and c.due < b.end_today + interval '1 day') as "dueTomorrow",
-      count(*) filter (where c.known_at is null and c.item_type in ('word', 'user_word') and c.reps > 0) as "wordsLearned",
+      count(*) filter (where c.known_at is null and c.item_type <> 'grammar_pattern' and c.reps > 0) as "wordsLearned",
       count(*) filter (where c.known_at is not null) as "wordsKnown"
     from cards c cross join bounds b
     where c.user_id = ${userId}`);

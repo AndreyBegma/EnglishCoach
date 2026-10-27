@@ -54,6 +54,12 @@ export function hubHandlers({ hub, sessions, onboarding }: HubHandlerDeps): Comp
         await hub.refresh(ctx.user, callback.screen);
         return;
       case "activity": {
+        // A hub sent before the level was lost still shows them; learning waits for the test.
+        if (ctx.settings.cefrLevel === null) {
+          await ctx.answerCallbackQuery({ text: ctx.t("hub-locked-toast") });
+          await hub.refresh(ctx.user);
+          return;
+        }
         const kind = ACTIVITY_KIND[callback.activity];
         if (!sessions.handlerFor(kind)) {
           await ctx.answerCallbackQuery({ text: ctx.t("hub-coming-soon") });

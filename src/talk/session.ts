@@ -106,11 +106,13 @@ async function takeTurn(
       log.warn("talk mistake upsert failed", { sessionId: session.session.id, error });
     });
   }
-  await recordTalkTurn(db, userId, text, turn.corrections, turn.topic_uses).catch(
-    (error: unknown) => {
-      log.warn("talk level update failed", { sessionId: session.session.id, error });
-    },
-  );
+  await recordTalkTurn(db, userId, text, turn.corrections, {
+    topicUses: turn.topic_uses,
+    sessionId: session.session.id,
+    messageId: learnerMessage ?? null,
+  }).catch((error: unknown) => {
+    log.warn("talk level update failed", { sessionId: session.session.id, error });
+  });
 }
 
 /** The bot's opening question, from the model or, if that fails, a fixed one. */

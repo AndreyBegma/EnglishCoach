@@ -6,32 +6,37 @@
       "corrected": "Yesterday I went",
       "category": "grammar",
       "severity": "critical",
-      "why": "«Yesterday» — это прошлое, поэтому нужен past simple: go → went."
+      "why": "«Yesterday» — это прошлое, поэтому нужен past simple: go → went.",
+      "topic_id": "g006"
     },
     {
       "original": "we was",
       "corrected": "we were",
       "category": "grammar",
       "severity": "moderate",
-      "why": "С «we» в прошедшем времени используется «were», а не «was»."
+      "why": "С «we» в прошедшем времени используется «were», а не «was».",
+      "topic_id": "g091"
     },
     {
       "original": "Film was about football",
       "corrected": "The film was about football",
       "category": "grammar",
       "severity": "moderate",
-      "why": "Конкретный фильм, о котором уже шла речь, требует артикля «the»."
+      "why": "Конкретный фильм, о котором уже шла речь, требует артикля «the».",
+      "topic_id": "g004"
     },
     {
       "original": "I very like it",
       "corrected": "I really like it",
       "category": "expression",
       "severity": "moderate",
-      "why": "«Very» не ставится перед глаголом; говорят «I really like it» или «I like it very much»."
+      "why": "«Very» не ставится перед глаголом; говорят «I really like it» или «I like it very much».",
+      "topic_id": null
     }
   ],
   "tip": {
     "kind": "native_pitfall",
     "text": "Русскоговорящие часто говорят «I very like», калькируя «я очень люблю». По-английски: «I really like football» или «I like football very much» — «very much» стоит в конце."
-  }
+  },
+  "topic_uses": []
 }

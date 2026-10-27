@@ -12,7 +12,7 @@ import type { SkillRunner } from "../skills";
 import { parseGrammarCallback } from "./callbacks";
 import { type Graded, gradeChoice, gradeTyped } from "./grading";
 import { nextTopic } from "./next-topic";
-import { grammarBand, topicProgressMap } from "./progress";
+import { grammarBand, topicProgressMap, transferSummary } from "./progress";
 import { GRAMMAR_CARD_THRESHOLD, promoteMistakeToCard } from "./promotion";
 import {
   feedbackText,
@@ -21,6 +21,7 @@ import {
   questionText,
   retryKeyboard,
   topicPicker,
+  transferLines,
 } from "./screens";
 import type { GrammarState } from "./state";
 import { recordGrammarAnswer } from "./stats";
@@ -178,7 +179,7 @@ async function settle(
 
   const settings = await getSettings(deps.db, handle.user.id);
   await recordGrammarAnswer(deps.db, handle.user.id, settings?.timezone ?? "UTC", graded.correct);
-  await recordGrammarItem(deps.db, handle.user.id, current.item, graded.verdict);
+  await recordGrammarItem(deps.db, handle.user.id, current.item, graded.verdict, handle.session.id);
 
   state.answered += 1;
   let cardAdded = false;
@@ -307,7 +308,15 @@ export function grammarHandlers(deps: GrammarDeps): Composer<BotContext> {
               wrongByTopic: {},
             };
             ctx.session.grammar = fresh;
-            await askNext(deps, handle, fresh, ctx.t("grammar-topic-chosen", { topic: chosen }));
+            const evidence = topic
+              ? transferLines(
+                  deps.i18n,
+                  handle.locale,
+                  await transferSummary(deps.db, handle.user.id, topic.id),
+                )
+              : [];
+            const header = [ctx.t("grammar-topic-chosen", { topic: chosen }), ...evidence];
+            await askNext(deps, handle, fresh, header.join("\n"));
           },
           () => !ownState(ctx, handle),
         );

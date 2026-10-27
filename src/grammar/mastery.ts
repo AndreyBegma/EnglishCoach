@@ -1,27 +1,38 @@
 import { type Card, createEmptyCard, fsrs, Rating, type State } from "ts-fsrs";
-import type { TopicFsrs, TopicItem, TopicProgressRow, TopicStatus } from "../db/schema";
+import type {
+  TopicFsrs,
+  TopicItem,
+  TopicProgressRow,
+  TopicSession,
+  TopicStatus,
+} from "../db/schema";
 
 /**
- * Topic mastery, pure: how one graded item or one correct use in free production moves a
- * learner's progress on a syllabus topic. Nothing here reads or writes the database; the recorder
- * (`./progress.ts`) locks the row, calls these and stores the result.
+ * Topic mastery, pure: how one graded item, or one correct use of or error against the topic in
+ * free production, moves a learner's progress on a syllabus topic. Nothing here reads or writes
+ * the database; the recorder (`./progress.ts`) locks the row, calls these and stores the result.
  *
  * not_started → learning on the first graded item. learning/shaky → mastered when `masteryRule`
  * holds; the topic then enters FSRS. mastered → shaky when its rolling accuracy falls below the
- * threshold. A due mastered topic is checked by its next `CHECK_ITEMS` items: all of them right
- * reschedules it, a wrong one sends it back to learning.
+ * threshold or an error is tagged to it in free production. A due mastered topic is checked by
+ * its next `CHECK_ITEMS` items: all of them right reschedules it, a wrong one sends it back to
+ * learning.
  */
 
-/** The rolling window: mastery is judged on this many most recent items. */
+/** The rolling window a mastered topic's accuracy is watched over. */
 export const MASTERY_WINDOW = 8;
-/** Mean score over the window a mastered topic needs, and keeps. */
+/** Accuracy each counted session needs, and the window keeps once mastered. */
 export const MASTERY_ACCURACY = 0.85;
-/** The window must span at least this many exercise types. */
+/** The counted sessions must span at least this many exercise types. */
 export const MASTERY_TYPES = 2;
-/** The accuracy rule must still hold on an item at least this long after it first held. */
-export const CONFIRMATION_MS = 3 * 24 * 60 * 60 * 1000;
+/** Mastery is judged on this many most recent grammar sessions on the topic. */
+export const MASTERY_SESSIONS = 3;
+/** …the first and the last of which are at least this far apart. */
+export const MASTERY_SPREAD_MS = 7 * 24 * 60 * 60 * 1000;
 /** Correct uses in free production a topic needs before it can be mastered. */
-export const MASTERY_TRANSFER = 1;
+export const MASTERY_TRANSFER = 2;
+/** No error tagged to the topic in free production for this long before it can be mastered. */
+export const ERROR_FREE_MS = 14 * 24 * 60 * 60 * 1000;
 /** Items that make up the check of a due mastered topic. */
 export const CHECK_ITEMS = 3;
 
@@ -31,9 +42,9 @@ export type TopicProgress = Pick<
   | "status"
   | "recentItems"
   | "accuracyByType"
+  | "sessionResults"
   | "transferEvidence"
-  | "criteriaMetAt"
-  | "confirmedAt"
+  | "lastErrorAt"
   | "masteredAt"
   | "firstMasteredAt"
   | "fsrs"
@@ -45,9 +56,9 @@ export const EMPTY_PROGRESS: TopicProgress = {
   status: "not_started",
   recentItems: [],
   accuracyByType: {},
+  sessionResults: [],
   transferEvidence: 0,
-  criteriaMetAt: null,
-  confirmedAt: null,
+  lastErrorAt: null,
   masteredAt: null,
   firstMasteredAt: null,
   fsrs: null,
@@ -61,9 +72,9 @@ export function progressOf(row: TopicProgress): TopicProgress {
     status: row.status,
     recentItems: row.recentItems,
     accuracyByType: row.accuracyByType,
+    sessionResults: row.sessionResults,
     transferEvidence: row.transferEvidence,
-    criteriaMetAt: row.criteriaMetAt,
-    confirmedAt: row.confirmedAt,
+    lastErrorAt: row.lastErrorAt,
     masteredAt: row.masteredAt,
     firstMasteredAt: row.firstMasteredAt,
     fsrs: row.fsrs,
@@ -140,42 +151,72 @@ export function accuracyByType(items: readonly TopicItem[]): Record<string, numb
   return Object.fromEntries([...byType].map(([type, scores]) => [type, mean(scores)]));
 }
 
-/** Whether the window alone meets the accuracy rule: full, accurate enough, varied enough. */
-export function windowHolds(items: readonly TopicItem[]): boolean {
+/**
+ * Whether the practice half of the rule holds: the last `MASTERY_SESSIONS` sessions on the topic
+ * are each at least `MASTERY_ACCURACY`, spread over at least `MASTERY_SPREAD_MS`, and together
+ * span at least `MASTERY_TYPES` exercise types.
+ */
+export function sessionsHold(sessions: readonly TopicSession[]): boolean {
+  const counted = sessions.slice(-MASTERY_SESSIONS);
+  const first = counted[0];
+  const last = counted.at(-1);
+  if (counted.length < MASTERY_SESSIONS || !first || !last) return false;
   return (
-    items.length >= MASTERY_WINDOW &&
-    mean(items.map((item) => item.score)) >= MASTERY_ACCURACY &&
-    new Set(items.map((item) => item.type)).size >= MASTERY_TYPES
+    counted.every((s) => s.items > 0 && s.scoreSum / s.items >= MASTERY_ACCURACY) &&
+    Date.parse(last.at) - Date.parse(first.at) >= MASTERY_SPREAD_MS &&
+    new Set(counted.flatMap((s) => s.types)).size >= MASTERY_TYPES
   );
 }
 
 /**
- * The mastery rule, in one place (C-58 replaces it): the accuracy rule holds over the window, it
- * was confirmed on an item at least `CONFIRMATION_MS` after it first held, and the topic has been
- * used correctly in free production. Everything it needs is on `progress`.
+ * Whether the transfer half of the rule holds at `at`: enough correct uses in free production, and
+ * no error tagged to the topic there in the last `ERROR_FREE_MS`.
  */
-export function masteryRule(progress: TopicProgress): boolean {
+export function transferHolds(progress: TopicProgress, at: Date): boolean {
   return (
-    windowHolds(progress.recentItems) &&
-    progress.confirmedAt !== null &&
-    progress.transferEvidence >= MASTERY_TRANSFER
+    progress.transferEvidence >= MASTERY_TRANSFER &&
+    (progress.lastErrorAt === null ||
+      at.getTime() - progress.lastErrorAt.getTime() >= ERROR_FREE_MS)
   );
 }
 
-/** Moves the confirmation clock after the window changed at `at`. */
-function trackCriteria(progress: TopicProgress, at: Date): TopicProgress {
-  if (!windowHolds(progress.recentItems)) {
-    return { ...progress, criteriaMetAt: null, confirmedAt: null };
-  }
-  const criteriaMetAt = progress.criteriaMetAt ?? at;
-  const confirmedAt =
-    progress.confirmedAt ?? (at.getTime() - criteriaMetAt.getTime() >= CONFIRMATION_MS ? at : null);
-  return { ...progress, criteriaMetAt, confirmedAt };
+/**
+ * The mastery rule, in one place: `sessionsHold` and `transferHolds`. Everything it needs is on
+ * `progress`; `at` is now, for the error-free window.
+ */
+export function masteryRule(progress: TopicProgress, at: Date): boolean {
+  return sessionsHold(progress.sessionResults) && transferHolds(progress, at);
+}
+
+/** `sessionResults` with one more item of session `session`, at most `MASTERY_SESSIONS` kept. */
+function addToSession(
+  sessions: readonly TopicSession[],
+  item: { type: string; score: number; session: number },
+  at: Date,
+): TopicSession[] {
+  const current = sessions.find((s) => s.session === item.session);
+  const updated: TopicSession = current
+    ? {
+        ...current,
+        scoreSum: current.scoreSum + item.score,
+        items: current.items + 1,
+        types: current.types.includes(item.type) ? current.types : [...current.types, item.type],
+      }
+    : {
+        session: item.session,
+        at: at.toISOString(),
+        scoreSum: item.score,
+        items: 1,
+        types: [item.type],
+      };
+  return [...sessions.filter((s) => s.session !== item.session), updated]
+    .sort((a, b) => Date.parse(a.at) - Date.parse(b.at))
+    .slice(-MASTERY_SESSIONS);
 }
 
 /** Masters a learning or shaky topic when the rule holds: it enters (or re-enters) FSRS. */
 function promote(progress: TopicProgress, from: TopicStatus, at: Date): TopicStep {
-  if (progress.status === "mastered" || !masteryRule(progress)) {
+  if (progress.status === "mastered" || !masteryRule(progress, at)) {
     return { progress, from, mastered: false, firstMastery: false };
   }
   const firstMastery = progress.firstMasteredAt === null;
@@ -194,12 +235,13 @@ function promote(progress: TopicProgress, from: TopicStatus, at: Date): TopicSte
   };
 }
 
-/** A failed check or a fall below the threshold: the confirmation has to be earned again. */
+/**
+ * A failed check, a fall below the threshold or an error in free production: mastery has to be
+ * earned again under the full rule.
+ */
 const demoted = (progress: TopicProgress, status: TopicStatus): TopicProgress => ({
   ...progress,
   status,
-  criteriaMetAt: null,
-  confirmedAt: null,
   masteredAt: null,
   checkScores: [],
 });
@@ -213,10 +255,13 @@ export function isDue(progress: TopicProgress, at: Date): boolean {
   );
 }
 
-/** One graded item on the topic: `score` 0..1, `type` the grammar-quiz item type. */
+/**
+ * One graded item on the topic: `score` 0..1, `type` the grammar-quiz item type, `session` the
+ * learning session it was answered in.
+ */
 export function applyItem(
   before: TopicProgress,
-  item: { type: string; score: number },
+  item: { type: string; score: number; session: number },
   at: Date,
 ): TopicStep {
   const from = before.status;
@@ -225,15 +270,13 @@ export function applyItem(
     ...before.recentItems,
     { type: item.type, score, at: at.toISOString() },
   ].slice(-MASTERY_WINDOW);
-  let progress = trackCriteria(
-    {
-      ...before,
-      status: from === "not_started" ? "learning" : from,
-      recentItems,
-      accuracyByType: accuracyByType(recentItems),
-    },
-    at,
-  );
+  let progress: TopicProgress = {
+    ...before,
+    status: from === "not_started" ? "learning" : from,
+    recentItems,
+    accuracyByType: accuracyByType(recentItems),
+    sessionResults: addToSession(before.sessionResults, { ...item, score }, at),
+  };
 
   let checked: TopicStep["checked"];
   if (isDue(before, at)) {
@@ -264,8 +307,42 @@ export function applyItem(
   return promote(progress, from, at);
 }
 
-/** `uses` correct uses of the topic in free production at `at`. */
-export function applyTransfer(before: TopicProgress, uses: number, at: Date): TopicStep {
-  const progress = { ...before, transferEvidence: before.transferEvidence + Math.max(0, uses) };
-  return promote(progress, before.status, at);
+/**
+ * One correct use of the topic in free production, or one error against it, at `at`. A correct use
+ * is evidence and may master the topic; an error restarts the error-free window and turns a
+ * mastered topic shaky.
+ */
+export function applyTransfer(
+  before: TopicProgress,
+  kind: "correct" | "error",
+  at: Date,
+): TopicStep {
+  const from = before.status;
+  if (kind === "correct") {
+    return promote({ ...before, transferEvidence: before.transferEvidence + 1 }, from, at);
+  }
+  const lastErrorAt =
+    before.lastErrorAt && before.lastErrorAt.getTime() > at.getTime() ? before.lastErrorAt : at;
+  const progress = { ...before, lastErrorAt };
+  return {
+    progress: from === "mastered" ? demoted(progress, "shaky") : progress,
+    from,
+    mastered: false,
+    firstMastery: false,
+  };
+}
+
+/**
+ * A topic the placement test found known: mastered at `at` and on FSRS like an earned mastery,
+ * so its first check comes due. It earns nothing: `firstMasteredAt` stays as it was, so the
+ * first mastery the learner earns later still pays its XP, and no `topic.mastered` is emitted.
+ */
+export function placeMastered(before: TopicProgress, at: Date): TopicProgress {
+  return {
+    ...before,
+    status: "mastered",
+    masteredAt: at,
+    checkScores: [],
+    ...schedule(before.fsrs, Rating.Good, at),
+  };
 }

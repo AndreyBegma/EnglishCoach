@@ -233,7 +233,11 @@ placement-summary = Placement test: { $level }.
 
 # --- grammar ---
 grammar-pick-topic = ✍️ Grammar practice: 10 questions. Pick a topic or practise a mix.
-grammar-mixed = 🎲 Mixed (recommended)
+grammar-mixed = 🎲 Mixed
+grammar-next-review = 🔁 Review: { $topic }
+grammar-next-shaky = 🟡 Firm up: { $topic }
+grammar-next-new = ▶ Next: { $topic }
+grammar-next-learning = ▶ Continue: { $topic }
 grammar-topic-chosen = Topic: { $topic }
 grammar-question-header = ❓ Question { $n } of { $total }
 grammar-chosen = Your answer: { $answer }

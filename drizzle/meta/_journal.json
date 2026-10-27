@@ -106,6 +106,13 @@
       "when": 1793095054905,
       "tag": "0014_example_sentences",
       "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1793095893818,
+      "tag": "0015_topic_progress",
+      "breakpoints": true
     }
   ]
 }

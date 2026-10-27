@@ -4,6 +4,8 @@ import type { Locale, Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
 import { upsertMistake } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
+import { grammarBand } from "../grammar/progress";
+import { topicChoices } from "../grammar/topics";
 import { recordTalkTurn } from "../levels";
 import type { Logger } from "../log";
 import { acceptAnswer } from "../sessions/answer";
@@ -53,7 +55,12 @@ async function takeTurn(
     ({ data: turn } = await skills.runSkill(
       userId,
       "conversation",
-      { topic: state.topic, learner_message: text, tip_kind: tipKind },
+      {
+        topic: state.topic,
+        learner_message: text,
+        tip_kind: tipKind,
+        syllabus_topics: topicChoices(await grammarBand(db, userId)),
+      },
       state.history,
     ));
   } catch (error) {
@@ -99,9 +106,11 @@ async function takeTurn(
       log.warn("talk mistake upsert failed", { sessionId: session.session.id, error });
     });
   }
-  await recordTalkTurn(db, userId, text, turn.corrections).catch((error: unknown) => {
-    log.warn("talk level update failed", { sessionId: session.session.id, error });
-  });
+  await recordTalkTurn(db, userId, text, turn.corrections, turn.topic_uses).catch(
+    (error: unknown) => {
+      log.warn("talk level update failed", { sessionId: session.session.id, error });
+    },
+  );
 }
 
 /** The bot's opening question, from the model or, if that fails, a fixed one. */

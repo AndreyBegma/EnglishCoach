@@ -19,6 +19,7 @@ import { preferVerified } from "../words/enrichment";
 import { WordPicker } from "../words/picker";
 import type { VocabCallback } from "./callbacks";
 import { button, type Lead, type VocabCore } from "./core";
+import { pronunciationFor } from "./pronunciation";
 import { cardCaption, cardHtml, escapeHtml, HTML } from "./render";
 import { speakRow } from "./speak";
 import { readFlow, writeFlow } from "./state";
@@ -354,7 +355,11 @@ export class LearnFlow implements SessionKindHandler {
   private async showCard(handle: LearningHandle, ctx: BotContext, card: CardRow, lead?: Lead) {
     const t = this.core.t(handle);
     const image = await this.imageFor(card);
-    const caption = image && cardCaption(t, card, image, lead?.line);
+    const view = {
+      ...card,
+      pronunciation: await pronunciationFor(this.core.deps.db, card, ctx.settings.englishVariant),
+    };
+    const caption = image && cardCaption(t, view, image, lead?.line);
     const speak = await speakRow(t, ctx, card, this.core.deps.speech);
     const rows = (photo: boolean) => [
       [
@@ -370,7 +375,7 @@ export class LearnFlow implements SessionKindHandler {
       image &&
       caption &&
       (await this.showPhoto(handle, image, caption, [...(lead?.rows ?? []), ...rows(true)]));
-    if (!shown) await this.core.show(handle, cardHtml(t, card), rows(false), lead);
+    if (!shown) await this.core.show(handle, cardHtml(t, view), rows(false), lead);
     writeFlow(ctx, handle.session.id, { kind: "card", cardId: card.id });
   }
 

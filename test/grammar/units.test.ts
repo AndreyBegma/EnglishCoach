@@ -1,7 +1,9 @@
 import { describe, expect, test } from "bun:test";
 import { MAX_CALLBACK_BYTES, parseCallback } from "../../src/bot/callbacks";
+import { createI18n } from "../../src/bot/i18n";
 import { encodeGrammarCallback, parseGrammarCallback } from "../../src/grammar/callbacks";
 import { matchesAccepted, normaliseAnswer } from "../../src/grammar/grading";
+import { topicPicker } from "../../src/grammar/screens";
 import { localDate } from "../../src/grammar/stats";
 import { SYLLABUS, topicById, topicsForLevel } from "../../src/grammar/topics";
 import { CEFR_LEVELS } from "../../src/settings/options";
@@ -60,6 +62,38 @@ describe("grammar topics", () => {
       expect(parseGrammarCallback(data)).toEqual({ type: "topic", id: topic.id });
       expect(topicById(topic.id)).toBe(topic);
     }
+  });
+});
+
+describe("topic picker", () => {
+  const i18n = createI18n();
+  const [first, second, third] = topicsForLevel("B1");
+
+  test("the next topic leads with its reason, every topic carries its status marker", () => {
+    if (!first || !second || !third) throw new Error("B1 has fewer than three topics");
+    const progress = new Map([
+      [first.id, { status: "mastered" as const, reviewDue: new Date(0) }],
+      [second.id, { status: "shaky" as const, reviewDue: null }],
+      [third.id, { status: "learning" as const, reviewDue: null }],
+    ]);
+    const { keyboard } = topicPicker(i18n, "en", "B1", progress, {
+      topic: first,
+      reason: "review",
+    });
+    const labels = keyboard.inline_keyboard.map((row) => row.map((button) => button.text));
+    expect(labels[0]).toEqual([`🔁 Review: ${first.title.en}`]);
+    expect(labels[1]).toEqual(["🎲 Mixed"]);
+    expect(labels.slice(2, 5).flat()).toEqual([
+      `✅ ${first.title.en}`,
+      `🟡 ${second.title.en}`,
+      `🔴 ${third.title.en}`,
+    ]);
+    expect(labels[5]?.[0]).toStartWith("⬜ ");
+  });
+
+  test("without a next topic, Mixed comes first", () => {
+    const { keyboard } = topicPicker(i18n, "ru", "B1");
+    expect(keyboard.inline_keyboard[0]?.[0]?.text).toBe("🎲 Микс");
   });
 });
 

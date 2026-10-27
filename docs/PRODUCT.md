@@ -145,3 +145,74 @@ Messages sent outside a session go through a smart router:
 - Postgres backups.
 - No LLM cost controls for now.
 - `/export`, `/delete_me`, and Anki/CSV import.
+
+## Completeness addendum (2026-10-26)
+
+These decisions extend the sections above and, where they conflict, override
+them.
+
+### Grammar
+
+- **Syllabus:** covers A1–C2, not A1–C1.
+- **Topic mastery rule** (supersedes the C-28 rule and the Mastery bullet in
+  Grammar above):
+  - ≥85% accuracy in 3 sessions spread over ≥7 days, across ≥2 exercise types;
+  - and ≥2 correct uses of the topic in free production (Talk / Writing /
+    Speaking) with no error tagged to that topic in the last 14 days.
+  - Falling below this → `shaky`.
+- **Transfer tracking:** correction skills tag every correction and every
+  notable correct use with syllabus topic ids; this feeds mastery.
+- **Native-language interference:** a curated catalogue of typical ru/uk → en
+  errors drives targeted translation drills.
+- **Grammar reference on demand:** `/rule <topic>` and "why is it X here?"
+  questions get a short rule + examples + native-language contrast, without
+  starting a session.
+- **Personal mistake deck:** recurring error patterns from free production
+  become FSRS items until they stop recurring.
+
+### Vocabulary
+
+- **Vocabulary size:** a monthly size test by frequency bands and a coverage
+  meter ("≈N words, ~X% of B2 text").
+- **Verified examples:** example sentences come from Tatoeba (CC-BY) where
+  available; LLM examples are a validated fallback.
+- **Word families:** learning one member links the others as related cards.
+
+### Scheduling
+
+- **FSRS:** per-user parameter optimisation from review history and a
+  desired-retention setting (85–95%).
+
+### Speech and writing
+
+- **Phonetics:** a module for sounds hard for ru/uk speakers (minimal pairs by
+  ear via TTS and in production via STT).
+- **Functional language:** speech functions per level (apologising, refusing,
+  disagreeing, small talk, business mail) and register.
+- **Spelling:** dictation of words by audio and drills on common spelling
+  traps.
+
+### Quality
+
+- A learner simulator verifies adaptation.
+- When the LLM provider fails, sessions continue on the verified item bank.
+
+### Branches
+
+- Merges go into `develop`; `main` is fast-forwarded to `develop` after a live
+  check.
+
+### Owner decision added 2026-10-27
+
+- **Seed content from the owner's workbook.** The owner's word list (word, part
+  of speech, IPA, ru translation, CEFR level, topic, curriculum order, removed
+  list), the owner's own grammar course (85 topics A2–C2 with rule sections,
+  425 exercises with answers) and 137 phrasal verbs are committed to the
+  repository as seed data, so the LLM is not needed for that content at the
+  start.
+- **Not committed:** the example sentences in the word list come from Oxford
+  dictionaries and stay out of the public repository. They arrive only through
+  the external import (`db:import:owner-words`, #39) from the owner's private
+  file.
+- **Voice:** TTS landed as local Kokoro (#40, PR #46), superseding Piper; the
+  UK/US variant setting is #45.

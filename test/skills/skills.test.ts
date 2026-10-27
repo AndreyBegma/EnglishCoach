@@ -5,9 +5,12 @@ import type { CompletionRequest, LlmProvider } from "../../src/llm/types";
 import {
   BASE_SKILLS,
   type BaseSkillId,
+  correctionTopic,
   type LearnerContext,
   loadSkillRegistry,
+  MAX_TOPIC_USES,
   SkillRunner,
+  topicUses,
 } from "../../src/skills";
 
 // Learner-written text in every channel the engine reads from; none of it may reach `system`.
@@ -156,5 +159,42 @@ describe("output rules the JSON Schema cannot express", () => {
     expect(six).toHaveLength(6);
     expect(parse("conversation", { ...turn, corrections: six })).toBe(false);
     expect(parse("conversation", { ...turn, corrections: [] })).toBe(true);
+  });
+
+  test("conversation: corrections and correct uses carry syllabus topic tags", async () => {
+    const turn = await fixture("conversation", "output");
+    const output = registry.get("conversation").output;
+    const parsed = output.parse(turn) as {
+      corrections: { topic_id: string | null }[];
+      topic_uses: string[];
+    };
+    expect(parsed.corrections.map((c) => c.topic_id)).toEqual(["g006", "g091", "g004", null]);
+    expect(parsed.topic_uses).toEqual([]);
+
+    // A missing tag is null and missing uses are none: an older or terser model never fails.
+    const untagged = {
+      ...turn,
+      corrections: (turn.corrections as Record<string, unknown>[]).map(
+        ({ topic_id: _, ...c }) => c,
+      ),
+      topic_uses: undefined,
+    };
+    const loose = output.parse(untagged) as typeof parsed;
+    expect(loose.corrections.every((c) => c.topic_id === null)).toBe(true);
+    expect(loose.topic_uses).toEqual([]);
+
+    const uses = ["g001", "g002", "g003", "g004"];
+    expect(parse("conversation", { ...turn, topic_uses: uses.slice(0, MAX_TOPIC_USES) })).toBe(
+      true,
+    );
+    expect(parse("conversation", { ...turn, topic_uses: uses })).toBe(false);
+    expect(parse("conversation", { ...turn, topic_uses: [7] })).toBe(false);
+  });
+
+  test("the shared topic-tag fragment parses on its own", () => {
+    expect(correctionTopic.parse(undefined)).toBeNull();
+    expect(correctionTopic.parse("g006")).toBe("g006");
+    expect(topicUses.parse(undefined)).toEqual([]);
+    expect(topicUses.safeParse(["a", "b", "c", "d"]).success).toBe(false);
   });
 });

@@ -2,6 +2,7 @@ import {
   and,
   asc,
   count,
+  desc,
   eq,
   gt,
   gte,
@@ -20,6 +21,16 @@ import { type CardBack, type CardRow, cards, type Mistake, mistakes, reviewLogs 
 
 export type CardItemType = CardRow["itemType"];
 
+/** Item types learned like words — in Learn words, with a first check: everything but grammar patterns. */
+export const WORD_ITEM_TYPES = [
+  "word",
+  "user_word",
+  "collocation",
+  "phrasal_verb",
+  "idiom",
+  "word_family",
+] as const satisfies readonly CardItemType[];
+
 /**
  * A word card that was created (and enriched) but never rated: the learner saw it in Learn words
  * and has not passed its first check yet. It belongs to Learn words, not to Review, so it never
@@ -27,7 +38,7 @@ export type CardItemType = CardRow["itemType"];
  * learner marked known is neither pending nor reviewable.
  */
 export const isPendingCard = and(
-  inArray(cards.itemType, ["word", "user_word"]),
+  inArray(cards.itemType, [...WORD_ITEM_TYPES]),
   eq(cards.reps, 0),
   isNull(cards.knownAt),
 );
@@ -107,12 +118,35 @@ export async function markCardKnown(
       and(
         eq(cards.id, cardId),
         eq(cards.userId, userId),
-        inArray(cards.itemType, ["word", "user_word"]),
+        inArray(cards.itemType, [...WORD_ITEM_TYPES]),
         isNull(cards.knownAt),
       ),
     )
     .returning({ id: cards.id });
   return updated.length > 0;
+}
+
+/**
+ * How many of the user's latest `window` word-like cards (known ones included) are of each item
+ * type: the picker's recent mix.
+ */
+export async function countWordCardsByType(
+  db: Db,
+  userId: number,
+  window: number,
+): Promise<Partial<Record<(typeof WORD_ITEM_TYPES)[number], number>>> {
+  const latest = db
+    .select({ itemType: cards.itemType })
+    .from(cards)
+    .where(and(eq(cards.userId, userId), inArray(cards.itemType, [...WORD_ITEM_TYPES])))
+    .orderBy(desc(cards.createdAt), desc(cards.id))
+    .limit(window)
+    .as("latest");
+  const rows = await db
+    .select({ itemType: latest.itemType, n: count() })
+    .from(latest)
+    .groupBy(latest.itemType);
+  return Object.fromEntries(rows.map((row) => [row.itemType, row.n]));
 }
 
 /**

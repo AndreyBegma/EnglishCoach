@@ -8,7 +8,10 @@ import {
   settleExercise,
   targetForm,
 } from "../../src/vocab/exercise";
+import { requiredEvidence } from "../../src/vocab/mastery";
 import { modeFor } from "../../src/vocab/modes";
+
+const ALL_EVIDENCE = requiredEvidence({ earWaived: false });
 
 type Card = Pick<CardRow, "front" | "backJson" | "reps" | "itemType">;
 
@@ -48,8 +51,9 @@ const decide = (reps: number) =>
 const extra = { recent_accuracy: null, distractors: [] };
 
 describe("modeFor by item type", () => {
+  // Every kind of evidence held: the rotation by memory strength alone.
   const at = (itemType: CardRow["itemType"], stability: number) =>
-    modeFor({ itemType, stability, reps: 2 });
+    modeFor({ itemType, stability, reps: 2, evidence: ALL_EVIDENCE });
 
   test("phrasal verbs: meaning, then particle, then an own sentence", () => {
     expect([1, 5, 12].map((s) => at("phrasal_verb", s))).toEqual([

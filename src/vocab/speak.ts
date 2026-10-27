@@ -1,13 +1,38 @@
-import { InlineKeyboard } from "grammy";
+import { type Api, InlineKeyboard } from "grammy";
 import type { BotContext } from "../bot/context";
 import type { CardRow } from "../db/schema";
 import { encodeVoiceCallback } from "../voice/callbacks";
 import type { EnglishVariant } from "../voice/engines";
 import { exampleText, type T } from "./render";
 
-/** What the 🔊 buttons need of the TTS: whether pressing one would produce a voice note. */
+/**
+ * What vocabulary needs of the TTS: whether a text can be voiced for the learner (the 🔊 buttons,
+ * the listening waiver), and sending it as a voice note (the listening exercise). `play` throws
+ * when nothing could voice it.
+ */
 export interface SpeechPort {
   canPlay(text: string, variant: EnglishVariant, userId?: number): Promise<boolean>;
+  play(
+    api: Api,
+    chatId: number,
+    text: string,
+    variant: EnglishVariant,
+    userId?: number,
+  ): Promise<{ message_id: number }>;
+}
+
+/**
+ * Whether listening evidence is waived for this learner and card: voice is off, there is no TTS,
+ * or nothing can voice the word for them.
+ */
+export async function earWaived(
+  speech: SpeechPort | undefined,
+  settings: { voiceEnabled: boolean; englishVariant: EnglishVariant },
+  card: Pick<CardRow, "front">,
+  userId: number,
+): Promise<boolean> {
+  if (!speech || !settings.voiceEnabled) return true;
+  return !(await speech.canPlay(card.front, settings.englishVariant, userId));
 }
 
 /** The sentence the "🔊 Example" button voices: the card's first example, if any. */

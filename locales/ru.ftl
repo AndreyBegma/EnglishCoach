@@ -196,6 +196,8 @@ vocab-summary-reviewed = повторено: { $count }
 vocab-summary-accuracy = { $percent } %
 vocab-summary-learn-empty = В этот раз без новых слов.
 vocab-review-nothing = Сейчас повторять нечего.
+vocab-listening-prompt = 🎧 Послушайте голосовое сообщение. Что означает это слово?
+vocab-listening-unavailable = Аудио сейчас недоступно. Что означает это слово?
 
 # --- onboarding ---
 onboarding-welcome = 👋 Добро пожаловать в EnglishCoach! Понемногу английского каждый день: слова, грамматика и разговор. Для начала выберите язык интерфейса и объяснений.

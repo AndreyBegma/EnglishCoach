@@ -270,6 +270,34 @@ export async function applyReview(
   });
 }
 
+/**
+ * Adds the evidence `bits` to a card and stamps `learned_at` the first time `learned` (the rule,
+ * owned by `src/vocab/mastery.ts`) holds for the updated row. True only for the call that stamped
+ * it, so a card becomes learned once, even under racing ratings.
+ */
+export async function recordEvidence(
+  db: Db,
+  cardId: number,
+  bits: number,
+  learned: (card: CardRow) => boolean,
+  now: Date,
+): Promise<boolean> {
+  return db.transaction(async (tx) => {
+    const [card] = await tx
+      .update(cards)
+      .set({ evidence: sql`${cards.evidence} | ${bits}` })
+      .where(eq(cards.id, cardId))
+      .returning();
+    if (!card || card.learnedAt || !learned(card)) return false;
+    const [stamped] = await tx
+      .update(cards)
+      .set({ learnedAt: now })
+      .where(and(eq(cards.id, cardId), isNull(cards.learnedAt)))
+      .returning({ id: cards.id });
+    return stamped !== undefined;
+  });
+}
+
 export interface ReviewStats {
   /** Word cards rated for the first time. */
   learned: number;

@@ -11,7 +11,7 @@ import { createLogger, type Logger } from "../log";
  * | `session.ended` | the bot wiring, from `SessionManager.onEnded` |
  * | `grammar.answered` | `awardGrammarItem` (`src/gamification/awards.ts`), every graded answer |
  * | `card.rated` | `awardCardRating`, every rating, Again included |
- * | `card.learned` | `awardCardRating`, the first passing rating of a card being learned |
+ * | `card.learned` | `awardCardRating`, once per card: the rating that met the active-mastery rule (`src/vocab/mastery.ts`) |
  * | `talk.correction_fixed` | not emitted yet: the Talk card that tracks a fixed correction |
  *
  * `xp.awarded` and `topic.mastered` keep their own buses (`src/gamification/events.ts`,

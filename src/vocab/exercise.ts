@@ -51,9 +51,7 @@ export function targetForm(
  */
 export function effectiveMode(card: Pick<CardRow, "front" | "backJson" | "reps">, mode: VocabMode) {
   const unit = card.backJson.unit;
-  if (mode === "particle" || mode === "own_sentence") {
-    return unit?.kind === "phrasal_verb" ? mode : "production";
-  }
+  if (mode === "particle") return unit?.kind === "phrasal_verb" ? mode : "production";
   if (mode === "partner") return unit?.kind === "collocation" ? mode : "cloze";
   if (mode === "transform") return targetForm(card) ? mode : "cloze";
   return mode;

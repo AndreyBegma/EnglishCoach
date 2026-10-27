@@ -6,6 +6,7 @@ import { getHub } from "../../src/db/repositories/hub";
 import { findUserByTelegramId, updateSettings } from "../../src/db/repositories/users";
 import { type CardBack, cards, type LexicalDetails, reviewLogs, words } from "../../src/db/schema";
 import { encodeVocabCallback, type VocabCallback } from "../../src/vocab/callbacks";
+import { requiredEvidence } from "../../src/vocab/mastery";
 import { Scheduler } from "../../src/vocab/scheduler";
 import { createHarness, type Harness } from "../bot/harness";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
@@ -95,6 +96,8 @@ describe.skipIf(!testServerUrl)("lexical units in Learn words and Review", () =>
       scheduledDays: Math.round(stability),
       lastReview: new Date(now - (dueDaysAgo + stability) * DAY),
       due: new Date(now - dueDaysAgo * DAY),
+      // Every kind of evidence held: the units' own rotation by memory strength decides.
+      evidence: requiredEvidence({ earWaived: false }),
     });
     const back = (front: string, unit?: LexicalDetails): CardBack => ({
       translation: `${front}-translation`,

@@ -33,6 +33,10 @@ form, and inflect only its verb when the sentence needs it.
   could confuse (same topic, similar form, false friends for a {{native_lang}} speaker) — never
   synonyms of the right answer. `correct_index` points at the right option; `accepted_answers` is
   `[options[correct_index]]`.
+- `listening` — the learner hears the word (the app sends the voice note) and picks its meaning.
+  `prompt` is one short {{explain_lang}} sentence asking what the word they heard means; it must
+  **never** contain the English word, a form of it or a hint at its spelling. `options`,
+  `correct_index` and `accepted_answers` are built exactly as in `recognition`.
 - `production` — the learner sees the meaning and types the English word. `prompt` gives the
   {{explain_lang}} meaning plus a disambiguating hint (first letter and letter count, e.g.
   `d _ _ _ _ _ _ _ (8)` for "decision") so only this word fits. `accepted_answers` is the lemma plus any spelling
@@ -59,7 +63,7 @@ form, and inflect only its verb when the sentence needs it.
   (DECIDE)`. Only that part of speech may fit the gap. `accepted_answers` lists
   `task.target_form.form` and only the inflections the sentence allows (`decisions` if plural
   fits). `options` and `correct_index` are null.
-- `own_sentence` (phrasal verbs) — the learner writes a sentence of their own. `prompt` asks, in
+- `own_sentence` (any item) — the learner writes a sentence of their own. `prompt` asks, in
   {{explain_lang}}, for one English sentence using `task.lemma` in its meaning `task.translation`,
   with a short situation to write about so the sentence has something to say. No `___`.
   `accepted_answers` is `[task.lemma]` (the app's judge reads the sentence). `options` and

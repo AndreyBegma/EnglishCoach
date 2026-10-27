@@ -1,4 +1,3 @@
-import { State } from "ts-fsrs";
 import type { Db } from "../db/client";
 import { addToXpTotal, countXpEvents, insertXpEvent, setXpLevel } from "../db/repositories/xp";
 import type { XpSource } from "../db/schema";
@@ -101,21 +100,21 @@ export function awardTopicMastered(
 }
 
 /**
- * A rated vocabulary card. The first passing rating of a card still being learned (New or
- * Learning) is a learned word, once per card; any other passing rating is a remembered review.
+ * A rated vocabulary card. `card.learned` says the rating made it learned (the caller applies the
+ * active-mastery rule): a learned word, once per card; any other passing rating is a remembered
+ * review.
  */
 export function awardCardRating(
   db: Db,
   userId: number,
-  card: ItemPitch & { cardId: number; state: number; score: number },
+  card: ItemPitch & { cardId: number; learned: boolean; score: number },
   now?: Date,
 ): Promise<void> {
   return safely(userId, "card", async () => {
     const at = now ?? new Date();
-    const learning = card.state === State.New || card.state === State.Learning;
     const learned =
       card.score > 0 &&
-      learning &&
+      card.learned &&
       (await countXpEvents(db, userId, "word_learned", { cardId: card.cardId })) === 0;
     await domainEvents.emit("card.rated", {
       userId,

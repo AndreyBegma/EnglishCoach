@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { BotContext } from "../bot/context";
+import { EVIDENCE_ORDER } from "./mastery";
 import { RATINGS } from "./scheduler";
 
 const cardId = z.number().int().positive();
@@ -12,6 +13,7 @@ const step = z.discriminatedUnion("kind", [
   z.object({
     kind: z.literal("choice"),
     cardId,
+    mode: z.enum(["recognition", "listening", "particle"]).default("recognition"),
     options: z.array(z.string()).length(4),
     correctIndex: z.number().int().min(0).max(3),
     askedAt: z.number(),
@@ -25,8 +27,16 @@ const step = z.discriminatedUnion("kind", [
     accepted: z.array(z.string()),
     askedAt: z.number(),
   }),
-  /** Review: feedback is shown, waiting for the learner to apply a rating (self-graded: none). */
-  z.object({ kind: z.literal("rate"), cardId, suggested: z.enum(RATINGS).optional() }),
+  /**
+   * Review: feedback is shown, waiting for the learner to apply a rating (self-graded: none).
+   * `evidence` is what the answer proved; it is kept only if the rating passes.
+   */
+  z.object({
+    kind: z.literal("rate"),
+    cardId,
+    suggested: z.enum(RATINGS).optional(),
+    evidence: z.array(z.enum(EVIDENCE_ORDER)).optional(),
+  }),
   /** Review: a grammar pattern is shown, waiting for "Show answer". */
   z.object({ kind: z.literal("reveal"), cardId }),
   /** Learn words: waiting for the learner to type their own word. */

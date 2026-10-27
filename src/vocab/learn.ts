@@ -19,6 +19,8 @@ import { preferVerified } from "../words/enrichment";
 import { WordPicker } from "../words/picker";
 import type { VocabCallback } from "./callbacks";
 import { button, type Lead, type VocabCore } from "./core";
+import { evidenceEarned } from "./mastery";
+import type { VocabMode } from "./modes";
 import { pronunciationFor } from "./pronunciation";
 import { cardCaption, cardHtml, escapeHtml, HTML } from "./render";
 import { speakRow } from "./speak";
@@ -192,14 +194,16 @@ export class LearnFlow implements SessionKindHandler {
   private async answer(
     handle: LearningHandle,
     ctx: BotContext,
-    step: { cardId: number; options: string[]; correctIndex: number },
+    step: { cardId: number; mode: VocabMode; options: string[]; correctIndex: number },
     index: number,
   ) {
     const t = this.core.t(handle);
     const card = await getCard(this.core.deps.db, handle.user.id, step.cardId);
     if (!card) return;
     const correct = index === step.correctIndex;
-    if (!(await this.core.rate(handle, card, correct ? "good" : "again", "newWords"))) return;
+    const evidence = correct ? evidenceEarned(step.mode, "choice") : [];
+    const rating = correct ? "good" : "again";
+    if (!(await this.core.rate(handle, card, rating, "newWords", evidence))) return;
     const answer = escapeHtml(step.options[step.correctIndex] ?? "");
     await this.showNext(handle, ctx, {
       line: correct

@@ -196,6 +196,8 @@ vocab-summary-reviewed = { $count } reviewed
 vocab-summary-accuracy = { $percent } %
 vocab-summary-learn-empty = No new words this time.
 vocab-review-nothing = Nothing to review right now.
+vocab-listening-prompt = 🎧 Listen to the voice note. What does the word mean?
+vocab-listening-unavailable = The audio is unavailable right now. What does this word mean?
 
 # --- onboarding ---
 onboarding-welcome = 👋 Welcome to EnglishCoach! A little English every day, with words, grammar and conversation. First, choose the language for the interface and explanations.

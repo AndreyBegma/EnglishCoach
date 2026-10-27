@@ -20,6 +20,7 @@ type Task = {
 };
 type VocabMode =
   | "recognition"
+  | "listening"
   | "production"
   | "cloze"
   | "particle"
@@ -134,11 +135,11 @@ export function vocabSkills(db: Db) {
         if (unit) return { data: req.schema.parse(unit) };
         return {
           data: req.schema.parse(
-            mode === "recognition"
+            mode === "recognition" || mode === "listening"
               ? {
                   mode,
                   instruction: "Pick the meaning.",
-                  prompt: `I **${task.lemma}** it.`,
+                  prompt: mode === "listening" ? "What does it mean?" : `I **${task.lemma}** it.`,
                   options,
                   correct_index: 0,
                   accepted_answers: [options[0]],

@@ -32,6 +32,7 @@ newer and wins, and the issue's pull request updates this file.
 | API (Hono) | 18740 |
 | PostgreSQL | 55433 |
 | Redis | 56380 |
+| TTS (Kokoro-FastAPI) | 18880 |
 
 All are overridable via env; the defaults above live in `.env.example` and
 `docker-compose.yml`.

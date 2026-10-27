@@ -42,14 +42,7 @@ async function takeTurn(
   text: string,
 ) {
   const { db, skills, i18n, log } = deps;
-  /** Removes the error note of a failed turn: a session shows at most one. */
-  const dropError = async () => {
-    const { errorId } = state;
-    state.errorId = undefined;
-    if (errorId !== undefined && ctx.chat) {
-      await ctx.api.deleteMessage(ctx.chat.id, errorId).catch(() => {});
-    }
-  };
+  const learnerMessage = ctx.message?.message_id;
   const { id: userId } = session.user;
   const tipKind = TIP_KINDS[state.messages % TIP_KINDS.length] ?? "phrase";
 
@@ -64,11 +57,10 @@ async function takeTurn(
   } catch (error) {
     // Nothing was stored, so the learner can simply send the message again.
     log.warn("talk turn failed", { sessionId: session.session.id, error });
-    await dropError();
-    state.errorId = (await session.send(i18n.t(session.locale, "talk-error"))).message_id;
+    if (learnerMessage !== undefined) state.exchange = [...(state.exchange ?? []), learnerMessage];
+    await session.window.flashNote(i18n.t(session.locale, "talk-error"));
     return;
   }
-  await dropError();
 
   state.history = capHistory([
     ...state.history,
@@ -81,10 +73,17 @@ async function takeTurn(
     state.categories[c.category] = (state.categories[c.category] ?? 0) + 1;
   }
 
-  await session.send(renderTurn(i18n, session.locale, turn, state.messages % TIP_EVERY === 0), {
-    parse_mode: "HTML",
-    reply_markup: finishKeyboard(session.session.id, i18n.t(session.locale, "talk-finish")),
-  });
+  const reply = await session.send(
+    renderTurn(i18n, session.locale, turn, state.messages % TIP_EVERY === 0),
+    {
+      parse_mode: "HTML",
+      reply_markup: finishKeyboard(session.session.id, i18n.t(session.locale, "talk-finish")),
+    },
+  );
+  // The chat keeps the latest exchange only; older ones (and failed attempts) go.
+  await session.window.discard(state.exchange ?? []);
+  state.exchange =
+    learnerMessage === undefined ? [reply.message_id] : [learnerMessage, reply.message_id];
 
   // The learner already has their answer; a failed write must not take the conversation down.
   for (const c of turn.corrections) {
@@ -119,9 +118,10 @@ async function open(deps: TalkDeps, session: LearningHandle, state: TalkState) {
     log.warn("talk opener failed", { sessionId: session.session.id, error });
     text = i18n.t(session.locale, "talk-opener-fallback");
   }
-  await session.send(text, {
+  const opener = await session.send(text, {
     reply_markup: finishKeyboard(session.session.id, i18n.t(session.locale, "talk-finish")),
   });
+  state.exchange = [opener.message_id];
 }
 
 function topicKeyboard(
@@ -147,6 +147,8 @@ function topicKeyboard(
 
 export function talkSession(deps: TalkDeps): SessionKindHandler {
   return {
+    // A chat: the latest exchange stays on screen, `takeTurn` prunes the older ones.
+    keepsLearnerMessages: true,
     async onStart(session) {
       const settings = await getSettings(deps.db, session.user.id);
       const topics = suggestTopics({
@@ -161,7 +163,8 @@ export function talkSession(deps: TalkDeps): SessionKindHandler {
     async onMessage(session, ctx) {
       const text = ctx.message?.text?.trim();
       if (!text) {
-        await session.send(deps.i18n.t(session.locale, "talk-text-only"));
+        await session.window.flashNote(deps.i18n.t(session.locale, "talk-text-only"));
+        if (ctx.message) await session.window.consumeUserMessage(ctx.message.message_id);
         return;
       }
       // Typing before picking a topic is a free conversation: the learner went first.

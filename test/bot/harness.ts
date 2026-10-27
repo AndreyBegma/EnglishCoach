@@ -39,6 +39,8 @@ export interface ChatMessage {
   buttons: string[][];
   /** Button labels, row by row. */
   labels: string[][];
+  /** Set for a photo message (`text` is then its caption): the file ID or URL sent. */
+  photo?: string;
 }
 
 type Markup = { inline_keyboard?: { text: string; callback_data?: string }[][] };
@@ -108,9 +110,40 @@ export class FakeTelegram {
           text: p.text,
         });
       }
+      case "sendPhoto": {
+        const id = this.nextId++;
+        this.chat(chatId).set(id, {
+          id,
+          from: "bot",
+          text: String(p.caption ?? ""),
+          photo: String(p.photo),
+          ...keyboardOf(p.reply_markup as Markup | undefined),
+        });
+        return ok({
+          message_id: id,
+          date: Math.floor(Date.now() / 1000),
+          chat: { id: chatId, type: "private", first_name: "Learner" },
+          from: BOT_INFO,
+          photo: [{ file_id: String(p.photo), file_unique_id: "u", width: 1, height: 1 }],
+        });
+      }
+      case "editMessageMedia": {
+        const message = this.chat(chatId).get(Number(p.message_id));
+        if (!message) return fail("message to edit not found");
+        // Telegram cannot turn a text message into a photo.
+        if (message.photo === undefined) return fail("there is no media in the message to edit");
+        const media = p.media as { media: string; caption?: string };
+        Object.assign(
+          message,
+          { photo: String(media.media), text: String(media.caption ?? "") },
+          keyboardOf(p.reply_markup as Markup | undefined),
+        );
+        return ok(true);
+      }
       case "editMessageText": {
         const message = this.chat(chatId).get(Number(p.message_id));
         if (!message) return fail("message to edit not found");
+        if (message.photo !== undefined) return fail("there is no text in the message to edit");
         const next = keyboardOf(p.reply_markup as Markup | undefined);
         if (
           message.text === p.text &&

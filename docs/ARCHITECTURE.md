@@ -130,12 +130,33 @@ by message. Daily new-word count is a setting.
    **pinned**, and after every session it is **re-sent at the bottom** (old
    one deleted, new one pinned). Sub-screens (settings, progress) open by
    *editing* the hub message, never by sending new ones.
-2. **Sessions clean up after themselves.** Every message of a session —
+2. **One window per session.** While a session runs, the chat holds the hub
+   and one session window; nothing else lives longer than a few seconds.
+   The helper is `SessionWindow` (`src/sessions/window.ts`), on every
+   handle as `ctx.learning.window`.
+   - Every step (card → exercise → result → next card) is `window.show`: an
+     edit of the same message, keyboard included, so no old buttons remain to
+     tap. The previous step's result is the first line of the next screen,
+     never a message of its own.
+   - Telegram cannot turn text into a photo: a step with another media type
+     sends the new window, then deletes the old one. Photo → photo is
+     `editMessageMedia`.
+   - Messages tied to a step (🔊 voice notes, added with `handle.track`) are
+     deleted when the next step shows.
+   - The learner's messages (typed answers, a word to add, voice answers) are
+     deleted as soon as the session kind's `onMessage` has read them. A kind
+     whose messages are its content (`keepsLearnerMessages`: Talk) prunes them
+     itself: Talk keeps the latest exchange and deletes older ones.
+   - Hints and warnings ("use the buttons", validation errors) are a callback
+     toast where there is a callback, otherwise `window.flashNote`: a tracked
+     note that deletes itself after ~5 s. A session shows at most one note.
+3. **Sessions clean up after themselves.** Every message of a session —
    the bot's and the learner's — is tracked; when the session ends
-   (finished, cancelled, or timed out) they are all deleted and a one-line
-   summary is folded into the hub. Telegram allows deleting messages up to
-   48 h old; sessions longer than that are not a v1 concern.
-3. One question per message; answers via buttons where the answer space is
+   (finished, cancelled, or timed out) they are all deleted (the window
+   too) and a one-line summary is folded into the hub. Telegram allows
+   deleting messages up to 48 h old; sessions longer than that are not a v1
+   concern.
+4. One question per screen; answers via buttons where the answer space is
    closed, free text where it is not.
 
 ## Daily routine

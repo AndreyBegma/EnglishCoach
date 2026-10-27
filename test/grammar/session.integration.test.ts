@@ -43,13 +43,17 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     return last;
   };
 
-  /** The feedback on the last answer: the message just before the next question (or error). */
-  const feedback = (h: Harness, telegramId: number) => {
-    const messages = [...h.telegram.chat(telegramId).values()].filter((m) => m.from === "bot");
-    const message = messages.at(-2);
-    if (!message) throw new Error("no feedback message");
-    return message;
-  };
+  /** The feedback on the last answer: the lead of the next question (or error), in the window. */
+  const feedback = lastBot;
+
+  /** One window per session: once notes have faded, the chat holds the hub and the window only. */
+  async function expectOneWindow(h: Harness, telegramId: number, userId: number) {
+    await h.sessions.flushNotes();
+    const hub = await getHub(database.db, userId);
+    const chat = [...h.telegram.chat(telegramId).values()];
+    expect(chat.map((m) => m.id)).toEqual([hub?.messageId ?? -1, lastBot(h, telegramId).id]);
+    return lastBot(h, telegramId);
+  }
 
   async function startGrammar(h: Harness, telegramId: number, userId: number) {
     const hub = await getHub(database.db, userId);
@@ -89,21 +93,33 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     expect(picker.labels.flat()).toContain("Tenses");
     await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", index: null }));
 
-    // 1: multiple choice, right option.
-    expect(lastBot(h, telegramId).text).toContain("Question 1 of 10");
-    expect(lastBot(h, telegramId).labels.flat()).toEqual(OPTIONS);
+    // 1: multiple choice, right option. The question is the picker, edited in place.
+    const window = await expectOneWindow(h, telegramId, user.id);
+    expect(window.id).toBe(picker.id);
+    expect(window.text).toStartWith("Topic: 🎲 Mixed");
+    expect(window.text).toContain("Question 1 of 10");
+    expect(window.labels.flat()).toEqual(OPTIONS);
+    // A typed message on a multiple-choice question: a note that fades, and the message is gone.
+    const stray = await h.say(telegramId, "has lived");
+    expect(h.telegram.chat(telegramId).has(stray)).toBe(false);
+    expect(lastBot(h, telegramId).text).toBe("Please answer with the buttons above.");
+    await expectOneWindow(h, telegramId, user.id);
     await answer(h, telegramId, 1, 0);
-    expect(feedback(h, telegramId).text).toContain("✅ Correct!");
+    expect(feedback(h, telegramId).text).toStartWith("Your answer: has lived\n✅ Correct!");
     expect(feedback(h, telegramId).text).not.toContain("Severity");
+    expect((await expectOneWindow(h, telegramId, user.id)).id).toBe(picker.id);
 
     // 2: typed, exact match: no grammar-check call.
     expect(requests.at(-1)?.messages.at(-1)?.content).toMatch(/"recent_accuracy": 1\b/);
-    await h.say(telegramId, "  Has lived. ");
+    const typed = await h.say(telegramId, "  Has lived. ");
+    expect(h.telegram.chat(telegramId).has(typed)).toBe(false);
     expect(feedback(h, telegramId).text).toContain("✅ Correct!");
     expect(requests).toHaveLength(3);
+    await expectOneWindow(h, telegramId, user.id);
 
     // 3: typed, wrong: graded by the model, first sighting of the pattern.
     await h.say(telegramId, "I bought car");
+    await expectOneWindow(h, telegramId, user.id);
     const wrong = feedback(h, telegramId).text;
     expect(wrong).toContain("❌ Not quite.");
     expect(wrong).toContain("Correct answer: I bought a car.");
@@ -206,9 +222,12 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     expect(lastBot(h, telegramId).text).toContain("Question 1 of 10");
     await answer(h, telegramId, 1, 0);
 
-    // Question 2 is typed; the grader is down, so the answer is not lost and nothing is counted.
+    // Question 2 is typed; the grader is down, so the question stays open and nothing is counted.
     await h.say(telegramId, "must to");
-    expect(lastBot(h, telegramId).text).toContain("could not check your answer");
+    const open = lastBot(h, telegramId).text;
+    expect(open).toStartWith("⚠️ I could not check your answer");
+    expect(open).toContain("Question 2 of 10");
+    await expectOneWindow(h, telegramId, user.id);
     expect(
       await database.db.select().from(mistakes).where(eq(mistakes.userId, user.id)),
     ).toHaveLength(0);

@@ -21,10 +21,8 @@ export interface GrammarState {
   recentTopics: string[];
   /** Wrong answers per topic tag, for the "weak" part of the summary. */
   wrongByTopic: Record<string, number>;
-  /** The question waiting for an answer. */
-  current?: { n: number; item: QuizItem; messageId: number };
-  /** The answer-check error note on screen, removed when the check next succeeds. */
-  errorId?: number;
+  /** The question waiting for an answer; it is on screen in the session window. */
+  current?: { n: number; item: QuizItem };
 }
 
 declare module "../bot/context" {

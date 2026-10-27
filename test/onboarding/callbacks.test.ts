@@ -14,7 +14,7 @@ describe("onboarding callback data", () => {
     { type: "take-test" },
     { type: "know-level" },
     { type: "level", level: "C2" },
-    { type: "answer", index: 3 },
+    { type: "answer", seq: 15, index: 3 },
     { type: "continue" },
     { type: "words", count: 15 },
     { type: "morning", time: "06:30" },
@@ -36,6 +36,9 @@ describe("onboarding callback data", () => {
     "1:o",
     "1:o:zz",
     "1:o:a:4",
+    "1:o:a:1:4",
+    // An answer button from before items were numbered: stale, not an answer to the current item.
+    "1:o:a:2",
     "1:o:lv:D1",
     "1:o:wd:7",
     "1:o:mt:0800",

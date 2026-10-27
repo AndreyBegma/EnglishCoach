@@ -207,11 +207,21 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
     await s.h.say(s.telegramId, ANTHROPIC_KEY);
     s.h.llm.models = Array.from({ length: 10 }, (_, i) => `model-${i}`);
 
+    // Listing asks the provider: a loading toast and "typing" while it does.
+    s.h.telegram.reset();
     await s.press({ type: "settings", page: "model" });
+    expect(s.h.telegram.callsOf("answerCallbackQuery")[0]?.payload).toMatchObject({
+      text: "⏳ Loading models…",
+    });
+    expect(s.h.telegram.callsOf("sendChatAction")).toHaveLength(1);
     expect(s.hubLabels()).toContain("model-7");
     expect(s.hubLabels()).not.toContain("model-8");
     expect(s.hubText()).toContain("Page 1 of 2");
+    // A page turn reuses the list: nothing to wait for.
+    s.h.telegram.reset();
     await s.press({ type: "settings", page: "model", n: 1 });
+    expect(s.h.telegram.callsOf("answerCallbackQuery")[0]?.payload.text).toBeUndefined();
+    expect(s.h.telegram.callsOf("sendChatAction")).toHaveLength(0);
     expect(s.hubLabels()).toContain("model-9");
 
     await s.press({ type: "model", index: 9 });

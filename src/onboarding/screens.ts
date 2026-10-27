@@ -7,7 +7,7 @@ import { encodeOnboardingCallback, type OnboardingCallback } from "./callbacks";
 import { EVENING_SLOTS, MORNING_SLOTS } from "./options";
 import type { OnboardingState } from "./state";
 
-const OPTION_LETTERS = ["A", "B", "C", "D"] as const;
+export const OPTION_LETTERS = ["A", "B", "C", "D"] as const;
 
 const button = (label: string, data: OnboardingCallback) =>
   InlineKeyboard.text(label, encodeOnboardingCallback(data));
@@ -83,7 +83,9 @@ export function renderOnboarding(
       return {
         text: lines.join("\n"),
         keyboard: InlineKeyboard.from([
-          OPTION_LETTERS.map((letter, index) => button(letter, { type: "answer", index })),
+          OPTION_LETTERS.map((letter, index) =>
+            button(letter, { type: "answer", seq: state.itemSeq ?? 0, index }),
+          ),
         ]),
       };
     }

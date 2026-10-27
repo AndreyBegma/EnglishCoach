@@ -7,12 +7,13 @@ import type { SettingsEvents, SettingsField } from "../events/settings-events";
 import { answerOutdated } from "../hub/handlers";
 import type { HubService } from "../hub/hub-service";
 import type { Logger } from "../log";
+import { acceptAnswer } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
 import type { LearningHandle, SessionManager } from "../sessions/session-manager";
 import { PLACEMENT_MAX_ITEMS, type SkillRunner } from "../skills";
 import type { OnboardingCallback } from "./callbacks";
 import { firstSentence, grade, nextStep, type PlacementStep } from "./placement";
-import { renderOnboarding } from "./screens";
+import { OPTION_LETTERS, renderOnboarding } from "./screens";
 import type { OnboardingMode, OnboardingState, OnboardingStep } from "./state";
 
 export interface OnboardingDeps {
@@ -99,8 +100,43 @@ export class OnboardingFlow {
       return;
     }
 
-    await ctx.answerCallbackQuery();
     const on = (...steps: OnboardingStep[]) => steps.includes(state.step);
+    // The buttons that call the placement skill answer the tap themselves, through acceptAnswer.
+    const accept = (chosen: string, task: () => Promise<void>, current?: () => boolean) =>
+      acceptAnswer(ctx, { lock: learning.withLock, chosen, current }, task).then(() => {});
+    if (callback.type === "answer") {
+      const letter = OPTION_LETTERS[callback.index] ?? "";
+      const option = state.item?.options[callback.index];
+      return accept(
+        option === undefined ? letter : `${letter}) ${option}`,
+        async () => {
+          if (!state.item) return;
+          state.answers.push(grade(state.item, callback.index));
+          state.item = undefined;
+          await this.advance(ctx, learning, state);
+        },
+        () => on("question") && state.item !== undefined && callback.seq === state.itemSeq,
+      );
+    }
+    if (callback.type === "take-test") {
+      return accept(
+        ctx.t("onboarding-take-test"),
+        async () => {
+          state.answers = [];
+          await this.advance(ctx, learning, state);
+        },
+        () => on("path", "retake-intro"),
+      );
+    }
+    if (callback.type === "retry") {
+      return accept(
+        ctx.t("onboarding-retry"),
+        () => this.advance(ctx, learning, state),
+        () => on("error"),
+      );
+    }
+
+    await ctx.answerCallbackQuery();
 
     switch (callback.type) {
       case "lang":
@@ -114,10 +150,6 @@ export class OnboardingFlow {
         if (!on("provider")) return;
         state.wantsOwnProvider = callback.choice === "own";
         return this.goto(ctx, learning, state, "path");
-      case "take-test":
-        if (!on("path", "retake-intro")) return;
-        state.answers = [];
-        return this.advance(ctx, learning, state);
       case "know-level":
         if (!on("path", "error") || state.mode !== "onboarding") return;
         return this.goto(ctx, learning, state, "level");
@@ -129,16 +161,6 @@ export class OnboardingFlow {
         });
         return this.goto(ctx, learning, state, "words");
       }
-      case "answer": {
-        const item = state.item;
-        if (!on("question") || !item) return;
-        state.answers.push(grade(item, callback.index));
-        state.item = undefined;
-        return this.advance(ctx, learning, state);
-      }
-      case "retry":
-        if (!on("error")) return;
-        return this.advance(ctx, learning, state);
       case "continue":
         if (!on("result")) return;
         if (state.mode === "retake") return this.finish(ctx, learning, state);
@@ -183,6 +205,7 @@ export class OnboardingFlow {
 
     if (step.kind === "item") {
       state.item = step.item;
+      state.itemSeq = (state.itemSeq ?? 0) + 1;
       return this.goto(ctx, learning, state, "question");
     }
 

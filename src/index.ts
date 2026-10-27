@@ -13,6 +13,7 @@ import { BullRoutineJobs } from "./queue/routine-jobs";
 import { BullSessionTimeouts } from "./queue/session-timeouts";
 import { createRedis } from "./redis";
 import { RedisRoutineStore } from "./routine";
+import { RedisSessionLocks } from "./sessions/locks";
 import {
   learnerContextFromDb,
   loadSkillRegistry,
@@ -96,6 +97,7 @@ const { bot, sessions, routine } = createBot({
   llmEnv: env,
   skills,
   routine: { jobs: routineJobs, store: new RedisRoutineStore(redis.client) },
+  locks: new RedisSessionLocks(redis.client),
 });
 bot.catch((error) => log.error("bot update failed", { error: error.error }));
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));

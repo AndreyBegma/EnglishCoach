@@ -4,7 +4,8 @@ import { encodeCallback, parseCallback } from "../bot/callbacks";
 import type { BotContext } from "../bot/context";
 import type { LearningSession } from "../db/schema";
 import type { HubUser } from "../hub/hub-service";
-import type { SessionManager } from "./session-manager";
+import { whileTyping } from "./answer";
+import { type SessionManager, sessionLockKey } from "./session-manager";
 
 export const isCommand = (message: Message) =>
   message.entities?.some((entity) => entity.type === "bot_command" && entity.offset === 0) ?? false;
@@ -31,11 +32,17 @@ export function sessionMiddleware(sessions: SessionManager): Composer<BotContext
       await sessions.recordIncoming(active, ctx.chat.id, message.message_id);
       const handler = sessions.handlerFor(active.kind);
       if (handler?.onMessage && !isCommand(message)) {
+        const onMessage = handler.onMessage.bind(handler);
+        let dropped = false;
         try {
-          await handler.onMessage(learning, ctx);
+          // One answer at a time: a message sent while the previous one is handled is dropped.
+          dropped =
+            (await sessions.queuedBehind(sessionLockKey(active.id), message.date)) ||
+            !(await learning.withLock(() => whileTyping(ctx, () => onMessage(learning, ctx))));
+          if (dropped) await learning.window.flashNote(ctx.t("answer-busy"));
         } finally {
           // Read once, gone: the chat keeps the window, not the learner's answers.
-          if (!handler.keepsLearnerMessages)
+          if (dropped || !handler.keepsLearnerMessages)
             await learning.window.consumeUserMessage(message.message_id);
         }
         return;

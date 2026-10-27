@@ -329,3 +329,12 @@ voice-empty = I could not hear any words in that voice message. Try again or typ
 voice-tts-failed = I could not generate the pronunciation right now. Try again later.
 voice-disabled = Voice is off. Turn it on in Settings.
 voice-outdated = This button is no longer available.
+
+# --- answer feedback (one answer at a time) ---
+answer-accepted = Answer “{ $answer }” accepted
+answer-chosen = ✅ { $answer }
+answer-preparing = ⏳ Preparing the next question…
+answer-busy = Wait, preparing the next question
+answer-stale = This question is already answered
+answer-starting = ⏳ Getting it ready…
+settings-models-loading = ⏳ Loading models…

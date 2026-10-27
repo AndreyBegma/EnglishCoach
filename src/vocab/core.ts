@@ -17,6 +17,7 @@ import { encodeVocabCallback, type VocabCallback } from "./callbacks";
 import type { VocabMode } from "./modes";
 import { exampleText, exerciseHtml, HTML, type T } from "./render";
 import { RATINGS, type RatingName, Scheduler } from "./scheduler";
+import type { SpeechPort } from "./speak";
 import { clearFlow, writeFlow } from "./state";
 import { addVocabStats, localDate } from "./stats";
 
@@ -36,6 +37,8 @@ export interface VocabDeps {
   log: Logger;
   /** Pictures for word cards; absent when no stock-photo key is set. */
   images?: WordImages;
+  /** Text to speech, for the 🔊 buttons; absent means no 🔊 on any card. */
+  speech?: SpeechPort;
   /** The clock; tests pin it. */
   now?: () => Date;
 }

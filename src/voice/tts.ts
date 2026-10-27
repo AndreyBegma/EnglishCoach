@@ -15,6 +15,13 @@ export interface FileIdStore {
   save(key: TtsAudioKey, fileId: string): Promise<void>;
 }
 
+/** What one `prewarm` call did: newly uploaded, found already stored, or could not store. */
+export interface PrewarmResult {
+  generated: number;
+  stored: number;
+  failed: number;
+}
+
 /** Telegram allows a bot about 20 messages a minute in one group; prewarm stays under that. */
 export const PREWARM_INTERVAL_MS = 3_000;
 
@@ -93,11 +100,13 @@ export class Tts {
   /**
    * Synthesises and uploads `texts` in the background so the learner's first tap is instant.
    * One upload per `PREWARM_INTERVAL_MS`; texts already stored cost a database read. A no-op
-   * without a storage chat. Never rejects: failures are logged and the text is retried on play.
+   * without a storage chat. Never rejects: failures are logged, counted, and the text is retried
+   * on play or the next prewarm. Resolves when these texts are done, with what became of them.
    */
-  prewarm(texts: readonly string[], variant: EnglishVariant): Promise<void> {
+  prewarm(texts: readonly string[], variant: EnglishVariant): Promise<PrewarmResult> {
+    const result: PrewarmResult = { generated: 0, stored: 0, failed: 0 };
     const { api, storageChatId } = this.options;
-    if (!api || storageChatId === undefined) return Promise.resolve();
+    if (!api || storageChatId === undefined) return Promise.resolve(result);
     const fresh = texts.filter((text) => {
       const id = `${variant}:${speechTextHash(text)}`;
       if (!normalizeSpeechText(text) || this.prewarmed.has(id)) return false;
@@ -106,19 +115,57 @@ export class Tts {
     });
     const interval = this.options.prewarmIntervalMs ?? PREWARM_INTERVAL_MS;
     const sleep = this.options.sleep ?? ((ms: number) => Bun.sleep(ms));
-    this.prewarmQueue = this.prewarmQueue.then(async () => {
+    const run = this.prewarmQueue.then(async () => {
       for (const text of fresh) {
+        const id = `${variant}:${speechTextHash(text)}`;
         try {
           const uploads = this.uploads;
-          await this.source(api, text, variant);
-          if (this.uploads > uploads) await sleep(interval);
+          const source = await this.source(api, text, variant);
+          const uploaded = this.uploads > uploads;
+          // An upload the storage chat refused leaves nothing stored: try again another time.
+          if (source.kind === "audio") {
+            this.prewarmed.delete(id);
+            result.failed++;
+          } else if (uploaded) result.generated++;
+          else result.stored++;
+          if (uploaded) await sleep(interval);
         } catch (error) {
-          this.prewarmed.delete(`${variant}:${speechTextHash(text)}`);
+          this.prewarmed.delete(id);
+          result.failed++;
           this.options.log.warn("speech prewarm failed", { error: message(error) });
         }
       }
+      return result;
     });
-    return this.prewarmQueue;
+    this.prewarmQueue = run.then(() => undefined);
+    return run;
+  }
+
+  /**
+   * Whether 🔊 would work for this learner: the text is already voiced (a stored `file_id` or the
+   * disk cache, for any engine) or an engine can voice it now.
+   */
+  async canPlay(text: string, variant: EnglishVariant, userId?: number): Promise<boolean> {
+    if (!normalizeSpeechText(text)) return false;
+    const textHash = speechTextHash(text);
+    for (const engine of this.options.engines) {
+      const voice = engine.voice(variant);
+      if (await this.options.fileIds.find({ engine: engine.id, voice, textHash })) return true;
+      if (await Bun.file(this.path(voice, textHash)).exists()) return true;
+    }
+    return this.available(userId);
+  }
+
+  /** The engine background work prefers, and its voice per variant; undefined with no engine. */
+  primary(): { engine: string; voices: Record<EnglishVariant, string> } | undefined {
+    const [engine] = this.options.engines;
+    if (!engine) return undefined;
+    return { engine: engine.id, voices: { us: engine.voice("us"), uk: engine.voice("uk") } };
+  }
+
+  /** Whether background prewarm can store anything (an API and a storage chat). */
+  get canPrewarm(): boolean {
+    return this.options.api !== undefined && this.options.storageChatId !== undefined;
   }
 
   private async source(

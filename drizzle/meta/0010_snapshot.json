@@ -1,5 +1,5 @@
 {
-  "id": "4411f8e2-483b-45f1-9c06-a2badb00c784",
+  "id": "55f52954-16a9-4633-a1de-5a20688eafe8",
   "prevId": "af59b689-f61e-4b83-9321-ffcc035a12c5",
   "version": "7",
   "dialect": "postgresql",
@@ -101,80 +101,6 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.skill_levels": {
-      "name": "skill_levels",
-      "schema": "",
-      "columns": {
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "skill": {
-          "name": "skill",
-          "type": "skill",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "rating": {
-          "name": "rating",
-          "type": "double precision",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "uncertainty": {
-          "name": "uncertainty",
-          "type": "double precision",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "evidence": {
-          "name": "evidence",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "skill_levels_user_id_users_id_fk": {
-          "name": "skill_levels_user_id_users_id_fk",
-          "tableFrom": "skill_levels",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "skill_levels_user_id_skill_pk": {
-          "name": "skill_levels_user_id_skill_pk",
-          "columns": [
-            "user_id",
-            "skill"
-          ]
-        }
-      },
       "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
@@ -1914,6 +1840,51 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.tts_status_board": {
+      "name": "tts_status_board",
+      "schema": "",
+      "columns": {
+        "chat_id": {
+          "name": "chat_id",
+          "type": "bigint",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "message_id": {
+          "name": "message_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "failures_on": {
+          "name": "failures_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "failures": {
+          "name": "failures",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.excluded_lemmas": {
       "name": "excluded_lemmas",
       "schema": "",
@@ -2097,18 +2068,6 @@
       "values": [
         "pexels",
         "unsplash"
-      ]
-    },
-    "public.skill": {
-      "name": "skill",
-      "schema": "public",
-      "values": [
-        "grammar",
-        "vocabulary",
-        "reading",
-        "listening",
-        "writing",
-        "speaking"
       ]
     }
   },

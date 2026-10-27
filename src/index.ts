@@ -13,6 +13,7 @@ import { createServerProvider, defaultFactories, resolveProvider } from "./llm";
 import { createLogger } from "./log";
 import { BullRoutineJobs } from "./queue/routine-jobs";
 import { BullSessionTimeouts } from "./queue/session-timeouts";
+import { BullVoiceBackfill } from "./queue/voice-backfill";
 import { BullWordEnrichment } from "./queue/word-enrichment";
 import { createRedis } from "./redis";
 import { RedisRoutineStore } from "./routine";
@@ -92,7 +93,7 @@ const timeouts = new BullSessionTimeouts({
 });
 const routineJobs = new BullRoutineJobs({ redisUrl: env.REDIS_URL, log });
 const images = createWordImages(env, { db: database.db, log });
-const { bot, sessions, routine, settingsEvents } = createBot({
+const { bot, sessions, routine, settingsEvents, voice } = createBot({
   token: env.TELEGRAM_BOT_TOKEN,
   db: database.db,
   log,
@@ -130,6 +131,7 @@ if (wordEnrichment) {
     prefetchDays: env.WORD_PREFETCH_DAYS,
     adminTelegramIds: env.ADMIN_TELEGRAM_IDS,
     images,
+    speech: voice.tts,
   });
   const requestPrefetch = (userId: number) =>
     wordEnrichment
@@ -151,6 +153,25 @@ if (wordEnrichment) {
     .catch((error: unknown) => log.warn("word enrichment scheduling failed", { error }));
 } else {
   log.info("word prefetch off: SERVER_LLM_PROVIDER is not set");
+}
+
+// The owner's list is voiced ahead of time with the local engine, uploaded once to the storage
+// chat; without either, 🔊 voices each text on its first tap.
+const voiceBackfill =
+  env.TTS_URL && env.TTS_STORAGE_CHAT_ID !== undefined
+    ? new BullVoiceBackfill({
+        redisUrl: env.REDIS_URL,
+        log,
+        everyMinutes: env.VOICE_BACKFILL_EVERY_MINUTES,
+      })
+    : undefined;
+if (voiceBackfill) {
+  voiceBackfill.startWorker(() => voice.backfill.run(env.VOICE_BACKFILL_TEXTS));
+  redisReady
+    .then((ready) => (ready ? voiceBackfill.schedule() : undefined))
+    .catch((error: unknown) => log.warn("voice backfill scheduling failed", { error }));
+} else {
+  log.info("voice backfill off: TTS_URL or TTS_STORAGE_CHAT_ID is not set");
 }
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));
 routineJobs.startWorker((job) => routine.fire(job));
@@ -197,6 +218,7 @@ async function shutdown(signal: string) {
     timeouts.close(),
     routineJobs.close(),
     wordEnrichment?.close(),
+    voiceBackfill?.close(),
   ]);
   await Promise.allSettled([database.close(), redis.close()]);
   process.exit(0);

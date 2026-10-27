@@ -11,11 +11,21 @@ import {
   unique,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
-import { cardItemTypeEnum, cefrLevelEnum } from "./enums";
+import { cardItemTypeEnum, cefrLevelEnum, lexicalUnitTypeEnum } from "./enums";
 import { users } from "./users";
 
 /** `words.source` of a word imported from the owner's curated list (see `src/words/owner-list.ts`). */
 export const OWNER_LIST_SOURCE = "owner_list";
+
+/**
+ * What an exercise needs to know about a lexical unit beyond its text (see `src/words/lexical.ts`):
+ * a phrasal verb's verb and particle, the collocation word the learner supplies, a word family's
+ * forms. Idioms carry none.
+ */
+export type LexicalDetails =
+  | { kind: "phrasal_verb"; verb: string; particle: string }
+  | { kind: "collocation"; partner: string }
+  | { kind: "word_family"; forms: { pos: string; form: string }[] };
 
 /**
  * The seeded CEFR-levelled frequency dictionary, overlaid by the owner's curated list. Owner rows
@@ -28,8 +38,16 @@ export const words = pgTable(
   {
     id: integer().primaryKey().generatedAlwaysAsIdentity(),
     lemma: text().notNull(),
-    /** Comma-separated for an owner word listed with several parts of speech; "" when unknown. */
+    /**
+     * Comma-separated for an owner word listed with several parts of speech; "" when unknown. A
+     * lexical unit's is its type name (`phrasal verb`), so `decide` the verb and `decide` the word
+     * family are separate rows.
+     */
     pos: text().notNull(),
+    /** A word, or a lexical unit (`data/lexical/`): its cards take this as their item type. */
+    unitType: lexicalUnitTypeEnum().notNull().default("word"),
+    /** A lexical unit's exercise data; null for words and idioms. */
+    details: jsonb().$type<LexicalDetails>(),
     cefrLevel: cefrLevelEnum().notNull(),
     frequencyRank: integer(),
     source: text().notNull(),
@@ -56,6 +74,7 @@ export const words = pgTable(
     unique("words_lemma_pos_unique").on(table.lemma, table.pos),
     index("words_lemma_idx").on(table.lemma),
     index("words_curriculum_idx").on(table.curriculumStage, table.curriculumIndex),
+    index("words_unit_type_level_idx").on(table.unitType, table.cefrLevel),
   ],
 );
 
@@ -78,6 +97,8 @@ export type CardBack = {
   imageQuery?: string | null;
   /** An abstract word's emoji, shown in place of a picture. */
   emoji?: string | null;
+  /** A lexical unit's details, copied from its `words` row when the card is created. */
+  unit?: LexicalDetails;
 };
 
 /** FSRS state columns, 1:1 with the ts-fsrs 5 `Card` (see `src/db/fsrs.ts`). */

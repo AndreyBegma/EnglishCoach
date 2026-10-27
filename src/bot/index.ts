@@ -1,7 +1,9 @@
 import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
 import type { SessionKind } from "../db/repositories/sessions";
+import { domainEvents } from "../events/domain-events";
 import { SettingsEvents } from "../events/settings-events";
+import { AchievementEngine, achievementCatalogue } from "../gamification/achievements";
 import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
@@ -12,6 +14,7 @@ import type { ServerEnv } from "../llm/providers/server";
 import type { Logger } from "../log";
 import { OnboardingFlow } from "../onboarding/flow";
 import { onboardingHandlers, placementSession } from "../onboarding/handlers";
+import { topicProgressWriter } from "../placement/topic-writer";
 import { progressHandlers } from "../progress";
 import {
   MemoryRoutineJobs,
@@ -125,6 +128,9 @@ export function createBot(deps: BotDeps) {
     hub,
     log,
     openProviderSettings: (ctx) => settings.controller.show(ctx, { page: "provider" }),
+    // Voice is built below; the test asks for it only once a learner reaches listening.
+    speech: () => voice.tts,
+    topicFlags: topicProgressWriter(db),
   });
 
   const talk = { db, skills: deps.skills, i18n, log };
@@ -169,6 +175,19 @@ export function createBot(deps: BotDeps) {
   });
   settingsEvents.on("settings.changed", (event) => routine.onSettingsChanged(event));
   sessions.onEnded((event) => routine.onSessionEnded(event));
+
+  // Loads (and validates) the catalogue at boot, then listens for what unlocks achievements.
+  new AchievementEngine({ db, log, catalogue: achievementCatalogue() }).start();
+  sessions.onEnded(({ session, user, status }) =>
+    domainEvents.emit("session.ended", {
+      userId: user.id,
+      sessionId: session.id,
+      kind: session.kind,
+      status,
+      startedAt: session.startedAt,
+      at: session.endedAt ?? new Date(),
+    }),
+  );
 
   // Before access, which drops updates from bots: the pin notice is the bot's own message.
   bot.use(pinNoticeCleanup(log, { chatIds: voice.storageChatIds }));

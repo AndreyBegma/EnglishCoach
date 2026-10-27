@@ -10,6 +10,7 @@ import type { CardRow } from "../db/schema";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { VocabCallback } from "./callbacks";
 import { button, isLlmFailure, type VocabCore } from "./core";
+import { exerciseItemType } from "./exercise";
 import { modeFor } from "./modes";
 import { escapeHtml, HTML } from "./render";
 import type { RatingName } from "./scheduler";
@@ -202,7 +203,11 @@ export class ReviewFlow implements SessionKindHandler {
     // The learner's message is deleted once read, so the feedback repeats it.
     const yours = t("vocab-your-answer", { answer: escapeHtml(text.trim()) });
 
-    if (step.accepted.some((accepted) => normaliseAnswer(accepted) === answer)) {
+    // An own sentence that is just the phrase itself is no sentence; the judge decides every one.
+    const exact =
+      step.mode !== "own_sentence" &&
+      step.accepted.some((accepted) => normaliseAnswer(accepted) === answer);
+    if (exact) {
       await this.feedback(
         handle,
         ctx,
@@ -217,6 +222,7 @@ export class ReviewFlow implements SessionKindHandler {
     try {
       const { data } = await this.core.deps.skills.runSkill(handle.user.id, "vocab-check", {
         mode: step.mode,
+        item_type: exerciseItemType(card),
         lemma: card.front,
         prompt: step.prompt,
         accepted_answers: step.accepted,

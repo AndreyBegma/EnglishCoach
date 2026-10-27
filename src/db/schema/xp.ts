@@ -10,6 +10,7 @@ export const xpSourceEnum = pgEnum("xp_source", [
   "topic_mastered",
   "daily_goal",
   "streak",
+  "achievement",
 ]);
 
 export type XpSource = (typeof xpSourceEnum.enumValues)[number];

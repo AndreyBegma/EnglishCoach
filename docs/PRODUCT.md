@@ -23,6 +23,12 @@ disagree, the newer issue wins and its pull request updates this file.
 
 - One full test (~20 min, taken in one go) covering all skills.
 - It produces a level per skill.
+- It is the only way to the first level: no "I know my level" shortcut, and
+  learning stays locked until it is done. Retake from Settings.
+- Interrupted (the session expires or is cancelled), it starts again from the
+  beginning; nothing is stored until it is finished.
+- Listening and speaking need voice; without it the learner may skip them and
+  those skills start as a rough guess.
 
 ## Grammar
 

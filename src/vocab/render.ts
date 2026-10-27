@@ -36,11 +36,21 @@ function headHtml(card: CardView): string {
   return syllables ? `${head.join(" ")}\n${escapeHtml(syllables)}` : head.join(" ");
 }
 
+/** A word family card's forms (`decision (noun), decisive (adjective)`); undefined for other cards. */
+function familyHtml(t: T, card: CardView): string | undefined {
+  const unit = card.backJson.unit;
+  if (unit?.kind !== "word_family") return undefined;
+  const list = unit.forms.map((form) => `${form.form} (${form.pos})`).join(", ");
+  return t("vocab-word-family", { list: escapeHtml(list) });
+}
+
 /** The front and back of a word card, as Learn words shows it. */
 export function cardHtml(t: T, card: CardView): string {
   const back = card.backJson;
   const lines = [headHtml(card)];
   if (back.translation) lines.push(escapeHtml(back.translation));
+  const family = familyHtml(t, card);
+  if (family) lines.push(family);
   if (back.examples?.length) {
     lines.push("");
     for (const example of back.examples) {
@@ -117,6 +127,8 @@ export function cardCaption(
   const back = card.backJson;
   const top = [lead ? `${lead}\n\n${headHtml(card)}` : headHtml(card)];
   if (back.translation) top.push(escapeHtml(back.translation));
+  const family = familyHtml(t, card);
+  if (family) top.push(family);
   const author = link(credit.authorName ?? SOURCE_NAME[credit.source], credit.authorUrl);
   const credits = t("vocab-photo-credit", {
     author,

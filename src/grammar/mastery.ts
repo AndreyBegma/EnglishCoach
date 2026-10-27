@@ -331,3 +331,18 @@ export function applyTransfer(
     firstMastery: false,
   };
 }
+
+/**
+ * A topic the placement test found known: mastered at `at` and on FSRS like an earned mastery,
+ * so its first check comes due. It earns nothing: `firstMasteredAt` stays as it was, so the
+ * first mastery the learner earns later still pays its XP, and no `topic.mastered` is emitted.
+ */
+export function placeMastered(before: TopicProgress, at: Date): TopicProgress {
+  return {
+    ...before,
+    status: "mastered",
+    masteredAt: at,
+    checkScores: [],
+    ...schedule(before.fsrs, Rating.Good, at),
+  };
+}

@@ -97,8 +97,11 @@ the user's provider with the skill's output schema, tier and temperature.
 For the eight base skills (`BASE_SKILLS`) vars and output are typed.
 
 **Base set.** `grammar-quiz`, `grammar-check`, `vocab-enrich`,
-`vocab-exercise`, `vocab-check`, `placement-test` (multiple choice only, so
-the server grades; at most 15 items), `conversation` (reply + ≤ 5
+`vocab-exercise`, `vocab-check`, `placement-item` (one item of the full
+placement test at the level and section the server asks for; multiple choice,
+so the server grades), `writing-rubric` and `speaking-rubric` (the test's
+free tasks: rubric criteria plus the CEFR level the answer shows),
+`conversation` (reply + ≤ 5
 structured corrections + one tip of a server-rotated kind; the bot renders
 the corrections block through i18n) and `routine-plan`. Quiz and exercise
 skills take `recent_accuracy` and aim at 60–70 % success. Graders return a
@@ -133,6 +136,28 @@ count as C2), fields and curriculum position; its `Убрано` sheet fills
 `excluded_lemmas`. The picker offers, at the learner's level, owner words in
 curriculum order first, then dictionary words by frequency, skipping known,
 removed and duplicate lemmas.
+
+**Lexical units.** Phrasal verbs, collocations, idioms and word families are
+`words` rows too (`unit_type`; `pos` is the type's name, so `decide` the verb
+and `decide` the word family are separate rows; `details` holds a phrasal
+verb's verb and particle, a collocation's partner word, a word family's
+forms), seeded from `data/lexical/` — the owner's 137 phrasal verbs plus
+generated lists that pass a deterministic second check and a cap per level
+before `db:seed` loads anything (sources in its README). A unit's card takes its
+type as `item_type` and copies `details` into `back_json.unit`; enrichment,
+pictures, voices and the level update treat it like a word. The picker mixes
+types by per-level shares (`UNIT_SHARES`) over the learner's latest 20 word-like
+cards: the next unit is the type furthest below its share, a type that runs dry
+leaves its slots to the others, and idioms are offered from B2 only — by the
+shares and, whatever the data says, by the query. The word tier and
+recognition distractors keep to single words (a unit's distractors are units of
+its type). Learn words' first check is recognition for every type; Review
+rotates per type by stability: phrasal verb → meaning, particle choice (the
+server checks the right option is the verb's particle), then an own sentence
+that is never matched exactly and always judged by `vocab-check`; collocation →
+meaning, then the partner word in a gap; word family → meaning, then a
+transform to the next other form (the server picks it and always accepts it);
+idioms like words.
 
 **Enrichment cache.** `word_enrichments` holds one card back per word and
 explanation language, shared by all learners (so it carries no learner
@@ -199,11 +224,12 @@ scale, which is what XP is computed against.
 | Grammar quiz | grammar | syllabus topic's level (`grammarItemDifficulty`), else the quiz's estimate | correct 1 · partial 0.5 · wrong 0 |
 | Vocabulary card rating | vocabulary | the word's CEFR level; own words at the learner's level; grammar-pattern cards do not count | again 0 · hard 0.5 · good/easy 1 |
 | Talk turn (≥ 5 words) | writing | the learner's level | 1 − 0.5·critical − 0.25·moderate − 0.1·minor |
-| Placement test | the item's skill | the item's level | 1 / 0 |
 
-**Seeding.** The placement result seeds all six skills at its band centre
-(uncertainty 0.6), then replays each graded item into its own skill. A level
-the learner chooses (onboarding, Settings) re-seeds at uncertainty 0.8.
+**Seeding.** The full placement test (below) writes every skill's rating,
+uncertainty and evidence once, when it is finished
+(`seedPlacementLevels`, `src/levels/seed-placement.ts`), replacing what was
+there, and sets the cache to the overall band. A level the learner chooses in
+Settings (only once they have one) re-seeds at uncertainty 0.8.
 
 **Overall level and the cache.** The overall level is the mean of the skill
 ratings weighted by 1/uncertainty² (practised skills dominate).
@@ -234,6 +260,7 @@ logged and never fails the grader.
 | `topic_mastered` | a syllabus topic's first mastery (`topic.mastered` with `first`), once per topic | 50 × multiplier |
 | `daily_goal` | the day's goal was just met (`markGoalMet` flipped it) | 30 |
 | `streak` | the same moment, from day 2 of a streak | 5 × streak days, at most 50 |
+| `achievement` | an achievement was just unlocked, once per achievement | the entry's `xp_reward` |
 
 **Difficulty multiplier and anti-farming.** With `gap` = item level − the
 learner's rating in that skill before the item: 1 + 0.5·min(gap, 1) above the
@@ -252,9 +279,53 @@ award.
 
 **Profile screen.** Hub → 👤 Profile edits the hub: profile level, XP bar to
 the next level, streak, the overall CEFR decimal and every skill's (`~` marks a
-skill with no graded items yet), the last three achievements (a placeholder
-until achievements exist) and all-time totals. Its button rides the progress
-callback codec (`<v>:p:u`).
+skill with no graded items yet), the last three achievements and all-time
+totals. Its button rides the progress callback codec (`<v>:p:u`).
+
+## Achievements
+
+**Catalogue.** `data/achievements/*.yaml`, declarative. A file holds *series* —
+one metric, ascending thresholds grouped by tier (bronze, silver, gold,
+platinum, legend), an emoji, and a title and description in every UI locale
+with `{n}` for the threshold (phrased "Words learned: {n}" so Russian and
+Ukrainian need no plural forms; `format: cefr` shows a band index as its band)
+— and standalone *entries* (the secret ones). A series expands into one entry
+per step, `<series>_<threshold>`; one "Mastered: <topic>" entry per syllabus
+topic (`topic_<id>`) is generated from the syllabus. Every entry has `id`,
+`category`, `metric`, `threshold`, `tier`, `emoji`, `xp_reward` (by tier unless
+given), `secret`, and its texts. `src/gamification/achievements/catalogue.ts`
+validates it with zod (known metric, every locale, unique ids, thresholds rising
+within a series) and the bot loads it at boot, so a bad file fails boot.
+
+**Metrics and events.** Counters live in `achievement_progress` (one row per
+learner and metric); `src/gamification/achievements/metrics.ts` lists every
+metric and the event that moves it. Events travel on `domainEvents`
+(`src/events/domain-events.ts`, the `settings.changed` contract): `xp.awarded`
+(XP total, profile level, goal days, day streak, Talk turns),
+`grammar.answered` and `card.rated` (from `src/gamification/awards.ts`, every
+graded answer, wrong ones included), `card.learned`, `session.ended` (bridged
+from `SessionManager.onEnded`: sessions per kind, perfect sessions, learner-local
+morning / night / weekend, seasonal date windows) and `talk.correction_fixed`
+(subscribed by name, not emitted yet — the Talk card that tracks fixed
+corrections will). Per-topic entries listen to `topic.mastered` on
+`topicEvents` (`src/grammar/events.ts`); a topic counts once, re-masteries
+included. Each skill's CEFR milestone reads
+the level model after a graded item. A perfect session is a finished one with at
+least five graded items and no miss.
+
+**Evaluator.** `AchievementEngine.record` applies the counter updates and, in the
+same transaction, inserts every entry whose counter reached its threshold into
+`user_achievements` with `on conflict do nothing`. Only the rows that insert
+actually created award their XP (`source = achievement`), after the commit — so
+a replayed or concurrent event never unlocks or pays twice. A failure is logged
+and never fails the grader or the session that raised the event.
+
+**Notification and screens.** An unlock sends no message of its own: the next
+render of the hub's main screen carries one line ("🏆 Unlocked: …", three by
+name and "+N"), and the unlocks are marked shown (`notified_at`) once that hub
+is on screen. Profile → 🏆 Achievements is a paginated hub screen (`<v>:p:a:<page>`):
+unlocked count, grammar topics mastered, then per series the latest unlocked step
+and a progress bar to the next one; secret entries show only once found.
 
 ## Grammar syllabus
 
@@ -293,7 +364,8 @@ of a mastered topic (`fsrs`, `review_due`), the scores of a running check
 (`check_scores`) and `method_history` (for the adaptive-methods card). The
 rules are pure, in `src/grammar/mastery.ts`; only `recordTopicItem` and
 `recordTransfer` (`src/grammar/progress.ts`) write the table, under a row
-lock.
+lock — plus the placement test's topic flags (below), which place a
+never-practised topic as mastered through `placeMastered`.
 
 - **Items.** Every graded grammar-quiz answer with a validated `topic_id`
   feeds its topic (`recordGrammarItem`, after `recordGradedItem`), with the
@@ -337,6 +409,46 @@ lock.
   being learned. The grammar band is the grammar skill's level, else the
   overall one, else B1. The grammar picker leads with it and marks every
   topic with its status.
+
+## Placement test
+
+One full test (~20 min) in the `placement` session, after the onboarding
+steps and from Settings → Retake. `src/placement/` owns it; the server owns
+the adaptivity, the model only writes items and grades free tasks.
+
+| # | Section | Items | Graded by |
+|---|---|---|---|
+| 1 | Grammar | 7 multiple choice, each on an unasked syllabus topic of the target band | the server |
+| 2 | Vocabulary | 7 multiple choice, each on a dictionary word of the target band | the server |
+| 3 | Reading | 2 texts × 2 questions | the server |
+| 4 | Listening | 2 TTS clips × 2 questions (the script is never shown) | the server |
+| 5 | Writing | 1 task, 3–5 typed sentences | `writing-rubric` |
+| 6 | Speaking | 1 task, a voice answer (STT transcript) | `speaking-rubric` |
+
+- **Adaptivity.** Each section keeps a running level with the level model's
+  own `update`: every item is pitched at the band of that level, so a right
+  answer sends the next one up and a wrong one down. Grammar starts at the
+  prior (B1 ± 1.5); every later section at the level measured so far ± 1.0.
+  A rubric task sets its skill at the band the answer shows (uncertainty
+  0.6); an off-task answer reads as A1.
+- **Voice.** Listening and speaking ask a learner with voice off to turn it
+  on or skip; listening is skipped on its own when no engine can voice a clip.
+  A skipped skill starts at the measured level, uncertainty 0.8, no evidence
+  (`~` in Profile).
+- **Taken in one go.** Progress lives only in the flow state; nothing is
+  written until the last section. A session that ends earlier (cancelled,
+  expired) leaves no trace and the next one starts the test over; the saved
+  onboarding steps are not asked again.
+- **Output.** The six skill levels (`seedPlacementLevels`), the topic flags
+  and a summary in the explanation language (every skill's decimal and the
+  rubric feedback). Flags (`topicFlags`): a tested topic follows its answer;
+  untested topics below the grammar band are `mastered`, in it `unknown`;
+  above it nothing. `topicProgressWriter` places a `mastered` topic only when
+  the learner has no progress on it (`placeMastered`: on FSRS, no XP, no
+  `topic.mastered`); `unknown` stays `not_started`.
+- **The lock.** While `cefr_level` is null the hub shows only 🧭 Placement
+  test and Settings, a learning button of an older hub is refused, and
+  Settings offers no level picker: only the test sets the first level.
 
 ## Telegram UX rules
 

@@ -239,10 +239,10 @@ export class LearnFlow implements SessionKindHandler {
     if (!back) return;
     const card = await createCard(db, {
       userId: handle.user.id,
-      itemType: "word",
+      itemType: word.unitType,
       wordId: word.id,
       front: word.lemma,
-      back,
+      back: word.details ? { ...back, unit: word.details } : back,
       fsrs: this.core.scheduler.newCard(this.core.now()),
     });
     await this.showCard(handle, ctx, card, lead);

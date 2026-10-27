@@ -14,8 +14,9 @@ import type { Logger } from "../log";
 import type { LearningHandle } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { encodeVocabCallback, type VocabCallback } from "./callbacks";
+import { ExerciseCheckError, effectiveMode, exerciseVars, settleExercise } from "./exercise";
 import type { VocabMode } from "./modes";
-import { exampleText, exerciseHtml, HTML, type T } from "./render";
+import { exerciseHtml, HTML, type T } from "./render";
 import { RATINGS, type RatingName, Scheduler } from "./scheduler";
 import type { SpeechPort } from "./speak";
 import { clearFlow, writeFlow } from "./state";
@@ -119,43 +120,43 @@ export class VocabCore {
   }
 
   /**
-   * Asks the LLM for one exercise on `card` and shows it: buttons for recognition, a typed answer
-   * otherwise. Returns false when the LLM failed (the learner was told and offered a retry).
+   * Asks the LLM for one exercise on `card` and shows it: buttons for recognition and particle
+   * choice, a typed answer otherwise. Returns false when the LLM failed (the learner was told and
+   * offered a retry).
    */
   async sendExercise(
     handle: LearningHandle,
     ctx: BotContext,
     card: CardRow,
-    mode: VocabMode,
+    requested: VocabMode,
     lead?: Lead,
   ): Promise<boolean> {
     const { level } = await this.settings(handle.user.id);
-    const back = card.backJson;
-    const vars = {
-      mode,
+    const mode = effectiveMode(card, requested);
+    const unitType = card.itemType === "user_word" ? "word" : card.itemType;
+    const vars = exerciseVars(card, mode, {
       recent_accuracy: await this.recentAccuracy(handle),
-      lemma: card.front,
-      pos: back.pos ?? null,
-      translation: back.translation ?? null,
-      examples: back.examples?.map(exampleText) ?? [],
       distractors:
-        mode === "recognition"
-          ? await randomLemmas(this.deps.db, level, card.front, DISTRACTOR_LEMMAS)
+        mode === "recognition" && unitType !== "grammar_pattern"
+          ? await randomLemmas(this.deps.db, level, card.front, DISTRACTOR_LEMMAS, unitType)
           : [],
-    };
+    });
     const exercise = await this.llm(
       handle,
       ctx,
       { retry: "exercise", cardId: card.id },
-      () => this.deps.skills.runSkill(handle.user.id, "vocab-exercise", vars),
+      async () => {
+        const run = await this.deps.skills.runSkill(handle.user.id, "vocab-exercise", vars);
+        return settleExercise(vars, run.data);
+      },
       lead,
     );
     if (!exercise) return false;
 
-    const { data } = exercise;
+    const data = exercise;
     const text = exerciseHtml(data.instruction, data.prompt);
     const askedAt = this.now().getTime();
-    if (data.mode === "recognition" && data.options && data.correct_index !== null) {
+    if (data.options && data.correct_index !== null) {
       const options = data.options;
       await this.show(
         handle,
@@ -174,7 +175,8 @@ export class VocabCore {
       });
       return true;
     }
-    const typedMode = data.mode === "cloze" ? "cloze" : "production";
+    const typedMode =
+      data.mode === "recognition" || data.mode === "particle" ? "production" : data.mode;
     await this.show(handle, text, [], lead);
     writeFlow(ctx, handle.session.id, {
       kind: "typed",
@@ -251,7 +253,11 @@ export class VocabCore {
         writeFlow(ctx, handle.session.id, { kind: "idle" });
         return undefined;
       }
-      if (error instanceof LlmOutputError || error instanceof LlmProviderError) {
+      if (
+        error instanceof LlmOutputError ||
+        error instanceof LlmProviderError ||
+        error instanceof ExerciseCheckError
+      ) {
         this.deps.log.warn("vocabulary LLM call failed", {
           userId: handle.user.id,
           sessionId: handle.session.id,

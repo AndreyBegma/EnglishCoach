@@ -10,13 +10,19 @@ export interface ScreenModel {
   dueCount: number;
   /** One-line summary of the last ended session, shown on the main screen. */
   lastSummary?: string;
+  /** One line about achievements unlocked since the hub last showed any (main screen). */
+  unlockNotice?: string;
   /** The Progress screen's data; the hub loads it only when that screen is rendered. */
   progress?: ProgressData;
+  /** No level yet: learning waits for the placement test, the hub offers only it and Settings. */
+  locked?: boolean;
 }
 
 export interface RenderedScreen {
   text: string;
   keyboard: InlineKeyboard;
+  /** Unlocks this screen announces; the hub marks them shown once the message is on screen. */
+  announced?: readonly string[];
 }
 
 const button = (label: string, data: Parameters<typeof encodeCallback>[0]) =>
@@ -35,6 +41,16 @@ export function renderScreen(
     case "main": {
       const lines = [t("hub-title")];
       if (model.lastSummary) lines.push("", t("hub-last-session", { summary: model.lastSummary }));
+      if (model.unlockNotice) lines.push("", model.unlockNotice);
+      if (model.locked) {
+        return {
+          text: [...lines, "", t("hub-locked")].join("\n"),
+          keyboard: InlineKeyboard.from([
+            [button(t("hub-placement"), { type: "placement" })],
+            [button(t("hub-settings"), { type: "settings", page: "root" })],
+          ]),
+        };
+      }
       return {
         text: lines.join("\n"),
         keyboard: InlineKeyboard.from([

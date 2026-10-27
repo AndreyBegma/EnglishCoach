@@ -17,8 +17,8 @@ describe("onboarding callback data", () => {
     { type: "provider", choice: "server" },
     { type: "provider", choice: "own" },
     { type: "take-test" },
-    { type: "know-level" },
-    { type: "level", level: "C2" },
+    { type: "skip-section" },
+    { type: "voice-on" },
     { type: "answer", seq: 15, index: 3 },
     { type: "continue" },
     { type: "words", count: 15 },
@@ -44,7 +44,9 @@ describe("onboarding callback data", () => {
     "1:o:a:1:4",
     // An answer button from before items were numbered: stale, not an answer to the current item.
     "1:o:a:2",
-    "1:o:lv:D1",
+    // The "I know my level" path is gone: one full placement test only.
+    "1:o:k",
+    "1:o:lv:B1",
     "1:o:wd:7",
     "1:o:mt:0800",
     "1:o:et:0830",

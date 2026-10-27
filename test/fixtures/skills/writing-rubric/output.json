@@ -1,0 +1,6 @@
+{
+  "on_task": true,
+  "criteria": { "task": 2, "coherence": 2, "range": 2, "accuracy": 1 },
+  "level": "B1",
+  "feedback": "Вы ясно объясняете, почему хотите поехать, но после if нужно настоящее время: «If I go there», а не «If I will go»."
+}

@@ -13,6 +13,7 @@ import {
   MASTERY_TRANSFER,
   MASTERY_WINDOW,
   masteryRule,
+  placeMastered,
   sessionsHold,
   type TopicProgress,
   transferHolds,
@@ -377,5 +378,22 @@ describe("a due mastered topic is checked", () => {
     expect(failed.status).toBe("learning");
     const step = applyItem(failed, { type: "gap_fill", score: 1, session: 12 }, later(8));
     expect(step).toMatchObject({ from: "learning", mastered: true, firstMastery: false });
+  });
+});
+
+describe("a topic placed as mastered by the placement test", () => {
+  test("is mastered on FSRS, due later, without a first mastery", () => {
+    const placed = placeMastered(EMPTY_PROGRESS, T0);
+    expect(placed).toMatchObject({ status: "mastered", masteredAt: T0, firstMasteredAt: null });
+    expect(placed.fsrs).not.toBeNull();
+    expect(placed.reviewDue?.getTime()).toBeGreaterThan(T0.getTime());
+    expect(isDue(placed, T0)).toBe(false);
+  });
+
+  test("its first earned mastery after a fall still counts as the first", () => {
+    const placed = placeMastered(EMPTY_PROGRESS, T0);
+    const shaky = applyItem(placed, { type: "gap_fill", score: 0, session: 1 }, at(1)).progress;
+    expect(shaky.status).toBe("shaky");
+    expect(shaky.firstMasteredAt).toBeNull();
   });
 });

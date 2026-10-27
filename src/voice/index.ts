@@ -86,11 +86,9 @@ export function createVoice(deps: VoiceDeps) {
   }
   engines.push(
     new OpenAiSpeechEngine({
-      credentials: async (userId) => {
-        if (userId !== undefined) return resolveAudioCredentials(credentialDeps, userId);
-        const apiKey = deps.llmEnv.SERVER_OPENAI_API_KEY;
-        return apiKey ? { apiKey, baseUrl: deps.llmEnv.SERVER_OPENAI_BASE_URL } : undefined;
-      },
+      // Background work (prewarm) has no learner and is speculative: it never spends a paid key.
+      credentials: async (userId) =>
+        userId === undefined ? undefined : resolveAudioCredentials(credentialDeps, userId),
       fetch: fetcher,
     }),
   );

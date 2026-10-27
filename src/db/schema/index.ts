@@ -9,6 +9,7 @@ export * from "./mistakes";
 export * from "./owner-course";
 export * from "./providers";
 export * from "./sessions";
+export * from "./sizetest";
 export * from "./stats";
 export * from "./topic-progress";
 export * from "./users";

@@ -48,6 +48,7 @@ export const sessionKindEnum = pgEnum("session_kind", [
   "placement",
   "routine_morning",
   "routine_evening",
+  "size_test",
 ]);
 
 export const sessionStatusEnum = pgEnum("session_status", [

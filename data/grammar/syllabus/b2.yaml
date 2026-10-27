@@ -1,0 +1,397 @@
+# Grammar syllabus, band B2. Keys are topic ids; the owner's rule text lives in seed/grammar.
+
+g033:
+  level: B2.1
+  title:
+    en: "Third conditional (unreal past)"
+    ru: "Третье условное (нереальное прошлое)"
+    uk: "Третій умовний спосіб (нереальне минуле)"
+  prerequisites: [g022, g027]
+  contrast_with: [g022, g034]
+  examples:
+    - "If I had left earlier, I would have caught the train."
+    - "She wouldn't have failed if she had studied."
+    - "What would you have done if you had lost your passport?"
+  interference:
+    - wrong: "If I would have known, I would have helped."
+      right: "If I had known, I would have helped."
+      cause: "Russian 'бы' sits in both clauses, so 'would have' is copied into the if-clause."
+    - wrong: "If I knew it yesterday, I would come."
+      right: "If I had known it yesterday, I would have come."
+      cause: "Russian 'если бы знал, пришёл бы' has one form for present and past unreality."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g034:
+  level: B2.2
+  title:
+    en: Mixed conditionals
+    ru: Смешанные условные предложения
+    uk: Змішані умовні речення
+  prerequisites: [g033, g022]
+  contrast_with: [g033, g022]
+  examples:
+    - "If I had taken that job, I would be rich now."
+    - "If she weren't so shy, she would have spoken up."
+    - "If we had booked earlier, we wouldn't be standing in this queue."
+  interference:
+    - wrong: "If I had taken that job, I would have been rich now."
+      right: "If I had taken that job, I would be rich now."
+      cause: "The Russian 'бы' form carries no time, so learners don't switch the result to the present."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g035:
+  level: B2.3
+  title:
+    en: "wish / if only: present, past and would"
+    ru: "wish / if only: настоящее, прошлое и would"
+    uk: "wish / if only: теперішнє, минуле і would"
+  prerequisites: [g022, g033]
+  contrast_with: [g057]
+  examples:
+    - "I wish I had more free time."
+    - "If only I hadn't said that."
+    - "I wish you would stop interrupting."
+  interference:
+    - wrong: "I wish I have a car."
+      right: "I wish I had a car."
+      cause: "Russian 'жаль, что у меня нет' uses the real present; the backshift after wish feels unnatural."
+    - wrong: "I wish I would be taller."
+      right: "I wish I were taller."
+      cause: "Russian 'хотел бы быть' maps to 'would'; English uses 'would' only for others' behaviour."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g036:
+  level: B2.2
+  title:
+    en: "Passive voice in all tenses and with modal verbs"
+    ru: "Пассивный залог во всех временах и с модальными глаголами"
+    uk: "Пасивний стан у всіх часах і з модальними дієсловами"
+  prerequisites: [g023, g018]
+  contrast_with: [g023, g064]
+  examples:
+    - "The road is being repaired."
+    - "The report has been sent to the client."
+    - "This form must be signed by a manager."
+  interference:
+    - wrong: "The road is repairing now."
+      right: "The road is being repaired now."
+      cause: "Russian reflexive '-ся' ('ремонтируется') is translated with an active continuous."
+    - wrong: "It must be sign today."
+      right: "It must be signed today."
+      cause: "Russian modal + infinitive patterns lead learners to drop the participle ending."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g037:
+  level: B2.4
+  title:
+    en: "have / get something done"
+    ru: "have / get something done"
+    uk: "have / get something done"
+  prerequisites: [g036]
+  contrast_with: [g048]
+  examples:
+    - "I had my hair cut yesterday."
+    - "We're getting the kitchen repainted."
+    - "She had her phone stolen on the bus."
+  interference:
+    - wrong: "I cut my hair at the hairdresser's."
+      right: "I had my hair cut at the hairdresser's."
+      cause: "Russian 'я подстригся' uses an active verb even when someone else did the work."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g038:
+  level: B2.4
+  title:
+    en: "Modals in the past: must have / should have / could have / can't have"
+    ru: "Модальные глаголы в прошлом: must have / should have / could have / can't have"
+    uk: "Модальні дієслова в минулому: must have / should have / could have / can't have"
+  prerequisites: [g032, g027]
+  contrast_with: [g032, g059]
+  examples:
+    - "You should have told me earlier."
+    - "He must have forgotten about the meeting."
+    - "She can't have seen us; she was abroad."
+  interference:
+    - wrong: "You must told me."
+      right: "You should have told me."
+      cause: "Russian puts the main verb in the past ('надо было сказать'); English shifts the time with 'have + participle'."
+    - wrong: "He must forget about it yesterday."
+      right: "He must have forgotten about it yesterday."
+      cause: "Past deduction in Russian uses 'наверное' + past tense, with no perfect infinitive."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g039:
+  level: B2.3
+  title:
+    en: Future Continuous and Future Perfect
+    ru: Future Continuous и Future Perfect
+    uk: Future Continuous і Future Perfect
+  prerequisites: [g013, g018]
+  contrast_with: [g013]
+  examples:
+    - "This time tomorrow I'll be flying to Lisbon."
+    - "By Friday we will have finished the project."
+    - "Will you be using the car tonight?"
+  interference:
+    - wrong: "By June I will finish the course."
+      right: "By June I will have finished the course."
+      cause: "Russian perfective future ('закончу') already implies completion, so the perfect seems redundant."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g040:
+  level: B2.3
+  title:
+    en: "Past Perfect Continuous and a review of all past tenses"
+    ru: "Past Perfect Continuous и обзор всех прошедших времён"
+    uk: "Past Perfect Continuous і огляд усіх минулих часів"
+  prerequisites: [g027, g007, g018]
+  contrast_with: [g027, g007]
+  examples:
+    - "She was tired because she had been working all night."
+    - "We had been waiting for an hour when the bus came."
+    - "I was reading when the phone rang."
+  interference:
+    - wrong: "I waited for two hours when he finally came."
+      right: "I had been waiting for two hours when he finally came."
+      cause: "Russian imperfective past ('я ждал') covers duration up to a past moment."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g041:
+  level: B2.5
+  title:
+    en: "Articles: advanced cases (geography, institutions, unique objects)"
+    ru: "Артикли: продвинутые случаи (география, учреждения, уникальные объекты)"
+    uk: "Артиклі: складні випадки (географія, установи, унікальні об'єкти)"
+  prerequisites: [g004]
+  contrast_with: [g004, g073]
+  examples:
+    - "We sailed across the Atlantic to the United States."
+    - "He is in hospital after the accident."
+    - "Mount Everest is in the Himalayas."
+  interference:
+    - wrong: "I went to the bed early."
+      right: "I went to bed early."
+      cause: "Russian has no articles, so the zero-article rule for institutions is learnt word by word."
+    - wrong: "The Lake Baikal is very deep."
+      right: "Lake Baikal is very deep."
+      cause: "Geographical name rules have no counterpart in Russian/Ukrainian."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g042:
+  level: B2.5
+  title:
+    en: "Non-defining clauses: commas and which for the whole sentence"
+    ru: "Неограничительные придаточные: запятые и which ко всему предложению"
+    uk: "Неозначальні підрядні: коми і which до всього речення"
+  prerequisites: [g024]
+  contrast_with: [g024, g076]
+  examples:
+    - "My brother, who lives in Berlin, is a designer."
+    - "He passed the exam, which surprised everyone."
+    - "The museum, which opened in 1900, is free on Sundays."
+  interference:
+    - wrong: "My mother that lives in Odesa is a teacher."
+      right: "My mother, who lives in Odesa, is a teacher."
+      cause: "Russian always puts commas around 'который', so the defining/non-defining split is unknown."
+    - wrong: "He was late, what annoyed me."
+      right: "He was late, which annoyed me."
+      cause: "Calque of Russian 'что' referring to the whole clause."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g043:
+  level: B2.6
+  title:
+    en: "Participle clauses: Having finished…, Written in…, Feeling tired…"
+    ru: "Причастные обороты: Having finished…, Written in…, Feeling tired…"
+    uk: "Дієприкметникові звороти: Having finished…, Written in…, Feeling tired…"
+  prerequisites: [g024, g019]
+  contrast_with: [g066, g077]
+  examples:
+    - "Having finished the report, she went home."
+    - "Written in 1949, the novel is still relevant."
+    - "Feeling tired, I went to bed early."
+  interference:
+    - wrong: "Walking in the park, the rain started."
+      right: "Walking in the park, I got caught in the rain."
+      cause: "The Russian rule that a verbal adverb (деепричастие) shares the subject is often ignored in speech, and the habit transfers."
+  exercise_types: [multiple_choice, transformation]
+
+g044:
+  level: B2.6
+  title:
+    en: "Contrast linkers: although, even though, despite, in spite of, however, whereas"
+    ru: "Союзы контраста: although, even though, despite, in spite of, however, whereas"
+    uk: "Сполучники контрасту: although, even though, despite, in spite of, however, whereas"
+  prerequisites: [g094, g019]
+  contrast_with: [g045]
+  examples:
+    - "Although it was raining, we went out."
+    - "Despite the rain, we went out."
+    - "The plan was good. However, it was too expensive."
+  interference:
+    - wrong: "Despite it was raining, we went out."
+      right: "Despite the rain, we went out."
+      cause: "Russian 'несмотря на то, что' takes a clause, so 'despite' gets a clause too."
+    - wrong: "Although it was late, but we stayed."
+      right: "Although it was late, we stayed."
+      cause: "Russian 'хотя…, но…' allows both conjunctions together."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g045:
+  level: B2.6
+  title:
+    en: "Purpose and result: to / in order to / so that / so…that / such…that"
+    ru: "Цель и результат: to / in order to / so that / so…that / such…that"
+    uk: "Мета і результат: to / in order to / so that / so…that / such…that"
+  prerequisites: [g094]
+  contrast_with: [g044]
+  examples:
+    - "I left early to catch the train."
+    - "Speak slowly so that everyone can understand."
+    - "It was such a good film that I watched it twice."
+  interference:
+    - wrong: "I came for to help you."
+      right: "I came to help you."
+      cause: "Russian 'чтобы' / 'для того чтобы' is calqued as 'for to'."
+    - wrong: "It was so good film."
+      right: "It was such a good film."
+      cause: "Russian 'такой' / 'так' choice does not follow the noun/adjective split of such/so."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g046:
+  level: B2.7
+  title:
+    en: "Reporting verbs: suggest, recommend, deny, admit, accuse + patterns"
+    ru: "Отчётные глаголы: suggest, recommend, deny, admit, accuse + конструкции"
+    uk: "Дієслова непрямої мови: suggest, recommend, deny, admit, accuse + конструкції"
+  prerequisites: [g025, g019]
+  contrast_with: [g025]
+  examples:
+    - "She suggested going to the cinema."
+    - "He denied taking the money."
+    - "They accused him of lying."
+  interference:
+    - wrong: "He suggested me to go."
+      right: "He suggested that I go."
+      cause: "Russian 'предложил мне пойти' maps to object + infinitive."
+    - wrong: "She explained me the rule."
+      right: "She explained the rule to me."
+      cause: "Russian 'объяснила мне' takes a dative object directly."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g047:
+  level: B2.7
+  title:
+    en: "Impersonal passive: It is said that… / He is said to have…"
+    ru: "Безличный пассив: It is said that… / He is said to have…"
+    uk: "Безособовий пасив: It is said that… / He is said to have…"
+  prerequisites: [g036, g025]
+  contrast_with: [g036]
+  examples:
+    - "It is said that the castle is haunted."
+    - "He is believed to be the richest man in town."
+    - "The painting is thought to have been stolen."
+  interference:
+    - wrong: "He is said that he is rich."
+      right: "He is said to be rich."
+      cause: "Russian 'говорят, что' is impersonal active; the personal passive has no equivalent."
+  exercise_types: [multiple_choice, transformation]
+
+g048:
+  level: B2.7
+  title:
+    en: "Complex object: want him to do, make/let him do, see him doing"
+    ru: "Сложное дополнение: want him to do, make/let him do, see him doing"
+    uk: "Складний додаток: want him to do, make/let him do, see him doing"
+  prerequisites: [g019, g088]
+  contrast_with: [g037]
+  examples:
+    - "I want you to call me tomorrow."
+    - "My parents let me stay up late."
+    - "I saw him crossing the street."
+  interference:
+    - wrong: "I want that he comes."
+      right: "I want him to come."
+      cause: "Russian 'хочу, чтобы он пришёл' uses a subordinate clause."
+    - wrong: "She made me to wait."
+      right: "She made me wait."
+      cause: "Russian infinitive after 'заставила' leads to 'to' after make/let."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g049:
+  level: B2.8
+  title:
+    en: "-ed / -ing adjectives and adjective order"
+    ru: "Прилагательные на -ed / -ing и порядок прилагательных"
+    uk: "Прикметники на -ed / -ing і порядок прикметників"
+  prerequisites: [g012]
+  contrast_with: [g030]
+  examples:
+    - "The lecture was boring, so I was bored."
+    - "She bought a beautiful old Italian table."
+    - "I'm interested in history."
+  interference:
+    - wrong: "I am boring at work."
+      right: "I am bored at work."
+      cause: "Russian 'мне скучно' has one word for the feeling and its cause."
+    - wrong: "an Italian old beautiful table"
+      right: "a beautiful old Italian table"
+      cause: "Adjective order is flexible in Russian/Ukrainian."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g050:
+  level: B2.8
+  title:
+    en: "Word formation: prefixes un-, dis-, in-, mis-, re-, over-, under-"
+    ru: "Словообразование: приставки un-, dis-, in-, mis-, re-, over-, under-"
+    uk: "Словотвір: префікси un-, dis-, in-, mis-, re-, over-, under-"
+  prerequisites: []
+  contrast_with: [g051]
+  examples:
+    - "That answer is incorrect."
+    - "I misunderstood the question."
+    - "The meat is overcooked."
+  interference:
+    - wrong: "unpossible"
+      right: "impossible"
+      cause: "Russian 'не-' is one universal negative prefix; English chooses among un-/in-/im-/dis-."
+  exercise_types: [multiple_choice, gap_fill]
+
+g051:
+  level: B2.9
+  title:
+    en: "Word formation: suffixes -tion, -ment, -ness, -ity, -ful, -less, -ive, -able"
+    ru: "Словообразование: суффиксы -tion, -ment, -ness, -ity, -ful, -less, -ive, -able"
+    uk: "Словотвір: суфікси -tion, -ment, -ness, -ity, -ful, -less, -ive, -able"
+  prerequisites: [g050]
+  contrast_with: [g050, g063]
+  examples:
+    - "Her kindness surprised everyone."
+    - "The decision was reasonable."
+    - "This tool is useless."
+  interference:
+    - wrong: "He made a good decide."
+      right: "He made a good decision."
+      cause: "Russian part-of-speech changes are often signalled by endings learners don't expect in English, so the verb is reused as a noun."
+  exercise_types: [multiple_choice, gap_fill]
+
+g052:
+  level: B2.9
+  title:
+    en: "Collocations: make / do / take / have / get"
+    ru: "Коллокации: make / do / take / have / get"
+    uk: "Колокації: make / do / take / have / get"
+  prerequisites: []
+  contrast_with: [g061]
+  examples:
+    - "Can I make a suggestion?"
+    - "I need to do my homework."
+    - "Let's take a break."
+  interference:
+    - wrong: "I made my homework."
+      right: "I did my homework."
+      cause: "Russian 'делать' covers both make and do."
+    - wrong: "I did a mistake."
+      right: "I made a mistake."
+      cause: "Russian 'сделать ошибку' uses the do-verb."
+  exercise_types: [multiple_choice, gap_fill, error_correction]

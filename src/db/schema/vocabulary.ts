@@ -34,7 +34,16 @@ export const words = pgTable(
     frequencyRank: integer(),
     source: text().notNull(),
     topic: text(),
+    /** The owner's transcription; the fallback behind the dictionary IPA (see `src/words/pronunciation.ts`). */
     ipa: text(),
+    /** Dictionary IPA, General American (CMUdict, Wiktionary fallback); null when no source has it. */
+    ipaUs: text(),
+    /** Dictionary IPA, British (Wiktionary); null when no source has it. */
+    ipaUk: text(),
+    /** Written syllables joined by `·` (`wa·ter`); null when they could not be checked against a dictionary. */
+    syllables: text(),
+    /** 0-based index into `syllables` of the syllable with primary stress. */
+    stressIndex: smallint(),
     /** The owner's example sentence (English, untranslated). */
     example: text(),
     translationRu: text(),

@@ -23,6 +23,7 @@ const mistake = (n: number, patternText = long): Mistake => ({
   count: 1_000_000 + n,
   lastSeenAt: new Date("2026-03-01T00:00:00Z"),
   cardId: null,
+  topicId: null,
 });
 
 const data = (overrides: Partial<ProgressData> = {}): ProgressData => ({

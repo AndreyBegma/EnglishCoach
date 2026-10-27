@@ -4,12 +4,13 @@ import { CALLBACK_VERSION, MAX_CALLBACK_BYTES } from "../bot/callbacks";
  * Progress's own inline-button codec. Wire format: `<CALLBACK_VERSION>:p:<route>[:<arg>]`, within
  * Telegram's 64 bytes. Opening the Progress screen itself is the shared `screen: progress` button.
  * The hub's 👤 Profile button rides here too (`u`), so it needs no hub screen of its own, and so
- * does the Profile's 🏆 Achievements screen (`a:<page>`).
+ * does the Profile's 🏆 Achievements screen (`a:<page>`) and its 🧊 Buy a freeze button (`f`).
  */
 export type ProgressCallback =
   | { type: "weak" }
   | { type: "practice" }
   | { type: "profile" }
+  | { type: "freeze" }
   | { type: "achievements"; page: number };
 
 const PREFIX = `${CALLBACK_VERSION}:p`;
@@ -18,6 +19,7 @@ const ROUTE = {
   weak: "w",
   practice: "g",
   profile: "u",
+  freeze: "f",
   achievements: "a",
 } as const satisfies Record<ProgressCallback["type"], string>;
 
@@ -45,6 +47,8 @@ export function parseProgressCallback(data: string | undefined): ProgressCallbac
       return { type: "practice" };
     case `${PREFIX}:u`:
       return { type: "profile" };
+    case `${PREFIX}:f`:
+      return { type: "freeze" };
   }
   const page = data.startsWith(`${PREFIX}:a:`) ? data.slice(`${PREFIX}:a:`.length) : undefined;
   if (page && /^(0|[1-9]\d{0,2})$/.test(page) && Number(page) <= MAX_PAGE) {

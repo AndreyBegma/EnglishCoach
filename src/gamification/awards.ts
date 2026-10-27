@@ -2,6 +2,7 @@ import type { Db } from "../db/client";
 import { addToXpTotal, countXpEvents, insertXpEvent, setXpLevel } from "../db/repositories/xp";
 import type { XpSource } from "../db/schema";
 import { domainEvents } from "../events/domain-events";
+import { milestonesCrossed } from "../progress/streak-rules";
 import { type XpAwarded, xpEvents, xpLog } from "./events";
 import {
   DAILY_GOAL_XP,
@@ -147,6 +148,27 @@ export function awardTalkTurn(db: Db, userId: number, score: number, now?: Date)
       { source: "talk_turn", amount: itemXp("talk_turn", score, 0, 0) },
       now,
     );
+  });
+}
+
+/**
+ * The streak just went from `before` to `after` days (a goal day, or a restore that jumps): each
+ * milestone it passed pays its bonus once per run — a run is named by its first day, `since`, so
+ * a replayed session end pays nothing and a new run after a break earns the milestones again.
+ * The award carries the streak, so the `day_streak` achievements see it.
+ */
+export function awardStreakMilestones(
+  db: Db,
+  userId: number,
+  { before, after, since }: { before: number; after: number; since: string },
+  now?: Date,
+): Promise<void> {
+  return safely(userId, "streak_milestone", async () => {
+    for (const { days, xp } of milestonesCrossed(before, after)) {
+      if ((await countXpEvents(db, userId, "streak", { milestone: days, since })) > 0) continue;
+      const meta = { milestone: days, since, streak: after };
+      await awardXp(db, userId, { source: "streak", amount: xp, meta }, now);
+    }
   });
 }
 

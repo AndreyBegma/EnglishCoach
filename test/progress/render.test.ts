@@ -35,7 +35,7 @@ const data = (overrides: Partial<ProgressData> = {}): ProgressData => ({
     ],
   },
   wordsPerDay: 5,
-  streak: { current: 4, best: 6 },
+  streak: { current: 4, best: 6, freezes: 1 },
   today: { newWords: 3, reviews: 7, goalMet: true },
   cards: {
     new: 2,
@@ -92,7 +92,7 @@ describe("Progress screen", () => {
   for (const locale of SUPPORTED_LOCALES) {
     test(`fits one Telegram message with a large fixture in ${locale}`, () => {
       const huge = data({
-        streak: { current: 99_999, best: 99_999 },
+        streak: { current: 99_999, best: 99_999, freezes: 2 },
         cards: {
           new: 9_999_999,
           learning: 9_999_999,

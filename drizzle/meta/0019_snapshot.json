@@ -1,5 +1,5 @@
 {
-  "id": "eb6ec4ad-a1eb-4b78-ba80-839bba5f70a7",
+  "id": "852259cf-ef72-47db-9d3a-d26871a7a78c",
   "prevId": "81dae8d1-f71d-4bed-ba24-5821137eb609",
   "version": "7",
   "dialect": "postgresql",
@@ -1452,6 +1452,151 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.streak_days": {
+      "name": "streak_days",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "streak_days_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "streak_day_kind",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "streak_days_user_id_users_id_fk": {
+          "name": "streak_days_user_id_users_id_fk",
+          "tableFrom": "streak_days",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "streak_days_user_id_date_unique": {
+          "name": "streak_days_user_id_date_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "user_id",
+            "date"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.user_streak": {
+      "name": "user_streak",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "freezes": {
+          "name": "freezes",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "granted_week": {
+          "name": "granted_week",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "settled_through": {
+          "name": "settled_through",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "xp_spent": {
+          "name": "xp_spent",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_streak_user_id_users_id_fk": {
+          "name": "user_streak_user_id_users_id_fk",
+          "tableFrom": "user_streak",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.topic_progress": {
       "name": "topic_progress",
       "schema": "",
@@ -2058,19 +2203,6 @@
         },
         "known_at": {
           "name": "known_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "evidence": {
-          "name": "evidence",
-          "type": "smallint",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "learned_at": {
-          "name": "learned_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
@@ -2975,6 +3107,14 @@
         "listening",
         "writing",
         "speaking"
+      ]
+    },
+    "public.streak_day_kind": {
+      "name": "streak_day_kind",
+      "schema": "public",
+      "values": [
+        "freeze",
+        "restore"
       ]
     },
     "public.topic_status": {

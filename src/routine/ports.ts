@@ -27,6 +27,13 @@ export interface RoutineStore {
   claimSlot(userId: number, slot: RoutineSlot, date: string): Promise<boolean>;
   /** Gives a claim back when the message could not be sent for a reason worth retrying. */
   releaseSlot(userId: number, slot: RoutineSlot, date: string): Promise<void>;
+  /**
+   * Counts one unsolicited message against the learner's local `date`, atomically; false (and
+   * nothing counted) when `cap` were counted already.
+   */
+  reserveNotification(userId: number, date: string, cap: number): Promise<boolean>;
+  /** Takes back one count of `date`, for a message that was not sent after all. */
+  releaseNotification(userId: number, date: string): Promise<void>;
   getPrompt(userId: number): Promise<RoutinePrompt | undefined>;
   setPrompt(userId: number, prompt: RoutinePrompt): Promise<void>;
   clearPrompt(userId: number): Promise<void>;

@@ -9,6 +9,7 @@ export class MemoryRoutineStore implements RoutineStore {
   readonly claims = new Set<string>();
   readonly prompts = new Map<number, RoutinePrompt>();
   readonly blocked = new Set<number>();
+  readonly notifications = new Map<string, number>();
 
   async claimSlot(userId: number, slot: RoutineSlot, date: string) {
     const key = `${userId}:${slot}:${date}`;
@@ -18,6 +19,17 @@ export class MemoryRoutineStore implements RoutineStore {
   }
   async releaseSlot(userId: number, slot: RoutineSlot, date: string) {
     this.claims.delete(`${userId}:${slot}:${date}`);
+  }
+  async reserveNotification(userId: number, date: string, cap: number) {
+    const key = `${userId}:${date}`;
+    const count = this.notifications.get(key) ?? 0;
+    if (count >= cap) return false;
+    this.notifications.set(key, count + 1);
+    return true;
+  }
+  async releaseNotification(userId: number, date: string) {
+    const key = `${userId}:${date}`;
+    this.notifications.set(key, Math.max(0, (this.notifications.get(key) ?? 0) - 1));
   }
   async getPrompt(userId: number) {
     return this.prompts.get(userId);

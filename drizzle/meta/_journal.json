@@ -138,8 +138,15 @@
     {
       "idx": 19,
       "version": "7",
-      "when": 1793098517353,
-      "tag": "0019_card_mastery",
+      "when": 1793098267919,
+      "tag": "0019_streak_freezes",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1793098859000,
+      "tag": "0020_card_mastery",
       "breakpoints": true
     }
   ]

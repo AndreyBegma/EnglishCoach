@@ -4,6 +4,7 @@ import type { Locale, Translator } from "../bot/i18n";
 import { encodeProgressCallback } from "../progress/callbacks";
 import type { ProgressData } from "../progress/queries";
 import { renderProgress } from "../progress/render";
+import type { RestoreOffer } from "../progress/streak-rules";
 
 export interface ScreenModel {
   locale: Locale;
@@ -12,6 +13,8 @@ export interface ScreenModel {
   lastSummary?: string;
   /** One line about achievements unlocked since the hub last showed any (main screen). */
   unlockNotice?: string;
+  /** Set while a double goal today would restore yesterday's broken streak (main screen). */
+  restoreOffer?: RestoreOffer;
   /** The Progress screen's data; the hub loads it only when that screen is rendered. */
   progress?: ProgressData;
   /** No level yet: learning waits for the placement test, the hub offers only it and Settings. */
@@ -42,6 +45,9 @@ export function renderScreen(
       const lines = [t("hub-title")];
       if (model.lastSummary) lines.push("", t("hub-last-session", { summary: model.lastSummary }));
       if (model.unlockNotice) lines.push("", model.unlockNotice);
+      if (model.restoreOffer) {
+        lines.push("", t("hub-streak-restore", { days: model.restoreOffer.days }));
+      }
       if (model.locked) {
         return {
           text: [...lines, "", t("hub-locked")].join("\n"),

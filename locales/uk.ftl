@@ -460,3 +460,13 @@ input-interests = Надішліть інтереси через кому, на�
 input-profession = Надішліть професію чи посаду (зараз: { $profession }).
 input-interests-invalid = Надішліть короткі теми через кому, кожна до 40 символів.
 input-profession-invalid = Надішліть професію одним рядком, до 80 символів.
+
+## Streak: freezes, restore, the burning reminder
+profile-freezes = 🧊 Заморозки: { $count }/{ $max } · XP можна витратити: { $xp }
+profile-freeze-buy = 🧊 Купити заморозку · { $price } XP
+profile-freeze-bought = 🧊 Заморозку куплено: пропущений день не перерве серію.
+profile-freeze-full = У вас уже максимум заморозок.
+profile-freeze-poor = Заморозка коштує { $price } XP — поки бракує XP.
+hub-streak-restore = 🩹 Учора серія ({ $days } дн.) перервалася. Виконайте сьогодні подвійну денну ціль, щоб її повернути.
+routine-reminder-burning = 🔥 Серія ({ $days } дн.) згорить через { $hours } год. Кілька хвилин зараз — і вона триватиме.
+routine-reminder-restore = 🩹 Серію ({ $days } дн.) ще можна врятувати: подвійна денна ціль у найближчі { $hours } год поверне її.

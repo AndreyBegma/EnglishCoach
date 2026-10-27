@@ -456,3 +456,13 @@ input-interests = Send your interests, separated by commas, e.g. football, jazz,
 input-profession = Send your profession or job title (current: { $profession }).
 input-interests-invalid = Send short topics separated by commas, each up to 40 characters.
 input-profession-invalid = Send your profession in one line, up to 80 characters.
+
+## Streak: freezes, restore, the burning reminder
+profile-freezes = 🧊 Freezes: { $count }/{ $max } · XP to spend: { $xp }
+profile-freeze-buy = 🧊 Buy a freeze · { $price } XP
+profile-freeze-bought = 🧊 Freeze bought: a missed day will not break your streak.
+profile-freeze-full = You already hold as many freezes as you can.
+profile-freeze-poor = A freeze costs { $price } XP — not enough XP to spend yet.
+hub-streak-restore = 🩹 Your { $days }-day streak broke yesterday. Do a double daily goal today to restore it.
+routine-reminder-burning = 🔥 Your { $days }-day streak burns in { $hours } h. A few minutes now keep it going.
+routine-reminder-restore = 🩹 Your { $days }-day streak can still be saved: a double daily goal in the next { $hours } h restores it.

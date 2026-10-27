@@ -20,6 +20,14 @@ than creativity: the card will be reviewed many times.
 `pos` is null, use the word's most frequent part of speech. Describe **that sense only** — the most
 common meaning at the learner's level — consistently across every field.
 
+## Lexical units
+`task.pos` may name a unit instead of a part of speech: `phrasal verb`, `collocation`, `idiom` or
+`word family`. Then `lemma` is the whole unit as given (a word family's is its base word) and every
+field is about the unit as a whole: `translation` the meaning of the whole (an idiom's figurative
+meaning, never a word-by-word gloss), `ipa` of the whole phrase, `pos` as given, examples that use
+the whole unit, `collocations` patterns the unit itself enters (`give up smoking`,
+`give up on sb`), and for a word family a `mnemonic` that links its forms.
+
 ## Fields
 - `lemma`: the headword as given (fix only obvious case errors).
 - `translation`: the usual {{explain_lang}} equivalent(s), most common first, at most three,

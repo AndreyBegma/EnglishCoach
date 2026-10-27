@@ -33,6 +33,13 @@ Some items already carry fields from a curated list. **Keep them as given**:
   sentences show.
 A null field or an empty list is yours to write.
 
+An item's `pos` may name a lexical unit instead of a part of speech: `phrasal verb`,
+`collocation`, `idiom` or `word family`. Then its `lemma` is the whole unit (a word family's is
+its base word) and every field is about the unit as a whole: `translation` the meaning of the
+whole (an idiom's figurative meaning, never a word-by-word gloss), `ipa` of the whole phrase, `pos`
+as given, examples that use the whole unit, `collocations` patterns the unit itself enters, and for
+a word family a `mnemonic` that links its forms.
+
 ## Output
 `cards` holds exactly one card per item of `task.words`, with the item's `id`, in the same order.
 For each card:

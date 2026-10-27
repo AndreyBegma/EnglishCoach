@@ -29,6 +29,20 @@ The card tests `task.lemma`; the exercise (`task.mode`, `task.prompt`) asked for
   true synonyms in this context; a related but different word (`big` for `huge` in a sentence that
   needs intensity) is `close` at best, and a word from the same topic is `wrong`.
 
+## Lexical units and own sentences
+`task.item_type` is `word` or a lexical unit (`phrasal_verb`, `collocation`, `idiom`,
+`word_family`). A multi-word unit counts as the expected answer when its words are right and only
+its verb is inflected; a wrong particle or partner word is `wrong`, not a typo. In `partner` and
+`transform` mode the answer is the single word for the gap; in `transform` another form of the same
+family (`decisive` where `decision` was asked) is `close` with `accepted_as` `inflection`.
+
+In `own_sentence` mode the app never matches exactly: `task.learner_answer` is a whole sentence the
+learner wrote with `task.lemma`. It is `correct` (`accepted_as` `exact`) when it uses the unit in
+the meaning the prompt gave, grammatically, and the sentence makes sense; `close` (`accepted_as`
+`inflection`) when the unit is used right but the sentence has a grammar slip, or the verb form is
+wrong; `wrong` when the unit is missing, used in another meaning, or the text is not a sentence (the
+bare phrase alone is `wrong`). `feedback` quotes the corrected sentence when there was a slip.
+
 ## Verdict and rating
 - `correct` — `exact`, `inflection` (when the form is also right for the sentence), or `synonym`.
 - `close` — `typo`, or an `inflection` with the wrong form for the sentence. The learner knew the

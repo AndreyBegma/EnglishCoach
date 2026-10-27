@@ -62,9 +62,29 @@ export function parseTtsEnv(source: Record<string, string | undefined> = process
   return report(ttsSchema.safeParse(source));
 }
 
+/**
+ * Speech to text. Read by `src/voice` at startup (`parseSttEnv`) and validated with the rest of
+ * the environment.
+ */
+const sttShape = {
+  // Base URL of the faster-whisper service; unset means no local STT.
+  STT_URL: unsetIfBlank(url.optional()),
+  // The model id the service is asked for; compose loads the same one.
+  STT_MODEL: unsetIfBlank(requiredString.default("Systran/faster-whisper-small.en")),
+};
+
+const sttSchema = z.object(sttShape);
+export type SttEnv = z.infer<typeof sttSchema>;
+
+/** The STT variables alone. Throws `EnvError` like `parseEnv`. */
+export function parseSttEnv(source: Record<string, string | undefined> = process.env): SttEnv {
+  return report(sttSchema.safeParse(source));
+}
+
 const envSchema = z
   .object({
     ...ttsShape,
+    ...sttShape,
     NODE_ENV: unsetIfBlank(z.enum(["development", "production", "test"]).default("development")),
     LOG_LEVEL: unsetIfBlank(z.enum(["debug", "info", "warn", "error"]).default("info")),
     TELEGRAM_BOT_TOKEN: unsetIfBlank(requiredString),

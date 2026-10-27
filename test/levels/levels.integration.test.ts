@@ -136,7 +136,7 @@ describe.skipIf(!testServerUrl)("skill levels in the database", () => {
 
   test("the migration gives existing learners their level in every skill", async () => {
     const file = await Bun.file(
-      join(import.meta.dir, "../../drizzle/0010_skill_levels.sql"),
+      join(import.meta.dir, "../../drizzle/0011_skill_levels.sql"),
     ).text();
     const backfill = file.split("--> statement-breakpoint").at(-1) ?? "";
     expect(backfill).toContain("INSERT INTO");

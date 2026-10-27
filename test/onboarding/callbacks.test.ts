@@ -9,6 +9,11 @@ import {
 describe("onboarding callback data", () => {
   test.each<OnboardingCallback>([
     { type: "lang", lang: "uk" },
+    { type: "goal", goal: "work_business" },
+    { type: "goals-done" },
+    { type: "interest", index: 11 },
+    { type: "interests-done" },
+    { type: "profession-skip" },
     { type: "provider", choice: "server" },
     { type: "provider", choice: "own" },
     { type: "take-test" },
@@ -44,6 +49,9 @@ describe("onboarding callback data", () => {
     "1:o:mt:0800",
     "1:o:et:0830",
     "1:o:l:fr",
+    "1:o:g:cooking",
+    "1:o:i:12",
+    "1:o:i:-1",
   ])("rejects %p", (data) => {
     expect(parseOnboardingCallback(data)).toBeUndefined();
   });

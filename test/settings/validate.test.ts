@@ -1,12 +1,51 @@
 import { describe, expect, test } from "bun:test";
+import { MAX_INTERESTS } from "../../src/settings/options";
 import {
+  mergeInterests,
   parseApiKey,
   parseBaseUrl,
+  parseInterests,
   parseModelId,
+  parseProfession,
   parseTimezone,
   parseWorkspaceId,
   timezoneAt,
+  toggleInterest,
 } from "../../src/settings/validate";
+
+describe("learner profile text", () => {
+  test("interests are split on commas, semicolons and new lines, and tidied", () => {
+    expect(parseInterests(" jazz ,  indie   games;\nhiking\u0007 ,, ")).toEqual([
+      "jazz",
+      "indie games",
+      "hiking",
+    ]);
+  });
+
+  test("empty, over-long or key-shaped interests are refused", () => {
+    expect(parseInterests(" , ; ")).toBeUndefined();
+    expect(parseInterests(`jazz, ${"x".repeat(41)}`)).toBeUndefined();
+    expect(parseInterests("jazz, sk-ant-api03-abcdefghijk")).toBeUndefined();
+  });
+
+  test("merging drops case-insensitive repeats and stops at the limit", () => {
+    expect(mergeInterests(["Jazz"], ["jazz", "chess"])).toEqual(["Jazz", "chess"]);
+    const many = Array.from({ length: MAX_INTERESTS + 3 }, (_, i) => `topic ${i}`);
+    expect(mergeInterests([], many)).toHaveLength(MAX_INTERESTS);
+  });
+
+  test("toggling adds a missing interest and removes a present one", () => {
+    expect(toggleInterest(["music"], "books")).toEqual(["music", "books"]);
+    expect(toggleInterest(["Music", "books"], "music")).toEqual(["books"]);
+  });
+
+  test("a profession is one tidy line of at most 80 characters", () => {
+    expect(parseProfession("  Backend\n developer ")).toBe("Backend developer");
+    expect(parseProfession("   ")).toBeUndefined();
+    expect(parseProfession("x".repeat(81))).toBeUndefined();
+    expect(parseProfession("sk-or-v1-0123456789abcdef")).toBeUndefined();
+  });
+});
 
 describe("parseBaseUrl", () => {
   test.each([

@@ -71,6 +71,12 @@ const envSchema = z
     PUBLIC_URL: unsetIfBlank(url.optional()),
     SESSION_TIMEOUT_MINUTES: unsetIfBlank(z.coerce.number().int().min(1).max(1440).default(20)),
     ENABLE_DEMO_SESSION: unsetIfBlank(flag),
+    // Word card enrichment ahead of time (server provider only).
+    WORD_PREFETCH_DAYS: unsetIfBlank(z.coerce.number().int().min(1).max(14).default(3)),
+    WORD_ENRICH_BATCH: unsetIfBlank(z.coerce.number().int().min(1).max(20).default(10)),
+    WORD_ENRICH_CONCURRENCY: unsetIfBlank(z.coerce.number().int().min(1).max(10).default(1)),
+    WORD_BACKFILL_EVERY_MINUTES: unsetIfBlank(z.coerce.number().int().min(0).max(1440).default(30)),
+    WORD_BACKFILL_WORDS: unsetIfBlank(z.coerce.number().int().min(1).max(200).default(20)),
   })
   .superRefine((env, ctx) => {
     if (env.BOT_MODE !== "webhook") return;

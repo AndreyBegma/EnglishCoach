@@ -120,6 +120,22 @@ the learner's language, IPA, 2 examples, collocations) and generates
 exercises; it does not pick the words. Learners may also add their own words
 by message. Daily new-word count is a setting.
 
+**The owner's list.** A curated workbook (not redistributable, kept out of
+git) is imported over the dictionary with `bun run db:import:owner-words`.
+Its rows (`source = owner_list`) carry the owner's level (the rare bands
+count as C2), fields and curriculum position; its `Убрано` sheet fills
+`excluded_lemmas`. The picker offers, at the learner's level, owner words in
+curriculum order first, then dictionary words by frequency, skipping known,
+removed and duplicate lemmas.
+
+**Enrichment cache.** `word_enrichments` holds one card back per word and
+explanation language, shared by all learners (so it carries no learner
+context). A BullMQ job fills it ahead of time with the server provider and the
+`vocab-enrich-batch` skill — the next 3 days of each learner's words, plus a
+low-rate backfill — and the curated fields override the model's. Learn words
+reads the cache; a miss falls back to inline `vocab-enrich` with the learner's
+provider and is logged as a metric.
+
 ## Telegram UX rules
 
 1. **The hub.** Exactly one menu message per chat with inline buttons:

@@ -42,6 +42,31 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
 | `bun run db:seed:words` | Seed the CEFR frequency dictionary (`data/words/`), idempotent |
+| `bun run db:import:owner-words <path>` | Import the owner's curated word list (.xlsx) over the dictionary, idempotent — see below |
+
+## The owner's word list
+
+The owner's curated list (Oxford 5000 levels, dictionary example sentences) is **not
+redistributable and never goes into git** — neither the workbook nor anything extracted from it.
+Keep it in `data/private/` (git-ignored) or anywhere outside the repository, and import it into
+the database:
+
+```sh
+bun run db:seed:words                                   # the dictionary first
+bun run db:import:owner-words data/private/owner-words.xlsx
+```
+
+The importer reads the sheets `0 Проверка A1–A2`, `1 B1` … `6 Редкие III` (day-header rows skipped)
+and `Убрано` (lemmas never offered). The owner's level, part of speech, IPA, Russian translation,
+example and topic win over the dictionary's; its frequency rank stays. Learn words then follows the
+owner's order at the learner's level. Re-running it, or re-seeding the dictionary afterwards,
+changes nothing. The phrasal-verb and grammar sheets are not imported yet.
+
+With `SERVER_LLM_PROVIDER` set, a BullMQ job keeps the next `WORD_PREFETCH_DAYS` × words-per-day
+new words of every learner enriched ahead of time (after each Learn words session, on a level /
+language / daily-goal change and nightly), and a low-rate backfill works through the rest of the
+list (`WORD_BACKFILL_EVERY_MINUTES`, `WORD_BACKFILL_WORDS`). Cards then read the shared cache; a
+miss falls back to inline enrichment and logs `metric: vocab.enrich.cache_miss`.
 
 ## Layout
 
@@ -52,7 +77,8 @@ src/http/           Hono app (GET /health, POST /tg/<secret> in webhook mode)
 src/bot/            grammY bot: allowlist + admin commands, i18n (Fluent), callback data, Redis flow state
 src/hub/            the pinned hub (main menu) and its sub-screens
 src/sessions/       learning sessions: message tracking, cleanup, kind handlers (ctx.learning)
-src/queue/          BullMQ jobs (session inactivity timeout)
+src/queue/          BullMQ jobs (session inactivity timeout, routine, word enrichment)
+src/words/          dictionary seed, owner list importer, word picker, enrichment cache filler
 src/db/             Drizzle client, schema/ (one file per area), repositories/, FSRS mappers
 drizzle/            generated SQL migrations
 src/redis.ts        Redis client

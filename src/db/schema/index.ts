@@ -7,3 +7,4 @@ export * from "./sessions";
 export * from "./stats";
 export * from "./users";
 export * from "./vocabulary";
+export * from "./word-enrichment";

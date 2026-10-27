@@ -6,11 +6,13 @@ import { redisStorage } from "./bot/storage";
 import { EnvError, parseEnv } from "./config/env";
 import { masterKeyFromBase64 } from "./crypto/secrets";
 import { createDb } from "./db/client";
+import type { SettingsField } from "./events/settings-events";
 import { createApp } from "./http/app";
-import { resolveProvider } from "./llm";
+import { createServerProvider, defaultFactories, resolveProvider } from "./llm";
 import { createLogger } from "./log";
 import { BullRoutineJobs } from "./queue/routine-jobs";
 import { BullSessionTimeouts } from "./queue/session-timeouts";
+import { BullWordEnrichment } from "./queue/word-enrichment";
 import { createRedis } from "./redis";
 import { RedisRoutineStore } from "./routine";
 import {
@@ -19,6 +21,10 @@ import {
   SkillDefinitionError,
   SkillRunner,
 } from "./skills";
+import { WordEnricher } from "./words/enrichment";
+
+/** Settings that change which words come next, or in which language they are explained. */
+const PREFETCH_SETTINGS = new Set<SettingsField>(["cefrLevel", "explainLang", "wordsPerDay"]);
 
 function loadEnvOrExit() {
   try {
@@ -83,7 +89,7 @@ const timeouts = new BullSessionTimeouts({
   log,
 });
 const routineJobs = new BullRoutineJobs({ redisUrl: env.REDIS_URL, log });
-const { bot, sessions, routine } = createBot({
+const { bot, sessions, routine, settingsEvents } = createBot({
   token: env.TELEGRAM_BOT_TOKEN,
   db: database.db,
   log,
@@ -98,6 +104,48 @@ const { bot, sessions, routine } = createBot({
   routine: { jobs: routineJobs, store: new RedisRoutineStore(redis.client) },
 });
 bot.catch((error) => log.error("bot update failed", { error: error.error }));
+
+// Word cards are enriched ahead of time with the server's provider; without one, Learn words
+// enriches each card inline as before.
+const wordEnrichment = env.SERVER_LLM_PROVIDER
+  ? new BullWordEnrichment({
+      redisUrl: env.REDIS_URL,
+      log,
+      concurrency: env.WORD_ENRICH_CONCURRENCY,
+      backfillEveryMinutes: env.WORD_BACKFILL_EVERY_MINUTES,
+    })
+  : undefined;
+if (wordEnrichment) {
+  const enricher = new WordEnricher({
+    db: database.db,
+    registry: skillRegistry,
+    provider: () => createServerProvider(env, defaultFactories),
+    log,
+    batchSize: env.WORD_ENRICH_BATCH,
+    prefetchDays: env.WORD_PREFETCH_DAYS,
+    adminTelegramIds: env.ADMIN_TELEGRAM_IDS,
+  });
+  const requestPrefetch = (userId: number) =>
+    wordEnrichment
+      .requestPrefetch(userId)
+      .catch((error: unknown) => log.warn("word prefetch request failed", { userId, error }));
+  wordEnrichment.startWorker({
+    prefetch: (userId) => enricher.prefetchUser(userId),
+    prefetchAll: () => enricher.prefetchAll(),
+    backfill: () => enricher.backfill(env.WORD_BACKFILL_WORDS),
+  });
+  sessions.onEnded(({ session, user }) => {
+    if (session.kind === "vocab_new") void requestPrefetch(user.id);
+  });
+  settingsEvents.on("settings.changed", ({ userId, changed }) => {
+    if (changed.some((field) => PREFETCH_SETTINGS.has(field))) void requestPrefetch(userId);
+  });
+  redisReady
+    .then((ready) => (ready ? wordEnrichment.schedule() : undefined))
+    .catch((error: unknown) => log.warn("word enrichment scheduling failed", { error }));
+} else {
+  log.info("word prefetch off: SERVER_LLM_PROVIDER is not set");
+}
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));
 routineJobs.startWorker((job) => routine.fire(job));
 // Jobs persist in Redis; this creates them for users who never got any and drops stale ones.
@@ -137,7 +185,13 @@ async function shutdown(signal: string) {
   if (shuttingDown) return;
   shuttingDown = true;
   log.info("shutting down", { signal });
-  await Promise.allSettled([bot.stop(), server.stop(), timeouts.close(), routineJobs.close()]);
+  await Promise.allSettled([
+    bot.stop(),
+    server.stop(),
+    timeouts.close(),
+    routineJobs.close(),
+    wordEnrichment?.close(),
+  ]);
   await Promise.allSettled([database.close(), redis.close()]);
   process.exit(0);
 }

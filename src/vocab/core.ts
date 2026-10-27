@@ -6,7 +6,7 @@ import type { Db } from "../db/client";
 import { applyReview, reviewStatsSince } from "../db/repositories/cards";
 import { getSettings } from "../db/repositories/users";
 import { randomLemmas } from "../db/repositories/words";
-import type { CardRow, CefrLevel } from "../db/schema";
+import type { CardRow, CefrLevel, Language } from "../db/schema";
 import { LlmOutputError, LlmProviderError, ProviderUnavailableError } from "../llm";
 import type { Logger } from "../log";
 import type { LearningHandle } from "../sessions/session-manager";
@@ -37,6 +37,7 @@ const MAX_OPTION_LABEL = 60;
 
 export interface LearnerSettings {
   level: CefrLevel;
+  explainLang: Language;
   timezone: string;
   wordsPerDay: number;
 }
@@ -73,6 +74,7 @@ export class VocabCore {
     const settings = await getSettings(this.deps.db, userId);
     return {
       level: settings?.cefrLevel ?? DEFAULT_LEVEL,
+      explainLang: settings?.explainLang ?? "en",
       timezone: settings?.timezone ?? "UTC",
       wordsPerDay: settings?.wordsPerDay ?? 5,
     };

@@ -15,6 +15,13 @@
       "when": 1793051280953,
       "tag": "0001_card_known_at",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793089159400,
+      "tag": "0002_owner_words_enrichment",
+      "breakpoints": true
     }
   ]
 }

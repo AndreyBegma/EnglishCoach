@@ -12,10 +12,10 @@ import { createLogger, type Logger } from "../log";
  * | `grammar.answered` | `awardGrammarItem` (`src/gamification/awards.ts`), every graded answer |
  * | `card.rated` | `awardCardRating`, every rating, Again included |
  * | `card.learned` | `awardCardRating`, the first passing rating of a card being learned |
- * | `topic.mastered` | topic mastery (#84, C-28); until it lands, the `topic_mastered` XP award |
  * | `talk.correction_fixed` | not emitted yet: the Talk card that tracks a fixed correction |
  *
- * `xp.awarded` stays on its own bus (`src/gamification/events.ts`).
+ * `xp.awarded` and `topic.mastered` keep their own buses (`src/gamification/events.ts`,
+ * `src/grammar/events.ts`).
  */
 export interface DomainEventMap {
   "session.ended": {
@@ -36,7 +36,6 @@ export interface DomainEventMap {
   /** `learned`: the rating that learns the card (see `card.learned`), not a review. */
   "card.rated": { userId: number; cardId: number; score: number; learned: boolean; at: Date };
   "card.learned": { userId: number; cardId: number; at: Date };
-  "topic.mastered": { userId: number; topicId: string; at?: Date };
   "talk.correction_fixed": { userId: number; at?: Date };
 }
 

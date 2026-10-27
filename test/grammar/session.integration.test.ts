@@ -95,9 +95,15 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     const { h, telegramId, user, requests } = await setup(queue);
 
     const picker = await startGrammar(h, telegramId, user.id);
-    // Mixed first, then every topic offered to a learner without a level (treated as B1).
-    expect(picker.buttons[0]).toEqual([encodeGrammarCallback({ type: "topic", id: null })]);
-    expect(picker.labels.flat().slice(1)).toEqual(topicsForLevel("B1").map((t) => t.title.en));
+    // The selector's next topic, Mixed, then every topic offered to a learner without a level
+    // (treated as B1), each not started yet.
+    const b1 = topicsForLevel("B1");
+    expect(picker.buttons[0]).toEqual([
+      encodeGrammarCallback({ type: "topic", id: b1[0]?.id ?? "" }),
+    ]);
+    expect(picker.labels[0]).toEqual([`▶ Next: ${b1[0]?.title.en}`]);
+    expect(picker.buttons[1]).toEqual([encodeGrammarCallback({ type: "topic", id: null })]);
+    expect(picker.labels.flat().slice(2)).toEqual(b1.map((t) => `⬜ ${t.title.en}`));
     await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", id: null }));
 
     // 1: multiple choice, right option. The question is the picker, edited in place.
@@ -263,7 +269,11 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     await h.say(telegramId, "a");
     const check = taskOf(requests, 2);
     expect(check.topic_id).toBe("g004");
-    expect(check.syllabus_topics.map((t: { id: string }) => t.id)).toContain("g041");
+    // The check may name topics around the learner's grammar level (A2 after a wrong A2 answer);
+    // g041 (B2) is outside them, yet a real id the check names is still kept below.
+    const offered = check.syllabus_topics.map((t: { id: string }) => t.id);
+    expect(offered).toContain("g004");
+    expect(offered).not.toContain("g041");
     await h.say(telegramId, "a");
 
     const rows = await database.db

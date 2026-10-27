@@ -12,6 +12,7 @@ import {
   pendingUnlocks,
   RUN,
 } from "../../src/gamification/achievements";
+import { TopicEvents } from "../../src/grammar/events";
 import { topicById } from "../../src/grammar/topics";
 import { createLogger } from "../../src/log";
 import { createTestDatabase, testServerUrl } from "../db/test-database";
@@ -205,17 +206,23 @@ describe.skipIf(!testServerUrl)("achievements in the database", () => {
   test("listens on the buses: a met goal unlocks through xp.awarded", async () => {
     const xp = new XpEvents(log);
     const events = new DomainEvents(log);
-    const stop = engine.start(xp, events);
+    const topics = new TopicEvents(log);
+    const stop = engine.start(xp, events, topics);
     try {
       const awarded = await awardXp(database.db, userId, { source: "daily_goal", amount: 30 }, NOW);
       if (awarded) await xp.emit(awarded);
       await events.emit("talk.correction_fixed", { userId, at: NOW });
+      // Re-mastered after a failed check: still one topic.
+      await topics.emit({ userId, topicId: "g002", at: NOW, first: true });
+      await topics.emit({ userId, topicId: "g002", at: NOW, first: false });
     } finally {
       stop();
     }
     const ids = await unlocked();
     expect(ids).toContain("goal_days_1");
     expect(ids).toContain("corrections_fixed_1");
+    expect(ids).toContain("topic_g002");
+    expect((await getCounters(database.db, userId)).get("topics_mastered")).toBe(1);
   });
 
   test("new unlocks wait for the hub, then are marked shown", async () => {

@@ -18,8 +18,7 @@ export const BASE_XP = {
 
 export type ItemSource = keyof typeof BASE_XP;
 
-/** A grammar topic is mastered on this many correct quiz answers on it; awarded once. */
-export const MASTERY_CORRECT = 5;
+/** A syllabus topic's first mastery (`src/grammar/mastery.ts` decides it); awarded once. */
 export const TOPIC_MASTERED_XP = 50;
 
 export const DAILY_GOAL_XP = 30;
@@ -68,11 +67,6 @@ export function itemXp(
 export function streakXp(streak: number): number {
   if (streak < 2) return 0;
   return Math.min(STREAK_XP_CAP, STREAK_XP_PER_DAY * streak);
-}
-
-/** Whether the correct answer just counted makes the topic mastered (exactly the threshold). */
-export function topicJustMastered(correctOnTopic: number): boolean {
-  return correctOnTopic === MASTERY_CORRECT;
 }
 
 /** XP to go from level 1 to 2; each next level costs `LEVEL_GROWTH` times the previous one. */

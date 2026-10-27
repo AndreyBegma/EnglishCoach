@@ -1,152 +1,9 @@
 {
-  "id": "475d7003-1b6e-4bbf-96f2-2bc03d0d4ab3",
+  "id": "bfbb2864-e505-48b5-ae8f-d859968ee6e3",
   "prevId": "e4be49cd-2e6c-487c-a43e-5a59580afa7c",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.achievement_progress": {
-      "name": "achievement_progress",
-      "schema": "",
-      "columns": {
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "metric": {
-          "name": "metric",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "value": {
-          "name": "value",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "achievement_progress_user_id_users_id_fk": {
-          "name": "achievement_progress_user_id_users_id_fk",
-          "tableFrom": "achievement_progress",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "achievement_progress_user_id_metric_pk": {
-          "name": "achievement_progress_user_id_metric_pk",
-          "columns": [
-            "user_id",
-            "metric"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.user_achievements": {
-      "name": "user_achievements",
-      "schema": "",
-      "columns": {
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "achievement_id": {
-          "name": "achievement_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "unlocked_at": {
-          "name": "unlocked_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        },
-        "notified_at": {
-          "name": "notified_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "user_achievements_user_id_unlocked_at_idx": {
-          "name": "user_achievements_user_id_unlocked_at_idx",
-          "columns": [
-            {
-              "expression": "user_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "unlocked_at",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "user_achievements_user_id_users_id_fk": {
-          "name": "user_achievements_user_id_users_id_fk",
-          "tableFrom": "user_achievements",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "user_achievements_user_id_achievement_id_pk": {
-          "name": "user_achievements_user_id_achievement_id_pk",
-          "columns": [
-            "user_id",
-            "achievement_id"
-          ]
-        }
-      },
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.example_sentence_words": {
       "name": "example_sentence_words",
       "schema": "",
@@ -1452,6 +1309,161 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.topic_progress": {
+      "name": "topic_progress",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "topic_id": {
+          "name": "topic_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "topic_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'not_started'"
+        },
+        "recent_items": {
+          "name": "recent_items",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "accuracy_by_type": {
+          "name": "accuracy_by_type",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "transfer_evidence": {
+          "name": "transfer_evidence",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "criteria_met_at": {
+          "name": "criteria_met_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "confirmed_at": {
+          "name": "confirmed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mastered_at": {
+          "name": "mastered_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_mastered_at": {
+          "name": "first_mastered_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "fsrs": {
+          "name": "fsrs",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_due": {
+          "name": "review_due",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "check_scores": {
+          "name": "check_scores",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "method_history": {
+          "name": "method_history",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'[]'::jsonb"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "topic_progress_user_id_review_due_idx": {
+          "name": "topic_progress_user_id_review_due_idx",
+          "columns": [
+            {
+              "expression": "user_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "review_due",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "topic_progress_user_id_users_id_fk": {
+          "name": "topic_progress_user_id_users_id_fk",
+          "tableFrom": "topic_progress",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "topic_progress_user_id_topic_id_pk": {
+          "name": "topic_progress_user_id_topic_id_pk",
+          "columns": [
+            "user_id",
+            "topic_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.user_settings": {
       "name": "user_settings",
       "schema": "",
@@ -2634,6 +2646,16 @@
         "speaking"
       ]
     },
+    "public.topic_status": {
+      "name": "topic_status",
+      "schema": "public",
+      "values": [
+        "not_started",
+        "learning",
+        "shaky",
+        "mastered"
+      ]
+    },
     "public.xp_source": {
       "name": "xp_source",
       "schema": "public",
@@ -2644,8 +2666,7 @@
         "talk_turn",
         "topic_mastered",
         "daily_goal",
-        "streak",
-        "achievement"
+        "streak"
       ]
     }
   },

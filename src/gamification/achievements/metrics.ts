@@ -16,7 +16,7 @@ export const SKILLS = skillEnum.enumValues;
  * | `reviews`, `reviews_perfect` | `card.rated` (a passing review; one rated Good or Easy) |
  * | `grammar_answers`, `grammar_correct`, `grammar_correct_·band` | `grammar.answered` |
  * | `grammar_run` | `grammar.answered`: the best run of correct answers in a row |
- * | `topics_mastered`, `topics_mastered_·band`, `topic_mastered.<id>` | `topic.mastered` |
+ * | `topics_mastered`, `topics_mastered_·band`, `topic_mastered.<id>` | `topic.mastered` (`src/grammar/events.ts`) |
  * | `day_streak`, `goal_days` | `xp.awarded` (`streak`, `daily_goal`) |
  * | `xp_total`, `profile_level` | `xp.awarded` |
  * | `skill_·skill` | any graded item: the skill's CEFR band index (A1 = 0 … C2 = 5) |

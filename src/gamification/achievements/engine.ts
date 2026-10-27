@@ -7,6 +7,7 @@ import {
 } from "../../db/repositories/achievements";
 import { getSettings } from "../../db/repositories/users";
 import { type DomainEventMap, type DomainEvents, domainEvents } from "../../events/domain-events";
+import { type TopicEvents, type TopicMastered, topicEvents } from "../../grammar/events";
 import { topicById } from "../../grammar/topics";
 import { getLevels } from "../../levels";
 import type { Logger } from "../../log";
@@ -73,13 +74,17 @@ export class AchievementEngine {
   }
 
   /** Subscribes to the buses; returns the function that unsubscribes. */
-  start(xp: XpEvents = xpEvents, events: DomainEvents = domainEvents): () => void {
+  start(
+    xp: XpEvents = xpEvents,
+    events: DomainEvents = domainEvents,
+    topics: TopicEvents = topicEvents,
+  ): () => void {
     const offs = [
       xp.on("xp.awarded", (event) => this.onXpAwarded(event)),
       events.on("grammar.answered", (event) => this.onGrammarAnswered(event)),
       events.on("card.rated", (event) => this.onCardRated(event)),
       events.on("card.learned", (event) => this.onCardLearned(event)),
-      events.on("topic.mastered", (event) => this.onTopicMastered(event)),
+      topics.on("topic.mastered", (event) => this.onTopicMastered(event)),
       events.on("session.ended", (event) => this.onSessionEnded(event)),
       events.on("talk.correction_fixed", (event) => this.onCorrectionFixed(event)),
     ];
@@ -159,12 +164,6 @@ export class AchievementEngine {
         case "talk_turn":
           updates.push(add("talk_turns"), ...(await this.skillUpdates(event.userId)));
           break;
-        case "topic_mastered":
-          // Until topic mastery emits `topic.mastered` itself; the topic counter is idempotent.
-          if (typeof event.meta.topicId === "string") {
-            await this.onTopicMastered({ userId: event.userId, topicId: event.meta.topicId });
-          }
-          break;
       }
       await this.record(event.userId, updates);
     });
@@ -227,10 +226,11 @@ export class AchievementEngine {
   }
 
   /**
-   * A mastered topic sets its own counter (once, however often it is reported), then the totals
-   * are recounted from the topic counters, so a repeated event never inflates them.
+   * A mastered topic (`topic.mastered`, `src/grammar/events.ts`) sets its own counter — once,
+   * however often it is reported or re-mastered after a failed check — then the totals are
+   * recounted from the topic counters, so a repeated event never inflates them.
    */
-  onTopicMastered(event: DomainEventMap["topic.mastered"]): Promise<void> {
+  onTopicMastered(event: Pick<TopicMastered, "userId" | "topicId"> & { at?: Date }): Promise<void> {
     return this.guarded(event.userId, "topic.mastered", async () => {
       const topic = topicById(event.topicId);
       if (!topic) return;

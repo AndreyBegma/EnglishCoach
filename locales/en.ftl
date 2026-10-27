@@ -307,6 +307,13 @@ routine-outdated = This reminder is no longer active.
 # --- progress ---
 progress-level = 🎓 Level: { $level }
 progress-level-unset = 🎓 Level: not set yet
+progress-skills = 📊 { $list }
+progress-skill-grammar = Grammar
+progress-skill-vocabulary = Vocabulary
+progress-skill-reading = Reading
+progress-skill-listening = Listening
+progress-skill-writing = Writing
+progress-skill-speaking = Speaking
 progress-streak = 🔥 Streak: { $current } (best: { $best })
 progress-goal = 🎯 Today: { $done }/{ $goal } new words · { $reviews } reviews
 progress-goal-met = ✅

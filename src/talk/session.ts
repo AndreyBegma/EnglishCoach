@@ -4,6 +4,7 @@ import type { Locale, Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
 import { upsertMistake } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
+import { recordTalkTurn } from "../levels";
 import type { Logger } from "../log";
 import { acceptAnswer } from "../sessions/answer";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
@@ -98,6 +99,9 @@ async function takeTurn(
       log.warn("talk mistake upsert failed", { sessionId: session.session.id, error });
     });
   }
+  await recordTalkTurn(db, userId, text, turn.corrections).catch((error: unknown) => {
+    log.warn("talk level update failed", { sessionId: session.session.id, error });
+  });
 }
 
 /** The bot's opening question, from the model or, if that fails, a fixed one. */

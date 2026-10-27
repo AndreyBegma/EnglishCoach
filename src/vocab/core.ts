@@ -8,6 +8,7 @@ import { getSettings } from "../db/repositories/users";
 import { randomLemmas } from "../db/repositories/words";
 import type { CardRow, CefrLevel, Language } from "../db/schema";
 import type { WordImages } from "../images";
+import { recordCardRating } from "../levels";
 import { LlmOutputError, LlmProviderError, ProviderUnavailableError } from "../llm";
 import type { Logger } from "../log";
 import type { LearningHandle } from "../sessions/session-manager";
@@ -198,6 +199,7 @@ export class VocabCore {
     if (!(await applyReview(this.deps.db, card.id, card.reps, next, log))) return false;
     const { timezone } = await this.settings(handle.user.id);
     await addVocabStats(this.deps.db, handle.user.id, localDate(now, timezone), { [counter]: 1 });
+    await recordCardRating(this.deps.db, handle.user.id, card, rating);
     return true;
   }
 

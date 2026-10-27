@@ -2,6 +2,7 @@ import type { Db } from "../db/client";
 import { listTopMistakes } from "../db/repositories/mistakes";
 import { getSettings } from "../db/repositories/users";
 import type { CefrLevel, Language, Mistake, UserSettings } from "../db/schema";
+import { getOverallLevel } from "../levels";
 
 /** Native languages the prompts have curated hints for. */
 export type NativeLanguage = Exclude<Language, "en">;
@@ -50,13 +51,14 @@ export function toWeakSpot(mistake: Mistake): WeakSpot {
 /** Loads a learner's context from their settings and top mistakes. */
 export function learnerContextFromDb(db: Db) {
   return async (userId: number): Promise<LearnerContext> => {
-    const [settings, mistakes] = await Promise.all([
+    const [settings, mistakes, level] = await Promise.all([
       getSettings(db, userId),
       listTopMistakes(db, userId, WEAK_SPOT_LIMIT),
+      getOverallLevel(db, userId),
     ]);
     if (!settings) throw new Error(`user ${userId} has no settings`);
     return {
-      level: settings.cefrLevel,
+      level: level?.band ?? null,
       explainLang: settings.explainLang,
       uiLang: settings.uiLang,
       nativeLang: nativeLanguageOf(settings),

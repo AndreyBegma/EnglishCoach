@@ -1,10 +1,16 @@
 import { eq } from "drizzle-orm";
 import type { Db } from "../db/client";
 import { type CardRow, type CefrLevel, type Skill, words } from "../db/schema";
-import { awardCardRating, awardGrammarItem, awardTalkTurn } from "../gamification/awards";
+import {
+  awardCardRating,
+  awardGrammarItem,
+  awardTalkTurn,
+  awardTopicMastered,
+} from "../gamification/awards";
+import { recordTopicItem, recordTopicUses } from "../grammar/progress";
 import { topicById } from "../grammar/topics";
-import { type Difficulty, recordGradedItem, seedLevels } from "./levels";
-import { parseCefr } from "./model";
+import { type Difficulty, getLevels, recordGradedItem, seedLevels } from "./levels";
+import { PRIOR, parseCefr } from "./model";
 
 /**
  * What each grader's item is worth to the level model: its difficulty and its score. Kept here so
@@ -53,11 +59,14 @@ export async function recordPlacement(
 /** A partial answer is shown as a pass but counts half. */
 export const GRAMMAR_SCORES = { correct: 1, partial: 0.5, wrong: 0 } as const;
 
-/** A graded quiz answer, into the grammar level. */
+/**
+ * A graded quiz answer, into the grammar level, its XP and its syllabus topic's mastery; a
+ * topic's first mastery earns the mastery bonus.
+ */
 export async function recordGrammarItem(
   db: Db,
   userId: number,
-  item: { topic_id: string | null; difficulty: CefrLevel },
+  item: { topic_id: string | null; difficulty: CefrLevel; type: string },
   verdict: keyof typeof GRAMMAR_SCORES,
 ): Promise<void> {
   const difficulty = grammarItemDifficulty(item);
@@ -72,6 +81,14 @@ export async function recordGrammarItem(
     itemLevel: graded.itemLevel,
     rating: graded.before,
   });
+  const step = await recordTopicItem(db, userId, item.topic_id, { type: item.type, score });
+  if (step?.event?.first) {
+    await awardTopicMastered(db, userId, {
+      topicId: step.event.topicId,
+      itemLevel: graded.itemLevel,
+      rating: graded.before,
+    });
+  }
 }
 
 /** A card's difficulty: its dictionary word's level; a learner's own card is at their level. */
@@ -132,15 +149,29 @@ export function turnScore(
   return Math.max(0, 1 - penalty);
 }
 
-/** A corrected conversation turn, into the writing level and XP; a too-short turn records nothing. */
+/**
+ * A corrected conversation turn, into the writing level and XP, and the syllabus topics it used
+ * correctly (`topicUses`) into their mastery as transfer evidence; a too-short turn records nothing.
+ */
 export async function recordTalkTurn(
   db: Db,
   userId: number,
   text: string,
   corrections: readonly { severity: keyof typeof CORRECTION_PENALTY }[],
+  topicUses: readonly string[] = [],
 ): Promise<void> {
   const score = turnScore(text, corrections);
   if (score === null) return;
   await recordGradedItem(db, userId, "writing", null, score, { expected: ITEM_EXPECTED.turn });
   await awardTalkTurn(db, userId, score);
+  const mastered = (await recordTopicUses(db, userId, topicUses)).filter((event) => event.first);
+  if (mastered.length === 0) return;
+  // A topic mastered in conversation is pitched against the learner's grammar level.
+  const levels = await getLevels(db, userId);
+  const rating = levels?.skills.grammar?.rating ?? levels?.overall.rating ?? PRIOR.rating;
+  for (const { topicId } of mastered) {
+    const level = topicById(topicId)?.level;
+    const itemLevel = (level === undefined ? undefined : parseCefr(level)) ?? rating;
+    await awardTopicMastered(db, userId, { topicId, itemLevel, rating });
+  }
 }

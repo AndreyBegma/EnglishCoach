@@ -11,6 +11,8 @@ import type { LearningHandle, SessionKindHandler } from "../sessions/session-man
 import type { SkillRunner } from "../skills";
 import { parseGrammarCallback } from "./callbacks";
 import { type Graded, gradeChoice, gradeTyped } from "./grading";
+import { nextTopic } from "./next-topic";
+import { grammarBand, topicProgressMap } from "./progress";
 import { GRAMMAR_CARD_THRESHOLD, promoteMistakeToCard } from "./promotion";
 import {
   feedbackText,
@@ -22,7 +24,7 @@ import {
 } from "./screens";
 import type { GrammarState } from "./state";
 import { recordGrammarAnswer } from "./stats";
-import { knownTopicId, topicById, topicChoices } from "./topics";
+import { knownTopicId, SYLLABUS, topicById, topicChoices } from "./topics";
 
 export interface GrammarDeps {
   db: Db;
@@ -79,8 +81,10 @@ export function grammarSession(deps: GrammarDeps): SessionKindHandler {
         );
         return;
       }
-      const settings = await getSettings(deps.db, handle.user.id);
-      const picker = topicPicker(deps.i18n, handle.locale, settings?.cefrLevel ?? null);
+      const band = await grammarBand(deps.db, handle.user.id);
+      const progress = await topicProgressMap(deps.db, handle.user.id);
+      const next = nextTopic(SYLLABUS.topics, progress, band, new Date());
+      const picker = topicPicker(deps.i18n, handle.locale, band, progress, next);
       await handle.window.show({ text: picker.text, reply_markup: picker.keyboard });
     },
 
@@ -147,8 +151,7 @@ async function showQuestion(
 
 /** The syllabus topics around the learner's level a model may name. */
 async function choicesFor(deps: GrammarDeps, handle: LearningHandle) {
-  const settings = await getSettings(deps.db, handle.user.id);
-  return topicChoices(settings?.cefrLevel ?? null);
+  return topicChoices(await grammarBand(deps.db, handle.user.id));
 }
 
 /** The state of the session this update belongs to, or undefined when it is stale or not begun. */

@@ -26,6 +26,7 @@ Product decisions for v2 (what the app is meant to do): [PRODUCT.md](PRODUCT.md)
 | Lint / format | Biome |
 | Tests | `bun test` |
 | Deploy v1 | docker-compose (one host). Kubernetes/Helm is v2 |
+| Production | `docker-compose.prod.yml` on top of the base file, driven by `scripts/deploy.sh`; the app image boots through `scripts/entrypoint.sh` (migrate, seed, start) — see README "Deploy" |
 | Backups | `backup` compose service: daily `pg_dump -Fc` to `./backups`, 7 daily / 4 weekly / 3 monthly rotation, weekly restore check (`scripts/backup*.sh`, `scripts/restore*.sh`) |
 
 ## Ports (non-standard on purpose — the dev host already uses 5432, 6390, 8000, 9000)

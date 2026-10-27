@@ -1,0 +1,62 @@
+# Production override. Use together with the base file:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+# (scripts/deploy.sh does exactly that.)
+#
+# On top of docker-compose.yml: long polling is forced, every service gets a rotating json-file
+# log and `restart: unless-stopped`, the app gets a healthcheck on /health, and the data stores
+# are no longer reachable from outside the host (published on 127.0.0.1 only).
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  postgres:
+    restart: unless-stopped
+    logging: *logging
+    ports: !override
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-55433}:5432"
+
+  redis:
+    restart: unless-stopped
+    logging: *logging
+    ports: !override
+      - "127.0.0.1:${REDIS_HOST_PORT:-56380}:6379"
+
+  tts:
+    restart: unless-stopped
+    logging: *logging
+    ports: !override
+      - "127.0.0.1:${TTS_HOST_PORT:-18880}:8880"
+
+  stt:
+    restart: unless-stopped
+    logging: *logging
+    ports: !override
+      - "127.0.0.1:${STT_HOST_PORT:-18890}:8000"
+
+  backup:
+    restart: unless-stopped
+    logging: *logging
+
+  app:
+    restart: unless-stopped
+    logging: *logging
+    environment:
+      BOT_MODE: polling
+    ports: !override
+      - "127.0.0.1:${HTTP_HOST_PORT:-18740}:18740"
+    healthcheck:
+      # /health answers 503 unless Postgres and Redis are reachable, so this covers both.
+      test:
+        - CMD
+        - bun
+        - -e
+        - "const r = await fetch('http://127.0.0.1:18740/health'); process.exit(r.ok ? 0 : 1)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      # Migrations and seeds run before the bot starts; the first boot loads the dictionary.
+      start_period: 120s

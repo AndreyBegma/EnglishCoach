@@ -158,6 +158,38 @@ and, from whisper, per-word confidence. Voice messages over 60 s are rejected be
 once, its Telegram `file_id` is stored in `tts_audio`, and every later play is
 `sendVoice(file_id)` — instant, no upload, never a forward. Without it each send uploads the file.
 
+## Deploy
+
+One Linux host with Docker (Compose v2.24+), `curl` and `git`; a clone of the repository with a filled
+`.env` (`TELEGRAM_BOT_TOKEN`, `MASTER_KEY`, `ADMIN_TELEGRAM_IDS`, LLM keys — see `.env.example`).
+
+```sh
+scripts/deploy.sh      # first install and every update
+```
+
+It pulls `develop` (fast-forward only; it refuses a dirty tree), runs
+`docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build`, waits for `/health`
+on `127.0.0.1:${HTTP_HOST_PORT:-18740}` and prints the status table. If the app is not healthy within
+`DEPLOY_TIMEOUT` (240 s) it prints the last app log lines and exits 1. Re-running with nothing new
+changes nothing. `DEPLOY_BRANCH` deploys another branch, `DEPLOY_SKIP_PULL=1` deploys the tree as it
+is. Only `HTTP_HOST_PORT` is read from `.env`; no value is ever printed.
+
+`docker-compose.prod.yml` adds to the base file: `restart: unless-stopped` and rotating logs
+(`json-file`, 5 × 10 MB per service), an app healthcheck on `/health` (Postgres and Redis reachable),
+long polling regardless of `BOT_MODE` in `.env`, and loopback-only published ports.
+Logs: `docker compose -f docker-compose.yml -f docker-compose.prod.yml logs -f app`.
+
+On every start the app container (`scripts/entrypoint.sh`) applies pending migrations, then runs the
+idempotent seeds (dictionary, owner's word list, grammar, phrasal verbs), then starts the bot. An empty
+database comes up fully loaded; a second start changes no row. A failed migration or seed stops the
+container, and the restart policy retries it.
+
+**Surviving a reboot** needs the Docker daemon enabled at boot (`sudo systemctl enable docker`); the
+restart policy then brings every service back, and `depends_on` healthchecks order them. Check:
+`sudo reboot`, then `docker compose -f docker-compose.yml -f docker-compose.prod.yml ps` — every
+service `running`/`healthy` (tts and stt take a minute to load their models) and
+`curl localhost:18740/health` answers `{"ok":true,"db":true,"redis":true}`.
+
 ## Backups
 
 The `backup` compose service runs `pg_dump -Fc` daily at `BACKUP_HOUR` (UTC, default 03) into

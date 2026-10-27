@@ -1,0 +1,275 @@
+{
+  "id": "g084",
+  "position": 84,
+  "cefrLevel": "C2",
+  "title": "Типичные ошибки русскоговорящих: большой разбор",
+  "plannedFrom": "2027-12-27",
+  "plannedTo": "2028-01-01",
+  "sections": {
+    "why": [
+      "Большинство ошибок русскоговорящих повторяются: мы переводим русскую конструкцию слово в слово. Здесь собраны самые частые «ловушки» всего курса. Если ты их знаешь, ты ловишь себя до того, как ошибка вылетела."
+    ],
+    "formation": [
+      "Правильные модели вместо русских калек:",
+      "• I agree (не am agree); I am 25 (не have 25 years)",
+      "• tell + человек (told me), say + that (said that)",
+      "• глаголы без предлога: discuss, explain to, listen to, wait for, depend on",
+      "• since + точка, for + период, оба с Present Perfect",
+      "• after when / if / as soon as: Present Simple, не will",
+      "• Do you think ...? (не How do you think?)"
+    ],
+    "usage": [
+      "1. Глаголы и предлоги: русский предлог и английский не совпадают. We discussed the plan (не about). Explain it to me (не explain me). Listen to music, depend on, married to, interested in.",
+      "2. Времена: Present Perfect с since / for (I've lived here since 2019, не I live), Present Simple после when / if (When I get home, I'll call you).",
+      "3. Счётные и несчётные: advice, information, news, money, work несчётные, без -s и без a. (Some advice, the information is useful.)",
+      "4. Порядок слов: подлежащее обязательно (It's raining), наречие частоты перед глаголом (She always comes), в косвенном вопросе прямой порядок (Do you know where the station is?).",
+      "5. Прилагательные: сравнение либо -er, либо more (taller, не more tall); -ed о чувствах, -ing о причине (I'm bored, the film is boring).",
+      "6. Артикли и мелочи: a / an с профессией (She works as an engineer), no article в go home, go to work, at night."
+    ],
+    "signalWords": [
+      "Русское «мне 30 лет», «я согласен», «как ты думаешь», «рассказал мне», «обсудили»: на этих выражениях калька проявляется чаще всего."
+    ],
+    "mistakes": [
+      "✗ I am agree → ✓ I agree (agree уже глагол, am не нужен)",
+      "✗ I have 25 years → ✓ I am 25 (возраст через to be)",
+      "✗ He said me → ✓ He told me / He said that (said без человека)",
+      "✗ I'm living here since 2019 → ✓ I've lived here since 2019 (since требует Perfect)",
+      "✗ She gave me an advice → ✓ some advice (advice несчётное)"
+    ],
+    "remember": [
+      "Прежде чем перевести слово в слово, спроси себя: «А так ли говорят по-английски?» — и сверься с моделью."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I am agree with you.",
+          "answer": "I agree with you."
+        },
+        {
+          "number": 2,
+          "prompt": "I have 25 years.",
+          "answer": "I am 25 years old. / I'm 25. / I am 25. / I'm 25 years old."
+        },
+        {
+          "number": 3,
+          "prompt": "He said me that he was busy.",
+          "answer": "He told me that he was busy. / He said that he was busy."
+        },
+        {
+          "number": 4,
+          "prompt": "We discussed about the plan.",
+          "answer": "We discussed the plan."
+        },
+        {
+          "number": 5,
+          "prompt": "Can you explain me this rule?",
+          "answer": "Can you explain this rule to me?"
+        },
+        {
+          "number": 6,
+          "prompt": "I'm living here since 2019.",
+          "answer": "I've lived here since 2019. / I have lived here since 2019. / I have been living here since 2019. / I've been living here since 2019."
+        },
+        {
+          "number": 7,
+          "prompt": "She gave me an advice.",
+          "answer": "She gave me some advice. / She gave me a piece of advice."
+        },
+        {
+          "number": 8,
+          "prompt": "Information are on the website.",
+          "answer": "The information is on the website. / Information is on the website."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm ___ in this film. (a) interesting (b) interested",
+          "answer": "interested"
+        },
+        {
+          "number": 2,
+          "prompt": "She is married ___ a doctor. (a) with (b) to",
+          "answer": "to"
+        },
+        {
+          "number": 3,
+          "prompt": "It depends ___ the weather. (a) of (b) on",
+          "answer": "on"
+        },
+        {
+          "number": 4,
+          "prompt": "I will call you when I ___ home. (a) will get (b) get",
+          "answer": "get"
+        },
+        {
+          "number": 5,
+          "prompt": "She works as ___ designer. (a) a (b) the (c) no article",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "Do you know where ___? (a) is the station (b) the station is",
+          "answer": "the station is"
+        },
+        {
+          "number": 7,
+          "prompt": "This laptop is ___ than mine. (a) more good (b) better",
+          "answer": "better"
+        },
+        {
+          "number": 8,
+          "prompt": "The people ___ waiting outside. (a) is (b) are",
+          "answer": "are"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Вставьте пропущенное слово или форму глагола",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have been working here ___ three years.",
+          "answer": "for"
+        },
+        {
+          "number": 2,
+          "prompt": "Please listen ___ me carefully.",
+          "answer": "to"
+        },
+        {
+          "number": 3,
+          "prompt": "We need more ___ (information / informations) about the project.",
+          "answer": "information"
+        },
+        {
+          "number": 4,
+          "prompt": "If it ___ (rain) tomorrow, we will stay at home.",
+          "answer": "rains"
+        },
+        {
+          "number": 5,
+          "prompt": "He asked me where I ___ (live).",
+          "answer": "lived"
+        },
+        {
+          "number": 6,
+          "prompt": "She is ___ (good) developer in our team.",
+          "answer": "the best"
+        },
+        {
+          "number": 7,
+          "prompt": "I'm ___ (bore) because this meeting is ___ (bore).",
+          "answer": "bored, boring"
+        },
+        {
+          "number": 8,
+          "prompt": "I look forward to ___ (see) you.",
+          "answer": "seeing"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку (посложнее)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I like very much this song.",
+          "answer": "I like this song very much."
+        },
+        {
+          "number": 2,
+          "prompt": "She always is late.",
+          "answer": "She is always late."
+        },
+        {
+          "number": 3,
+          "prompt": "Is raining now.",
+          "answer": "It is raining now. / It's raining now."
+        },
+        {
+          "number": 4,
+          "prompt": "How do you think, is it a good idea?",
+          "answer": "Do you think it's a good idea? / Do you think it is a good idea?"
+        },
+        {
+          "number": 5,
+          "prompt": "I'm going to the home.",
+          "answer": "I'm going home. / I am going home."
+        },
+        {
+          "number": 6,
+          "prompt": "He is more tall than his brother.",
+          "answer": "He is taller than his brother."
+        },
+        {
+          "number": 7,
+          "prompt": "I didn't see nobody.",
+          "answer": "I didn't see anybody. / I saw nobody. / I didn't see anyone."
+        },
+        {
+          "number": 8,
+          "prompt": "My friend has a big experience in IT.",
+          "answer": "My friend has a lot of experience in IT. / My friend has a great deal of experience in IT. / My friend has extensive experience in IT."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я согласен с тобой.",
+          "answer": "I agree with you."
+        },
+        {
+          "number": 2,
+          "prompt": "Мне 30 лет.",
+          "answer": "I'm 30 years old. / I'm 30. / I am 30 years old. / I am 30."
+        },
+        {
+          "number": 3,
+          "prompt": "Он рассказал мне о проекте.",
+          "answer": "He told me about the project."
+        },
+        {
+          "number": 4,
+          "prompt": "Мы обсудили план вчера.",
+          "answer": "We discussed the plan yesterday. / Yesterday we discussed the plan."
+        },
+        {
+          "number": 5,
+          "prompt": "Я живу в Киеве с 2018 года.",
+          "answer": "I've lived in Kyiv since 2018. / I have lived in Kyiv since 2018. / I have been living in Kyiv since 2018. / I've been living in Kyiv since 2018."
+        },
+        {
+          "number": 6,
+          "prompt": "Это хороший совет.",
+          "answer": "That's good advice. / It's good advice. / This is good advice. / That's a good piece of advice."
+        },
+        {
+          "number": 7,
+          "prompt": "Как ты думаешь, он придёт?",
+          "answer": "Do you think he will come? / Do you think he'll come? / Do you think he's coming?"
+        },
+        {
+          "number": 8,
+          "prompt": "Я жду ответа от клиента.",
+          "answer": "I'm waiting for a reply from the client. / I'm waiting for an answer from the client. / I'm waiting for the client's reply."
+        }
+      ]
+    }
+  ]
+}

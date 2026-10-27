@@ -1,0 +1,272 @@
+{
+  "id": "g056",
+  "position": 56,
+  "cefrLevel": "C1",
+  "title": "Эмфаза: do/does/did, such, so, the very, itself",
+  "plannedFrom": "2027-06-14",
+  "plannedTo": "2027-06-19",
+  "sections": {
+    "why": [
+      "В русском мы усиливаем мысль интонацией и словами «действительно», «именно», «сам». В английском интонацию на письме не видно, поэтому для усиления используются специальные слова и конструкции. Они делают речь выразительнее: вы возражаете, подчёркиваете удивление или уточняете."
+    ],
+    "formation": [
+      "• do/does/did + базовая форма глагола (в утвердительном предложении, ударение на do): I do like it. She does know. He did call.",
+      "• such + (a/an) + (прилагательное) + существительное: such a long day, such good people",
+      "• so + прилагательное/наречие (без существительного): so long, so quickly",
+      "• the very + существительное: the very idea, the very thing",
+      "• местоимение/существительное + itself (или myself, himself и т. д.) для усиления: The problem itself is simple."
+    ],
+    "usage": [
+      "1. Do/does/did для усиления или возражения. После do глагол стоит в базовой форме, а does/did уже показывают время. (I did tell him! = Я же ему говорил! / She does work hard, you know. = Она действительно много работает.) Часто так отвечают на сомнение: «You never call.» — «I do call!»",
+      "2. Such + существительное, so + прилагательное. (It was such a boring meeting. = Это было такое скучное совещание. / The meeting was so boring. = Совещание было таким скучным.)",
+      "3. Such / so с последствием: such... that, so... that. (It was such a good offer that I accepted. = Предложение было настолько хорошим, что я согласился. / He was so tired that he fell asleep. = Он так устал, что уснул.)",
+      "4. The very для «именно тот» или «самый». (This is the very bug we were looking for. = Это именно тот баг, который мы искали. / The very thought of it scares me. = Одна мысль об этом пугает меня.)",
+      "5. -self / itself для «сам, сама по себе». (The code itself is fine; the server is the problem. = Сам код нормальный, проблема в сервере. / I fixed it myself. = Я сам это исправил.)"
+    ],
+    "signalWords": [
+      "really, actually, in fact, indeed, believe me, you know; после but/yet: «But I did tell you!»; такие слова, как «даже», «именно», «сам»."
+    ],
+    "mistakes": [
+      "✗ I did went there. → ✓ I did go there. После did глагол стоит в базовой форме.",
+      "✗ She does likes it. → ✓ She does like it. Окончание -s уже в does.",
+      "✗ It was so a nice day. → ✓ It was such a nice day. Перед существительным нужно such, а не so.",
+      "✗ He is such tall. → ✓ He is so tall. Прилагательное без существительного требует so.",
+      "✗ I do go to work every day. (как обычное утверждение) → ✓ I go to work every day. Без усиления do в утверждении не добавляем."
+    ],
+    "remember": [
+      "Such + существительное, so + прилагательное; для усиления глагола ставь do/does/did с ударением, а глагол оставляй в базовой форме."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте such или so",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was ___ a hot day that we stayed inside.",
+          "answer": "such"
+        },
+        {
+          "number": 2,
+          "prompt": "The film was ___ boring that I fell asleep.",
+          "answer": "so"
+        },
+        {
+          "number": 3,
+          "prompt": "She is ___ a talented designer.",
+          "answer": "such"
+        },
+        {
+          "number": 4,
+          "prompt": "Why are you ___ angry?",
+          "answer": "so"
+        },
+        {
+          "number": 5,
+          "prompt": "They gave us ___ good advice.",
+          "answer": "such"
+        },
+        {
+          "number": 6,
+          "prompt": "Our new server is ___ fast!",
+          "answer": "so"
+        },
+        {
+          "number": 7,
+          "prompt": "It was ___ an easy task that I finished in ten minutes.",
+          "answer": "such"
+        },
+        {
+          "number": 8,
+          "prompt": "He speaks ___ quickly that nobody understands him.",
+          "answer": "so"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Усильте предложение с помощью do/does/did",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I like your idea. (усильте: I ___ your idea.)",
+          "answer": "do like"
+        },
+        {
+          "number": 2,
+          "prompt": "She works hard. (усильте: She ___ hard.)",
+          "answer": "does work"
+        },
+        {
+          "number": 3,
+          "prompt": "He called me yesterday. (усильте: He ___ me yesterday.)",
+          "answer": "did call"
+        },
+        {
+          "number": 4,
+          "prompt": "We enjoyed the trip. (усильте: We ___ the trip.)",
+          "answer": "did enjoy"
+        },
+        {
+          "number": 5,
+          "prompt": "They know the answer. (усильте: They ___ the answer.)",
+          "answer": "do know"
+        },
+        {
+          "number": 6,
+          "prompt": "You forgot to send the file. (усильте: You ___ to send the file.)",
+          "answer": "did forget"
+        },
+        {
+          "number": 7,
+          "prompt": "My brother plays the guitar well. (усильте: My brother ___ the guitar well.)",
+          "answer": "does play"
+        },
+        {
+          "number": 8,
+          "prompt": "I locked the door! (усильте: I ___ the door!)",
+          "answer": "did lock"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was (a) so (b) such a long meeting.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "This is (a) very (b) the very thing I need.",
+          "answer": "b"
+        },
+        {
+          "number": 3,
+          "prompt": "You think I didn't help? I (a) did help (b) did helped you!",
+          "answer": "a"
+        },
+        {
+          "number": 4,
+          "prompt": "The room was (a) such (b) so dirty that we left.",
+          "answer": "b"
+        },
+        {
+          "number": 5,
+          "prompt": "The manager (a) himself (b) he told me the news.",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "She (a) does likes (b) does like cats, whatever you think.",
+          "answer": "b"
+        },
+        {
+          "number": 7,
+          "prompt": "They are (a) such (b) so nice people.",
+          "answer": "a"
+        },
+        {
+          "number": 8,
+          "prompt": "The (a) very idea (b) idea very of leaving makes me sad.",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was so a beautiful city.",
+          "answer": "It was such a beautiful city."
+        },
+        {
+          "number": 2,
+          "prompt": "I did went to the party, honestly.",
+          "answer": "I did go to the party, honestly."
+        },
+        {
+          "number": 3,
+          "prompt": "She does likes spicy food.",
+          "answer": "She does like spicy food."
+        },
+        {
+          "number": 4,
+          "prompt": "He is such clever.",
+          "answer": "He is so clever."
+        },
+        {
+          "number": 5,
+          "prompt": "The idea very of failing scares me.",
+          "answer": "The very idea of failing scares me."
+        },
+        {
+          "number": 6,
+          "prompt": "They were such tired that they went to bed early.",
+          "answer": "They were so tired that they went to bed early."
+        },
+        {
+          "number": 7,
+          "prompt": "The bug it is easy to fix, but finding it was hard.",
+          "answer": "The bug itself is easy to fix, but finding it was hard."
+        },
+        {
+          "number": 8,
+          "prompt": "I do liked the presentation.",
+          "answer": "I did like the presentation."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Это был такой длинный день!",
+          "answer": "It was such a long day!"
+        },
+        {
+          "number": 2,
+          "prompt": "Я же тебе говорил! (я действительно говорил)",
+          "answer": "I did tell you!"
+        },
+        {
+          "number": 3,
+          "prompt": "Она действительно хорошо знает JavaScript.",
+          "answer": "She does know JavaScript well. / She does know JavaScript really well."
+        },
+        {
+          "number": 4,
+          "prompt": "Сам код простой, но документации нет.",
+          "answer": "The code itself is simple, but there is no documentation."
+        },
+        {
+          "number": 5,
+          "prompt": "Этот сайт такой медленный, что я не могу работать.",
+          "answer": "This website is so slow that I can't work."
+        },
+        {
+          "number": 6,
+          "prompt": "Это именно та проблема, о которой я говорил.",
+          "answer": "This is the very problem I was talking about. / This is the very problem that I was talking about."
+        },
+        {
+          "number": 7,
+          "prompt": "Мы действительно ездили в Прагу прошлым летом.",
+          "answer": "We did go to Prague last summer."
+        },
+        {
+          "number": 8,
+          "prompt": "У них такие хорошие разработчики!",
+          "answer": "They have such good developers!"
+        }
+      ]
+    }
+  ]
+}

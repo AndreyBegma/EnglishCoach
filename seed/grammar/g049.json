@@ -1,0 +1,271 @@
+{
+  "id": "g049",
+  "position": 49,
+  "cefrLevel": "B2",
+  "title": "Прилагательные на -ed / -ing и порядок прилагательных",
+  "plannedFrom": "2027-04-26",
+  "plannedTo": "2027-05-01",
+  "sections": {
+    "why": [
+      "В русском мы говорим «мне скучно» и «это скучно» почти одним словом, а в английском нужно выбирать между bored и boring. Ошибка здесь меняет смысл: I am boring значит «я скучный человек». Вторая тема — порядок прилагательных: в английском он почти жёсткий, и фраза a red old car звучит неестественно."
+    ],
+    "formation": [
+      "• Прилагательное на -ed описывает ЧУВСТВО человека: I am bored. She was surprised.",
+      "• Прилагательное на -ing описывает ПРИЧИНУ этого чувства (предмет, человека, ситуацию): The lecture is boring. The news was surprising.",
+      "• Пары: bored / boring, tired / tiring, interested / interesting, excited / exciting, confused / confusing, shocked / shocking, annoyed / annoying, frightened / frightening, relaxed / relaxing, disappointed / disappointing.",
+      "• Порядок нескольких прилагательных перед существительным: мнение → размер → возраст → форма → цвет → происхождение → материал → назначение. a lovely big old round red Italian wooden table.",
+      "• В жизни обычно хватает двух-трёх прилагательных: a nice small black bag."
+    ],
+    "usage": [
+      "1. -ed: человек или существо чувствует эмоцию. The children were frightened by the storm. (Дети были напуганы грозой.)",
+      "2. -ing: предмет или событие вызывает эмоцию. The storm was frightening. (Гроза была пугающей.)",
+      "3. Описание вещи с несколькими прилагательными: She bought a beautiful old wooden box. (Она купила красивую старую деревянную коробку.)",
+      "4. Мнение идёт первым: a nice new phone, а не a new nice phone."
+    ],
+    "signalWords": [
+      "I am / feel + -ed (я чувствую). It is / was + -ing (это вызывает). Вопрос-проверка: «Кто это чувствует?» — -ed; «Что это вызывает?» — -ing."
+    ],
+    "mistakes": [
+      "✗ I am boring at the lecture → ✓ I am bored at the lecture. Скучно мне, а не я скучный.",
+      "✗ The film was very interested → ✓ The film was very interesting. Фильм вызывает интерес, значит -ing.",
+      "✗ She has a wooden big table → ✓ She has a big wooden table. Размер идёт раньше материала.",
+      "✗ He bought a red new car → ✓ He bought a new red car. Возраст идёт раньше цвета.",
+      "✗ I was shocking by the news → ✓ I was shocked by the news. Я чувствую, значит -ed."
+    ],
+    "remember": [
+      "Человек bored, а лекция boring; в порядке прилагательных: мнение, размер, возраст, цвет, материал."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте прилагательное в форму -ed или -ing",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The lecture was very ___ (bore).",
+          "answer": "boring"
+        },
+        {
+          "number": 2,
+          "prompt": "I was ___ (surprise) to see her.",
+          "answer": "surprised"
+        },
+        {
+          "number": 3,
+          "prompt": "This news is really ___ (shock).",
+          "answer": "shocking"
+        },
+        {
+          "number": 4,
+          "prompt": "We were ___ (exhaust) after the flight.",
+          "answer": "exhausted"
+        },
+        {
+          "number": 5,
+          "prompt": "It was an ___ (interest) article.",
+          "answer": "interesting"
+        },
+        {
+          "number": 6,
+          "prompt": "She felt ___ (confuse) by the instructions.",
+          "answer": "confused"
+        },
+        {
+          "number": 7,
+          "prompt": "The roller coaster was ___ (terrify).",
+          "answer": "terrifying"
+        },
+        {
+          "number": 8,
+          "prompt": "I'm ___ (excite) about the new project.",
+          "answer": "excited"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is very (a) annoyed (b) annoying — he never stops talking.",
+          "answer": "(b) annoying"
+        },
+        {
+          "number": 2,
+          "prompt": "I'm (a) tired (b) tiring after a long day.",
+          "answer": "(a) tired"
+        },
+        {
+          "number": 3,
+          "prompt": "The match was (a) disappointed (b) disappointing.",
+          "answer": "(b) disappointing"
+        },
+        {
+          "number": 4,
+          "prompt": "The children were (a) frightened (b) frightening by the storm.",
+          "answer": "(a) frightened"
+        },
+        {
+          "number": 5,
+          "prompt": "It was a (a) relaxed (b) relaxing weekend.",
+          "answer": "(b) relaxing"
+        },
+        {
+          "number": 6,
+          "prompt": "We were (a) amazed (b) amazing by his speed.",
+          "answer": "(a) amazed"
+        },
+        {
+          "number": 7,
+          "prompt": "The results of the test were (a) depressed (b) depressing.",
+          "answer": "(b) depressing"
+        },
+        {
+          "number": 8,
+          "prompt": "Are you (a) interested (b) interesting in jazz?",
+          "answer": "(a) interested"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Расставьте слова в правильном порядке",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "car / a / red / old / small",
+          "answer": "a small old red car"
+        },
+        {
+          "number": 2,
+          "prompt": "table / wooden / a / beautiful / round",
+          "answer": "a beautiful round wooden table"
+        },
+        {
+          "number": 3,
+          "prompt": "Italian / a / leather / black / bag / nice",
+          "answer": "a nice black Italian leather bag"
+        },
+        {
+          "number": 4,
+          "prompt": "laptop / an / gray / expensive / new",
+          "answer": "an expensive new gray laptop"
+        },
+        {
+          "number": 5,
+          "prompt": "Chinese / delicious / a / little / restaurant",
+          "answer": "a delicious little Chinese restaurant"
+        },
+        {
+          "number": 6,
+          "prompt": "sunglasses / plastic / cheap / yellow",
+          "answer": "cheap yellow plastic sunglasses"
+        },
+        {
+          "number": 7,
+          "prompt": "house / old / a / big / lovely",
+          "answer": "a lovely big old house"
+        },
+        {
+          "number": 8,
+          "prompt": "French / young / a / tall / teacher",
+          "answer": "a tall young French teacher"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и исправьте предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I am boring because I have nothing to do.",
+          "answer": "I am bored because I have nothing to do."
+        },
+        {
+          "number": 2,
+          "prompt": "The film was very interested.",
+          "answer": "The film was very interesting."
+        },
+        {
+          "number": 3,
+          "prompt": "She has a wooden big table.",
+          "answer": "She has a big wooden table."
+        },
+        {
+          "number": 4,
+          "prompt": "I was shocking by the news.",
+          "answer": "I was shocked by the news."
+        },
+        {
+          "number": 5,
+          "prompt": "He bought a red new car.",
+          "answer": "He bought a new red car."
+        },
+        {
+          "number": 6,
+          "prompt": "It was a tired journey.",
+          "answer": "It was a tiring journey."
+        },
+        {
+          "number": 7,
+          "prompt": "We stayed in a French lovely old hotel.",
+          "answer": "We stayed in a lovely old French hotel."
+        },
+        {
+          "number": 8,
+          "prompt": "The students were confusing by the question.",
+          "answer": "The students were confused by the question."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Это был очень интересный фильм.",
+          "answer": "It was a very interesting movie. / It was a very interesting film."
+        },
+        {
+          "number": 2,
+          "prompt": "Я устал после долгого рабочего дня.",
+          "answer": "I'm tired after a long working day. / I'm tired after a long day at work."
+        },
+        {
+          "number": 3,
+          "prompt": "Она купила красивую старую деревянную коробку.",
+          "answer": "She bought a beautiful old wooden box."
+        },
+        {
+          "number": 4,
+          "prompt": "Новости были шокирующими, и мы были удивлены.",
+          "answer": "The news was shocking and we were surprised. / The news was shocking, and we were shocked."
+        },
+        {
+          "number": 5,
+          "prompt": "Мне скучно на этой встрече.",
+          "answer": "I'm bored at this meeting. / I'm bored in this meeting."
+        },
+        {
+          "number": 6,
+          "prompt": "У него новый чёрный ноутбук.",
+          "answer": "He has a new black laptop."
+        },
+        {
+          "number": 7,
+          "prompt": "Это был утомительный, но интересный проект.",
+          "answer": "It was a tiring but interesting project. / It was a tiring, but interesting project."
+        },
+        {
+          "number": 8,
+          "prompt": "Ты заинтересован в этой работе?",
+          "answer": "Are you interested in this job?"
+        }
+      ]
+    }
+  ]
+}

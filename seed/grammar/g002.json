@@ -1,0 +1,270 @@
+{
+  "id": "g002",
+  "position": 2,
+  "cefrLevel": "A2",
+  "title": "Present Simple: утверждения, отрицания, вопросы",
+  "plannedFrom": "2026-10-20",
+  "plannedTo": "2026-10-20",
+  "sections": {
+    "why": [
+      "Present Simple рассказывает о том, что происходит регулярно, обычно или всегда: привычки, расписания, факты. По-русски мы просто говорим «я работаю», «он живёт», а в английском для отрицаний и вопросов нужен помощник — do или does."
+    ],
+    "formation": [
+      "• Утверждение: подлежащее + V1 (начальная форма глагола). I work. They live. С he/she/it добавляем -s/-es: He works. She watches.",
+      "• Отрицание: do not (don't) / does not (doesn't) + V1. I don't work. She doesn't work. После doesn't -s у глагола исчезает!",
+      "• Вопрос: Do / Does + подлежащее + V1? Do you work? Does he work? What time does the meeting start?",
+      "• Правописание -s: -es после -s, -sh, -ch, -x, -o (watches, fixes, goes); согласная + y → -ies (study → studies); have → has."
+    ],
+    "usage": [
+      "1. Привычки и повторяющиеся действия: I go to the gym twice a week. (Я хожу в зал два раза в неделю.)",
+      "2. Факты и постоянные ситуации: She lives in Lviv. Water boils at 100 degrees. (Она живёт во Львове. Вода кипит при 100 градусах.)",
+      "3. Расписания: The train leaves at 8:15. (Поезд отправляется в 8:15.)",
+      "4. Чувства и мнения (like, know, want, need): I need a new laptop. (Мне нужен новый ноутбук.)"
+    ],
+    "signalWords": [
+      "always, usually, often, sometimes, rarely, never, every day / week, on Mondays, twice a week, once a month. Частотные слова (always, never...) стоят перед основным глаголом: I usually get up at seven."
+    ],
+    "mistakes": [
+      "✗ He work in a bank. → ✓ He works in a bank. С he/she/it обязательно нужно -s.",
+      "✗ She doesn't works. → ✓ She doesn't work. После does/doesn't глагол без -s: окончание уже «забрал» помощник.",
+      "✗ Do she like tea? → ✓ Does she like tea? С she/he/it нужен does.",
+      "✗ You work here? / Like you coffee? → ✓ Do you work here? / Do you like coffee? Вопрос без do/does в Present Simple невозможен.",
+      "✗ I am work in IT. → ✓ I work in IT. Не смешиваем to be и обычный глагол."
+    ],
+    "remember": [
+      "Один -s на предложение: либо у глагола (She works), либо у does (Does she work? She doesn't work)."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Present Simple",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She ___ (work) in a bank.",
+          "answer": "works"
+        },
+        {
+          "number": 2,
+          "prompt": "My brother ___ (watch) TV every evening.",
+          "answer": "watches"
+        },
+        {
+          "number": 3,
+          "prompt": "They ___ (play) football on Sundays.",
+          "answer": "play"
+        },
+        {
+          "number": 4,
+          "prompt": "He ___ (study) English at night.",
+          "answer": "studies"
+        },
+        {
+          "number": 5,
+          "prompt": "I ___ (go) to the gym twice a week.",
+          "answer": "go"
+        },
+        {
+          "number": 6,
+          "prompt": "The train ___ (leave) at 8:15.",
+          "answer": "leaves"
+        },
+        {
+          "number": 7,
+          "prompt": "Our team ___ (fix) bugs every day.",
+          "answer": "fixes"
+        },
+        {
+          "number": 8,
+          "prompt": "We ___ (have) lunch at one o'clock.",
+          "answer": "have"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Сделайте предложение отрицательным (don't / doesn't)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He likes spicy food.",
+          "answer": "He doesn't like spicy food. / He does not like spicy food."
+        },
+        {
+          "number": 2,
+          "prompt": "I work on Saturdays.",
+          "answer": "I don't work on Saturdays. / I do not work on Saturdays."
+        },
+        {
+          "number": 3,
+          "prompt": "She speaks German.",
+          "answer": "She doesn't speak German. / She does not speak German."
+        },
+        {
+          "number": 4,
+          "prompt": "They live in the city center.",
+          "answer": "They don't live in the city center. / They do not live in the city center."
+        },
+        {
+          "number": 5,
+          "prompt": "The shop opens at 7.",
+          "answer": "The shop doesn't open at 7. / The shop does not open at 7."
+        },
+        {
+          "number": 6,
+          "prompt": "We use this tool every day.",
+          "answer": "We don't use this tool every day. / We do not use this tool every day."
+        },
+        {
+          "number": 7,
+          "prompt": "My manager answers emails at night.",
+          "answer": "My manager doesn't answer emails at night. / My manager does not answer emails at night."
+        },
+        {
+          "number": 8,
+          "prompt": "You know my address.",
+          "answer": "You don't know my address. / You do not know my address."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Составьте вопрос из слов",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "you / drink / coffee in the morning",
+          "answer": "Do you drink coffee in the morning?"
+        },
+        {
+          "number": 2,
+          "prompt": "she / work / from home",
+          "answer": "Does she work from home?"
+        },
+        {
+          "number": 3,
+          "prompt": "where / he / live",
+          "answer": "Where does he live?"
+        },
+        {
+          "number": 4,
+          "prompt": "what time / the meeting / start",
+          "answer": "What time does the meeting start?"
+        },
+        {
+          "number": 5,
+          "prompt": "how often / you / check your email",
+          "answer": "How often do you check your email?"
+        },
+        {
+          "number": 6,
+          "prompt": "they / speak / English at work",
+          "answer": "Do they speak English at work?"
+        },
+        {
+          "number": 7,
+          "prompt": "why / he / need / a new laptop",
+          "answer": "Why does he need a new laptop?"
+        },
+        {
+          "number": 8,
+          "prompt": "what / your sister / do",
+          "answer": "What does your sister do?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She (a) work (b) works (c) working in a bank.",
+          "answer": "b (works)"
+        },
+        {
+          "number": 2,
+          "prompt": "___ your parents live in Odesa? (a) Do (b) Does",
+          "answer": "a (Do)"
+        },
+        {
+          "number": 3,
+          "prompt": "My dog doesn't (a) likes (b) like cats.",
+          "answer": "b (like)"
+        },
+        {
+          "number": 4,
+          "prompt": "What time ___ the bank close? (a) do (b) does",
+          "answer": "b (does)"
+        },
+        {
+          "number": 5,
+          "prompt": "I (a) don't (b) doesn't know the answer.",
+          "answer": "a (don't)"
+        },
+        {
+          "number": 6,
+          "prompt": "He usually (a) go (b) goes (c) is go to work by bus.",
+          "answer": "b (goes)"
+        },
+        {
+          "number": 7,
+          "prompt": "Where ___ you work? (a) do (b) does",
+          "answer": "a (do)"
+        },
+        {
+          "number": 8,
+          "prompt": "She (a) don't drink (b) doesn't drink coffee. She prefers tea.",
+          "answer": "b (doesn't drink)"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я работаю в IT-компании.",
+          "answer": "I work at an IT company. / I work for an IT company. / I work in an IT company."
+        },
+        {
+          "number": 2,
+          "prompt": "Она не пьёт кофе по вечерам.",
+          "answer": "She doesn't drink coffee in the evening. / She doesn't drink coffee in the evenings. / She does not drink coffee in the evening."
+        },
+        {
+          "number": 3,
+          "prompt": "Во сколько начинается встреча?",
+          "answer": "What time does the meeting start?"
+        },
+        {
+          "number": 4,
+          "prompt": "Мой брат живёт в Варшаве.",
+          "answer": "My brother lives in Warsaw."
+        },
+        {
+          "number": 5,
+          "prompt": "Вы говорите по-английски?",
+          "answer": "Do you speak English?"
+        },
+        {
+          "number": 6,
+          "prompt": "Я обычно встаю в семь часов.",
+          "answer": "I usually get up at seven. / I usually get up at 7 o'clock. / I usually get up at 7."
+        },
+        {
+          "number": 7,
+          "prompt": "Он не любит ходить в офис.",
+          "answer": "He doesn't like going to the office. / He doesn't like to go to the office."
+        },
+        {
+          "number": 8,
+          "prompt": "Как часто ты ездишь в отпуск?",
+          "answer": "How often do you go on vacation? / How often do you go on holiday?"
+        }
+      ]
+    }
+  ]
+}

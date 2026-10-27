@@ -1,0 +1,273 @@
+{
+  "id": "g041",
+  "position": 41,
+  "cefrLevel": "B2",
+  "title": "Артикли: продвинутые случаи (география, учреждения, уникальные объекты)",
+  "plannedFrom": "2027-03-01",
+  "plannedTo": "2027-03-06",
+  "sections": {
+    "why": [
+      "В русском артиклей нет, поэтому в английском их выбор кажется случайным. На уровне B2 важно знать устойчивые группы слов: география, учреждения, уникальные объекты. Здесь артикль подчиняется почти жёстким правилам, и их можно просто выучить."
+    ],
+    "formation": [
+      "• a / an + исчисляемое существительное в ед. числе — \"один из многих\", называем впервые",
+      "• the + любое существительное — собеседник понимает, о каком именно предмете речь",
+      "• нулевой артикль (—) — множественное число и неисчисляемые в общем смысле, имена, большинство стран и городов"
+    ],
+    "usage": [
+      "1. THE с уникальными объектами (он один на всех): the sun, the moon, the sky, the internet, the government, the world. (Солнце уже село. — The sun has already set.)",
+      "2. THE с географией: океаны, моря, реки, горные цепи, группы островов, пустыни, страны во множественном числе и со словами republic / kingdom / states. (Мы плыли по Нилу. — We sailed along the Nile.) Примеры: the Pacific, the Alps, the Sahara, the Netherlands, the UK, the USA.",
+      "БЕЗ артикля: континенты, большинство стран, города, отдельные горы и озёра. (Asia, Poland, Kyiv, Mount Everest, Lake Geneva.)",
+      "3. Учреждения БЕЗ артикля, когда важна их функция (учёба, лечение, служба, сон, работа): go to school, be in prison, go to church, go to bed, be at work. (Моя дочь ходит в школу. — My daughter goes to school.)",
+      "С THE, когда это просто здание или у вас другая цель визита. (Я зашёл в школу поговорить с учителем. — I went to the school to talk to the teacher.)",
+      "4. THE с превосходной степенью, порядковыми числительными и словами only / same: the best, the first, the only, the same. (Это лучший фильм. — It is the best movie.)",
+      "5. Музыка и спорт: THE с музыкальными инструментами, без артикля со спортом и играми. (play the guitar, play football). Приёмы пищи тоже без артикля (have breakfast), но с прилагательным нужен a: have a big breakfast."
+    ],
+    "signalWords": [
+      "Ocean, sea, river, desert, mountains, islands в названии → the. Mount, Lake, Cape, названия городов → без the."
+    ],
+    "mistakes": [
+      "✗ I live in Netherlands → ✓ I live in the Netherlands (название во множественном числе)",
+      "✗ The Mount Everest is high → ✓ Mount Everest is high (отдельная гора без the)",
+      "✗ My son goes to the school every day → ✓ goes to school (он учится, функция учреждения)",
+      "✗ He plays guitar → ✓ He plays the guitar (инструмент с the)",
+      "✗ She plays the tennis → ✓ She plays tennis (спорт без артикля)",
+      "✗ Internet is slow → ✓ The internet is slow (единственный в мире)"
+    ],
+    "remember": [
+      "Океан, река, пустыня, горная цепь — the; одна страна, город, гора, озеро — без артикля; школа \"для учёбы\" — без артикля."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте the или поставьте - (артикль не нужен)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He lives in ___ Netherlands.",
+          "answer": "the"
+        },
+        {
+          "number": 2,
+          "prompt": "Have you ever seen ___ Alps?",
+          "answer": "the"
+        },
+        {
+          "number": 3,
+          "prompt": "___ Nile is one of the longest rivers in the world.",
+          "answer": "The"
+        },
+        {
+          "number": 4,
+          "prompt": "She was born in ___ Kyiv.",
+          "answer": "-"
+        },
+        {
+          "number": 5,
+          "prompt": "Astronauts landed on ___ moon in 1969.",
+          "answer": "the"
+        },
+        {
+          "number": 6,
+          "prompt": "We spent two weeks in ___ Spain.",
+          "answer": "-"
+        },
+        {
+          "number": 7,
+          "prompt": "___ Sahara is the largest hot desert in the world.",
+          "answer": "The"
+        },
+        {
+          "number": 8,
+          "prompt": "Lake Michigan is one of ___ Great Lakes.",
+          "answer": "the"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My daughter is six, so she goes to (a) school (b) the school every day.",
+          "answer": "(a) school"
+        },
+        {
+          "number": 2,
+          "prompt": "I went to (a) school (b) the school to meet her teacher.",
+          "answer": "(b) the school"
+        },
+        {
+          "number": 3,
+          "prompt": "Tom is in (a) prison (b) the prison for fraud.",
+          "answer": "(a) prison"
+        },
+        {
+          "number": 4,
+          "prompt": "The journalist went to (a) prison (b) the prison to interview the guard.",
+          "answer": "(b) the prison"
+        },
+        {
+          "number": 5,
+          "prompt": "I'm very tired. I'm going to (a) bed (b) the bed now.",
+          "answer": "(a) bed"
+        },
+        {
+          "number": 6,
+          "prompt": "The tourists went to (a) church (b) the church to take photos of the building.",
+          "answer": "(b) the church"
+        },
+        {
+          "number": 7,
+          "prompt": "I usually get home from (a) work (b) the work at six.",
+          "answer": "(a) work"
+        },
+        {
+          "number": 8,
+          "prompt": "The pizza place is next to (a) school (b) the school.",
+          "answer": "(b) the school"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Найдите ошибку и перепишите предложение правильно",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Internet is very slow today.",
+          "answer": "The internet is very slow today."
+        },
+        {
+          "number": 2,
+          "prompt": "My brother plays guitar in a band.",
+          "answer": "My brother plays the guitar in a band."
+        },
+        {
+          "number": 3,
+          "prompt": "We're going to the Italy in May.",
+          "answer": "We're going to Italy in May."
+        },
+        {
+          "number": 4,
+          "prompt": "She plays the tennis every weekend.",
+          "answer": "She plays tennis every weekend."
+        },
+        {
+          "number": 5,
+          "prompt": "I love walking along the Lake Geneva.",
+          "answer": "I love walking along Lake Geneva."
+        },
+        {
+          "number": 6,
+          "prompt": "It was best concert I have ever seen.",
+          "answer": "It was the best concert I have ever seen."
+        },
+        {
+          "number": 7,
+          "prompt": "Don't call me at the work.",
+          "answer": "Don't call me at work."
+        },
+        {
+          "number": 8,
+          "prompt": "The Mount Fuji is in Japan.",
+          "answer": "Mount Fuji is in Japan."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Вставьте a, an, the или - (в предложениях может быть два пропуска)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I usually have ___ breakfast at seven, but today I had ___ huge breakfast.",
+          "answer": "- / a"
+        },
+        {
+          "number": 2,
+          "prompt": "Could you close ___ window next to you? It's cold.",
+          "answer": "the"
+        },
+        {
+          "number": 3,
+          "prompt": "She's ___ engineer from ___ UK.",
+          "answer": "an / the"
+        },
+        {
+          "number": 4,
+          "prompt": "We stayed at ___ hotel near ___ airport.",
+          "answer": "a / the"
+        },
+        {
+          "number": 5,
+          "prompt": "What's ___ time?",
+          "answer": "the"
+        },
+        {
+          "number": 6,
+          "prompt": "___ Pacific is bigger than ___ Atlantic.",
+          "answer": "The / the"
+        },
+        {
+          "number": 7,
+          "prompt": "He plays ___ piano and ___ football.",
+          "answer": "the / -"
+        },
+        {
+          "number": 8,
+          "prompt": "My sister is ___ only person in our family who works in ___ IT.",
+          "answer": "the / -"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Мы летим в Нидерланды в июне.",
+          "answer": "We are flying to the Netherlands in June."
+        },
+        {
+          "number": 2,
+          "prompt": "Моя дочь ходит в школу на автобусе.",
+          "answer": "My daughter goes to school by bus."
+        },
+        {
+          "number": 3,
+          "prompt": "Вчера я ходил в школу поговорить с учителем.",
+          "answer": "Yesterday I went to the school to talk to the teacher."
+        },
+        {
+          "number": 4,
+          "prompt": "Солнце уже село.",
+          "answer": "The sun has already set."
+        },
+        {
+          "number": 5,
+          "prompt": "Он играет на гитаре и в футбол.",
+          "answer": "He plays the guitar and football."
+        },
+        {
+          "number": 6,
+          "prompt": "Нил — одна из самых длинных рек в мире.",
+          "answer": "The Nile is one of the longest rivers in the world."
+        },
+        {
+          "number": 7,
+          "prompt": "Я обычно приезжаю с работы в семь.",
+          "answer": "I usually get home from work at seven."
+        },
+        {
+          "number": 8,
+          "prompt": "Интернет сегодня не работает.",
+          "answer": "The internet isn't working today. / The internet is down today."
+        }
+      ]
+    }
+  ]
+}

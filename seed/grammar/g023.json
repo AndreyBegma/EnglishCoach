@@ -1,0 +1,276 @@
+{
+  "id": "g023",
+  "position": 23,
+  "cefrLevel": "B1",
+  "title": "Пассивный залог: Present и Past Simple",
+  "plannedFrom": "2026-11-30",
+  "plannedTo": "2026-12-02",
+  "sections": {
+    "why": [
+      "Пассив (страдательный залог) нужен, когда важно само действие или его результат, а не тот, кто его выполняет: «Письмо было отправлено», «Здесь говорят по-английски». В русском похожую роль играют безличные конструкции и «-ся» («это делается»), а в английском для этого есть чёткая форма."
+    ],
+    "formation": [
+      "• Present Simple Passive: am / is / are + V3 (третья форма глагола)",
+      "English is spoken here. / These cars are made in Japan.",
+      "• Past Simple Passive: was / were + V3",
+      "The email was sent yesterday. / The windows were cleaned.",
+      "• Отрицание: The office isn't cleaned every day. / The report wasn't finished.",
+      "• Вопрос: Is the code reviewed by two people? / Where were these photos taken?",
+      "• Исполнитель действия, если он важен, вводится через by: The app was created by a small team.",
+      "• Правильные глаголы: V3 = V + ed (cleaned). Неправильные учим по таблице: write - wrote - written, make - made - made, build - built - built."
+    ],
+    "usage": [
+      "1. Исполнитель неизвестен или неважен.",
+      "My bike was stolen last night. (Мой велосипед украли прошлой ночью.)",
+      "2. Исполнитель очевиден или это общие правила и процессы.",
+      "The tickets are checked at the entrance. (Билеты проверяют на входе.)",
+      "3. Важен результат или объект действия.",
+      "This bridge was built in 1990. (Этот мост построили в 1990 году.)",
+      "4. Официальный, научный, технический стиль (инструкции, новости, документация).",
+      "The data is stored in the cloud. (Данные хранятся в облаке.)"
+    ],
+    "signalWords": [
+      "by (кем), every day, yesterday, last year, in 2010, usually. Если подлежащим становится объект действия, а в русском предложении глагол стоит в неопределённо-личной форме («построили», «говорят»), почти всегда нужен пассив."
+    ],
+    "mistakes": [
+      "✗ The window broke by the boy. → ✓ The window was broken by the boy. (пропущен was и V3)",
+      "✗ The report was wrote yesterday. → ✓ The report was written yesterday. (после was нужна V3, не V2)",
+      "✗ This book is writing by a famous author. → ✓ This book was written by a famous author. (не -ing, а V3)",
+      "✗ Cars are make in Germany. → ✓ Cars are made in Germany. (V3 обязательна)",
+      "✗ I was born in 1990 year. → ✓ I was born in 1990. (born всегда в пассиве)"
+    ],
+    "remember": ["Be в нужном времени + V3: is/are made сейчас, was/were made в прошлом."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Present Simple Passive или Past Simple Passive",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "English ___ (speak) in many countries.",
+          "answer": "is spoken"
+        },
+        {
+          "number": 2,
+          "prompt": "This bridge ___ (build) in 1995.",
+          "answer": "was built"
+        },
+        {
+          "number": 3,
+          "prompt": "These phones ___ (make) in China.",
+          "answer": "are made"
+        },
+        {
+          "number": 4,
+          "prompt": "My wallet ___ (steal) yesterday.",
+          "answer": "was stolen"
+        },
+        {
+          "number": 5,
+          "prompt": "The rooms ___ (clean) every morning.",
+          "answer": "are cleaned"
+        },
+        {
+          "number": 6,
+          "prompt": "The email ___ (send) two hours ago.",
+          "answer": "was sent"
+        },
+        {
+          "number": 7,
+          "prompt": "Lunch ___ (serve) at one o'clock every day.",
+          "answer": "is served"
+        },
+        {
+          "number": 8,
+          "prompt": "The windows ___ (break) during the storm.",
+          "answer": "were broken"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The film (a) was directed (b) directed by Steven Spielberg.",
+          "answer": "(a) was directed"
+        },
+        {
+          "number": 2,
+          "prompt": "This museum (a) visits (b) is visited by many tourists every year.",
+          "answer": "(b) is visited"
+        },
+        {
+          "number": 3,
+          "prompt": "This book (a) was written (b) wrote in 1925.",
+          "answer": "(a) was written"
+        },
+        {
+          "number": 4,
+          "prompt": "My car (a) is repaired (b) was repaired yesterday.",
+          "answer": "(b) was repaired"
+        },
+        {
+          "number": 5,
+          "prompt": "Coffee (a) grows (b) is grown in Brazil.",
+          "answer": "(b) is grown"
+        },
+        {
+          "number": 6,
+          "prompt": "The documents (a) was signed (b) were signed by the director.",
+          "answer": "(b) were signed"
+        },
+        {
+          "number": 7,
+          "prompt": "The Eiffel Tower (a) was build (b) was built in 1889.",
+          "answer": "(b) was built"
+        },
+        {
+          "number": 8,
+          "prompt": "Our products (a) sell (b) are sold in more than 20 countries.",
+          "answer": "(b) are sold"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Преобразуйте предложение из актива в пассив",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "They make cheese in France. -> Cheese ___.",
+          "answer": "is made in France"
+        },
+        {
+          "number": 2,
+          "prompt": "Someone stole my bike. -> My bike ___.",
+          "answer": "was stolen"
+        },
+        {
+          "number": 3,
+          "prompt": "A famous architect designed this building. -> This building ___.",
+          "answer": "was designed by a famous architect"
+        },
+        {
+          "number": 4,
+          "prompt": "The team tests the app every week. -> The app ___.",
+          "answer": "is tested by the team every week"
+        },
+        {
+          "number": 5,
+          "prompt": "They didn't invite me to the party. -> I ___.",
+          "answer": "wasn't invited to the party / was not invited to the party"
+        },
+        {
+          "number": 6,
+          "prompt": "Make a question in the passive: When / this house / build?",
+          "answer": "When was this house built?"
+        },
+        {
+          "number": 7,
+          "prompt": "They don't open the shop on Sundays. -> The shop ___ on Sundays.",
+          "answer": "isn't opened / is not opened"
+        },
+        {
+          "number": 8,
+          "prompt": "Make a question in the passive: Where / these cars / make?",
+          "answer": "Where are these cars made?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The letter was wrote yesterday.",
+          "answer": "The letter was written yesterday."
+        },
+        {
+          "number": 2,
+          "prompt": "English speaks in many countries.",
+          "answer": "English is spoken in many countries."
+        },
+        {
+          "number": 3,
+          "prompt": "This house built in 1950.",
+          "answer": "This house was built in 1950."
+        },
+        {
+          "number": 4,
+          "prompt": "The cars are make in Germany.",
+          "answer": "The cars are made in Germany."
+        },
+        {
+          "number": 5,
+          "prompt": "The window was broke by the children.",
+          "answer": "The window was broken by the children."
+        },
+        {
+          "number": 6,
+          "prompt": "Where did these photos take?",
+          "answer": "Where were these photos taken?"
+        },
+        {
+          "number": 7,
+          "prompt": "I was born in 1992 year.",
+          "answer": "I was born in 1992."
+        },
+        {
+          "number": 8,
+          "prompt": "The rooms is cleaned every day.",
+          "answer": "The rooms are cleaned every day."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Мой ноутбук украли вчера.",
+          "answer": "My laptop was stolen yesterday."
+        },
+        {
+          "number": 2,
+          "prompt": "Этот сайт был создан в 2018 году.",
+          "answer": "This website was created in 2018. / This site was created in 2018. / This website was made in 2018."
+        },
+        {
+          "number": 3,
+          "prompt": "Английский язык используется во всём мире.",
+          "answer": "English is used all over the world. / English is used around the world. / English is used worldwide."
+        },
+        {
+          "number": 4,
+          "prompt": "Код проверяется двумя разработчиками.",
+          "answer": "The code is reviewed by two developers. / The code is checked by two developers."
+        },
+        {
+          "number": 5,
+          "prompt": "Где сделана эта фотография?",
+          "answer": "Where was this photo taken? / Where was this picture taken?"
+        },
+        {
+          "number": 6,
+          "prompt": "Билеты не были проверены на входе.",
+          "answer": "The tickets weren't checked at the entrance. / The tickets were not checked at the entrance."
+        },
+        {
+          "number": 7,
+          "prompt": "Меня пригласили на собеседование на прошлой неделе.",
+          "answer": "I was invited to an interview last week."
+        },
+        {
+          "number": 8,
+          "prompt": "В этом ресторане подают завтрак с семи часов.",
+          "answer": "Breakfast is served from seven o'clock in this restaurant. / Breakfast is served from seven in this restaurant. / Breakfast is served from seven o'clock at this restaurant."
+        }
+      ]
+    }
+  ]
+}

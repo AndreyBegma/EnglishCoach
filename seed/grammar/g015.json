@@ -1,0 +1,269 @@
+{
+  "id": "g015",
+  "position": 15,
+  "cefrLevel": "B1",
+  "title": "Present Perfect: опыт и результат",
+  "plannedFrom": "2026-11-02",
+  "plannedTo": "2026-11-04",
+  "sections": {
+    "why": [
+      "Present Perfect связывает прошлое с настоящим: нас интересует не когда это случилось, а что у нас есть сейчас — опыт или результат. В русском такой формы нет, поэтому её приходится осознанно выбирать."
+    ],
+    "formation": [
+      "• Утверждение: have/has + V3 (третья форма глагола). I have seen it. She has lost her keys.",
+      "• Отрицание: haven't / hasn't + V3. They haven't finished.",
+      "• Вопрос: Have/Has + подлежащее + V3? Have you tried it? Has he called?",
+      "• V3 у правильных глаголов = V + ed (visited), у неправильных нужно знать форму: see — saw — seen, go — went — gone, write — wrote — written, eat — ate — eaten."
+    ],
+    "usage": [
+      "1. Жизненный опыт (был ли, делал ли хоть раз). I have visited Prague twice. (Я был в Праге дважды.) Have you ever tried sushi? (Ты когда-нибудь пробовал суши?)",
+      "2. Результат, который виден сейчас. I've lost my keys. (Я потерял ключи, и сейчас их нет.) He has broken his laptop. (Он сломал ноутбук, и он не работает.)",
+      "3. Новость, которую только что сообщаем. The team has released a new version. (Команда выпустила новую версию.)",
+      "4. been и gone: She has been to Italy. (Она бывала в Италии, сейчас вернулась.) She has gone to Italy. (Она уехала в Италию, и сейчас там.)"
+    ],
+    "signalWords": [
+      "ever (когда-либо), never (никогда), before (раньше), so far (пока что), several times, twice, three times, in my life. Точное время в прошлом (yesterday, last year, in 2020) в Present Perfect не используем, там нужен Past Simple (подробнее в теме 17)."
+    ],
+    "mistakes": [
+      "✗ I have see this film. → ✓ I have seen this film. После have нужна третья форма, а не начальная.",
+      "✗ She have lost her phone. → ✓ She has lost her phone. С he/she/it используем has.",
+      "✗ I am lost my keys. → ✓ I have lost my keys. Am/is/are не создают этого времени.",
+      "✗ They haven't never been to Asia. → ✓ They have never been to Asia. В английском двойное отрицание не нужно.",
+      "✗ Has she ever visit Spain? → ✓ Has she ever visited Spain? В вопросе глагол остаётся в форме V3.",
+      "✗ She has gone to Italy three times. → ✓ She has been to Italy three times. Для опыта и возвращения используем been."
+    ],
+    "remember": ["Важен опыт или результат сейчас, а не время в прошлом: have/has + V3."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Present Perfect",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (visit) Prague twice.",
+          "answer": "have visited / 've visited"
+        },
+        {
+          "number": 2,
+          "prompt": "She ___ (never / try) sushi.",
+          "answer": "has never tried / hasn't tried"
+        },
+        {
+          "number": 3,
+          "prompt": "We ___ (see) this film three times.",
+          "answer": "have seen / 've seen"
+        },
+        {
+          "number": 4,
+          "prompt": "He ___ (lose) his keys. He can't open the door.",
+          "answer": "has lost / 's lost"
+        },
+        {
+          "number": 5,
+          "prompt": "They ___ (break) the window.",
+          "answer": "have broken / 've broken"
+        },
+        {
+          "number": 6,
+          "prompt": "I ___ (write) the report. You can read it now.",
+          "answer": "have written / 've written"
+        },
+        {
+          "number": 7,
+          "prompt": "My sister ___ (work) in five countries.",
+          "answer": "has worked / 's worked"
+        },
+        {
+          "number": 8,
+          "prompt": "___ you ever ___ (be) to London? (two words)",
+          "answer": "Have, been"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Сделайте отрицание или вопрос по заданию",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She has been to Japan. (negative)",
+          "answer": "She hasn't been to Japan. / She has not been to Japan."
+        },
+        {
+          "number": 2,
+          "prompt": "They have finished the project. (question)",
+          "answer": "Have they finished the project?"
+        },
+        {
+          "number": 3,
+          "prompt": "I have seen that actor before. (negative)",
+          "answer": "I haven't seen that actor before. / I have not seen that actor before."
+        },
+        {
+          "number": 4,
+          "prompt": "You have met the new manager. (question)",
+          "answer": "Have you met the new manager?"
+        },
+        {
+          "number": 5,
+          "prompt": "He has driven a truck. (question with ever)",
+          "answer": "Has he ever driven a truck?"
+        },
+        {
+          "number": 6,
+          "prompt": "We have eaten Thai food. (negative)",
+          "answer": "We haven't eaten Thai food. / We have not eaten Thai food."
+        },
+        {
+          "number": 7,
+          "prompt": "Anna has called you. (negative)",
+          "answer": "Anna hasn't called you. / Anna has not called you."
+        },
+        {
+          "number": 8,
+          "prompt": "They have lived abroad. (question with ever)",
+          "answer": "Have they ever lived abroad?"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выберите правильную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She has (a) gone (b) been to Italy three times.",
+          "answer": "(b) been"
+        },
+        {
+          "number": 2,
+          "prompt": "He's (a) lost (b) lose his passport.",
+          "answer": "(a) lost"
+        },
+        {
+          "number": 3,
+          "prompt": "Have you ever (a) ate (b) eaten snails?",
+          "answer": "(b) eaten"
+        },
+        {
+          "number": 4,
+          "prompt": "We have (a) saw (b) seen that film.",
+          "answer": "(b) seen"
+        },
+        {
+          "number": 5,
+          "prompt": "I've (a) wrote (b) written five tests this week.",
+          "answer": "(b) written"
+        },
+        {
+          "number": 6,
+          "prompt": "She has (a) gone (b) been to the shop. She'll be back in ten minutes.",
+          "answer": "(a) gone"
+        },
+        {
+          "number": 7,
+          "prompt": "They have (a) took (b) taken the wrong bus.",
+          "answer": "(b) taken"
+        },
+        {
+          "number": 8,
+          "prompt": "I've never (a) drove (b) driven a motorbike.",
+          "answer": "(b) driven"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку в предложении",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have see this film.",
+          "answer": "I have seen this film."
+        },
+        {
+          "number": 2,
+          "prompt": "She have lost her phone.",
+          "answer": "She has lost her phone."
+        },
+        {
+          "number": 3,
+          "prompt": "He has never eat octopus.",
+          "answer": "He has never eaten octopus."
+        },
+        {
+          "number": 4,
+          "prompt": "We has finished the task.",
+          "answer": "We have finished the task."
+        },
+        {
+          "number": 5,
+          "prompt": "Has she ever visit Spain?",
+          "answer": "Has she ever visited Spain?"
+        },
+        {
+          "number": 6,
+          "prompt": "They haven't never been to Asia.",
+          "answer": "They have never been to Asia. / They haven't ever been to Asia."
+        },
+        {
+          "number": 7,
+          "prompt": "My laptop has broke.",
+          "answer": "My laptop has broken."
+        },
+        {
+          "number": 8,
+          "prompt": "I am lost my keys.",
+          "answer": "I have lost my keys. / I've lost my keys."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я никогда не был в Лондоне.",
+          "answer": "I have never been to London. / I've never been to London."
+        },
+        {
+          "number": 2,
+          "prompt": "Ты когда-нибудь пробовал суши?",
+          "answer": "Have you ever tried sushi?"
+        },
+        {
+          "number": 3,
+          "prompt": "Она потеряла ключи.",
+          "answer": "She has lost her keys. / She's lost her keys."
+        },
+        {
+          "number": 4,
+          "prompt": "Мы смотрели этот фильм три раза.",
+          "answer": "We have seen this film three times. / We've seen this film three times. / We have watched this film three times."
+        },
+        {
+          "number": 5,
+          "prompt": "Он работал в нескольких стартапах.",
+          "answer": "He has worked at several startups. / He has worked for several startups. / He has worked in several startups."
+        },
+        {
+          "number": 6,
+          "prompt": "Я сломал ноутбук. Он не включается.",
+          "answer": "I have broken my laptop. It won't turn on. / I've broken my laptop. It won't turn on. / I have broken my laptop. It doesn't turn on."
+        },
+        {
+          "number": 7,
+          "prompt": "Мой коллега написал отличный скрипт.",
+          "answer": "My colleague has written a great script."
+        },
+        {
+          "number": 8,
+          "prompt": "Ты когда-нибудь работал с React?",
+          "answer": "Have you ever worked with React? / Have you ever used React?"
+        }
+      ]
+    }
+  ]
+}

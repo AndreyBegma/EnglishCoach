@@ -1,0 +1,274 @@
+{
+  "id": "g012",
+  "position": 12,
+  "cefrLevel": "A2",
+  "title": "Сравнительная и превосходная степень прилагательных",
+  "plannedFrom": "2026-10-30",
+  "plannedTo": "2026-10-30",
+  "sections": {
+    "why": [
+      "Мы постоянно сравниваем: «дешевле», «быстрее», «самый лучший». В русском это одно слово («быстрее»), а в английском форма зависит от длины прилагательного: faster, но more expensive."
+    ],
+    "formation": [
+      "• Короткие прилагательные (1 слог): + -er / the + -est. cheap — cheaper — the cheapest.",
+      "• На -e: + -r / -st. nice — nicer — the nicest.",
+      "• Одна гласная + одна согласная: согласная удваивается. big — bigger — the biggest; hot — hotter — the hottest.",
+      "• На -y: -y меняется на -ier / -iest. easy — easier — the easiest; busy — busier — the busiest.",
+      "• Длинные (2 слога и больше, кроме -y): more + прил. / the most + прил. expensive — more expensive — the most expensive.",
+      "• Исключения: good — better — the best; bad — worse — the worst; far — farther (further) — the farthest (furthest)."
+    ],
+    "usage": [
+      "1. Сравниваем два предмета: comparative + than. This phone is cheaper than that one. (Этот телефон дешевле того.)",
+      "2. Один предмет из группы: the + superlative + in/of. He is the best developer in our team. (Он лучший разработчик в нашей команде.) После in идёт место или группа (in the city, in the class), после of — число или множество (of the three, of all).",
+      "3. Равенство: as + прил. + as. My laptop is as fast as yours. (Мой ноутбук такой же быстрый, как твой.) Отрицание: not as + прил. + as. Lviv is not as big as Kyiv. (Львов не такой большой, как Киев.)",
+      "4. Меньше, чем: less + прил. + than. This book is less interesting than that one. (Эта книга менее интересна, чем та.)",
+      "5. Усиление: much, a lot, far, a bit, slightly + comparative. She is much taller than her sister. (Она намного выше сестры.)"
+    ],
+    "signalWords": [
+      "than (чем), as ... as (такой же ... как), the ... in/of, much/a bit + comparative."
+    ],
+    "mistakes": [
+      "✗ more cheap → ✓ cheaper. Короткие прилагательные берут -er, а не more.",
+      "✗ more better → ✓ better. Better уже сравнительная форма, more лишнее.",
+      "✗ the most biggest → ✓ the biggest. Либо -est, либо most, но не оба сразу.",
+      "✗ He is taller as me. → ✓ He is taller than me. После сравнительной степени нужен than, а as только в as ... as.",
+      "✗ the best of the world → ✓ the best in the world. После superlative с местом или группой ставим in.",
+      "✗ This is best restaurant. → ✓ This is the best restaurant. С превосходной степенью нужен the."
+    ],
+    "remember": [
+      "Короткое слово: -er и the -est; длинное: more и the most; сравниваем через than, а группу называем через in."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте прилагательное в сравнительную степень",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This laptop is ___ (cheap) than that one.",
+          "answer": "cheaper"
+        },
+        {
+          "number": 2,
+          "prompt": "My new phone is ___ (big) than my old one.",
+          "answer": "bigger"
+        },
+        {
+          "number": 3,
+          "prompt": "Python is ___ (easy) than C++ for beginners.",
+          "answer": "easier"
+        },
+        {
+          "number": 4,
+          "prompt": "This hotel is ___ (expensive) than the one near the station.",
+          "answer": "more expensive"
+        },
+        {
+          "number": 5,
+          "prompt": "Today is ___ (hot) than yesterday.",
+          "answer": "hotter"
+        },
+        {
+          "number": 6,
+          "prompt": "Your English is ___ (good) than before.",
+          "answer": "better"
+        },
+        {
+          "number": 7,
+          "prompt": "The train is ___ (comfortable) than the bus.",
+          "answer": "more comfortable"
+        },
+        {
+          "number": 8,
+          "prompt": "My brother is ___ (old) than me.",
+          "answer": "older"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Поставьте прилагательное в превосходную степень",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It's ___ (long) day of the week.",
+          "answer": "the longest"
+        },
+        {
+          "number": 2,
+          "prompt": "She is ___ (smart) person in our team.",
+          "answer": "the smartest"
+        },
+        {
+          "number": 3,
+          "prompt": "That was ___ (bad) meeting of the year.",
+          "answer": "the worst"
+        },
+        {
+          "number": 4,
+          "prompt": "Which is ___ (fast) way to the airport?",
+          "answer": "the fastest"
+        },
+        {
+          "number": 5,
+          "prompt": "He is ___ (famous) developer in our city.",
+          "answer": "the most famous"
+        },
+        {
+          "number": 6,
+          "prompt": "It's ___ (busy) street in the town.",
+          "answer": "the busiest"
+        },
+        {
+          "number": 7,
+          "prompt": "This is ___ (good) pizza in the city.",
+          "answer": "the best"
+        },
+        {
+          "number": 8,
+          "prompt": "Saturday is ___ (relaxing) day for me.",
+          "answer": "the most relaxing"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My flat is (a) more small (b) smaller than yours.",
+          "answer": "(b) smaller"
+        },
+        {
+          "number": 2,
+          "prompt": "This exercise is (a) easier (b) more easy than the last one.",
+          "answer": "(a) easier"
+        },
+        {
+          "number": 3,
+          "prompt": "He is taller (a) than (b) as me.",
+          "answer": "(a) than"
+        },
+        {
+          "number": 4,
+          "prompt": "It's the (a) most big (b) biggest screen in the shop.",
+          "answer": "(b) biggest"
+        },
+        {
+          "number": 5,
+          "prompt": "The weather today is (a) more good (b) better than yesterday.",
+          "answer": "(b) better"
+        },
+        {
+          "number": 6,
+          "prompt": "She is the best student (a) of (b) in the class.",
+          "answer": "(b) in"
+        },
+        {
+          "number": 7,
+          "prompt": "Your car is as (a) fast (b) faster as mine.",
+          "answer": "(a) fast"
+        },
+        {
+          "number": 8,
+          "prompt": "Tom is the (a) youngest (b) most young of the three brothers.",
+          "answer": "(a) youngest"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Преобразуйте предложение по заданию",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Anna is 25. Tom is 30. Write one sentence with: Anna / young / than Tom.",
+          "answer": "Anna is younger than Tom."
+        },
+        {
+          "number": 2,
+          "prompt": "The red bag costs $50. The blue bag costs $80. Use the word cheap.",
+          "answer": "The red bag is cheaper than the blue bag."
+        },
+        {
+          "number": 3,
+          "prompt": "Rewrite with not as ... as: Kyiv is bigger than Lviv.",
+          "answer": "Lviv is not as big as Kyiv. / Lviv isn't as big as Kyiv."
+        },
+        {
+          "number": 4,
+          "prompt": "Rewrite with less: This book is more interesting than that one.",
+          "answer": "That book is less interesting than this one."
+        },
+        {
+          "number": 5,
+          "prompt": "Rewrite with as ... as: My laptop and your laptop are equally fast.",
+          "answer": "My laptop is as fast as yours. / Your laptop is as fast as mine."
+        },
+        {
+          "number": 6,
+          "prompt": "Rewrite with a superlative: No other building in the city is taller than this tower.",
+          "answer": "This tower is the tallest building in the city."
+        },
+        {
+          "number": 7,
+          "prompt": "Add the word much: She is taller than her sister.",
+          "answer": "She is much taller than her sister."
+        },
+        {
+          "number": 8,
+          "prompt": "The bus takes 40 minutes, the metro takes 25. Use the word fast.",
+          "answer": "The metro is faster than the bus."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Этот ноутбук дороже, чем мой.",
+          "answer": "This laptop is more expensive than mine."
+        },
+        {
+          "number": 2,
+          "prompt": "Сегодня холоднее, чем вчера.",
+          "answer": "It's colder today than yesterday. / Today is colder than yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "Это самый лучший ресторан в городе.",
+          "answer": "This is the best restaurant in the city."
+        },
+        {
+          "number": 4,
+          "prompt": "Моя работа не такая сложная, как твоя.",
+          "answer": "My job is not as difficult as yours. / My job isn't as hard as yours."
+        },
+        {
+          "number": 5,
+          "prompt": "Метро быстрее, чем автобус.",
+          "answer": "The metro is faster than the bus."
+        },
+        {
+          "number": 6,
+          "prompt": "Он самый опытный разработчик в нашей команде.",
+          "answer": "He is the most experienced developer in our team."
+        },
+        {
+          "number": 7,
+          "prompt": "Этот код намного чище, чем старый.",
+          "answer": "This code is much cleaner than the old one. / This code is much cleaner than the old code."
+        },
+        {
+          "number": 8,
+          "prompt": "Это был худший день в моей жизни.",
+          "answer": "That was the worst day of my life. / It was the worst day of my life."
+        }
+      ]
+    }
+  ]
+}

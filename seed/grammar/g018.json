@@ -1,0 +1,280 @@
+{
+  "id": "g018",
+  "position": 18,
+  "cefrLevel": "B1",
+  "title": "Present Perfect Continuous",
+  "plannedFrom": "2026-11-12",
+  "plannedTo": "2026-11-14",
+  "sections": {
+    "why": [
+      "Это время подчёркивает сам процесс и его длительность: что-то началось в прошлом и продолжается до сих пор, либо только что закончилось и мы видим следы. По-русски: «Я работаю здесь три года», «Я весь день учусь», «Ты весь мокрый, ты бегал?»"
+    ],
+    "formation": [
+      "• Утверждение: have/has + been + V-ing: I have been working. She has been waiting.",
+      "• Отрицание: haven't / hasn't + been + V-ing: We haven't been sleeping well.",
+      "• Вопрос: Have/Has + подлежащее + been + V-ing?: Have you been studying?",
+      "• Краткие формы: I've been, he's been, they've been."
+    ],
+    "usage": [
+      "1. Процесс начался в прошлом и продолжается сейчас (часто с for и since).",
+      "• I have been learning English for two years. (Я учу английский два года.)",
+      "• He has been working since 8 a.m. (Он работает с 8 утра.)",
+      "2. Процесс только что закончился, и его результат виден сейчас.",
+      "• You look tired. Have you been running? (Ты выглядишь усталым. Ты бегал?)",
+      "• The ground is wet. It has been raining. (Земля мокрая. Шёл дождь.)",
+      "3. Вопрос How long ... ? про длительность процесса.",
+      "• How long have you been waiting? (Как долго ты ждёшь?)",
+      "4. Повторяющееся действие в последнее время.",
+      "• I have been going to the gym a lot lately. (Последнее время я много хожу в спортзал.)",
+      "Важно: Present Perfect Simple делает акцент на результате и количестве, Continuous на процессе.",
+      "• I have written three emails. (результат: три письма)",
+      "• I have been writing emails all morning. (процесс: всё утро)"
+    ],
+    "signalWords": [
+      "for, since, all day, all morning, how long, lately, recently.",
+      "Глаголы состояния (know, like, want, have = «иметь», be) в Continuous обычно не используем: I have known him for years (не have been knowing)."
+    ],
+    "mistakes": [
+      "✗ I am waiting for you since 9 o'clock. → ✓ I have been waiting for you since 9 o'clock. С since и for нужно Perfect, а не Present Continuous.",
+      "✗ I have been wait for an hour. → ✓ I have been waiting for an hour. После been идёт форма -ing.",
+      "✗ I have been knowing him for years. → ✓ I have known him for years. Know не используется в Continuous.",
+      "✗ How long do you learn English? → ✓ How long have you been learning English? Русское настоящее время передаём Perfect Continuous.",
+      "✗ She has been finishing the report three times. → ✓ She has finished the report three times. Если есть количество или результат, ставим Simple."
+    ],
+    "remember": [
+      "Have been + V-ing = «делаю уже какое-то время»; считаем результат (3 письма) в Simple, а процесс («всё утро») в Continuous."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Present Perfect Continuous",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (study) English for two years.",
+          "answer": "have been studying"
+        },
+        {
+          "number": 2,
+          "prompt": "She ___ (work) here since January.",
+          "answer": "has been working"
+        },
+        {
+          "number": 3,
+          "prompt": "They ___ (wait) for the bus for twenty minutes.",
+          "answer": "have been waiting"
+        },
+        {
+          "number": 4,
+          "prompt": "It ___ (rain) all day.",
+          "answer": "has been raining"
+        },
+        {
+          "number": 5,
+          "prompt": "We ___ (talk) for an hour.",
+          "answer": "have been talking"
+        },
+        {
+          "number": 6,
+          "prompt": "He ___ (play) computer games since morning.",
+          "answer": "has been playing"
+        },
+        {
+          "number": 7,
+          "prompt": "I ___ (learn) JavaScript for six months.",
+          "answer": "have been learning"
+        },
+        {
+          "number": 8,
+          "prompt": "My brother ___ (live) in Warsaw since 2022.",
+          "answer": "has been living"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "How long (a) do you wait (b) have you been waiting for the doctor?",
+          "answer": "b / have you been waiting"
+        },
+        {
+          "number": 2,
+          "prompt": "I (a) am working (b) have been working on this bug since lunch.",
+          "answer": "b / have been working"
+        },
+        {
+          "number": 3,
+          "prompt": "She (a) has been knowing (b) has known him for ten years.",
+          "answer": "b / has known"
+        },
+        {
+          "number": 4,
+          "prompt": "You are out of breath. (a) Did you run (b) Have you been running?",
+          "answer": "b / Have you been running"
+        },
+        {
+          "number": 5,
+          "prompt": "He's tired because he (a) works (b) has been working all night.",
+          "answer": "b / has been working"
+        },
+        {
+          "number": 6,
+          "prompt": "I (a) have been having (b) have a headache right now.",
+          "answer": "b / have"
+        },
+        {
+          "number": 7,
+          "prompt": "We (a) have been living (b) live in this house since 2015.",
+          "answer": "a / have been living"
+        },
+        {
+          "number": 8,
+          "prompt": "They (a) have been (b) are been travelling for a month.",
+          "answer": "a / have been"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Составьте вопрос или отрицание",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You have been learning Spanish. (Вопрос: How long ...?)",
+          "answer": "How long have you been learning Spanish?"
+        },
+        {
+          "number": 2,
+          "prompt": "She has been sleeping well. (Отрицание)",
+          "answer": "She hasn't been sleeping well."
+        },
+        {
+          "number": 3,
+          "prompt": "They have been working today. (Вопрос: Have ...?)",
+          "answer": "Have they been working today?"
+        },
+        {
+          "number": 4,
+          "prompt": "I have been exercising. (Отрицание)",
+          "answer": "I haven't been exercising."
+        },
+        {
+          "number": 5,
+          "prompt": "He has been driving since 6 a.m. (Вопрос: How long ...?)",
+          "answer": "How long has he been driving?"
+        },
+        {
+          "number": 6,
+          "prompt": "We have been waiting for you. (Вопрос: Have ...?)",
+          "answer": "Have you been waiting for us? / Have we been waiting for you?"
+        },
+        {
+          "number": 7,
+          "prompt": "It has been snowing. (Отрицание)",
+          "answer": "It hasn't been snowing."
+        },
+        {
+          "number": 8,
+          "prompt": "She has been studying all day. (Вопрос: Has ...?)",
+          "answer": "Has she been studying all day?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Simple или Continuous? Поставьте глагол в правильную форму Present Perfect",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (write) five emails this morning.",
+          "answer": "have written"
+        },
+        {
+          "number": 2,
+          "prompt": "I ___ (write) emails all morning.",
+          "answer": "have been writing"
+        },
+        {
+          "number": 3,
+          "prompt": "She ___ (read) this book for three hours.",
+          "answer": "has been reading"
+        },
+        {
+          "number": 4,
+          "prompt": "She ___ (read) three books this month.",
+          "answer": "has read"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ (paint) the kitchen. It's still wet.",
+          "answer": "has been painting / has painted"
+        },
+        {
+          "number": 6,
+          "prompt": "They ___ (build) a new website since May.",
+          "answer": "have been building"
+        },
+        {
+          "number": 7,
+          "prompt": "I ___ (know) Peter for a long time.",
+          "answer": "have known"
+        },
+        {
+          "number": 8,
+          "prompt": "We ___ (clean) the house all day.",
+          "answer": "have been cleaning"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я учу английский уже полгода.",
+          "answer": "I have been learning English for six months. / I have been learning English for half a year."
+        },
+        {
+          "number": 2,
+          "prompt": "Как долго ты ждёшь?",
+          "answer": "How long have you been waiting?"
+        },
+        {
+          "number": 3,
+          "prompt": "Весь день идёт снег.",
+          "answer": "It has been snowing all day."
+        },
+        {
+          "number": 4,
+          "prompt": "Он работает над этим проектом с марта.",
+          "answer": "He has been working on this project since March."
+        },
+        {
+          "number": 5,
+          "prompt": "Ты выглядишь уставшим. Ты не спал?",
+          "answer": "You look tired. Haven't you been sleeping? / You look tired. Have you not been sleeping?"
+        },
+        {
+          "number": 6,
+          "prompt": "Мы целый час обсуждаем эту проблему.",
+          "answer": "We have been discussing this problem for an hour."
+        },
+        {
+          "number": 7,
+          "prompt": "Последнее время я мало сплю.",
+          "answer": "I haven't been sleeping much lately. / I haven't been getting much sleep lately."
+        },
+        {
+          "number": 8,
+          "prompt": "Она пишет код с девяти утра.",
+          "answer": "She has been writing code since nine a.m. / She has been coding since nine a.m."
+        }
+      ]
+    }
+  ]
+}

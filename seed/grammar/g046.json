@@ -1,0 +1,272 @@
+{
+  "id": "g046",
+  "position": 46,
+  "cefrLevel": "B2",
+  "title": "Отчётные глаголы: suggest, recommend, deny, admit, accuse + конструкции",
+  "plannedFrom": "2027-04-05",
+  "plannedTo": "2027-04-10",
+  "sections": {
+    "why": [
+      "Отчётные глаголы (suggest, recommend, deny, admit, accuse) передают не просто слова, а намерение говорящего: совет, признание, отрицание, обвинение. По-русски мы говорим «предложил пойти», «признал, что ошибся», «обвинил в краже». В английском смысл тот же, но после каждого глагола стоит своя конструкция, и угадывать её нельзя — её нужно выучить вместе с глаголом."
+    ],
+    "formation": [
+      "• suggest / recommend + V-ing: He suggested going by train.",
+      "• suggest / recommend / admit / deny + (that) + подлежащее + глагол: She admitted that she was wrong.",
+      "• suggest / recommend + that + кто-то + базовая форма глагола (или should + глагол): I suggest that he call the client. / I suggest that he should call the client.",
+      "• admit / deny + V-ing; для действия в прошлом можно having + V3: He denied breaking the server. / He denied having broken the server.",
+      "• accuse + кого-то + of + V-ing: They accused him of stealing data.",
+      "• advise (а не recommend) + кому-то + to + глагол: She advised me to wait."
+    ],
+    "usage": [
+      "1. Предложение и совет (suggest, recommend): I recommend using Git. (Я рекомендую использовать Git.) They suggested that we meet at six. (Они предложили встретиться в шесть.)",
+      "2. Признание (admit): He admitted forgetting the password. (Он признался, что забыл пароль.)",
+      "3. Отрицание (deny): She denied that she had seen the message. (Она отрицала, что видела сообщение.)",
+      "4. Обвинение (accuse): The boss accused Tom of lying. (Босс обвинил Тома во лжи.)"
+    ],
+    "signalWords": [
+      "after suggest / recommend / admit / deny всегда смотрим на следующее слово: либо V-ing, либо that. Предлог of бывает только после accuse somebody."
+    ],
+    "mistakes": [
+      "✗ She suggested me to leave → ✓ She suggested that I leave / She suggested leaving. После suggest нет «кому-то + to + глагол».",
+      "✗ He denied to take the money → ✓ He denied taking the money. После deny только V-ing или that.",
+      "✗ They accused him for cheating → ✓ They accused him of cheating. Accuse всегда с of, а не for.",
+      "✗ I recommend to use this library → ✓ I recommend using this library. После recommend нет to + глагол сразу.",
+      "✗ He accused me to be late → ✓ He accused me of being late. После of нужен V-ing."
+    ],
+    "remember": [
+      "suggest, recommend, admit, deny — это V-ing или that; accuse — всегда of + V-ing; to + глагол после suggest не бывает."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму (V-ing)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She suggested ___ (take) a taxi.",
+          "answer": "taking"
+        },
+        {
+          "number": 2,
+          "prompt": "He denied ___ (steal) the money.",
+          "answer": "stealing"
+        },
+        {
+          "number": 3,
+          "prompt": "I recommend ___ (read) this book.",
+          "answer": "reading"
+        },
+        {
+          "number": 4,
+          "prompt": "Tom admitted ___ (make) a mistake in the code.",
+          "answer": "making / having made"
+        },
+        {
+          "number": 5,
+          "prompt": "Anna suggested ___ (have) lunch together.",
+          "answer": "having"
+        },
+        {
+          "number": 6,
+          "prompt": "The doctor recommended ___ (drink) more water.",
+          "answer": "drinking"
+        },
+        {
+          "number": 7,
+          "prompt": "They denied ___ (know) about the problem.",
+          "answer": "knowing / having known"
+        },
+        {
+          "number": 8,
+          "prompt": "He admitted ___ (forget) the password.",
+          "answer": "forgetting / having forgotten"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He suggested (a) to go (b) going (c) go to the cinema.",
+          "answer": "(b) going"
+        },
+        {
+          "number": 2,
+          "prompt": "I recommend (a) that you see (b) you to see (c) you seeing a doctor.",
+          "answer": "(a) that you see"
+        },
+        {
+          "number": 3,
+          "prompt": "They accused him (a) for (b) of (c) in stealing the idea.",
+          "answer": "(b) of"
+        },
+        {
+          "number": 4,
+          "prompt": "She denied (a) that she had seen (b) to see (c) she see him.",
+          "answer": "(a) that she had seen"
+        },
+        {
+          "number": 5,
+          "prompt": "He suggested that we (a) to meet (b) meeting (c) meet at six.",
+          "answer": "(c) meet"
+        },
+        {
+          "number": 6,
+          "prompt": "The manager accused the team (a) of missing (b) to miss (c) missing the deadline.",
+          "answer": "(a) of missing"
+        },
+        {
+          "number": 7,
+          "prompt": "He admitted (a) that he was (b) him being (c) to be late.",
+          "answer": "(a) that he was"
+        },
+        {
+          "number": 8,
+          "prompt": "I'd recommend (a) to stay (b) staying (c) stay at this hotel.",
+          "answer": "(b) staying"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите фразу с указанным глаголом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "'Let's go to the park,' said Mia. (suggested)",
+          "answer": "Mia suggested going to the park. / Mia suggested that we go to the park."
+        },
+        {
+          "number": 2,
+          "prompt": "'I didn't take your laptop,' Dan told me. (denied)",
+          "answer": "Dan denied taking my laptop. / Dan denied that he had taken my laptop. / Dan denied having taken my laptop."
+        },
+        {
+          "number": 3,
+          "prompt": "'Yes, I deleted the file,' said Kate. (admitted)",
+          "answer": "Kate admitted deleting the file. / Kate admitted having deleted the file. / Kate admitted that she had deleted the file."
+        },
+        {
+          "number": 4,
+          "prompt": "'You stole my idea!' Paul said to Ben. (accused)",
+          "answer": "Paul accused Ben of stealing his idea."
+        },
+        {
+          "number": 5,
+          "prompt": "'You should try this tool,' she said to us. (recommended)",
+          "answer": "She recommended trying this tool. / She recommended that we try this tool. / She recommended that we should try this tool."
+        },
+        {
+          "number": 6,
+          "prompt": "'Why don't we call the client?' said Max. (suggested)",
+          "answer": "Max suggested calling the client. / Max suggested that we call the client."
+        },
+        {
+          "number": 7,
+          "prompt": "'I didn't see the message,' said Lena. (denied)",
+          "answer": "Lena denied seeing the message. / Lena denied having seen the message. / Lena denied that she had seen the message."
+        },
+        {
+          "number": 8,
+          "prompt": "'You lied to the customers,' the boss said to Tom. (accused)",
+          "answer": "The boss accused Tom of lying to the customers."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и исправьте предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She suggested to go to the cinema.",
+          "answer": "She suggested going to the cinema. / She suggested that we go to the cinema."
+        },
+        {
+          "number": 2,
+          "prompt": "He denied to take the money.",
+          "answer": "He denied taking the money."
+        },
+        {
+          "number": 3,
+          "prompt": "They accused him for cheating.",
+          "answer": "They accused him of cheating."
+        },
+        {
+          "number": 4,
+          "prompt": "I recommend to use this library.",
+          "answer": "I recommend using this library."
+        },
+        {
+          "number": 5,
+          "prompt": "He admitted to make a serious mistake.",
+          "answer": "He admitted making a serious mistake. / He admitted to making a serious mistake."
+        },
+        {
+          "number": 6,
+          "prompt": "The doctor suggested me to rest.",
+          "answer": "The doctor suggested that I rest. / The doctor suggested resting."
+        },
+        {
+          "number": 7,
+          "prompt": "He accused me to be late.",
+          "answer": "He accused me of being late."
+        },
+        {
+          "number": 8,
+          "prompt": "I suggest you to check the logs.",
+          "answer": "I suggest (that) you check the logs. / I suggest checking the logs. / I suggest that you should check the logs."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я предложил встретиться в пятницу.",
+          "answer": "I suggested meeting on Friday. / I suggested that we meet on Friday."
+        },
+        {
+          "number": 2,
+          "prompt": "Он признал, что допустил ошибку в коде.",
+          "answer": "He admitted that he had made a mistake in the code. / He admitted making a mistake in the code."
+        },
+        {
+          "number": 3,
+          "prompt": "Она отрицает, что видела это письмо.",
+          "answer": "She denies seeing this email. / She denies that she saw this email."
+        },
+        {
+          "number": 4,
+          "prompt": "Врач порекомендовал мне больше отдыхать.",
+          "answer": "The doctor recommended that I rest more. / The doctor recommended resting more."
+        },
+        {
+          "number": 5,
+          "prompt": "Клиент обвинил нас в том, что мы потеряли данные.",
+          "answer": "The client accused us of losing the data."
+        },
+        {
+          "number": 6,
+          "prompt": "Я бы порекомендовал использовать React для этого проекта.",
+          "answer": "I would recommend using React for this project. / I'd recommend using React for this project."
+        },
+        {
+          "number": 7,
+          "prompt": "Они предложили поехать в отпуск в сентябре.",
+          "answer": "They suggested going on vacation in September. / They suggested that we go on vacation in September."
+        },
+        {
+          "number": 8,
+          "prompt": "Том признался, что забыл про встречу.",
+          "answer": "Tom admitted that he had forgotten about the meeting. / Tom admitted forgetting about the meeting."
+        }
+      ]
+    }
+  ]
+}

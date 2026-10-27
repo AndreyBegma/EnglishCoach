@@ -1,0 +1,270 @@
+{
+  "id": "g005",
+  "position": 5,
+  "cefrLevel": "A2",
+  "title": "Множественное число; исчисляемые и неисчисляемые; some/any/much/many",
+  "plannedFrom": "2026-10-23",
+  "plannedTo": "2026-10-23",
+  "sections": {
+    "why": [
+      "В английском существительные делятся на те, которые можно посчитать (a bug, two bugs), и те, которые посчитать нельзя (water, money, information). От этого зависит, какое слово мы ставим перед ними: many или much, some или any. В русском многие неисчисляемые слова ведут себя иначе: «новости», «деньги» — множественное число, а news и money в английском — единственное."
+    ],
+    "formation": [
+      "• Множественное число: обычно + -s (day → days); после -s, -sh, -ch, -x, -o: + -es (box → boxes); согласная + y → -ies (city → cities); -f/-fe → -ves (knife → knives).",
+      "• Исключения: man → men, woman → women, child → children, person → people, foot → feet, tooth → teeth.",
+      "• Неисчисляемые: нет формы мн. числа, перед ними нет a/an, глагол в единственном числе: water, money, time, information, advice, news, work, help, luggage."
+    ],
+    "usage": [
+      "1. Some — в утверждениях и в предложениях-просьбах: I need some help. Would you like some tea? (Мне нужна помощь. Хотите чаю?)",
+      "2. Any — в отрицаниях и вопросах: I don't have any questions. Do you have any ideas? (У меня нет вопросов. У вас есть идеи?)",
+      "3. Many — с исчисляемыми во мн. числе: How many people are in the team? (Сколько человек в команде?) We don't have many clients. (У нас немного клиентов.)",
+      "4. Much — с неисчисляемыми, в вопросах и отрицаниях: How much money do you need? I don't have much time. (Сколько денег нужно? У меня мало времени.)",
+      "5. В утверждениях вместо many/much обычно говорим a lot of: There are a lot of mistakes in this code. (В этом коде много ошибок.)"
+    ],
+    "signalWords": [
+      "How many...? / How much...? too many / too much, a lot of, there is / there are. Слово news, как и money, всегда единственное число: The news is good."
+    ],
+    "mistakes": [
+      "✗ I need an advice. → ✓ I need some advice. Advice неисчисляемое: без a/an и без -s.",
+      "✗ The news are interesting. → ✓ The news is interesting. News — единственное число, хотя по-русски «новости».",
+      "✗ How much people are here? → ✓ How many people are here? People можно посчитать, значит many.",
+      "✗ Two persons, many childs. → ✓ Two people, many children. Это неправильные формы.",
+      "✗ I don't have some time. → ✓ I don't have any time. В отрицании нужно any."
+    ],
+    "remember": [
+      "Можно посчитать — many, нельзя — much; в вопросе и отрицании — any, в утверждении — some."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Напишите форму множественного числа",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "box",
+          "answer": "boxes"
+        },
+        {
+          "number": 2,
+          "prompt": "city",
+          "answer": "cities"
+        },
+        {
+          "number": 3,
+          "prompt": "child",
+          "answer": "children"
+        },
+        {
+          "number": 4,
+          "prompt": "man",
+          "answer": "men"
+        },
+        {
+          "number": 5,
+          "prompt": "knife",
+          "answer": "knives"
+        },
+        {
+          "number": 6,
+          "prompt": "photo",
+          "answer": "photos"
+        },
+        {
+          "number": 7,
+          "prompt": "tooth",
+          "answer": "teeth"
+        },
+        {
+          "number": 8,
+          "prompt": "day",
+          "answer": "days"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Вставьте much или many",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "How ___ money do you have?",
+          "answer": "much"
+        },
+        {
+          "number": 2,
+          "prompt": "How ___ people are in the office?",
+          "answer": "many"
+        },
+        {
+          "number": 3,
+          "prompt": "There isn't ___ time.",
+          "answer": "much"
+        },
+        {
+          "number": 4,
+          "prompt": "I don't have ___ friends here.",
+          "answer": "many"
+        },
+        {
+          "number": 5,
+          "prompt": "How ___ coffee do you drink a day?",
+          "answer": "much"
+        },
+        {
+          "number": 6,
+          "prompt": "There are too ___ bugs in this code.",
+          "answer": "many"
+        },
+        {
+          "number": 7,
+          "prompt": "We don't have ___ work today.",
+          "answer": "much"
+        },
+        {
+          "number": 8,
+          "prompt": "How ___ tickets do you need?",
+          "answer": "many"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Вставьте some или any",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I need ___ help.",
+          "answer": "some"
+        },
+        {
+          "number": 2,
+          "prompt": "Do you have ___ questions?",
+          "answer": "any"
+        },
+        {
+          "number": 3,
+          "prompt": "There aren't ___ chairs in the room.",
+          "answer": "any"
+        },
+        {
+          "number": 4,
+          "prompt": "Would you like ___ tea?",
+          "answer": "some"
+        },
+        {
+          "number": 5,
+          "prompt": "She doesn't have ___ experience.",
+          "answer": "any"
+        },
+        {
+          "number": 6,
+          "prompt": "There is ___ milk in the fridge.",
+          "answer": "some"
+        },
+        {
+          "number": 7,
+          "prompt": "Are there ___ problems with the server?",
+          "answer": "any"
+        },
+        {
+          "number": 8,
+          "prompt": "Can I have ___ water, please?",
+          "answer": "some"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I need (a) an advice (b) some advice.",
+          "answer": "b (some advice)"
+        },
+        {
+          "number": 2,
+          "prompt": "There (a) is (b) are a lot of information on the site.",
+          "answer": "a (is)"
+        },
+        {
+          "number": 3,
+          "prompt": "She gave me (a) a good news (b) some good news.",
+          "answer": "b (some good news)"
+        },
+        {
+          "number": 4,
+          "prompt": "Two (a) person (b) people are waiting outside.",
+          "answer": "b (people)"
+        },
+        {
+          "number": 5,
+          "prompt": "How many (a) luggage (b) bags do you have?",
+          "answer": "b (bags)"
+        },
+        {
+          "number": 6,
+          "prompt": "The news (a) is (b) are interesting.",
+          "answer": "a (is)"
+        },
+        {
+          "number": 7,
+          "prompt": "I'd like (a) a bread (b) some bread.",
+          "answer": "b (some bread)"
+        },
+        {
+          "number": 8,
+          "prompt": "My trousers (a) is (b) are new.",
+          "answer": "b (are)"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "У меня нет свободного времени.",
+          "answer": "I don't have any free time. / I have no free time."
+        },
+        {
+          "number": 2,
+          "prompt": "Сколько человек в команде?",
+          "answer": "How many people are in the team? / How many people are there in the team?"
+        },
+        {
+          "number": 3,
+          "prompt": "В холодильнике есть молоко.",
+          "answer": "There is some milk in the fridge. / There is milk in the fridge."
+        },
+        {
+          "number": 4,
+          "prompt": "Сколько денег тебе нужно?",
+          "answer": "How much money do you need?"
+        },
+        {
+          "number": 5,
+          "prompt": "В этом коде много ошибок.",
+          "answer": "There are a lot of mistakes in this code. / There are many mistakes in this code."
+        },
+        {
+          "number": 6,
+          "prompt": "Новости хорошие.",
+          "answer": "The news is good."
+        },
+        {
+          "number": 7,
+          "prompt": "Вам нужна помощь?",
+          "answer": "Do you need any help? / Do you need some help?"
+        },
+        {
+          "number": 8,
+          "prompt": "У нас не очень много клиентов.",
+          "answer": "We don't have many clients. / We do not have many clients."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "id": "g075",
+  "position": 75,
+  "cefrLevel": "C2",
+  "title": "Продвинутые условные: should you, were it not for, but for, provided, otherwise",
+  "plannedFrom": "2027-10-25",
+  "plannedTo": "2027-10-30",
+  "sections": {
+    "why": [
+      "Обычное if хорошо для бытовой речи, но в деловой переписке, договорах и литературном стиле нужны более лаконичные и формальные способы выразить условие: «если вдруг», «если бы не», «при условии, что», «иначе». В русском это работает похоже («Не будь вас...», «Если вдруг...»), и в английском такие конструкции звучат очень уверенно."
+    ],
+    "formation": [
+      "• Should + подлежащее + V1 (вместо if): Should you need help, call me. (Если вдруг вам понадобится помощь, звоните.)",
+      "• Were + подлежащее + to + V1 / Were + подлежащее ...: Were I to lose my job, I would move. Were it not for + существительное, ...: Were it not for the noise, this café would be perfect.",
+      "• Had + подлежащее + V3: Had it not been for your help, we would have failed. (о прошлом)",
+      "• But for + существительное: But for the rain, we would have gone out. (без)",
+      "• provided / providing (that), as long as, on condition that: условие, которое должно выполниться.",
+      "• unless = if ... not: I won't go unless you come. otherwise = «иначе»: Hurry up; otherwise, you'll be late."
+    ],
+    "usage": [
+      "1. Should you ... — вежливое, формальное «если вдруг» (реальная, но маловероятная ситуация): Should the server crash, restart it. (Если вдруг сервер упадёт, перезапустите его.)",
+      "2. Were it not for / If it weren't for — «если бы не» (настоящее): Were it not for my team, this project would fail. (Если бы не моя команда, проект бы провалился.)",
+      "3. Had it not been for / But for — «если бы не» (прошлое): Had it not been for the traffic, we would have arrived on time. But for your advice, I would have made a mistake. (Если бы не ваш совет, я бы ошибся.)",
+      "4. Provided / as long as — «при условии, что»: You can use my laptop provided (that) you are careful. (Можешь пользоваться ноутбуком, при условии что будешь осторожен.)",
+      "5. Unless — «если только не»: I won't go unless you come with me.",
+      "6. Otherwise — «иначе», отдельное слово между двумя предложениями: Back up your files; otherwise, you may lose them.",
+      "7. Supposing / suppose — «а что если»: Supposing you lose your job, what will you do?"
+    ],
+    "signalWords": [
+      "should, were, had в начале предложения без if; but for, provided, providing, as long as, on condition that, unless, otherwise, supposing."
+    ],
+    "mistakes": [
+      "✗ Should you will need help, call me. → ✓ Should you need help (после should — V1, без will)",
+      "✗ If should you need... → ✓ Should you need... (if и инверсия вместе не ставятся)",
+      "✗ Unless you don't come, I'll go. → ✓ Unless you come, I'll go (unless уже содержит отрицание)",
+      "✗ Had it not been for you, I would fail. (о прошлом) → ✓ I would have failed",
+      "✗ Hurry up, otherwise you will to miss it → ✓ otherwise you'll miss it"
+    ],
+    "remember": [
+      "Should = «если вдруг», Were / Had = «если бы не», provided = «при условии», otherwise = «иначе»."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте пропущенное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___ you need any help, call me. (формально, вместо if)",
+          "answer": "Should"
+        },
+        {
+          "number": 2,
+          "prompt": "___ it not been for your help, I would have failed.",
+          "answer": "Had"
+        },
+        {
+          "number": 3,
+          "prompt": "___ for the rain, we would have gone hiking.",
+          "answer": "But"
+        },
+        {
+          "number": 4,
+          "prompt": "You can borrow my car ___ you drive carefully. (при условии)",
+          "answer": "provided / providing / as long as"
+        },
+        {
+          "number": 5,
+          "prompt": "Take an umbrella; ___, you'll get wet.",
+          "answer": "otherwise"
+        },
+        {
+          "number": 6,
+          "prompt": "___ it not for this bug, the app would be perfect.",
+          "answer": "Were"
+        },
+        {
+          "number": 7,
+          "prompt": "I'll come ___ I'm too busy. (если только не)",
+          "answer": "unless"
+        },
+        {
+          "number": 8,
+          "prompt": "___ I to lose my job, I would move to another city.",
+          "answer": "Were"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Перепишите условное предложение с инверсией Should (без if)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If you need more information, contact us.",
+          "answer": "Should you need more information, contact us."
+        },
+        {
+          "number": 2,
+          "prompt": "If anyone calls, please take a message.",
+          "answer": "Should anyone call, please take a message."
+        },
+        {
+          "number": 3,
+          "prompt": "If the server crashes, restart it.",
+          "answer": "Should the server crash, restart it."
+        },
+        {
+          "number": 4,
+          "prompt": "If you have any questions, let me know.",
+          "answer": "Should you have any questions, let me know."
+        },
+        {
+          "number": 5,
+          "prompt": "If he arrives early, ask him to wait.",
+          "answer": "Should he arrive early, ask him to wait."
+        },
+        {
+          "number": 6,
+          "prompt": "If there is a problem, call me.",
+          "answer": "Should there be a problem, call me."
+        },
+        {
+          "number": 7,
+          "prompt": "If it rains, the event will be moved indoors.",
+          "answer": "Should it rain, the event will be moved indoors."
+        },
+        {
+          "number": 8,
+          "prompt": "If you change your mind, tell me.",
+          "answer": "Should you change your mind, tell me."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, используя конструкцию в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If it weren't for the deadline, I would stay longer. (Were it not for...)",
+          "answer": "Were it not for the deadline, I would stay longer."
+        },
+        {
+          "number": 2,
+          "prompt": "If it hadn't been for your advice, I would have made a mistake. (Had it not been for...)",
+          "answer": "Had it not been for your advice, I would have made a mistake."
+        },
+        {
+          "number": 3,
+          "prompt": "Without your help, we would have lost the client. (But for...)",
+          "answer": "But for your help, we would have lost the client."
+        },
+        {
+          "number": 4,
+          "prompt": "Without the internet, our work would be impossible. (But for...)",
+          "answer": "But for the internet, our work would be impossible."
+        },
+        {
+          "number": 5,
+          "prompt": "If it hadn't been for the traffic, we would have arrived on time. (Had it not been for...)",
+          "answer": "Had it not been for the traffic, we would have arrived on time."
+        },
+        {
+          "number": 6,
+          "prompt": "If it weren't for my team, this project would fail. (Were it not for...)",
+          "answer": "Were it not for my team, this project would fail."
+        },
+        {
+          "number": 7,
+          "prompt": "We would have caught the train if the delay hadn't happened. (But for...)",
+          "answer": "But for the delay, we would have caught the train."
+        },
+        {
+          "number": 8,
+          "prompt": "If it weren't for the noise, this cafe would be perfect. (Were it not for...)",
+          "answer": "Were it not for the noise, this cafe would be perfect."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Объедините предложения, используя слово в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You can use the car. You return it by six. (provided that)",
+          "answer": "You can use the car provided that you return it by six. / You can use the car provided you return it by six."
+        },
+        {
+          "number": 2,
+          "prompt": "We'll start at nine. It rains. (unless)",
+          "answer": "We'll start at nine unless it rains."
+        },
+        {
+          "number": 3,
+          "prompt": "Hurry up. You'll miss the bus. (otherwise)",
+          "answer": "Hurry up; otherwise, you'll miss the bus. / Hurry up, otherwise you'll miss the bus."
+        },
+        {
+          "number": 4,
+          "prompt": "You can stay here. You are quiet. (as long as)",
+          "answer": "You can stay here as long as you are quiet. / You can stay here as long as you're quiet."
+        },
+        {
+          "number": 5,
+          "prompt": "I won't go. You come with me. (unless)",
+          "answer": "I won't go unless you come with me."
+        },
+        {
+          "number": 6,
+          "prompt": "Back up your files. You may lose them. (otherwise)",
+          "answer": "Back up your files; otherwise, you may lose them. / Back up your files, otherwise you may lose them."
+        },
+        {
+          "number": 7,
+          "prompt": "I'll lend you money. You pay me back soon. (providing)",
+          "answer": "I'll lend you money providing you pay me back soon. / I'll lend you money providing that you pay me back soon."
+        },
+        {
+          "number": 8,
+          "prompt": "What will you do if you lose your job? (start with Supposing)",
+          "answer": "Supposing you lose your job, what will you do?"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Если вам вдруг понадобится помощь, звоните мне.",
+          "answer": "Should you need any help, call me. / Should you need help, call me."
+        },
+        {
+          "number": 2,
+          "prompt": "Если бы не ваша помощь, мы бы не закончили проект.",
+          "answer": "Had it not been for your help, we wouldn't have finished the project. / But for your help, we wouldn't have finished the project. / If it hadn't been for your help, we wouldn't have finished the project."
+        },
+        {
+          "number": 3,
+          "prompt": "Ты можешь пользоваться моим ноутбуком при условии, что будешь осторожен.",
+          "answer": "You can use my laptop provided (that) you are careful. / You can use my laptop as long as you're careful."
+        },
+        {
+          "number": 4,
+          "prompt": "Поторопись, иначе опоздаешь на самолёт.",
+          "answer": "Hurry up, otherwise you'll miss the flight. / Hurry up, otherwise you'll miss your flight."
+        },
+        {
+          "number": 5,
+          "prompt": "Если бы не этот баг, приложение работало бы идеально.",
+          "answer": "Were it not for this bug, the app would work perfectly. / If it weren't for this bug, the app would work perfectly."
+        },
+        {
+          "number": 6,
+          "prompt": "Я не пойду, если только ты не пойдёшь со мной.",
+          "answer": "I won't go unless you come with me. / I won't go unless you go with me."
+        },
+        {
+          "number": 7,
+          "prompt": "Если бы вы вдруг передумали, дайте мне знать.",
+          "answer": "Should you change your mind, let me know. / Were you to change your mind, let me know."
+        },
+        {
+          "number": 8,
+          "prompt": "Если бы не пробки, мы были бы уже дома.",
+          "answer": "But for the traffic, we would be home by now. / Were it not for the traffic, we would be home by now."
+        }
+      ]
+    }
+  ]
+}

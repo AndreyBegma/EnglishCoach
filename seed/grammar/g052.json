@@ -1,0 +1,269 @@
+{
+  "id": "g052",
+  "position": 52,
+  "cefrLevel": "B2",
+  "title": "Коллокации: make / do / take / have / get",
+  "plannedFrom": "2027-05-17",
+  "plannedTo": "2027-05-22",
+  "sections": {
+    "why": [
+      "В русском мы говорим «принять решение», «сделать ошибку», «принять душ», «провести встречу» — и глаголы разные. В английском тоже: нельзя выбрать глагол по переводу, его нужно запомнить вместе с существительным. Это и есть коллокации — устойчивые сочетания."
+    ],
+    "formation": [
+      "Глагол + существительное (иногда с артиклем): make + a decision, do + homework, take + a break, have + a meeting, get + a reply. Глагол меняется по временам как обычно: She made a mistake. He doesn't do his homework. We're having lunch."
+    ],
+    "usage": [
+      "1. MAKE — создаём результат, что-то новое: make a decision (принять решение), make a mistake (ошибиться), make a plan (составить план), make progress (добиться прогресса), make money (зарабатывать деньги), make a call (позвонить), make an effort (приложить усилия), make a suggestion (предложить), make noise (шуметь).",
+      "2. DO — занятия, работа, повседневные дела: do homework (делать домашнее задание), do the dishes (мыть посуду), do the shopping (ходить по магазинам), do a good job (хорошо поработать), do research (проводить исследование), do a favor (оказать услугу), do business (вести дела).",
+      "3. TAKE — берём, тратим время, делаем «разовое действие»: take a break (сделать перерыв), take a photo (сфотографировать), take a risk (рискнуть), take notes (делать заметки), take care of (заботиться), take part in (участвовать), It takes two hours (это занимает два часа).",
+      "4. HAVE — события, еда, состояния: have a meeting (провести совещание), have lunch (обедать), have fun (веселиться), have a problem (иметь проблему), have an idea (иметь идею), have a chat (поболтать), have a good time (хорошо провести время).",
+      "5. GET — получить, стать, добраться: get a message (получить сообщение), get a job (найти работу), get tired (устать), get better (поправиться), get home (добраться домой), get ready (подготовиться), get it (понять).",
+      "Можно и take a shower, и have a shower (принять душ): оба варианта верны."
+    ],
+    "signalWords": [
+      "Смотри на существительное: mistake, decision, plan, progress → make; homework, dishes, shopping, favor → do; break, photo, risk, notes → take; meeting, lunch, fun, idea → have."
+    ],
+    "mistakes": [
+      "✗ I did a mistake → ✓ I made a mistake (ошибку «создают», а не «делают»)",
+      "✗ She makes her homework → ✓ She does her homework",
+      "✗ Let's make a break → ✓ Let's take a break",
+      "✗ It makes two hours to get there → ✓ It takes two hours (время «занимает» — take)",
+      "✗ We did a decision → ✓ We made a decision"
+    ],
+    "remember": [
+      "Make — создаём результат, do — выполняем дела, take — берём и тратим время, have — события и еда, get — получаем и становимся. Учи сочетание целиком."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте make или do в нужной форме",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I need to ___ a phone call before the meeting.",
+          "answer": "make"
+        },
+        {
+          "number": 2,
+          "prompt": "Can you ___ me a favor?",
+          "answer": "do"
+        },
+        {
+          "number": 3,
+          "prompt": "Everyone ___ mistakes when they learn.",
+          "answer": "makes"
+        },
+        {
+          "number": 4,
+          "prompt": "She ___ her homework every evening.",
+          "answer": "does"
+        },
+        {
+          "number": 5,
+          "prompt": "Let's ___ a plan for the release.",
+          "answer": "make"
+        },
+        {
+          "number": 6,
+          "prompt": "He ___ a lot of research on user behavior.",
+          "answer": "does"
+        },
+        {
+          "number": 7,
+          "prompt": "We're ___ progress, but slowly.",
+          "answer": "making"
+        },
+        {
+          "number": 8,
+          "prompt": "I ___ the dishes after dinner.",
+          "answer": "do"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный глагол",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Let's ___ a break for ten minutes. (a) make (b) take (c) do",
+          "answer": "(b) take"
+        },
+        {
+          "number": 2,
+          "prompt": "Let's ___ a meeting tomorrow morning. (a) have (b) do (c) take",
+          "answer": "(a) have"
+        },
+        {
+          "number": 3,
+          "prompt": "I'd like to ___ a photo of the team. (a) do (b) take (c) make",
+          "answer": "(b) take"
+        },
+        {
+          "number": 4,
+          "prompt": "It will ___ about two hours to get there. (a) take (b) make (c) do",
+          "answer": "(a) take"
+        },
+        {
+          "number": 5,
+          "prompt": "Did you ___ fun at the party? (a) make (b) do (c) have",
+          "answer": "(c) have"
+        },
+        {
+          "number": 6,
+          "prompt": "She ___ a great job on the presentation. (a) did (b) made (c) took",
+          "answer": "(a) did"
+        },
+        {
+          "number": 7,
+          "prompt": "Please ___ care of yourself. (a) have (b) make (c) take",
+          "answer": "(c) take"
+        },
+        {
+          "number": 8,
+          "prompt": "I want to ___ a decision by Friday. (a) make (b) do (c) take",
+          "answer": "(a) make"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Замените выделенное слово глаголом get",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Rewrite with get: 'I received your message yesterday.' → 'I ___ your message yesterday.'",
+          "answer": "got"
+        },
+        {
+          "number": 2,
+          "prompt": "Rewrite with get: 'It is becoming dark.' → 'It is ___ dark.'",
+          "answer": "getting"
+        },
+        {
+          "number": 3,
+          "prompt": "Rewrite with get: 'She became tired after the trip.' → 'She ___ tired after the trip.'",
+          "answer": "got"
+        },
+        {
+          "number": 4,
+          "prompt": "Rewrite with get: 'We arrived home at midnight.' → 'We ___ home at midnight.'",
+          "answer": "got"
+        },
+        {
+          "number": 5,
+          "prompt": "Rewrite with get: 'He found a new job in London.' → 'He ___ a new job in London.'",
+          "answer": "got"
+        },
+        {
+          "number": 6,
+          "prompt": "Rewrite with get: 'Did you understand the joke?' → 'Did you ___ the joke?'",
+          "answer": "get"
+        },
+        {
+          "number": 7,
+          "prompt": "Rewrite with get: 'Prepare quickly, we are leaving soon.' → '___ ready quickly, we are leaving soon.'",
+          "answer": "Get"
+        },
+        {
+          "number": 8,
+          "prompt": "Rewrite with get: 'I need to buy some milk.' → 'I need to ___ some milk.'",
+          "answer": "get"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I did a mistake in the report.",
+          "answer": "I made a mistake in the report."
+        },
+        {
+          "number": 2,
+          "prompt": "Let's make a break.",
+          "answer": "Let's take a break."
+        },
+        {
+          "number": 3,
+          "prompt": "She makes her homework in the evening.",
+          "answer": "She does her homework in the evening."
+        },
+        {
+          "number": 4,
+          "prompt": "We did a decision yesterday.",
+          "answer": "We made a decision yesterday."
+        },
+        {
+          "number": 5,
+          "prompt": "Did you have a photo of the office?",
+          "answer": "Did you take a photo of the office?"
+        },
+        {
+          "number": 6,
+          "prompt": "I want to do a shower before dinner.",
+          "answer": "I want to take a shower before dinner. / I want to have a shower before dinner."
+        },
+        {
+          "number": 7,
+          "prompt": "He makes the shopping on Saturdays.",
+          "answer": "He does the shopping on Saturdays."
+        },
+        {
+          "number": 8,
+          "prompt": "It makes me two hours to get to work.",
+          "answer": "It takes me two hours to get to work."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Давай сделаем перерыв на пять минут.",
+          "answer": "Let's take a break for five minutes. / Let's take a five-minute break."
+        },
+        {
+          "number": 2,
+          "prompt": "Я допустил ошибку в коде.",
+          "answer": "I made a mistake in the code."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы приняли решение перенести релиз.",
+          "answer": "We made a decision to postpone the release."
+        },
+        {
+          "number": 4,
+          "prompt": "Ты можешь сделать мне одолжение?",
+          "answer": "Can you do me a favor?"
+        },
+        {
+          "number": 5,
+          "prompt": "Дорога до офиса занимает у меня час.",
+          "answer": "It takes me an hour to get to the office."
+        },
+        {
+          "number": 6,
+          "prompt": "Вчера у нас было совещание.",
+          "answer": "We had a meeting yesterday."
+        },
+        {
+          "number": 7,
+          "prompt": "Я получил ответ от клиента.",
+          "answer": "I got a reply from the client."
+        },
+        {
+          "number": 8,
+          "prompt": "На этой неделе мы добились большого прогресса.",
+          "answer": "We made great progress this week. / We made a lot of progress this week."
+        }
+      ]
+    }
+  ]
+}

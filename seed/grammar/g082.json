@@ -1,0 +1,272 @@
+{
+  "id": "g082",
+  "position": 82,
+  "cefrLevel": "C2",
+  "title": "Усилители и смягчители: quite, rather, fairly, utterly, somewhat",
+  "plannedFrom": "2027-12-13",
+  "plannedTo": "2027-12-18",
+  "sections": {
+    "why": [
+      "Слова вроде quite, rather, fairly, utterly, somewhat регулируют «громкость» прилагательного: делают признак слабее или сильнее. В русском мы обходимся «очень», «довольно», «совершенно», а в английском выбор точного слова показывает уровень языка."
+    ],
+    "formation": [
+      "• Смягчители (слабее): a bit, a little, slightly, somewhat, fairly, reasonably, kind of",
+      "• Средняя степень: quite, rather, pretty",
+      "• Усилители (сильнее): very, really, extremely, highly",
+      "• Усилители для крайних прилагательных: absolutely, utterly, completely, totally (absolutely fantastic, utterly ridiculous)",
+      "• Порядок слов: quite / rather + a + прилагательное + существительное (quite a good idea, rather a long day), но a + fairly / pretty / rather + прилагательное + существительное (a fairly good idea, a rather long day)."
+    ],
+    "usage": [
+      "1. Обычные (градуируемые) прилагательные: tired, big, good, difficult. Они сочетаются с very, extremely, quite, fairly, a bit. (It's very difficult. — Это очень сложно.)",
+      "2. Крайние (неградуируемые) прилагательные: exhausted, huge, terrible, impossible, fantastic. С ними нужны absolutely, utterly, completely. (It's absolutely impossible. — Это абсолютно невозможно.)",
+      "3. fairly обычно с положительным смыслом (fairly good — неплохой), rather чаще с отрицательным или неожиданным (rather expensive — дороговато). (The hotel was rather noisy. — Отель оказался довольно шумным.)",
+      "4. somewhat — формальное «в некоторой степени». (We were somewhat surprised. — Мы были несколько удивлены.)",
+      "5. Смягчение критики: not entirely sure, a bit worried, slightly disappointed звучат вежливее, чем прямое «I'm worried»."
+    ],
+    "signalWords": [
+      "В отзывах, деловой переписке и рабочих обсуждениях: rather, somewhat, slightly (смягчить), absolutely, utterly, totally (усилить)."
+    ],
+    "mistakes": [
+      "✗ very excellent → ✓ absolutely excellent (excellent уже «крайнее», very с ним не идёт)",
+      "✗ absolutely tired → ✓ very tired / extremely tired (tired обычное, absolutely с ним не сочетается)",
+      "✗ a quite good idea → ✓ quite a good idea (quite стоит перед a)",
+      "✗ I very like it → ✓ I like it very much (very не стоит перед глаголом)",
+      "✗ She was much tired → ✓ She was very tired (much с прилагательными не используется)"
+    ],
+    "remember": [
+      "Обычное прилагательное берёт very, крайнее берёт absolutely, а quite и rather ставь перед a."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Выберите правильный усилитель: very или absolutely / utterly / completely",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The view from the hotel was ___ breathtaking. (a) very (b) absolutely",
+          "answer": "absolutely"
+        },
+        {
+          "number": 2,
+          "prompt": "I'm ___ tired after the flight. (a) very (b) absolutely",
+          "answer": "very"
+        },
+        {
+          "number": 3,
+          "prompt": "The test was ___ difficult, but I passed. (a) very (b) utterly",
+          "answer": "very"
+        },
+        {
+          "number": 4,
+          "prompt": "His excuse was ___ ridiculous. (a) very (b) utterly",
+          "answer": "utterly"
+        },
+        {
+          "number": 5,
+          "prompt": "She is ___ famous in our city. (a) very (b) completely",
+          "answer": "very"
+        },
+        {
+          "number": 6,
+          "prompt": "It's ___ impossible to finish by Friday. (a) very (b) absolutely",
+          "answer": "absolutely"
+        },
+        {
+          "number": 7,
+          "prompt": "The soup is ___ hot. Be careful. (a) very (b) absolutely",
+          "answer": "very"
+        },
+        {
+          "number": 8,
+          "prompt": "We were ___ terrified during the storm. (a) very (b) absolutely",
+          "answer": "absolutely"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Добавьте слово из скобок в правильное место",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was a good idea. (quite)",
+          "answer": "It was quite a good idea."
+        },
+        {
+          "number": 2,
+          "prompt": "She is a talented designer. (rather)",
+          "answer": "She is a rather talented designer. / She is rather a talented designer."
+        },
+        {
+          "number": 3,
+          "prompt": "He is an interesting speaker. (fairly)",
+          "answer": "He is a fairly interesting speaker."
+        },
+        {
+          "number": 4,
+          "prompt": "We had a long meeting. (rather)",
+          "answer": "We had a rather long meeting. / We had rather a long meeting."
+        },
+        {
+          "number": 5,
+          "prompt": "That was a nice surprise. (quite)",
+          "answer": "That was quite a nice surprise."
+        },
+        {
+          "number": 6,
+          "prompt": "It's a big problem. (pretty)",
+          "answer": "It's a pretty big problem."
+        },
+        {
+          "number": 7,
+          "prompt": "The code is clean. (reasonably)",
+          "answer": "The code is reasonably clean."
+        },
+        {
+          "number": 8,
+          "prompt": "It was a difficult decision. (somewhat)",
+          "answer": "It was a somewhat difficult decision."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Смягчите высказывание с помощью слова в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The price is high. (a bit)",
+          "answer": "The price is a bit high."
+        },
+        {
+          "number": 2,
+          "prompt": "I'm disappointed. (slightly)",
+          "answer": "I'm slightly disappointed."
+        },
+        {
+          "number": 3,
+          "prompt": "The deadline is tight. (somewhat)",
+          "answer": "The deadline is somewhat tight."
+        },
+        {
+          "number": 4,
+          "prompt": "The room is cold. (a little)",
+          "answer": "The room is a little cold."
+        },
+        {
+          "number": 5,
+          "prompt": "I'm sure. (not entirely)",
+          "answer": "I'm not entirely sure."
+        },
+        {
+          "number": 6,
+          "prompt": "I agree with you. (not completely)",
+          "answer": "I don't completely agree with you. / I'm not completely in agreement with you."
+        },
+        {
+          "number": 7,
+          "prompt": "The layout is confusing. (rather)",
+          "answer": "The layout is rather confusing."
+        },
+        {
+          "number": 8,
+          "prompt": "I'm worried about the budget. (a bit)",
+          "answer": "I'm a bit worried about the budget."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It was a very excellent presentation.",
+          "answer": "It was an absolutely excellent presentation. / It was a really excellent presentation. / It was an excellent presentation."
+        },
+        {
+          "number": 2,
+          "prompt": "I'm absolutely tired.",
+          "answer": "I'm very tired. / I'm extremely tired. / I'm really tired."
+        },
+        {
+          "number": 3,
+          "prompt": "She is a quite good developer.",
+          "answer": "She is quite a good developer."
+        },
+        {
+          "number": 4,
+          "prompt": "The task is very impossible.",
+          "answer": "The task is absolutely impossible. / The task is completely impossible. / The task is utterly impossible."
+        },
+        {
+          "number": 5,
+          "prompt": "I very like this song.",
+          "answer": "I like this song very much. / I really like this song."
+        },
+        {
+          "number": 6,
+          "prompt": "I very agree with you.",
+          "answer": "I completely agree with you. / I totally agree with you. / I absolutely agree with you."
+        },
+        {
+          "number": 7,
+          "prompt": "She was much tired.",
+          "answer": "She was very tired. / She was really tired."
+        },
+        {
+          "number": 8,
+          "prompt": "The film was utterly good.",
+          "answer": "The film was very good. / The film was really good."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Это была довольно длинная встреча.",
+          "answer": "It was quite a long meeting. / It was a rather long meeting. / It was a pretty long meeting."
+        },
+        {
+          "number": 2,
+          "prompt": "Я абсолютно уверен, что это баг.",
+          "answer": "I'm absolutely sure it's a bug. / I'm absolutely sure that it's a bug. / I'm completely sure it's a bug."
+        },
+        {
+          "number": 3,
+          "prompt": "Это абсолютно невозможно.",
+          "answer": "It's absolutely impossible. / It's completely impossible. / It's utterly impossible."
+        },
+        {
+          "number": 4,
+          "prompt": "Я немного устал.",
+          "answer": "I'm a bit tired. / I'm a little tired. / I'm slightly tired."
+        },
+        {
+          "number": 5,
+          "prompt": "Она довольно хорошо говорит по-английски.",
+          "answer": "She speaks English fairly well. / She speaks English quite well. / She speaks English pretty well."
+        },
+        {
+          "number": 6,
+          "prompt": "Отель был абсолютно ужасным.",
+          "answer": "The hotel was absolutely terrible. / The hotel was utterly terrible. / The hotel was absolutely awful. / The hotel was utterly awful."
+        },
+        {
+          "number": 7,
+          "prompt": "Я не совсем уверен.",
+          "answer": "I'm not entirely sure. / I'm not quite sure. / I'm not completely sure."
+        },
+        {
+          "number": 8,
+          "prompt": "Результат нас несколько удивил.",
+          "answer": "We were somewhat surprised by the result. / We were somewhat surprised at the result."
+        }
+      ]
+    }
+  ]
+}

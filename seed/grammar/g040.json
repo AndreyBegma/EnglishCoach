@@ -1,0 +1,273 @@
+{
+  "id": "g040",
+  "position": 40,
+  "cefrLevel": "B2",
+  "title": "Past Perfect Continuous и обзор всех прошедших времён",
+  "plannedFrom": "2027-02-22",
+  "plannedTo": "2027-02-27",
+  "sections": {
+    "why": [
+      "Past Perfect Continuous показывает процесс, который длился до другого момента в прошлом и часто объясняет его результат: «Он устал, потому что работал всю ночь». В русском здесь хватает одного прошедшего времени, а в английском нужно показать, что процесс был раньше и длился какое-то время."
+    ],
+    "formation": [
+      "Формула: had been + V-ing",
+      "• Утверждение: She had been waiting for an hour.",
+      "• Отрицание: She hadn't been waiting long.",
+      "• Вопрос: Had she been waiting long? How long had she been waiting?"
+    ],
+    "usage": [
+      "1. Процесс длился до момента в прошлом: She had been waiting for an hour when the bus finally came. (Она ждала уже час, когда наконец пришёл автобус.)",
+      "2. Причина состояния в прошлом, результат виден: The ground was wet. It had been raining. (Земля была мокрая. Шёл дождь.)",
+      "3. Глаголы состояния (know, be, want, like) в Continuous не ставим: I had known him for years. (Я знал его много лет.)",
+      "ОБЗОР ПРОШЕДШИХ ВРЕМЁН",
+      "• Past Simple — факт или цепочка событий: I opened the door and saw a cat.",
+      "• Past Continuous — процесс в момент в прошлом: At 7 I was cooking.",
+      "• Past Perfect — действие закончилось ДО другого момента в прошлом: When I arrived, they had left.",
+      "• Past Perfect Continuous — процесс шёл ДО другого момента в прошлом: I had been waiting for an hour when they called.",
+      "Как выбрать: сначала спросите себя, что случилось раньше. Если раньше и это результат или факт, нужен Past Perfect. Если раньше и это длительный процесс, нужен Past Perfect Continuous. Если события идут по порядку, достаточно Past Simple."
+    ],
+    "signalWords": [
+      "for, since, all day, all morning, how long, before, by the time, when, because, already."
+    ],
+    "mistakes": [
+      "✗ I was tired because I was working all day. → ✓ I was tired because I had been working all day. (причина была раньше состояния)",
+      "✗ She had been wait for an hour. → ✓ She had been waiting for an hour. (после been нужна форма -ing)",
+      "✗ He had been knowing her for years. → ✓ He had known her for years. (know не ставим в Continuous)",
+      "✗ When I came, they were already left. → ✓ When I came, they had already left. (завершённое действие до другого момента — Past Perfect)",
+      "✗ How long did you learn English before you moved? → ✓ How long had you been learning English before you moved? (процесс до момента в прошлом)"
+    ],
+    "remember": ["had been + V-ing — процесс, который шёл ещё до нужного момента в прошлом."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Past Perfect Continuous",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He was tired because he ___ (work) all night.",
+          "answer": "had been working"
+        },
+        {
+          "number": 2,
+          "prompt": "She ___ (wait) for an hour when the bus finally came.",
+          "answer": "had been waiting"
+        },
+        {
+          "number": 3,
+          "prompt": "The ground was wet. It ___ (rain).",
+          "answer": "had been raining"
+        },
+        {
+          "number": 4,
+          "prompt": "We ___ (look) for the file for two hours before we found it.",
+          "answer": "had been looking"
+        },
+        {
+          "number": 5,
+          "prompt": "My eyes hurt because I ___ (stare) at the screen all day.",
+          "answer": "had been staring"
+        },
+        {
+          "number": 6,
+          "prompt": "They ___ (not / sleep) well, so they looked exhausted.",
+          "answer": "hadn't been sleeping / had not been sleeping"
+        },
+        {
+          "number": 7,
+          "prompt": "How long ___ you ___ (learn) English before you moved? (два пропуска)",
+          "answer": "had / been learning"
+        },
+        {
+          "number": 8,
+          "prompt": "He ___ (drive) for six hours when the car broke down.",
+          "answer": "had been driving"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I was exhausted because I (a) worked (b) had been working (c) was worked for ten hours.",
+          "answer": "(b) had been working"
+        },
+        {
+          "number": 2,
+          "prompt": "When the phone rang, I (a) was taking (b) had taken (c) had been taken a shower.",
+          "answer": "(a) was taking"
+        },
+        {
+          "number": 3,
+          "prompt": "She (a) had left (b) was leaving (c) leaves before I arrived, so I didn't see her.",
+          "answer": "(a) had left"
+        },
+        {
+          "number": 4,
+          "prompt": "I couldn't get in because I (a) lost (b) had lost (c) was losing my keys.",
+          "answer": "(b) had lost"
+        },
+        {
+          "number": 5,
+          "prompt": "While we (a) were walking (b) had walked (c) had been walking in the park, it started to rain.",
+          "answer": "(a) were walking"
+        },
+        {
+          "number": 6,
+          "prompt": "He (a) had been living (b) lived (c) was living in Kyiv for five years before he moved to Warsaw.",
+          "answer": "(a) had been living"
+        },
+        {
+          "number": 7,
+          "prompt": "After she (a) had finished (b) was finishing (c) finish the report, she went home.",
+          "answer": "(a) had finished"
+        },
+        {
+          "number": 8,
+          "prompt": "The streets were wet. It (a) rained (b) had been raining (c) was rained.",
+          "answer": "(b) had been raining"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Соедините предложения, используя слово в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Tom was tired. He ran for two hours. (because)",
+          "answer": "Tom was tired because he had been running for two hours."
+        },
+        {
+          "number": 2,
+          "prompt": "First I finished the task. Then I went home. (After)",
+          "answer": "After I had finished the task, I went home."
+        },
+        {
+          "number": 3,
+          "prompt": "She was covered in paint. She painted the wall all morning. (because)",
+          "answer": "She was covered in paint because she had been painting the wall all morning."
+        },
+        {
+          "number": 4,
+          "prompt": "The train left at 5:00. I arrived at 5:10. (When I arrived, ...)",
+          "answer": "When I arrived, the train had left. / When I arrived, the train had already left."
+        },
+        {
+          "number": 5,
+          "prompt": "We started waiting at 2 p.m. At 4 p.m. the guest still wasn't there. (By 4 p.m. ... for two hours)",
+          "answer": "By 4 p.m. we had been waiting for two hours."
+        },
+        {
+          "number": 6,
+          "prompt": "He studied German for years. Then he moved to Berlin. (Before)",
+          "answer": "Before he moved to Berlin, he had studied German for years. / Before he moved to Berlin, he had been studying German for years."
+        },
+        {
+          "number": 7,
+          "prompt": "My hands were dirty. I was fixing the car. (because)",
+          "answer": "My hands were dirty because I had been fixing the car."
+        },
+        {
+          "number": 8,
+          "prompt": "She felt nervous. She had never given a presentation before. (because)",
+          "answer": "She felt nervous because she had never given a presentation before."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Поставьте глаголы в нужное прошедшее время (два пропуска, ответы по порядку через /)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "When I ___ (get) home, my wife ___ (cook) dinner.",
+          "answer": "got / was cooking"
+        },
+        {
+          "number": 2,
+          "prompt": "By the time he ___ (arrive), the meeting ___ (already / start).",
+          "answer": "arrived / had already started"
+        },
+        {
+          "number": 3,
+          "prompt": "It ___ (snow) for hours, so the roads ___ (be) closed.",
+          "answer": "had been snowing / were"
+        },
+        {
+          "number": 4,
+          "prompt": "While I ___ (wait) for the bus, I ___ (see) an old friend.",
+          "answer": "was waiting / saw"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ (not / answer) because he ___ (sleep).",
+          "answer": "didn't answer / was sleeping"
+        },
+        {
+          "number": 6,
+          "prompt": "After they ___ (finish) the project, they ___ (celebrate).",
+          "answer": "had finished / celebrated"
+        },
+        {
+          "number": 7,
+          "prompt": "I ___ (try) to fix the bug for three hours before my colleague ___ (find) the problem.",
+          "answer": "had been trying / found"
+        },
+        {
+          "number": 8,
+          "prompt": "When I ___ (open) the door, the cat ___ (already / escape).",
+          "answer": "opened / had already escaped"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я устал, потому что работал весь день.",
+          "answer": "I was tired because I had been working all day."
+        },
+        {
+          "number": 2,
+          "prompt": "Когда я пришёл, они уже ушли.",
+          "answer": "When I arrived, they had already left. / When I came, they had already left."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы ждали уже час, когда он наконец позвонил.",
+          "answer": "We had been waiting for an hour when he finally called."
+        },
+        {
+          "number": 4,
+          "prompt": "У неё были красные глаза, потому что она плакала.",
+          "answer": "Her eyes were red because she had been crying."
+        },
+        {
+          "number": 5,
+          "prompt": "Пока я писал код, мой коллега пил кофе.",
+          "answer": "While I was writing code, my colleague was drinking coffee."
+        },
+        {
+          "number": 6,
+          "prompt": "До этой поездки он никогда не летал на самолёте.",
+          "answer": "He had never flown before this trip. / He had never flown on a plane before this trip."
+        },
+        {
+          "number": 7,
+          "prompt": "Сколько времени ты учил английский до того, как переехал?",
+          "answer": "How long had you been learning English before you moved?"
+        },
+        {
+          "number": 8,
+          "prompt": "Когда я включил компьютер, кто-то уже поменял пароль.",
+          "answer": "When I turned on the computer, someone had already changed the password. / When I turned on my computer, someone had already changed the password."
+        }
+      ]
+    }
+  ]
+}

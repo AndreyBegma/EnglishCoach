@@ -13,7 +13,9 @@
     "test": "bun test",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:seed": "bun scripts/seed.ts",
     "db:seed:words": "bun scripts/seed-words.ts",
+    "seed:generate": "bun scripts/generate-seed.ts",
     "db:import:owner-words": "bun scripts/import-owner-words.ts"
   },
   "dependencies": {

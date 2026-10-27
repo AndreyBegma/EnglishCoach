@@ -1,0 +1,274 @@
+{
+  "id": "g080",
+  "position": 80,
+  "cefrLevel": "C2",
+  "title": "Модальность: might well, may as well, could hardly, would sooner",
+  "plannedFrom": "2027-11-29",
+  "plannedTo": "2027-12-04",
+  "sections": {
+    "why": [
+      "Эти модальные выражения передают тонкие оттенки: «вполне возможно», «можно и...», «едва ли», «я бы скорее...». В русском это решают слова «вполне», «пожалуй», «едва», «лучше уж». В английском для каждого оттенка есть своя формула."
+    ],
+    "formation": [
+      "• may / might / could well + V1 (вполне возможно): She may well refuse.",
+      "• may / might as well + V1 (можно и..., с таким же успехом): We might as well go.",
+      "• might as well have + V3 (зря не сделали иначе): We might as well have stayed home.",
+      "• can / could hardly + V1 (едва, вряд ли): I could hardly hear him.",
+      "• could hardly have + V3 (едва ли мог): He could hardly have known.",
+      "• would sooner / would rather + V1 (+ than + V1): I'd sooner stay than go.",
+      "• would rather / sooner + подлежащее + Past Simple (про другого человека): I'd rather you didn't."
+    ],
+    "usage": [
+      "1. Высокая вероятность: The release may well be postponed. (Релиз вполне может быть отложен.)",
+      "2. Нет причин отказываться: There's nothing to do, so we may as well leave. (Делать нечего, так что можем и уйти.)",
+      "3. Почти невозможно: I can hardly believe it. (Я едва в это верю.) Hardly уже отрицание, поэтому not не нужен.",
+      "4. Предпочтение: I would sooner work alone than in a team. (Я бы скорее работал один, чем в команде.)",
+      "5. Просьба к другому человеку: I'd rather you didn't smoke here. (Я бы предпочёл, чтобы вы здесь не курили.) Форма Past Simple, но смысл настоящий."
+    ],
+    "signalWords": [
+      "well, as well, hardly, sooner, rather, than; «вполне», «можно и», «едва», «скорее чем», «лучше бы»."
+    ],
+    "mistakes": [
+      "✗ She might good be right. → ✓ She might well be right. (well, а не good)",
+      "✗ I would sooner to stay. → ✓ I would sooner stay. (после would sooner — V1 без to)",
+      "✗ I can't hardly hear you. → ✓ I can hardly hear you. (двойное отрицание)",
+      "✗ I'd rather you don't tell him. → ✓ I'd rather you didn't tell him. (про другого человека — Past Simple)",
+      "✗ They might well to win. → ✓ They might well win. (после модального глагола to не нужен)"
+    ],
+    "remember": [
+      "well — вероятно, as well — «можно и», hardly — «едва», sooner — «скорее»; после всех — V1 без to."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте пропущенное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is late again; he ___ well be stuck in traffic.",
+          "answer": "may / might / could"
+        },
+        {
+          "number": 2,
+          "prompt": "There's nothing on TV, so we ___ as well go to bed.",
+          "answer": "may / might"
+        },
+        {
+          "number": 3,
+          "prompt": "I could ___ believe my eyes.",
+          "answer": "hardly"
+        },
+        {
+          "number": 4,
+          "prompt": "I'd sooner ___ (stay) home than go to that party.",
+          "answer": "stay"
+        },
+        {
+          "number": 5,
+          "prompt": "She would ___ walk than take the bus.",
+          "answer": "rather / sooner"
+        },
+        {
+          "number": 6,
+          "prompt": "It's so noisy that I can ___ hear you.",
+          "answer": "hardly"
+        },
+        {
+          "number": 7,
+          "prompt": "The train was so late that we ___ as well have taken a taxi.",
+          "answer": "might / may"
+        },
+        {
+          "number": 8,
+          "prompt": "I'd sooner you ___ (not, tell) anyone.",
+          "answer": "didn't tell"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It ___ rain tonight. (a) might well (b) might good",
+          "answer": "(a) might well"
+        },
+        {
+          "number": 2,
+          "prompt": "We ___ ask him. (a) may as well (b) may as good",
+          "answer": "(a) may as well"
+        },
+        {
+          "number": 3,
+          "prompt": "I could ___ in that room. (a) hardly not breathe (b) hardly breathe",
+          "answer": "(b) hardly breathe"
+        },
+        {
+          "number": 4,
+          "prompt": "I ___ leave early than wait. (a) would sooner to (b) would sooner",
+          "answer": "(b) would sooner"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ known the answer. (a) could hardly have (b) couldn't hardly have",
+          "answer": "(a) could hardly have"
+        },
+        {
+          "number": 6,
+          "prompt": "I'd rather ___ smoke here. (a) you didn't (b) you don't",
+          "answer": "(a) you didn't"
+        },
+        {
+          "number": 7,
+          "prompt": "The result ___ a surprise. (a) may well be (b) may well to be",
+          "answer": "(a) may well be"
+        },
+        {
+          "number": 8,
+          "prompt": "I ___ for the weekend. (a) can hardly wait (b) hardly can wait",
+          "answer": "(a) can hardly wait"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, используя слово в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It is quite possible that she knows the answer. (may well)",
+          "answer": "She may well know the answer."
+        },
+        {
+          "number": 2,
+          "prompt": "I prefer to work alone rather than in a team. (would sooner)",
+          "answer": "I would sooner work alone than in a team."
+        },
+        {
+          "number": 3,
+          "prompt": "I almost couldn't hear him. (could hardly)",
+          "answer": "I could hardly hear him."
+        },
+        {
+          "number": 4,
+          "prompt": "We have nothing else to do, so there is no reason not to start now. (might as well)",
+          "answer": "We might as well start now."
+        },
+        {
+          "number": 5,
+          "prompt": "It's very likely that they missed the train. (might well have)",
+          "answer": "They might well have missed the train."
+        },
+        {
+          "number": 6,
+          "prompt": "I don't want you to read my messages. (would rather)",
+          "answer": "I would rather you didn't read my messages."
+        },
+        {
+          "number": 7,
+          "prompt": "The meeting was useless; staying at home would have been just as good. (might as well have)",
+          "answer": "We might as well have stayed at home."
+        },
+        {
+          "number": 8,
+          "prompt": "I would prefer to pay now than later. (would sooner)",
+          "answer": "I would sooner pay now than later."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She might good be right.",
+          "answer": "She might well be right."
+        },
+        {
+          "number": 2,
+          "prompt": "I would sooner to stay at home.",
+          "answer": "I would sooner stay at home."
+        },
+        {
+          "number": 3,
+          "prompt": "I can't hardly hear you.",
+          "answer": "I can hardly hear you."
+        },
+        {
+          "number": 4,
+          "prompt": "I'd rather you don't tell him.",
+          "answer": "I'd rather you didn't tell him."
+        },
+        {
+          "number": 5,
+          "prompt": "We may as good wait here.",
+          "answer": "We may as well wait here."
+        },
+        {
+          "number": 6,
+          "prompt": "He would sooner going than waiting.",
+          "answer": "He would sooner go than wait."
+        },
+        {
+          "number": 7,
+          "prompt": "They might well to win the match.",
+          "answer": "They might well win the match."
+        },
+        {
+          "number": 8,
+          "prompt": "I could hardly not understand him because he spoke so fast.",
+          "answer": "I could hardly understand him because he spoke so fast."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Он, вполне возможно, откажется.",
+          "answer": "He may well refuse. / He might well refuse."
+        },
+        {
+          "number": 2,
+          "prompt": "Нам нечего делать, так что можем и пойти домой.",
+          "answer": "We have nothing to do, so we may as well go home. / We have nothing to do, so we might as well go home."
+        },
+        {
+          "number": 3,
+          "prompt": "Я едва слышал её из-за шума.",
+          "answer": "I could hardly hear her because of the noise."
+        },
+        {
+          "number": 4,
+          "prompt": "Я бы лучше остался дома, чем пошёл туда.",
+          "answer": "I would sooner stay home than go there. / I would rather stay home than go there."
+        },
+        {
+          "number": 5,
+          "prompt": "Я бы предпочёл, чтобы ты не говорил об этом клиенту.",
+          "answer": "I would rather you didn't mention this to the client."
+        },
+        {
+          "number": 6,
+          "prompt": "Релиз вполне может быть отложен.",
+          "answer": "The release may well be postponed. / The release might well be postponed."
+        },
+        {
+          "number": 7,
+          "prompt": "Мы с таким же успехом могли бы поехать на поезде.",
+          "answer": "We might as well have taken the train."
+        },
+        {
+          "number": 8,
+          "prompt": "Едва ли он мог знать об этом.",
+          "answer": "He could hardly have known about it."
+        }
+      ]
+    }
+  ]
+}

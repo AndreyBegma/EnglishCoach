@@ -1,0 +1,273 @@
+{
+  "id": "g043",
+  "position": 43,
+  "cefrLevel": "B2",
+  "title": "Причастные обороты: Having finished…, Written in…, Feeling tired…",
+  "plannedFrom": "2027-03-15",
+  "plannedTo": "2027-03-20",
+  "sections": {
+    "why": [
+      "Причастные обороты позволяют заменить целое придаточное коротким оборотом: \"Закончив работу, я пошёл домой\". В русском это деепричастный оборот, в английском он используется гораздо чаще в письменной речи, отчётах и рассказах. Он делает текст компактным и более взрослым."
+    ],
+    "formation": [
+      "• V-ing — действие идёт одновременно или объясняет причину: Feeling tired, I went to bed.",
+      "• Having + V3 (третья форма глагола) — действие было раньше главного: Having finished the report, I went home.",
+      "• V3 — пассивное значение: Written in Python, the app is fast.",
+      "• Being + V3 / Having been + V3 — пассив подчёркнуто: Having been warned, he was careful.",
+      "• Отрицание: Not + причастие: Not knowing the answer, he stayed silent.",
+      "Главное правило: подлежащее оборота совпадает с подлежащим главного предложения."
+    ],
+    "usage": [
+      "1. Одновременные действия. (Идя на работу, я встретил Анну. — Walking to work, I met Anna.)",
+      "2. Одно действие раньше другого. (Прочитав письмо, она позвонила клиенту. — Having read the email, she called the client.)",
+      "3. Причина. (Не имея билета, он не смог войти. — Not having a ticket, he couldn't get in.)",
+      "4. Пассив: V3 в начале предложения. (Построенный в 1900 году, мост до сих пор используется. — Built in 1900, the bridge is still in use.)",
+      "5. После существительного вместо who / which: V-ing для активного, V3 для пассивного значения. (Человек, стоящий у двери, мой босс. — The man standing near the door is my boss. / Файлы, сохранённые вчера, пропали. — The files saved yesterday are gone.)"
+    ],
+    "signalWords": [
+      "After / before / while / when / since + V-ing: Before leaving, check the lights. While working, I listen to music. Запятая после оборота в начале предложения."
+    ],
+    "mistakes": [
+      "✗ Walking down the street, a car hit me → ✓ Walking down the street, I was hit by a car (подлежащее должно совпадать)",
+      "✗ Finished the work, I went home → ✓ Having finished the work, I went home (нужна форма Having + V3 для действия раньше)",
+      "✗ Knowing not the answer → ✓ Not knowing the answer (not стоит перед причастием)",
+      "✗ Wrote in Java, the program is slow → ✓ Written in Java, the program is slow (пассив требует V3)",
+      "✗ Having seen the film, so I didn't go again → ✓ Having seen the film, I didn't go again (союз so не нужен)"
+    ],
+    "remember": [
+      "Действие \"раньше\" — Having + V3; действие \"с ним\" — V-ing; \"над ним что-то сделали\" — V3; и подлежащее у них общее."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в скобках в нужную форму причастия",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___ (walk) to work, I met my old teacher.",
+          "answer": "Walking"
+        },
+        {
+          "number": 2,
+          "prompt": "___ (finish) the report, she went home.",
+          "answer": "Having finished"
+        },
+        {
+          "number": 3,
+          "prompt": "___ (not / know) the answer, he stayed silent.",
+          "answer": "Not knowing"
+        },
+        {
+          "number": 4,
+          "prompt": "___ (live) in London for years, he speaks perfect English.",
+          "answer": "Having lived"
+        },
+        {
+          "number": 5,
+          "prompt": "___ (write) in Python, the script runs on any system.",
+          "answer": "Written"
+        },
+        {
+          "number": 6,
+          "prompt": "___ (feel) tired, I went to bed early.",
+          "answer": "Feeling"
+        },
+        {
+          "number": 7,
+          "prompt": "___ (build) in 1890, the bridge is still in use.",
+          "answer": "Built"
+        },
+        {
+          "number": 8,
+          "prompt": "___ (not / receive) any reply, we wrote again.",
+          "answer": "Not having received"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Open (b) Opening (c) Opened the door, he saw a strange box.",
+          "answer": "(b) Opening"
+        },
+        {
+          "number": 2,
+          "prompt": "(a) Having eaten (b) Eaten dinner, we watched a movie.",
+          "answer": "(a) Having eaten"
+        },
+        {
+          "number": 3,
+          "prompt": "___ by a famous designer, the logo is easy to recognize. (a) Designing (b) Designed",
+          "answer": "(b) Designed"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Not feeling (b) Feeling not well, she stayed home.",
+          "answer": "(a) Not feeling"
+        },
+        {
+          "number": 5,
+          "prompt": "___ from the top of the hill, the city looks tiny. (a) Seeing (b) Seen",
+          "answer": "(b) Seen"
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Having lost (b) Losing my keys, I couldn't get into the house.",
+          "answer": "(a) Having lost"
+        },
+        {
+          "number": 7,
+          "prompt": "After ___ for an hour, we took a taxi. (a) wait (b) waiting",
+          "answer": "(b) waiting"
+        },
+        {
+          "number": 8,
+          "prompt": "The people (a) living (b) lived (c) lives next door are very noisy.",
+          "answer": "(a) living"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение с причастным оборотом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "As I was walking home, I saw an accident.",
+          "answer": "Walking home, I saw an accident."
+        },
+        {
+          "number": 2,
+          "prompt": "After she had read the email, she called the client.",
+          "answer": "Having read the email, she called the client."
+        },
+        {
+          "number": 3,
+          "prompt": "Because he didn't have a ticket, he couldn't enter.",
+          "answer": "Not having a ticket, he couldn't enter."
+        },
+        {
+          "number": 4,
+          "prompt": "The app was developed by a small team, and it became a hit.",
+          "answer": "Developed by a small team, the app became a hit."
+        },
+        {
+          "number": 5,
+          "prompt": "Because I felt nervous, I drank some water.",
+          "answer": "Feeling nervous, I drank some water."
+        },
+        {
+          "number": 6,
+          "prompt": "After he had finished his degree, he moved to Berlin.",
+          "answer": "Having finished his degree, he moved to Berlin."
+        },
+        {
+          "number": 7,
+          "prompt": "Because it was built with cheap materials, the house fell apart.",
+          "answer": "Built with cheap materials, the house fell apart."
+        },
+        {
+          "number": 8,
+          "prompt": "While I was waiting for the train, I read the news.",
+          "answer": "Waiting for the train, I read the news. / While waiting for the train, I read the news."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и перепишите предложение правильно",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Walking down the street, a car almost hit me.",
+          "answer": "Walking down the street, I was almost hit by a car."
+        },
+        {
+          "number": 2,
+          "prompt": "Finished the work, I went home.",
+          "answer": "Having finished the work, I went home."
+        },
+        {
+          "number": 3,
+          "prompt": "Knowing not the answer, he asked me.",
+          "answer": "Not knowing the answer, he asked me."
+        },
+        {
+          "number": 4,
+          "prompt": "Wrote in Java, the program is slow.",
+          "answer": "Written in Java, the program is slow."
+        },
+        {
+          "number": 5,
+          "prompt": "Having tired, she went to bed.",
+          "answer": "Feeling tired, she went to bed. / Being tired, she went to bed."
+        },
+        {
+          "number": 6,
+          "prompt": "The man stand near the door is my boss.",
+          "answer": "The man standing near the door is my boss."
+        },
+        {
+          "number": 7,
+          "prompt": "Having seen the film twice, so I didn't want to go again.",
+          "answer": "Having seen the film twice, I didn't want to go again."
+        },
+        {
+          "number": 8,
+          "prompt": "Open the box, she found a letter.",
+          "answer": "Opening the box, she found a letter."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Закончив работу, я пошёл домой.",
+          "answer": "Having finished work, I went home. / Having finished my work, I went home."
+        },
+        {
+          "number": 2,
+          "prompt": "Не зная дороги, мы взяли такси.",
+          "answer": "Not knowing the way, we took a taxi."
+        },
+        {
+          "number": 3,
+          "prompt": "Идя по улице, я встретил старого друга.",
+          "answer": "Walking down the street, I met an old friend."
+        },
+        {
+          "number": 4,
+          "prompt": "Написанное на Python, приложение работает быстро.",
+          "answer": "Written in Python, the app runs fast. / Written in Python, the app works fast."
+        },
+        {
+          "number": 5,
+          "prompt": "Чувствуя усталость, он рано лёг спать.",
+          "answer": "Feeling tired, he went to bed early."
+        },
+        {
+          "number": 6,
+          "prompt": "Человек, стоящий у двери, — наш новый менеджер.",
+          "answer": "The man standing near the door is our new manager. / The man standing by the door is our new manager."
+        },
+        {
+          "number": 7,
+          "prompt": "Прочитав письмо, она сразу ответила.",
+          "answer": "Having read the email, she replied immediately. / Having read the email, she answered right away."
+        },
+        {
+          "number": 8,
+          "prompt": "Построенный в 1900 году, этот мост до сих пор используется.",
+          "answer": "Built in 1900, this bridge is still used. / Built in 1900, this bridge is still in use."
+        }
+      ]
+    }
+  ]
+}

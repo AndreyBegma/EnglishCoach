@@ -1,0 +1,283 @@
+{
+  "id": "g071",
+  "position": 71,
+  "cefrLevel": "C1",
+  "title": "Идиомы и устойчивые выражения в живой речи",
+  "plannedFrom": "2027-09-27",
+  "plannedTo": "2027-10-02",
+  "sections": {
+    "why": [
+      "Идиома — это устойчивое выражение, смысл которого не складывается из отдельных слов: to call it a day не значит «назвать это днём», а значит «закончить работу на сегодня». Носители используют идиомы постоянно: на созвонах, в чатах, в сериалах. В русском то же самое: «бить баклуши», «ни свет ни заря», «попасть в точку»."
+    ],
+    "formation": [
+      "• Идиома — готовый блок слов. Состав и порядок менять нельзя: a piece of cake, а не a slice of cake.",
+      "• Глагол внутри идиомы меняет форму как обычно: She called it a day. / We are burning the midnight oil. / He has spilled the beans.",
+      "• Существительные и предлоги остаются на месте: on the same page, in the loop, under the weather.",
+      "• Учите идиому целиком, вместе с глаголом и предлогом, и сразу с примером."
+    ],
+    "usage": [
+      "1. Работа и проекты:",
+      "• call it a day — закончить на сегодня (Let's call it a day. — Давайте на сегодня закончим.)",
+      "• on the same page — быть согласными, понимать одно и то же (Are we on the same page? — Мы понимаем это одинаково?)",
+      "• keep someone in the loop — держать в курсе (Keep me in the loop. — Держи меня в курсе.)",
+      "• back to square one — всё сначала (The server crashed, so we're back to square one. — Сервер упал, и мы начинаем с нуля.)",
+      "• the ball is in your court — теперь ваш ход (I've sent the offer, the ball is in your court. — Я отправил предложение, теперь решать вам.)",
+      "• burn the midnight oil — работать допоздна",
+      "2. Оценки и ситуации:",
+      "• a piece of cake — проще простого (The test was a piece of cake. — Тест был проще простого.)",
+      "• cost an arm and a leg — стоить целое состояние",
+      "• hit the nail on the head — попасть в точку",
+      "• bite the bullet — стиснуть зубы и сделать неприятное (I'll bite the bullet and tell him. — Придётся перебороть себя и сказать ему.)",
+      "• miss the boat — упустить возможность",
+      "3. Повседневная жизнь:",
+      "• under the weather — неважно себя чувствовать",
+      "• once in a blue moon — очень редко, раз в сто лет",
+      "• spill the beans — проболтаться",
+      "• break the ice — разрядить обстановку при знакомстве",
+      "• get the hang of — разобраться, «набить руку»"
+    ],
+    "signalWords": [
+      "Идиому часто вводят словами: as they say, so to speak, to be honest. Ещё признак идиомы: фраза звучит бессмысленно, если переводить дословно."
+    ],
+    "mistakes": [
+      "✗ It cost me a hand and a leg → ✓ an arm and a leg (в идиоме нельзя заменять слова)",
+      "✗ I feel under the rain → ✓ I feel under the weather (идиома фиксирована)",
+      "✗ We are not on the same site → ✓ on the same page",
+      "✗ I see him once in a blue sky → ✓ once in a blue moon",
+      "✗ Keep me on the loop → ✓ in the loop (предлог часть идиомы)"
+    ],
+    "remember": ["Идиому не переводят по словам — её учат целиком, как одно длинное слово."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте пропущенное слово в идиому",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "After ten hours of debugging, let's call it a ___.",
+          "answer": "day"
+        },
+        {
+          "number": 2,
+          "prompt": "The exam was a piece of ___. I finished it in twenty minutes.",
+          "answer": "cake"
+        },
+        {
+          "number": 3,
+          "prompt": "I'm feeling a bit under the ___ today, so I'll stay home.",
+          "answer": "weather"
+        },
+        {
+          "number": 4,
+          "prompt": "Can you keep me in the ___ about the release?",
+          "answer": "loop"
+        },
+        {
+          "number": 5,
+          "prompt": "Our fix didn't work, so we're back to ___ one.",
+          "answer": "square"
+        },
+        {
+          "number": 6,
+          "prompt": "You hit the nail on the ___ - that is exactly the problem.",
+          "answer": "head"
+        },
+        {
+          "number": 7,
+          "prompt": "I only see my cousin once in a blue ___.",
+          "answer": "moon"
+        },
+        {
+          "number": 8,
+          "prompt": "Don't spill the ___! It's a surprise party.",
+          "answer": "beans"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have to (a) bite the bullet (b) bite the finger and tell my boss about the mistake.",
+          "answer": "(a) bite the bullet"
+        },
+        {
+          "number": 2,
+          "prompt": "That car cost (a) a hand and a leg (b) an arm and a leg.",
+          "answer": "(b) an arm and a leg"
+        },
+        {
+          "number": 3,
+          "prompt": "It's your decision now. The ball is in (a) your court (b) your field.",
+          "answer": "(a) your court"
+        },
+        {
+          "number": 4,
+          "prompt": "He has been (a) burning the midnight oil (b) burning the night light all week to finish the project.",
+          "answer": "(a) burning the midnight oil"
+        },
+        {
+          "number": 5,
+          "prompt": "Let's make sure we're (a) on the same page (b) in the same page before the meeting.",
+          "answer": "(a) on the same page"
+        },
+        {
+          "number": 6,
+          "prompt": "She waited too long and (a) missed the boat (b) lost the boat - the offer has expired.",
+          "answer": "(a) missed the boat"
+        },
+        {
+          "number": 7,
+          "prompt": "A funny question is a good way to (a) break the ice (b) break the snow at a party.",
+          "answer": "(a) break the ice"
+        },
+        {
+          "number": 8,
+          "prompt": "It took me a month to get (a) the hang (b) the hold of this framework.",
+          "answer": "(a) the hang"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, используя идиому в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This task is very easy. (a piece of cake)",
+          "answer": "This task is a piece of cake."
+        },
+        {
+          "number": 2,
+          "prompt": "I'm a bit ill today. (under the weather)",
+          "answer": "I'm a bit under the weather today."
+        },
+        {
+          "number": 3,
+          "prompt": "Let's stop working for today. (call it a day)",
+          "answer": "Let's call it a day."
+        },
+        {
+          "number": 4,
+          "prompt": "He revealed the secret by accident. (spill the beans)",
+          "answer": "He spilled the beans by accident. / He accidentally spilled the beans."
+        },
+        {
+          "number": 5,
+          "prompt": "That phone was extremely expensive. (cost an arm and a leg)",
+          "answer": "That phone cost an arm and a leg."
+        },
+        {
+          "number": 6,
+          "prompt": "She stays up late working every night. (burn the midnight oil)",
+          "answer": "She burns the midnight oil every night."
+        },
+        {
+          "number": 7,
+          "prompt": "Please watch the server while I'm away. (keep an eye on)",
+          "answer": "Please keep an eye on the server while I'm away."
+        },
+        {
+          "number": 8,
+          "prompt": "We have to do something unpleasant but necessary: tell the client the truth. (bite the bullet)",
+          "answer": "We have to bite the bullet and tell the client the truth."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку в идиоме и исправьте предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This laptop cost me a hand and a leg.",
+          "answer": "This laptop cost me an arm and a leg."
+        },
+        {
+          "number": 2,
+          "prompt": "I'm a bit under the rain today.",
+          "answer": "I'm a bit under the weather today."
+        },
+        {
+          "number": 3,
+          "prompt": "Let's make a day and go home.",
+          "answer": "Let's call it a day and go home."
+        },
+        {
+          "number": 4,
+          "prompt": "We are not on the same site about the deadline.",
+          "answer": "We are not on the same page about the deadline."
+        },
+        {
+          "number": 5,
+          "prompt": "He hit the nail in the head.",
+          "answer": "He hit the nail on the head."
+        },
+        {
+          "number": 6,
+          "prompt": "I see her once in a blue sky.",
+          "answer": "I see her once in a blue moon."
+        },
+        {
+          "number": 7,
+          "prompt": "Don't forget to keep me on the loop.",
+          "answer": "Don't forget to keep me in the loop."
+        },
+        {
+          "number": 8,
+          "prompt": "After the server crashed, we were back to the square one.",
+          "answer": "After the server crashed, we were back to square one."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Это было проще простого.",
+          "answer": "It was a piece of cake."
+        },
+        {
+          "number": 2,
+          "prompt": "Давайте на сегодня закончим.",
+          "answer": "Let's call it a day."
+        },
+        {
+          "number": 3,
+          "prompt": "Я сегодня неважно себя чувствую.",
+          "answer": "I'm feeling a bit under the weather today. / I'm a bit under the weather today."
+        },
+        {
+          "number": 4,
+          "prompt": "Держи меня в курсе.",
+          "answer": "Keep me in the loop. / Keep me posted."
+        },
+        {
+          "number": 5,
+          "prompt": "Ты попал в точку.",
+          "answer": "You hit the nail on the head."
+        },
+        {
+          "number": 6,
+          "prompt": "Этот ноутбук стоил целое состояние.",
+          "answer": "This laptop cost an arm and a leg. / That laptop cost an arm and a leg."
+        },
+        {
+          "number": 7,
+          "prompt": "Мы снова в самом начале.",
+          "answer": "We're back to square one."
+        },
+        {
+          "number": 8,
+          "prompt": "Не проболтайся!",
+          "answer": "Don't spill the beans!"
+        }
+      ]
+    }
+  ]
+}

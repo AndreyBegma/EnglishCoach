@@ -1,0 +1,278 @@
+{
+  "id": "g081",
+  "position": 81,
+  "cefrLevel": "C2",
+  "title": "Разговорный английский: сокращения gonna/wanna, редукция, частицы",
+  "plannedFrom": "2027-12-06",
+  "plannedTo": "2027-12-11",
+  "sections": {
+    "why": [
+      "В живой речи носители не произносят going to и want to по буквам: звуки сливаются, и получается gonna, wanna. Если ты знаешь эти формы, ты поймёшь сериалы, созвоны и переписку в Slack, а сам начнёшь звучать естественнее. Но это разговорный стиль: в резюме, договорах и деловых письмах так не пишут."
+    ],
+    "formation": [
+      "• going to → gonna (I'm gonna call him)",
+      "• want to → wanna (I wanna go)",
+      "• have got to / have to → gotta (I gotta go)",
+      "• kind of → kinda, sort of → sorta, a lot of → lotta, out of → outta",
+      "• let me → lemme, give me → gimme, don't know → dunno, what do you → whaddya",
+      "• В вопросах и ответах часто выпадает начало фразы: (Do you) want some? (I'm) not sure. (It) doesn't matter."
+    ],
+    "usage": [
+      "1. Планы и намерения: gonna. (She's gonna love it. — Ей это понравится.) Подходит ко всем лицам: I'm gonna, he's gonna, they're gonna.",
+      "2. Желание: wanna вместо want to, но только после I / you / we / they. (Do you wanna come? — Хочешь пойти?) С he / she нужно wants to.",
+      "3. Обязанность: gotta. (I gotta finish this ticket. — Мне надо закончить этот тикет.)",
+      "4. Речевые частицы, которые заполняют паузу или смягчают фразу:",
+      "• well — пауза или осторожное несогласие (Well, I'm not sure. — Ну, я не уверен.)",
+      "• you know — проверка контакта (It's, you know, a bit tricky. — Это, ну, немного сложно.)",
+      "• I mean — уточнение (I mean, it works, but it's slow. — То есть, работает, но медленно.)",
+      "• like — пауза или «примерно» (It took, like, ten minutes. — Это заняло минут десять.)",
+      "• anyway — вернуться к теме (Anyway, back to the code. — Ладно, вернёмся к коду.)",
+      "• kind of / sort of — «вроде как» (He's kind of upset. — Он вроде как расстроен.)"
+    ],
+    "signalWords": [
+      "Неформальная переписка, сериалы, подкасты, фразы вроде lemme see, dunno, c'mon, ya know. В письменной речи формы с gonna допустимы только в чатах и сообщениях друзьям."
+    ],
+    "mistakes": [
+      "✗ I'm gonna to call → ✓ I'm gonna call (в gonna уже спрятано to)",
+      "✗ He wanna go → ✓ He wants to go (wanna только для I / you / we / they)",
+      "✗ Dear Mr. Brown, I'm gonna send the report → ✓ I am going to send / I will send (деловое письмо)",
+      "✗ I'm wanna go → ✓ I wanna go / I'm going to go (не смешивай две конструкции)",
+      "✗ вставлять like в каждое слово → ✓ одна-две частицы на фразу, иначе речь звучит неряшливо"
+    ],
+    "remember": [
+      "Gonna, wanna, gotta — это только звучание: пиши их в чате, но в письме и на собеседовании говори going to, want to, have to."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Перепишите фразу в разговорном стиле (gonna / wanna / gotta)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I am going to call him later.",
+          "answer": "I'm gonna call him later."
+        },
+        {
+          "number": 2,
+          "prompt": "Do you want to grab lunch?",
+          "answer": "Do you wanna grab lunch?"
+        },
+        {
+          "number": 3,
+          "prompt": "I have got to finish this ticket.",
+          "answer": "I gotta finish this ticket. / I've gotta finish this ticket."
+        },
+        {
+          "number": 4,
+          "prompt": "What are you going to do tonight?",
+          "answer": "What are you gonna do tonight?"
+        },
+        {
+          "number": 5,
+          "prompt": "They don't want to wait.",
+          "answer": "They don't wanna wait."
+        },
+        {
+          "number": 6,
+          "prompt": "We are not going to deploy today.",
+          "answer": "We're not gonna deploy today."
+        },
+        {
+          "number": 7,
+          "prompt": "She is going to love it.",
+          "answer": "She's gonna love it."
+        },
+        {
+          "number": 8,
+          "prompt": "I want to ask you something.",
+          "answer": "I wanna ask you something."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Запишите разговорную фразу полностью, как в письменной речи",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I dunno what happened.",
+          "answer": "I don't know what happened."
+        },
+        {
+          "number": 2,
+          "prompt": "Gimme a minute.",
+          "answer": "Give me a minute."
+        },
+        {
+          "number": 3,
+          "prompt": "Lemme check the code.",
+          "answer": "Let me check the code."
+        },
+        {
+          "number": 4,
+          "prompt": "It's kinda slow.",
+          "answer": "It's kind of slow."
+        },
+        {
+          "number": 5,
+          "prompt": "Whaddya want for dinner?",
+          "answer": "What do you want for dinner?"
+        },
+        {
+          "number": 6,
+          "prompt": "I gotta go now.",
+          "answer": "I have to go now. / I've got to go now. / I have got to go now."
+        },
+        {
+          "number": 7,
+          "prompt": "He's gonna be late.",
+          "answer": "He is going to be late. / He's going to be late."
+        },
+        {
+          "number": 8,
+          "prompt": "I'm outta coffee.",
+          "answer": "I'm out of coffee. / I am out of coffee."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___, as I was saying, the API is stable. (a) Anyway (b) Because (c) Unless",
+          "answer": "Anyway"
+        },
+        {
+          "number": 2,
+          "prompt": "The design is ___ boring. (a) kind of (b) a lot of (c) out of",
+          "answer": "kind of"
+        },
+        {
+          "number": 3,
+          "prompt": "I'm ___ tell her the truth. (a) gonna (b) gonna to (c) going to to",
+          "answer": "gonna"
+        },
+        {
+          "number": 4,
+          "prompt": "He ___ go home. He's tired. (a) wanna (b) wants to (c) want to",
+          "answer": "wants to"
+        },
+        {
+          "number": 5,
+          "prompt": "Where ___ you gonna sit? (a) do (b) are (c) will",
+          "answer": "are"
+        },
+        {
+          "number": 6,
+          "prompt": "I'm tired. — ___, you should sleep. (a) Well (b) Gonna (c) Lotta",
+          "answer": "Well"
+        },
+        {
+          "number": 7,
+          "prompt": "— Why is the site down? — I ___. (a) dunno (b) gimme (c) lemme",
+          "answer": "dunno"
+        },
+        {
+          "number": 8,
+          "prompt": "___ see if I can fix it. (a) Lemme (b) Gimme (c) Dunno",
+          "answer": "Lemme"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm gonna to call you tomorrow.",
+          "answer": "I'm gonna call you tomorrow."
+        },
+        {
+          "number": 2,
+          "prompt": "He wanna leave early.",
+          "answer": "He wants to leave early."
+        },
+        {
+          "number": 3,
+          "prompt": "Dear Mr. Brown, I'm gonna send you the report today.",
+          "answer": "Dear Mr. Brown, I am going to send you the report today. / Dear Mr. Brown, I will send you the report today."
+        },
+        {
+          "number": 4,
+          "prompt": "We gotta to finish today.",
+          "answer": "We gotta finish today. / We've gotta finish today."
+        },
+        {
+          "number": 5,
+          "prompt": "She don't wanna come.",
+          "answer": "She doesn't wanna come. / She doesn't want to come."
+        },
+        {
+          "number": 6,
+          "prompt": "Where you are gonna go?",
+          "answer": "Where are you gonna go?"
+        },
+        {
+          "number": 7,
+          "prompt": "I wanna that you help me.",
+          "answer": "I want you to help me."
+        },
+        {
+          "number": 8,
+          "prompt": "They is gonna win.",
+          "answer": "They're gonna win. / They are gonna win."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я собираюсь позвонить ему завтра.",
+          "answer": "I'm going to call him tomorrow. / I'm gonna call him tomorrow."
+        },
+        {
+          "number": 2,
+          "prompt": "Ты хочешь пойти с нами?",
+          "answer": "Do you want to come with us? / Do you wanna come with us?"
+        },
+        {
+          "number": 3,
+          "prompt": "Мне надо идти, у меня созвон.",
+          "answer": "I have to go, I have a call. / I gotta go, I have a call. / I've got to go, I have a call."
+        },
+        {
+          "number": 4,
+          "prompt": "Я не знаю, что случилось.",
+          "answer": "I don't know what happened. / I dunno what happened."
+        },
+        {
+          "number": 5,
+          "prompt": "Дай мне минутку.",
+          "answer": "Give me a minute. / Gimme a minute."
+        },
+        {
+          "number": 6,
+          "prompt": "Он вроде как расстроен.",
+          "answer": "He's kind of upset. / He's kinda upset. / He's sort of upset."
+        },
+        {
+          "number": 7,
+          "prompt": "Ну, я думаю, нам стоит подождать.",
+          "answer": "Well, I think we should wait."
+        },
+        {
+          "number": 8,
+          "prompt": "Они собираются запустить новую версию в пятницу.",
+          "answer": "They're going to release the new version on Friday. / They're gonna release the new version on Friday."
+        }
+      ]
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import {
   type ByokChoice,
   CEFR_LEVELS,
   COMMON_TIMEZONES,
+  ENGLISH_VARIANTS,
   PROVIDER_CHOICES,
   type ProviderChoice,
   TIME_SLOTS,
@@ -54,7 +55,8 @@ export type SettingChange =
   | { field: "wordsPerDay"; value: WordsPerDay }
   | { field: "timezone"; value: (typeof COMMON_TIMEZONES)[number] }
   | { field: "morningTime" | "eveningTime"; value: string }
-  | { field: "remindersEnabled" | "voiceEnabled"; value: boolean };
+  | { field: "remindersEnabled" | "voiceEnabled"; value: boolean }
+  | { field: "englishVariant"; value: (typeof ENGLISH_VARIANTS)[number] };
 
 export type Callback =
   | { type: "screen"; screen: HubScreen }
@@ -171,6 +173,7 @@ const route = z.union([
   set("et", timeSlot)("eveningTime"),
   set("rm", flag)("remindersEnabled"),
   set("vc", flag)("voiceEnabled"),
+  set("ev", z.enum(ENGLISH_VARIANTS))("englishVariant"),
   z.tuple([z.literal("pv"), z.enum(PROVIDER_CHOICES)]).transform(([, choice]) => ({
     type: "provider" as const,
     choice,
@@ -210,6 +213,7 @@ const SET_CODES: Record<SettingChange["field"], string> = {
   eveningTime: "et",
   remindersEnabled: "rm",
   voiceEnabled: "vc",
+  englishVariant: "ev",
 };
 
 function encodeSetValue(change: SettingChange): string | number {

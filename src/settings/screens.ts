@@ -108,6 +108,7 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
     }),
     t("settings-reminders", { state: onOff(settings.remindersEnabled) }),
     t("settings-voice", { state: onOff(settings.voiceEnabled) }),
+    t("settings-english-variant", { variant: t(`english-variant-${settings.englishVariant}`) }),
     t("settings-provider", { provider: providerLabel(t, model.provider) }),
   ];
   const page = (label: string, target: SettingsPage) =>
@@ -128,6 +129,20 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
           type: "set",
           change: { field: "voiceEnabled", value: !settings.voiceEnabled },
         }),
+      ],
+      [
+        button(
+          t("settings-btn-english-variant", {
+            variant: t(`english-variant-${settings.englishVariant}`),
+          }),
+          {
+            type: "set",
+            change: {
+              field: "englishVariant",
+              value: settings.englishVariant === "us" ? "uk" : "us",
+            },
+          },
+        ),
       ],
       [page("settings-btn-provider", "provider")],
       [button(t("hub-back"), { type: "screen", screen: "main" })],

@@ -1,0 +1,271 @@
+{
+  "id": "g066",
+  "position": 66,
+  "cefrLevel": "C1",
+  "title": "Сложные формы герундия и причастия: having done, being done",
+  "plannedFrom": "2027-08-23",
+  "plannedTo": "2027-08-28",
+  "sections": {
+    "why": [
+      "Эти формы позволяют уложить два действия в одно предложение и показать, какое из них было раньше или кто его совершил. В русском для этого есть деепричастия («сделав», «будучи уволенным»), в английском — причастие и герундий с having / being."
+    ],
+    "formation": [
+      "• Perfect participle (действие раньше главного): having + V3 (третья форма глагола) — Having finished, ...",
+      "• Пассив: being + V3 (действие идёт или состояние) / having been + V3 (действие произошло раньше) — Being asked..., Having been asked...",
+      "• Perfect gerund: having + V3 — He denied having seen her.",
+      "• Passive gerund: being + V3 / having been + V3 — I hate being interrupted.",
+      "• Отрицание: not стоит перед формой — Not having received an answer, ... / He regrets not having asked."
+    ],
+    "usage": [
+      "1. Одно действие закончилось, потом началось другое (подлежащее одно и то же): Having finished the report, I went home. (Закончив отчёт, я пошёл домой.)",
+      "2. Причина действия: Not having received a reply, she wrote again. (Не получив ответа, она написала снова.)",
+      "3. Пассивное причастие: Having been fired, he started his own company. (Будучи уволенным, он открыл свою компанию.) Being left alone, the child began to cry. (Оставшись один, ребёнок заплакал.)",
+      "4. Perfect gerund после глаголов и предлогов, когда действие было раньше: She admitted having made a mistake. (Она призналась, что сделала ошибку.) He was proud of having won. (Он гордился тем, что победил.)",
+      "5. Passive gerund: I don't like being told what to do. (Не люблю, когда мне указывают, что делать.)"
+    ],
+    "signalWords": [
+      "deny, admit, regret, remember, apologize for, accuse of, thank for, be proud of, be ashamed of, because / since / after (вместо них можно поставить having + V3)."
+    ],
+    "mistakes": [
+      "✗ Finished the work, he went home → ✓ Having finished the work, he went home (русское деепричастие «закончив» требует having).",
+      "✗ Having tired, she sat down → ✓ Being tired, she sat down (having + V3 нужно для действия, а не для состояния).",
+      "✗ Having read the instructions, the printer started → ✓ Having read the instructions, I started the printer (подлежащее главной части должно совпадать с тем, кто совершил первое действие).",
+      "✗ He denied to have seen her → ✓ He denied having seen her (после deny, admit, regret — герундий)."
+    ],
+    "remember": [
+      "Having + V3 = «сделав» (раньше), being + V3 = «будучи сделанным» (пассив), и подлежащее у обоих действий одно."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму (having done / being done)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___ (finish) the report, she sent it to the manager.",
+          "answer": "Having finished"
+        },
+        {
+          "number": 2,
+          "prompt": "___ (not / receive) any answer, he called again.",
+          "answer": "Not having received"
+        },
+        {
+          "number": 3,
+          "prompt": "He denied ___ (steal) the laptop.",
+          "answer": "having stolen / stealing"
+        },
+        {
+          "number": 4,
+          "prompt": "I hate ___ (interrupt) when I'm coding.",
+          "answer": "being interrupted"
+        },
+        {
+          "number": 5,
+          "prompt": "___ (live) in Kyiv for ten years, he knew the city well.",
+          "answer": "Having lived"
+        },
+        {
+          "number": 6,
+          "prompt": "She was proud of ___ (promote) so quickly.",
+          "answer": "having been promoted / being promoted"
+        },
+        {
+          "number": 7,
+          "prompt": "___ (see) the film twice, we didn't want to go again.",
+          "answer": "Having seen"
+        },
+        {
+          "number": 8,
+          "prompt": "He doesn't like ___ (tell) what to do.",
+          "answer": "being told"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Finished (b) Having finished the code, he pushed it to GitHub.",
+          "answer": "(b) Having finished"
+        },
+        {
+          "number": 2,
+          "prompt": "She admitted (a) to take (b) having taken the key.",
+          "answer": "(b) having taken"
+        },
+        {
+          "number": 3,
+          "prompt": "(a) Having tired (b) Being tired, he made a lot of mistakes.",
+          "answer": "(b) Being tired"
+        },
+        {
+          "number": 4,
+          "prompt": "He was angry about (a) ignoring (b) being ignored by his team.",
+          "answer": "(b) being ignored"
+        },
+        {
+          "number": 5,
+          "prompt": "(a) Having been fired (b) Having fired, he started his own company.",
+          "answer": "(a) Having been fired"
+        },
+        {
+          "number": 6,
+          "prompt": "I'm sorry for (a) having kept (b) to have kept you waiting.",
+          "answer": "(a) having kept"
+        },
+        {
+          "number": 7,
+          "prompt": "(a) Having wrote (b) Having written the email, she closed her laptop.",
+          "answer": "(b) Having written"
+        },
+        {
+          "number": 8,
+          "prompt": "Nobody likes (a) laughing at (b) being laughed at.",
+          "answer": "(b) being laughed at"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Объедините предложения, используя having done / being done / having been done",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She finished her work. Then she went home. (Begin with: Having)",
+          "answer": "Having finished her work, she went home."
+        },
+        {
+          "number": 2,
+          "prompt": "He didn't read the manual. He couldn't set up the router. (Begin with: Not having)",
+          "answer": "Not having read the manual, he couldn't set up the router."
+        },
+        {
+          "number": 3,
+          "prompt": "We had checked all the options. We chose the cheapest. (Begin with: Having)",
+          "answer": "Having checked all the options, we chose the cheapest."
+        },
+        {
+          "number": 4,
+          "prompt": "He had been warned about the traffic, so he left early. (Begin with: Having been)",
+          "answer": "Having been warned about the traffic, he left early."
+        },
+        {
+          "number": 5,
+          "prompt": "She was sorry that she had lost the files. (Use: sorry for ...)",
+          "answer": "She was sorry for having lost the files."
+        },
+        {
+          "number": 6,
+          "prompt": "He denied that he had broken the window. (Use: denied + gerund)",
+          "answer": "He denied having broken the window."
+        },
+        {
+          "number": 7,
+          "prompt": "I don't like it when people shout at me. (Use: I don't like + gerund)",
+          "answer": "I don't like being shouted at."
+        },
+        {
+          "number": 8,
+          "prompt": "After he had been given the keys, he opened the door. (Begin with: Having been)",
+          "answer": "Having been given the keys, he opened the door."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Finished the test, the students left the room.",
+          "answer": "Having finished the test, the students left the room."
+        },
+        {
+          "number": 2,
+          "prompt": "Having tired, he went to bed early.",
+          "answer": "Being tired, he went to bed early."
+        },
+        {
+          "number": 3,
+          "prompt": "He denied to have seen her.",
+          "answer": "He denied having seen her. / He denied seeing her."
+        },
+        {
+          "number": 4,
+          "prompt": "Having read the instructions, the printer started working. (the printer didn't read them)",
+          "answer": "Having read the instructions, I started the printer."
+        },
+        {
+          "number": 5,
+          "prompt": "I remember to be told about it last week.",
+          "answer": "I remember being told about it last week."
+        },
+        {
+          "number": 6,
+          "prompt": "She was proud of be chosen as team lead.",
+          "answer": "She was proud of being chosen as team lead."
+        },
+        {
+          "number": 7,
+          "prompt": "Not have finished the project, he asked for more time.",
+          "answer": "Not having finished the project, he asked for more time."
+        },
+        {
+          "number": 8,
+          "prompt": "They apologized for have been late.",
+          "answer": "They apologized for being late. / They apologized for having been late."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Закончив код, я отправил его на ревью.",
+          "answer": "Having finished the code, I sent it for review."
+        },
+        {
+          "number": 2,
+          "prompt": "Не получив ответа, она написала ему снова.",
+          "answer": "Not having received an answer, she wrote to him again."
+        },
+        {
+          "number": 3,
+          "prompt": "Он отрицал, что видел этого клиента.",
+          "answer": "He denied having seen this client. / He denied seeing this client."
+        },
+        {
+          "number": 4,
+          "prompt": "Терпеть не могу, когда меня прерывают на встречах.",
+          "answer": "I hate being interrupted in meetings."
+        },
+        {
+          "number": 5,
+          "prompt": "Прожив в Лондоне пять лет, она хорошо говорила по-английски.",
+          "answer": "Having lived in London for five years, she spoke English well."
+        },
+        {
+          "number": 6,
+          "prompt": "Будучи уволенным, он открыл собственную компанию.",
+          "answer": "Having been fired, he started his own company."
+        },
+        {
+          "number": 7,
+          "prompt": "Она гордится тем, что её выбрали лидером команды.",
+          "answer": "She is proud of having been chosen team leader. / She is proud of being chosen team leader."
+        },
+        {
+          "number": 8,
+          "prompt": "Извините, что заставил вас ждать.",
+          "answer": "Sorry for keeping you waiting. / I'm sorry for having kept you waiting."
+        }
+      ]
+    }
+  ]
+}

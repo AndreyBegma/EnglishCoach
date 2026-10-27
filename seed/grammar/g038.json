@@ -1,0 +1,271 @@
+{
+  "id": "g038",
+  "position": 38,
+  "cefrLevel": "B2",
+  "title": "Модальные глаголы в прошлом: must have / should have / could have / can't have",
+  "plannedFrom": "2027-02-08",
+  "plannedTo": "2027-02-13",
+  "sections": {
+    "why": [
+      "Модальный глагол + have + V3 позволяет комментировать прошлое: делать выводы («он, должно быть, забыл»), упрекать и сожалеть («надо было позвонить») и говорить об упущенных возможностях («мог бы помочь»). В русском это передаётся словами «должно быть», «надо было», «мог бы», а в английском всё это решает связка modal + have + V3."
+    ],
+    "formation": [
+      "Формула: modal + have + V3 (третья форма глагола).",
+      "• must have + V3 — He must have forgotten.",
+      "• can't / couldn't have + V3 — She can't have said that.",
+      "• might / may / could have + V3 — They might have got lost.",
+      "• should / shouldn't have + V3 — You should have called.",
+      "В речи have сокращается: should've, could've, must've, might've. Вопрос: Should I have called him? Could he have known? Модальный глагол не меняется по лицам и не принимает to."
+    ],
+    "usage": [
+      "1. must have + V3 — почти уверены, что это было: The lights are off. They must have gone to bed. (Свет выключен. Они, должно быть, легли спать.)",
+      "2. can't have + V3 — почти уверены, что этого не было: He can't have seen me, he was abroad. (Он не мог меня видеть, он был за границей.)",
+      "3. might / may / could have + V3 — возможно, это было: She might have missed the bus. (Возможно, она опоздала на автобус.) Отрицание: He might not have heard you. (Возможно, он не услышал.)",
+      "4. should have + V3 — надо было сделать, но не сделали; shouldn't have — не надо было: You should have told me. I shouldn't have said that. (Тебе следовало мне сказать. Мне не стоило этого говорить.)",
+      "5. could have + V3 — была возможность, но не использовали: I could have helped you. (Я мог бы тебе помочь.)"
+    ],
+    "signalWords": [
+      "yesterday, last night, earlier, I'm sure, perhaps, maybe, it's impossible, why didn't you, but I didn't."
+    ],
+    "mistakes": [
+      "✗ You should told me. → ✓ You should have told me. (нужен have + V3)",
+      "✗ He must have forget it. → ✓ He must have forgotten it. (после have третья форма)",
+      "✗ She mustn't have been there. → ✓ She can't have been there. (для вывода «не может быть» используем can't have, а не mustn't have)",
+      "✗ I should to call him. → ✓ I should have called him. (после модального нет to)",
+      "✗ We could have went there. → ✓ We could have gone there. (go — went — gone)"
+    ],
+    "remember": ["modal + have + V3 — это мнение о прошлом: вывод, упрёк или упущенный шанс."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He didn't come to the meeting. He ___ (must / forget) about it.",
+          "answer": "must have forgotten"
+        },
+        {
+          "number": 2,
+          "prompt": "You were late again. You ___ (should / leave) earlier.",
+          "answer": "should have left"
+        },
+        {
+          "number": 3,
+          "prompt": "She ___ (can't / see) me. She was in another city.",
+          "answer": "can't have seen"
+        },
+        {
+          "number": 4,
+          "prompt": "I ___ (could / call) you, but I didn't have your number.",
+          "answer": "could have called"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ (shouldn't / eat) so much cake. Now he feels sick.",
+          "answer": "shouldn't have eaten"
+        },
+        {
+          "number": 6,
+          "prompt": "The door was open. Somebody ___ (must / come) in.",
+          "answer": "must have come"
+        },
+        {
+          "number": 7,
+          "prompt": "They ___ (can't / win). They didn't even play well.",
+          "answer": "can't have won"
+        },
+        {
+          "number": 8,
+          "prompt": "We ___ (could / miss) the train, but luckily we ran fast.",
+          "answer": "could have missed"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The lights are off. They (a) must have gone (b) must went (c) must have go to bed.",
+          "answer": "(a) must have gone"
+        },
+        {
+          "number": 2,
+          "prompt": "You (a) should told (b) should have told (c) should had told me about the problem!",
+          "answer": "(b) should have told"
+        },
+        {
+          "number": 3,
+          "prompt": "It's impossible. He (a) can't have said (b) mustn't have said (c) couldn't said that.",
+          "answer": "(a) can't have said"
+        },
+        {
+          "number": 4,
+          "prompt": "I was lucky: I (a) could have lost (b) could lost (c) can have lost my wallet.",
+          "answer": "(a) could have lost"
+        },
+        {
+          "number": 5,
+          "prompt": "She looks happy. She (a) must have passed (b) must pass (c) must has passed the exam.",
+          "answer": "(a) must have passed"
+        },
+        {
+          "number": 6,
+          "prompt": "You (a) shouldn't have left (b) shouldn't left (c) mustn't have left your laptop in the car.",
+          "answer": "(a) shouldn't have left"
+        },
+        {
+          "number": 7,
+          "prompt": "The test was easy. You (a) could have done (b) could had done (c) can have done better.",
+          "answer": "(a) could have done"
+        },
+        {
+          "number": 8,
+          "prompt": "Why did you drive so fast? You (a) might have had (b) might had (c) might have has an accident.",
+          "answer": "(a) might have had"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение с модальным глаголом в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm sure she forgot her keys. (must)",
+          "answer": "She must have forgotten her keys."
+        },
+        {
+          "number": 2,
+          "prompt": "It was wrong of you to shout at him. (should)",
+          "answer": "You shouldn't have shouted at him."
+        },
+        {
+          "number": 3,
+          "prompt": "I'm sure he didn't take your phone. (can't)",
+          "answer": "He can't have taken your phone."
+        },
+        {
+          "number": 4,
+          "prompt": "It was a good idea to call her, but you didn't. (should)",
+          "answer": "You should have called her."
+        },
+        {
+          "number": 5,
+          "prompt": "Perhaps they got lost. (might)",
+          "answer": "They might have got lost. / They might have gotten lost."
+        },
+        {
+          "number": 6,
+          "prompt": "I'm sure it was a hard exam. (must)",
+          "answer": "It must have been a hard exam."
+        },
+        {
+          "number": 7,
+          "prompt": "It was possible for us to win, but we didn't. (could)",
+          "answer": "We could have won."
+        },
+        {
+          "number": 8,
+          "prompt": "I'm sure Anna didn't write this email. It's full of mistakes. (can't)",
+          "answer": "Anna can't have written this email."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You should told me earlier.",
+          "answer": "You should have told me earlier."
+        },
+        {
+          "number": 2,
+          "prompt": "He must have forget his password.",
+          "answer": "He must have forgotten his password."
+        },
+        {
+          "number": 3,
+          "prompt": "Tom is so honest. He mustn't have lied to us.",
+          "answer": "Tom is so honest. He can't have lied to us."
+        },
+        {
+          "number": 4,
+          "prompt": "I should have went to the dentist.",
+          "answer": "I should have gone to the dentist."
+        },
+        {
+          "number": 5,
+          "prompt": "We should have took a taxi.",
+          "answer": "We should have taken a taxi."
+        },
+        {
+          "number": 6,
+          "prompt": "You shouldn't say that to her yesterday.",
+          "answer": "You shouldn't have said that to her yesterday."
+        },
+        {
+          "number": 7,
+          "prompt": "The keys must be have fallen out of my pocket.",
+          "answer": "The keys must have fallen out of my pocket."
+        },
+        {
+          "number": 8,
+          "prompt": "She could won the race, but she fell.",
+          "answer": "She could have won the race, but she fell."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Тебе следовало позвонить мне раньше.",
+          "answer": "You should have called me earlier."
+        },
+        {
+          "number": 2,
+          "prompt": "Он, должно быть, забыл о встрече.",
+          "answer": "He must have forgotten about the meeting."
+        },
+        {
+          "number": 3,
+          "prompt": "Она не могла этого сказать.",
+          "answer": "She can't have said that. / She couldn't have said that."
+        },
+        {
+          "number": 4,
+          "prompt": "Мы могли бы успеть на поезд, но вышли слишком поздно.",
+          "answer": "We could have caught the train, but we left too late."
+        },
+        {
+          "number": 5,
+          "prompt": "Мне не стоило так много пить вчера.",
+          "answer": "I shouldn't have drunk so much yesterday. / I shouldn't have had so much to drink yesterday."
+        },
+        {
+          "number": 6,
+          "prompt": "Кто-то, должно быть, изменил пароль.",
+          "answer": "Someone must have changed the password."
+        },
+        {
+          "number": 7,
+          "prompt": "Ты мог бы помочь мне с этим багом!",
+          "answer": "You could have helped me with this bug!"
+        },
+        {
+          "number": 8,
+          "prompt": "Возможно, они не получили моё письмо.",
+          "answer": "They might not have received my email. / They may not have received my email."
+        }
+      ]
+    }
+  ]
+}

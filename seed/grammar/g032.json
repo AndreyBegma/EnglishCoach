@@ -1,0 +1,271 @@
+{
+  "id": "g032",
+  "position": 32,
+  "cefrLevel": "B1",
+  "title": "Модальные глаголы вероятности: might / may / could / must / can't",
+  "plannedFrom": "2026-12-31",
+  "plannedTo": "2027-01-02",
+  "sections": {
+    "why": [
+      "Эти модальные глаголы показывают, насколько мы уверены в том, что происходит сейчас или может случиться. По-русски это «наверное», «должно быть», «возможно», «не может быть». В английском для этого не нужны лишние слова — хватает одного модального глагола."
+    ],
+    "formation": [
+      "• Модальный глагол + V1 (инфинитив без to): He must be at home. She might know him.",
+      "• Если действие идёт прямо сейчас: модальный + be + V-ing: He must be sleeping. They may be waiting outside.",
+      "• Отрицание: might not / may not (возможно, нет), can't / couldn't (точно нет). Окончания -s нет: She may be late, а не ✗ She mays be late.",
+      "• Вопросы про вероятность обычно задают другими словами: Do you think he is at home? А не ✗ Must he be at home?"
+    ],
+    "usage": [
+      "1. must — почти уверены, что это правда (есть факты): He has been driving for ten hours. He must be tired. (Он, должно быть, устал.)",
+      "2. can't — почти уверены, что это неправда: That can't be his car — he doesn't have one. (Это не может быть его машина.)",
+      "3. may / might / could — возможно, но не уверены (шанс примерно 50%): She might be in the kitchen. (Она, возможно, на кухне.) It could be a virus. (Это может быть вирус.)",
+      "4. may / might о будущем: It may rain tomorrow. (Завтра может пойти дождь.) I might call you later. (Я, возможно, позвоню позже.)",
+      "5. might not / may not — «возможно, не»: He might not come to the party. (Он, возможно, не придёт.)"
+    ],
+    "signalWords": [
+      "perhaps, maybe, probably, I think, I'm sure, I don't know, it looks like, obviously, clearly. Эти слова подсказывают, какой уровень уверенности выбрать."
+    ],
+    "mistakes": [
+      "✗ He must to be at home. → ✓ He must be at home. (после модального нет to)",
+      "✗ He mustn't be at home. (я уверен, что его нет) → ✓ He can't be at home. (mustn't значит «нельзя», а не «не может быть»)",
+      "✗ He may is at work. → ✓ He may be at work. (после may нужен инфинитив)",
+      "✗ He must be work now. → ✓ He must be working now. (действие идёт сейчас — be + V-ing)",
+      "✗ She can be late. (когда хотим сказать «возможно, опоздает») → ✓ She might / may / could be late. (can в утверждении так не используется)"
+    ],
+    "remember": [
+      "must — наверняка да, can't — наверняка нет, might / may / could — возможно; после них всегда инфинитив без to."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте must, can't или might",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He has been driving for ten hours. He ___ be tired.",
+          "answer": "must"
+        },
+        {
+          "number": 2,
+          "prompt": "Tom left the office five minutes ago. He ___ be home yet.",
+          "answer": "can't"
+        },
+        {
+          "number": 3,
+          "prompt": "I don't know where Anna is. She ___ be in the kitchen.",
+          "answer": "might / may / could"
+        },
+        {
+          "number": 4,
+          "prompt": "The shop is always open on Sundays. It ___ be closed today.",
+          "answer": "can't"
+        },
+        {
+          "number": 5,
+          "prompt": "Look at all those people with umbrellas. It ___ be raining.",
+          "answer": "must"
+        },
+        {
+          "number": 6,
+          "prompt": "I'm not sure about the room for the meeting. It ___ be Room 5.",
+          "answer": "might / may / could"
+        },
+        {
+          "number": 7,
+          "prompt": "She has worked here for twenty years. She ___ know everyone.",
+          "answer": "must"
+        },
+        {
+          "number": 8,
+          "prompt": "He's only ten years old. He ___ be a doctor!",
+          "answer": "can't"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Don't call him now. He (a) must sleep (b) must be sleeping.",
+          "answer": "(b) must be sleeping"
+        },
+        {
+          "number": 2,
+          "prompt": "The keys (a) might be (b) might to be in my bag.",
+          "answer": "(a) might be"
+        },
+        {
+          "number": 3,
+          "prompt": "You say he won the lottery? That (a) mustn't (b) can't be true!",
+          "answer": "(b) can't be true"
+        },
+        {
+          "number": 4,
+          "prompt": "She isn't answering her phone. She (a) might be (b) might is in a meeting.",
+          "answer": "(a) might be"
+        },
+        {
+          "number": 5,
+          "prompt": "Ben earns very little. He (a) must (b) can't buy a Ferrari.",
+          "answer": "(b) can't buy"
+        },
+        {
+          "number": 6,
+          "prompt": "Take an umbrella. It (a) may rain (b) may to rain later.",
+          "answer": "(a) may rain"
+        },
+        {
+          "number": 7,
+          "prompt": "She's wearing a wedding ring. She (a) must be (b) can't be married.",
+          "answer": "(a) must be"
+        },
+        {
+          "number": 8,
+          "prompt": "The test is easy, so it (a) can't (b) mustn't take long.",
+          "answer": "(a) can't"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение с модальным глаголом в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm sure he is at work. (must)",
+          "answer": "He must be at work."
+        },
+        {
+          "number": 2,
+          "prompt": "Maybe they are late. (might)",
+          "answer": "They might be late."
+        },
+        {
+          "number": 3,
+          "prompt": "I'm sure she isn't a student. (can't)",
+          "answer": "She can't be a student."
+        },
+        {
+          "number": 4,
+          "prompt": "Perhaps it will snow tonight. (may)",
+          "answer": "It may snow tonight."
+        },
+        {
+          "number": 5,
+          "prompt": "I'm sure he is sleeping now. (must)",
+          "answer": "He must be sleeping now."
+        },
+        {
+          "number": 6,
+          "prompt": "Maybe she isn't working today. (might not)",
+          "answer": "She might not be working today."
+        },
+        {
+          "number": 7,
+          "prompt": "It's impossible that this is the right address. (can't)",
+          "answer": "This can't be the right address."
+        },
+        {
+          "number": 8,
+          "prompt": "Perhaps the server is down. (could)",
+          "answer": "The server could be down."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She must to be at home now.",
+          "answer": "She must be at home now."
+        },
+        {
+          "number": 2,
+          "prompt": "You've been awake for 24 hours. You can be very tired.",
+          "answer": "You must be very tired."
+        },
+        {
+          "number": 3,
+          "prompt": "They may are late.",
+          "answer": "They may be late."
+        },
+        {
+          "number": 4,
+          "prompt": "She can be ill, but I'm not sure.",
+          "answer": "She may be ill, but I'm not sure. / She might be ill, but I'm not sure. / She could be ill, but I'm not sure."
+        },
+        {
+          "number": 5,
+          "prompt": "He must be work now.",
+          "answer": "He must be working now."
+        },
+        {
+          "number": 6,
+          "prompt": "This can't to be the right way.",
+          "answer": "This can't be the right way."
+        },
+        {
+          "number": 7,
+          "prompt": "It might rains tomorrow.",
+          "answer": "It might rain tomorrow."
+        },
+        {
+          "number": 8,
+          "prompt": "I'm sure they aren't at home: the lights are off. They mustn't be at home.",
+          "answer": "They can't be at home."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Он, наверное, устал после перелёта.",
+          "answer": "He must be tired after the flight."
+        },
+        {
+          "number": 2,
+          "prompt": "Это не может быть правдой.",
+          "answer": "That can't be true. / It can't be true."
+        },
+        {
+          "number": 3,
+          "prompt": "Возможно, сервер сейчас не работает.",
+          "answer": "The server might be down now. / The server may be down now. / The server could be down now."
+        },
+        {
+          "number": 4,
+          "prompt": "Она, должно быть, сейчас на встрече.",
+          "answer": "She must be in a meeting now."
+        },
+        {
+          "number": 5,
+          "prompt": "Завтра может пойти дождь.",
+          "answer": "It may rain tomorrow. / It might rain tomorrow. / It could rain tomorrow."
+        },
+        {
+          "number": 6,
+          "prompt": "Не может быть, что он всё ещё работает.",
+          "answer": "He can't still be working."
+        },
+        {
+          "number": 7,
+          "prompt": "Они, должно быть, живут рядом, раз приходят пешком.",
+          "answer": "They must live nearby if they come on foot."
+        },
+        {
+          "number": 8,
+          "prompt": "Мой телефон, возможно, в машине.",
+          "answer": "My phone might be in the car. / My phone may be in the car. / My phone could be in the car."
+        }
+      ]
+    }
+  ]
+}

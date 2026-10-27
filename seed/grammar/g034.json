@@ -1,0 +1,275 @@
+{
+  "id": "g034",
+  "position": 34,
+  "cefrLevel": "B2",
+  "title": "Смешанные условные предложения",
+  "plannedFrom": "2027-01-11",
+  "plannedTo": "2027-01-16",
+  "sections": {
+    "why": [
+      "Иногда условие и результат относятся к разным временам: «Если бы я тогда поступил иначе (прошлое), сейчас я жил бы лучше (настоящее)». Для таких мыслей английский смешивает две конструкции: от третьего и второго условного. Русские бы просто сказали «бы» дважды, а в английском надо выбрать форму для каждой части."
+    ],
+    "formation": [
+      "Есть два основных типа.",
+      "Тип 1. Прошлое условие → настоящий результат:",
+      "• If + Past Perfect (had + V3), would + V1",
+      "• If I had taken that job, I would be rich now. (Если бы я взял ту работу, я был бы богат сейчас.)",
+      "• Отрицание: If she hadn't moved to Berlin, she wouldn't have this job today.",
+      "Тип 2. Настоящее состояние → прошлый результат:",
+      "• If + Past Simple, would have + V3",
+      "• If I were more careful, I wouldn't have made that mistake yesterday. (Если бы я был внимательнее, я бы не сделал вчера эту ошибку.)",
+      "• С be для всех лиц обычно were: If he were patient... (в разговоре допустимо и was)."
+    ],
+    "usage": [
+      "1. Прошлое действие влияет на сегодняшнюю ситуацию: If I had learned English at school, I would speak it fluently now. (Если бы я выучил английский в школе, я бы свободно говорил на нём сейчас.)",
+      "2. Постоянная черта или состояние объясняет прошлое событие: If he weren't so lazy, he would have finished the project last week. (Если бы он не был таким ленивым, он закончил бы проект на прошлой неделе.)",
+      "3. Размышления о жизненных решениях: If we hadn't moved here, we wouldn't know our neighbors now.",
+      "4. Упрёк с учётом последствий: If you had listened to me, you wouldn't be in trouble now."
+    ],
+    "signalWords": [
+      "Смотрите на метки времени в предложении: now, today, still, at the moment, these days — значит, результат в настоящем (would + V1). Yesterday, last week, in 2019, then — значит, результат в прошлом (would have + V3). Условие тоже проверяйте по смыслу: «тогда однократно» — had + V3, «вообще, по характеру» — Past Simple."
+    ],
+    "mistakes": [
+      "✗ If I would have studied medicine, I would be a doctor now. → ✓ If I had studied medicine, I would be a doctor now. (would в if-части не ставим)",
+      "✗ If I had studied medicine, I would have been a doctor now. → ✓ ... I would be a doctor now. (now — результат в настоящем)",
+      "✗ If I knew him better, I would invite him yesterday. → ✓ ... I would have invited him yesterday. (результат в прошлом)",
+      "✗ If he would be more careful, he wouldn't have broken it. → ✓ If he were more careful, he wouldn't have broken it.",
+      "✗ If I didn't miss the plane, I would be in Paris now. → ✓ If I hadn't missed the plane, I would be in Paris now. (условие в прошлом — Past Perfect)"
+    ],
+    "remember": [
+      "Смотри на каждую половину отдельно: условие в прошлом — had V3, условие вообще или сейчас — Past Simple; результат сейчас — would V1, результат тогда — would have V3."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Прошлое условие, настоящий результат (If + had V3, would + V1)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I ___ (take) that job, I ___ (be) rich now.",
+          "answer": "had taken, would be"
+        },
+        {
+          "number": 2,
+          "prompt": "If she ___ (not move) to Berlin, she ___ (not have) this great job today.",
+          "answer": "hadn't moved, wouldn't have"
+        },
+        {
+          "number": 3,
+          "prompt": "If we ___ (leave) earlier, we ___ (be) at the beach now.",
+          "answer": "had left, would be"
+        },
+        {
+          "number": 4,
+          "prompt": "If he ___ (study) medicine, he ___ (be) a doctor now.",
+          "answer": "had studied, would be"
+        },
+        {
+          "number": 5,
+          "prompt": "If you ___ (listen) to me, you ___ (not be) in trouble now.",
+          "answer": "had listened, wouldn't be"
+        },
+        {
+          "number": 6,
+          "prompt": "If they ___ (not sell) the shares, they ___ (own) the company today.",
+          "answer": "hadn't sold, would own"
+        },
+        {
+          "number": 7,
+          "prompt": "If I ___ (learn) English at school, I ___ (speak) it fluently now.",
+          "answer": "had learned, would speak"
+        },
+        {
+          "number": 8,
+          "prompt": "If she ___ (not break) her phone, she ___ (answer) me right now.",
+          "answer": "hadn't broken, would answer / would be answering"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Настоящее условие, прошлый результат (If + Past Simple, would have V3)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I ___ (be) more careful, I ___ (not make) that mistake yesterday.",
+          "answer": "were / was, wouldn't have made"
+        },
+        {
+          "number": 2,
+          "prompt": "If he ___ (speak) better English, he ___ (get) the job last week.",
+          "answer": "spoke, would have gotten"
+        },
+        {
+          "number": 3,
+          "prompt": "If I ___ (not live) so far away, I ___ (come) to the party last night.",
+          "answer": "didn't live, would have come"
+        },
+        {
+          "number": 4,
+          "prompt": "If she ___ (be) afraid of flying, she ___ (not take) the plane yesterday.",
+          "answer": "were / was, wouldn't have taken"
+        },
+        {
+          "number": 5,
+          "prompt": "If we ___ (have) a bigger budget, we ___ (hire) more people last year.",
+          "answer": "had, would have hired"
+        },
+        {
+          "number": 6,
+          "prompt": "If I ___ (not trust) him, I ___ (not lend) him the money last month.",
+          "answer": "didn't trust, wouldn't have lent"
+        },
+        {
+          "number": 7,
+          "prompt": "If Tom ___ (be) a good manager, the team ___ (not leave) last month.",
+          "answer": "were / was, wouldn't have left"
+        },
+        {
+          "number": 8,
+          "prompt": "If I ___ (know) Spanish, I ___ (understand) the guide in Madrid.",
+          "answer": "knew, would have understood"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I had slept more, I (a) would feel (b) would have felt better now.",
+          "answer": "(a) would feel"
+        },
+        {
+          "number": 2,
+          "prompt": "If I were rich, I (a) would have bought (b) would buy that house last year.",
+          "answer": "(a) would have bought"
+        },
+        {
+          "number": 3,
+          "prompt": "If we had booked earlier, we (a) wouldn't be waiting (b) wouldn't have waited in this queue now.",
+          "answer": "(a) wouldn't be waiting"
+        },
+        {
+          "number": 4,
+          "prompt": "If he (a) were (b) had been more patient, he wouldn't have shouted at her yesterday.",
+          "answer": "(a) were"
+        },
+        {
+          "number": 5,
+          "prompt": "If she (a) hadn't gone (b) didn't go to university, she wouldn't be a teacher today.",
+          "answer": "(a) hadn't gone"
+        },
+        {
+          "number": 6,
+          "prompt": "If I weren't so shy, I (a) would have spoken (b) would speak to her at the party last night.",
+          "answer": "(a) would have spoken"
+        },
+        {
+          "number": 7,
+          "prompt": "If they had invested in Bitcoin in 2010, they (a) would be (b) would have been millionaires today.",
+          "answer": "(a) would be"
+        },
+        {
+          "number": 8,
+          "prompt": "If I (a) were (b) would be you, I wouldn't have accepted that offer last week.",
+          "answer": "(a) were"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Перепишите факты как смешанное условное",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I didn't save money, so I'm poor now.",
+          "answer": "If I had saved money, I wouldn't be poor now."
+        },
+        {
+          "number": 2,
+          "prompt": "He isn't a patient person, so he lost the client yesterday.",
+          "answer": "If he were a patient person, he wouldn't have lost the client yesterday. / If he was a patient person, he wouldn't have lost the client yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "She didn't take the medicine, so she is still ill.",
+          "answer": "If she had taken the medicine, she wouldn't be ill now. / If she had taken the medicine, she wouldn't still be ill."
+        },
+        {
+          "number": 4,
+          "prompt": "I don't have a car, so I took the bus this morning.",
+          "answer": "If I had a car, I wouldn't have taken the bus this morning."
+        },
+        {
+          "number": 5,
+          "prompt": "They didn't go to the meeting, so they don't know the plan.",
+          "answer": "If they had gone to the meeting, they would know the plan."
+        },
+        {
+          "number": 6,
+          "prompt": "He doesn't know SQL, so he didn't get the job.",
+          "answer": "If he knew SQL, he would have gotten the job."
+        },
+        {
+          "number": 7,
+          "prompt": "We didn't fix the bug last week, so the app crashes today.",
+          "answer": "If we had fixed the bug last week, the app wouldn't crash today."
+        },
+        {
+          "number": 8,
+          "prompt": "I'm not a morning person, so I missed the early train.",
+          "answer": "If I were a morning person, I wouldn't have missed the early train. / If I was a morning person, I wouldn't have missed the early train."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Если бы я выучил английский в школе, сейчас я бы свободно на нём говорил.",
+          "answer": "If I had learned English at school, I would speak it fluently now."
+        },
+        {
+          "number": 2,
+          "prompt": "Если бы он был внимательнее, он бы не сделал эту ошибку.",
+          "answer": "If he were more careful, he wouldn't have made this mistake. / If he was more careful, he wouldn't have made this mistake."
+        },
+        {
+          "number": 3,
+          "prompt": "Если бы мы не переехали в другой город, у нас сейчас не было бы этой работы.",
+          "answer": "If we hadn't moved to another city, we wouldn't have this job now."
+        },
+        {
+          "number": 4,
+          "prompt": "Если бы я лучше знал город, я бы вчера не заблудился.",
+          "answer": "If I knew the city better, I wouldn't have gotten lost yesterday."
+        },
+        {
+          "number": 5,
+          "prompt": "Если бы она послушала совет, она бы сейчас не искала работу.",
+          "answer": "If she had listened to the advice, she wouldn't be looking for a job now."
+        },
+        {
+          "number": 6,
+          "prompt": "Если бы у нас был больший бюджет, мы бы наняли ещё двух разработчиков в прошлом месяце.",
+          "answer": "If we had a bigger budget, we would have hired two more developers last month."
+        },
+        {
+          "number": 7,
+          "prompt": "Если бы я не опоздал на самолёт, я был бы сейчас в Париже.",
+          "answer": "If I hadn't missed the plane, I would be in Paris now."
+        },
+        {
+          "number": 8,
+          "prompt": "Если бы я не был таким ленивым, я бы закончил этот проект на прошлой неделе.",
+          "answer": "If I weren't so lazy, I would have finished this project last week. / If I wasn't so lazy, I would have finished this project last week."
+        }
+      ]
+    }
+  ]
+}

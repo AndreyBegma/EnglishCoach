@@ -1,0 +1,6412 @@
+[
+  {
+    "lemma": "due",
+    "pos": ["adjective"],
+    "ipa": "/duː/",
+    "translationRu": "должный, из-за",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 1
+  },
+  {
+    "lemma": "medium",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈmiːdiəm/",
+    "translationRu": "средний, среда",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 2
+  },
+  {
+    "lemma": "current",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈkɜːrənt/",
+    "translationRu": "текущий, ток",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 3
+  },
+  {
+    "lemma": "private",
+    "pos": ["adjective"],
+    "ipa": "/ˈpraɪvət/",
+    "translationRu": "частный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 4
+  },
+  {
+    "lemma": "central",
+    "pos": ["adjective"],
+    "ipa": "/ˈsentrəl/",
+    "translationRu": "центральный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 5
+  },
+  {
+    "lemma": "various",
+    "pos": ["adjective"],
+    "ipa": "/ˈveriəs/",
+    "translationRu": "различный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 6
+  },
+  {
+    "lemma": "simply",
+    "pos": ["adverb"],
+    "ipa": "/ˈsɪmpli/",
+    "translationRu": "просто",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 7
+  },
+  {
+    "lemma": "ahead",
+    "pos": ["adverb"],
+    "ipa": "/əˈhed/",
+    "translationRu": "впереди",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 8
+  },
+  {
+    "lemma": "western",
+    "pos": ["adjective"],
+    "ipa": "/ˈwestərn/",
+    "translationRu": "западный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 9
+  },
+  {
+    "lemma": "absolutely",
+    "pos": ["adverb"],
+    "ipa": "/ˌæbsəˈluːtli/",
+    "translationRu": "абсолютно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 10
+  },
+  {
+    "lemma": "particularly",
+    "pos": ["adverb"],
+    "ipa": "/ˌpɑːrˈtɪkjələrli/",
+    "translationRu": "особенно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 11
+  },
+  {
+    "lemma": "generally",
+    "pos": ["adverb"],
+    "ipa": "/ˈdʒenərəli/",
+    "translationRu": "в целом",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 12
+  },
+  {
+    "lemma": "global",
+    "pos": ["adjective"],
+    "ipa": "/ˈɡloʊbəl/",
+    "translationRu": "глобальный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 13
+  },
+  {
+    "lemma": "seriously",
+    "pos": ["adverb"],
+    "ipa": "/ˈsɪriəsli/",
+    "translationRu": "серьёзно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 14
+  },
+  {
+    "lemma": "directly",
+    "pos": ["adverb"],
+    "ipa": "/dərˈektli/",
+    "translationRu": "напрямую",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 15
+  },
+  {
+    "lemma": "basic",
+    "pos": ["adjective"],
+    "ipa": "/ˈbeɪsɪk/",
+    "translationRu": "базовый, основной",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 16
+  },
+  {
+    "lemma": "effective",
+    "pos": ["adjective"],
+    "ipa": "/ɪˈfektɪv/",
+    "translationRu": "эффективный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 17
+  },
+  {
+    "lemma": "highly",
+    "pos": ["adverb"],
+    "ipa": "/ˈhaɪli/",
+    "translationRu": "очень, высоко",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 18
+  },
+  {
+    "lemma": "primary",
+    "pos": ["adjective"],
+    "ipa": "/ˈpraɪˌmeri/",
+    "translationRu": "основной, первичный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 19
+  },
+  {
+    "lemma": "responsible",
+    "pos": ["adjective"],
+    "ipa": "/riˈspɑːnsəbəl/",
+    "translationRu": "ответственный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 20
+  },
+  {
+    "lemma": "complex",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈkɑːmpleks/",
+    "translationRu": "сложный, комплекс",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 21
+  },
+  {
+    "lemma": "powerful",
+    "pos": ["adjective"],
+    "ipa": "/ˈpaʊərfəl/",
+    "translationRu": "мощный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 22
+  },
+  {
+    "lemma": "smart",
+    "pos": ["adjective"],
+    "ipa": "/smɑːrt/",
+    "translationRu": "умный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 23
+  },
+  {
+    "lemma": "totally",
+    "pos": ["adverb"],
+    "ipa": "/ˈtoʊtəli/",
+    "translationRu": "полностью",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 24
+  },
+  {
+    "lemma": "obviously",
+    "pos": ["adverb"],
+    "ipa": "/ˈɑːbviəsli/",
+    "translationRu": "очевидно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 25
+  },
+  {
+    "lemma": "apart",
+    "pos": ["adverb"],
+    "ipa": "/əˈpɑːrt/",
+    "translationRu": "отдельно, врозь",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 26
+  },
+  {
+    "lemma": "aware",
+    "pos": ["adjective"],
+    "ipa": "/əˈwer/",
+    "translationRu": "осведомлённый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 27
+  },
+  {
+    "lemma": "possibly",
+    "pos": ["adverb"],
+    "ipa": "/ˈpɑːsəbli/",
+    "translationRu": "возможно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 28
+  },
+  {
+    "lemma": "rare",
+    "pos": ["adjective"],
+    "ipa": "/rer/",
+    "translationRu": "редкий",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 29
+  },
+  {
+    "lemma": "beauty",
+    "pos": ["noun"],
+    "ipa": "/bˈjuːti/",
+    "translationRu": "красота",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 30
+  },
+  {
+    "lemma": "slightly",
+    "pos": ["adverb"],
+    "ipa": "/ˈslaɪtli/",
+    "translationRu": "слегка",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 31
+  },
+  {
+    "lemma": "edge",
+    "pos": ["noun"],
+    "ipa": "/edʒ/",
+    "translationRu": "край",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 32
+  },
+  {
+    "lemma": "solid",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈsɑːləd/",
+    "translationRu": "твёрдый, прочный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 33
+  },
+  {
+    "lemma": "proper",
+    "pos": ["adjective"],
+    "ipa": "/ˈprɑːpər/",
+    "translationRu": "надлежащий, правильный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 34
+  },
+  {
+    "lemma": "equal",
+    "pos": ["adjective", "noun", "verb"],
+    "ipa": "/ˈiːkwəl/",
+    "translationRu": "равный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 35
+  },
+  {
+    "lemma": "specifically",
+    "pos": ["adverb"],
+    "ipa": "/spəˈsɪfɪkli/",
+    "translationRu": "конкретно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 36
+  },
+  {
+    "lemma": "properly",
+    "pos": ["adverb"],
+    "ipa": "/ˈprɑːpərli/",
+    "translationRu": "должным образом",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 37
+  },
+  {
+    "lemma": "obvious",
+    "pos": ["adjective"],
+    "ipa": "/ˈɑːbviəs/",
+    "translationRu": "очевидный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 38
+  },
+  {
+    "lemma": "giant",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈdʒaɪənt/",
+    "translationRu": "гигант, огромный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 39
+  },
+  {
+    "lemma": "tiny",
+    "pos": ["adjective"],
+    "ipa": "/ˈtaɪni/",
+    "translationRu": "крошечный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 40
+  },
+  {
+    "lemma": "typically",
+    "pos": ["adverb"],
+    "ipa": "/ˈtɪpɪkli/",
+    "translationRu": "обычно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 41
+  },
+  {
+    "lemma": "essential",
+    "pos": ["adjective"],
+    "ipa": "/eˈsenʃəl/",
+    "translationRu": "необходимый, существенный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 42
+  },
+  {
+    "lemma": "familiar",
+    "pos": ["adjective"],
+    "ipa": "/fəˈmɪljər/",
+    "translationRu": "знакомый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 43
+  },
+  {
+    "lemma": "perfectly",
+    "pos": ["adverb"],
+    "ipa": "/ˈpɜːrfəktli/",
+    "translationRu": "отлично, идеально",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 44
+  },
+  {
+    "lemma": "unable",
+    "pos": ["adjective"],
+    "ipa": "/əˈneɪbəl/",
+    "translationRu": "неспособный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 45
+  },
+  {
+    "lemma": "mainly",
+    "pos": ["adverb"],
+    "ipa": "/ˈmeɪnli/",
+    "translationRu": "главным образом",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 46
+  },
+  {
+    "lemma": "competitive",
+    "pos": ["adjective"],
+    "ipa": "/kəmˈpetətɪv/",
+    "translationRu": "конкурентный, соревновательный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 47
+  },
+  {
+    "lemma": "personally",
+    "pos": ["adverb"],
+    "ipa": "/ˈpɜːrsənəli/",
+    "translationRu": "лично",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 48
+  },
+  {
+    "lemma": "tight",
+    "pos": ["adjective"],
+    "ipa": "/taɪt/",
+    "translationRu": "тесный, тугой, плотный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 49
+  },
+  {
+    "lemma": "surely",
+    "pos": ["adverb"],
+    "ipa": "/ˈʃʊrli/",
+    "translationRu": "конечно, наверняка",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 50
+  },
+  {
+    "lemma": "heavily",
+    "pos": ["adverb"],
+    "ipa": "/ˈhevəli/",
+    "translationRu": "сильно, тяжело",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 51
+  },
+  {
+    "lemma": "worldwide",
+    "pos": ["adjective", "adverb"],
+    "ipa": "/ˈwɜːrldˈwaɪd/",
+    "translationRu": "по всему миру",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 52
+  },
+  {
+    "lemma": "hardly",
+    "pos": ["adverb"],
+    "ipa": "/ˈhɑːrdli/",
+    "translationRu": "едва, вряд ли",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 53
+  },
+  {
+    "lemma": "secondary",
+    "pos": ["adjective"],
+    "ipa": "/ˈsekənˌderi/",
+    "translationRu": "вторичный, средний",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 54
+  },
+  {
+    "lemma": "immediate",
+    "pos": ["adjective"],
+    "ipa": "/ˌɪˈmiːˌdiːət/",
+    "translationRu": "немедленный, непосредственный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 55
+  },
+  {
+    "lemma": "fairly",
+    "pos": ["adverb"],
+    "ipa": "/ˈferli/",
+    "translationRu": "довольно, справедливо",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 56
+  },
+  {
+    "lemma": "effectively",
+    "pos": ["adverb"],
+    "ipa": "/ɪˈfektɪvli/",
+    "translationRu": "эффективно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 57
+  },
+  {
+    "lemma": "rough",
+    "pos": ["adjective"],
+    "ipa": "/rʌf/",
+    "translationRu": "грубый, шероховатый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 58
+  },
+  {
+    "lemma": "naturally",
+    "pos": ["adverb"],
+    "ipa": "/ˈnætʃərəli/",
+    "translationRu": "естественно, конечно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 59
+  },
+  {
+    "lemma": "necessarily",
+    "pos": ["adverb"],
+    "ipa": "/ˌnesəˈserəli/",
+    "translationRu": "обязательно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 60
+  },
+  {
+    "lemma": "practical",
+    "pos": ["adjective"],
+    "ipa": "/ˈpræktəkəl/",
+    "translationRu": "практичный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 61
+  },
+  {
+    "lemma": "sharp",
+    "pos": ["adjective"],
+    "ipa": "/ʃɑːrp/",
+    "translationRu": "острый, резкий",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 62
+  },
+  {
+    "lemma": "impressive",
+    "pos": ["adjective"],
+    "ipa": "/ˌɪmˈpresɪv/",
+    "translationRu": "впечатляющий",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 63
+  },
+  {
+    "lemma": "strongly",
+    "pos": ["adverb"],
+    "ipa": "/sˈtrɔːŋli/",
+    "translationRu": "сильно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 64
+  },
+  {
+    "lemma": "violent",
+    "pos": ["adjective"],
+    "ipa": "/ˈvaɪələnt/",
+    "translationRu": "жестокий, насильственный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 65
+  },
+  {
+    "lemma": "innocent",
+    "pos": ["adjective"],
+    "ipa": "/ˈɪnəsənt/",
+    "translationRu": "невиновный, невинный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 66
+  },
+  {
+    "lemma": "silent",
+    "pos": ["adjective"],
+    "ipa": "/ˈsaɪlənt/",
+    "translationRu": "тихий, молчаливый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 67
+  },
+  {
+    "lemma": "successfully",
+    "pos": ["adverb"],
+    "ipa": "/səkˈsesfəli/",
+    "translationRu": "успешно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 68
+  },
+  {
+    "lemma": "horrible",
+    "pos": ["adjective"],
+    "ipa": "/ˈhɔːrəbəl/",
+    "translationRu": "ужасный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 69
+  },
+  {
+    "lemma": "odd",
+    "pos": ["adjective"],
+    "ipa": "/ɑːd/",
+    "translationRu": "странный, нечётный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 70
+  },
+  {
+    "lemma": "ugly",
+    "pos": ["adjective"],
+    "ipa": "/ˈʌɡli/",
+    "translationRu": "уродливый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 71
+  },
+  {
+    "lemma": "remote",
+    "pos": ["adjective"],
+    "ipa": "/rɪˈmoʊt/",
+    "translationRu": "удалённый, пульт",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 72
+  },
+  {
+    "lemma": "smooth",
+    "pos": ["adjective"],
+    "ipa": "/smuːð/",
+    "translationRu": "гладкий, плавный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 73
+  },
+  {
+    "lemma": "sudden",
+    "pos": ["adjective"],
+    "ipa": "/ˈsʌdən/",
+    "translationRu": "внезапный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 74
+  },
+  {
+    "lemma": "equally",
+    "pos": ["adverb"],
+    "ipa": "/ˈiːkwəli/",
+    "translationRu": "одинаково, поровну",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 75
+  },
+  {
+    "lemma": "silly",
+    "pos": ["adjective"],
+    "ipa": "/ˈsɪli/",
+    "translationRu": "глупый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 76
+  },
+  {
+    "lemma": "incredibly",
+    "pos": ["adverb"],
+    "ipa": "/ˌɪnˈkredəbli/",
+    "translationRu": "невероятно",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 77
+  },
+  {
+    "lemma": "suitable",
+    "pos": ["adjective"],
+    "ipa": "/ˈsuːtəbəl/",
+    "translationRu": "подходящий",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 78
+  },
+  {
+    "lemma": "fancy",
+    "pos": ["adjective", "verb"],
+    "ipa": "/ˈfænsi/",
+    "translationRu": "причудливый, фантазия",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 79
+  },
+  {
+    "lemma": "unlikely",
+    "pos": ["adjective"],
+    "ipa": "/ənˈlaɪkli/",
+    "translationRu": "маловероятный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 80
+  },
+  {
+    "lemma": "similarly",
+    "pos": ["adverb"],
+    "ipa": "/ˈsɪmələrli/",
+    "translationRu": "аналогично",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 81
+  },
+  {
+    "lemma": "talented",
+    "pos": ["adjective"],
+    "ipa": "/ˈtæləntɪd/",
+    "translationRu": "талантливый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 82
+  },
+  {
+    "lemma": "reliable",
+    "pos": ["adjective"],
+    "ipa": "/rɪˈlaɪəbəl/",
+    "translationRu": "надёжный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 83
+  },
+  {
+    "lemma": "peaceful",
+    "pos": ["adjective"],
+    "ipa": "/ˈpiːsfəl/",
+    "translationRu": "мирный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 84
+  },
+  {
+    "lemma": "pleasant",
+    "pos": ["adjective"],
+    "ipa": "/ˈplezənt/",
+    "translationRu": "приятный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 85
+  },
+  {
+    "lemma": "continuous",
+    "pos": ["adjective"],
+    "ipa": "/kənˈtɪnjuəs/",
+    "translationRu": "непрерывный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 86
+  },
+  {
+    "lemma": "unnecessary",
+    "pos": ["adjective"],
+    "ipa": "/ənˈnesəˌseri/",
+    "translationRu": "ненужный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 87
+  },
+  {
+    "lemma": "gentle",
+    "pos": ["adjective"],
+    "ipa": "/ˈdʒentəl/",
+    "translationRu": "мягкий, нежный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 88
+  },
+  {
+    "lemma": "unfair",
+    "pos": ["adjective"],
+    "ipa": "/ənˈfer/",
+    "translationRu": "несправедливый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 89
+  },
+  {
+    "lemma": "convenient",
+    "pos": ["adjective"],
+    "ipa": "/kənˈviːnjənt/",
+    "translationRu": "удобный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 90
+  },
+  {
+    "lemma": "fascinating",
+    "pos": ["adjective"],
+    "ipa": "/ˈfæsəˌneɪtɪŋ/",
+    "translationRu": "увлекательный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 91
+  },
+  {
+    "lemma": "mild",
+    "pos": ["adjective"],
+    "ipa": "/maɪld/",
+    "translationRu": "мягкий, умеренный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 92
+  },
+  {
+    "lemma": "indoor",
+    "pos": ["adjective"],
+    "ipa": "/ˈɪnˌdɔːr/",
+    "translationRu": "внутренний, комнатный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 93
+  },
+  {
+    "lemma": "pale",
+    "pos": ["adjective"],
+    "ipa": "/peɪl/",
+    "translationRu": "бледный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 94
+  },
+  {
+    "lemma": "backwards",
+    "pos": ["adverb"],
+    "ipa": "/ˈbækwərdz/",
+    "translationRu": "назад, задом наперёд",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 95
+  },
+  {
+    "lemma": "indirect",
+    "pos": ["adjective"],
+    "ipa": "/ˌɪndərˈekt/",
+    "translationRu": "косвенный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 96
+  },
+  {
+    "lemma": "sensible",
+    "pos": ["adjective"],
+    "ipa": "/ˈsensəbəl/",
+    "translationRu": "разумный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 97
+  },
+  {
+    "lemma": "shiny",
+    "pos": ["adjective"],
+    "ipa": "/ˈʃaɪni/",
+    "translationRu": "блестящий",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 98
+  },
+  {
+    "lemma": "unpleasant",
+    "pos": ["adjective"],
+    "ipa": "/ənˈplezənt/",
+    "translationRu": "неприятный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 99
+  },
+  {
+    "lemma": "imaginary",
+    "pos": ["adjective"],
+    "ipa": "/ˌɪˈmædʒəˌneri/",
+    "translationRu": "воображаемый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 100
+  },
+  {
+    "lemma": "definite",
+    "pos": ["adjective"],
+    "ipa": "/ˈdefənət/",
+    "translationRu": "определённый, чёткий",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 101
+  },
+  {
+    "lemma": "careless",
+    "pos": ["adjective"],
+    "ipa": "/ˈkerləs/",
+    "translationRu": "небрежный, беспечный",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 102
+  },
+  {
+    "lemma": "poisonous",
+    "pos": ["adjective"],
+    "ipa": "/ˈpɔɪzənəs/",
+    "translationRu": "ядовитый",
+    "topic": "✨ Качества и описания",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 103
+  },
+  {
+    "lemma": "though",
+    "pos": ["adverb", "conjunction"],
+    "ipa": "/ðoʊ/",
+    "translationRu": "хотя",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 104
+  },
+  {
+    "lemma": "within",
+    "pos": ["preposition"],
+    "ipa": "/wɪˈðɪn/",
+    "translationRu": "внутри, в пределах",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 105
+  },
+  {
+    "lemma": "whether",
+    "pos": ["conjunction"],
+    "ipa": "/ˈweðər/",
+    "translationRu": "ли",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 106
+  },
+  {
+    "lemma": "whatever",
+    "pos": ["adverb", "determiner", "pronoun"],
+    "ipa": "/ˌwʌˈtevər/",
+    "translationRu": "что угодно",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 107
+  },
+  {
+    "lemma": "upon",
+    "pos": ["preposition"],
+    "ipa": "/əˈpɑːn/",
+    "translationRu": "на",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 108
+  },
+  {
+    "lemma": "despite",
+    "pos": ["preposition"],
+    "ipa": "/dɪˈspaɪt/",
+    "translationRu": "несмотря на",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 109
+  },
+  {
+    "lemma": "throughout",
+    "pos": ["adverb", "preposition"],
+    "ipa": "/θruˈaʊt/",
+    "translationRu": "по всему, на протяжении",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 110
+  },
+  {
+    "lemma": "unless",
+    "pos": ["conjunction"],
+    "ipa": "/ənˈles/",
+    "translationRu": "если не",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 111
+  },
+  {
+    "lemma": "therefore",
+    "pos": ["adverb"],
+    "ipa": "/ˈðerˌfɔːr/",
+    "translationRu": "поэтому",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 112
+  },
+  {
+    "lemma": "indeed",
+    "pos": ["adverb"],
+    "ipa": "/ˌɪnˈdiːd/",
+    "translationRu": "действительно",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 113
+  },
+  {
+    "lemma": "till",
+    "pos": ["conjunction", "preposition"],
+    "ipa": "/tɪl/",
+    "translationRu": "до",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 114
+  },
+  {
+    "lemma": "nor",
+    "pos": ["adverb", "conjunction"],
+    "ipa": "/nɔːr/",
+    "translationRu": "ни, и не",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 115
+  },
+  {
+    "lemma": "whenever",
+    "pos": ["conjunction"],
+    "ipa": "/weˈnevər/",
+    "translationRu": "всякий раз, когда",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 116
+  },
+  {
+    "lemma": "unlike",
+    "pos": ["preposition"],
+    "ipa": "/ənˈlaɪk/",
+    "translationRu": "в отличие от",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 117
+  },
+  {
+    "lemma": "ought",
+    "pos": ["modal"],
+    "ipa": "/ɔːt/",
+    "translationRu": "следует, должен",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 118
+  },
+  {
+    "lemma": "ours",
+    "pos": ["pronoun"],
+    "ipa": "/ˈaʊərz/",
+    "translationRu": "наш",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 119
+  },
+  {
+    "lemma": "theirs",
+    "pos": ["pronoun"],
+    "ipa": "/ðerz/",
+    "translationRu": "их",
+    "topic": "🔗 Служебные слова",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 120
+  },
+  {
+    "lemma": "total",
+    "pos": ["adjective", "noun", "verb"],
+    "ipa": "/ˈtoʊtəl/",
+    "translationRu": "общий, итог",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 121
+  },
+  {
+    "lemma": "range",
+    "pos": ["noun", "verb"],
+    "ipa": "/reɪndʒ/",
+    "translationRu": "диапазон",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 122
+  },
+  {
+    "lemma": "currently",
+    "pos": ["adverb"],
+    "ipa": "/ˈkɜːrəntli/",
+    "translationRu": "в настоящее время",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 123
+  },
+  {
+    "lemma": "previous",
+    "pos": ["adjective"],
+    "ipa": "/ˈpriːviəs/",
+    "translationRu": "предыдущий",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 124
+  },
+  {
+    "lemma": "plus",
+    "pos": ["adjective", "conjunction", "noun", "preposition"],
+    "ipa": "/plʌs/",
+    "translationRu": "плюс",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 125
+  },
+  {
+    "lemma": "eventually",
+    "pos": ["adverb"],
+    "ipa": "/ɪˈventʃəwəli/",
+    "translationRu": "в конце концов",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 126
+  },
+  {
+    "lemma": "previously",
+    "pos": ["adverb"],
+    "ipa": "/ˈpriːviəsli/",
+    "translationRu": "ранее",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 127
+  },
+  {
+    "lemma": "length",
+    "pos": ["noun"],
+    "ipa": "/leŋkθ/",
+    "translationRu": "длина",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 128
+  },
+  {
+    "lemma": "forever",
+    "pos": ["adverb"],
+    "ipa": "/fərˈevər/",
+    "translationRu": "навсегда",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 129
+  },
+  {
+    "lemma": "plenty",
+    "pos": ["pronoun"],
+    "ipa": "/ˈplenti/",
+    "translationRu": "множество",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 130
+  },
+  {
+    "lemma": "originally",
+    "pos": ["adverb"],
+    "ipa": "/ərˈɪdʒənəli/",
+    "translationRu": "первоначально",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 131
+  },
+  {
+    "lemma": "measure",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈmeʒər/",
+    "translationRu": "мера, измерять",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 132
+  },
+  {
+    "lemma": "approximately",
+    "pos": ["adverb"],
+    "ipa": "/əˈprɑːksəmətli/",
+    "translationRu": "приблизительно",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 133
+  },
+  {
+    "lemma": "decade",
+    "pos": ["noun"],
+    "ipa": "/deˈkeɪd/",
+    "translationRu": "десятилетие",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 134
+  },
+  {
+    "lemma": "frequently",
+    "pos": ["adverb"],
+    "ipa": "/ˈfriːkwəntli/",
+    "translationRu": "часто",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 135
+  },
+  {
+    "lemma": "regularly",
+    "pos": ["adverb"],
+    "ipa": "/ˈreɡjələrli/",
+    "translationRu": "регулярно",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 136
+  },
+  {
+    "lemma": "historic",
+    "pos": ["adjective"],
+    "ipa": "/hɪˈstɔːrɪk/",
+    "translationRu": "исторический",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 137
+  },
+  {
+    "lemma": "meanwhile",
+    "pos": ["adverb"],
+    "ipa": "/ˈmiːnˌwaɪl/",
+    "translationRu": "тем временем",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 138
+  },
+  {
+    "lemma": "percentage",
+    "pos": ["noun"],
+    "ipa": "/pərˈsentədʒ/",
+    "translationRu": "процент",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 139
+  },
+  {
+    "lemma": "rarely",
+    "pos": ["adverb"],
+    "ipa": "/ˈrerli/",
+    "translationRu": "редко",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 140
+  },
+  {
+    "lemma": "occasion",
+    "pos": ["noun"],
+    "ipa": "/əˈkeɪʒən/",
+    "translationRu": "случай, повод",
+    "topic": "⏱ Время и количество",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 141
+  },
+  {
+    "lemma": "set",
+    "pos": ["noun", "verb"],
+    "ipa": "/set/",
+    "translationRu": "набор, ставить",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 142
+  },
+  {
+    "lemma": "require",
+    "pos": ["verb"],
+    "ipa": "/ˌriːˈkwaɪər/",
+    "translationRu": "требовать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 143
+  },
+  {
+    "lemma": "locate",
+    "pos": ["verb"],
+    "ipa": "/ˈloʊˌkeɪt/",
+    "translationRu": "находить, размещать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 144
+  },
+  {
+    "lemma": "remain",
+    "pos": ["verb"],
+    "ipa": "/rɪˈmeɪn/",
+    "translationRu": "оставаться",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 145
+  },
+  {
+    "lemma": "spread",
+    "pos": ["noun", "verb"],
+    "ipa": "/spred/",
+    "translationRu": "распространять, распространение",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 146
+  },
+  {
+    "lemma": "shoot",
+    "pos": ["noun", "verb"],
+    "ipa": "/ʃuːt/",
+    "translationRu": "стрелять",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 147
+  },
+  {
+    "lemma": "roll",
+    "pos": ["noun", "verb"],
+    "ipa": "/roʊl/",
+    "translationRu": "катить, рулон",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 148
+  },
+  {
+    "lemma": "combine",
+    "pos": ["verb"],
+    "ipa": "/ˈkɑːmbaɪn/",
+    "translationRu": "объединять",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 149
+  },
+  {
+    "lemma": "commit",
+    "pos": ["verb"],
+    "ipa": "/kəˈmɪt/",
+    "translationRu": "совершать, обязываться",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 150
+  },
+  {
+    "lemma": "escape",
+    "pos": ["noun", "verb"],
+    "ipa": "/ɪˈskeɪp/",
+    "translationRu": "бежать, побег",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 151
+  },
+  {
+    "lemma": "deliver",
+    "pos": ["verb"],
+    "ipa": "/dɪˈlɪvər/",
+    "translationRu": "доставлять",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 152
+  },
+  {
+    "lemma": "hang",
+    "pos": ["verb"],
+    "ipa": "/hæŋ/",
+    "translationRu": "вешать, висеть",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 153
+  },
+  {
+    "lemma": "lay",
+    "pos": ["verb"],
+    "ipa": "/leɪ/",
+    "translationRu": "класть, положить",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 154
+  },
+  {
+    "lemma": "quit",
+    "pos": ["verb"],
+    "ipa": "/kwɪt/",
+    "translationRu": "бросать, уходить",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 155
+  },
+  {
+    "lemma": "attach",
+    "pos": ["verb"],
+    "ipa": "/əˈtætʃ/",
+    "translationRu": "прикреплять",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 156
+  },
+  {
+    "lemma": "survive",
+    "pos": ["verb"],
+    "ipa": "/sərˈvaɪv/",
+    "translationRu": "выживать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 157
+  },
+  {
+    "lemma": "arrival",
+    "pos": ["noun"],
+    "ipa": "/ərˈaɪvəl/",
+    "translationRu": "прибытие",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 158
+  },
+  {
+    "lemma": "assist",
+    "pos": ["verb"],
+    "ipa": "/əˈsɪst/",
+    "translationRu": "помогать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 159
+  },
+  {
+    "lemma": "participate",
+    "pos": ["verb"],
+    "ipa": "/pɑrˈtɪsəˌpeɪt/",
+    "translationRu": "участвовать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 160
+  },
+  {
+    "lemma": "bury",
+    "pos": ["verb"],
+    "ipa": "/ˈberi/",
+    "translationRu": "хоронить, закапывать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 161
+  },
+  {
+    "lemma": "expand",
+    "pos": ["verb"],
+    "ipa": "/ɪkˈspænd/",
+    "translationRu": "расширять",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 162
+  },
+  {
+    "lemma": "attract",
+    "pos": ["verb"],
+    "ipa": "/əˈtrækt/",
+    "translationRu": "привлекать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 163
+  },
+  {
+    "lemma": "explore",
+    "pos": ["verb"],
+    "ipa": "/ɪksˈplɔːr/",
+    "translationRu": "исследовать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 164
+  },
+  {
+    "lemma": "highlight",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈhaɪˌlaɪt/",
+    "translationRu": "выделять, основной момент",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 165
+  },
+  {
+    "lemma": "gather",
+    "pos": ["verb"],
+    "ipa": "/ˈɡæðər/",
+    "translationRu": "собирать, собираться",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 166
+  },
+  {
+    "lemma": "explosion",
+    "pos": ["noun"],
+    "ipa": "/ɪksˈploʊʒən/",
+    "translationRu": "взрыв",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 167
+  },
+  {
+    "lemma": "cheat",
+    "pos": ["noun", "verb"],
+    "ipa": "/tʃiːt/",
+    "translationRu": "обманывать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 168
+  },
+  {
+    "lemma": "hurry",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈhɜːri/",
+    "translationRu": "спешить, спешка",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 169
+  },
+  {
+    "lemma": "bend",
+    "pos": ["noun", "verb"],
+    "ipa": "/bend/",
+    "translationRu": "сгибать, изгиб",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 170
+  },
+  {
+    "lemma": "pour",
+    "pos": ["verb"],
+    "ipa": "/pɔːr/",
+    "translationRu": "лить, наливать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 171
+  },
+  {
+    "lemma": "fold",
+    "pos": ["noun", "verb"],
+    "ipa": "/foʊld/",
+    "translationRu": "складывать, сгибать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 172
+  },
+  {
+    "lemma": "expedition",
+    "pos": ["noun"],
+    "ipa": "/ˌekspəˈdɪʃən/",
+    "translationRu": "экспедиция",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 173
+  },
+  {
+    "lemma": "weigh",
+    "pos": ["verb"],
+    "ipa": "/weɪ/",
+    "translationRu": "взвешивать",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 174
+  },
+  {
+    "lemma": "consume",
+    "pos": ["verb"],
+    "ipa": "/kənˈsuːm/",
+    "translationRu": "потреблять",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 175
+  },
+  {
+    "lemma": "explode",
+    "pos": ["verb"],
+    "ipa": "/ɪksˈploʊd/",
+    "translationRu": "взрываться",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 176
+  },
+  {
+    "lemma": "fasten",
+    "pos": ["verb"],
+    "ipa": "/ˈfæsən/",
+    "translationRu": "застёгивать, закреплять",
+    "topic": "🏃 Действия и движение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 177
+  },
+  {
+    "lemma": "base",
+    "pos": ["noun", "verb"],
+    "ipa": "/beɪs/",
+    "translationRu": "основа, база",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 178
+  },
+  {
+    "lemma": "living",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈlɪvɪŋ/",
+    "translationRu": "жизнь, живой",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 179
+  },
+  {
+    "lemma": "issue",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈɪʃu/",
+    "translationRu": "вопрос, выпуск",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 180
+  },
+  {
+    "lemma": "relate",
+    "pos": ["verb"],
+    "ipa": "/rɪˈleɪt/",
+    "translationRu": "относиться",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 181
+  },
+  {
+    "lemma": "loss",
+    "pos": ["noun"],
+    "ipa": "/lɔːs/",
+    "translationRu": "потеря",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 182
+  },
+  {
+    "lemma": "risk",
+    "pos": ["noun", "verb"],
+    "ipa": "/rɪsk/",
+    "translationRu": "риск",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 183
+  },
+  {
+    "lemma": "truth",
+    "pos": ["noun"],
+    "ipa": "/truːθ/",
+    "translationRu": "правда",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 184
+  },
+  {
+    "lemma": "growth",
+    "pos": ["noun"],
+    "ipa": "/ɡroʊθ/",
+    "translationRu": "рост",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 185
+  },
+  {
+    "lemma": "standard",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈstændərd/",
+    "translationRu": "стандарт",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 186
+  },
+  {
+    "lemma": "limit",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈlɪmət/",
+    "translationRu": "предел, ограничивать",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 187
+  },
+  {
+    "lemma": "addition",
+    "pos": ["noun"],
+    "ipa": "/əˈdɪʃən/",
+    "translationRu": "добавление",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 188
+  },
+  {
+    "lemma": "content",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈkɑːntent/",
+    "translationRu": "содержание, довольный",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 189
+  },
+  {
+    "lemma": "effort",
+    "pos": ["noun"],
+    "ipa": "/ˈefərt/",
+    "translationRu": "усилие",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 190
+  },
+  {
+    "lemma": "impact",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˌɪmˈpækt/",
+    "translationRu": "влияние, удар",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 191
+  },
+  {
+    "lemma": "lack",
+    "pos": ["noun", "verb"],
+    "ipa": "/læk/",
+    "translationRu": "нехватка, не хватать",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 192
+  },
+  {
+    "lemma": "operation",
+    "pos": ["noun"],
+    "ipa": "/ˌɑːpərˈeɪʃən/",
+    "translationRu": "операция, работа",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 193
+  },
+  {
+    "lemma": "resource",
+    "pos": ["noun"],
+    "ipa": "/ˈriːsɔrs/",
+    "translationRu": "ресурс",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 194
+  },
+  {
+    "lemma": "damage",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈdæmədʒ/",
+    "translationRu": "ущерб, повреждать",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 195
+  },
+  {
+    "lemma": "reality",
+    "pos": ["noun"],
+    "ipa": "/ˌriːˈæləˌtiː/",
+    "translationRu": "реальность",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 196
+  },
+  {
+    "lemma": "spot",
+    "pos": ["noun", "verb"],
+    "ipa": "/spɑːt/",
+    "translationRu": "пятно, место",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 197
+  },
+  {
+    "lemma": "block",
+    "pos": ["noun", "verb"],
+    "ipa": "/blɑːk/",
+    "translationRu": "блок, блокировать",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 198
+  },
+  {
+    "lemma": "challenge",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈtʃæləndʒ/",
+    "translationRu": "вызов",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 199
+  },
+  {
+    "lemma": "basis",
+    "pos": ["noun"],
+    "ipa": "/ˈbeɪsəs/",
+    "translationRu": "основа",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 200
+  },
+  {
+    "lemma": "waste",
+    "pos": ["adjective", "noun", "verb"],
+    "ipa": "/weɪst/",
+    "translationRu": "отходы, тратить впустую",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 201
+  },
+  {
+    "lemma": "influence",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈɪnfluəns/",
+    "translationRu": "влияние",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 202
+  },
+  {
+    "lemma": "setting",
+    "pos": ["noun"],
+    "ipa": "/ˈsetɪŋ/",
+    "translationRu": "обстановка, настройка",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 203
+  },
+  {
+    "lemma": "balance",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈbæləns/",
+    "translationRu": "баланс, равновесие",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 204
+  },
+  {
+    "lemma": "responsibility",
+    "pos": ["noun"],
+    "ipa": "/riˌspɑːnsəˈbɪləti/",
+    "translationRu": "ответственность",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 205
+  },
+  {
+    "lemma": "reaction",
+    "pos": ["noun"],
+    "ipa": "/riˈækʃən/",
+    "translationRu": "реакция",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 206
+  },
+  {
+    "lemma": "emergency",
+    "pos": ["noun"],
+    "ipa": "/ɪˈmɜːrdʒənsi/",
+    "translationRu": "чрезвычайная ситуация",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 207
+  },
+  {
+    "lemma": "duty",
+    "pos": ["noun"],
+    "ipa": "/ˈduːti/",
+    "translationRu": "долг, обязанность",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 208
+  },
+  {
+    "lemma": "entry",
+    "pos": ["noun"],
+    "ipa": "/ˈentri/",
+    "translationRu": "вход, запись",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 209
+  },
+  {
+    "lemma": "relation",
+    "pos": ["noun"],
+    "ipa": "/riˈleɪʃən/",
+    "translationRu": "отношение, связь",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 210
+  },
+  {
+    "lemma": "identity",
+    "pos": ["noun"],
+    "ipa": "/aɪˈdentɪˌtiː/",
+    "translationRu": "личность, тождество",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 211
+  },
+  {
+    "lemma": "talent",
+    "pos": ["noun"],
+    "ipa": "/ˈtælənt/",
+    "translationRu": "талант",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 212
+  },
+  {
+    "lemma": "row",
+    "pos": ["noun"],
+    "ipa": "/roʊ/",
+    "translationRu": "ряд; ссора",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 213
+  },
+  {
+    "lemma": "represent",
+    "pos": ["verb"],
+    "ipa": "/ˌreprɪˈzent/",
+    "translationRu": "представлять, изображать",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 214
+  },
+  {
+    "lemma": "category",
+    "pos": ["noun"],
+    "ipa": "/ˈkætəˌɡɔːri/",
+    "translationRu": "категория",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 215
+  },
+  {
+    "lemma": "occur",
+    "pos": ["verb"],
+    "ipa": "/əˈkɜːr/",
+    "translationRu": "происходить, случаться",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 216
+  },
+  {
+    "lemma": "tend",
+    "pos": ["verb"],
+    "ipa": "/tend/",
+    "translationRu": "иметь склонность, ухаживать",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 217
+  },
+  {
+    "lemma": "importance",
+    "pos": ["noun"],
+    "ipa": "/ˌɪmˈpɔːrtəns/",
+    "translationRu": "важность",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 218
+  },
+  {
+    "lemma": "aim",
+    "pos": ["noun", "verb"],
+    "ipa": "/eɪm/",
+    "translationRu": "цель; целиться",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 219
+  },
+  {
+    "lemma": "technique",
+    "pos": ["noun"],
+    "ipa": "/tekˈniːk/",
+    "translationRu": "техника, приём",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 220
+  },
+  {
+    "lemma": "trend",
+    "pos": ["noun"],
+    "ipa": "/trend/",
+    "translationRu": "тенденция, тренд",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 221
+  },
+  {
+    "lemma": "improvement",
+    "pos": ["noun"],
+    "ipa": "/ˌɪmˈpruːvmənt/",
+    "translationRu": "улучшение",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 222
+  },
+  {
+    "lemma": "trick",
+    "pos": ["noun", "verb"],
+    "ipa": "/trɪk/",
+    "translationRu": "трюк, обман",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 223
+  },
+  {
+    "lemma": "consequence",
+    "pos": ["noun"],
+    "ipa": "/ˈkɑːnsəkwəns/",
+    "translationRu": "последствие",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 224
+  },
+  {
+    "lemma": "contrast",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈkɑːntræst/",
+    "translationRu": "контраст",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 225
+  },
+  {
+    "lemma": "mystery",
+    "pos": ["noun"],
+    "ipa": "/ˈmɪstəri/",
+    "translationRu": "тайна, загадка",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 226
+  },
+  {
+    "lemma": "layer",
+    "pos": ["noun"],
+    "ipa": "/ˈleɪər/",
+    "translationRu": "слой",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 227
+  },
+  {
+    "lemma": "consist",
+    "pos": ["verb"],
+    "ipa": "/kənˈsɪst/",
+    "translationRu": "состоять",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 228
+  },
+  {
+    "lemma": "achievement",
+    "pos": ["noun"],
+    "ipa": "/əˈtʃiːvmənt/",
+    "translationRu": "достижение",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 229
+  },
+  {
+    "lemma": "difficulty",
+    "pos": ["noun"],
+    "ipa": "/ˈdɪfəkəlti/",
+    "translationRu": "трудность",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 230
+  },
+  {
+    "lemma": "similarity",
+    "pos": ["noun"],
+    "ipa": "/ˌsɪməˈlerəti/",
+    "translationRu": "сходство",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 231
+  },
+  {
+    "lemma": "disadvantage",
+    "pos": ["noun"],
+    "ipa": "/ˌdɪsədˈvæntɪdʒ/",
+    "translationRu": "недостаток",
+    "topic": "🧩 Абстрактные понятия",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 232
+  },
+  {
+    "lemma": "court",
+    "pos": ["noun"],
+    "ipa": "/kɔːrt/",
+    "translationRu": "суд, двор",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 233
+  },
+  {
+    "lemma": "political",
+    "pos": ["adjective"],
+    "ipa": "/pəˈlɪtəkəl/",
+    "translationRu": "политический",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 234
+  },
+  {
+    "lemma": "security",
+    "pos": ["noun"],
+    "ipa": "/sɪkˈjʊrəti/",
+    "translationRu": "безопасность",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 235
+  },
+  {
+    "lemma": "policy",
+    "pos": ["noun"],
+    "ipa": "/ˈpɑːləsi/",
+    "translationRu": "политика, полис",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 236
+  },
+  {
+    "lemma": "official",
+    "pos": ["adjective", "noun"],
+    "ipa": "/əˈfɪʃəl/",
+    "translationRu": "официальный, чиновник",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 237
+  },
+  {
+    "lemma": "vote",
+    "pos": ["noun", "verb"],
+    "ipa": "/voʊt/",
+    "translationRu": "голосовать, голос",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 238
+  },
+  {
+    "lemma": "election",
+    "pos": ["noun"],
+    "ipa": "/ɪˈlekʃən/",
+    "translationRu": "выборы",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 239
+  },
+  {
+    "lemma": "legal",
+    "pos": ["adjective"],
+    "ipa": "/ˈliːɡəl/",
+    "translationRu": "законный",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 240
+  },
+  {
+    "lemma": "union",
+    "pos": ["noun"],
+    "ipa": "/ˈjuːnjən/",
+    "translationRu": "союз",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 241
+  },
+  {
+    "lemma": "campaign",
+    "pos": ["noun", "verb"],
+    "ipa": "/kæmˈpeɪn/",
+    "translationRu": "кампания",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 242
+  },
+  {
+    "lemma": "safety",
+    "pos": ["noun"],
+    "ipa": "/ˈseɪfti/",
+    "translationRu": "безопасность",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 243
+  },
+  {
+    "lemma": "judge",
+    "pos": ["noun", "verb"],
+    "ipa": "/dʒʌdʒ/",
+    "translationRu": "судья, судить",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 244
+  },
+  {
+    "lemma": "battle",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈbætəl/",
+    "translationRu": "битва",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 245
+  },
+  {
+    "lemma": "agreement",
+    "pos": ["noun"],
+    "ipa": "/əˈɡriːmənt/",
+    "translationRu": "соглашение",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 246
+  },
+  {
+    "lemma": "nation",
+    "pos": ["noun"],
+    "ipa": "/ˈneɪʃən/",
+    "translationRu": "нация",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 247
+  },
+  {
+    "lemma": "politics",
+    "pos": ["noun"],
+    "ipa": "/ˈpɑːləˌtɪks/",
+    "translationRu": "политика",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 248
+  },
+  {
+    "lemma": "murder",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈmɜːrdər/",
+    "translationRu": "убийство",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 249
+  },
+  {
+    "lemma": "religious",
+    "pos": ["adjective"],
+    "ipa": "/rɪˈlɪdʒəs/",
+    "translationRu": "религиозный",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 250
+  },
+  {
+    "lemma": "royal",
+    "pos": ["adjective"],
+    "ipa": "/ˈrɔɪəl/",
+    "translationRu": "королевский",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 251
+  },
+  {
+    "lemma": "authority",
+    "pos": ["noun"],
+    "ipa": "/əˈθɔːrəti/",
+    "translationRu": "власть, авторитет",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 252
+  },
+  {
+    "lemma": "cultural",
+    "pos": ["adjective"],
+    "ipa": "/ˈkʌltʃərəl/",
+    "translationRu": "культурный",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 253
+  },
+  {
+    "lemma": "weapon",
+    "pos": ["noun"],
+    "ipa": "/ˈwepən/",
+    "translationRu": "оружие",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 254
+  },
+  {
+    "lemma": "religion",
+    "pos": ["noun"],
+    "ipa": "/rɪˈlɪdʒən/",
+    "translationRu": "религия",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 255
+  },
+  {
+    "lemma": "guard",
+    "pos": ["noun", "verb"],
+    "ipa": "/ɡɑːrd/",
+    "translationRu": "охранник, охранять",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 256
+  },
+  {
+    "lemma": "border",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈbɔːrdər/",
+    "translationRu": "граница",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 257
+  },
+  {
+    "lemma": "enemy",
+    "pos": ["noun"],
+    "ipa": "/ˈenəmi/",
+    "translationRu": "враг",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 258
+  },
+  {
+    "lemma": "illegal",
+    "pos": ["adjective"],
+    "ipa": "/ˌɪˈliːɡəl/",
+    "translationRu": "незаконный",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 259
+  },
+  {
+    "lemma": "candidate",
+    "pos": ["noun"],
+    "ipa": "/ˈkændədeɪt/",
+    "translationRu": "кандидат",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 260
+  },
+  {
+    "lemma": "arrest",
+    "pos": ["noun", "verb"],
+    "ipa": "/ərˈest/",
+    "translationRu": "арест, арестовывать",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 261
+  },
+  {
+    "lemma": "guilty",
+    "pos": ["adjective"],
+    "ipa": "/ˈɡɪlti/",
+    "translationRu": "виновный",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 262
+  },
+  {
+    "lemma": "bomb",
+    "pos": ["noun", "verb"],
+    "ipa": "/bɑːm/",
+    "translationRu": "бомба",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 263
+  },
+  {
+    "lemma": "flag",
+    "pos": ["noun"],
+    "ipa": "/flæɡ/",
+    "translationRu": "флаг",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 264
+  },
+  {
+    "lemma": "ban",
+    "pos": ["noun", "verb"],
+    "ipa": "/bæn/",
+    "translationRu": "запрет, запрещать",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 265
+  },
+  {
+    "lemma": "politician",
+    "pos": ["noun"],
+    "ipa": "/ˌpɑːləˈtɪʃən/",
+    "translationRu": "политик",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 266
+  },
+  {
+    "lemma": "protest",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈproʊˌtest/",
+    "translationRu": "протест",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 267
+  },
+  {
+    "lemma": "custom",
+    "pos": ["noun"],
+    "ipa": "/ˈkʌstəm/",
+    "translationRu": "обычай, традиция",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 268
+  },
+  {
+    "lemma": "ceremony",
+    "pos": ["noun"],
+    "ipa": "/ˈserəˌmoʊni/",
+    "translationRu": "церемония",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 269
+  },
+  {
+    "lemma": "prayer",
+    "pos": ["noun"],
+    "ipa": "/prer/",
+    "translationRu": "молитва",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 270
+  },
+  {
+    "lemma": "pray",
+    "pos": ["verb"],
+    "ipa": "/preɪ/",
+    "translationRu": "молиться",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 271
+  },
+  {
+    "lemma": "prisoner",
+    "pos": ["noun"],
+    "ipa": "/ˈprɪzənər/",
+    "translationRu": "заключённый, пленник",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 272
+  },
+  {
+    "lemma": "punishment",
+    "pos": ["noun"],
+    "ipa": "/ˈpʌnɪʃmənt/",
+    "translationRu": "наказание",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 273
+  },
+  {
+    "lemma": "priest",
+    "pos": ["noun"],
+    "ipa": "/priːst/",
+    "translationRu": "священник",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 274
+  },
+  {
+    "lemma": "punish",
+    "pos": ["verb"],
+    "ipa": "/ˈpʌnɪʃ/",
+    "translationRu": "наказывать",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 275
+  },
+  {
+    "lemma": "clause",
+    "pos": ["noun"],
+    "ipa": "/klɔːz/",
+    "translationRu": "пункт, статья",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 276
+  },
+  {
+    "lemma": "killing",
+    "pos": ["noun"],
+    "ipa": "/ˈkɪlɪŋ/",
+    "translationRu": "убийство",
+    "topic": "⚖️ Общество и право",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 277
+  },
+  {
+    "lemma": "contact",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈkɑːnˌtækt/",
+    "translationRu": "контакт, связываться",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 278
+  },
+  {
+    "lemma": "marriage",
+    "pos": ["noun"],
+    "ipa": "/ˈmerɪdʒ/",
+    "translationRu": "брак",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 279
+  },
+  {
+    "lemma": "captain",
+    "pos": ["noun"],
+    "ipa": "/ˈkæptən/",
+    "translationRu": "капитан",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 280
+  },
+  {
+    "lemma": "generation",
+    "pos": ["noun"],
+    "ipa": "/ˌdʒenərˈeɪʃən/",
+    "translationRu": "поколение",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 281
+  },
+  {
+    "lemma": "host",
+    "pos": ["noun", "verb"],
+    "ipa": "/hoʊst/",
+    "translationRu": "хозяин, ведущий",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 282
+  },
+  {
+    "lemma": "youth",
+    "pos": ["noun"],
+    "ipa": "/juːθ/",
+    "translationRu": "молодость, молодёжь",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 283
+  },
+  {
+    "lemma": "prince",
+    "pos": ["noun"],
+    "ipa": "/prɪns/",
+    "translationRu": "принц",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 284
+  },
+  {
+    "lemma": "native",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈneɪtɪv/",
+    "translationRu": "местный, коренной",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 285
+  },
+  {
+    "lemma": "folk",
+    "pos": ["adjective", "noun"],
+    "ipa": "/foʊk/",
+    "translationRu": "народ, люди",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 286
+  },
+  {
+    "lemma": "kiss",
+    "pos": ["noun", "verb"],
+    "ipa": "/kɪs/",
+    "translationRu": "поцелуй, целовать",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 287
+  },
+  {
+    "lemma": "victim",
+    "pos": ["noun"],
+    "ipa": "/ˈvɪktəm/",
+    "translationRu": "жертва",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 288
+  },
+  {
+    "lemma": "princess",
+    "pos": ["noun"],
+    "ipa": "/ˈprɪnses/",
+    "translationRu": "принцесса",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 289
+  },
+  {
+    "lemma": "childhood",
+    "pos": ["noun"],
+    "ipa": "/ˈtʃaɪldˌhʊd/",
+    "translationRu": "детство",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 290
+  },
+  {
+    "lemma": "relative",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈrelətɪv/",
+    "translationRu": "родственник, относительный",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 291
+  },
+  {
+    "lemma": "supporter",
+    "pos": ["noun"],
+    "ipa": "/səˈpɔːrtər/",
+    "translationRu": "сторонник, болельщик",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 292
+  },
+  {
+    "lemma": "friendship",
+    "pos": ["noun"],
+    "ipa": "/ˈfrendʃɪp/",
+    "translationRu": "дружба",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 293
+  },
+  {
+    "lemma": "immigrant",
+    "pos": ["noun"],
+    "ipa": "/ˈɪməɡrənt/",
+    "translationRu": "иммигрант",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 294
+  },
+  {
+    "lemma": "volunteer",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˌvɑːlənˈtɪr/",
+    "translationRu": "волонтёр, вызваться",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 295
+  },
+  {
+    "lemma": "gentleman",
+    "pos": ["noun"],
+    "ipa": "/ˈdʒentəlmən/",
+    "translationRu": "джентльмен",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 296
+  },
+  {
+    "lemma": "stranger",
+    "pos": ["noun"],
+    "ipa": "/sˈtreɪndʒər/",
+    "translationRu": "незнакомец, чужой",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 297
+  },
+  {
+    "lemma": "servant",
+    "pos": ["noun"],
+    "ipa": "/ˈsɜːrvənt/",
+    "translationRu": "слуга",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 298
+  },
+  {
+    "lemma": "bride",
+    "pos": ["noun"],
+    "ipa": "/braɪd/",
+    "translationRu": "невеста",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 299
+  },
+  {
+    "lemma": "sailor",
+    "pos": ["noun"],
+    "ipa": "/ˈseɪlər/",
+    "translationRu": "моряк",
+    "topic": "👥 Люди и отношения",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 300
+  },
+  {
+    "lemma": "announce",
+    "pos": ["verb"],
+    "ipa": "/əˈnaʊns/",
+    "translationRu": "объявлять",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 301
+  },
+  {
+    "lemma": "claim",
+    "pos": ["noun", "verb"],
+    "ipa": "/kleɪm/",
+    "translationRu": "утверждать, претензия",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 302
+  },
+  {
+    "lemma": "wonder",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈwʌndər/",
+    "translationRu": "удивляться, чудо",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 303
+  },
+  {
+    "lemma": "doubt",
+    "pos": ["noun", "verb"],
+    "ipa": "/daʊt/",
+    "translationRu": "сомнение, сомневаться",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 304
+  },
+  {
+    "lemma": "reference",
+    "pos": ["noun"],
+    "ipa": "/ˈrefərəns/",
+    "translationRu": "ссылка, справка",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 305
+  },
+  {
+    "lemma": "intelligence",
+    "pos": ["noun"],
+    "ipa": "/ˌɪnˈtelədʒəns/",
+    "translationRu": "интеллект, разведка",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 306
+  },
+  {
+    "lemma": "intend",
+    "pos": ["verb"],
+    "ipa": "/ˌɪnˈtend/",
+    "translationRu": "намереваться",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 307
+  },
+  {
+    "lemma": "communication",
+    "pos": ["noun"],
+    "ipa": "/kəmˌjuːnəˈkeɪʃən/",
+    "translationRu": "общение, связь",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 308
+  },
+  {
+    "lemma": "confirm",
+    "pos": ["verb"],
+    "ipa": "/kənˈfɜːrm/",
+    "translationRu": "подтверждать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 309
+  },
+  {
+    "lemma": "determine",
+    "pos": ["verb"],
+    "ipa": "/dəˈtɜːrmən/",
+    "translationRu": "определять",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 310
+  },
+  {
+    "lemma": "warning",
+    "pos": ["noun"],
+    "ipa": "/ˈwɔːrnɪŋ/",
+    "translationRu": "предупреждение",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 311
+  },
+  {
+    "lemma": "admit",
+    "pos": ["verb"],
+    "ipa": "/ədˈmɪt/",
+    "translationRu": "признавать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 312
+  },
+  {
+    "lemma": "definition",
+    "pos": ["noun"],
+    "ipa": "/ˌdefəˈnɪʃən/",
+    "translationRu": "определение",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 313
+  },
+  {
+    "lemma": "define",
+    "pos": ["verb"],
+    "ipa": "/dɪˈfaɪn/",
+    "translationRu": "определять",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 314
+  },
+  {
+    "lemma": "comparison",
+    "pos": ["noun"],
+    "ipa": "/kəmˈperəsən/",
+    "translationRu": "сравнение",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 315
+  },
+  {
+    "lemma": "quote",
+    "pos": ["noun", "verb"],
+    "ipa": "/kwoʊt/",
+    "translationRu": "цитата, цитировать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 316
+  },
+  {
+    "lemma": "ignore",
+    "pos": ["verb"],
+    "ipa": "/ˌɪɡˈnɔːr/",
+    "translationRu": "игнорировать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 317
+  },
+  {
+    "lemma": "confuse",
+    "pos": ["verb"],
+    "ipa": "/kənfˈjuːz/",
+    "translationRu": "путать, смущать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 318
+  },
+  {
+    "lemma": "belief",
+    "pos": ["noun"],
+    "ipa": "/bɪˈliːf/",
+    "translationRu": "вера, убеждение",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 319
+  },
+  {
+    "lemma": "encourage",
+    "pos": ["verb"],
+    "ipa": "/enˈkɜːrɪdʒ/",
+    "translationRu": "поощрять, ободрять",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 320
+  },
+  {
+    "lemma": "conclusion",
+    "pos": ["noun"],
+    "ipa": "/kənˈkluːʒən/",
+    "translationRu": "вывод, заключение",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 321
+  },
+  {
+    "lemma": "convince",
+    "pos": ["verb"],
+    "ipa": "/kənˈvɪns/",
+    "translationRu": "убеждать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 322
+  },
+  {
+    "lemma": "reflect",
+    "pos": ["verb"],
+    "ipa": "/rɪˈflekt/",
+    "translationRu": "отражать, размышлять",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 323
+  },
+  {
+    "lemma": "translation",
+    "pos": ["noun"],
+    "ipa": "/trænzˈleɪʃən/",
+    "translationRu": "перевод",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 324
+  },
+  {
+    "lemma": "reject",
+    "pos": ["verb"],
+    "ipa": "/rɪˈdʒekt/",
+    "translationRu": "отвергать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 325
+  },
+  {
+    "lemma": "remind",
+    "pos": ["verb"],
+    "ipa": "/riˈmaɪnd/",
+    "translationRu": "напоминать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 326
+  },
+  {
+    "lemma": "summary",
+    "pos": ["noun"],
+    "ipa": "/ˈsʌməri/",
+    "translationRu": "резюме, краткое изложение",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 327
+  },
+  {
+    "lemma": "conclude",
+    "pos": ["verb"],
+    "ipa": "/kənˈkluːd/",
+    "translationRu": "заключать, делать вывод",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 328
+  },
+  {
+    "lemma": "impression",
+    "pos": ["noun"],
+    "ipa": "/ˌɪmˈpreʃən/",
+    "translationRu": "впечатление",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 329
+  },
+  {
+    "lemma": "indicate",
+    "pos": ["verb"],
+    "ipa": "/ˈɪndəˌkeɪt/",
+    "translationRu": "указывать, показывать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 330
+  },
+  {
+    "lemma": "intention",
+    "pos": ["noun"],
+    "ipa": "/ˌɪnˈtentʃən/",
+    "translationRu": "намерение",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 331
+  },
+  {
+    "lemma": "pretend",
+    "pos": ["verb"],
+    "ipa": "/priˈtend/",
+    "translationRu": "притворяться",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 332
+  },
+  {
+    "lemma": "complaint",
+    "pos": ["noun"],
+    "ipa": "/kəmˈpleɪnt/",
+    "translationRu": "жалоба",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 333
+  },
+  {
+    "lemma": "announcement",
+    "pos": ["noun"],
+    "ipa": "/əˈnaʊnsmənt/",
+    "translationRu": "объявление",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 334
+  },
+  {
+    "lemma": "investigate",
+    "pos": ["verb"],
+    "ipa": "/ˌɪnˈvestəˌɡeɪt/",
+    "translationRu": "расследовать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 335
+  },
+  {
+    "lemma": "recommendation",
+    "pos": ["noun"],
+    "ipa": "/ˌrekəmənˈdeɪʃən/",
+    "translationRu": "рекомендация",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 336
+  },
+  {
+    "lemma": "advise",
+    "pos": ["verb"],
+    "ipa": "/ædˈvaɪz/",
+    "translationRu": "советовать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 337
+  },
+  {
+    "lemma": "clue",
+    "pos": ["noun"],
+    "ipa": "/kluː/",
+    "translationRu": "подсказка, улика",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 338
+  },
+  {
+    "lemma": "examine",
+    "pos": ["verb"],
+    "ipa": "/ɪɡˈzæmɪn/",
+    "translationRu": "исследовать, осматривать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 339
+  },
+  {
+    "lemma": "warn",
+    "pos": ["verb"],
+    "ipa": "/wɔːrn/",
+    "translationRu": "предупреждать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 340
+  },
+  {
+    "lemma": "apologize",
+    "pos": ["verb"],
+    "ipa": "/əˈpɑːləˌdʒaɪz/",
+    "translationRu": "извиняться",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 341
+  },
+  {
+    "lemma": "translate",
+    "pos": ["verb"],
+    "ipa": "/trænzˈleɪt/",
+    "translationRu": "переводить",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 342
+  },
+  {
+    "lemma": "concentrate",
+    "pos": ["verb"],
+    "ipa": "/ˈkɑːnsənˌtreɪt/",
+    "translationRu": "сосредоточиться; концентрат",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 343
+  },
+  {
+    "lemma": "prediction",
+    "pos": ["noun"],
+    "ipa": "/priˈdɪkʃən/",
+    "translationRu": "предсказание",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 344
+  },
+  {
+    "lemma": "persuade",
+    "pos": ["verb"],
+    "ipa": "/pərˈsweɪd/",
+    "translationRu": "убеждать",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 345
+  },
+  {
+    "lemma": "quotation",
+    "pos": ["noun"],
+    "ipa": "/kwoʊˈteɪʃən/",
+    "translationRu": "цитата, расценка",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 346
+  },
+  {
+    "lemma": "summarize",
+    "pos": ["verb"],
+    "ipa": "/ˈsʌmərˌaɪz/",
+    "translationRu": "резюмировать, подводить итог",
+    "topic": "💬 Мышление и общение",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 347
+  },
+  {
+    "lemma": "respect",
+    "pos": ["noun", "verb"],
+    "ipa": "/rɪˈspekt/",
+    "translationRu": "уважение, уважать",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 348
+  },
+  {
+    "lemma": "glad",
+    "pos": ["adjective"],
+    "ipa": "/ɡlæd/",
+    "translationRu": "рад",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 349
+  },
+  {
+    "lemma": "spirit",
+    "pos": ["noun"],
+    "ipa": "/ˈspɪrət/",
+    "translationRu": "дух",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 350
+  },
+  {
+    "lemma": "proud",
+    "pos": ["adjective"],
+    "ipa": "/praʊd/",
+    "translationRu": "гордый",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 351
+  },
+  {
+    "lemma": "appreciate",
+    "pos": ["verb"],
+    "ipa": "/əˈpriːʃiˌeɪt/",
+    "translationRu": "ценить",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 352
+  },
+  {
+    "lemma": "mad",
+    "pos": ["adjective"],
+    "ipa": "/mæd/",
+    "translationRu": "безумный, злой",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 353
+  },
+  {
+    "lemma": "honest",
+    "pos": ["adjective"],
+    "ipa": "/ˈɑːnəst/",
+    "translationRu": "честный",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 354
+  },
+  {
+    "lemma": "upset",
+    "pos": ["adjective", "verb"],
+    "ipa": "/əpˈset/",
+    "translationRu": "расстроенный",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 355
+  },
+  {
+    "lemma": "attitude",
+    "pos": ["noun"],
+    "ipa": "/ˈætəˌtuːd/",
+    "translationRu": "отношение",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 356
+  },
+  {
+    "lemma": "pleasure",
+    "pos": ["noun"],
+    "ipa": "/ˈpleʒər/",
+    "translationRu": "удовольствие",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 357
+  },
+  {
+    "lemma": "calm",
+    "pos": ["adjective", "noun", "verb"],
+    "ipa": "/kɑːm/",
+    "translationRu": "спокойный, успокаивать",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 358
+  },
+  {
+    "lemma": "suffer",
+    "pos": ["verb"],
+    "ipa": "/ˈsʌfər/",
+    "translationRu": "страдать",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 359
+  },
+  {
+    "lemma": "happiness",
+    "pos": ["noun"],
+    "ipa": "/ˈhæpinəs/",
+    "translationRu": "счастье",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 360
+  },
+  {
+    "lemma": "mood",
+    "pos": ["noun"],
+    "ipa": "/muːd/",
+    "translationRu": "настроение",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 361
+  },
+  {
+    "lemma": "passion",
+    "pos": ["noun"],
+    "ipa": "/ˈpæʃən/",
+    "translationRu": "страсть",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 362
+  },
+  {
+    "lemma": "confident",
+    "pos": ["adjective"],
+    "ipa": "/ˈkɑːnfədənt/",
+    "translationRu": "уверенный",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 363
+  },
+  {
+    "lemma": "horror",
+    "pos": ["noun"],
+    "ipa": "/ˈhɔːrər/",
+    "translationRu": "ужас",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 364
+  },
+  {
+    "lemma": "romantic",
+    "pos": ["adjective"],
+    "ipa": "/roʊˈmæntɪk/",
+    "translationRu": "романтичный",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 365
+  },
+  {
+    "lemma": "annoy",
+    "pos": ["verb"],
+    "ipa": "/əˈnɔɪ/",
+    "translationRu": "раздражать",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 366
+  },
+  {
+    "lemma": "bother",
+    "pos": ["verb"],
+    "ipa": "/ˈbɑːðər/",
+    "translationRu": "беспокоить, утруждать",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 367
+  },
+  {
+    "lemma": "emotion",
+    "pos": ["noun"],
+    "ipa": "/ɪˈmoʊʃən/",
+    "translationRu": "эмоция",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 368
+  },
+  {
+    "lemma": "grateful",
+    "pos": ["adjective"],
+    "ipa": "/ˈɡreɪtfəl/",
+    "translationRu": "благодарный",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 369
+  },
+  {
+    "lemma": "brave",
+    "pos": ["adjective"],
+    "ipa": "/breɪv/",
+    "translationRu": "храбрый",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 370
+  },
+  {
+    "lemma": "lonely",
+    "pos": ["adjective"],
+    "ipa": "/ˈloʊnli/",
+    "translationRu": "одинокий",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 371
+  },
+  {
+    "lemma": "generous",
+    "pos": ["adjective"],
+    "ipa": "/ˈdʒenərəs/",
+    "translationRu": "щедрый",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 372
+  },
+  {
+    "lemma": "excitement",
+    "pos": ["noun"],
+    "ipa": "/ɪkˈsaɪtmənt/",
+    "translationRu": "волнение",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 373
+  },
+  {
+    "lemma": "uncomfortable",
+    "pos": ["adjective"],
+    "ipa": "/ənˈkʌmfərtəbəl/",
+    "translationRu": "неудобный, неловкий",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 374
+  },
+  {
+    "lemma": "shy",
+    "pos": ["adjective"],
+    "ipa": "/ʃaɪ/",
+    "translationRu": "застенчивый",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 375
+  },
+  {
+    "lemma": "keen",
+    "pos": ["adjective"],
+    "ipa": "/kiːn/",
+    "translationRu": "увлечённый, острый",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 376
+  },
+  {
+    "lemma": "cruel",
+    "pos": ["adjective"],
+    "ipa": "/ˈkruːəl/",
+    "translationRu": "жестокий",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 377
+  },
+  {
+    "lemma": "admire",
+    "pos": ["verb"],
+    "ipa": "/ædˈmaɪr/",
+    "translationRu": "восхищаться",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 378
+  },
+  {
+    "lemma": "ambitious",
+    "pos": ["adjective"],
+    "ipa": "/æmˈbɪʃəs/",
+    "translationRu": "амбициозный",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 379
+  },
+  {
+    "lemma": "ambition",
+    "pos": ["noun"],
+    "ipa": "/æmˈbɪʃən/",
+    "translationRu": "амбиция, стремление",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 380
+  },
+  {
+    "lemma": "dislike",
+    "pos": ["noun", "verb"],
+    "ipa": "/dɪˈslaɪk/",
+    "translationRu": "не любить; неприязнь",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 381
+  },
+  {
+    "lemma": "frighten",
+    "pos": ["verb"],
+    "ipa": "/ˈfraɪtən/",
+    "translationRu": "пугать",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 382
+  },
+  {
+    "lemma": "cheerful",
+    "pos": ["adjective"],
+    "ipa": "/ˈtʃɪrfəl/",
+    "translationRu": "весёлый",
+    "topic": "💛 Эмоции и характер",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 383
+  },
+  {
+    "lemma": "production",
+    "pos": ["noun"],
+    "ipa": "/prəˈdʌkʃən/",
+    "translationRu": "производство",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 384
+  },
+  {
+    "lemma": "management",
+    "pos": ["noun"],
+    "ipa": "/ˈmænədʒmənt/",
+    "translationRu": "управление",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 385
+  },
+  {
+    "lemma": "staff",
+    "pos": ["noun"],
+    "ipa": "/stæf/",
+    "translationRu": "персонал",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 386
+  },
+  {
+    "lemma": "agent",
+    "pos": ["noun"],
+    "ipa": "/ˈeɪdʒənt/",
+    "translationRu": "агент",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 387
+  },
+  {
+    "lemma": "marketing",
+    "pos": ["noun"],
+    "ipa": "/ˈmɑːrkətɪŋ/",
+    "translationRu": "маркетинг",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 388
+  },
+  {
+    "lemma": "shift",
+    "pos": ["noun", "verb"],
+    "ipa": "/ʃɪft/",
+    "translationRu": "смена, сдвиг",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 389
+  },
+  {
+    "lemma": "employment",
+    "pos": ["noun"],
+    "ipa": "/emˈplɔɪmənt/",
+    "translationRu": "занятость, трудоустройство",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 390
+  },
+  {
+    "lemma": "promote",
+    "pos": ["verb"],
+    "ipa": "/prəˈmoʊt/",
+    "translationRu": "продвигать, повышать",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 391
+  },
+  {
+    "lemma": "appointment",
+    "pos": ["noun"],
+    "ipa": "/əˈpɔɪntmənt/",
+    "translationRu": "встреча, назначение",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 392
+  },
+  {
+    "lemma": "qualify",
+    "pos": ["verb"],
+    "ipa": "/ˈkwɑːləˌfaɪ/",
+    "translationRu": "квалифицироваться, соответствовать",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 393
+  },
+  {
+    "lemma": "retire",
+    "pos": ["verb"],
+    "ipa": "/rɪˈtaɪr/",
+    "translationRu": "уходить на пенсию",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 394
+  },
+  {
+    "lemma": "hire",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈhaɪər/",
+    "translationRu": "нанимать",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 395
+  },
+  {
+    "lemma": "presentation",
+    "pos": ["noun"],
+    "ipa": "/ˌprezənˈteɪʃən/",
+    "translationRu": "презентация",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 396
+  },
+  {
+    "lemma": "unemployment",
+    "pos": ["noun"],
+    "ipa": "/ˌʌnɪmˈplɔɪmənt/",
+    "translationRu": "безработица",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 397
+  },
+  {
+    "lemma": "assignment",
+    "pos": ["noun"],
+    "ipa": "/əˈsaɪnmənt/",
+    "translationRu": "задание, назначение",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 398
+  },
+  {
+    "lemma": "profession",
+    "pos": ["noun"],
+    "ipa": "/prəˈfeʃən/",
+    "translationRu": "профессия",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 399
+  },
+  {
+    "lemma": "competitor",
+    "pos": ["noun"],
+    "ipa": "/kəmˈpetətər/",
+    "translationRu": "конкурент",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 400
+  },
+  {
+    "lemma": "unemployed",
+    "pos": ["adjective"],
+    "ipa": "/ˌʌnemˈplɔɪd/",
+    "translationRu": "безработный",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 401
+  },
+  {
+    "lemma": "qualification",
+    "pos": ["noun"],
+    "ipa": "/ˌkwɑːləfəˈkeɪʃən/",
+    "translationRu": "квалификация",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 402
+  },
+  {
+    "lemma": "organizer",
+    "pos": ["noun"],
+    "ipa": "/ˈɔːrɡəˌnaɪzər/",
+    "translationRu": "организатор",
+    "topic": "💼 Работа и бизнес",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 403
+  },
+  {
+    "lemma": "northern",
+    "pos": ["adjective"],
+    "ipa": "/ˈnɔːrðərn/",
+    "translationRu": "северный",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 404
+  },
+  {
+    "lemma": "southern",
+    "pos": ["adjective"],
+    "ipa": "/ˈsʌðərn/",
+    "translationRu": "южный",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 405
+  },
+  {
+    "lemma": "surface",
+    "pos": ["noun"],
+    "ipa": "/ˈsɜːrfəs/",
+    "translationRu": "поверхность",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 406
+  },
+  {
+    "lemma": "eastern",
+    "pos": ["adjective"],
+    "ipa": "/ˈiːstərn/",
+    "translationRu": "восточный",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 407
+  },
+  {
+    "lemma": "path",
+    "pos": ["noun"],
+    "ipa": "/pæθ/",
+    "translationRu": "тропа, путь",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 408
+  },
+  {
+    "lemma": "environmental",
+    "pos": ["adjective"],
+    "ipa": "/ɪnˌvaɪrənˈmentəl/",
+    "translationRu": "экологический",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 409
+  },
+  {
+    "lemma": "flow",
+    "pos": ["noun", "verb"],
+    "ipa": "/floʊ/",
+    "translationRu": "течение, поток",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 410
+  },
+  {
+    "lemma": "wing",
+    "pos": ["noun"],
+    "ipa": "/wɪŋ/",
+    "translationRu": "крыло",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 411
+  },
+  {
+    "lemma": "branch",
+    "pos": ["noun"],
+    "ipa": "/bræntʃ/",
+    "translationRu": "ветка, филиал",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 412
+  },
+  {
+    "lemma": "coal",
+    "pos": ["noun"],
+    "ipa": "/koʊl/",
+    "translationRu": "уголь",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 413
+  },
+  {
+    "lemma": "hunt",
+    "pos": ["noun", "verb"],
+    "ipa": "/hʌnt/",
+    "translationRu": "охота, охотиться",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 414
+  },
+  {
+    "lemma": "atmosphere",
+    "pos": ["noun"],
+    "ipa": "/ˈætməsˌfɪr/",
+    "translationRu": "атмосфера",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 415
+  },
+  {
+    "lemma": "sand",
+    "pos": ["noun"],
+    "ipa": "/sænd/",
+    "translationRu": "песок",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 416
+  },
+  {
+    "lemma": "soil",
+    "pos": ["noun"],
+    "ipa": "/sɔɪl/",
+    "translationRu": "почва",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 417
+  },
+  {
+    "lemma": "shell",
+    "pos": ["noun"],
+    "ipa": "/ʃel/",
+    "translationRu": "раковина, скорлупа, оболочка",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 418
+  },
+  {
+    "lemma": "seed",
+    "pos": ["noun"],
+    "ipa": "/siːd/",
+    "translationRu": "семя",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 419
+  },
+  {
+    "lemma": "flood",
+    "pos": ["noun", "verb"],
+    "ipa": "/flʌd/",
+    "translationRu": "наводнение, затопить",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 420
+  },
+  {
+    "lemma": "tail",
+    "pos": ["noun"],
+    "ipa": "/teɪl/",
+    "translationRu": "хвост",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 421
+  },
+  {
+    "lemma": "freeze",
+    "pos": ["verb"],
+    "ipa": "/friːz/",
+    "translationRu": "замерзать, замораживать",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 422
+  },
+  {
+    "lemma": "outdoor",
+    "pos": ["adjective"],
+    "ipa": "/ˈaʊtˌdɔːr/",
+    "translationRu": "на открытом воздухе",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 423
+  },
+  {
+    "lemma": "leaf",
+    "pos": ["noun"],
+    "ipa": "/liːf/",
+    "translationRu": "лист",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 424
+  },
+  {
+    "lemma": "shine",
+    "pos": ["verb"],
+    "ipa": "/ʃaɪn/",
+    "translationRu": "светить, сиять",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 425
+  },
+  {
+    "lemma": "earthquake",
+    "pos": ["noun"],
+    "ipa": "/ˈɜːrθˌkweɪk/",
+    "translationRu": "землетрясение",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 426
+  },
+  {
+    "lemma": "mud",
+    "pos": ["noun"],
+    "ipa": "/mʌd/",
+    "translationRu": "грязь",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 427
+  },
+  {
+    "lemma": "hurricane",
+    "pos": ["noun"],
+    "ipa": "/ˈhɜːrəˌkeɪn/",
+    "translationRu": "ураган",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 428
+  },
+  {
+    "lemma": "bee",
+    "pos": ["noun"],
+    "ipa": "/biː/",
+    "translationRu": "пчела",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 429
+  },
+  {
+    "lemma": "fur",
+    "pos": ["noun"],
+    "ipa": "/fɜːr/",
+    "translationRu": "мех",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 430
+  },
+  {
+    "lemma": "countryside",
+    "pos": ["noun"],
+    "ipa": "/ˈkʌntriˌsaɪd/",
+    "translationRu": "сельская местность",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 431
+  },
+  {
+    "lemma": "outdoors",
+    "pos": ["adverb"],
+    "ipa": "/ˈaʊtˈdɔːrz/",
+    "translationRu": "на открытом воздухе",
+    "topic": "🌿 Природа и погода",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 432
+  },
+  {
+    "lemma": "performance",
+    "pos": ["noun"],
+    "ipa": "/pərˈfɔːrməns/",
+    "translationRu": "выступление, производительность",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 433
+  },
+  {
+    "lemma": "press",
+    "pos": ["noun", "verb"],
+    "ipa": "/pres/",
+    "translationRu": "пресса, нажимать",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 434
+  },
+  {
+    "lemma": "release",
+    "pos": ["noun", "verb"],
+    "ipa": "/riˈliːs/",
+    "translationRu": "выпускать, релиз",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 435
+  },
+  {
+    "lemma": "album",
+    "pos": ["noun"],
+    "ipa": "/ˈælbəm/",
+    "translationRu": "альбом",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 436
+  },
+  {
+    "lemma": "episode",
+    "pos": ["noun"],
+    "ipa": "/ˈepəˌsoʊd/",
+    "translationRu": "эпизод, серия",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 437
+  },
+  {
+    "lemma": "collection",
+    "pos": ["noun"],
+    "ipa": "/kəˈlekʃən/",
+    "translationRu": "коллекция",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 438
+  },
+  {
+    "lemma": "channel",
+    "pos": ["noun"],
+    "ipa": "/ˈtʃænəl/",
+    "translationRu": "канал",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 439
+  },
+  {
+    "lemma": "journal",
+    "pos": ["noun"],
+    "ipa": "/ˈdʒɜːrnəl/",
+    "translationRu": "журнал, дневник",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 440
+  },
+  {
+    "lemma": "magic",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈmædʒɪk/",
+    "translationRu": "магия",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 441
+  },
+  {
+    "lemma": "studio",
+    "pos": ["noun"],
+    "ipa": "/ˈstuːdiˌoʊ/",
+    "translationRu": "студия",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 442
+  },
+  {
+    "lemma": "chapter",
+    "pos": ["noun"],
+    "ipa": "/ˈtʃæptər/",
+    "translationRu": "глава",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 443
+  },
+  {
+    "lemma": "editor",
+    "pos": ["noun"],
+    "ipa": "/ˈedətər/",
+    "translationRu": "редактор",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 444
+  },
+  {
+    "lemma": "literature",
+    "pos": ["noun"],
+    "ipa": "/ˈlɪtərətʃər/",
+    "translationRu": "литература",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 445
+  },
+  {
+    "lemma": "theme",
+    "pos": ["noun"],
+    "ipa": "/θiːm/",
+    "translationRu": "тема",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 446
+  },
+  {
+    "lemma": "entertainment",
+    "pos": ["noun"],
+    "ipa": "/ˌentərˈteɪnmənt/",
+    "translationRu": "развлечение",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 447
+  },
+  {
+    "lemma": "plot",
+    "pos": ["noun", "verb"],
+    "ipa": "/plɑːt/",
+    "translationRu": "сюжет, заговор, участок",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 448
+  },
+  {
+    "lemma": "photography",
+    "pos": ["noun"],
+    "ipa": "/fəˈtɑːɡrəfi/",
+    "translationRu": "фотография",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 449
+  },
+  {
+    "lemma": "producer",
+    "pos": ["noun"],
+    "ipa": "/prəˈduːsər/",
+    "translationRu": "продюсер, производитель",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 450
+  },
+  {
+    "lemma": "ghost",
+    "pos": ["noun"],
+    "ipa": "/ɡoʊst/",
+    "translationRu": "призрак",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 451
+  },
+  {
+    "lemma": "poetry",
+    "pos": ["noun"],
+    "ipa": "/ˈpoʊətri/",
+    "translationRu": "поэзия",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 452
+  },
+  {
+    "lemma": "narrative",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈnærətɪv/",
+    "translationRu": "повествование",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 453
+  },
+  {
+    "lemma": "exhibition",
+    "pos": ["noun"],
+    "ipa": "/ˌeksəˈbɪʃən/",
+    "translationRu": "выставка",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 454
+  },
+  {
+    "lemma": "script",
+    "pos": ["noun"],
+    "ipa": "/skrɪpt/",
+    "translationRu": "сценарий, скрипт",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 455
+  },
+  {
+    "lemma": "documentary",
+    "pos": ["noun"],
+    "ipa": "/ˌdɑːkjəˈmentəri/",
+    "translationRu": "документальный фильм",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 456
+  },
+  {
+    "lemma": "photographer",
+    "pos": ["noun"],
+    "ipa": "/fəˈtɑːɡrəfər/",
+    "translationRu": "фотограф",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 457
+  },
+  {
+    "lemma": "poem",
+    "pos": ["noun"],
+    "ipa": "/ˈpoʊəm/",
+    "translationRu": "стихотворение",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 458
+  },
+  {
+    "lemma": "portrait",
+    "pos": ["noun"],
+    "ipa": "/ˈpɔːrtrət/",
+    "translationRu": "портрет",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 459
+  },
+  {
+    "lemma": "viewer",
+    "pos": ["noun"],
+    "ipa": "/vˈjuːər/",
+    "translationRu": "зритель",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 460
+  },
+  {
+    "lemma": "poet",
+    "pos": ["noun"],
+    "ipa": "/ˈpoʊət/",
+    "translationRu": "поэт",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 461
+  },
+  {
+    "lemma": "drum",
+    "pos": ["noun"],
+    "ipa": "/drʌm/",
+    "translationRu": "барабан",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 462
+  },
+  {
+    "lemma": "entertain",
+    "pos": ["verb"],
+    "ipa": "/ˌentərˈteɪn/",
+    "translationRu": "развлекать",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 463
+  },
+  {
+    "lemma": "statue",
+    "pos": ["noun"],
+    "ipa": "/ˈstæˌtʃuː/",
+    "translationRu": "статуя",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 464
+  },
+  {
+    "lemma": "headline",
+    "pos": ["noun"],
+    "ipa": "/ˈhedˌlaɪn/",
+    "translationRu": "заголовок",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 465
+  },
+  {
+    "lemma": "sculpture",
+    "pos": ["noun"],
+    "ipa": "/ˈskʌlptʃər/",
+    "translationRu": "скульптура",
+    "topic": "🎬 Искусство и медиа",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 466
+  },
+  {
+    "lemma": "account",
+    "pos": ["noun", "verb"],
+    "ipa": "/əˈkaʊnt/",
+    "translationRu": "счёт, учётная запись",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 467
+  },
+  {
+    "lemma": "worth",
+    "pos": ["adjective", "noun"],
+    "ipa": "/wɜːrθ/",
+    "translationRu": "стоящий, ценность",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 468
+  },
+  {
+    "lemma": "value",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈvælju/",
+    "translationRu": "ценность, значение",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 469
+  },
+  {
+    "lemma": "tax",
+    "pos": ["noun", "verb"],
+    "ipa": "/tæks/",
+    "translationRu": "налог",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 470
+  },
+  {
+    "lemma": "trade",
+    "pos": ["noun", "verb"],
+    "ipa": "/treɪd/",
+    "translationRu": "торговля",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 471
+  },
+  {
+    "lemma": "property",
+    "pos": ["noun"],
+    "ipa": "/ˈprɑːpərti/",
+    "translationRu": "собственность",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 472
+  },
+  {
+    "lemma": "economic",
+    "pos": ["adjective"],
+    "ipa": "/ˌekəˈnɑːmɪk/",
+    "translationRu": "экономический",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 473
+  },
+  {
+    "lemma": "financial",
+    "pos": ["adjective"],
+    "ipa": "/fəˈnænʃəl/",
+    "translationRu": "финансовый",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 474
+  },
+  {
+    "lemma": "charge",
+    "pos": ["noun", "verb"],
+    "ipa": "/tʃɑːrdʒ/",
+    "translationRu": "плата, обвинять, заряжать",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 475
+  },
+  {
+    "lemma": "commercial",
+    "pos": ["adjective", "noun"],
+    "ipa": "/kəˈmɜːrʃəl/",
+    "translationRu": "коммерческий, реклама",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 476
+  },
+  {
+    "lemma": "economy",
+    "pos": ["noun"],
+    "ipa": "/ɪˈkɑːnəmi/",
+    "translationRu": "экономика",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 477
+  },
+  {
+    "lemma": "exchange",
+    "pos": ["noun", "verb"],
+    "ipa": "/ɪksˈtʃeɪndʒ/",
+    "translationRu": "обмен, обменивать",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 478
+  },
+  {
+    "lemma": "brand",
+    "pos": ["noun", "verb"],
+    "ipa": "/brænd/",
+    "translationRu": "бренд, марка",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 479
+  },
+  {
+    "lemma": "supply",
+    "pos": ["noun", "verb"],
+    "ipa": "/səˈplaɪ/",
+    "translationRu": "снабжение, поставлять",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 480
+  },
+  {
+    "lemma": "ad",
+    "pos": ["noun"],
+    "ipa": "/æd/",
+    "translationRu": "реклама",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 481
+  },
+  {
+    "lemma": "profit",
+    "pos": ["noun"],
+    "ipa": "/ˈprɑːfət/",
+    "translationRu": "прибыль",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 482
+  },
+  {
+    "lemma": "payment",
+    "pos": ["noun"],
+    "ipa": "/ˈpeɪmənt/",
+    "translationRu": "платёж",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 483
+  },
+  {
+    "lemma": "rent",
+    "pos": ["noun", "verb"],
+    "ipa": "/rent/",
+    "translationRu": "аренда, арендовать",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 484
+  },
+  {
+    "lemma": "afford",
+    "pos": ["verb"],
+    "ipa": "/əˈfɔːrd/",
+    "translationRu": "позволить себе",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 485
+  },
+  {
+    "lemma": "consumer",
+    "pos": ["noun"],
+    "ipa": "/kənˈsuːmər/",
+    "translationRu": "потребитель",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 486
+  },
+  {
+    "lemma": "client",
+    "pos": ["noun"],
+    "ipa": "/ˈklaɪənt/",
+    "translationRu": "клиент",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 487
+  },
+  {
+    "lemma": "valuable",
+    "pos": ["adjective"],
+    "ipa": "/ˈvæljəbəl/",
+    "translationRu": "ценный",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 488
+  },
+  {
+    "lemma": "package",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈpækədʒ/",
+    "translationRu": "пакет, посылка",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 489
+  },
+  {
+    "lemma": "poverty",
+    "pos": ["noun"],
+    "ipa": "/ˈpɑːvərti/",
+    "translationRu": "бедность",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 490
+  },
+  {
+    "lemma": "label",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈleɪbəl/",
+    "translationRu": "этикетка, ярлык",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 491
+  },
+  {
+    "lemma": "currency",
+    "pos": ["noun"],
+    "ipa": "/ˈkɜːrənsi/",
+    "translationRu": "валюта",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 492
+  },
+  {
+    "lemma": "discount",
+    "pos": ["noun", "verb"],
+    "ipa": "/dɪˈskaʊnt/",
+    "translationRu": "скидка",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 493
+  },
+  {
+    "lemma": "luxury",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈlʌɡʒəri/",
+    "translationRu": "роскошь",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 494
+  },
+  {
+    "lemma": "invest",
+    "pos": ["verb"],
+    "ipa": "/ˌɪnˈvest/",
+    "translationRu": "инвестировать",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 495
+  },
+  {
+    "lemma": "coin",
+    "pos": ["noun"],
+    "ipa": "/kɔɪn/",
+    "translationRu": "монета",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 496
+  },
+  {
+    "lemma": "export",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈekspɔrt/",
+    "translationRu": "экспорт, экспортировать",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 497
+  },
+  {
+    "lemma": "import",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˌɪmˈpɔːrt/",
+    "translationRu": "импорт, ввозить",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 498
+  },
+  {
+    "lemma": "donate",
+    "pos": ["verb"],
+    "ipa": "/ˈdoʊˌneɪt/",
+    "translationRu": "жертвовать",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 499
+  },
+  {
+    "lemma": "receipt",
+    "pos": ["noun"],
+    "ipa": "/rɪˈsiːt/",
+    "translationRu": "квитанция, чек",
+    "topic": "💰 Деньги и покупки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 500
+  },
+  {
+    "lemma": "sex",
+    "pos": ["noun"],
+    "ipa": "/seks/",
+    "translationRu": "секс, пол",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 501
+  },
+  {
+    "lemma": "treatment",
+    "pos": ["noun"],
+    "ipa": "/ˈtriːtmənt/",
+    "translationRu": "лечение",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 502
+  },
+  {
+    "lemma": "mental",
+    "pos": ["adjective"],
+    "ipa": "/ˈmentəl/",
+    "translationRu": "умственный, психический",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 503
+  },
+  {
+    "lemma": "sexual",
+    "pos": ["adjective"],
+    "ipa": "/ˈsekʃuəl/",
+    "translationRu": "сексуальный",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 504
+  },
+  {
+    "lemma": "strength",
+    "pos": ["noun"],
+    "ipa": "/streŋkθ/",
+    "translationRu": "сила",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 505
+  },
+  {
+    "lemma": "treat",
+    "pos": ["verb"],
+    "ipa": "/triːt/",
+    "translationRu": "лечить, обращаться",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 506
+  },
+  {
+    "lemma": "sight",
+    "pos": ["noun"],
+    "ipa": "/saɪt/",
+    "translationRu": "зрение, вид",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 507
+  },
+  {
+    "lemma": "breath",
+    "pos": ["noun"],
+    "ipa": "/breθ/",
+    "translationRu": "дыхание, вдох",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 508
+  },
+  {
+    "lemma": "chest",
+    "pos": ["noun"],
+    "ipa": "/tʃest/",
+    "translationRu": "грудь; сундук",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 509
+  },
+  {
+    "lemma": "injure",
+    "pos": ["verb"],
+    "ipa": "/ˈɪndʒər/",
+    "translationRu": "ранить, повредить",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 510
+  },
+  {
+    "lemma": "symptom",
+    "pos": ["noun"],
+    "ipa": "/ˈsɪmptəm/",
+    "translationRu": "симптом",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 511
+  },
+  {
+    "lemma": "muscle",
+    "pos": ["noun"],
+    "ipa": "/ˈmʌsəl/",
+    "translationRu": "мышца",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 512
+  },
+  {
+    "lemma": "tongue",
+    "pos": ["noun"],
+    "ipa": "/tʌŋ/",
+    "translationRu": "язык",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 513
+  },
+  {
+    "lemma": "lip",
+    "pos": ["noun"],
+    "ipa": "/lɪp/",
+    "translationRu": "губа",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 514
+  },
+  {
+    "lemma": "painful",
+    "pos": ["adjective"],
+    "ipa": "/ˈpeɪnfəl/",
+    "translationRu": "болезненный",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 515
+  },
+  {
+    "lemma": "bite",
+    "pos": ["noun", "verb"],
+    "ipa": "/baɪt/",
+    "translationRu": "кусать, укус",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 516
+  },
+  {
+    "lemma": "throat",
+    "pos": ["noun"],
+    "ipa": "/θroʊt/",
+    "translationRu": "горло",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 517
+  },
+  {
+    "lemma": "breathing",
+    "pos": ["noun"],
+    "ipa": "/ˈbriːðɪŋ/",
+    "translationRu": "дыхание",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 518
+  },
+  {
+    "lemma": "breathe",
+    "pos": ["verb"],
+    "ipa": "/briːð/",
+    "translationRu": "дышать",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 519
+  },
+  {
+    "lemma": "poison",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈpɔɪzən/",
+    "translationRu": "яд, отравлять",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 520
+  },
+  {
+    "lemma": "toe",
+    "pos": ["noun"],
+    "ipa": "/toʊ/",
+    "translationRu": "палец ноги",
+    "topic": "🩺 Тело и здоровье",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 521
+  },
+  {
+    "lemma": "development",
+    "pos": ["noun"],
+    "ipa": "/dɪˈveləpmənt/",
+    "translationRu": "развитие, разработка",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 522
+  },
+  {
+    "lemma": "version",
+    "pos": ["noun"],
+    "ipa": "/ˈvɜːrʒən/",
+    "translationRu": "версия",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 523
+  },
+  {
+    "lemma": "access",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈækˌses/",
+    "translationRu": "доступ",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 524
+  },
+  {
+    "lemma": "application",
+    "pos": ["noun"],
+    "ipa": "/ˌæpləˈkeɪʃən/",
+    "translationRu": "применение, заявка, приложение",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 525
+  },
+  {
+    "lemma": "click",
+    "pos": ["noun", "verb"],
+    "ipa": "/klɪk/",
+    "translationRu": "щёлкать, клик",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 526
+  },
+  {
+    "lemma": "engineering",
+    "pos": ["noun"],
+    "ipa": "/ˈendʒəˈnɪrɪŋ/",
+    "translationRu": "инженерия",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 527
+  },
+  {
+    "lemma": "function",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈfʌŋkʃən/",
+    "translationRu": "функция",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 528
+  },
+  {
+    "lemma": "software",
+    "pos": ["noun"],
+    "ipa": "/ˈsɔːfˌtwer/",
+    "translationRu": "программное обеспечение",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 529
+  },
+  {
+    "lemma": "connection",
+    "pos": ["noun"],
+    "ipa": "/kəˈnekʃən/",
+    "translationRu": "связь, соединение",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 530
+  },
+  {
+    "lemma": "net",
+    "pos": ["adjective", "noun"],
+    "ipa": "/net/",
+    "translationRu": "сеть",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 531
+  },
+  {
+    "lemma": "file",
+    "pos": ["noun", "verb"],
+    "ipa": "/faɪl/",
+    "translationRu": "файл, папка",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 532
+  },
+  {
+    "lemma": "technical",
+    "pos": ["adjective"],
+    "ipa": "/ˈteknɪkəl/",
+    "translationRu": "технический",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 533
+  },
+  {
+    "lemma": "fuel",
+    "pos": ["noun", "verb"],
+    "ipa": "/fˈjuːəl/",
+    "translationRu": "топливо",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 534
+  },
+  {
+    "lemma": "update",
+    "pos": ["noun", "verb"],
+    "ipa": "/əpˈdeɪt/",
+    "translationRu": "обновление, обновлять",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 535
+  },
+  {
+    "lemma": "signal",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈsɪɡnəl/",
+    "translationRu": "сигнал",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 536
+  },
+  {
+    "lemma": "switch",
+    "pos": ["noun", "verb"],
+    "ipa": "/swɪtʃ/",
+    "translationRu": "переключатель, переключать",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 537
+  },
+  {
+    "lemma": "battery",
+    "pos": ["noun"],
+    "ipa": "/ˈbætəri/",
+    "translationRu": "батарея, аккумулятор",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 538
+  },
+  {
+    "lemma": "tube",
+    "pos": ["noun"],
+    "ipa": "/tuːb/",
+    "translationRu": "труба, трубка, метро",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 539
+  },
+  {
+    "lemma": "robot",
+    "pos": ["noun"],
+    "ipa": "/ˈroʊˌbɑːt/",
+    "translationRu": "робот",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 540
+  },
+  {
+    "lemma": "keyboard",
+    "pos": ["noun"],
+    "ipa": "/ˈkiːˌbɔːrd/",
+    "translationRu": "клавиатура",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 541
+  },
+  {
+    "lemma": "scan",
+    "pos": ["verb"],
+    "ipa": "/skæn/",
+    "translationRu": "сканировать",
+    "topic": "💻 IT и техника",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 542
+  },
+  {
+    "lemma": "stuff",
+    "pos": ["noun", "verb"],
+    "ipa": "/stʌf/",
+    "translationRu": "вещи, штуки",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 543
+  },
+  {
+    "lemma": "stick",
+    "pos": ["noun", "verb"],
+    "ipa": "/stɪk/",
+    "translationRu": "палка; приклеивать",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 544
+  },
+  {
+    "lemma": "iron",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈaɪərn/",
+    "translationRu": "железо, утюг",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 545
+  },
+  {
+    "lemma": "chain",
+    "pos": ["noun", "verb"],
+    "ipa": "/tʃeɪn/",
+    "translationRu": "цепь, сеть",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 546
+  },
+  {
+    "lemma": "bell",
+    "pos": ["noun"],
+    "ipa": "/bel/",
+    "translationRu": "звонок, колокол",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 547
+  },
+  {
+    "lemma": "frame",
+    "pos": ["noun", "verb"],
+    "ipa": "/freɪm/",
+    "translationRu": "рамка, каркас",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 548
+  },
+  {
+    "lemma": "mess",
+    "pos": ["noun"],
+    "ipa": "/mes/",
+    "translationRu": "беспорядок",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 549
+  },
+  {
+    "lemma": "yard",
+    "pos": ["noun"],
+    "ipa": "/jɑːrd/",
+    "translationRu": "двор, ярд",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 550
+  },
+  {
+    "lemma": "tape",
+    "pos": ["noun"],
+    "ipa": "/teɪp/",
+    "translationRu": "лента, плёнка",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 551
+  },
+  {
+    "lemma": "dust",
+    "pos": ["noun"],
+    "ipa": "/dʌst/",
+    "translationRu": "пыль",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 552
+  },
+  {
+    "lemma": "pot",
+    "pos": ["noun"],
+    "ipa": "/pɑːt/",
+    "translationRu": "горшок, кастрюля",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 553
+  },
+  {
+    "lemma": "string",
+    "pos": ["noun"],
+    "ipa": "/strɪŋ/",
+    "translationRu": "верёвка, струна, строка",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 554
+  },
+  {
+    "lemma": "pan",
+    "pos": ["noun"],
+    "ipa": "/pæn/",
+    "translationRu": "сковорода",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 555
+  },
+  {
+    "lemma": "alarm",
+    "pos": ["noun", "verb"],
+    "ipa": "/əˈlɑːrm/",
+    "translationRu": "тревога, будильник",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 556
+  },
+  {
+    "lemma": "pin",
+    "pos": ["noun", "verb"],
+    "ipa": "/pɪn/",
+    "translationRu": "булавка, прикалывать",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 557
+  },
+  {
+    "lemma": "garage",
+    "pos": ["noun"],
+    "ipa": "/ɡərˈɑːʒ/",
+    "translationRu": "гараж",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 558
+  },
+  {
+    "lemma": "pipe",
+    "pos": ["noun"],
+    "ipa": "/paɪp/",
+    "translationRu": "труба, трубка",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 559
+  },
+  {
+    "lemma": "powder",
+    "pos": ["noun"],
+    "ipa": "/ˈpaʊdər/",
+    "translationRu": "порошок, пудра",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 560
+  },
+  {
+    "lemma": "dirt",
+    "pos": ["noun"],
+    "ipa": "/dɜːrt/",
+    "translationRu": "грязь",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 561
+  },
+  {
+    "lemma": "fence",
+    "pos": ["noun"],
+    "ipa": "/fens/",
+    "translationRu": "забор",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 562
+  },
+  {
+    "lemma": "nail",
+    "pos": ["noun"],
+    "ipa": "/neɪl/",
+    "translationRu": "гвоздь, ноготь",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 563
+  },
+  {
+    "lemma": "sink",
+    "pos": ["verb"],
+    "ipa": "/sɪŋk/",
+    "translationRu": "раковина, тонуть",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 564
+  },
+  {
+    "lemma": "ceiling",
+    "pos": ["noun"],
+    "ipa": "/ˈsiːlɪŋ/",
+    "translationRu": "потолок",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 565
+  },
+  {
+    "lemma": "heating",
+    "pos": ["noun"],
+    "ipa": "/ˈhiːtɪŋ/",
+    "translationRu": "отопление",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 566
+  },
+  {
+    "lemma": "bubble",
+    "pos": ["noun"],
+    "ipa": "/ˈbʌbəl/",
+    "translationRu": "пузырь",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 567
+  },
+  {
+    "lemma": "accommodation",
+    "pos": ["noun"],
+    "ipa": "/əˌkɑːməˈdeɪʃən/",
+    "translationRu": "жильё, размещение",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 568
+  },
+  {
+    "lemma": "rope",
+    "pos": ["noun"],
+    "ipa": "/roʊp/",
+    "translationRu": "верёвка, канат",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 569
+  },
+  {
+    "lemma": "container",
+    "pos": ["noun"],
+    "ipa": "/kənˈteɪnər/",
+    "translationRu": "контейнер, ёмкость",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 570
+  },
+  {
+    "lemma": "tin",
+    "pos": ["noun"],
+    "ipa": "/tɪn/",
+    "translationRu": "олово, жестяная банка",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 571
+  },
+  {
+    "lemma": "shelf",
+    "pos": ["noun"],
+    "ipa": "/ʃelf/",
+    "translationRu": "полка",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 572
+  },
+  {
+    "lemma": "cottage",
+    "pos": ["noun"],
+    "ipa": "/ˈkɑːtədʒ/",
+    "translationRu": "коттедж, домик",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 573
+  },
+  {
+    "lemma": "needle",
+    "pos": ["noun"],
+    "ipa": "/ˈniːdəl/",
+    "translationRu": "игла",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 574
+  },
+  {
+    "lemma": "decorate",
+    "pos": ["verb"],
+    "ipa": "/ˈdekərˌeɪt/",
+    "translationRu": "украшать",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 575
+  },
+  {
+    "lemma": "curtain",
+    "pos": ["noun"],
+    "ipa": "/ˈkɜːrtən/",
+    "translationRu": "занавеска, штора",
+    "topic": "🏠 Дом и быт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 576
+  },
+  {
+    "lemma": "kick",
+    "pos": ["noun", "verb"],
+    "ipa": "/kɪk/",
+    "translationRu": "пинать, удар",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 577
+  },
+  {
+    "lemma": "stadium",
+    "pos": ["noun"],
+    "ipa": "/ˈsteɪdiəm/",
+    "translationRu": "стадион",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 578
+  },
+  {
+    "lemma": "champion",
+    "pos": ["noun"],
+    "ipa": "/ˈtʃæmpiən/",
+    "translationRu": "чемпион",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 579
+  },
+  {
+    "lemma": "rugby",
+    "pos": ["noun"],
+    "ipa": "/ˈrʌɡbi/",
+    "translationRu": "регби",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 580
+  },
+  {
+    "lemma": "fitness",
+    "pos": ["noun"],
+    "ipa": "/ˈfɪtnəs/",
+    "translationRu": "фитнес, пригодность",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 581
+  },
+  {
+    "lemma": "celebration",
+    "pos": ["noun"],
+    "ipa": "/ˌseləˈbreɪʃən/",
+    "translationRu": "празднование",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 582
+  },
+  {
+    "lemma": "tent",
+    "pos": ["noun"],
+    "ipa": "/tent/",
+    "translationRu": "палатка",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 583
+  },
+  {
+    "lemma": "leisure",
+    "pos": ["noun"],
+    "ipa": "/ˈleʒər/",
+    "translationRu": "досуг",
+    "topic": "⚽ Спорт и отдых",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 584
+  },
+  {
+    "lemma": "location",
+    "pos": ["noun"],
+    "ipa": "/loʊˈkeɪʃən/",
+    "translationRu": "местоположение",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 585
+  },
+  {
+    "lemma": "port",
+    "pos": ["noun"],
+    "ipa": "/pɔːrt/",
+    "translationRu": "порт",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 586
+  },
+  {
+    "lemma": "entrance",
+    "pos": ["noun"],
+    "ipa": "/ˈentrəns/",
+    "translationRu": "вход",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 587
+  },
+  {
+    "lemma": "mall",
+    "pos": ["noun"],
+    "ipa": "/mɔːl/",
+    "translationRu": "торговый центр",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 588
+  },
+  {
+    "lemma": "destination",
+    "pos": ["noun"],
+    "ipa": "/ˌdestəˈneɪʃən/",
+    "translationRu": "пункт назначения",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 589
+  },
+  {
+    "lemma": "departure",
+    "pos": ["noun"],
+    "ipa": "/dɪˈpɑːrtʃər/",
+    "translationRu": "отправление",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 590
+  },
+  {
+    "lemma": "helicopter",
+    "pos": ["noun"],
+    "ipa": "/ˈhelɪˌkɑːptər/",
+    "translationRu": "вертолёт",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 591
+  },
+  {
+    "lemma": "attraction",
+    "pos": ["noun"],
+    "ipa": "/əˈtrækʃən/",
+    "translationRu": "притяжение, достопримечательность",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 592
+  },
+  {
+    "lemma": "reservation",
+    "pos": ["noun"],
+    "ipa": "/ˌrezərˈveɪʃən/",
+    "translationRu": "бронирование, оговорка",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 593
+  },
+  {
+    "lemma": "queue",
+    "pos": ["noun", "verb"],
+    "ipa": "/kjuː/",
+    "translationRu": "очередь",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 594
+  },
+  {
+    "lemma": "indoors",
+    "pos": ["adverb"],
+    "ipa": "/ˈɪnˌdɔːrz/",
+    "translationRu": "в помещении",
+    "topic": "🏙 Город и транспорт",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 595
+  },
+  {
+    "lemma": "force",
+    "pos": ["noun", "verb"],
+    "ipa": "/fɔːrs/",
+    "translationRu": "сила, принуждать",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 596
+  },
+  {
+    "lemma": "pressure",
+    "pos": ["noun"],
+    "ipa": "/ˈpreʃər/",
+    "translationRu": "давление",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 597
+  },
+  {
+    "lemma": "analysis",
+    "pos": ["noun"],
+    "ipa": "/əˈnæləsəs/",
+    "translationRu": "анализ",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 598
+  },
+  {
+    "lemma": "theory",
+    "pos": ["noun"],
+    "ipa": "/ˈθɪri/",
+    "translationRu": "теория",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 599
+  },
+  {
+    "lemma": "grade",
+    "pos": ["noun", "verb"],
+    "ipa": "/ɡreɪd/",
+    "translationRu": "оценка, класс",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 600
+  },
+  {
+    "lemma": "prove",
+    "pos": ["verb"],
+    "ipa": "/pruːv/",
+    "translationRu": "доказывать",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 601
+  },
+  {
+    "lemma": "nuclear",
+    "pos": ["adjective"],
+    "ipa": "/ˈnuːkliər/",
+    "translationRu": "ядерный",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 602
+  },
+  {
+    "lemma": "element",
+    "pos": ["noun"],
+    "ipa": "/ˈeləmənt/",
+    "translationRu": "элемент",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 603
+  },
+  {
+    "lemma": "historical",
+    "pos": ["adjective"],
+    "ipa": "/hɪˈstɔːrɪkəl/",
+    "translationRu": "исторический",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 604
+  },
+  {
+    "lemma": "scientific",
+    "pos": ["adjective"],
+    "ipa": "/ˌsaɪənˈtɪfɪk/",
+    "translationRu": "научный",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 605
+  },
+  {
+    "lemma": "educational",
+    "pos": ["adjective"],
+    "ipa": "/ˌedʒəˈkeɪʃənəl/",
+    "translationRu": "образовательный",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 606
+  },
+  {
+    "lemma": "statistic",
+    "pos": ["noun"],
+    "ipa": "/stəˈtɪstɪk/",
+    "translationRu": "статистика",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 607
+  },
+  {
+    "lemma": "academic",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˌækəˈdemɪk/",
+    "translationRu": "академический, учёный",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 608
+  },
+  {
+    "lemma": "chemical",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈkeməkəl/",
+    "translationRu": "химический, химикат",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 609
+  },
+  {
+    "lemma": "sample",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈsæmpəl/",
+    "translationRu": "образец, проба",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 610
+  },
+  {
+    "lemma": "campus",
+    "pos": ["noun"],
+    "ipa": "/ˈkæmpəs/",
+    "translationRu": "кампус",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 611
+  },
+  {
+    "lemma": "graduate",
+    "pos": ["noun", "verb"],
+    "ipa": "/ˈɡrædʒəwət/",
+    "translationRu": "выпускник, оканчивать",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 612
+  },
+  {
+    "lemma": "divide",
+    "pos": ["noun", "verb"],
+    "ipa": "/dɪˈvaɪd/",
+    "translationRu": "делить, разделять",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 613
+  },
+  {
+    "lemma": "liquid",
+    "pos": ["adjective", "noun"],
+    "ipa": "/ˈlɪkwəd/",
+    "translationRu": "жидкость, жидкий",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 614
+  },
+  {
+    "lemma": "laboratory",
+    "pos": ["noun"],
+    "ipa": "/ˈlæbrəˌtɔːri/",
+    "translationRu": "лаборатория",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 615
+  },
+  {
+    "lemma": "educate",
+    "pos": ["verb"],
+    "ipa": "/ˈedʒəˌkeɪt/",
+    "translationRu": "обучать",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 616
+  },
+  {
+    "lemma": "substance",
+    "pos": ["noun"],
+    "ipa": "/ˈsʌbstəns/",
+    "translationRu": "вещество, суть",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 617
+  },
+  {
+    "lemma": "revise",
+    "pos": ["verb"],
+    "ipa": "/rɪˈvaɪz/",
+    "translationRu": "пересматривать, повторять",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 618
+  },
+  {
+    "lemma": "diagram",
+    "pos": ["noun"],
+    "ipa": "/ˈdaɪəˌɡræm/",
+    "translationRu": "диаграмма, схема",
+    "topic": "🔬 Наука и учёба",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 619
+  },
+  {
+    "lemma": "mix",
+    "pos": ["noun", "verb"],
+    "ipa": "/mɪks/",
+    "translationRu": "смешивать",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 620
+  },
+  {
+    "lemma": "alcohol",
+    "pos": ["noun"],
+    "ipa": "/ˈælkəˌhɑːl/",
+    "translationRu": "алкоголь",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 621
+  },
+  {
+    "lemma": "drunk",
+    "pos": ["adjective"],
+    "ipa": "/drʌŋk/",
+    "translationRu": "пьяный",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 622
+  },
+  {
+    "lemma": "grain",
+    "pos": ["noun"],
+    "ipa": "/ɡreɪn/",
+    "translationRu": "зерно",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 623
+  },
+  {
+    "lemma": "mixture",
+    "pos": ["noun"],
+    "ipa": "/ˈmɪkstʃər/",
+    "translationRu": "смесь",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 624
+  },
+  {
+    "lemma": "ingredient",
+    "pos": ["noun"],
+    "ipa": "/ˌɪnˈɡriːdiənt/",
+    "translationRu": "ингредиент, составляющая",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 625
+  },
+  {
+    "lemma": "fry",
+    "pos": ["verb"],
+    "ipa": "/fraɪ/",
+    "translationRu": "жарить",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 626
+  },
+  {
+    "lemma": "flour",
+    "pos": ["noun"],
+    "ipa": "/ˈflaʊər/",
+    "translationRu": "мука",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 627
+  },
+  {
+    "lemma": "slice",
+    "pos": ["noun", "verb"],
+    "ipa": "/slaɪs/",
+    "translationRu": "ломтик, кусок",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 628
+  },
+  {
+    "lemma": "bake",
+    "pos": ["verb"],
+    "ipa": "/beɪk/",
+    "translationRu": "печь, выпекать",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 629
+  },
+  {
+    "lemma": "alcoholic",
+    "pos": ["adjective"],
+    "ipa": "/ˌælkəˈhɑːlɪk/",
+    "translationRu": "алкогольный; алкоголик",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 630
+  },
+  {
+    "lemma": "spicy",
+    "pos": ["adjective"],
+    "ipa": "/ˈspaɪsi/",
+    "translationRu": "острый",
+    "topic": "🍎 Еда и напитки",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 631
+  },
+  {
+    "lemma": "cap",
+    "pos": ["noun"],
+    "ipa": "/kæp/",
+    "translationRu": "кепка, колпачок, предел",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 632
+  },
+  {
+    "lemma": "diamond",
+    "pos": ["noun"],
+    "ipa": "/ˈdaɪmənd/",
+    "translationRu": "бриллиант, алмаз",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 633
+  },
+  {
+    "lemma": "cotton",
+    "pos": ["noun"],
+    "ipa": "/ˈkɑːtən/",
+    "translationRu": "хлопок",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 634
+  },
+  {
+    "lemma": "leather",
+    "pos": ["noun"],
+    "ipa": "/ˈleðər/",
+    "translationRu": "кожа (материал)",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 635
+  },
+  {
+    "lemma": "costume",
+    "pos": ["noun"],
+    "ipa": "/kɑˈstuːm/",
+    "translationRu": "костюм",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 636
+  },
+  {
+    "lemma": "glove",
+    "pos": ["noun"],
+    "ipa": "/ɡlʌv/",
+    "translationRu": "перчатка",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 637
+  },
+  {
+    "lemma": "cloth",
+    "pos": ["noun"],
+    "ipa": "/klɔːθ/",
+    "translationRu": "ткань, тряпка",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 638
+  },
+  {
+    "lemma": "underwear",
+    "pos": ["noun"],
+    "ipa": "/ˈʌndərˌwer/",
+    "translationRu": "нижнее бельё",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 639
+  },
+  {
+    "lemma": "wool",
+    "pos": ["noun"],
+    "ipa": "/wʊl/",
+    "translationRu": "шерсть",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 640
+  },
+  {
+    "lemma": "fashionable",
+    "pos": ["adjective"],
+    "ipa": "/ˈfæʃənəbəl/",
+    "translationRu": "модный",
+    "topic": "👕 Одежда и внешность",
+    "cefrLevel": "B1",
+    "stage": 1,
+    "index": 641
+  }
+]

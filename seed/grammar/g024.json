@@ -1,0 +1,276 @@
+{
+  "id": "g024",
+  "position": 24,
+  "cefrLevel": "B1",
+  "title": "Относительные придаточные: who / which / that / where / whose",
+  "plannedFrom": "2026-12-03",
+  "plannedTo": "2026-12-05",
+  "sections": {
+    "why": [
+      "Относительные придаточные отвечают на вопрос «какой?» и позволяют соединить два предложения в одно: «Человек, который позвонил, мой коллега». В русском «который» меняется по родам и падежам, а в английском выбор слова зависит от того, о ком или о чём мы говорим."
+    ],
+    "formation": [
+      "• who — для людей: The man who called me is my boss.",
+      "• which — для предметов и животных: The laptop which I bought is fast.",
+      "• that — и для людей, и для предметов (разговорный вариант вместо who / which): The app that I use is free.",
+      "• where — для мест: This is the café where we met.",
+      "• whose — «чей / чья / чьё» (принадлежность): I know a girl whose father is a pilot.",
+      "• Порядок: существительное + who / which / that + (подлежащее) + глагол."
+    ],
+    "usage": [
+      "1. who / that — человек выполняет действие (подлежащее придаточного).",
+      "The woman who works here is very helpful. (Женщина, которая здесь работает, очень помогает.)",
+      "2. which / that — вещь или идея.",
+      "This is the book which changed my life. (Это книга, которая изменила мою жизнь.)",
+      "3. where — место.",
+      "Show me the office where you work. (Покажи офис, где ты работаешь.)",
+      "4. whose — принадлежность.",
+      "He is a developer whose app has a million users. (Он разработчик, чьё приложение имеет миллион пользователей.)",
+      "5. Если слово относится к объекту придаточного, его можно опустить.",
+      "The movie (that) we watched was boring. (Фильм, который мы смотрели, был скучным.) Но если слово относится к подлежащему, опускать нельзя: The man who lives next door is a teacher."
+    ],
+    "signalWords": [
+      "вопрос к существительному: кто? (who), что? (which / that), где? (where), чей? (whose). После all, everything, something, nothing обычно ставим that: Everything that he said was true."
+    ],
+    "mistakes": [
+      "✗ The man which lives here is nice. → ✓ The man who lives here is nice. (для людей — who)",
+      "✗ The book what I read was good. → ✓ The book that I read was good. (what в роли «который» не используем)",
+      "✗ The man who he called is my friend. → ✓ The man who called him is my friend. / The man (who) he called is my friend. (нельзя повторять he после who как подлежащее)",
+      "✗ This is the house where I was born in it. → ✓ This is the house where I was born. (лишнее местоимение не добавляем)",
+      "✗ A girl who her father is a pilot → ✓ A girl whose father is a pilot. (принадлежность — whose)"
+    ],
+    "remember": ["Who — люди, which — вещи, that — и те, и другие, where — места, whose — чьё."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте who, which, where или whose",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The woman ___ lives next door is a doctor.",
+          "answer": "who"
+        },
+        {
+          "number": 2,
+          "prompt": "This is the restaurant ___ we had dinner last week.",
+          "answer": "where"
+        },
+        {
+          "number": 3,
+          "prompt": "I have a laptop ___ is very fast.",
+          "answer": "which"
+        },
+        {
+          "number": 4,
+          "prompt": "He is a friend ___ brother works at Google.",
+          "answer": "whose"
+        },
+        {
+          "number": 5,
+          "prompt": "The people ___ work in my office are friendly.",
+          "answer": "who"
+        },
+        {
+          "number": 6,
+          "prompt": "Do you remember the hotel ___ we stayed in Rome?",
+          "answer": "where"
+        },
+        {
+          "number": 7,
+          "prompt": "The book ___ I am reading now is interesting.",
+          "answer": "which"
+        },
+        {
+          "number": 8,
+          "prompt": "She is a designer ___ projects always win awards.",
+          "answer": "whose"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The man (a) which (b) who called you is my boss.",
+          "answer": "(b) who"
+        },
+        {
+          "number": 2,
+          "prompt": "This is the app (a) who (b) that helps me to learn English.",
+          "answer": "(b) that"
+        },
+        {
+          "number": 3,
+          "prompt": "I know a girl (a) whose (b) who father works in London.",
+          "answer": "(a) whose"
+        },
+        {
+          "number": 4,
+          "prompt": "The city (a) where (b) which I was born is small.",
+          "answer": "(a) where"
+        },
+        {
+          "number": 5,
+          "prompt": "Everything (a) what (b) that he said was true.",
+          "answer": "(b) that"
+        },
+        {
+          "number": 6,
+          "prompt": "The phone (a) who (b) which is on the table is mine.",
+          "answer": "(b) which"
+        },
+        {
+          "number": 7,
+          "prompt": "The colleague (a) that (b) where I work with is very smart.",
+          "answer": "(a) that"
+        },
+        {
+          "number": 8,
+          "prompt": "Do you know the person (a) whose (b) who car is parked outside?",
+          "answer": "(a) whose"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Соедините два предложения в одно, используя who / which / where / whose",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have a friend. He lives in Canada. (who)",
+          "answer": "I have a friend who lives in Canada."
+        },
+        {
+          "number": 2,
+          "prompt": "This is the book. I bought it yesterday. (which)",
+          "answer": "This is the book which I bought yesterday. / This is the book I bought yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "That is the café. We often meet there. (where)",
+          "answer": "That is the café where we often meet."
+        },
+        {
+          "number": 4,
+          "prompt": "She is a developer. Her app is very popular. (whose)",
+          "answer": "She is a developer whose app is very popular."
+        },
+        {
+          "number": 5,
+          "prompt": "The man is my uncle. He is standing at the door. (who)",
+          "answer": "The man who is standing at the door is my uncle."
+        },
+        {
+          "number": 6,
+          "prompt": "The city is beautiful. I live there. (where)",
+          "answer": "The city where I live is beautiful."
+        },
+        {
+          "number": 7,
+          "prompt": "The car is expensive. It is parked outside. (which)",
+          "answer": "The car which is parked outside is expensive."
+        },
+        {
+          "number": 8,
+          "prompt": "I met a woman. Her daughter studies with my son. (whose)",
+          "answer": "I met a woman whose daughter studies with my son."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The man which lives next door is a teacher.",
+          "answer": "The man who lives next door is a teacher."
+        },
+        {
+          "number": 2,
+          "prompt": "The book what I read was great.",
+          "answer": "The book that I read was great. / The book which I read was great."
+        },
+        {
+          "number": 3,
+          "prompt": "She is a girl who her father is a pilot.",
+          "answer": "She is a girl whose father is a pilot."
+        },
+        {
+          "number": 4,
+          "prompt": "This is the house where I was born in.",
+          "answer": "This is the house where I was born. / This is the house which I was born in."
+        },
+        {
+          "number": 5,
+          "prompt": "The woman who she called me is my boss.",
+          "answer": "The woman who called me is my boss."
+        },
+        {
+          "number": 6,
+          "prompt": "Everything which he said was true.",
+          "answer": "Everything that he said was true."
+        },
+        {
+          "number": 7,
+          "prompt": "The film that I watched it was boring.",
+          "answer": "The film that I watched was boring."
+        },
+        {
+          "number": 8,
+          "prompt": "I know a man who his dog can talk.",
+          "answer": "I know a man whose dog can talk."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Человек, который позвонил вчера, мой новый коллега.",
+          "answer": "The man who called yesterday is my new colleague. / The man that called yesterday is my new colleague."
+        },
+        {
+          "number": 2,
+          "prompt": "Это приложение, которое помогает мне учить слова.",
+          "answer": "This is the app which helps me learn words. / This is the app that helps me learn words. / This is the app that helps me to learn words."
+        },
+        {
+          "number": 3,
+          "prompt": "Вот кафе, где мы познакомились.",
+          "answer": "Here is the café where we met. / This is the café where we met."
+        },
+        {
+          "number": 4,
+          "prompt": "Я знаю разработчика, чей сайт посещают миллионы людей.",
+          "answer": "I know a developer whose website is visited by millions of people. / I know a developer whose site millions of people visit."
+        },
+        {
+          "number": 5,
+          "prompt": "Фильм, который мы смотрели вчера, был очень интересным.",
+          "answer": "The movie we watched yesterday was very interesting. / The film that we watched yesterday was very interesting. / The movie that we watched yesterday was very interesting."
+        },
+        {
+          "number": 6,
+          "prompt": "Отель, где мы остановились, был недорогим.",
+          "answer": "The hotel where we stayed was cheap. / The hotel where we stayed wasn't expensive."
+        },
+        {
+          "number": 7,
+          "prompt": "У меня есть подруга, которая работает в Берлине.",
+          "answer": "I have a friend who works in Berlin. / I have a friend that works in Berlin."
+        },
+        {
+          "number": 8,
+          "prompt": "Всё, что она сказала, было правдой.",
+          "answer": "Everything that she said was true. / Everything she said was true."
+        }
+      ]
+    }
+  ]
+}

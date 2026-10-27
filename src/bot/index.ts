@@ -22,6 +22,7 @@ import {
 } from "../routine";
 import { demoSession } from "../sessions/demo";
 import { offerToCancel, sessionMiddleware } from "../sessions/handlers";
+import type { SessionLocks } from "../sessions/locks";
 import { SessionManager, type SessionTimeouts } from "../sessions/session-manager";
 import { SettingsController } from "../settings/controller";
 import { settingsHandlers, settingsInputMiddleware } from "../settings/handlers";
@@ -64,6 +65,8 @@ export interface BotDeps {
   pinSettleMs?: number;
   /** The daily routine's jobs and state (BullMQ and Redis in production; in memory otherwise). */
   routine?: { jobs: RoutineJobs; store: RoutineStore };
+  /** The in-flight answer locks (Redis in production; in memory otherwise). */
+  locks?: SessionLocks;
 }
 
 /**
@@ -88,6 +91,7 @@ export function createBot(deps: BotDeps) {
     timeouts: deps.timeouts,
     log,
     i18n,
+    locks: deps.locks,
   });
 
   const skippedKinds = new Set(deps.withoutSessionKinds);

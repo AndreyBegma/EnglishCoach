@@ -1,0 +1,961 @@
+[
+  {
+    "number": 1,
+    "phrase": "back up",
+    "translationRu": "делать резервную копию; поддержать",
+    "example": "Back up the database before you run the migration.",
+    "planDay": 1
+  },
+  {
+    "number": 2,
+    "phrase": "break down",
+    "translationRu": "сломаться; разбить на части; расплакаться",
+    "example": "The build broke down after the last commit.",
+    "planDay": 1
+  },
+  {
+    "number": 3,
+    "phrase": "break up",
+    "translationRu": "расстаться; распадаться",
+    "example": "They broke up after five years together.",
+    "planDay": 1
+  },
+  {
+    "number": 4,
+    "phrase": "bring up",
+    "translationRu": "поднять тему; воспитывать",
+    "example": "She brought up the deadline at the meeting.",
+    "planDay": 2
+  },
+  {
+    "number": 5,
+    "phrase": "call off",
+    "translationRu": "отменить",
+    "example": "The demo was called off because the server was down.",
+    "planDay": 2
+  },
+  {
+    "number": 6,
+    "phrase": "calm down",
+    "translationRu": "успокоиться",
+    "example": "Calm down, it's just a warning, not an error.",
+    "planDay": 2
+  },
+  {
+    "number": 7,
+    "phrase": "carry on",
+    "translationRu": "продолжать",
+    "example": "Carry on with the task, I'll join in a minute.",
+    "planDay": 3
+  },
+  {
+    "number": 8,
+    "phrase": "carry out",
+    "translationRu": "выполнять, осуществлять",
+    "example": "We carried out the tests on three browsers.",
+    "planDay": 3
+  },
+  {
+    "number": 9,
+    "phrase": "catch up (with)",
+    "translationRu": "догнать; наверстать",
+    "example": "I need to catch up with the backlog after my holiday.",
+    "planDay": 3
+  },
+  {
+    "number": 10,
+    "phrase": "check in",
+    "translationRu": "регистрироваться; отмечаться",
+    "example": "Let's check in on the project every Monday.",
+    "planDay": 4
+  },
+  {
+    "number": 11,
+    "phrase": "check out",
+    "translationRu": "проверить, взглянуть; выписаться",
+    "example": "Check out this new library, it's really fast.",
+    "planDay": 4
+  },
+  {
+    "number": 12,
+    "phrase": "cheer up",
+    "translationRu": "приободриться, развеселить",
+    "example": "Cheer up — the bug is fixed.",
+    "planDay": 4
+  },
+  {
+    "number": 13,
+    "phrase": "come across",
+    "translationRu": "случайно наткнуться; производить впечатление",
+    "example": "I came across a useful article about caching.",
+    "planDay": 5
+  },
+  {
+    "number": 14,
+    "phrase": "come up",
+    "translationRu": "возникать (о проблеме, теме)",
+    "example": "Something came up, so I'll be late.",
+    "planDay": 5
+  },
+  {
+    "number": 15,
+    "phrase": "come up with",
+    "translationRu": "придумать, предложить",
+    "example": "He came up with a simpler solution.",
+    "planDay": 5
+  },
+  {
+    "number": 16,
+    "phrase": "count on",
+    "translationRu": "рассчитывать на",
+    "example": "You can count on me to finish it today.",
+    "planDay": 6
+  },
+  {
+    "number": 17,
+    "phrase": "cut down on",
+    "translationRu": "сократить (потребление)",
+    "example": "I'm trying to cut down on coffee.",
+    "planDay": 6
+  },
+  {
+    "number": 18,
+    "phrase": "cut off",
+    "translationRu": "отрезать; отключить, прервать",
+    "example": "We got cut off in the middle of the call.",
+    "planDay": 6
+  },
+  {
+    "number": 19,
+    "phrase": "deal with",
+    "translationRu": "иметь дело с, разбираться",
+    "example": "Let me deal with this ticket first.",
+    "planDay": 7
+  },
+  {
+    "number": 20,
+    "phrase": "drop off",
+    "translationRu": "подвезти, забросить; уснуть",
+    "example": "Can you drop me off at the station?",
+    "planDay": 7
+  },
+  {
+    "number": 21,
+    "phrase": "drop out",
+    "translationRu": "бросить (учёбу, участие)",
+    "example": "He dropped out of the course after two weeks.",
+    "planDay": 7
+  },
+  {
+    "number": 22,
+    "phrase": "eat out",
+    "translationRu": "есть вне дома",
+    "example": "We eat out on Fridays.",
+    "planDay": 8
+  },
+  {
+    "number": 23,
+    "phrase": "end up",
+    "translationRu": "в итоге оказаться",
+    "example": "We ended up rewriting the whole module.",
+    "planDay": 8
+  },
+  {
+    "number": 24,
+    "phrase": "fall apart",
+    "translationRu": "разваливаться",
+    "example": "The plan fell apart when the client changed the scope.",
+    "planDay": 8
+  },
+  {
+    "number": 25,
+    "phrase": "fall behind",
+    "translationRu": "отставать",
+    "example": "I fell behind with my English homework.",
+    "planDay": 9
+  },
+  {
+    "number": 26,
+    "phrase": "fall through",
+    "translationRu": "сорваться (о плане)",
+    "example": "The deal fell through at the last minute.",
+    "planDay": 9
+  },
+  {
+    "number": 27,
+    "phrase": "figure out",
+    "translationRu": "разобраться, понять",
+    "example": "I can't figure out why this test fails.",
+    "planDay": 9
+  },
+  {
+    "number": 28,
+    "phrase": "fill in / fill out",
+    "translationRu": "заполнить (форму)",
+    "example": "Please fill in the form and send it back.",
+    "planDay": 10
+  },
+  {
+    "number": 29,
+    "phrase": "find out",
+    "translationRu": "узнать, выяснить",
+    "example": "I found out that the API has a rate limit.",
+    "planDay": 10
+  },
+  {
+    "number": 30,
+    "phrase": "get along (with)",
+    "translationRu": "ладить",
+    "example": "I get along well with my new team.",
+    "planDay": 10
+  },
+  {
+    "number": 31,
+    "phrase": "get away with",
+    "translationRu": "выйти сухим из воды",
+    "example": "You won't get away with skipping the tests.",
+    "planDay": 11
+  },
+  {
+    "number": 32,
+    "phrase": "get back to",
+    "translationRu": "вернуться к; перезвонить, ответить",
+    "example": "I'll get back to you by tomorrow.",
+    "planDay": 11
+  },
+  {
+    "number": 33,
+    "phrase": "get by",
+    "translationRu": "справляться, обходиться",
+    "example": "I can get by with my English, but I want more.",
+    "planDay": 11
+  },
+  {
+    "number": 34,
+    "phrase": "get in touch",
+    "translationRu": "связаться",
+    "example": "Get in touch if you have any questions.",
+    "planDay": 12
+  },
+  {
+    "number": 35,
+    "phrase": "get over",
+    "translationRu": "пережить, оправиться",
+    "example": "It took her a week to get over the flu.",
+    "planDay": 12
+  },
+  {
+    "number": 36,
+    "phrase": "get rid of",
+    "translationRu": "избавиться",
+    "example": "Let's get rid of the unused code.",
+    "planDay": 12
+  },
+  {
+    "number": 37,
+    "phrase": "get through",
+    "translationRu": "пройти через, справиться; дозвониться",
+    "example": "We got through the release without a single bug.",
+    "planDay": 13
+  },
+  {
+    "number": 38,
+    "phrase": "get up",
+    "translationRu": "вставать (с постели)",
+    "example": "I usually get up at seven.",
+    "planDay": 13
+  },
+  {
+    "number": 39,
+    "phrase": "give away",
+    "translationRu": "отдать даром; выдать (секрет)",
+    "example": "Don't give away the ending!",
+    "planDay": 13
+  },
+  {
+    "number": 40,
+    "phrase": "give back",
+    "translationRu": "вернуть",
+    "example": "Give me back my charger, please.",
+    "planDay": 14
+  },
+  {
+    "number": 41,
+    "phrase": "give in",
+    "translationRu": "уступить, сдаться",
+    "example": "In the end, the manager gave in.",
+    "planDay": 14
+  },
+  {
+    "number": 42,
+    "phrase": "give up",
+    "translationRu": "сдаться; бросить (привычку)",
+    "example": "Don't give up — you're almost there.",
+    "planDay": 14
+  },
+  {
+    "number": 43,
+    "phrase": "go ahead",
+    "translationRu": "начинать; продолжайте",
+    "example": "Go ahead, I'm listening.",
+    "planDay": 15
+  },
+  {
+    "number": 44,
+    "phrase": "go off",
+    "translationRu": "сработать (о будильнике); взорваться; испортиться",
+    "example": "My alarm didn't go off this morning.",
+    "planDay": 15
+  },
+  {
+    "number": 45,
+    "phrase": "go on",
+    "translationRu": "продолжать; происходить",
+    "example": "What's going on with the server?",
+    "planDay": 15
+  },
+  {
+    "number": 46,
+    "phrase": "go over",
+    "translationRu": "просмотреть, проверить",
+    "example": "Let's go over the requirements once more.",
+    "planDay": 16
+  },
+  {
+    "number": 47,
+    "phrase": "go through",
+    "translationRu": "пройти через; просмотреть",
+    "example": "She went through all the logs.",
+    "planDay": 16
+  },
+  {
+    "number": 48,
+    "phrase": "grow up",
+    "translationRu": "вырасти",
+    "example": "I grew up in a small town.",
+    "planDay": 16
+  },
+  {
+    "number": 49,
+    "phrase": "hand in",
+    "translationRu": "сдать (работу)",
+    "example": "Hand in the report by Friday.",
+    "planDay": 17
+  },
+  {
+    "number": 50,
+    "phrase": "hand out",
+    "translationRu": "раздавать",
+    "example": "They handed out badges at the entrance.",
+    "planDay": 17
+  },
+  {
+    "number": 51,
+    "phrase": "hang on / hold on",
+    "translationRu": "подожди",
+    "example": "Hang on, I'm checking the config.",
+    "planDay": 17
+  },
+  {
+    "number": 52,
+    "phrase": "hang out",
+    "translationRu": "тусоваться, проводить время",
+    "example": "We hung out at a café after work.",
+    "planDay": 18
+  },
+  {
+    "number": 53,
+    "phrase": "hold back",
+    "translationRu": "сдерживать; утаивать",
+    "example": "Don't hold back — tell me what you think.",
+    "planDay": 18
+  },
+  {
+    "number": 54,
+    "phrase": "hurry up",
+    "translationRu": "поторопиться",
+    "example": "Hurry up, the meeting starts in two minutes.",
+    "planDay": 18
+  },
+  {
+    "number": 55,
+    "phrase": "keep on",
+    "translationRu": "продолжать (делать)",
+    "example": "He kept on talking for an hour.",
+    "planDay": 19
+  },
+  {
+    "number": 56,
+    "phrase": "keep up with",
+    "translationRu": "не отставать, идти в ногу",
+    "example": "It's hard to keep up with new JS frameworks.",
+    "planDay": 19
+  },
+  {
+    "number": 57,
+    "phrase": "kick off",
+    "translationRu": "начать (проект, встречу)",
+    "example": "We'll kick off the project on Monday.",
+    "planDay": 19
+  },
+  {
+    "number": 58,
+    "phrase": "leave out",
+    "translationRu": "пропустить, не включить",
+    "example": "You left out an important step.",
+    "planDay": 20
+  },
+  {
+    "number": 59,
+    "phrase": "let down",
+    "translationRu": "подвести",
+    "example": "I won't let you down.",
+    "planDay": 20
+  },
+  {
+    "number": 60,
+    "phrase": "line up",
+    "translationRu": "выстроить; организовать",
+    "example": "We've lined up three interviews for next week.",
+    "planDay": 20
+  },
+  {
+    "number": 61,
+    "phrase": "log in / log out",
+    "translationRu": "войти / выйти (из системы)",
+    "example": "Log out and log in again to see the changes.",
+    "planDay": 21
+  },
+  {
+    "number": 62,
+    "phrase": "look after",
+    "translationRu": "присматривать, заботиться",
+    "example": "Who looks after the production server?",
+    "planDay": 21
+  },
+  {
+    "number": 63,
+    "phrase": "look for",
+    "translationRu": "искать",
+    "example": "I'm looking for a good UI library.",
+    "planDay": 21
+  },
+  {
+    "number": 64,
+    "phrase": "look forward to",
+    "translationRu": "с нетерпением ждать",
+    "example": "I'm looking forward to the weekend.",
+    "planDay": 22
+  },
+  {
+    "number": 65,
+    "phrase": "look into",
+    "translationRu": "изучить, разобраться",
+    "example": "I'll look into the problem this afternoon.",
+    "planDay": 22
+  },
+  {
+    "number": 66,
+    "phrase": "look out",
+    "translationRu": "осторожно!; быть начеку",
+    "example": "Look out — the floor is wet.",
+    "planDay": 22
+  },
+  {
+    "number": 67,
+    "phrase": "look up",
+    "translationRu": "посмотреть (в словаре, интернете)",
+    "example": "Look up the word if you don't know it.",
+    "planDay": 23
+  },
+  {
+    "number": 68,
+    "phrase": "look up to",
+    "translationRu": "уважать, равняться на",
+    "example": "I look up to my first team lead.",
+    "planDay": 23
+  },
+  {
+    "number": 69,
+    "phrase": "make up",
+    "translationRu": "выдумать; помириться; составлять",
+    "example": "He made up an excuse for being late.",
+    "planDay": 23
+  },
+  {
+    "number": 70,
+    "phrase": "make up for",
+    "translationRu": "компенсировать",
+    "example": "I'll work on Saturday to make up for lost time.",
+    "planDay": 24
+  },
+  {
+    "number": 71,
+    "phrase": "mess up",
+    "translationRu": "испортить, напортачить",
+    "example": "I messed up the merge, sorry.",
+    "planDay": 24
+  },
+  {
+    "number": 72,
+    "phrase": "move on",
+    "translationRu": "двигаться дальше",
+    "example": "Let's move on to the next item.",
+    "planDay": 24
+  },
+  {
+    "number": 73,
+    "phrase": "narrow down",
+    "translationRu": "сузить (выбор)",
+    "example": "We narrowed the options down to two.",
+    "planDay": 25
+  },
+  {
+    "number": 74,
+    "phrase": "opt out",
+    "translationRu": "отказаться от участия",
+    "example": "Users can opt out of email notifications.",
+    "planDay": 25
+  },
+  {
+    "number": 75,
+    "phrase": "pass away",
+    "translationRu": "скончаться",
+    "example": "His grandfather passed away last year.",
+    "planDay": 25
+  },
+  {
+    "number": 76,
+    "phrase": "pass out",
+    "translationRu": "потерять сознание; раздать",
+    "example": "She passed out from the heat.",
+    "planDay": 26
+  },
+  {
+    "number": 77,
+    "phrase": "pay back",
+    "translationRu": "вернуть долг",
+    "example": "I'll pay you back on Friday.",
+    "planDay": 26
+  },
+  {
+    "number": 78,
+    "phrase": "pay off",
+    "translationRu": "окупиться; выплатить",
+    "example": "All that practice finally paid off.",
+    "planDay": 26
+  },
+  {
+    "number": 79,
+    "phrase": "phase out",
+    "translationRu": "постепенно выводить из использования",
+    "example": "We're phasing out the old API.",
+    "planDay": 27
+  },
+  {
+    "number": 80,
+    "phrase": "pick up",
+    "translationRu": "забрать; подхватить; научиться",
+    "example": "I picked up some Polish while working in Warsaw.",
+    "planDay": 27
+  },
+  {
+    "number": 81,
+    "phrase": "plug in",
+    "translationRu": "подключить (к сети)",
+    "example": "Plug in the laptop, the battery is low.",
+    "planDay": 27
+  },
+  {
+    "number": 82,
+    "phrase": "point out",
+    "translationRu": "указать, отметить",
+    "example": "She pointed out a mistake in my code.",
+    "planDay": 28
+  },
+  {
+    "number": 83,
+    "phrase": "print out",
+    "translationRu": "распечатать",
+    "example": "Print out the ticket just in case.",
+    "planDay": 28
+  },
+  {
+    "number": 84,
+    "phrase": "pull over",
+    "translationRu": "остановиться у обочины",
+    "example": "The police asked him to pull over.",
+    "planDay": 28
+  },
+  {
+    "number": 85,
+    "phrase": "put away",
+    "translationRu": "убрать (на место)",
+    "example": "Put the dishes away, please.",
+    "planDay": 29
+  },
+  {
+    "number": 86,
+    "phrase": "put down",
+    "translationRu": "положить; записать; унизить",
+    "example": "Put your phone down and listen.",
+    "planDay": 29
+  },
+  {
+    "number": 87,
+    "phrase": "put off",
+    "translationRu": "откладывать",
+    "example": "Stop putting off the refactoring.",
+    "planDay": 29
+  },
+  {
+    "number": 88,
+    "phrase": "put on",
+    "translationRu": "надеть; включить; набрать (вес)",
+    "example": "Put on a jacket, it's cold.",
+    "planDay": 30
+  },
+  {
+    "number": 89,
+    "phrase": "put together",
+    "translationRu": "собрать, составить",
+    "example": "I put together a short presentation.",
+    "planDay": 30
+  },
+  {
+    "number": 90,
+    "phrase": "put up with",
+    "translationRu": "мириться, терпеть",
+    "example": "I can't put up with this noise anymore.",
+    "planDay": 30
+  },
+  {
+    "number": 91,
+    "phrase": "reach out",
+    "translationRu": "обратиться, связаться",
+    "example": "Feel free to reach out if you need help.",
+    "planDay": 31
+  },
+  {
+    "number": 92,
+    "phrase": "rely on",
+    "translationRu": "полагаться на",
+    "example": "We rely on automated tests.",
+    "planDay": 31
+  },
+  {
+    "number": 93,
+    "phrase": "roll back",
+    "translationRu": "откатить (изменения)",
+    "example": "We had to roll back the release.",
+    "planDay": 31
+  },
+  {
+    "number": 94,
+    "phrase": "roll out",
+    "translationRu": "выкатить, развернуть",
+    "example": "The feature was rolled out to 10% of users.",
+    "planDay": 32
+  },
+  {
+    "number": 95,
+    "phrase": "rule out",
+    "translationRu": "исключить (вариант)",
+    "example": "We can't rule out a memory leak.",
+    "planDay": 32
+  },
+  {
+    "number": 96,
+    "phrase": "run into",
+    "translationRu": "столкнуться; случайно встретить",
+    "example": "I ran into an old friend yesterday.",
+    "planDay": 32
+  },
+  {
+    "number": 97,
+    "phrase": "run out of",
+    "translationRu": "закончиться, исчерпать",
+    "example": "We've run out of time.",
+    "planDay": 33
+  },
+  {
+    "number": 98,
+    "phrase": "scale up / scale down",
+    "translationRu": "масштабировать вверх / вниз",
+    "example": "We scaled up the servers before Black Friday.",
+    "planDay": 33
+  },
+  {
+    "number": 99,
+    "phrase": "set off",
+    "translationRu": "отправиться в путь; вызвать",
+    "example": "We set off early to avoid traffic.",
+    "planDay": 33
+  },
+  {
+    "number": 100,
+    "phrase": "set up",
+    "translationRu": "настроить, установить; организовать",
+    "example": "I set up the dev environment in an hour.",
+    "planDay": 34
+  },
+  {
+    "number": 101,
+    "phrase": "settle down",
+    "translationRu": "остепениться; успокоиться",
+    "example": "The kids finally settled down.",
+    "planDay": 34
+  },
+  {
+    "number": 102,
+    "phrase": "show off",
+    "translationRu": "хвастаться, красоваться",
+    "example": "He loves showing off his new car.",
+    "planDay": 34
+  },
+  {
+    "number": 103,
+    "phrase": "show up",
+    "translationRu": "появиться, прийти",
+    "example": "Only five people showed up to the meeting.",
+    "planDay": 35
+  },
+  {
+    "number": 104,
+    "phrase": "shut down",
+    "translationRu": "выключить; закрыть (компанию)",
+    "example": "Shut down the server before the update.",
+    "planDay": 35
+  },
+  {
+    "number": 105,
+    "phrase": "sign up",
+    "translationRu": "зарегистрироваться, записаться",
+    "example": "I signed up for a gym membership.",
+    "planDay": 35
+  },
+  {
+    "number": 106,
+    "phrase": "slow down",
+    "translationRu": "замедлиться",
+    "example": "Slow down, I can't follow you.",
+    "planDay": 36
+  },
+  {
+    "number": 107,
+    "phrase": "sort out",
+    "translationRu": "уладить, разобраться",
+    "example": "We need to sort out the login bug today.",
+    "planDay": 36
+  },
+  {
+    "number": 108,
+    "phrase": "speed up",
+    "translationRu": "ускорить",
+    "example": "Caching will speed up the page.",
+    "planDay": 36
+  },
+  {
+    "number": 109,
+    "phrase": "split up",
+    "translationRu": "разделиться; расстаться",
+    "example": "Let's split up the work between us.",
+    "planDay": 37
+  },
+  {
+    "number": 110,
+    "phrase": "stand for",
+    "translationRu": "означать; выступать за",
+    "example": "What does CRM stand for?",
+    "planDay": 37
+  },
+  {
+    "number": 111,
+    "phrase": "stand out",
+    "translationRu": "выделяться",
+    "example": "Her portfolio really stands out.",
+    "planDay": 37
+  },
+  {
+    "number": 112,
+    "phrase": "stand up for",
+    "translationRu": "заступиться, отстаивать",
+    "example": "Stand up for your ideas in the review.",
+    "planDay": 38
+  },
+  {
+    "number": 113,
+    "phrase": "step down",
+    "translationRu": "уйти в отставку",
+    "example": "The CEO stepped down last month.",
+    "planDay": 38
+  },
+  {
+    "number": 114,
+    "phrase": "stick to",
+    "translationRu": "придерживаться",
+    "example": "Let's stick to the plan.",
+    "planDay": 38
+  },
+  {
+    "number": 115,
+    "phrase": "sum up",
+    "translationRu": "подвести итог",
+    "example": "To sum up, we need two more weeks.",
+    "planDay": 39
+  },
+  {
+    "number": 116,
+    "phrase": "switch on / switch off",
+    "translationRu": "включить / выключить",
+    "example": "Switch off notifications while you study.",
+    "planDay": 39
+  },
+  {
+    "number": 117,
+    "phrase": "take back",
+    "translationRu": "взять назад (слова); вернуть",
+    "example": "I take back what I said.",
+    "planDay": 39
+  },
+  {
+    "number": 118,
+    "phrase": "take in",
+    "translationRu": "усвоить, воспринять; обмануть",
+    "example": "That was a lot of information to take in.",
+    "planDay": 40
+  },
+  {
+    "number": 119,
+    "phrase": "take off",
+    "translationRu": "взлететь; снять (одежду); резко вырасти",
+    "example": "The plane took off on time.",
+    "planDay": 40
+  },
+  {
+    "number": 120,
+    "phrase": "take over",
+    "translationRu": "взять на себя; захватить",
+    "example": "She took over the project in May.",
+    "planDay": 40
+  },
+  {
+    "number": 121,
+    "phrase": "take up",
+    "translationRu": "заняться (хобби); занимать (место, время)",
+    "example": "I took up running last spring.",
+    "planDay": 41
+  },
+  {
+    "number": 122,
+    "phrase": "team up",
+    "translationRu": "объединиться",
+    "example": "We teamed up with the design team.",
+    "planDay": 41
+  },
+  {
+    "number": 123,
+    "phrase": "think over",
+    "translationRu": "обдумать",
+    "example": "Think it over and tell me tomorrow.",
+    "planDay": 41
+  },
+  {
+    "number": 124,
+    "phrase": "throw away",
+    "translationRu": "выбросить",
+    "example": "Throw away the old cables.",
+    "planDay": 42
+  },
+  {
+    "number": 125,
+    "phrase": "try on",
+    "translationRu": "примерить",
+    "example": "Try on the jacket before you buy it.",
+    "planDay": 42
+  },
+  {
+    "number": 126,
+    "phrase": "try out",
+    "translationRu": "опробовать",
+    "example": "Let's try out the new framework on a small project.",
+    "planDay": 42
+  },
+  {
+    "number": 127,
+    "phrase": "turn down",
+    "translationRu": "отклонить; убавить",
+    "example": "He turned down the job offer.",
+    "planDay": 43
+  },
+  {
+    "number": 128,
+    "phrase": "turn into",
+    "translationRu": "превратиться",
+    "example": "A small bug turned into a big problem.",
+    "planDay": 43
+  },
+  {
+    "number": 129,
+    "phrase": "turn out",
+    "translationRu": "оказаться",
+    "example": "It turned out to be a config issue.",
+    "planDay": 43
+  },
+  {
+    "number": 130,
+    "phrase": "turn up",
+    "translationRu": "появиться; прибавить (звук)",
+    "example": "He turned up late, as usual.",
+    "planDay": 44
+  },
+  {
+    "number": 131,
+    "phrase": "walk through",
+    "translationRu": "пройтись по шагам, объяснить",
+    "example": "Can you walk me through the deployment?",
+    "planDay": 44
+  },
+  {
+    "number": 132,
+    "phrase": "warm up",
+    "translationRu": "разогреться; разминаться",
+    "example": "Warm up before you run.",
+    "planDay": 44
+  },
+  {
+    "number": 133,
+    "phrase": "wear out",
+    "translationRu": "износиться; вымотать",
+    "example": "These shoes wore out in a year.",
+    "planDay": 45
+  },
+  {
+    "number": 134,
+    "phrase": "work out",
+    "translationRu": "решить; тренироваться; сложиться",
+    "example": "Everything worked out in the end.",
+    "planDay": 45
+  },
+  {
+    "number": 135,
+    "phrase": "wrap up",
+    "translationRu": "завершить, закруглиться",
+    "example": "Let's wrap up the meeting.",
+    "planDay": 45
+  },
+  {
+    "number": 136,
+    "phrase": "write down",
+    "translationRu": "записать",
+    "example": "Write down the new words every day.",
+    "planDay": 46
+  },
+  {
+    "number": 137,
+    "phrase": "zoom in / zoom out",
+    "translationRu": "приблизить / отдалить",
+    "example": "Zoom in to see the details.",
+    "planDay": 46
+  }
+]

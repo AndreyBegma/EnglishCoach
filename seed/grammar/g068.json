@@ -1,0 +1,277 @@
+{
+  "id": "g068",
+  "position": 68,
+  "cefrLevel": "C1",
+  "title": "Дискурсивные маркеры в речи и письме: in fact, mind you, as it happens, after all",
+  "plannedFrom": "2027-09-06",
+  "plannedTo": "2027-09-11",
+  "sections": {
+    "why": [
+      "Дискурсивные маркеры — это «связки» речи: они показывают, как ваша фраза относится к предыдущей (уточнение, уступка, причина, смена темы). Они делают речь живой и похожей на речь носителя; в русском их роль играют «вообще-то», «кстати», «впрочем», «в конце концов», «так уж вышло»."
+    ],
+    "formation": [
+      "Маркер обычно стоит в начале предложения или в конце и отделяется запятой: In fact, ... / ..., after all. Это не меняет порядок слов в самом предложении.",
+      "• in fact / as a matter of fact — «на самом деле», усиливают или уточняют",
+      "• actually — «вообще-то», мягкая поправка",
+      "• mind you — «впрочем», уступка",
+      "• as it happens — «так уж вышло», совпадение",
+      "• after all — «в конце концов», напоминание о причине (или результат вопреки ожиданию в конце)",
+      "• by the way — «кстати», новая тема",
+      "• anyway — «ладно, в любом случае», возврат к теме или завершение",
+      "• to be honest — «честно говоря»"
+    ],
+    "usage": [
+      "1. Усиление и уточнение: The test wasn't difficult. In fact, it was very easy. (Тест был не сложный. Вообще-то, очень лёгкий.)",
+      "2. Поправка: A: You're from Russia? B: Actually, I'm from Ukraine. (Вообще-то я из Украины.)",
+      "3. Уступка: The flat is small. Mind you, it's in a great area. (Квартира маленькая. Впрочем, район отличный.)",
+      "4. Совпадение: As it happens, I know the author. (Так уж вышло, что я знаком с автором.)",
+      "5. Напоминание о причине: Don't be angry. He's a beginner, after all. (Не злись. Он же новичок.) Либо результат вопреки ожиданиям: I passed after all. (Я всё-таки сдал.)",
+      "6. Смена и возврат темы: By the way, have you seen Tom? Anyway, let's get back to work."
+    ],
+    "signalWords": [
+      "though / but (рядом с mind you), expected / thought (рядом с after all), no, ... (перед actually), the reason (перед after all)."
+    ],
+    "mistakes": [
+      "✗ Actually, we have ten developers (имеется в виду «сейчас») → ✓ Currently, we have ten developers (actually не значит «актуально, в данный момент»).",
+      "✗ After all, I found the keys (имеется в виду «наконец») → ✓ In the end, I found the keys (after all не значит «в итоге после всего»).",
+      "✗ To say honestly, ... → ✓ To be honest, ... (устойчивое выражение).",
+      "✗ In the way, ... → ✓ By the way, ... (кстати).",
+      "✗ Any way, let's move on → ✓ Anyway, let's move on (одним словом)."
+    ],
+    "remember": [
+      "Actually и in fact — «на самом деле», mind you — «впрочем», after all — «ведь / всё-таки», by the way — «кстати»; а «сейчас» по-английски — currently."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте подходящий маркер (in fact, mind you, as it happens, after all, by the way, to be honest, anyway, actually)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "We shouldn't be angry. She is only a child, ___.",
+          "answer": "after all"
+        },
+        {
+          "number": 2,
+          "prompt": "A: Who is the new manager? B: ___, I used to work with her.",
+          "answer": "As it happens"
+        },
+        {
+          "number": 3,
+          "prompt": "It's an old laptop. ___, it still works well.",
+          "answer": "Mind you"
+        },
+        {
+          "number": 4,
+          "prompt": "___, have you seen Tom today?",
+          "answer": "By the way"
+        },
+        {
+          "number": 5,
+          "prompt": "A: You're from Russia? B: No, ___, I'm Ukrainian.",
+          "answer": "actually"
+        },
+        {
+          "number": 6,
+          "prompt": "She isn't just good. ___, she's the best in the company.",
+          "answer": "In fact / As a matter of fact"
+        },
+        {
+          "number": 7,
+          "prompt": "...so that's the history of the project. ___, let's discuss the next steps.",
+          "answer": "Anyway"
+        },
+        {
+          "number": 8,
+          "prompt": "___, I'm not a big fan of morning meetings.",
+          "answer": "To be honest"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I wasn't surprised he won. (a) Mind you, (b) After all, he'd practiced every day.",
+          "answer": "(b) After all"
+        },
+        {
+          "number": 2,
+          "prompt": "The food was terrible. (a) Mind you, (b) After all, the service was friendly.",
+          "answer": "(a) Mind you"
+        },
+        {
+          "number": 3,
+          "prompt": "A: Do you need a lift? B: (a) As it happens, (b) After all, I'm going that way anyway.",
+          "answer": "(a) As it happens"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) By the way, (b) Anyway, enough about me. How was your trip?",
+          "answer": "(b) Anyway"
+        },
+        {
+          "number": 5,
+          "prompt": "A: You look tired. B: (a) Actually, (b) After all, I slept really well.",
+          "answer": "(a) Actually"
+        },
+        {
+          "number": 6,
+          "prompt": "We planned to go out, but we stayed home (a) in fact (b) after all.",
+          "answer": "(b) after all"
+        },
+        {
+          "number": 7,
+          "prompt": "The project is late. (a) Mind you, (b) In fact, we haven't even started.",
+          "answer": "(b) In fact"
+        },
+        {
+          "number": 8,
+          "prompt": "(a) By the way, (b) After all, I forgot to tell you: the meeting is moved to Friday.",
+          "answer": "(a) By the way"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите или дополните предложение с указанным маркером",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Add 'as it happens' at the start: I live next door to the manager.",
+          "answer": "As it happens, I live next door to the manager."
+        },
+        {
+          "number": 2,
+          "prompt": "Join with 'After all': You can't blame him. He is only a beginner.",
+          "answer": "You can't blame him. After all, he is only a beginner."
+        },
+        {
+          "number": 3,
+          "prompt": "Add 'mind you' at the start of the second sentence: The salary is low. The team is great.",
+          "answer": "The salary is low. Mind you, the team is great."
+        },
+        {
+          "number": 4,
+          "prompt": "Add 'In fact' at the start of the second sentence: The test was not difficult. It was very easy.",
+          "answer": "The test was not difficult. In fact, it was very easy."
+        },
+        {
+          "number": 5,
+          "prompt": "Use 'after all' at the end: We planned to cancel the trip, but we went.",
+          "answer": "We planned to cancel the trip, but we went after all."
+        },
+        {
+          "number": 6,
+          "prompt": "Change the topic with 'by the way': Do you have Sarah's number?",
+          "answer": "By the way, do you have Sarah's number?"
+        },
+        {
+          "number": 7,
+          "prompt": "Soften your opinion with 'to be honest': I don't like the design.",
+          "answer": "To be honest, I don't like the design."
+        },
+        {
+          "number": 8,
+          "prompt": "Return to the main topic with 'anyway': Let's move on to the next slide.",
+          "answer": "Anyway, let's move on to the next slide."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку в маркере",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Actually, we have ten developers in the team. (имеется в виду «в данный момент»)",
+          "answer": "Currently, we have ten developers in the team."
+        },
+        {
+          "number": 2,
+          "prompt": "After all, I found my keys. (имеется в виду «наконец»)",
+          "answer": "In the end, I found my keys."
+        },
+        {
+          "number": 3,
+          "prompt": "To say honestly, I don't like it.",
+          "answer": "To be honest, I don't like it."
+        },
+        {
+          "number": 4,
+          "prompt": "How it happens, I know his brother.",
+          "answer": "As it happens, I know his brother."
+        },
+        {
+          "number": 5,
+          "prompt": "In the way, do you know where Tom is?",
+          "answer": "By the way, do you know where Tom is?"
+        },
+        {
+          "number": 6,
+          "prompt": "Any way, let's move on.",
+          "answer": "Anyway, let's move on."
+        },
+        {
+          "number": 7,
+          "prompt": "Mind that, it was cheap.",
+          "answer": "Mind you, it was cheap."
+        },
+        {
+          "number": 8,
+          "prompt": "In the fact, the app is very fast.",
+          "answer": "In fact, the app is very fast."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Честно говоря, я не очень люблю созвоны по утрам.",
+          "answer": "To be honest, I'm not a big fan of morning calls."
+        },
+        {
+          "number": 2,
+          "prompt": "Кстати, ты уже отправил счёт?",
+          "answer": "By the way, have you sent the invoice yet?"
+        },
+        {
+          "number": 3,
+          "prompt": "Не переживай из-за ошибки. В конце концов, это тестовая среда.",
+          "answer": "Don't worry about the mistake. After all, it's a test environment."
+        },
+        {
+          "number": 4,
+          "prompt": "Вообще-то я родом из Харькова.",
+          "answer": "Actually, I'm from Kharkiv. / As a matter of fact, I'm from Kharkiv."
+        },
+        {
+          "number": 5,
+          "prompt": "Так уж вышло, что я знаком с автором этой библиотеки.",
+          "answer": "As it happens, I know the author of this library."
+        },
+        {
+          "number": 6,
+          "prompt": "Квартира маленькая. Впрочем, она в отличном районе.",
+          "answer": "The apartment is small. Mind you, it's in a great neighborhood."
+        },
+        {
+          "number": 7,
+          "prompt": "Ладно, давайте вернёмся к бюджету.",
+          "answer": "Anyway, let's get back to the budget."
+        },
+        {
+          "number": 8,
+          "prompt": "Я думал, что провалю собеседование, но всё-таки прошёл.",
+          "answer": "I thought I'd fail the interview, but I passed after all."
+        }
+      ]
+    }
+  ]
+}

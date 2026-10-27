@@ -1,0 +1,275 @@
+{
+  "id": "g054",
+  "position": 54,
+  "cefrLevel": "C1",
+  "title": "Инверсия: Not until, Only then, Little; условные без if (Had I known…)",
+  "plannedFrom": "2027-05-31",
+  "plannedTo": "2027-06-05",
+  "sections": {
+    "why": [
+      "В прошлой теме мы вынесли вперёд never и rarely. Тот же приём работает с Not until, Only then, Little, а ещё позволяет убрать if из условных предложений. Результат: более формальная, «литературная» речь, которую часто встретишь в статьях, докладах и официальных письмах."
+    ],
+    "formation": [
+      "Общая схема: вводное слово + вспомогательный глагол + подлежащее + основной глагол.",
+      "• Not until + время/клауза: Not until midnight did I finish. (Только к полуночи я закончил.)",
+      "• Only then / Only after / Only when + ...: Only then did she understand.",
+      "• Little + did + подлежащее + V1: Little did he know. (Он и не подозревал.)",
+      "Условные без if:",
+      "• Had + подлежащее + V3 (вместо if + Past Perfect): Had I known, I would have called. = If I had known...",
+      "• Were + подлежащее (вместо if + were): Were I you, I'd wait. = If I were you...",
+      "• Should + подлежащее + V1 (вместо if + should / Present): Should you need help, call me.",
+      "Отрицание: Had they not left, ... (не Hadn't they)."
+    ],
+    "usage": [
+      "1. Not until — «только когда / не раньше чем»: Not until I got home did I realize I'd lost my keys. (Только дома я понял, что потерял ключи.) Инверсия идёт во второй части, после запятой.",
+      "2. Only then / Only after / Only when — «только тогда / после / когда»: Only after the update did the bug disappear. (Только после обновления баг исчез.)",
+      "3. Little — «и не подозревал, и не думал»: Little did we know that the server would crash. (Мы и не знали, что сервер упадёт.) Little здесь значит «совсем не».",
+      "4. Условные без if — формально: Had I known about the delay, I would have told you. (Знай я о задержке, я бы вам сказал.) Should you have any questions, please contact us. (Если возникнут вопросы, свяжитесь с нами.)"
+    ],
+    "signalWords": [
+      "Not until, only then, only after, only when, only by, little (в начале предложения), had I / were I / should you в начале фразы без if."
+    ],
+    "mistakes": [
+      "✗ Not until he arrived the meeting started → ✓ Not until he arrived did the meeting start (инверсия во второй части)",
+      "✗ Little they knew → ✓ Little did they know",
+      "✗ Had I knew → ✓ Had I known (после had нужна третья форма)",
+      "✗ Hadn't I known → ✓ Had I not known (not ставим после подлежащего)",
+      "✗ Should you will need → ✓ Should you need (после should глагол в базовой форме)"
+    ],
+    "remember": [
+      "Начало предложения занято «особым» словом, тогда вспомогательный глагол идёт перед подлежащим: Not until I left DID I understand; HAD I known, I would have helped."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте нужное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Not until midnight ___ I finish the report.",
+          "answer": "did"
+        },
+        {
+          "number": 2,
+          "prompt": "Only then ___ she understand the problem.",
+          "answer": "did"
+        },
+        {
+          "number": 3,
+          "prompt": "Little ___ he know that the server would crash.",
+          "answer": "did"
+        },
+        {
+          "number": 4,
+          "prompt": "___ I known about the delay, I would have called you.",
+          "answer": "Had"
+        },
+        {
+          "number": 5,
+          "prompt": "___ you need any help, please let me know.",
+          "answer": "Should"
+        },
+        {
+          "number": 6,
+          "prompt": "___ I you, I would accept the offer.",
+          "answer": "Were"
+        },
+        {
+          "number": 7,
+          "prompt": "Not until she left ___ I realize how much I missed her.",
+          "answer": "did"
+        },
+        {
+          "number": 8,
+          "prompt": "Only after the update ___ the bug disappear.",
+          "answer": "did"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильное предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "(a) Not until he arrived did the meeting start. (b) Not until he arrived the meeting started.",
+          "answer": "(a) Not until he arrived did the meeting start."
+        },
+        {
+          "number": 2,
+          "prompt": "(a) Little they knew about the plan. (b) Little did they know about the plan.",
+          "answer": "(b) Little did they know about the plan."
+        },
+        {
+          "number": 3,
+          "prompt": "(a) Had I known, I would have helped. (b) Had I knew, I would have helped.",
+          "answer": "(a) Had I known, I would have helped."
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Only then I understood. (b) Only then did I understand.",
+          "answer": "(b) Only then did I understand."
+        },
+        {
+          "number": 5,
+          "prompt": "(a) Should you have any questions, call me. (b) Should you will have any questions, call me.",
+          "answer": "(a) Should you have any questions, call me."
+        },
+        {
+          "number": 6,
+          "prompt": "(a) Were I you, I would wait. (b) Would I be you, I would wait.",
+          "answer": "(a) Were I you, I would wait."
+        },
+        {
+          "number": 7,
+          "prompt": "(a) Not until the code was tested did we release it. (b) Not until the code was tested we did release it.",
+          "answer": "(a) Not until the code was tested did we release it."
+        },
+        {
+          "number": 8,
+          "prompt": "(a) Only when the user logs in can they see the data. (b) Only when the user logs in they can see the data.",
+          "answer": "(a) Only when the user logs in can they see the data."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите условное предложение без if",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I had known, I would have told you.",
+          "answer": "Had I known, I would have told you."
+        },
+        {
+          "number": 2,
+          "prompt": "If you should need help, call me.",
+          "answer": "Should you need help, call me."
+        },
+        {
+          "number": 3,
+          "prompt": "If I were you, I would apply.",
+          "answer": "Were I you, I would apply."
+        },
+        {
+          "number": 4,
+          "prompt": "If she had left earlier, she would have caught the train.",
+          "answer": "Had she left earlier, she would have caught the train."
+        },
+        {
+          "number": 5,
+          "prompt": "If you have any problems, contact support.",
+          "answer": "Should you have any problems, contact support."
+        },
+        {
+          "number": 6,
+          "prompt": "If we had saved the file, we wouldn't have lost the data.",
+          "answer": "Had we saved the file, we wouldn't have lost the data."
+        },
+        {
+          "number": 7,
+          "prompt": "If he were here, he would help us.",
+          "answer": "Were he here, he would help us."
+        },
+        {
+          "number": 8,
+          "prompt": "If they hadn't missed the flight, they would have arrived on time.",
+          "answer": "Had they not missed the flight, they would have arrived on time."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Перепишите предложение, начав с данных слов",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I didn't realize my mistake until I read the email. → Not until ...",
+          "answer": "Not until I read the email did I realize my mistake."
+        },
+        {
+          "number": 2,
+          "prompt": "He didn't know that he would win. → Little ...",
+          "answer": "Little did he know that he would win."
+        },
+        {
+          "number": 3,
+          "prompt": "She only understood the problem then. → Only then ...",
+          "answer": "Only then did she understand the problem."
+        },
+        {
+          "number": 4,
+          "prompt": "We didn't leave until the rain stopped. → Not until ...",
+          "answer": "Not until the rain stopped did we leave."
+        },
+        {
+          "number": 5,
+          "prompt": "They only found the bug after three days. → Only after ...",
+          "answer": "Only after three days did they find the bug."
+        },
+        {
+          "number": 6,
+          "prompt": "I never suspected that the project would fail. → Little ...",
+          "answer": "Little did I suspect that the project would fail."
+        },
+        {
+          "number": 7,
+          "prompt": "He started to feel better only when he went outside. → Only when ...",
+          "answer": "Only when he went outside did he start to feel better."
+        },
+        {
+          "number": 8,
+          "prompt": "The system didn't work again until we restarted it. → Not until ...",
+          "answer": "Not until we restarted it did the system work again."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Только тогда я понял, как всё серьёзно.",
+          "answer": "Only then did I realize how serious it was. / Only then did I understand how serious it was."
+        },
+        {
+          "number": 2,
+          "prompt": "Они и не подозревали, что их ждёт.",
+          "answer": "Little did they know what was waiting for them. / Little did they know what awaited them."
+        },
+        {
+          "number": 3,
+          "prompt": "Только когда я вернулся домой, я заметил, что потерял ключи.",
+          "answer": "Only when I got home did I notice that I had lost my keys. / Only when I got home did I notice that I'd lost my keys."
+        },
+        {
+          "number": 4,
+          "prompt": "Знай я об этом раньше, я бы вам позвонил.",
+          "answer": "Had I known about it earlier, I would have called you."
+        },
+        {
+          "number": 5,
+          "prompt": "Если вам понадобится помощь, обращайтесь.",
+          "answer": "Should you need any help, please let us know. / Should you need help, please contact us."
+        },
+        {
+          "number": 6,
+          "prompt": "Будь я на вашем месте, я бы согласился.",
+          "answer": "Were I in your position, I would agree. / Were I you, I would agree."
+        },
+        {
+          "number": 7,
+          "prompt": "Мы поняли, что это ошибка, только когда прочитали отчёт.",
+          "answer": "Not until we read the report did we understand that it was a mistake. / Not until we read the report did we realize it was a mistake."
+        },
+        {
+          "number": 8,
+          "prompt": "Приложение запустилось только после того, как разработчик исправил ошибку.",
+          "answer": "Only after the developer fixed the error did the app start. / Not until the developer fixed the error did the app start."
+        }
+      ]
+    }
+  ]
+}

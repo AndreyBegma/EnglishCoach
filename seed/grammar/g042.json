@@ -1,0 +1,273 @@
+{
+  "id": "g042",
+  "position": 42,
+  "cefrLevel": "B2",
+  "title": "Неограничительные придаточные: запятые и which ко всему предложению",
+  "plannedFrom": "2027-03-08",
+  "plannedTo": "2027-03-13",
+  "sections": {
+    "why": [
+      "Неограничительное (добавочное) придаточное даёт дополнительную информацию, без которой предложение и так понятно. В русском такие обороты тоже выделяются запятыми (\"мой брат, который живёт в Берлине\"), но в английском правила строже: нельзя использовать that, нельзя пропускать who / which. Отдельная ловушка: which может относиться ко всему предыдущему предложению (\"..., что означало...\")."
+    ],
+    "formation": [
+      "• человек: , who + глагол ,  (my boss, who lives in Boston, ...)",
+      "• предмет: , which + глагол ,  (my laptop, which is old, ...)",
+      "• принадлежность: , whose + существительное  (Anna, whose brother works here, ...)",
+      "• место / время: , where ... / , when ...  (Lviv, where I studied, ...)",
+      "• с предлогом (формально): , to whom / with which ...  (my manager, with whom I work, ...)",
+      "• ко всему предложению: основная мысль , which + глагол  (He lost his job, which was a shock.)",
+      "Если придаточное стоит в середине, запятая ставится с обеих сторон."
+    ],
+    "usage": [
+      "1. Дополнительная информация о человеке или предмете, который и так понятен (имя, my + существительное, единственный в своём роде). (Мой брат, который живёт в Берлине, дизайнер. — My brother, who lives in Berlin, is a designer.)",
+      "2. Which относится ко всему предложению. (Сервер упал, а это значит, что мы потеряли данные. — The server crashed, which meant we lost the data.)",
+      "3. Where / when / whose для места, времени, принадлежности. (Мы были в Праге, где вырос мой муж. — We visited Prague, where my husband grew up.)",
+      "4. Разница в смысле. Без запятых мы выбираем часть группы, с запятыми говорим обо всей группе. (The developers who work remotely are happier = только удалённые. The developers, who work remotely, are happier = все они удалённые.)"
+    ],
+    "signalWords": [
+      "Запятые в письме и пауза в речи; имена собственные (Kyiv, Mr. Brown); my / our + существительное; весь контекст понятен и без придаточного."
+    ],
+    "mistakes": [
+      "✗ My car, that is old, still works → ✓ My car, which is old, still works (that после запятой нельзя)",
+      "✗ He lost his job, that was a shock → ✓ ..., which was a shock (which ко всей мысли)",
+      "✗ Mike, I met yesterday, is a tester → ✓ Mike, whom / who I met yesterday, is a tester (местоимение нельзя опускать)",
+      "✗ The Eiffel Tower which is in Paris is famous → ✓ The Eiffel Tower, which is in Paris, is famous (нужны запятые)",
+      "✗ It rained all day, what ruined our trip → ✓ ..., which ruined our trip (what не используется)"
+    ],
+    "remember": [
+      "Есть запятая — нет that и нельзя пропустить who / which; \"что\" про всю ситуацию — это , which."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте who, whom, which, whose, where или when",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My manager, ___ lives in Boston, is visiting us.",
+          "answer": "who"
+        },
+        {
+          "number": 2,
+          "prompt": "The new office, ___ is near the river, has a gym.",
+          "answer": "which"
+        },
+        {
+          "number": 3,
+          "prompt": "Anna, ___ brother works at Google, is my neighbor.",
+          "answer": "whose"
+        },
+        {
+          "number": 4,
+          "prompt": "We stayed in Lisbon, ___ my parents got married.",
+          "answer": "where"
+        },
+        {
+          "number": 5,
+          "prompt": "I'll never forget 2020, ___ we all worked from home.",
+          "answer": "when"
+        },
+        {
+          "number": 6,
+          "prompt": "The project, ___ started in March, is almost finished.",
+          "answer": "which"
+        },
+        {
+          "number": 7,
+          "prompt": "Our CTO, ___ I really respect, is leaving.",
+          "answer": "whom / who"
+        },
+        {
+          "number": 8,
+          "prompt": "She didn't answer, ___ annoyed me.",
+          "answer": "which"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Соедините два предложения с помощью неограничительного придаточного",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My sister is a doctor. She lives in Toronto.",
+          "answer": "My sister, who lives in Toronto, is a doctor."
+        },
+        {
+          "number": 2,
+          "prompt": "Python is easy to learn. It is very popular.",
+          "answer": "Python, which is very popular, is easy to learn."
+        },
+        {
+          "number": 3,
+          "prompt": "We visited Prague. My wife grew up there.",
+          "answer": "We visited Prague, where my wife grew up."
+        },
+        {
+          "number": 4,
+          "prompt": "Tom is my teammate. His laptop broke yesterday.",
+          "answer": "Tom, whose laptop broke yesterday, is my teammate."
+        },
+        {
+          "number": 5,
+          "prompt": "The bus was late. This made me miss the meeting.",
+          "answer": "The bus was late, which made me miss the meeting."
+        },
+        {
+          "number": 6,
+          "prompt": "Mr. Brown is our biggest client. I met him in Paris.",
+          "answer": "Mr. Brown, whom I met in Paris, is our biggest client. / Mr. Brown, who I met in Paris, is our biggest client."
+        },
+        {
+          "number": 7,
+          "prompt": "The website crashed. It was updated an hour ago.",
+          "answer": "The website, which was updated an hour ago, crashed."
+        },
+        {
+          "number": 8,
+          "prompt": "I love July. The weather is perfect then.",
+          "answer": "I love July, when the weather is perfect."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Расставьте запятые. Если запятые не нужны, напишите OK",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My brother who lives in Berlin is a designer.",
+          "answer": "My brother, who lives in Berlin, is a designer."
+        },
+        {
+          "number": 2,
+          "prompt": "The people who work here are very friendly.",
+          "answer": "OK"
+        },
+        {
+          "number": 3,
+          "prompt": "Lviv which is in western Ukraine is a lovely city.",
+          "answer": "Lviv, which is in western Ukraine, is a lovely city."
+        },
+        {
+          "number": 4,
+          "prompt": "The book that I borrowed was great.",
+          "answer": "OK"
+        },
+        {
+          "number": 5,
+          "prompt": "She failed the test which surprised nobody.",
+          "answer": "She failed the test, which surprised nobody."
+        },
+        {
+          "number": 6,
+          "prompt": "The restaurant where we had dinner was expensive.",
+          "answer": "OK"
+        },
+        {
+          "number": 7,
+          "prompt": "I called Steve whose number I found online.",
+          "answer": "I called Steve, whose number I found online."
+        },
+        {
+          "number": 8,
+          "prompt": "We moved to Denver where the cost of living is lower.",
+          "answer": "We moved to Denver, where the cost of living is lower."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и перепишите предложение правильно",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My laptop, that is two years old, still works fine.",
+          "answer": "My laptop, which is two years old, still works fine."
+        },
+        {
+          "number": 2,
+          "prompt": "He passed the exam, that surprised everyone.",
+          "answer": "He passed the exam, which surprised everyone."
+        },
+        {
+          "number": 3,
+          "prompt": "Mike, I met yesterday, is a tester.",
+          "answer": "Mike, whom I met yesterday, is a tester. / Mike, who I met yesterday, is a tester."
+        },
+        {
+          "number": 4,
+          "prompt": "The Eiffel Tower which is in Paris is very famous.",
+          "answer": "The Eiffel Tower, which is in Paris, is very famous."
+        },
+        {
+          "number": 5,
+          "prompt": "It rained all week, what ruined our trip.",
+          "answer": "It rained all week, which ruined our trip."
+        },
+        {
+          "number": 6,
+          "prompt": "My boss, who his wife is a lawyer, is very busy.",
+          "answer": "My boss, whose wife is a lawyer, is very busy."
+        },
+        {
+          "number": 7,
+          "prompt": "We stayed in Rome, that is my favorite city.",
+          "answer": "We stayed in Rome, which is my favorite city."
+        },
+        {
+          "number": 8,
+          "prompt": "Our CEO, with who I work closely, is very kind.",
+          "answer": "Our CEO, with whom I work closely, is very kind."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Мой брат, который живёт в Берлине, работает программистом.",
+          "answer": "My brother, who lives in Berlin, works as a programmer. / My brother, who lives in Berlin, is a programmer."
+        },
+        {
+          "number": 2,
+          "prompt": "Сервер упал, а это значит, что мы потеряли данные.",
+          "answer": "The server crashed, which meant we lost the data."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы были в Лондоне, где я раньше жил.",
+          "answer": "We were in London, where I used to live."
+        },
+        {
+          "number": 4,
+          "prompt": "Анна, чья сестра работает у нас, сейчас в отпуске.",
+          "answer": "Anna, whose sister works for us, is on vacation now."
+        },
+        {
+          "number": 5,
+          "prompt": "Он опоздал, что меня разозлило.",
+          "answer": "He was late, which made me angry. / He was late, which annoyed me."
+        },
+        {
+          "number": 6,
+          "prompt": "Наш офис, который находится в центре города, сегодня закрыт.",
+          "answer": "Our office, which is in the city center, is closed today."
+        },
+        {
+          "number": 7,
+          "prompt": "Мой начальник, с которым я работаю пять лет, уходит.",
+          "answer": "My boss, with whom I have worked for five years, is leaving. / My boss, who I have worked with for five years, is leaving."
+        },
+        {
+          "number": 8,
+          "prompt": "Я люблю осень, когда в парке так красиво.",
+          "answer": "I love autumn, when the park is so beautiful."
+        }
+      ]
+    }
+  ]
+}

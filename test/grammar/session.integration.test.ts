@@ -236,7 +236,7 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     expect(queue).toHaveLength(0);
   });
 
-  test("a button of an earlier question does nothing", async () => {
+  test("a button of an earlier question does nothing but say it is answered", async () => {
     const { h, telegramId, user } = await setup([choice("modals"), choice("modals")]);
     const picker = await startGrammar(h, telegramId, user.id);
     await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", index: null }));
@@ -251,5 +251,14 @@ describe.skipIf(!testServerUrl)("grammar session over a mocked Telegram API", ()
     );
     expect(h.telegram.chat(telegramId).size).toBe(before);
     expect(lastBot(h, telegramId).text).toContain("Question 2 of 10");
+    expect(h.telegram.callsOf("answerCallbackQuery").at(-1)?.payload).toMatchObject({
+      text: "This question is already answered",
+    });
+
+    // The topic picker is answered too.
+    await h.press(telegramId, picker.id, encodeGrammarCallback({ type: "topic", index: null }));
+    expect(h.telegram.callsOf("answerCallbackQuery").at(-1)?.payload).toMatchObject({
+      text: "This question is already answered",
+    });
   });
 });

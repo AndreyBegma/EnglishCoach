@@ -1,0 +1,271 @@
+{
+  "id": "g058",
+  "position": 58,
+  "cefrLevel": "C1",
+  "title": "Эллипсис и замены: so / not, do so, one / ones",
+  "plannedFrom": "2027-06-28",
+  "plannedTo": "2027-07-03",
+  "sections": {
+    "why": [
+      "В русском мы часто опускаем повторяющиеся слова: «Ты придёшь? — Думаю, да». В английском тоже избегают повторов, но делают это по правилам: подставляют so, not, do so, one/ones или просто опускают часть фразы. Так речь звучит естественно и без лишней тяжести."
+    ],
+    "formation": [
+      "• so / not после think, hope, suppose, expect, believe, be afraid, guess: I think so. I hope not.",
+      "• do so = заменяет глагол с дополнением (формальнее, чем просто do): He asked me to leave, and I did so.",
+      "• one / ones заменяют исчисляемое существительное: a red car → a red one; these books → these ones.",
+      "• эллипсис: опускаем повторяющуюся часть, оставляя вспомогательный глагол или to: She can swim, and I can too. I didn't want to go, but I had to."
+    ],
+    "usage": [
+      "1. So / not вместо целого придаточного. (Is it going to rain? — I think so. = Будет дождь? — Думаю, да. / I hope not. = Надеюсь, что нет.) Отрицание: с think, believe, suppose, expect чаще I don't think so; с hope и be afraid только I hope not, I'm afraid not.",
+      "2. Do so вместо повторения действия. (They told us to submit the form, and we did so immediately. = Нам сказали подать форму, и мы сделали это сразу.)",
+      "3. One / ones вместо повтора существительного. (I don't like this laptop. Show me a cheaper one. = Мне не нравится этот ноутбук. Покажите дешевле. / Which shoes? — The black ones. = Какие туфли? — Чёрные.) После слов some, any, both, several, a few, the one stays без one: I'll take some.",
+      "4. Эллипсис после вспомогательных. (He hasn't finished, but I have. = Он не закончил, а я закончил. / Can you help? — I'd love to. = Поможешь? — С радостью.)",
+      "5. If so / if not. (Do you have time? If so, call me. If not, write. = Есть время? Если да, позвони. Если нет, напиши.)"
+    ],
+    "signalWords": [
+      "I think / hope / suppose / expect / guess / believe so; I'm afraid so / not; if so, if not; and so do I; so am I; neither do I."
+    ],
+    "mistakes": [
+      "✗ I hope so not. → ✓ I hope not. Not стоит сразу после hope.",
+      "✗ I think not so. → ✓ I don't think so. Для think используем отрицание перед глаголом.",
+      "✗ Do you like this shirt? I prefer the another one. → ✓ I prefer another one. Перед another не ставим the.",
+      "✗ I want a coffee, and she wants a one too. → ✓ and she wants one too. После a/an слово one стоит без артикля, если нет прилагательного.",
+      "✗ I think so it will rain. → ✓ I think it will rain / I think so. So и придаточное вместе не используем."
+    ],
+    "remember": [
+      "So и not заменяют целое придаточное после think / hope; one / ones заменяют существительное, do so заменяет действие."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте so, not, one или ones",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Will the meeting be cancelled? — I hope ___.",
+          "answer": "not"
+        },
+        {
+          "number": 2,
+          "prompt": "Is he coming tonight? — I think ___.",
+          "answer": "so"
+        },
+        {
+          "number": 3,
+          "prompt": "I don't like these shoes. Do you have any other ___?",
+          "answer": "ones"
+        },
+        {
+          "number": 4,
+          "prompt": "Is it going to be expensive? — I'm afraid ___.",
+          "answer": "so"
+        },
+        {
+          "number": 5,
+          "prompt": "My phone is old. I need a new ___.",
+          "answer": "one"
+        },
+        {
+          "number": 6,
+          "prompt": "Has the server crashed again? — I hope ___.",
+          "answer": "not"
+        },
+        {
+          "number": 7,
+          "prompt": "Which cups do you want? — The blue ___.",
+          "answer": "ones"
+        },
+        {
+          "number": 8,
+          "prompt": "Will they accept our offer? — I don't think ___.",
+          "answer": "so"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Will it snow tomorrow? — I hope (a) so not (b) not.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "He asked me to move my car, and I (a) did so (b) so did at once.",
+          "answer": "a"
+        },
+        {
+          "number": 3,
+          "prompt": "I need a pen. Have you got (a) a one (b) one?",
+          "answer": "b"
+        },
+        {
+          "number": 4,
+          "prompt": "Is she upset? — I (a) don't think so (b) think not so.",
+          "answer": "a"
+        },
+        {
+          "number": 5,
+          "prompt": "Do you want the big boxes or the small (a) ones (b) one?",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "Can you help me? — Yes, I'd be happy (a) to help me (b) to.",
+          "answer": "b"
+        },
+        {
+          "number": 7,
+          "prompt": "Are you free tonight? If (a) so (b) it, let's go to the cinema.",
+          "answer": "a"
+        },
+        {
+          "number": 8,
+          "prompt": "Did they pass the test? — I'm afraid (a) no (b) not.",
+          "answer": "b"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Сократите ответ, избегая повторов",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Are you going to finish the report today? — Yes, I think I will finish it today. (ответьте коротко, используя so)",
+          "answer": "I think so."
+        },
+        {
+          "number": 2,
+          "prompt": "Is the shop open on Sunday? — No, I don't think it is open on Sunday. (коротко)",
+          "answer": "I don't think so."
+        },
+        {
+          "number": 3,
+          "prompt": "Will they be late? — I hope they will not be late. (коротко)",
+          "answer": "I hope not."
+        },
+        {
+          "number": 4,
+          "prompt": "I like the red jacket, but I don't like the green jacket. (замените второе jacket)",
+          "answer": "I like the red jacket, but I don't like the green one. / I like the red one, but I don't like the green one."
+        },
+        {
+          "number": 5,
+          "prompt": "She wanted to go to the concert, but she couldn't go to the concert. (сократите конец)",
+          "answer": "She wanted to go to the concert, but she couldn't."
+        },
+        {
+          "number": 6,
+          "prompt": "The manager told me to send the file, and I sent the file immediately. (используйте do so)",
+          "answer": "The manager told me to send the file, and I did so immediately."
+        },
+        {
+          "number": 7,
+          "prompt": "I've seen the film, but my brother hasn't seen the film. (сократите конец)",
+          "answer": "I've seen the film, but my brother hasn't."
+        },
+        {
+          "number": 8,
+          "prompt": "Are you ready? If you are ready, we can start. (замените: If you are ready, ...)",
+          "answer": "Are you ready? If so, we can start."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I hope so not.",
+          "answer": "I hope not."
+        },
+        {
+          "number": 2,
+          "prompt": "Do you like this phone? I prefer the another one.",
+          "answer": "Do you like this phone? I prefer another one."
+        },
+        {
+          "number": 3,
+          "prompt": "I think not so.",
+          "answer": "I don't think so."
+        },
+        {
+          "number": 4,
+          "prompt": "I need a laptop, and Tom needs a one too.",
+          "answer": "I need a laptop, and Tom needs one too."
+        },
+        {
+          "number": 5,
+          "prompt": "I think so that he will win.",
+          "answer": "I think so. / I think that he will win. / I think he will win."
+        },
+        {
+          "number": 6,
+          "prompt": "Which books do you want? The ones red.",
+          "answer": "Which books do you want? The red ones."
+        },
+        {
+          "number": 7,
+          "prompt": "I wasn't going to tell her, but I had tell her.",
+          "answer": "I wasn't going to tell her, but I had to."
+        },
+        {
+          "number": 8,
+          "prompt": "Is it true? — I'm afraid yes.",
+          "answer": "Is it true? — I'm afraid so."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Будет ли встреча сегодня? — Думаю, да.",
+          "answer": "Will there be a meeting today? — I think so. / Is there going to be a meeting today? — I think so."
+        },
+        {
+          "number": 2,
+          "prompt": "Тебе нравится эта куртка? Мне больше нравится та, синяя.",
+          "answer": "Do you like this jacket? I prefer the blue one. / Do you like this jacket? I like the blue one more."
+        },
+        {
+          "number": 3,
+          "prompt": "Сайт упал снова? — Надеюсь, что нет.",
+          "answer": "Has the site crashed again? — I hope not. / Has the website crashed again? — I hope not. / Did the site crash again? — I hope not."
+        },
+        {
+          "number": 4,
+          "prompt": "Мне нужен новый монитор, а старый уже не работает.",
+          "answer": "I need a new monitor, and the old one doesn't work anymore. / I need a new monitor because the old one doesn't work anymore."
+        },
+        {
+          "number": 5,
+          "prompt": "Она сказала, что поможет, и она это сделала.",
+          "answer": "She said she would help, and she did. / She said that she would help, and she did."
+        },
+        {
+          "number": 6,
+          "prompt": "У тебя есть время? Если да, давай обсудим проект.",
+          "answer": "Do you have time? If so, let's discuss the project."
+        },
+        {
+          "number": 7,
+          "prompt": "Мы выиграем тендер? — Боюсь, что нет.",
+          "answer": "Will we win the tender? — I'm afraid not. / Are we going to win the tender? — I'm afraid not."
+        },
+        {
+          "number": 8,
+          "prompt": "Я не хотел идти на конференцию, но мне пришлось.",
+          "answer": "I didn't want to go to the conference, but I had to."
+        }
+      ]
+    }
+  ]
+}

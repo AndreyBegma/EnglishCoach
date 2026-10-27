@@ -1,0 +1,271 @@
+{
+  "id": "g074",
+  "position": 74,
+  "cefrLevel": "C2",
+  "title": "Тонкости времён: Present Simple в рассказе, Present Perfect в новостях, Past для вежливости",
+  "plannedFrom": "2027-10-18",
+  "plannedTo": "2027-10-23",
+  "sections": {
+    "why": [
+      "Времена в английском не всегда показывают реальное время. Present Simple может оживить рассказ о прошлом, Present Perfect открывает новость, а Past Simple делает просьбу мягче и вежливее. В русском похожие приёмы есть («Иду я вчера по улице, и вдруг...»), но в английском они строго закреплены за жанрами."
+    ],
+    "formation": [
+      "• Историческое настоящее: Present Simple вместо Past Simple для событий в рассказе: He opens the door and sees her.",
+      "• Новости: первая фраза в Present Perfect (или Present Simple в заголовке), подробности дальше в Past Simple: Police have arrested a man. He was caught at 6 a.m.",
+      "• Вежливость: Past Simple или Past Continuous вместо Present: I wanted to ask..., I was wondering if you could..., I was hoping you could..."
+    ],
+    "usage": [
+      "1. Анекдоты и устные истории (historical present): A man walks into a bar and orders a coffee. (Заходит мужик в бар и заказывает кофе.) So I open the door, and there's a huge dog! (Открываю дверь, а там огромная собака!)",
+      "2. Пересказ сюжета фильма, книги, а также исторические описания для драматизма: Napoleon crosses the Alps and invades Italy.",
+      "3. Новости: сообщаем главное через связь с настоящим, детали уже в прошлом. Scientists have discovered a new planet. The discovery was announced yesterday. (Учёные открыли новую планету. О находке объявили вчера.) Как только появляется точное время (yesterday, at 9 a.m.), переходим на Past Simple.",
+      "4. Заголовки: Present Simple вместо прошедшего: Government cuts taxes. (Правительство снижает налоги.)",
+      "5. Вежливость, отстранение: Did you want anything else? (Вам ещё что-нибудь?) I was wondering if you could help me. (Не могли бы вы мне помочь?) I thought you might like some tea. Past «отодвигает» просьбу от настоящего и делает её менее давящей.",
+      "6. Глаголы-сообщения в настоящем: I hear / I gather / I understand that she has resigned. (Слышал, что она уволилась.)"
+    ],
+    "signalWords": [
+      "Breaking news, just, so, then, suddenly, and then (в рассказе); I was wondering, I was hoping, I wondered if (в просьбах); yesterday, at 9 a.m., last week (переход в Past Simple в новости)."
+    ],
+    "mistakes": [
+      "✗ Breaking news: a bridge collapsed in Texas. → ✓ a bridge has collapsed (свежая новость, связь с сейчас)",
+      "✗ The company has announced the merger yesterday. → ✓ announced (с yesterday только Past Simple)",
+      "✗ So I open the door and I saw a dog. → ✓ and I see a dog (не смешивайте времена в рассказе)",
+      "✗ I was wanting to ask... → ✓ I wanted to ask... (want — глагол состояния, Continuous не нужен)",
+      "✗ I wonder if you could help me, please? (слишком прямо в серьёзной просьбе) → ✓ I was wondering if you could help me."
+    ],
+    "remember": [
+      "Время в английском — это ещё и жанр: рассказ в настоящем, новость через Perfect, вежливость через Past."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Present Perfect или Past Simple (стиль новостей)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "News: Scientists ___ (discover) a new planet.",
+          "answer": "have discovered"
+        },
+        {
+          "number": 2,
+          "prompt": "News: The company ___ (launch) a new app.",
+          "answer": "has launched"
+        },
+        {
+          "number": 3,
+          "prompt": "The announcement ___ (be) made at 9 a.m. yesterday.",
+          "answer": "was"
+        },
+        {
+          "number": 4,
+          "prompt": "The president arrived in Paris this morning. He ___ (meet) the prime minister at noon.",
+          "answer": "met"
+        },
+        {
+          "number": 5,
+          "prompt": "Breaking news: Two people ___ (die) in a crash on Highway 5.",
+          "answer": "have died"
+        },
+        {
+          "number": 6,
+          "prompt": "Police say the driver ___ (lose) control of the car.",
+          "answer": "lost"
+        },
+        {
+          "number": 7,
+          "prompt": "The government ___ (cut) taxes again. The decision was announced yesterday.",
+          "answer": "has cut"
+        },
+        {
+          "number": 8,
+          "prompt": "Workers ___ (return) to work on Monday after a two-week strike.",
+          "answer": "returned"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Перепишите историю в историческом настоящем (Present Simple)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "A man walked into a bar and asked for a drink.",
+          "answer": "A man walks into a bar and asks for a drink."
+        },
+        {
+          "number": 2,
+          "prompt": "So I opened the door and saw a huge dog.",
+          "answer": "So I open the door and see a huge dog."
+        },
+        {
+          "number": 3,
+          "prompt": "Then she looked at me and said nothing.",
+          "answer": "Then she looks at me and says nothing."
+        },
+        {
+          "number": 4,
+          "prompt": "He picked up the phone and called his boss.",
+          "answer": "He picks up the phone and calls his boss."
+        },
+        {
+          "number": 5,
+          "prompt": "Suddenly the lights went out.",
+          "answer": "Suddenly the lights go out."
+        },
+        {
+          "number": 6,
+          "prompt": "Napoleon crossed the Alps and invaded Italy.",
+          "answer": "Napoleon crosses the Alps and invades Italy."
+        },
+        {
+          "number": 7,
+          "prompt": "The hero found the map and ran out of the house.",
+          "answer": "The hero finds the map and runs out of the house."
+        },
+        {
+          "number": 8,
+          "prompt": "Then the dog jumped over the fence and disappeared.",
+          "answer": "Then the dog jumps over the fence and disappears."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Сделайте просьбу более вежливой с помощью прошедшего времени",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I want to ask you something.",
+          "answer": "I wanted to ask you something."
+        },
+        {
+          "number": 2,
+          "prompt": "Do you want anything else?",
+          "answer": "Did you want anything else?"
+        },
+        {
+          "number": 3,
+          "prompt": "I wonder if you can help me.",
+          "answer": "I was wondering if you could help me."
+        },
+        {
+          "number": 4,
+          "prompt": "I hope you can come to the party.",
+          "answer": "I was hoping you could come to the party."
+        },
+        {
+          "number": 5,
+          "prompt": "Can I borrow your charger? (start with Could)",
+          "answer": "Could I borrow your charger?"
+        },
+        {
+          "number": 6,
+          "prompt": "I'm wondering if I can use your phone.",
+          "answer": "I was wondering if I could use your phone."
+        },
+        {
+          "number": 7,
+          "prompt": "Will you have a minute? (start with Would)",
+          "answer": "Would you have a minute?"
+        },
+        {
+          "number": 8,
+          "prompt": "I'm hoping to speak to Ms. Lee.",
+          "answer": "I was hoping to speak to Ms. Lee."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку во времени и исправьте предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Breaking news: a bridge collapsed in Texas.",
+          "answer": "Breaking news: a bridge has collapsed in Texas."
+        },
+        {
+          "number": 2,
+          "prompt": "The company has announced the merger yesterday.",
+          "answer": "The company announced the merger yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "So I open the door, and I saw a huge dog.",
+          "answer": "So I open the door, and I see a huge dog."
+        },
+        {
+          "number": 4,
+          "prompt": "Researchers have published the results in March.",
+          "answer": "Researchers published the results in March."
+        },
+        {
+          "number": 5,
+          "prompt": "Prices have risen sharply, officials said. The increase has begun in May.",
+          "answer": "Prices have risen sharply, officials said. The increase began in May."
+        },
+        {
+          "number": 6,
+          "prompt": "I was wanting to ask about the price.",
+          "answer": "I wanted to ask about the price."
+        },
+        {
+          "number": 7,
+          "prompt": "A man walks into a bar. The barman asked him what he wanted.",
+          "answer": "A man walks into a bar. The barman asks him what he wants."
+        },
+        {
+          "number": 8,
+          "prompt": "Have you seen the news? A storm has hit the coast last night.",
+          "answer": "Have you seen the news? A storm hit the coast last night."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Правительство объявило о новых налогах.",
+          "answer": "The government has announced new taxes."
+        },
+        {
+          "number": 2,
+          "prompt": "Объявление было сделано вчера вечером.",
+          "answer": "The announcement was made last night. / The announcement was made yesterday evening."
+        },
+        {
+          "number": 3,
+          "prompt": "Я хотел спросить, не могли бы вы мне помочь (очень вежливо).",
+          "answer": "I was wondering if you could help me. / I wanted to ask if you could help me."
+        },
+        {
+          "number": 4,
+          "prompt": "Заходит мужик в бар и заказывает кофе.",
+          "answer": "A man walks into a bar and orders a coffee. / A man walks into a bar and orders coffee."
+        },
+        {
+          "number": 5,
+          "prompt": "Я надеялся, что вы сможете прийти на встречу.",
+          "answer": "I was hoping you could come to the meeting. / I was hoping that you could come to the meeting."
+        },
+        {
+          "number": 6,
+          "prompt": "Компания только что выпустила новую версию приложения.",
+          "answer": "The company has just released a new version of the app. / The company has just launched a new version of the app."
+        },
+        {
+          "number": 7,
+          "prompt": "И тут она открывает дверь и видит его (в рассказе).",
+          "answer": "And then she opens the door and sees him."
+        },
+        {
+          "number": 8,
+          "prompt": "Землетрясение произошло в 5 утра, пострадали десять человек.",
+          "answer": "The earthquake happened at 5 a.m., and ten people were injured. / The earthquake struck at 5 a.m., injuring ten people."
+        }
+      ]
+    }
+  ]
+}

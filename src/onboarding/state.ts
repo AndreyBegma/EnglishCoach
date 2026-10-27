@@ -30,6 +30,11 @@ export interface OnboardingState {
   messageId?: number;
   answers: PlacementAnswer[];
   item?: PlacementItem;
+  /**
+   * Counts every item shown in this session, retries included; the answer buttons carry it, so a
+   * tap meant for an earlier item never answers the one on screen.
+   */
+  itemSeq?: number;
   result?: { level: CefrLevel; summary: string | null };
   /** The line folded into the hub when the session ends. */
   summaryLine?: string;

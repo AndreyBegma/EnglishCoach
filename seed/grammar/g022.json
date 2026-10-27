@@ -1,0 +1,278 @@
+{
+  "id": "g022",
+  "position": 22,
+  "cefrLevel": "B1",
+  "title": "Второе условное (нереальное настоящее)",
+  "plannedFrom": "2026-11-26",
+  "plannedTo": "2026-11-28",
+  "sections": {
+    "why": [
+      "Второе условное говорит о нереальных или маловероятных ситуациях в настоящем и будущем: «если бы я был богат, я бы купил остров». В русском для этого есть «бы», а в английском сигнал — глагол в прошедшем времени после if, хотя речь НЕ о прошлом."
+    ],
+    "formation": [
+      "• If + Past Simple, would + глагол",
+      "If I had more time, I would learn Spanish.",
+      "• Отрицание: If I didn't have to work, I would travel more. / I wouldn't say that if I were you.",
+      "• Вопрос: What would you do if you won a million dollars?",
+      "• Глагол to be: после if для всех лиц обычно используют were: If I were you, I would accept the offer. (В разговорной речи допустимо и was: If he was here...)",
+      "• would можно заменить на could (= мог бы) или might (= возможно, смог бы): If I had a car, I could drive to work.",
+      "• Сокращение: would = 'd (I'd go), would not = wouldn't."
+    ],
+    "usage": [
+      "1. Нереальная ситуация сейчас.",
+      "If I were a manager, I would change the process. (Если бы я был менеджером, я бы изменил процесс. — но я не менеджер.)",
+      "2. Маловероятное будущее.",
+      "If I won the lottery, I would quit my job. (Если бы я выиграл в лотерею, я бы уволился.)",
+      "3. Совет в формуле If I were you.",
+      "If I were you, I would talk to your boss. (На твоём месте я бы поговорил с начальником.)",
+      "4. Воображаемые желания и мечты.",
+      "What would you do if you could fly? (Что бы ты делал, если бы мог летать?)"
+    ],
+    "signalWords": [
+      "If I were you, imagine, suppose, what if, «если бы», «на твоём месте».",
+      "Разница с первым условным: If I have time, I will help (реально, вполне возможно) и If I had time, I would help (но времени нет или вряд ли будет)."
+    ],
+    "mistakes": [
+      "✗ If I would have money, I would buy a car. → ✓ If I had money, I would buy a car. (would нельзя ставить после if)",
+      "✗ If I will be rich, I would travel. → ✓ If I were rich, I would travel. (будущее после if не ставим)",
+      "✗ If I was you, I will go. → ✓ If I were you, I would go. (в главной части — would, не will)",
+      "✗ If I would be you → ✓ If I were you (после if нужен Past Simple или were)",
+      "✗ I would go if I have time. → ✓ I would go if I had time. (части должны согласоваться по типу условия)"
+    ],
+    "remember": [
+      "If + прошедшее, would + глагол: прошедшее время здесь «отодвигает» ситуацию от реальности, а не от настоящего."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму (Past Simple или would + глагол)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I ___ (have) more money, I would buy a new laptop.",
+          "answer": "had"
+        },
+        {
+          "number": 2,
+          "prompt": "If she knew the answer, she ___ (tell) us.",
+          "answer": "would tell"
+        },
+        {
+          "number": 3,
+          "prompt": "We ___ (travel) around the world if we had more free time.",
+          "answer": "would travel"
+        },
+        {
+          "number": 4,
+          "prompt": "If I ___ (be) you, I would apply for that job.",
+          "answer": "were"
+        },
+        {
+          "number": 5,
+          "prompt": "If they lived closer, they ___ (visit) us more often.",
+          "answer": "would visit"
+        },
+        {
+          "number": 6,
+          "prompt": "He would be healthier if he ___ (not eat) so much fast food.",
+          "answer": "didn't eat / did not eat"
+        },
+        {
+          "number": 7,
+          "prompt": "If you ___ (speak) better English, you would find a job abroad.",
+          "answer": "spoke"
+        },
+        {
+          "number": 8,
+          "prompt": "I ___ (not buy) that car if I were you.",
+          "answer": "wouldn't buy / would not buy"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I (a) have (b) had a bigger apartment, I would invite all my friends.",
+          "answer": "(b) had"
+        },
+        {
+          "number": 2,
+          "prompt": "If she (a) would know (b) knew his number, she would call him.",
+          "answer": "(b) knew"
+        },
+        {
+          "number": 3,
+          "prompt": "What (a) will (b) would you do if you lost your job?",
+          "answer": "(b) would"
+        },
+        {
+          "number": 4,
+          "prompt": "If I (a) was (b) were you, I would talk to the teacher.",
+          "answer": "(b) were (was is also possible in informal speech)"
+        },
+        {
+          "number": 5,
+          "prompt": "We (a) would go (b) will go to the beach if the weather were better.",
+          "answer": "(a) would go"
+        },
+        {
+          "number": 6,
+          "prompt": "If he (a) didn't work (b) wouldn't work so much, he would have more free time.",
+          "answer": "(a) didn't work"
+        },
+        {
+          "number": 7,
+          "prompt": "I (a) could (b) can help you if I knew how to do it.",
+          "answer": "(a) could"
+        },
+        {
+          "number": 8,
+          "prompt": "If it (a) is (b) were Saturday today, we would be at the park.",
+          "answer": "(b) were"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Преобразуйте предложение во второе условное",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I don't have a car, so I don't drive to work. -> If I ___, I ___ to work.",
+          "answer": "had a car, I would drive"
+        },
+        {
+          "number": 2,
+          "prompt": "She isn't rich, so she doesn't travel a lot. -> If she ___ rich, she ___ a lot.",
+          "answer": "were / was rich, she would travel"
+        },
+        {
+          "number": 3,
+          "prompt": "He doesn't know Spanish, so he can't work in Madrid. -> If he ___ Spanish, he ___ in Madrid.",
+          "answer": "knew Spanish, he could work"
+        },
+        {
+          "number": 4,
+          "prompt": "We live far from the office, so we are always late. -> If we ___ closer, we ___ always late.",
+          "answer": "lived closer, we wouldn't be / would not be"
+        },
+        {
+          "number": 5,
+          "prompt": "Make a question: What / you / do / if / you / win / a lottery?",
+          "answer": "What would you do if you won the lottery? / What would you do if you won a lottery?"
+        },
+        {
+          "number": 6,
+          "prompt": "Give advice using If I were you: You should talk to your manager.",
+          "answer": "If I were you, I would talk to your manager. / If I were you, I'd talk to your manager."
+        },
+        {
+          "number": 7,
+          "prompt": "Make negative: If I had time, I would help you.",
+          "answer": "If I didn't have time, I wouldn't help you."
+        },
+        {
+          "number": 8,
+          "prompt": "Rewrite with the if-part second: If I were a doctor, I would help people.",
+          "answer": "I would help people if I were a doctor."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If I would have more time, I would learn to play the guitar.",
+          "answer": "If I had more time, I would learn to play the guitar."
+        },
+        {
+          "number": 2,
+          "prompt": "If I will be you, I would not do that.",
+          "answer": "If I were you, I would not do that."
+        },
+        {
+          "number": 3,
+          "prompt": "If she had a car, she will drive to work.",
+          "answer": "If she had a car, she would drive to work."
+        },
+        {
+          "number": 4,
+          "prompt": "What you would do if you were president?",
+          "answer": "What would you do if you were president?"
+        },
+        {
+          "number": 5,
+          "prompt": "I would buy a house if I have a lot of money.",
+          "answer": "I would buy a house if I had a lot of money."
+        },
+        {
+          "number": 6,
+          "prompt": "If he didn't be so busy, he would come to the party.",
+          "answer": "If he weren't so busy, he would come to the party. / If he wasn't so busy, he would come to the party."
+        },
+        {
+          "number": 7,
+          "prompt": "If they would live in Kyiv, they would see us often.",
+          "answer": "If they lived in Kyiv, they would see us often."
+        },
+        {
+          "number": 8,
+          "prompt": "She would be happier if she not worked so much.",
+          "answer": "She would be happier if she didn't work so much."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Если бы у меня было больше времени, я бы выучил французский.",
+          "answer": "If I had more time, I would learn French."
+        },
+        {
+          "number": 2,
+          "prompt": "На твоём месте я бы поговорил с начальником.",
+          "answer": "If I were you, I would talk to my boss. / If I were you, I would talk to your boss. / If I were you, I would talk to the boss."
+        },
+        {
+          "number": 3,
+          "prompt": "Что бы ты делал, если бы выиграл миллион долларов?",
+          "answer": "What would you do if you won a million dollars?"
+        },
+        {
+          "number": 4,
+          "prompt": "Если бы я не работал в IT, я бы, наверное, был учителем.",
+          "answer": "If I didn't work in IT, I would probably be a teacher."
+        },
+        {
+          "number": 5,
+          "prompt": "Мы бы поехали в отпуск, если бы у нас были деньги.",
+          "answer": "We would go on vacation if we had money. / We would go on vacation if we had the money."
+        },
+        {
+          "number": 6,
+          "prompt": "Если бы он знал правду, он бы расстроился.",
+          "answer": "If he knew the truth, he would be upset."
+        },
+        {
+          "number": 7,
+          "prompt": "Я бы не сказал этого, если бы был на твоём месте.",
+          "answer": "I wouldn't say that if I were you. / I wouldn't say that if I were in your place."
+        },
+        {
+          "number": 8,
+          "prompt": "Если бы сервер работал быстрее, пользователи были бы счастливее.",
+          "answer": "If the server worked faster, the users would be happier. / If the server were faster, the users would be happier."
+        }
+      ]
+    }
+  ]
+}

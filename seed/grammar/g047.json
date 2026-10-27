@@ -1,0 +1,272 @@
+{
+  "id": "g047",
+  "position": 47,
+  "cefrLevel": "B2",
+  "title": "Безличный пассив: It is said that… / He is said to have…",
+  "plannedFrom": "2027-04-12",
+  "plannedTo": "2027-04-17",
+  "sections": {
+    "why": [
+      "Эта конструкция нужна, когда мы передаём общее мнение, слухи или новости, не называя, кто именно это говорит: «говорят, что…», «считается, что…», «ожидается, что…». По-русски это безличные предложения, а в английском для них есть два готовых шаблона. Их очень любят в новостях и в деловой речи."
+    ],
+    "formation": [
+      "• Шаблон 1: It is + V3 + that + целое предложение. It is said that he is rich.",
+      "• Шаблон 2: Подлежащее + is/are + V3 + to + глагол. He is said to be rich.",
+      "• Одновременно с мнением или в будущем: to + базовая форма. She is believed to live in Paris.",
+      "• Действие раньше мнения: to have + V3. He is said to have won the prize.",
+      "• Действие идёт прямо сейчас: to be + V-ing. They are thought to be working abroad.",
+      "• Глаголы: say, believe, think, know, report, expect, consider, understand, claim."
+    ],
+    "usage": [
+      "1. Слухи и общее мнение: It is said that the CEO will leave. (Говорят, что директор уйдёт.) The CEO is said to be leaving. (Директор, как говорят, уходит.)",
+      "2. Новости и официальные сообщения: The minister is reported to have resigned. (Сообщается, что министр ушёл в отставку.)",
+      "3. Ожидания: The new phone is expected to be popular. (Ожидается, что новый телефон будет популярным.)",
+      "4. Прошлое событие: The house is known to have been built in 1900. (Известно, что дом построили в 1900 году.)"
+    ],
+    "signalWords": [
+      "is said, is believed, is thought, is known, is reported, is expected, is considered, is understood, is claimed. Перевод обычно начинается со слов «говорят», «считается», «полагают», «известно», «сообщается»."
+    ],
+    "mistakes": [
+      "✗ It is said him to be rich → ✓ He is said to be rich / It is said that he is rich. Нельзя смешивать два шаблона.",
+      "✗ He is said that he is rich → ✓ It is said that he is rich. После that подлежащее «it», а не «he».",
+      "✗ People is said to be happy → ✓ People are said to be happy. Be должен согласоваться с подлежащим.",
+      "✗ He is said to win the prize last year → ✓ He is said to have won the prize last year. Для прошлого нужен to have + V3.",
+      "✗ He is know to be rich → ✓ He is known to be rich. Нужна третья форма глагола."
+    ],
+    "remember": [
+      "Мнение в настоящем, а событие раньше — ставь to have + V3: He is said to have left."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It is ___ (say) that the company will hire more developers.",
+          "answer": "said"
+        },
+        {
+          "number": 2,
+          "prompt": "The new phone is ___ (expect) to be very popular.",
+          "answer": "expected"
+        },
+        {
+          "number": 3,
+          "prompt": "He is believed ___ (be) in Canada now.",
+          "answer": "to be"
+        },
+        {
+          "number": 4,
+          "prompt": "She is said ___ (win) the prize last year.",
+          "answer": "to have won"
+        },
+        {
+          "number": 5,
+          "prompt": "The bridge is known ___ (be) very old.",
+          "answer": "to be"
+        },
+        {
+          "number": 6,
+          "prompt": "It ___ (report) that the meeting was cancelled.",
+          "answer": "was reported / is reported"
+        },
+        {
+          "number": 7,
+          "prompt": "The thief is thought ___ (escape) through the window.",
+          "answer": "to have escaped"
+        },
+        {
+          "number": 8,
+          "prompt": "The city is considered ___ (be) one of the safest in Europe.",
+          "answer": "to be"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It is believed (a) that he is (b) him to be (c) he to be a genius.",
+          "answer": "(a) that he is"
+        },
+        {
+          "number": 2,
+          "prompt": "She is said (a) to speak (b) speaks (c) speaking five languages.",
+          "answer": "(a) to speak"
+        },
+        {
+          "number": 3,
+          "prompt": "They are reported (a) to have left (b) to leave (c) have left the country last night.",
+          "answer": "(a) to have left"
+        },
+        {
+          "number": 4,
+          "prompt": "It (a) says (b) is said (c) said that prices will rise.",
+          "answer": "(b) is said"
+        },
+        {
+          "number": 5,
+          "prompt": "The company is expected (a) to announce (b) announcing (c) that announce new products soon.",
+          "answer": "(a) to announce"
+        },
+        {
+          "number": 6,
+          "prompt": "He is thought (a) to have worked (b) to be working (c) to worked in Berlin right now.",
+          "answer": "(b) to be working"
+        },
+        {
+          "number": 7,
+          "prompt": "The old man is said (a) to be (b) to have been very rich when he was young.",
+          "answer": "(b) to have been"
+        },
+        {
+          "number": 8,
+          "prompt": "It (a) is believed (b) believe (c) believes that the fire started in the kitchen.",
+          "answer": "(a) is believed"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение, начав с указанных слов",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "People say that Tom is a good manager. (Tom ...)",
+          "answer": "Tom is said to be a good manager."
+        },
+        {
+          "number": 2,
+          "prompt": "People believe that the virus came from animals. (The virus ...)",
+          "answer": "The virus is believed to have come from animals."
+        },
+        {
+          "number": 3,
+          "prompt": "They expect that prices will rise. (Prices ...)",
+          "answer": "Prices are expected to rise."
+        },
+        {
+          "number": 4,
+          "prompt": "People think that she is working abroad. (She ...)",
+          "answer": "She is thought to be working abroad."
+        },
+        {
+          "number": 5,
+          "prompt": "Everyone knows that he lost a lot of money. (He ...)",
+          "answer": "He is known to have lost a lot of money."
+        },
+        {
+          "number": 6,
+          "prompt": "They say that the film is excellent. (The film ...)",
+          "answer": "The film is said to be excellent."
+        },
+        {
+          "number": 7,
+          "prompt": "People report that the minister resigned. (The minister ...)",
+          "answer": "The minister is reported to have resigned."
+        },
+        {
+          "number": 8,
+          "prompt": "They consider that this method is safe. (This method ...)",
+          "answer": "This method is considered to be safe. / This method is considered safe."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Перепишите предложение, начав с It is ...",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is said to be a millionaire.",
+          "answer": "It is said that he is a millionaire."
+        },
+        {
+          "number": 2,
+          "prompt": "The company is believed to have lost millions.",
+          "answer": "It is believed that the company has lost millions. / It is believed that the company lost millions."
+        },
+        {
+          "number": 3,
+          "prompt": "She is thought to live near the lake.",
+          "answer": "It is thought that she lives near the lake."
+        },
+        {
+          "number": 4,
+          "prompt": "The president is expected to arrive tomorrow.",
+          "answer": "It is expected that the president will arrive tomorrow."
+        },
+        {
+          "number": 5,
+          "prompt": "The house is known to have been built in 1900.",
+          "answer": "It is known that the house was built in 1900. / It is known that the house had been built in 1900."
+        },
+        {
+          "number": 6,
+          "prompt": "The suspect is reported to be in Spain.",
+          "answer": "It is reported that the suspect is in Spain."
+        },
+        {
+          "number": 7,
+          "prompt": "The team is understood to have fixed the bug.",
+          "answer": "It is understood that the team has fixed the bug. / It is understood that the team fixed the bug."
+        },
+        {
+          "number": 8,
+          "prompt": "He is considered to be the best developer.",
+          "answer": "It is considered that he is the best developer."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Говорят, что этот ресторан очень дорогой.",
+          "answer": "It is said that this restaurant is very expensive. / This restaurant is said to be very expensive."
+        },
+        {
+          "number": 2,
+          "prompt": "Считается, что он лучший разработчик в нашей команде.",
+          "answer": "He is considered to be the best developer in our team. / It is considered that he is the best developer in our team."
+        },
+        {
+          "number": 3,
+          "prompt": "Говорят, что она живёт в Лондоне.",
+          "answer": "She is said to live in London. / It is said that she lives in London."
+        },
+        {
+          "number": 4,
+          "prompt": "Ожидается, что новая версия выйдет в следующем месяце.",
+          "answer": "The new version is expected to be released next month. / It is expected that the new version will be released next month."
+        },
+        {
+          "number": 5,
+          "prompt": "Полагают, что вор вошёл через окно.",
+          "answer": "The thief is thought to have entered through the window. / It is thought that the thief entered through the window."
+        },
+        {
+          "number": 6,
+          "prompt": "Известно, что эта компания теряет деньги.",
+          "answer": "This company is known to be losing money. / It is known that this company is losing money."
+        },
+        {
+          "number": 7,
+          "prompt": "Сообщается, что самолёт приземлился благополучно.",
+          "answer": "The plane is reported to have landed safely. / It is reported that the plane landed safely."
+        },
+        {
+          "number": 8,
+          "prompt": "Говорят, что он очень много работает.",
+          "answer": "He is said to work a lot. / It is said that he works a lot. / He is said to work very hard."
+        }
+      ]
+    }
+  ]
+}

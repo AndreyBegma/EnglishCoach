@@ -1,0 +1,277 @@
+{
+  "id": "g026",
+  "position": 26,
+  "cefrLevel": "B1",
+  "title": "Косвенная речь: вопросы, просьбы, приказы",
+  "plannedFrom": "2026-12-10",
+  "plannedTo": "2026-12-12",
+  "sections": {
+    "why": [
+      "Когда мы пересказываем чужой вопрос, просьбу или приказ, мы не цитируем их дословно, а встраиваем в свою фразу. В русском это просто: «Он спросил, где я живу». В английском есть ловушка: после reported question порядок слов становится как в утверждении, без do/does/did."
+    ],
+    "formation": [
+      "1) Вопросы с вопросительным словом (what, where, when, why, how):",
+      "asked / wanted to know + вопросительное слово + подлежащее + глагол (порядок как в утверждении).",
+      "\"Where do you work?\" → He asked where I worked.",
+      "2) Вопросы без вопросительного слова (да/нет): if или whether.",
+      "\"Do you like coffee?\" → She asked if I liked coffee.",
+      "3) Времена сдвигаются назад, как в теме 25: do → did, am/is → was, will → would, can → could, have done → had done.",
+      "4) Просьбы и приказы: told / asked / ordered + кого + (not) to + глагол.",
+      "\"Open the file.\" → He told me to open the file.",
+      "\"Please don't be late.\" → She asked me not to be late.",
+      "Вопросительный знак в косвенном вопросе не ставится."
+    ],
+    "usage": [
+      "1. Пересказ вопроса: She asked me what time the meeting started. (Она спросила меня, во сколько начинается встреча.)",
+      "2. Пересказ вопроса да/нет: I asked him whether he had finished the task. (Я спросил его, закончил ли он задачу.)",
+      "3. Пересказ просьбы: The client asked us to send the invoice. (Клиент попросил нас отправить счёт.)",
+      "4. Пересказ приказа или запрета: The manager told him not to deploy on Friday. (Менеджер велел ему не деплоить в пятницу.)"
+    ],
+    "signalWords": [
+      "asked, wanted to know, wondered, told someone to, asked someone to, if, whether.",
+      "Местоимения и слова времени тоже меняются: I → he/she, my → his/her, today → that day, tomorrow → the next day, here → there."
+    ],
+    "mistakes": [
+      "✗ He asked where did I live. → ✓ He asked where I lived. (после asked порядок слов прямой, do/did не нужен)",
+      "✗ She asked me do I like tea. → ✓ She asked me if I liked tea. (в вопросе да/нет нужен if или whether)",
+      "✗ He told me open the door. → ✓ He told me to open the door. (после told/asked + кого нужен to)",
+      "✗ She asked me to not go. → ✓ She asked me not to go. (not стоит перед to + глагол)",
+      "✗ He said me to wait. → ✓ He told me to wait. (say не берёт «кому» напрямую, нужен tell)"
+    ],
+    "remember": [
+      "Косвенный вопрос = не вопрос: порядок слов как в утверждении, без do/did, без знака вопроса; да/нет-вопрос открывай через if."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте пропущенное слово (if / where / what / to / not to)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "\"Do you speak French?\" → She asked me ___ I spoke French.",
+          "answer": "if / whether"
+        },
+        {
+          "number": 2,
+          "prompt": "\"Where do you live?\" → He asked me ___ I lived.",
+          "answer": "where"
+        },
+        {
+          "number": 3,
+          "prompt": "\"Close the window.\" → She told me ___ close the window.",
+          "answer": "to"
+        },
+        {
+          "number": 4,
+          "prompt": "\"Don't touch it.\" → He told me ___ ___ touch it.",
+          "answer": "not to"
+        },
+        {
+          "number": 5,
+          "prompt": "\"What is your name?\" → She asked me ___ my name was.",
+          "answer": "what"
+        },
+        {
+          "number": 6,
+          "prompt": "\"Is the server down?\" → He wanted to know ___ the server was down.",
+          "answer": "if / whether"
+        },
+        {
+          "number": 7,
+          "prompt": "\"Please help me.\" → She asked him ___ help her.",
+          "answer": "to"
+        },
+        {
+          "number": 8,
+          "prompt": "\"Why are you late?\" → The boss asked me ___ I was late.",
+          "answer": "why"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He asked me (a) where did I work (b) where I worked.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "She asked (a) if I was tired (b) was I tired.",
+          "answer": "a"
+        },
+        {
+          "number": 3,
+          "prompt": "The teacher told us (a) to open (b) open our books.",
+          "answer": "a"
+        },
+        {
+          "number": 4,
+          "prompt": "He asked her (a) not to be (b) to not be late.",
+          "answer": "a"
+        },
+        {
+          "number": 5,
+          "prompt": "I asked him (a) what he was doing (b) what was he doing.",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "She (a) said (b) told me to wait here.",
+          "answer": "b"
+        },
+        {
+          "number": 7,
+          "prompt": "They wanted to know (a) when would the train arrive (b) when the train would arrive.",
+          "answer": "b"
+        },
+        {
+          "number": 8,
+          "prompt": "He asked me (a) whether I had seen the report (b) whether had I seen the report.",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите в косвенной речи",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "\"Where do you work?\" He asked me ...",
+          "answer": "He asked me where I worked."
+        },
+        {
+          "number": 2,
+          "prompt": "\"Are you ready?\" She asked me ...",
+          "answer": "She asked me if I was ready. / She asked me whether I was ready."
+        },
+        {
+          "number": 3,
+          "prompt": "\"Send me the file.\" My boss told me ...",
+          "answer": "My boss told me to send him the file. / My boss told me to send her the file."
+        },
+        {
+          "number": 4,
+          "prompt": "\"Don't be late.\" She told us ...",
+          "answer": "She told us not to be late."
+        },
+        {
+          "number": 5,
+          "prompt": "\"What time does the meeting start?\" He wanted to know ...",
+          "answer": "He wanted to know what time the meeting started."
+        },
+        {
+          "number": 6,
+          "prompt": "\"Can you fix the bug?\" The client asked me ...",
+          "answer": "The client asked me if I could fix the bug. / The client asked me whether I could fix the bug."
+        },
+        {
+          "number": 7,
+          "prompt": "\"Have you finished the task?\" She asked him ...",
+          "answer": "She asked him if he had finished the task. / She asked him whether he had finished the task."
+        },
+        {
+          "number": 8,
+          "prompt": "\"Please turn off your phone.\" The guard asked me ...",
+          "answer": "The guard asked me to turn off my phone."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He asked me where did I live.",
+          "answer": "He asked me where I lived."
+        },
+        {
+          "number": 2,
+          "prompt": "She asked me do I like pizza.",
+          "answer": "She asked me if I liked pizza."
+        },
+        {
+          "number": 3,
+          "prompt": "The manager told me send the report.",
+          "answer": "The manager told me to send the report."
+        },
+        {
+          "number": 4,
+          "prompt": "He said me to wait outside.",
+          "answer": "He told me to wait outside."
+        },
+        {
+          "number": 5,
+          "prompt": "She asked me to not make noise.",
+          "answer": "She asked me not to make noise."
+        },
+        {
+          "number": 6,
+          "prompt": "They asked what time is it.",
+          "answer": "They asked what time it was."
+        },
+        {
+          "number": 7,
+          "prompt": "He asked me that I had a car.",
+          "answer": "He asked me if I had a car. / He asked me whether I had a car."
+        },
+        {
+          "number": 8,
+          "prompt": "I asked her where was the station?",
+          "answer": "I asked her where the station was."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Он спросил меня, где я работаю.",
+          "answer": "He asked me where I worked."
+        },
+        {
+          "number": 2,
+          "prompt": "Она спросила, есть ли у меня время.",
+          "answer": "She asked if I had time. / She asked whether I had time."
+        },
+        {
+          "number": 3,
+          "prompt": "Менеджер попросил меня отправить ему отчёт.",
+          "answer": "The manager asked me to send him the report."
+        },
+        {
+          "number": 4,
+          "prompt": "Врач сказал мне не пить кофе вечером.",
+          "answer": "The doctor told me not to drink coffee in the evening."
+        },
+        {
+          "number": 5,
+          "prompt": "Клиент спросил, когда мы закончим сайт.",
+          "answer": "The client asked when we would finish the website."
+        },
+        {
+          "number": 6,
+          "prompt": "Я спросил коллегу, понимает ли он этот код.",
+          "answer": "I asked my colleague if he understood this code. / I asked my colleague whether he understood this code."
+        },
+        {
+          "number": 7,
+          "prompt": "Таксист спросил, куда мы едем.",
+          "answer": "The taxi driver asked where we were going."
+        },
+        {
+          "number": 8,
+          "prompt": "Мама сказала мне позвонить ей вечером.",
+          "answer": "My mom told me to call her in the evening."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "id": "g077",
+  "position": 77,
+  "cefrLevel": "C2",
+  "title": "Абсолютные причастные конструкции: Weather permitting, All things considered",
+  "plannedFrom": "2027-11-08",
+  "plannedTo": "2027-11-13",
+  "sections": {
+    "why": [
+      "Абсолютная конструкция — это короткий оборот со своим собственным подлежащим, который заменяет целое придаточное: причину, условие или время. По-русски похоже на «Погода позволяя...» или «Дело сделано — можно отдыхать». В английском это звучит кратко и литературно, а готовые формулы (Weather permitting) встречаются постоянно."
+    ],
+    "formation": [
+      "• существительное + причастие: Weather permitting, ...",
+      "• существительное + being + прилагательное: Time being short, ...",
+      "• существительное + having + V3: The tests having passed, ...",
+      "• существительное + V3 (пассивное значение): The work finished, ...",
+      "• with + существительное + причастие/прилагательное: with her eyes closed",
+      "Подлежащее оборота НЕ совпадает с подлежащим главной части — в этом отличие от обычного причастного оборота. Запятая отделяет оборот от главной части."
+    ],
+    "usage": [
+      "1. Условие (вместо if): Weather permitting, we'll fly on Friday. (Если позволит погода, мы вылетим в пятницу.)",
+      "2. Причина (вместо because): Time being short, we skipped the demo. (Так как времени было мало, мы пропустили демо.)",
+      "3. Время (вместо when/after): The tests having passed, we deployed. (Когда тесты прошли, мы выложили релиз.)",
+      "4. Сопутствующие обстоятельства, часто с with: He sat there with his arms crossed. (Он сидел со скрещёнными руками.)",
+      "5. Устойчивые формулы: All things considered (всё взвесив), other things being equal (при прочих равных), everything taken into account (учитывая всё), that said (тем не менее)."
+    ],
+    "signalWords": [
+      "Начало предложения: Weather permitting, Time being..., All things considered, Other things being equal, The work done... Часто в деловой и письменной речи."
+    ],
+    "mistakes": [
+      "✗ Weather permits, we'll go. → ✓ Weather permitting, we'll go. (нужно причастие, а не глагол: два глагола через запятую не соединить)",
+      "✗ Being time short, we left. → ✓ Time being short, we left. (подлежащее ставим перед being)",
+      "✗ The work finishing, we went home. → ✓ The work finished, we went home. (работа не «заканчивает», её закончили — нужна форма V3)",
+      "✗ All things considering → ✓ All things considered (вещи рассматриваются — V3)",
+      "✗ He sat with the arms crossed. → ✓ He sat with his arms crossed. (части тела — с притяжательным местоимением)"
+    ],
+    "remember": [
+      "Своё подлежащее + причастие, и вся мысль в одной фразе: Weather permitting, all things considered."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте слово в нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The weather ___ (permit), we'll have the barbecue outside.",
+          "answer": "permitting"
+        },
+        {
+          "number": 2,
+          "prompt": "The work ___ (finish), the team went home.",
+          "answer": "finished"
+        },
+        {
+          "number": 3,
+          "prompt": "Time ___ (be) short, we skipped the last item.",
+          "answer": "being"
+        },
+        {
+          "number": 4,
+          "prompt": "All things ___ (consider), it was a good year.",
+          "answer": "considered"
+        },
+        {
+          "number": 5,
+          "prompt": "The server ___ (crash), nobody could work.",
+          "answer": "having crashed"
+        },
+        {
+          "number": 6,
+          "prompt": "Other things ___ (be) equal, I'd choose the cheaper one.",
+          "answer": "being"
+        },
+        {
+          "number": 7,
+          "prompt": "Everything ___ (take) into account, the plan seems realistic.",
+          "answer": "taken"
+        },
+        {
+          "number": 8,
+          "prompt": "Her homework ___ (do), she turned on the TV.",
+          "answer": "done"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "___, we'll start at nine. (a) Weather permitting (b) Weather permits",
+          "answer": "(a) Weather permitting"
+        },
+        {
+          "number": 2,
+          "prompt": "The meeting ___, everyone left. (a) finishing (b) finished",
+          "answer": "(b) finished"
+        },
+        {
+          "number": 3,
+          "prompt": "She sat there with her eyes ___. (a) close (b) closed",
+          "answer": "(b) closed"
+        },
+        {
+          "number": 4,
+          "prompt": "___, we cut the demo. (a) Being time short (b) Time being short",
+          "answer": "(b) Time being short"
+        },
+        {
+          "number": 5,
+          "prompt": "All things ___, I think we should accept. (a) considered (b) considering",
+          "answer": "(a) considered"
+        },
+        {
+          "number": 6,
+          "prompt": "He walked in, ___. (a) a book in his hand (b) a book is in his hand",
+          "answer": "(a) a book in his hand"
+        },
+        {
+          "number": 7,
+          "prompt": "___ equal, the younger candidate gets the job. (a) Everything else being (b) Everything else is",
+          "answer": "(a) Everything else being"
+        },
+        {
+          "number": 8,
+          "prompt": "The deadline ___, we worked all weekend. (a) approaching (b) approached",
+          "answer": "(a) approaching"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перепишите предложение с абсолютной конструкцией",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If the weather permits, we will fly on Friday. (Begin: Weather...)",
+          "answer": "Weather permitting, we will fly on Friday."
+        },
+        {
+          "number": 2,
+          "prompt": "Because time was short, we skipped lunch. (Begin: Time...)",
+          "answer": "Time being short, we skipped lunch."
+        },
+        {
+          "number": 3,
+          "prompt": "When the tests had passed, we deployed the code. (Begin: The tests...)",
+          "answer": "The tests having passed, we deployed the code."
+        },
+        {
+          "number": 4,
+          "prompt": "If we consider everything, the project was a success. (Begin: All things...)",
+          "answer": "All things considered, the project was a success."
+        },
+        {
+          "number": 5,
+          "prompt": "As the road was closed, we took the train. (Begin: The road...)",
+          "answer": "The road being closed, we took the train."
+        },
+        {
+          "number": 6,
+          "prompt": "She stood at the door and her arms were crossed. (Use with)",
+          "answer": "She stood at the door with her arms crossed."
+        },
+        {
+          "number": 7,
+          "prompt": "Because the budget had been cut, the team was smaller. (Begin: The budget...)",
+          "answer": "The budget having been cut, the team was smaller."
+        },
+        {
+          "number": 8,
+          "prompt": "If other things are equal, I prefer remote work. (Begin: Other things...)",
+          "answer": "Other things being equal, I prefer remote work."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Weather permits, we'll go hiking.",
+          "answer": "Weather permitting, we'll go hiking."
+        },
+        {
+          "number": 2,
+          "prompt": "Being time short, we left early.",
+          "answer": "Time being short, we left early."
+        },
+        {
+          "number": 3,
+          "prompt": "The work finishing, we went home.",
+          "answer": "The work finished, we went home. / The work having finished, we went home."
+        },
+        {
+          "number": 4,
+          "prompt": "All things considering, it was fine.",
+          "answer": "All things considered, it was fine."
+        },
+        {
+          "number": 5,
+          "prompt": "Walking along the river, the rain began.",
+          "answer": "As we were walking along the river, the rain began. / Walking along the river, we felt the rain begin."
+        },
+        {
+          "number": 6,
+          "prompt": "He sat with the arms crossed.",
+          "answer": "He sat with his arms crossed."
+        },
+        {
+          "number": 7,
+          "prompt": "Having been said that, I agree with you.",
+          "answer": "Having said that, I agree with you. / That said, I agree with you."
+        },
+        {
+          "number": 8,
+          "prompt": "She left the room, the door was open behind her.",
+          "answer": "She left the room, the door open behind her. / She left the room with the door open behind her."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Если позволит погода, мы поедем на озеро в субботу.",
+          "answer": "Weather permitting, we will go to the lake on Saturday."
+        },
+        {
+          "number": 2,
+          "prompt": "Времени мало, поэтому мы пропустим презентацию.",
+          "answer": "Time being short, we will skip the presentation."
+        },
+        {
+          "number": 3,
+          "prompt": "Всё взвесив, я принял предложение.",
+          "answer": "All things considered, I accepted the offer."
+        },
+        {
+          "number": 4,
+          "prompt": "Когда тесты прошли, мы выпустили релиз.",
+          "answer": "The tests having passed, we released the update."
+        },
+        {
+          "number": 5,
+          "prompt": "Он вошёл в офис с ноутбуком под мышкой.",
+          "answer": "He walked into the office with a laptop under his arm."
+        },
+        {
+          "number": 6,
+          "prompt": "При прочих равных условиях я бы выбрал этот вариант.",
+          "answer": "Other things being equal, I would choose this option."
+        },
+        {
+          "number": 7,
+          "prompt": "Работа закончена, и мы пошли домой.",
+          "answer": "The work finished, we went home. / The work being finished, we went home."
+        },
+        {
+          "number": 8,
+          "prompt": "Она сидела с закрытыми глазами и слушала музыку.",
+          "answer": "She sat with her eyes closed, listening to music."
+        }
+      ]
+    }
+  ]
+}

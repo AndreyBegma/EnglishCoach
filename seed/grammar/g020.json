@@ -1,0 +1,275 @@
+{
+  "id": "g020",
+  "position": 20,
+  "cefrLevel": "B1",
+  "title": "used to / be used to / get used to",
+  "plannedFrom": "2026-11-19",
+  "plannedTo": "2026-11-21",
+  "sections": {
+    "why": [
+      "Три похожих конструкции выражают разное. Used to говорит о том, что раньше было постоянно, а теперь нет («раньше я, бывало...»). Be used to значит «привык, для меня это обычно». Get used to значит «привыкаю, становлюсь привыкшим»."
+    ],
+    "formation": [
+      "• used to + V1 (начальная форма): I used to smoke. Отрицание: didn't use to + V1. Вопрос: Did you use to ...?",
+      "• be used to + V-ing или существительное: I am used to working late. She is used to the noise.",
+      "• get used to + V-ing или существительное: I'm getting used to living alone. He got used to the cold.",
+      "• Be и get меняются по временам (am/is/are, was, have been, will get), а used to в used to + V1 всегда остаётся в прошедшем."
+    ],
+    "usage": [
+      "1. Used to + V1: привычка или состояние в прошлом, которых уже нет.",
+      "• I used to play chess every day. (Раньше я каждый день играл в шахматы.)",
+      "• We used to live in Lviv. (Мы раньше жили во Львове.)",
+      "2. Be used to + V-ing: что-то привычно, не вызывает трудностей.",
+      "• He is used to getting up early. (Он привык рано вставать.)",
+      "• I'm not used to this heat. (Я не привык к такой жаре.)",
+      "3. Get used to + V-ing: процесс привыкания.",
+      "• It was hard, but I got used to working remotely. (Было трудно, но я привык работать удалённо.)",
+      "• You'll soon get used to the new office. (Ты скоро привыкнешь к новому офису.)"
+    ],
+    "signalWords": [
+      "Used to: when I was a child, years ago, in the past, but now... Be/get used to: already, soon, in a month, at first, not yet, still."
+    ],
+    "mistakes": [
+      "✗ I used to working here. → ✓ I used to work here. После used to (прошлая привычка) идёт V1, а не V-ing.",
+      "✗ I'm used to get up early. → ✓ I'm used to getting up early. После be used to нужен V-ing, потому что to здесь предлог.",
+      "✗ I didn't used to like tea. → ✓ I didn't use to like tea. Вспомогательный did уже показывает прошедшее время, поэтому use без d.",
+      "✗ I used to live here now. → ✓ I live here now. / I used to live here. Used to говорит только о прошлом и не бывает для настоящего.",
+      "✗ I am used to the noise last year. → ✓ I got used to the noise last year. Для процесса привыкания в прошлом нужен get used to в Past Simple."
+    ],
+    "remember": [
+      "Used to + V1 = раньше делал (теперь нет); be/get used to + V-ing или сущ. = привык / привыкаю."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте used to + глагол",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (play) the guitar when I was young.",
+          "answer": "used to play"
+        },
+        {
+          "number": 2,
+          "prompt": "We ___ (live) in a small village.",
+          "answer": "used to live"
+        },
+        {
+          "number": 3,
+          "prompt": "She ___ (have) long hair, but now it is short.",
+          "answer": "used to have"
+        },
+        {
+          "number": 4,
+          "prompt": "They ___ (go) to the sea every summer.",
+          "answer": "used to go"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ (work) as a waiter before he became a developer.",
+          "answer": "used to work"
+        },
+        {
+          "number": 6,
+          "prompt": "My grandfather ___ (tell) us stories every evening.",
+          "answer": "used to tell"
+        },
+        {
+          "number": 7,
+          "prompt": "I ___ (be) afraid of dogs.",
+          "answer": "used to be"
+        },
+        {
+          "number": 8,
+          "prompt": "We ___ (not / have) a car, but now we do.",
+          "answer": "didn't use to have"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm used to (a) get up (b) getting up early.",
+          "answer": "b / getting up"
+        },
+        {
+          "number": 2,
+          "prompt": "She used to (a) walk (b) walking to school.",
+          "answer": "a / walk"
+        },
+        {
+          "number": 3,
+          "prompt": "It took me a month to get used to (a) work (b) working at night.",
+          "answer": "b / working at night"
+        },
+        {
+          "number": 4,
+          "prompt": "He isn't used to (a) the cold (b) be cold in the north.",
+          "answer": "a / the cold"
+        },
+        {
+          "number": 5,
+          "prompt": "Did you use to (a) play (b) playing video games?",
+          "answer": "a / play"
+        },
+        {
+          "number": 6,
+          "prompt": "I'll never get used to (a) wake up (b) waking up at 5 a.m.",
+          "answer": "b / waking up"
+        },
+        {
+          "number": 7,
+          "prompt": "They are used to (a) travel (b) travelling a lot for work.",
+          "answer": "b / travelling"
+        },
+        {
+          "number": 8,
+          "prompt": "We (a) didn't used to (b) didn't use to eat out much.",
+          "answer": "b / didn't use to"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Заполните пропуск (used to / be used to / get used to + глагол в нужной форме)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (not / be) used to the noise yet. It's very loud here.",
+          "answer": "am not"
+        },
+        {
+          "number": 2,
+          "prompt": "He ___ (use) to play tennis, but he stopped after the injury.",
+          "answer": "used"
+        },
+        {
+          "number": 3,
+          "prompt": "It was difficult, but she quickly ___ used to the new job.",
+          "answer": "got"
+        },
+        {
+          "number": 4,
+          "prompt": "Don't worry. You will soon get used to ___ (drive) on the left.",
+          "answer": "driving"
+        },
+        {
+          "number": 5,
+          "prompt": "My sister ___ used to living alone. She has done it for years.",
+          "answer": "is"
+        },
+        {
+          "number": 6,
+          "prompt": "When I was a child, I ___ to believe in ghosts.",
+          "answer": "used"
+        },
+        {
+          "number": 7,
+          "prompt": "After a few weeks, we ___ used to the climate.",
+          "answer": "got"
+        },
+        {
+          "number": 8,
+          "prompt": "I'm used to ___ (code) in the evenings; it's my usual time.",
+          "answer": "coding"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I used to working in a bank.",
+          "answer": "I used to work in a bank."
+        },
+        {
+          "number": 2,
+          "prompt": "She is used to get up at six.",
+          "answer": "She is used to getting up at six."
+        },
+        {
+          "number": 3,
+          "prompt": "Did you used to live in Odesa?",
+          "answer": "Did you use to live in Odesa?"
+        },
+        {
+          "number": 4,
+          "prompt": "I'm not used to spicy food last year.",
+          "answer": "I wasn't used to spicy food last year. / I didn't get used to spicy food last year."
+        },
+        {
+          "number": 5,
+          "prompt": "He didn't used to smoke.",
+          "answer": "He didn't use to smoke."
+        },
+        {
+          "number": 6,
+          "prompt": "We are getting used to live in a big city.",
+          "answer": "We are getting used to living in a big city."
+        },
+        {
+          "number": 7,
+          "prompt": "I used to drink coffee every day, and I still do.",
+          "answer": "I drink coffee every day. / I used to drink coffee every day, but I don't now."
+        },
+        {
+          "number": 8,
+          "prompt": "They get used to the new rules in a week ago.",
+          "answer": "They got used to the new rules a week ago."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Раньше я жил в маленьком городе.",
+          "answer": "I used to live in a small town."
+        },
+        {
+          "number": 2,
+          "prompt": "Я привык вставать в семь утра.",
+          "answer": "I am used to getting up at seven a.m. / I'm used to getting up at seven a.m. / I am used to waking up at seven a.m."
+        },
+        {
+          "number": 3,
+          "prompt": "Мне трудно привыкнуть к новому графику.",
+          "answer": "It is hard for me to get used to the new schedule. / I find it hard to get used to the new schedule. / I'm finding it hard to get used to the new schedule."
+        },
+        {
+          "number": 4,
+          "prompt": "Раньше он не любил кофе.",
+          "answer": "He didn't use to like coffee. / He used not to like coffee."
+        },
+        {
+          "number": 5,
+          "prompt": "Она привыкла работать удалённо.",
+          "answer": "She is used to working remotely. / She's used to working from home."
+        },
+        {
+          "number": 6,
+          "prompt": "Ты скоро привыкнешь к этому городу.",
+          "answer": "You will soon get used to this city. / You'll soon get used to this city."
+        },
+        {
+          "number": 7,
+          "prompt": "Мы раньше часто ходили в кино.",
+          "answer": "We used to go to the cinema a lot. / We used to go to the movies a lot. / We used to go to the cinema often."
+        },
+        {
+          "number": 8,
+          "prompt": "Я не привык к такой жаре.",
+          "answer": "I am not used to this heat. / I'm not used to such heat. / I'm not used to this kind of heat."
+        }
+      ]
+    }
+  ]
+}

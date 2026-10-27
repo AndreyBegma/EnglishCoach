@@ -80,13 +80,24 @@ describe("openai provider (fake client)", () => {
     expect(calls[0]?.max_completion_tokens).toBeUndefined();
   });
 
-  test("passes temperature only when the request sets it", async () => {
+  test("passes temperature only when the request sets it and the model accepts it", async () => {
     const { client, calls } = fakeClient([valid, valid]);
-    const provider = createOpenAiProvider({ apiKey, client });
+    const provider = createOpenAiProvider({ apiKey, client, model: "gpt-4.1-mini" });
     await provider.complete({ ...request, temperature: 0.3 });
     await provider.complete(request);
     expect(calls[0]?.temperature).toBe(0.3);
     expect(calls[1]).not.toHaveProperty("temperature");
+  });
+
+  test("drops temperature for reasoning models, router-prefixed ids included", async () => {
+    for (const model of [null, "gpt-6-luna", "o4-mini", "openai/gpt-5-mini"]) {
+      const { client, calls } = fakeClient([valid]);
+      await createOpenAiProvider({ apiKey, client, model }).complete({
+        ...request,
+        temperature: 0.3,
+      });
+      expect(calls[0]).not.toHaveProperty("temperature");
+    }
   });
 
   test("falls back to json_object, with the schema in the prompt, and remembers it", async () => {

@@ -2,10 +2,11 @@ import { z } from "zod";
 import { cefrLevelEnum, mistakeCategoryEnum } from "../db/schema/enums";
 
 // Every skill names one input and one output schema from this file in its frontmatter.
-// Outputs are root objects with flat, required (nullable) fields: the Anthropic provider sends the
-// schema as a tool's `input_schema`, which must be an object, and flat shapes survive every
-// backend's structured-output mode better than unions. Cross-field rules live in `superRefine`;
-// they do not reach the JSON Schema the model sees, but a violation earns the repair turn.
+// Outputs are root objects with flat, required (nullable) fields: structured-output modes want an
+// object at the root (Anthropic's forced-tool fallback needs one as a tool's `input_schema`), and
+// flat shapes survive every backend better than unions. Cross-field rules live in `superRefine`,
+// and bounds such as `.min()` are only hinted to Anthropic models; neither is enforced by the
+// backend, but zod checks both and a violation earns the repair turn.
 
 const cefr = z.enum(cefrLevelEnum.enumValues);
 const category = z.enum(mistakeCategoryEnum.enumValues);

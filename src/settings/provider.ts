@@ -154,7 +154,8 @@ export class ProviderSettings {
         messages: [{ role: "user", content: "ping" }],
         schema: z.object({ ok: z.boolean() }),
         tier: "fast",
-        maxTokens: 32,
+        // Current models think before answering, and thinking counts against this budget.
+        maxTokens: 1024,
       });
       return { key: "provider-test-ok", vars: { ms: ms() } };
     } catch (error) {

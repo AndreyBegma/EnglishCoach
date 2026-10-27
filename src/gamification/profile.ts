@@ -3,6 +3,7 @@ import { InlineKeyboard } from "grammy";
 import { encodeCallback } from "../bot/callbacks";
 import type { Locale, Translator } from "../bot/i18n";
 import type { Db } from "../db/client";
+import { spendableXp } from "../db/repositories/streak";
 import { getUserXp } from "../db/repositories/xp";
 import { dailyStats, type Skill, type UserSettings } from "../db/schema";
 import { getLevels, SKILLS } from "../levels";
@@ -10,6 +11,7 @@ import { encodeProgressCallback } from "../progress/callbacks";
 import { cardsBlock } from "../progress/queries";
 import { MAX_MESSAGE_LENGTH } from "../progress/render";
 import { type Streak, streakDays } from "../progress/streak";
+import { FREEZE_PRICE_XP, MAX_FREEZES } from "../progress/streak-rules";
 import { latestAchievements } from "./achievements/view";
 import { type ProfileLevel, profileLevel } from "./xp";
 
@@ -25,6 +27,8 @@ export interface ProfileData {
   xp: number;
   level: ProfileLevel;
   streak: Streak;
+  /** XP left to spend on freezes (earned XP less what freezes took). */
+  spendableXp: number;
   /** The overall CEFR level, "B1.6"; null until the learner has a level. */
   cefr: string | null;
   /** Every skill with a level, in course order; `practised` once it has graded items behind it. */
@@ -65,18 +69,21 @@ export async function loadProfile(
   now: Date = new Date(),
 ): Promise<ProfileData> {
   const timezone = settings?.timezone ?? "UTC";
-  const [xp, levels, streak, sums, achievements] = await Promise.all([
+  // The streak first: it settles the freeze row the spendable XP is read from.
+  const streak = await streakDays(db, userId, { now, timezone });
+  const [xp, levels, sums, achievements, spendable] = await Promise.all([
     getUserXp(db, userId),
     getLevels(db, userId),
-    streakDays(db, userId, { now, timezone }),
     totals(db, userId, timezone, now),
     latestAchievements(db, userId, settings?.uiLang ?? "en", PROFILE_ACHIEVEMENTS),
+    spendableXp(db, userId),
   ]);
   const total = xp?.total ?? 0;
   return {
     xp: total,
     level: profileLevel(total),
     streak,
+    spendableXp: spendable,
     cefr: levels?.overall.label ?? null,
     skills: SKILLS.flatMap((skill) => {
       const level = levels?.skills[skill];
@@ -119,6 +126,7 @@ export function renderProfile(
       next: level.level + 1,
     }),
     t("profile-streak", { current: streak.current, best: streak.best }),
+    t("profile-freezes", { count: streak.freezes, max: MAX_FREEZES, xp: data.spendableXp }),
     "",
     data.cefr ? t("profile-cefr", { level: data.cefr }) : t("profile-cefr-unset"),
     ...data.skills.map(({ skill, label, practised }) =>
@@ -153,5 +161,14 @@ export function renderProfile(
     t("hub-back"),
     encodeCallback({ type: "screen", screen: "main" }),
   );
-  return { text, keyboard: InlineKeyboard.from([[achievements], [back]]) };
+  const rows = [[achievements], [back]];
+  if (streak.freezes < MAX_FREEZES) {
+    rows.splice(1, 0, [
+      InlineKeyboard.text(
+        t("profile-freeze-buy", { price: FREEZE_PRICE_XP }),
+        encodeProgressCallback({ type: "freeze" }),
+      ),
+    ]);
+  }
+  return { text, keyboard: InlineKeyboard.from(rows) };
 }

@@ -14,18 +14,28 @@ import {
 } from "../db/repositories/users";
 import type { User, UserSettings } from "../db/schema";
 import type { SettingsChanged, SettingsField } from "../events/settings-events";
-import { awardGoalMet } from "../gamification/awards";
+import { awardGoalMet, awardStreakMilestones } from "../gamification/awards";
 import { QUESTIONS_PER_SESSION, startSeededGrammar } from "../grammar";
 import type { HubUser } from "../hub/hub-service";
 import type { Logger } from "../log";
-import { streakDays } from "../progress/streak";
+import { restoreStreak, streakDays } from "../progress/streak";
 import { acceptAnswer } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
 import type { SessionEnded, SessionManager, StartOutcome } from "../sessions/session-manager";
 import type { SkillRunner } from "../skills";
 import { encodeRoutineCallback, type RoutineCallback } from "./callbacks";
+import { reserveNotification } from "./notify";
 import type { RoutineJobs, RoutineStore } from "./ports";
-import { localDate, type RoutineSlot, safeZone, slotDate, slotSchedules } from "./time";
+import {
+  localDate,
+  localMinutes,
+  type RoutineSlot,
+  safeZone,
+  slotDate,
+  slotSchedules,
+} from "./time";
+
+const MINUTES_PER_DAY = 24 * 60;
 
 /** The morning prompt can be put off this many times, an hour each. */
 export const MAX_SNOOZES = 2;
@@ -134,22 +144,36 @@ export class Routine {
   /**
    * Session-end listener: sets `goal_met` for the learner-local days the session touched (the day
    * it started and the day it ended — a session across midnight counts its answers to both). A day
-   * whose goal this call met earns the goal and streak XP, once: the flag never flips back.
+   * whose goal this call met earns the goal and streak XP, once: the flag never flips back; a
+   * streak milestone it reached pays its bonus. Then a double goal today restores yesterday's
+   * break (`restoreStreak`), paying any milestone the restored run passes.
    */
   async onSessionEnded({ session, user }: SessionEnded): Promise<void> {
-    const settings = await getSettings(this.deps.db, user.id);
+    const { db } = this.deps;
+    const settings = await getSettings(db, user.id);
     if (!settings) return;
+    const clock = { now: this.now(), timezone: settings.timezone };
     const dates = new Set([
       localDate(session.startedAt, settings.timezone),
-      localDate(this.now(), settings.timezone),
+      localDate(clock.now, settings.timezone),
     ]);
     for (const date of dates) {
-      if (!(await markGoalMet(this.deps.db, user.id, date, settings.wordsPerDay))) continue;
-      const streak = await streakDays(this.deps.db, user.id, {
-        now: this.now(),
-        timezone: settings.timezone,
+      if (!(await markGoalMet(db, user.id, date, settings.wordsPerDay))) continue;
+      const streak = await streakDays(db, user.id, clock);
+      await awardGoalMet(db, user.id, { date, streak: streak.current });
+      if (streak.since) {
+        const run = { before: streak.current - 1, after: streak.current, since: streak.since };
+        await awardStreakMilestones(db, user.id, run);
+      }
+    }
+    try {
+      const restored = await restoreStreak(db, user.id, {
+        ...clock,
+        wordsPerDay: settings.wordsPerDay,
       });
-      await awardGoalMet(this.deps.db, user.id, { date, streak: streak.current });
+      if (restored) await awardStreakMilestones(db, user.id, restored);
+    } catch (error) {
+      this.deps.log.warn("streak restore failed", { userId: user.id, error });
     }
   }
 
@@ -197,8 +221,16 @@ export class Routine {
       // Mid-session the learner is already at it.
       if (await this.deps.sessions.findActive(userId)) return "skipped";
     }
+    // A snoozed re-send is one the learner asked for: no claim, and it does not count.
     const snoozed = snoozes > 0;
     if (!snoozed && !(await store.claimSlot(userId, slot, date))) return "skipped";
+    const release = snoozed
+      ? async () => {}
+      : await reserveNotification(store, { userId, slot, now, timezone: settings.timezone });
+    if (!release) {
+      await store.releaseSlot(userId, slot, date);
+      return "skipped";
+    }
 
     try {
       await this.sendPrompt(user, settings, slot, date, snoozes);
@@ -209,7 +241,10 @@ export class Routine {
         return "blocked";
       }
       // Worth a retry (the job has attempts left): give the slot back so the retry may send.
-      if (!snoozed) await store.releaseSlot(userId, slot, date);
+      if (!snoozed) {
+        await release();
+        await store.releaseSlot(userId, slot, date);
+      }
       log.warn("routine prompt not sent", { userId, slot, error });
       throw error;
     }
@@ -235,7 +270,7 @@ export class Routine {
     const locale = settings.uiLang ?? DEFAULT_LOCALE;
     const text =
       slot === "reminder"
-        ? this.t(locale, "routine-reminder")
+        ? await this.reminderText(user.id, locale, settings.timezone, date)
         : await this.planText(user, settings, slot, date);
     const keyboard = new InlineKeyboard();
     if (slot === "morning") {
@@ -312,6 +347,35 @@ export class Routine {
     ].filter((line): line is string => Boolean(line));
     const heading = this.t(locale, `routine-plan-${vars.slot}`);
     return [heading, ...(lines.length ? lines : [this.t(locale, "routine-plan-empty")])].join("\n");
+  }
+
+  /**
+   * The evening nudge for the open goal of `date`: "your N-day streak burns in X h" while there is
+   * a streak to lose, the restore offer while yesterday's break can still be undone, else the plain
+   * reminder — also once `date` is over (a reminder past midnight) or the streak cannot be read.
+   */
+  private async reminderText(
+    userId: number,
+    locale: Locale,
+    timezone: string,
+    date: string,
+  ): Promise<string> {
+    const now = this.now();
+    const zone = safeZone(timezone);
+    if (localDate(now, zone) !== date) return this.t(locale, "routine-reminder");
+    const hours = Math.max(1, Math.ceil((MINUTES_PER_DAY - localMinutes(now, zone)) / 60));
+    try {
+      const streak = await streakDays(this.deps.db, userId, { now, timezone: zone });
+      if (streak.current > 0) {
+        return this.t(locale, "routine-reminder-burning", { days: streak.current, hours });
+      }
+      if (streak.restore) {
+        return this.t(locale, "routine-reminder-restore", { days: streak.restore.days, hours });
+      }
+    } catch (error) {
+      this.deps.log.warn("streak lookup failed", { userId, error });
+    }
+    return this.t(locale, "routine-reminder");
   }
 
   /** Days in a row the goal was met; 0 when it cannot be read (the plan still goes out). */

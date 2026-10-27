@@ -16,6 +16,7 @@ import { pendingUnlocks, unlockNotice } from "../gamification/achievements/view"
 import type { Logger } from "../log";
 import { loadProgress } from "../progress/queries";
 import { type RenderedScreen, renderScreen } from "./screens";
+import { streakRestoreOffer } from "./summary-streak";
 
 /** Hubs live in the private chat with the user, whose chat ID is the user's Telegram ID. */
 export type HubUser = Pick<User, "id" | "telegramId">;
@@ -67,11 +68,12 @@ export class HubService {
   }
 
   private async render(user: HubUser, screen: HubScreen): Promise<RenderedScreen> {
-    const [settings, dueCount, lastSummary, unlocks] = await Promise.all([
+    const [settings, dueCount, lastSummary, unlocks, restoreOffer] = await Promise.all([
       getSettings(this.deps.db, user.id),
       countDueCards(this.deps.db, user.id),
       lastSummaryLine(this.deps.db, user.id),
       screen === "main" ? pendingUnlocks(this.deps.db, user.id) : undefined,
+      screen === "main" ? streakRestoreOffer(this.deps.db, user.id, this.deps.log) : undefined,
     ]);
     const locale = settings?.uiLang ?? "en";
     const progress =
@@ -81,6 +83,7 @@ export class HubService {
       dueCount,
       lastSummary,
       unlockNotice: unlocks && unlockNotice(this.deps.i18n, locale, unlocks.entries),
+      restoreOffer,
       progress,
     });
     return unlocks?.ids.length ? { ...rendered, announced: unlocks.ids } : rendered;

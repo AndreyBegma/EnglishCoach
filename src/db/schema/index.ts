@@ -10,6 +10,7 @@ export * from "./owner-course";
 export * from "./providers";
 export * from "./sessions";
 export * from "./stats";
+export * from "./streak";
 export * from "./topic-progress";
 export * from "./users";
 export * from "./vocabulary";

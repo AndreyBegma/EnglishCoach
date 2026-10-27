@@ -37,7 +37,11 @@ describe("profile screen", () => {
       expect(text).toContain("~B1.5");
       expect(text).toContain("567");
       expect(text).toContain(xpBar(profileLevel(734).into, profileLevel(734).needed));
-      expect(keyboard.inline_keyboard.flat()).toHaveLength(1);
+      expect(keyboard.inline_keyboard.flat()).toHaveLength(2);
+      const [achievements] = keyboard.inline_keyboard.flat();
+      expect(
+        parseProgressCallback((achievements as { callback_data: string }).callback_data),
+      ).toEqual({ type: "achievements", page: 0 });
     });
   }
 
@@ -56,7 +60,7 @@ describe("profile screen", () => {
     );
     expect(text).toContain("Level 1 · 0 XP");
     expect(text).toContain("level not set yet");
-    expect(text).toContain("Achievements are coming soon.");
+    expect(text).toContain("No achievements yet");
   });
 
   test("shows the latest three achievements, and stays under the limit with long titles", () => {
@@ -78,5 +82,15 @@ describe("profile screen", () => {
   test("the hub's profile button round-trips through the progress codec", () => {
     const data = encodeProgressCallback({ type: "profile" });
     expect(parseProgressCallback(data)).toEqual({ type: "profile" });
+  });
+
+  test("achievements pages round-trip; malformed pages do not parse", () => {
+    for (const page of [0, 7, 999]) {
+      const data = encodeProgressCallback({ type: "achievements", page });
+      expect(parseProgressCallback(data)).toEqual({ type: "achievements", page });
+    }
+    for (const bad of ["1:p:a:", "1:p:a:-1", "1:p:a:01", "1:p:a:1000", "1:p:a:x", "0:p:a:1"]) {
+      expect(parseProgressCallback(bad)).toBeUndefined();
+    }
   });
 });

@@ -1,0 +1,198 @@
+# Streaks, XP, the profile level and the CEFR level of each skill.
+# `format: cefr` shows a threshold as its band: 1 = A2, 2 = B1, 3 = B2, 4 = C1, 5 = C2.
+series:
+  - id: day_streak
+    category: streaks
+    metric: day_streak
+    emoji: "🔥"
+    title:
+      en: "Streak: {n} days"
+      ru: "Серия: {n} дн."
+      uk: "Серія: {n} дн."
+    description:
+      en: "Meet your daily goal {n} days in a row"
+      ru: "Выполняй дневную цель подряд — {n} дн."
+      uk: "Виконуй денну ціль поспіль — {n} дн."
+    steps:
+      bronze: [2, 3, 5]
+      silver: [7, 10]
+      gold: [14, 21]
+      platinum: [30, 60]
+      legend: [100, 180, 365]
+
+  - id: goal_days
+    category: streaks
+    metric: goal_days
+    emoji: "📅"
+    title:
+      en: "Goal days: {n}"
+      ru: "Дней с целью: {n}"
+      uk: "Днів із ціллю: {n}"
+    description:
+      en: "Meet your daily goal on {n} days in all"
+      ru: "Выполни дневную цель — всего {n} дн."
+      uk: "Виконай денну ціль — усього {n} дн."
+    steps:
+      bronze: [1, 5]
+      silver: [10, 25]
+      gold: [50, 100]
+      platinum: [150, 200]
+      legend: [300, 365, 500]
+
+  - id: xp_total
+    category: progress
+    metric: xp_total
+    emoji: "⭐"
+    title:
+      en: "XP earned: {n}"
+      ru: "Заработано XP: {n}"
+      uk: "Зароблено XP: {n}"
+    description:
+      en: "Earn {n} XP in all"
+      ru: "Заработай всего {n} XP"
+      uk: "Зароби усього {n} XP"
+    steps:
+      bronze: [100, 250]
+      silver: [500, 1000]
+      gold: [2500, 5000]
+      platinum: [10000, 25000]
+      legend: [50000, 100000]
+
+  - id: profile_level
+    category: progress
+    metric: profile_level
+    emoji: "🏅"
+    title:
+      en: "Profile level {n}"
+      ru: "Уровень профиля {n}"
+      uk: "Рівень профілю {n}"
+    description:
+      en: "Reach profile level {n}"
+      ru: "Достигни уровня профиля {n}"
+      uk: "Досягни рівня профілю {n}"
+    steps:
+      bronze: [2, 3, 5]
+      silver: [7, 10]
+      gold: [15, 20]
+      platinum: [25, 30]
+      legend: [40, 50]
+
+  - id: skill_grammar
+    category: levels
+    metric: skill_grammar
+    format: cefr
+    emoji: "📐"
+    title:
+      en: "Grammar at {n}"
+      ru: "Грамматика на {n}"
+      uk: "Граматика на {n}"
+    description:
+      en: "Raise your grammar level to {n}"
+      ru: "Подними уровень грамматики до {n}"
+      uk: "Підніми рівень граматики до {n}"
+    steps:
+      bronze: [1]
+      silver: [2]
+      gold: [3]
+      platinum: [4]
+      legend: [5]
+
+  - id: skill_vocabulary
+    category: levels
+    metric: skill_vocabulary
+    format: cefr
+    emoji: "📖"
+    title:
+      en: "Vocabulary at {n}"
+      ru: "Словарный запас на {n}"
+      uk: "Словниковий запас на {n}"
+    description:
+      en: "Raise your vocabulary level to {n}"
+      ru: "Подними уровень словарного запаса до {n}"
+      uk: "Підніми рівень словникового запасу до {n}"
+    steps:
+      bronze: [1]
+      silver: [2]
+      gold: [3]
+      platinum: [4]
+      legend: [5]
+
+  - id: skill_reading
+    category: levels
+    metric: skill_reading
+    format: cefr
+    emoji: "👓"
+    title:
+      en: "Reading at {n}"
+      ru: "Чтение на {n}"
+      uk: "Читання на {n}"
+    description:
+      en: "Raise your reading level to {n}"
+      ru: "Подними уровень чтения до {n}"
+      uk: "Підніми рівень читання до {n}"
+    steps:
+      bronze: [1]
+      silver: [2]
+      gold: [3]
+      platinum: [4]
+      legend: [5]
+
+  - id: skill_listening
+    category: levels
+    metric: skill_listening
+    format: cefr
+    emoji: "🎧"
+    title:
+      en: "Listening at {n}"
+      ru: "Аудирование на {n}"
+      uk: "Аудіювання на {n}"
+    description:
+      en: "Raise your listening level to {n}"
+      ru: "Подними уровень аудирования до {n}"
+      uk: "Підніми рівень аудіювання до {n}"
+    steps:
+      bronze: [1]
+      silver: [2]
+      gold: [3]
+      platinum: [4]
+      legend: [5]
+
+  - id: skill_writing
+    category: levels
+    metric: skill_writing
+    format: cefr
+    emoji: "🖋️"
+    title:
+      en: "Writing at {n}"
+      ru: "Письмо на {n}"
+      uk: "Письмо на {n}"
+    description:
+      en: "Raise your writing level to {n}"
+      ru: "Подними уровень письма до {n}"
+      uk: "Підніми рівень письма до {n}"
+    steps:
+      bronze: [1]
+      silver: [2]
+      gold: [3]
+      platinum: [4]
+      legend: [5]
+
+  - id: skill_speaking
+    category: levels
+    metric: skill_speaking
+    format: cefr
+    emoji: "🗣️"
+    title:
+      en: "Speaking at {n}"
+      ru: "Говорение на {n}"
+      uk: "Говоріння на {n}"
+    description:
+      en: "Raise your speaking level to {n}"
+      ru: "Подними уровень говорения до {n}"
+      uk: "Підніми рівень говоріння до {n}"
+    steps:
+      bronze: [1]
+      silver: [2]
+      gold: [3]
+      platinum: [4]
+      legend: [5]

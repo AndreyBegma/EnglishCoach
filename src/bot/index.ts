@@ -1,7 +1,9 @@
 import { Bot, type BotConfig, type StorageAdapter, session } from "grammy";
 import type { Db } from "../db/client";
 import type { SessionKind } from "../db/repositories/sessions";
+import { domainEvents } from "../events/domain-events";
 import { SettingsEvents } from "../events/settings-events";
+import { AchievementEngine, achievementCatalogue } from "../gamification/achievements";
 import { grammarHandlers, grammarSession } from "../grammar";
 import { answerOutdated, hubHandlers } from "../hub/handlers";
 import { HubService } from "../hub/hub-service";
@@ -169,6 +171,19 @@ export function createBot(deps: BotDeps) {
   });
   settingsEvents.on("settings.changed", (event) => routine.onSettingsChanged(event));
   sessions.onEnded((event) => routine.onSessionEnded(event));
+
+  // Loads (and validates) the catalogue at boot, then listens for what unlocks achievements.
+  new AchievementEngine({ db, log, catalogue: achievementCatalogue() }).start();
+  sessions.onEnded(({ session, user, status }) =>
+    domainEvents.emit("session.ended", {
+      userId: user.id,
+      sessionId: session.id,
+      kind: session.kind,
+      status,
+      startedAt: session.startedAt,
+      at: session.endedAt ?? new Date(),
+    }),
+  );
 
   // Before access, which drops updates from bots: the pin notice is the bot's own message.
   bot.use(pinNoticeCleanup(log, { chatIds: voice.storageChatIds }));

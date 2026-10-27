@@ -1,0 +1,60 @@
+# Vocabulary achievements. A series expands into one entry per step: `<id>_<threshold>`.
+# `{n}` in a title or description is the step's threshold. Titles are phrased as "<thing>: {n}"
+# so Russian and Ukrainian need no plural forms.
+series:
+  - id: words_learned
+    category: words
+    metric: words_learned
+    emoji: "📚"
+    title:
+      en: "Words learned: {n}"
+      ru: "Выучено слов: {n}"
+      uk: "Вивчено слів: {n}"
+    description:
+      en: "Learn new words until the count reaches {n}"
+      ru: "Учи новые слова, пока счёт не дойдёт до {n}"
+      uk: "Вчи нові слова, доки рахунок не сягне {n}"
+    steps:
+      bronze: [1, 10, 25]
+      silver: [50, 100]
+      gold: [250, 500]
+      platinum: [1000, 2000]
+      legend: [3000, 5000]
+
+  - id: reviews
+    category: reviews
+    metric: reviews
+    emoji: "🔁"
+    title:
+      en: "Reviews passed: {n}"
+      ru: "Повторений пройдено: {n}"
+      uk: "Повторень пройдено: {n}"
+    description:
+      en: "Remember a word on review — {n} times in all"
+      ru: "Вспомни слово на повторении — всего {n} раз"
+      uk: "Згадай слово на повторенні — усього {n} разів"
+    steps:
+      bronze: [10, 50]
+      silver: [100, 250]
+      gold: [500, 1000]
+      platinum: [2500, 5000]
+      legend: [10000, 25000]
+
+  - id: reviews_perfect
+    category: reviews
+    metric: reviews_perfect
+    emoji: "🎯"
+    title:
+      en: "Sharp memory: {n}"
+      ru: "Цепкая память: {n}"
+      uk: "Чіпка пам'ять: {n}"
+    description:
+      en: "Rate a review Good or Easy — {n} times in all"
+      ru: "Оцени повторение как «Хорошо» или «Легко» — всего {n} раз"
+      uk: "Оціни повторення як «Добре» чи «Легко» — усього {n} разів"
+    steps:
+      bronze: [10, 25]
+      silver: [50, 100]
+      gold: [250, 500]
+      platinum: [1000, 2500]
+      legend: [5000, 10000]

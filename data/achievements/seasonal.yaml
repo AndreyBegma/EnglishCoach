@@ -1,0 +1,116 @@
+# Seasonal achievements: sessions finished inside a dated window (learner-local, inclusive,
+# MM-DD; a window may wrap the new year). The count is lifetime, so later years add to it.
+series:
+  - id: season_new_year
+    category: seasonal
+    metric: season_sessions
+    season: { id: new_year, from: "12-25", to: "01-07" }
+    emoji: "🎄"
+    title:
+      en: "Holiday learner: {n}"
+      ru: "Учусь в праздники: {n}"
+      uk: "Вчуся у свята: {n}"
+    description:
+      en: "Finish {n} sessions between 25 December and 7 January"
+      ru: "Заверши занятия с 25 декабря по 7 января — всего {n}"
+      uk: "Заверши заняття з 25 грудня по 7 січня — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [14]
+
+  - id: season_valentine
+    category: seasonal
+    metric: season_sessions
+    season: { id: valentine, from: "02-14", to: "02-14" }
+    emoji: "💌"
+    title:
+      en: "Love for English: {n}"
+      ru: "Любовь к английскому: {n}"
+      uk: "Любов до англійської: {n}"
+    description:
+      en: "Finish {n} sessions on 14 February"
+      ru: "Заверши занятия 14 февраля — всего {n}"
+      uk: "Заверши заняття 14 лютого — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [14]
+
+  - id: season_april_fools
+    category: seasonal
+    metric: season_sessions
+    season: { id: april_fools, from: "04-01", to: "04-01" }
+    emoji: "🃏"
+    title:
+      en: "No joke: {n}"
+      ru: "Без шуток: {n}"
+      uk: "Без жартів: {n}"
+    description:
+      en: "Finish {n} sessions on 1 April"
+      ru: "Заверши занятия 1 апреля — всего {n}"
+      uk: "Заверши заняття 1 квітня — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [14]
+
+  - id: season_midsummer
+    category: seasonal
+    metric: season_sessions
+    season: { id: midsummer, from: "06-20", to: "06-24" }
+    emoji: "☀️"
+    title:
+      en: "Midsummer study: {n}"
+      ru: "Учёба в солнцестояние: {n}"
+      uk: "Навчання в сонцестояння: {n}"
+    description:
+      en: "Finish {n} sessions between 20 and 24 June"
+      ru: "Заверши занятия с 20 по 24 июня — всего {n}"
+      uk: "Заверши заняття з 20 по 24 червня — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [14]
+
+  - id: season_back_to_school
+    category: seasonal
+    metric: season_sessions
+    season: { id: back_to_school, from: "09-01", to: "09-07" }
+    emoji: "🎒"
+    title:
+      en: "Back to school: {n}"
+      ru: "Снова в школу: {n}"
+      uk: "Знову до школи: {n}"
+    description:
+      en: "Finish {n} sessions in the first week of September"
+      ru: "Заверши занятия в первую неделю сентября — всего {n}"
+      uk: "Заверши заняття в перший тиждень вересня — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [14]
+
+  - id: season_halloween
+    category: seasonal
+    metric: season_sessions
+    season: { id: halloween, from: "10-31", to: "10-31" }
+    emoji: "🎃"
+    title:
+      en: "Spooky study: {n}"
+      ru: "Страшно полезно: {n}"
+      uk: "Страшно корисно: {n}"
+    description:
+      en: "Finish {n} sessions on 31 October"
+      ru: "Заверши занятия 31 октября — всего {n}"
+      uk: "Заверши заняття 31 жовтня — усього {n}"
+    steps:
+      bronze: [1]
+      silver: [3]
+      gold: [7]
+      platinum: [14]

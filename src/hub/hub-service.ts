@@ -7,10 +7,12 @@ import {
   isNotModifiedError,
 } from "../bot/telegram-errors";
 import type { Db } from "../db/client";
+import { markNotified } from "../db/repositories/achievements";
 import { countDueCards, getHub, saveHub } from "../db/repositories/hub";
 import { lastSummaryLine } from "../db/repositories/sessions";
 import { getSettings } from "../db/repositories/users";
 import type { User } from "../db/schema";
+import { pendingUnlocks, unlockNotice } from "../gamification/achievements/view";
 import type { Logger } from "../log";
 import { loadProgress } from "../progress/queries";
 import { type RenderedScreen, renderScreen } from "./screens";
@@ -64,21 +66,37 @@ export class HubService {
     return this.serialised(user, () => this.sendNew(user));
   }
 
-  private async render(user: HubUser, screen: HubScreen) {
-    const [settings, dueCount, lastSummary] = await Promise.all([
+  private async render(user: HubUser, screen: HubScreen): Promise<RenderedScreen> {
+    const [settings, dueCount, lastSummary, unlocks] = await Promise.all([
       getSettings(this.deps.db, user.id),
       countDueCards(this.deps.db, user.id),
       lastSummaryLine(this.deps.db, user.id),
+      screen === "main" ? pendingUnlocks(this.deps.db, user.id) : undefined,
     ]);
+    const locale = settings?.uiLang ?? "en";
     const progress =
       screen === "progress" ? await loadProgress(this.deps.db, user.id, settings) : undefined;
-    return renderScreen(this.deps.i18n, screen, {
-      locale: settings?.uiLang ?? "en",
+    const rendered = renderScreen(this.deps.i18n, screen, {
+      locale,
       dueCount,
       lastSummary,
+      unlockNotice: unlocks && unlockNotice(this.deps.i18n, locale, unlocks.entries),
       progress,
       locked: !settings?.cefrLevel,
     });
+    return unlocks?.ids.length ? { ...rendered, announced: unlocks.ids } : rendered;
+  }
+
+  /**
+   * New unlocks ride the hub, not messages of their own: once a main screen naming them is on
+   * screen they are marked shown, so the next render drops the line. Never fails the hub.
+   */
+  private async markAnnounced(user: HubUser, rendered: RenderedScreen): Promise<void> {
+    if (!rendered.announced?.length) return;
+    await markNotified(this.deps.db, user.id, rendered.announced, new Date()).catch(
+      (error: unknown) =>
+        this.deps.log.warn("achievement notice mark failed", { userId: user.id, error }),
+    );
   }
 
   /** Returns false when there is no hub to edit any more. */
@@ -88,16 +106,16 @@ export class HubService {
   ): Promise<boolean> {
     const hub = await getHub(this.deps.db, user.id);
     if (!hub) return false;
-    const { text, keyboard } = await render();
+    const rendered = await render();
     try {
-      await this.deps.api.editMessageText(hub.chatId, hub.messageId, text, {
-        reply_markup: keyboard,
+      await this.deps.api.editMessageText(hub.chatId, hub.messageId, rendered.text, {
+        reply_markup: rendered.keyboard,
       });
     } catch (error) {
-      if (isNotModifiedError(error)) return true;
       if (isMessageGoneError(error)) return false;
-      throw error;
+      if (!isNotModifiedError(error)) throw error;
     }
+    await this.markAnnounced(user, rendered);
     return true;
   }
 
@@ -111,9 +129,12 @@ export class HubService {
       });
     }
 
-    const { text, keyboard } = await this.render(user, "main");
-    const message = await api.sendMessage(chatId, text, { reply_markup: keyboard });
+    const rendered = await this.render(user, "main");
+    const message = await api.sendMessage(chatId, rendered.text, {
+      reply_markup: rendered.keyboard,
+    });
     await saveHub(db, { userId: user.id, chatId, messageId: message.message_id, pinned: false });
+    await this.markAnnounced(user, rendered);
 
     try {
       await api.pinChatMessage(chatId, message.message_id, { disable_notification: true });

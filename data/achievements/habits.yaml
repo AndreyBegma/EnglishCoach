@@ -1,0 +1,59 @@
+# Time-of-day and weekend habits, by the learner's local time when a session finishes:
+# morning 05:00–09:00, night 22:00–02:00.
+series:
+  - id: sessions_morning
+    category: habits
+    metric: sessions_morning
+    emoji: "🐦"
+    title:
+      en: "Early bird: {n}"
+      ru: "Ранняя пташка: {n}"
+      uk: "Рання пташка: {n}"
+    description:
+      en: "Finish {n} sessions between 5 and 9 in the morning"
+      ru: "Заверши занятия между 5 и 9 утра — всего {n}"
+      uk: "Заверши заняття між 5 і 9 ранку — усього {n}"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 20]
+      gold: [30, 50]
+      platinum: [75, 100]
+      legend: [150, 200]
+
+  - id: sessions_night
+    category: habits
+    metric: sessions_night
+    emoji: "🌃"
+    title:
+      en: "Night owl: {n}"
+      ru: "Сова: {n}"
+      uk: "Сова: {n}"
+    description:
+      en: "Finish {n} sessions between 10 at night and 2 in the morning"
+      ru: "Заверши занятия между 22:00 и 2:00 — всего {n}"
+      uk: "Заверши заняття між 22:00 і 2:00 — усього {n}"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 20]
+      gold: [30, 50]
+      platinum: [75, 100]
+      legend: [150, 200]
+
+  - id: sessions_weekend
+    category: habits
+    metric: sessions_weekend
+    emoji: "🛋️"
+    title:
+      en: "Weekend learner: {n}"
+      ru: "Учусь и в выходные: {n}"
+      uk: "Вчуся й у вихідні: {n}"
+    description:
+      en: "Finish {n} sessions on a Saturday or Sunday"
+      ru: "Заверши занятия в субботу или воскресенье — всего {n}"
+      uk: "Заверши заняття в суботу чи неділю — усього {n}"
+    steps:
+      bronze: [1, 5]
+      silver: [10, 20]
+      gold: [30, 50]
+      platinum: [75, 100]
+      legend: [150, 200]

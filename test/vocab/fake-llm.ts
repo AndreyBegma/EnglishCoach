@@ -11,7 +11,66 @@ import {
   VocabExerciseOutput,
 } from "../../src/skills";
 
-type Task = { lemma: string; mode?: "recognition" | "production" | "cloze" };
+type Task = {
+  lemma: string;
+  mode?: VocabMode;
+  particle?: string | null;
+  partner?: string | null;
+  target_form?: { pos: string; form: string } | null;
+};
+type VocabMode =
+  | "recognition"
+  | "production"
+  | "cloze"
+  | "particle"
+  | "partner"
+  | "transform"
+  | "own_sentence";
+
+/** A `vocab-exercise` answer for the lexical-unit modes, built from the server's facts. */
+function unitExercise(mode: VocabMode, task: Task) {
+  const typed = { options: null, correct_index: null };
+  switch (mode) {
+    case "particle": {
+      const particle = task.particle ?? "up";
+      const options = [particle, ...["off", "away", "over", "in"].filter((p) => p !== particle)];
+      return {
+        mode,
+        instruction: "Pick the particle.",
+        prompt: `She ___ (${task.lemma}).`,
+        options: options.slice(0, 4),
+        correct_index: 0,
+        accepted_answers: [particle],
+      };
+    }
+    case "partner":
+      return {
+        mode,
+        instruction: "Fill in the missing word.",
+        prompt: `We need to ___ … (${task.lemma})`,
+        ...typed,
+        accepted_answers: [task.partner ?? task.lemma],
+      };
+    case "transform":
+      return {
+        mode,
+        instruction: "Change the word.",
+        prompt: `It was a hard ___. (${task.lemma.toUpperCase()})`,
+        ...typed,
+        accepted_answers: [task.target_form?.form ?? task.lemma],
+      };
+    case "own_sentence":
+      return {
+        mode,
+        instruction: "Write your own sentence.",
+        prompt: `Use "${task.lemma}" in a sentence about your job.`,
+        ...typed,
+        accepted_answers: [task.lemma],
+      };
+    default:
+      return undefined;
+  }
+}
 
 /** The `<task>` JSON of the skill call's last user message. */
 function taskOf(req: CompletionRequest<unknown>): Task {
@@ -71,6 +130,8 @@ export function vocabSkills(db: Db) {
         calls.exercise++;
         const mode = task.mode ?? "recognition";
         const options = [meaningOf(task.lemma), "wrong one", "wrong two", "wrong three"];
+        const unit = unitExercise(mode, task);
+        if (unit) return { data: req.schema.parse(unit) };
         return {
           data: req.schema.parse(
             mode === "recognition"

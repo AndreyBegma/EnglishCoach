@@ -2,6 +2,7 @@ import { State } from "ts-fsrs";
 import type { Db } from "../db/client";
 import { addToXpTotal, countXpEvents, insertXpEvent, setXpLevel } from "../db/repositories/xp";
 import type { XpSource } from "../db/schema";
+import { domainEvents } from "../events/domain-events";
 import { type XpAwarded, xpEvents, xpLog } from "./events";
 import {
   DAILY_GOAL_XP,
@@ -64,6 +65,13 @@ export function awardGrammarItem(
   now?: Date,
 ): Promise<void> {
   return safely(userId, "grammar_item", async () => {
+    await domainEvents.emit("grammar.answered", {
+      userId,
+      topicId: item.topicId,
+      verdict: item.verdict,
+      score: item.score,
+      at: now ?? new Date(),
+    });
     const amount = itemXp("grammar_item", item.score, item.itemLevel, item.rating);
     const meta = { verdict: item.verdict, ...(item.topicId ? { topicId: item.topicId } : {}) };
     await awardXp(db, userId, { source: "grammar_item", amount, meta }, now);
@@ -102,13 +110,32 @@ export function awardCardRating(
   now?: Date,
 ): Promise<void> {
   return safely(userId, "card", async () => {
-    if (card.score <= 0) return;
+    const at = now ?? new Date();
     const learning = card.state === State.New || card.state === State.Learning;
     const learned =
-      learning && (await countXpEvents(db, userId, "word_learned", { cardId: card.cardId })) === 0;
+      card.score > 0 &&
+      learning &&
+      (await countXpEvents(db, userId, "word_learned", { cardId: card.cardId })) === 0;
+    await domainEvents.emit("card.rated", {
+      userId,
+      cardId: card.cardId,
+      score: card.score,
+      learned,
+      at,
+    });
+    if (card.score <= 0) return;
     const source = learned ? "word_learned" : "review";
     const amount = itemXp(source, card.score, card.itemLevel, card.rating);
-    await awardXp(db, userId, { source, amount, meta: { cardId: card.cardId } }, now);
+    const awarded = await awardXp(
+      db,
+      userId,
+      { source, amount, meta: { cardId: card.cardId } },
+      now,
+    );
+    // Once per card, like the ledger row that says it was learned.
+    if (learned && awarded) {
+      await domainEvents.emit("card.learned", { userId, cardId: card.cardId, at });
+    }
   });
 }
 

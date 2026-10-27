@@ -1,3 +1,4 @@
+import type { FSRS } from "ts-fsrs";
 import type { Db } from "../db/client";
 import type { Tx } from "../db/repositories/levels";
 import {
@@ -11,6 +12,7 @@ import {
   type TransferCount,
 } from "../db/repositories/transfer-events";
 import type { CefrLevel, TopicProgressRow, TransferKind, TransferSource } from "../db/schema";
+import { fsrsFor } from "../fsrs";
 import { getLevels } from "../levels/levels";
 import { type TopicMastered, topicEvents } from "./events";
 import {
@@ -18,6 +20,7 @@ import {
   applyTransfer,
   ERROR_FREE_MS,
   progressOf,
+  TOPIC_SCHEDULER,
   type TopicProgress,
   type TopicStep,
 } from "./mastery";
@@ -32,13 +35,13 @@ async function step(
   db: Db,
   userId: number,
   topicId: string,
-  apply: (progress: TopicProgress) => TopicStep,
+  apply: (progress: TopicProgress, scheduler: FSRS) => TopicStep,
   at: Date,
   also?: (tx: Tx) => Promise<void>,
 ): Promise<TopicStep & { event?: TopicMastered }> {
   const result = await db.transaction(async (tx) => {
     const row = await lockTopicProgress(tx, userId, topicId);
-    const next = apply(progressOf(row));
+    const next = apply(progressOf(row), await fsrsFor(tx, userId, TOPIC_SCHEDULER));
     await putTopicProgress(tx, userId, topicId, next.progress, at);
     await also?.(tx);
     return next;
@@ -63,7 +66,13 @@ export async function recordTopicItem(
 ): Promise<(TopicStep & { event?: TopicMastered }) | undefined> {
   const id = knownTopicId(topicId);
   if (!id) return undefined;
-  return step(db, userId, id, (progress) => applyItem(progress, item, at), at);
+  return step(
+    db,
+    userId,
+    id,
+    (progress, scheduler) => applyItem(progress, item, at, scheduler),
+    at,
+  );
 }
 
 /** Where a corrected message in free production came from. */
@@ -101,7 +110,7 @@ export async function recordTransfer(
       db,
       userId,
       topicId,
-      (progress) => applyTransfer(progress, kind, at),
+      (progress, scheduler) => applyTransfer(progress, kind, at, scheduler),
       at,
       (tx) => insertTransferEvent(tx, { userId, topicId, kind, ...origin, createdAt: at }),
     );

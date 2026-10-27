@@ -58,9 +58,15 @@ export const userSettings = pgTable(
     goals: text().array().$type<LearnerGoal[]>().notNull().default(sql`'{}'::text[]`),
     interests: text().array().notNull().default(sql`'{}'::text[]`),
     profession: text(),
+    // The recall probability every FSRS scheduler aims for, in percent (`src/fsrs/`).
+    desiredRetention: smallint().notNull().default(90),
   },
   (table) => [
     check("user_settings_english_variant_check", sql`${table.englishVariant} in ('us', 'uk')`),
+    check(
+      "user_settings_desired_retention_check",
+      sql`${table.desiredRetention} between 85 and 95`,
+    ),
     check(
       "user_settings_goals_check",
       sql`${table.goals} <@ array[${sql.raw(LEARNER_GOALS.map((goal) => `'${goal}'`).join(", "))}]::text[]`,

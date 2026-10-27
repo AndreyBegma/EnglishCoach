@@ -13,6 +13,7 @@ import {
   MAX_INTERESTS,
   MODEL_PAGE_SIZE,
   type ProviderChoice,
+  RETENTION_OPTIONS,
   TIME_PAGE_SIZE,
   TIME_SLOTS,
   WORDS_PER_DAY,
@@ -106,6 +107,7 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
     t("settings-explain-lang", { lang: t(`lang-${settings.explainLang}`) }),
     t("settings-level", { level: model.level ?? t("settings-level-unset") }),
     t("settings-words", { count: settings.wordsPerDay }),
+    t("settings-retention", { percent: settings.desiredRetention }),
     t("settings-timezone", { timezone: settings.timezone }),
     t("settings-times", {
       morning: hhmm(settings.morningTime),
@@ -126,7 +128,7 @@ function rootScreen(t: T, model: SettingsModel, notice?: Notice): RenderedScreen
       settings.cefrLevel === null
         ? [page("settings-btn-words", "words")]
         : [page("settings-btn-level", "level"), page("settings-btn-words", "words")],
-      [page("settings-btn-timezone", "timezone")],
+      [page("settings-btn-retention", "retention"), page("settings-btn-timezone", "timezone")],
       [page("settings-btn-morning", "morning"), page("settings-btn-evening", "evening")],
       [
         button(t("settings-btn-reminders", { state: onOff(settings.remindersEnabled) }), {
@@ -427,6 +429,19 @@ export function renderSettings(
             button(mark(String(count), count === settings.wordsPerDay), {
               type: "set",
               change: { field: "wordsPerDay", value: count },
+            }),
+          ),
+          back,
+        ]),
+      };
+    case "retention":
+      return {
+        text: t("settings-choose-retention", { percent: settings.desiredRetention }),
+        keyboard: Keyboard.from([
+          RETENTION_OPTIONS.map((percent) =>
+            button(mark(`${percent}%`, percent === settings.desiredRetention), {
+              type: "set",
+              change: { field: "desiredRetention", value: percent },
             }),
           ),
           back,

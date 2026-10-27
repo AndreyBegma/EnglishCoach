@@ -39,6 +39,7 @@ describe.skipIf(!testServerUrl)("users repository", () => {
       goals: [],
       interests: [],
       profession: null,
+      desiredRetention: 90,
     });
   });
 

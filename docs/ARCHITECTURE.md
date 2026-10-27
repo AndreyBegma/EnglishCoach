@@ -21,7 +21,7 @@ Product decisions for v2 (what the app is meant to do): [PRODUCT.md](PRODUCT.md)
 | Database | PostgreSQL 16 + Drizzle ORM / drizzle-kit migrations |
 | Queue / scheduling / ephemeral state | Redis 7 + BullMQ |
 | Validation | zod (env, LLM output, callback payloads) |
-| SRS | FSRS via `ts-fsrs` |
+| SRS | FSRS via `ts-fsrs`; per-user parameters fitted by `@open-spaced-repetition/binding` (see FSRS scheduling) |
 | i18n | UI in `ru`, `en`, `uk`; explanations in the learner's chosen language |
 | Lint / format | Biome |
 | Tests | `bun test` |
@@ -195,6 +195,41 @@ deleted with the step. The prefetch job prewarms upcoming words and examples; th
 paid key) voices the whole owner's list a slice at a time and keeps one pinned status message in
 the storage chat (`tts_status_board`), edited in place at most once a minute, re-sent and
 re-pinned when it is gone; `pinNoticeCleanup` deletes the pin notice there too.
+
+## FSRS scheduling
+
+- **One factory.** Every FSRS scheduler is built by `src/fsrs/`. That covers
+  words, grammar topics, and mistake patterns once they are scheduled.
+  `fsrsFor(db, userId, options)` reads the learner's profile;
+  `schedulerFrom(profile, options)` is the pure part. Never call `fsrs()`
+  directly. Words keep short-term steps; topics pass `TOPIC_SCHEDULER`
+  (`{ shortTerm: false }`).
+- **Desired retention.** `user_settings.desired_retention`, in percent,
+  85–95, default 90. Settings → 🎯 Target recall offers 85/88/90/92/95. It
+  becomes ts-fsrs `request_retention` for all of the learner's schedulers.
+- **Per-user parameters.** `fsrs_parameters` holds one row per learner: the
+  fitted FSRS-6 weights (null means the ts-fsrs defaults), their log loss, the
+  review count, `fitted_at` and `checked_at`. The weights apply to every
+  scheduler, so each learner has one memory model.
+- **Optimiser.** Uses `@open-spaced-repetition/binding`, the napi-rs build of
+  fsrs-rs, which is the official FSRS optimiser. Checked under Bun 1.4: it
+  loads, and fits 21 weights, the count ts-fsrs 5 takes. The app image is
+  glibc (`oven/bun`) and installs the `linux-x64-gnu` prebuilt through
+  optionalDependencies. ts-fsrs has no optimiser of its own.
+  - Don't pass the binding's `timeout` option: with it, the promise does not
+    resolve until the timeout runs out.
+  - Training data comes from `review_logs` joined to the learner's `cards`.
+    Each card's history starts at its first review as a new card. Manual
+    reschedules (rating 0) are dropped. `delta_t` is whole days between
+    reviews on the learner's calendar (their timezone). Each review after the
+    first is one training item.
+- **When it runs.** `BullFsrsOptimiser` (`src/queue/fsrs-optimiser.ts`): a
+  sweep at 03:40 UTC each day enqueues one deduplicated run per learner with
+  at least 1,000 logged reviews whose last run is missing or more than 30
+  days old. Runs happen one at a time. A run fits the whole log and
+  evaluates the weights in use and the new ones on that same log. It keeps
+  the new weights only if their log loss is strictly lower. Every run stamps
+  `checked_at`, so a rejected fit also waits a month.
 
 ## Level model
 
@@ -395,7 +430,8 @@ never-practised topic as mastered through `placeMastered`.
   screen (the header when a topic is picked) shows the evidence: correct uses
   per source, and errors per source in the last 14 days.
 - **FSRS.** A topic that becomes mastered is rated Good on its card (a new one
-  the first time; ts-fsrs without short-term steps, so intervals are days).
+  the first time). The scheduler is the learner's (`fsrsFor` with
+  `TOPIC_SCHEDULER`): no short-term steps, so intervals are in days.
   When it is due, its next 3 items are the check: a wrong one rates Again and
   sends the topic back to `learning`; three passes rate Good (Hard if any was
   partial).

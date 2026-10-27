@@ -35,6 +35,9 @@ export const MAX_PROFESSION_LENGTH = 80;
 /** Pronunciation the bot voices words in; the settings button switches between the two. */
 export const ENGLISH_VARIANTS = ["us", "uk"] as const satisfies readonly EnglishVariant[];
 
+/** Desired retention, in percent; applied to every FSRS scheduler (`src/fsrs/`). */
+export { RETENTION_OPTIONS, type RetentionOption } from "../fsrs/scheduler";
+
 export const WORDS_PER_DAY = [3, 5, 10, 15, 20] as const;
 export type WordsPerDay = (typeof WORDS_PER_DAY)[number];
 

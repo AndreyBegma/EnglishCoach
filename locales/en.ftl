@@ -65,6 +65,10 @@ settings-choose-timezone = Your time zone: { $timezone }
 settings-choose-morning = Morning session at { $time }. Choose a time:
 settings-choose-evening = Evening session at { $time }. Choose a time:
 settings-timezone-set = Time zone set to { $timezone }.
+# Desired retention (FSRS)
+settings-retention = Target recall: { $percent }%
+settings-btn-retention = 🎯 Target recall
+settings-choose-retention = Target recall: { $percent }%. How sure do you want to be of a word or topic when it comes back for review? Higher means more frequent reviews; lower means fewer reviews and more forgetting.
 lang-en = English
 lang-ru = Русский
 lang-uk = Українська

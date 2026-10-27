@@ -1,4 +1,4 @@
-import { type Card, createEmptyCard, fsrs, Rating, type State } from "ts-fsrs";
+import { type Card, createEmptyCard, type FSRS, Rating, type State } from "ts-fsrs";
 import type {
   TopicFsrs,
   TopicItem,
@@ -6,6 +6,7 @@ import type {
   TopicSession,
   TopicStatus,
 } from "../db/schema";
+import { DEFAULT_PROFILE, type SchedulerOptions, schedulerFrom } from "../fsrs/scheduler";
 
 /**
  * Topic mastery, pure: how one graded item, or one correct use of or error against the topic in
@@ -96,8 +97,11 @@ export type TopicStep = {
   checked?: "passed" | "failed";
 };
 
-// Topics are reviewed in days, not minutes: no short-term learning steps.
-const scheduler = fsrs({ enable_short_term: false });
+/** Topics are reviewed in days, not minutes: no short-term learning steps. */
+export const TOPIC_SCHEDULER: SchedulerOptions = { shortTerm: false };
+
+/** A topic scheduler for a learner with default settings, for callers that pass none. */
+const defaultScheduler = schedulerFrom(DEFAULT_PROFILE, TOPIC_SCHEDULER);
 
 function toCard(stored: TopicFsrs): Card {
   const card: Card = {
@@ -135,6 +139,7 @@ function schedule(
   stored: TopicFsrs | null,
   rating: Rating.Again | Rating.Hard | Rating.Good,
   at: Date,
+  scheduler: FSRS,
 ) {
   const card = stored ? toCard(stored) : createEmptyCard(at);
   const next = scheduler.next(card, at, rating).card;
@@ -215,7 +220,7 @@ function addToSession(
 }
 
 /** Masters a learning or shaky topic when the rule holds: it enters (or re-enters) FSRS. */
-function promote(progress: TopicProgress, from: TopicStatus, at: Date): TopicStep {
+function promote(progress: TopicProgress, from: TopicStatus, at: Date, scheduler: FSRS): TopicStep {
   if (progress.status === "mastered" || !masteryRule(progress, at)) {
     return { progress, from, mastered: false, firstMastery: false };
   }
@@ -227,7 +232,7 @@ function promote(progress: TopicProgress, from: TopicStatus, at: Date): TopicSte
       masteredAt: at,
       firstMasteredAt: progress.firstMasteredAt ?? at,
       checkScores: [],
-      ...schedule(progress.fsrs, Rating.Good, at),
+      ...schedule(progress.fsrs, Rating.Good, at, scheduler),
     },
     from,
     mastered: true,
@@ -257,12 +262,14 @@ export function isDue(progress: TopicProgress, at: Date): boolean {
 
 /**
  * One graded item on the topic: `score` 0..1, `type` the grammar-quiz item type, `session` the
- * learning session it was answered in.
+ * learning session it was answered in. `scheduler` is the learner's (`fsrsFor` with
+ * `TOPIC_SCHEDULER`).
  */
 export function applyItem(
   before: TopicProgress,
   item: { type: string; score: number; session: number },
   at: Date,
+  scheduler: FSRS = defaultScheduler,
 ): TopicStep {
   const from = before.status;
   const score = Math.min(1, Math.max(0, item.score));
@@ -282,7 +289,10 @@ export function applyItem(
   if (isDue(before, at)) {
     // A wrong answer fails the check at once; partial credit passes, but rates the card Hard.
     if (score === 0) {
-      progress = demoted({ ...progress, ...schedule(progress.fsrs, Rating.Again, at) }, "learning");
+      progress = demoted(
+        { ...progress, ...schedule(progress.fsrs, Rating.Again, at, scheduler) },
+        "learning",
+      );
       return { progress, from, mastered: false, firstMastery: false, checked: "failed" };
     }
     const checkScores = [...progress.checkScores, score];
@@ -290,7 +300,7 @@ export function applyItem(
       return { progress: { ...progress, checkScores }, from, mastered: false, firstMastery: false };
     }
     const rating = checkScores.every((s) => s >= 1) ? Rating.Good : Rating.Hard;
-    progress = { ...progress, checkScores: [], ...schedule(progress.fsrs, rating, at) };
+    progress = { ...progress, checkScores: [], ...schedule(progress.fsrs, rating, at, scheduler) };
     checked = "passed";
   }
 
@@ -304,7 +314,7 @@ export function applyItem(
       ...(checked ? { checked } : {}),
     };
   }
-  return promote(progress, from, at);
+  return promote(progress, from, at, scheduler);
 }
 
 /**
@@ -316,10 +326,16 @@ export function applyTransfer(
   before: TopicProgress,
   kind: "correct" | "error",
   at: Date,
+  scheduler: FSRS = defaultScheduler,
 ): TopicStep {
   const from = before.status;
   if (kind === "correct") {
-    return promote({ ...before, transferEvidence: before.transferEvidence + 1 }, from, at);
+    return promote(
+      { ...before, transferEvidence: before.transferEvidence + 1 },
+      from,
+      at,
+      scheduler,
+    );
   }
   const lastErrorAt =
     before.lastErrorAt && before.lastErrorAt.getTime() > at.getTime() ? before.lastErrorAt : at;
@@ -337,12 +353,16 @@ export function applyTransfer(
  * so its first check comes due. It earns nothing: `firstMasteredAt` stays as it was, so the
  * first mastery the learner earns later still pays its XP, and no `topic.mastered` is emitted.
  */
-export function placeMastered(before: TopicProgress, at: Date): TopicProgress {
+export function placeMastered(
+  before: TopicProgress,
+  at: Date,
+  scheduler: FSRS = defaultScheduler,
+): TopicProgress {
   return {
     ...before,
     status: "mastered",
     masteredAt: at,
     checkScores: [],
-    ...schedule(before.fsrs, Rating.Good, at),
+    ...schedule(before.fsrs, Rating.Good, at, scheduler),
   };
 }

@@ -65,6 +65,10 @@ settings-choose-timezone = Ваш часовий пояс: { $timezone }
 settings-choose-morning = Ранкове заняття о { $time }. Оберіть час:
 settings-choose-evening = Вечірнє заняття о { $time }. Оберіть час:
 settings-timezone-set = Часовий пояс: { $timezone }.
+# Desired retention (FSRS)
+settings-retention = Ціль запам'ятовування: { $percent }%
+settings-btn-retention = 🎯 Ціль запам'ятовування
+settings-choose-retention = Ціль запам'ятовування: { $percent }%. Наскільки впевнено ви хочете пам'ятати слово чи тему, коли воно повернеться на повторення? Вище — повторень більше; нижче — повторень менше, але й забувається більше.
 lang-en = English
 lang-ru = Русский
 lang-uk = Українська

@@ -1,6 +1,7 @@
 import type { Db } from "../db/client";
 import { lockTopicProgress, putTopicProgress } from "../db/repositories/topic-progress";
-import { placeMastered, progressOf } from "../grammar/mastery";
+import { fsrsFor } from "../fsrs";
+import { placeMastered, progressOf, TOPIC_SCHEDULER } from "../grammar/mastery";
 import type { TopicFlagWriter } from "./topics";
 
 /**
@@ -16,10 +17,12 @@ export function topicProgressWriter(db: Db, now: () => Date = () => new Date()):
       if (mastered.length === 0) return;
       const at = now();
       await db.transaction(async (tx) => {
+        const scheduler = await fsrsFor(tx, userId, TOPIC_SCHEDULER);
         for (const flag of mastered) {
           const row = await lockTopicProgress(tx, userId, flag.topicId);
           if (row.status !== "not_started" || row.recentItems.length > 0) continue;
-          await putTopicProgress(tx, userId, flag.topicId, placeMastered(progressOf(row), at), at);
+          const placed = placeMastered(progressOf(row), at, scheduler);
+          await putTopicProgress(tx, userId, flag.topicId, placed, at);
         }
       });
     },

@@ -3,6 +3,7 @@
 export * from "./achievements";
 export * from "./enums";
 export * from "./examples";
+export * from "./fsrs";
 export * from "./images";
 export * from "./levels";
 export * from "./mistakes";

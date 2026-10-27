@@ -11,6 +11,8 @@ import {
   type LearnerGoal,
   PROVIDER_CHOICES,
   type ProviderChoice,
+  RETENTION_OPTIONS,
+  type RetentionOption,
   TIME_SLOTS,
   WORDS_PER_DAY,
   type WordsPerDay,
@@ -39,6 +41,7 @@ export const SETTINGS_PAGES = [
   "explain",
   "level",
   "words",
+  "retention",
   "timezone",
   "morning",
   "evening",
@@ -64,6 +67,7 @@ export type SettingChange =
   | { field: "explainLang"; value: Locale }
   | { field: "cefrLevel"; value: CefrLevel }
   | { field: "wordsPerDay"; value: WordsPerDay }
+  | { field: "desiredRetention"; value: RetentionOption }
   | { field: "timezone"; value: (typeof COMMON_TIMEZONES)[number] }
   | { field: "morningTime" | "eveningTime"; value: string }
   | { field: "remindersEnabled" | "voiceEnabled"; value: boolean }
@@ -153,6 +157,8 @@ const timezoneIndex = smallInt.pipe(
 
 const wordsPerDay = smallInt.pipe(z.union(WORDS_PER_DAY.map((n) => z.literal(n))));
 
+const retention = smallInt.pipe(z.union(RETENTION_OPTIONS.map((n) => z.literal(n))));
+
 const set =
   <T extends SettingChange>(code: string, value: z.ZodType<T["value"], string>) =>
   (field: T["field"]) =>
@@ -191,6 +197,7 @@ const route = z.union([
   set("ex", z.enum(SUPPORTED_LOCALES))("explainLang"),
   set("lv", z.enum(CEFR_LEVELS))("cefrLevel"),
   set("wd", wordsPerDay)("wordsPerDay"),
+  set("dr", retention)("desiredRetention"),
   set("tz", timezoneIndex)("timezone"),
   set("mt", timeSlot)("morningTime"),
   set("et", timeSlot)("eveningTime"),
@@ -242,6 +249,7 @@ const SET_CODES: Record<SettingChange["field"], string> = {
   explainLang: "ex",
   cefrLevel: "lv",
   wordsPerDay: "wd",
+  desiredRetention: "dr",
   timezone: "tz",
   morningTime: "mt",
   eveningTime: "et",

@@ -7,6 +7,7 @@ import { applyReview, reviewStatsSince } from "../db/repositories/cards";
 import { getSettings } from "../db/repositories/users";
 import { randomLemmas } from "../db/repositories/words";
 import type { CardRow, CefrLevel, Language } from "../db/schema";
+import { fsrsFor } from "../fsrs";
 import type { WordImages } from "../images";
 import { recordCardRating } from "../levels";
 import { LlmOutputError, LlmProviderError, ProviderUnavailableError } from "../llm";
@@ -200,7 +201,8 @@ export class VocabCore {
     counter: "newWords" | "reviews",
   ): Promise<boolean> {
     const now = this.now();
-    const { next, log } = this.scheduler.rate(card, rating, now);
+    const fsrs = await fsrsFor(this.deps.db, handle.user.id);
+    const { next, log } = this.scheduler.rate(card, rating, now, fsrs);
     if (!(await applyReview(this.deps.db, card.id, card.reps, next, log))) return false;
     const { timezone } = await this.settings(handle.user.id);
     await addVocabStats(this.deps.db, handle.user.id, localDate(now, timezone), { [counter]: 1 });

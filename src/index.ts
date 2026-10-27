@@ -7,10 +7,12 @@ import { EnvError, parseEnv } from "./config/env";
 import { masterKeyFromBase64 } from "./crypto/secrets";
 import { createDb } from "./db/client";
 import type { SettingsField } from "./events/settings-events";
+import { optimise, usersDueForOptimisation } from "./fsrs/optimiser";
 import { createApp } from "./http/app";
 import { createWordImages } from "./images";
 import { createServerProvider, defaultFactories, resolveProvider } from "./llm";
 import { createLogger } from "./log";
+import { BullFsrsOptimiser } from "./queue/fsrs-optimiser";
 import { BullRoutineJobs } from "./queue/routine-jobs";
 import { BullSessionTimeouts } from "./queue/session-timeouts";
 import { BullVoiceBackfill } from "./queue/voice-backfill";
@@ -173,6 +175,19 @@ if (voiceBackfill) {
 } else {
   log.info("voice backfill off: TTS_URL or TTS_STORAGE_CHAT_ID is not set");
 }
+// Per-learner FSRS parameters, fitted from their review log once it is long enough, then monthly.
+const fsrsOptimiser = new BullFsrsOptimiser({ redisUrl: env.REDIS_URL, log });
+fsrsOptimiser.startWorker({
+  dueUsers: () => usersDueForOptimisation(database.db, new Date()),
+  optimise: async (userId) => {
+    const outcome = await optimise(database.db, userId, new Date());
+    log.info("fsrs optimiser run", { userId, ...outcome });
+  },
+});
+redisReady
+  .then((ready) => (ready ? fsrsOptimiser.schedule() : undefined))
+  .catch((error: unknown) => log.warn("fsrs optimiser scheduling failed", { error }));
+
 timeouts.startWorker((sessionId) => sessions.expire(sessionId));
 routineJobs.startWorker((job) => routine.fire(job));
 // Jobs persist in Redis; this creates them for users who never got any and drops stale ones.
@@ -219,6 +234,7 @@ async function shutdown(signal: string) {
     routineJobs.close(),
     wordEnrichment?.close(),
     voiceBackfill?.close(),
+    fsrsOptimiser.close(),
   ]);
   await Promise.allSettled([database.close(), redis.close()]);
   process.exit(0);

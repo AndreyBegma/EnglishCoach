@@ -6,19 +6,21 @@ import { CALLBACK_VERSION, MAX_CALLBACK_BYTES } from "../bot/callbacks";
  * hub and settings composers pass these updates on to `grammarHandlers`.
  */
 export type GrammarCallback =
-  | { type: "topic"; index: number | null }
+  /** A syllabus topic id (`g015`); null for Mixed. */
+  | { type: "topic"; id: string | null }
   | { type: "answer"; question: number; option: number }
   | { type: "retry" }
   | { type: "stop" };
 
 const PREFIX = `${CALLBACK_VERSION}:g`;
 const int = /^\d{1,3}$/;
+const topicId = /^g\d{3}$/;
 
 export function encodeGrammarCallback(callback: GrammarCallback): string {
   let data: string;
   switch (callback.type) {
     case "topic":
-      data = `${PREFIX}:t:${callback.index ?? "m"}`;
+      data = `${PREFIX}:t:${callback.id ?? "m"}`;
       break;
     case "answer":
       data = `${PREFIX}:a:${callback.question}:${callback.option}`;
@@ -43,9 +45,8 @@ export function parseGrammarCallback(data: string | undefined): GrammarCallback 
   if (version !== String(CALLBACK_VERSION) || prefix !== "g") return undefined;
 
   if (route === "t" && args.length === 1) {
-    if (args[0] === "m") return { type: "topic", index: null };
-    if (args[0] !== undefined && int.test(args[0]))
-      return { type: "topic", index: Number(args[0]) };
+    if (args[0] === "m") return { type: "topic", id: null };
+    if (args[0] !== undefined && topicId.test(args[0])) return { type: "topic", id: args[0] };
   }
   if (route === "a" && args.length === 2 && int.test(args[0] ?? "") && int.test(args[1] ?? "")) {
     return { type: "answer", question: Number(args[0]), option: Number(args[1]) };

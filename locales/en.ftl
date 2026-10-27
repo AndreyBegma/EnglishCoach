@@ -219,16 +219,6 @@ onboarding-done = Welcome aboard!
 # --- grammar ---
 grammar-pick-topic = ✍️ Grammar practice: 10 questions. Pick a topic or practise a mix.
 grammar-mixed = 🎲 Mixed (recommended)
-grammar-topic-tenses = Tenses
-grammar-topic-articles = Articles
-grammar-topic-prepositions = Prepositions
-grammar-topic-comparatives = Comparatives
-grammar-topic-conditionals = Conditionals
-grammar-topic-modals = Modal verbs
-grammar-topic-passive = Passive voice
-grammar-topic-reported-speech = Reported speech
-grammar-topic-gerund-infinitive = Gerund / infinitive
-grammar-topic-relative-clauses = Relative clauses
 grammar-topic-chosen = Topic: { $topic }
 grammar-question-header = ❓ Question { $n } of { $total }
 grammar-chosen = Your answer: { $answer }

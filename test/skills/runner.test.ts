@@ -132,7 +132,8 @@ describe("SkillRunner", () => {
     const result = await skills.runSkill(7, "grammar-quiz", { recent_accuracy: 0.5 });
 
     expect(result.usage).toEqual({ input: 1, output: 2 });
-    expect(result.data as Record<string, unknown>).toEqual(quizOutput);
+    // A model that names no syllabus topic gets the default.
+    expect(result.data as Record<string, unknown>).toEqual({ ...quizOutput, topic_id: null });
     // Typed by the skill's output schema: no cast needed to read a field.
     expect(result.data.accepted_answers).toEqual(["a"]);
     expect(users).toEqual([7]);

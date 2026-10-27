@@ -36,7 +36,9 @@ describe.skipIf(!testServerUrl)("users repository", () => {
       remindersEnabled: true,
       voiceEnabled: false,
       englishVariant: "us",
+      goals: [],
       interests: [],
+      profession: null,
     });
   });
 

@@ -12,6 +12,17 @@ import {
 } from "drizzle-orm/pg-core";
 import { cefrLevelEnum, languageEnum } from "./enums";
 
+/** Why the learner studies English; several may apply. */
+export const LEARNER_GOALS = [
+  "it",
+  "travel",
+  "work_business",
+  "exam",
+  "everyday",
+  "relocation",
+] as const;
+export type LearnerGoal = (typeof LEARNER_GOALS)[number];
+
 export const users = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   // Telegram IDs fit in 52 bits, so number mode is lossless.
@@ -31,7 +42,8 @@ export const userSettings = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
     uiLang: languageEnum().notNull().default("en"),
     explainLang: languageEnum().notNull().default("en"),
-    // Null until the placement test has run.
+    // Null until the placement test has run. A cache of the overall level's band from
+    // `skill_levels` (`src/levels/`): written there, never set on its own.
     cefrLevel: cefrLevelEnum(),
     wordsPerDay: smallint().notNull().default(5),
     timezone: text().notNull().default("Europe/Kyiv"),
@@ -41,10 +53,18 @@ export const userSettings = pgTable(
     voiceEnabled: boolean().notNull().default(false),
     // Which English the bot pronounces words in.
     englishVariant: text().$type<"us" | "uk">().notNull().default("us"),
+    // The learner profile, asked in onboarding and edited in Settings → Profile & goals. Learner
+    // text: it reaches skills only inside `<learner_context>`, never the system prompt.
+    goals: text().array().$type<LearnerGoal[]>().notNull().default(sql`'{}'::text[]`),
     interests: text().array().notNull().default(sql`'{}'::text[]`),
+    profession: text(),
   },
   (table) => [
     check("user_settings_english_variant_check", sql`${table.englishVariant} in ('us', 'uk')`),
+    check(
+      "user_settings_goals_check",
+      sql`${table.goals} <@ array[${sql.raw(LEARNER_GOALS.map((goal) => `'${goal}'`).join(", "))}]::text[]`,
+    ),
   ],
 );
 

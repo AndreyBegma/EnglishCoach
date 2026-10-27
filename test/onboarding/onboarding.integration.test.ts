@@ -5,6 +5,7 @@ import { getHub } from "../../src/db/repositories/hub";
 import { findActiveSession } from "../../src/db/repositories/sessions";
 import { findUserByTelegramId, getSettings } from "../../src/db/repositories/users";
 import type { SettingsChanged } from "../../src/events/settings-events";
+import { getLevels, SEEDED_UNCERTAINTY } from "../../src/levels";
 import type { LlmProvider } from "../../src/llm";
 import { encodeOnboardingCallback, type OnboardingCallback } from "../../src/onboarding/callbacks";
 import { learnerContextFromDb, loadSkillRegistry, SkillRunner } from "../../src/skills";
@@ -105,6 +106,13 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
       return hub;
     };
     const start = () => h.say(telegramId, "/start", languageCode);
+    /** The profile steps the quickest way: one goal, no interests, no profession. */
+    const profile = async () => {
+      await tap({ type: "goal", goal: "everyday" });
+      await tap({ type: "goals-done" });
+      await tap({ type: "interests-done" });
+      await tap({ type: "profession-skip" });
+    };
     /** Taps option `index` of the item on screen: its buttons carry the item's number. */
     const answer = (index = 1) => {
       const data = card().buttons[0]?.[index];
@@ -124,6 +132,7 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
       settings,
       hubOnly,
       start,
+      profile,
       answer,
     };
   }
@@ -140,6 +149,38 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     expect(buttons(s.card())).toContain(encodeOnboardingCallback({ type: "lang", lang: "ru" }));
 
     await s.tap({ type: "lang", lang: "ru" });
+
+    // Goals: a multi-select that needs at least one choice.
+    expect(s.card().text).toContain("Зачем вам английский");
+    await s.tap({ type: "goals-done" });
+    expect(s.card().text).toContain("Зачем вам английский");
+    await s.tap({ type: "goal", goal: "it" });
+    await s.tap({ type: "goal", goal: "travel" });
+    await s.tap({ type: "goal", goal: "travel" });
+    await s.tap({ type: "goal", goal: "relocation" });
+    expect(s.card().labels.flat()).toContain("✓ 💻 IT");
+    expect(s.card().labels.flat()).not.toContain("✓ ✈️ Путешествия");
+    await s.tap({ type: "goals-done" });
+
+    // Interests: suggestion buttons plus typed tags; the typed message does not stay.
+    expect(s.card().text).toContain("Чем вы увлекаетесь");
+    await s.tap({ type: "interest", index: 1 });
+    await s.h.say(s.telegramId, "jazz, Startups; music");
+    expect(s.bot()).toHaveLength(1);
+    expect(s.card().text).toContain("Интересы: Музыка, jazz, Startups");
+    await s.tap({ type: "interests-done" });
+
+    // Profession: free text, validated; a refusal is a note that fades.
+    expect(s.card().text).toContain("Чем вы занимаетесь");
+    const tooLong = await s.h.say(s.telegramId, "x".repeat(200));
+    expect(s.chat().has(tooLong)).toBe(false);
+    expect(s.card().text).toContain("до 80 символов");
+    await s.h.sessions.flushNotes();
+    expect(s.bot()).toHaveLength(1);
+    expect(s.card().text).toContain("Чем вы занимаетесь");
+    await s.h.say(s.telegramId, "  Backend   developer ");
+    expect(s.card().text).toContain("Какой ИИ");
+
     await s.tap({ type: "provider", choice: "server" });
     await s.tap({ type: "take-test" });
 
@@ -175,10 +216,16 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
       wordsPerDay: 10,
       morningTime: "07:30:00",
       eveningTime: "21:00:00",
+      goals: ["it", "relocation"],
+      interests: ["music", "jazz", "Startups"],
+      profession: "Backend developer",
     });
     expect(s.events.flatMap((event) => event.changed)).toEqual([
       "uiLang",
       "explainLang",
+      "goals",
+      "interests",
+      "profession",
       "cefrLevel",
       "wordsPerDay",
       "morningTime",
@@ -193,6 +240,7 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     const s = await setup();
     await s.start();
     await s.tap({ type: "lang", lang: "en" });
+    await s.profile();
     await s.tap({ type: "provider", choice: "server" });
     await s.tap({ type: "take-test" });
 
@@ -203,13 +251,20 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     expect(s.script.calls).toBe(16);
     expect(s.card().text).toContain("Your level: B1");
     expect(s.card().text).toContain("Based on 8 correct answers out of 15.");
-    expect((await s.settings()).settings.cefrLevel).toBe("B1");
+    const { user, settings } = await s.settings();
+    expect(settings.cefrLevel).toBe("B1");
+    // Every item was a grammar item: grammar carries the evidence, the other skills the seed.
+    const levels = await getLevels(database.db, user.id);
+    expect(levels?.skills.grammar?.evidence).toBe(15);
+    expect(levels?.skills.grammar?.uncertainty).toBeLessThan(SEEDED_UNCERTAINTY.placement);
+    expect(levels?.skills.reading).toMatchObject({ label: "B1.5", evidence: 0 });
   });
 
   test("a learner who knows their level skips the test", async () => {
     const s = await setup();
     await s.start();
     await s.tap({ type: "lang", lang: "en" });
+    await s.profile();
     await s.tap({ type: "provider", choice: "server" });
     await s.tap({ type: "know-level" });
     await s.tap({ type: "level", level: "C1" });
@@ -219,13 +274,16 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
 
     await s.hubOnly();
     expect(s.script.calls).toBe(0);
-    expect((await s.settings()).settings).toMatchObject({ cefrLevel: "C1", wordsPerDay: 3 });
+    const { user, settings } = await s.settings();
+    expect(settings).toMatchObject({ cefrLevel: "C1", wordsPerDay: 3 });
+    expect((await getLevels(database.db, user.id))?.overall.label).toBe("C1.5");
   });
 
   test("choosing their own provider ends onboarding on Settings → AI provider", async () => {
     const s = await setup();
     await s.start();
     await s.tap({ type: "lang", lang: "en" });
+    await s.profile();
     await s.tap({ type: "provider", choice: "own" });
     await s.tap({ type: "know-level" });
     await s.tap({ type: "level", level: "A2" });
@@ -241,6 +299,7 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     const s = await setup();
     await s.start();
     await s.tap({ type: "lang", lang: "en" });
+    await s.profile();
     await s.tap({ type: "provider", choice: "server" });
 
     s.script.failNext = 1;
@@ -266,15 +325,37 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     await s.start();
     expect(s.bot()).toHaveLength(1);
     expect(s.card().id).not.toBe(oldCard);
-    expect(buttons(s.card())).toContain(
-      encodeOnboardingCallback({ type: "provider", choice: "server" }),
-    );
+    expect(buttons(s.card())).toContain(encodeOnboardingCallback({ type: "goals-done" }));
 
     await s.h.press(s.telegramId, oldCard, encodeOnboardingCallback({ type: "lang", lang: "uk" }));
+    await s.h.press(s.telegramId, oldCard, encodeOnboardingCallback({ type: "goal", goal: "it" }));
     expect((await s.settings()).settings.uiLang).toBe("ru");
-    expect(buttons(s.card())).toContain(
-      encodeOnboardingCallback({ type: "provider", choice: "server" }),
-    );
+    expect(buttons(s.card())).toContain(encodeOnboardingCallback({ type: "goals-done" }));
+    expect(s.card().labels.flat()).not.toContain("✓ 💻 IT");
+  });
+
+  test("goals are toggled one tap at a time; Next needs one", async () => {
+    const s = await setup();
+    await s.start();
+    await s.tap({ type: "lang", lang: "en" });
+    await s.tap({ type: "goals-done" });
+    expect(s.card().text).toContain("Why are you learning English?");
+    expect((await s.settings()).settings.goals).toEqual([]);
+
+    await s.tap({ type: "goal", goal: "exam" });
+    await s.tap({ type: "goals-done" });
+    // A stale goal button on the interests step changes nothing.
+    await s.tap({ type: "goal", goal: "travel" });
+    expect(s.card().text).toContain("What are you into?");
+    expect((await s.settings()).settings.goals).toEqual(["exam"]);
+
+    await s.h.say(s.telegramId, "sk-ant-api03-abcdefghijklmnop");
+    await s.h.sessions.flushNotes();
+    await s.tap({ type: "interests-done" });
+    expect((await s.settings()).settings.interests).toEqual([]);
+    await s.tap({ type: "profession-skip" });
+    expect((await s.settings()).settings.profession).toBeNull();
+    expect(s.card().text).toContain("Which AI should run your lessons?");
   });
 
   test("a button that does not fit the current step changes nothing", async () => {
@@ -291,6 +372,7 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     const s = await setup();
     await s.start();
     await s.tap({ type: "lang", lang: "en" });
+    await s.profile();
     await s.tap({ type: "provider", choice: "server" });
     await s.tap({ type: "know-level" });
     await s.tap({ type: "level", level: "A2" });
@@ -329,6 +411,7 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     const s = await setup();
     await s.start();
     await s.tap({ type: "lang", lang: "en" });
+    await s.profile();
     await s.tap({ type: "provider", choice: "server" });
     await s.tap({ type: "know-level" });
     await s.tap({ type: "level", level: "B1" });

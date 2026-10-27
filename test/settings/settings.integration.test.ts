@@ -350,6 +350,8 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       "morning",
       "evening",
       "provider",
+      "profile",
+      "interests",
     ] as const;
     for (const lang of ["ru", "uk", "en"] as const) {
       await s.press({ type: "lang", lang });
@@ -359,6 +361,66 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
       await s.press({ type: "input-cancel" });
     }
     expect(s.hubText()).toContain("Your time zone");
+    expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
+    expect(s.chatIds()).toEqual([s.hub.messageId]);
+  });
+
+  test("Profile & goals edits goals, interests and the profession in the hub", async () => {
+    const s = await setup();
+    const saved = async () => {
+      const settings = await getSettings(database.db, s.user.id);
+      return {
+        goals: settings?.goals,
+        interests: settings?.interests,
+        profession: settings?.profession,
+      };
+    };
+    await s.press({ type: "settings", page: "root" });
+    expect(s.hubLabels()).toContain("👤 Profile & goals");
+    await s.press({ type: "settings", page: "profile" });
+    expect(s.hubText()).toContain("Goals: —");
+
+    await s.press({ type: "goal", goal: "exam" });
+    await s.press({ type: "goal", goal: "it" });
+    await s.press({ type: "goal", goal: "exam" });
+    expect(s.hubText()).toContain("Goals: 💻 IT");
+    expect(s.hubLabels()).toContain("✓ 💻 IT");
+
+    await s.press({ type: "settings", page: "interests" });
+    await s.press({ type: "interest", index: 0 });
+    await s.press({ type: "input", input: "interests" });
+    await s.h.say(s.telegramId, `chess, ${"x".repeat(60)}`);
+    expect(s.hubText()).toContain("each up to 40 characters");
+    await s.h.say(s.telegramId, "chess, Technology");
+    expect(s.hubText()).toContain("Interests: Technology, chess");
+
+    await s.press({ type: "settings", page: "profile" });
+    await s.press({ type: "input", input: "profession" });
+    await s.press({ type: "input-cancel" });
+    expect(s.hubText()).toContain("Profession: —");
+    await s.press({ type: "input", input: "profession" });
+    await s.h.say(s.telegramId, "QA engineer");
+    expect(s.hubText()).toContain("Profession: QA engineer");
+    expect(await saved()).toEqual({
+      goals: ["it"],
+      interests: ["technology", "chess"],
+      profession: "QA engineer",
+    });
+
+    await s.press({ type: "profile-clear", field: "profession" });
+    await s.press({ type: "settings", page: "interests" });
+    await s.press({ type: "profile-clear", field: "interests" });
+    expect(await saved()).toEqual({ goals: ["it"], interests: [], profession: null });
+    expect(s.events.flatMap((event) => event.changed)).toEqual([
+      "goals",
+      "goals",
+      "goals",
+      "interests",
+      "interests",
+      "profession",
+      "profession",
+      "interests",
+    ]);
     expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
     expect(s.chatIds()).toEqual([s.hub.messageId]);
   });

@@ -6,18 +6,29 @@ import { setActiveProviderModel } from "../db/repositories/providers";
 import { getSettings, type SettingsPatch, updateSettings } from "../db/repositories/users";
 import type { SettingsEvents, SettingsField } from "../events/settings-events";
 import type { HubService } from "../hub/hub-service";
+import { getOverallLevel, seedLevels } from "../levels";
 import { whileTyping } from "../sessions/answer";
-import { type ByokChoice, MODEL_PAGE_SIZE, type ProviderChoice } from "./options";
+import {
+  type ByokChoice,
+  INTEREST_SUGGESTIONS,
+  MAX_INTERESTS,
+  MODEL_PAGE_SIZE,
+  type ProviderChoice,
+} from "./options";
 import type { Notice, ProviderSettings } from "./provider";
 import { renderSettings, type SettingsView } from "./screens";
 import { providerKey, type SettingsInput } from "./state";
 import {
+  mergeInterests,
   parseApiKey,
   parseBaseUrl,
+  parseInterests,
   parseModelId,
+  parseProfession,
   parseTimezone,
   parseWorkspaceId,
   timezoneAt,
+  toggleInterest,
 } from "./validate";
 
 export interface SettingsControllerDeps {
@@ -36,6 +47,22 @@ type PendingInput = SettingsInput extends infer I
     : never
   : never;
 
+/** The page a cancelled text input returns to. */
+function cancelPage(
+  pending: SettingsInput | undefined,
+): "timezone" | "interests" | "profile" | "provider" {
+  switch (pending?.kind) {
+    case "timezone":
+      return "timezone";
+    case "interests":
+      return "interests";
+    case "profession":
+      return "profile";
+    default:
+      return "provider";
+  }
+}
+
 /**
  * The settings screens. Every screen is the hub message edited in place; free-text values are
  * asked for by editing the hub into a prompt (docs/ARCHITECTURE.md → Telegram UX rules), so
@@ -47,12 +74,18 @@ export class SettingsController {
   show(ctx: BotContext, view: SettingsView): Promise<void> {
     const { db, hub, i18n, providers } = this.deps;
     return hub.present(ctx.user, async () => {
-      const [settings, provider] = await Promise.all([
+      const [settings, provider, level] = await Promise.all([
         getSettings(db, ctx.user.id),
         providers.active(ctx.user.id),
+        getOverallLevel(db, ctx.user.id),
       ]);
       if (!settings) throw new Error(`user ${ctx.user.id} has no settings`);
-      return renderSettings(i18n, view, { locale: settings.uiLang, settings, provider });
+      return renderSettings(i18n, view, {
+        locale: settings.uiLang,
+        settings,
+        level: level?.label,
+        provider,
+      });
     });
   }
 
@@ -106,7 +139,29 @@ export class SettingsController {
         return this.ask(ctx, { kind: callback.input });
       case "input-cancel":
         await ctx.answerCallbackQuery();
-        return this.show(ctx, { page: pending?.kind === "timezone" ? "timezone" : "provider" });
+        return this.show(ctx, { page: cancelPage(pending) });
+      case "goal": {
+        await ctx.answerCallbackQuery();
+        const goals = ctx.settings.goals.includes(callback.goal)
+          ? ctx.settings.goals.filter((goal) => goal !== callback.goal)
+          : [...ctx.settings.goals, callback.goal];
+        return this.saveProfile(ctx, { goals }, "profile");
+      }
+      case "interest": {
+        const id = INTEREST_SUGGESTIONS[callback.index] ?? "";
+        const current = ctx.settings.interests;
+        const interests = toggleInterest(current, id);
+        const full = current.length >= MAX_INTERESTS && interests.length === current.length;
+        await ctx.answerCallbackQuery(
+          full ? { text: ctx.t("profile-interests-full", { max: MAX_INTERESTS }) } : undefined,
+        );
+        return this.saveProfile(ctx, { interests }, "interests");
+      }
+      case "profile-clear":
+        await ctx.answerCallbackQuery();
+        return callback.field === "interests"
+          ? this.saveProfile(ctx, { interests: [] }, "interests")
+          : this.saveProfile(ctx, { profession: null }, "profile");
       case "provider-test": {
         await ctx.answerCallbackQuery({ text: ctx.t("provider-testing") });
         const { notice, needsWorkspace } = await this.deps.providers.test(ctx.user.id);
@@ -186,10 +241,38 @@ export class SettingsController {
           notice: { key: "settings-timezone-set", vars: { timezone } },
         });
       }
+      case "interests": {
+        const added = parseInterests(text);
+        if (!added) return retry({ key: "input-interests-invalid" });
+        ctx.session.settingsInput = undefined;
+        const interests = mergeInterests(ctx.settings.interests, added);
+        return this.saveProfile(ctx, { interests }, "interests");
+      }
+      case "profession": {
+        const profession = parseProfession(text);
+        if (!profession) return retry({ key: "input-profession-invalid" });
+        ctx.session.settingsInput = undefined;
+        return this.saveProfile(ctx, { profession }, "profile");
+      }
     }
   }
 
+  /** Saves profile fields and shows the profile page they were edited on. */
+  private async saveProfile(
+    ctx: BotContext,
+    patch: Pick<SettingsPatch, "goals" | "interests" | "profession">,
+    page: "profile" | "interests",
+  ): Promise<void> {
+    await updateSettings(this.deps.db, ctx.user.id, patch);
+    await this.changed(ctx, Object.keys(patch) as SettingsField[]);
+    return this.show(ctx, { page });
+  }
+
   private async apply(ctx: BotContext, patch: SettingsPatch, changed: SettingsField[]) {
+    // A chosen level restarts the level model there; re-picking the current band keeps it.
+    if (patch.cefrLevel && patch.cefrLevel !== ctx.settings.cefrLevel) {
+      await seedLevels(this.deps.db, ctx.user.id, patch.cefrLevel, "chosen");
+    }
     await updateSettings(this.deps.db, ctx.user.id, patch);
     await this.changed(ctx, changed);
     await this.show(ctx, { page: "root" });

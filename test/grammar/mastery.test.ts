@@ -9,6 +9,7 @@ import {
   isDue,
   MASTERY_WINDOW,
   masteryRule,
+  placeMastered,
   type TopicProgress,
   windowHolds,
 } from "../../src/grammar/mastery";
@@ -233,5 +234,22 @@ describe("a due mastered topic is checked", () => {
       new Date(when.getTime() + 5 * DAY),
     );
     expect(step).toMatchObject({ from: "learning", mastered: true, firstMastery: false });
+  });
+});
+
+describe("a topic placed as mastered by the placement test", () => {
+  test("is mastered on FSRS, due later, without a first mastery", () => {
+    const placed = placeMastered(EMPTY_PROGRESS, T0);
+    expect(placed).toMatchObject({ status: "mastered", masteredAt: T0, firstMasteredAt: null });
+    expect(placed.fsrs).not.toBeNull();
+    expect(placed.reviewDue?.getTime()).toBeGreaterThan(T0.getTime());
+    expect(isDue(placed, T0)).toBe(false);
+  });
+
+  test("its first earned mastery after a fall still counts as the first", () => {
+    const placed = placeMastered(EMPTY_PROGRESS, T0);
+    const shaky = applyItem(placed, { type: "gap_fill", score: 0 }, at(1)).progress;
+    expect(shaky.status).toBe("shaky");
+    expect(shaky.firstMasteredAt).toBeNull();
   });
 });

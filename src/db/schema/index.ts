@@ -2,6 +2,7 @@
 // Column keys are camelCase in code and snake_case in the database (`casing: "snake_case"`).
 export * from "./enums";
 export * from "./images";
+export * from "./levels";
 export * from "./mistakes";
 export * from "./owner-course";
 export * from "./providers";

@@ -6,6 +6,7 @@ import type { CefrLevel } from "../db/schema/enums";
 import type { SettingsEvents, SettingsField } from "../events/settings-events";
 import { answerOutdated } from "../hub/handlers";
 import type { HubService } from "../hub/hub-service";
+import { recordPlacement, seedLevels } from "../levels";
 import type { Logger } from "../log";
 import { acceptAnswer } from "../sessions/answer";
 import { offerToCancel } from "../sessions/handlers";
@@ -155,6 +156,7 @@ export class OnboardingFlow {
         return this.goto(ctx, learning, state, "level");
       case "level": {
         if (!on("level")) return;
+        await seedLevels(this.deps.db, ctx.user.id, callback.level, "chosen");
         await this.save(ctx, { cefrLevel: callback.level }, ["cefrLevel"]);
         state.summaryLine = this.deps.i18n.t(await this.locale(ctx), "onboarding-summary-chosen", {
           level: callback.level,
@@ -209,7 +211,9 @@ export class OnboardingFlow {
       return this.goto(ctx, learning, state, "question");
     }
 
-    await this.save(ctx, { cefrLevel: step.level }, ["cefrLevel"]);
+    await recordPlacement(this.deps.db, ctx.user.id, step.level, state.answers);
+    // The cache now holds the model's band, which the graded items may have moved off the result.
+    await this.deps.events.emit({ userId: ctx.user.id, changed: ["cefrLevel"] });
     state.result = { level: step.level, summary: step.summary };
     state.item = undefined;
     state.summaryLine = await this.testSummaryLine(ctx, state, step.level, step.summary);

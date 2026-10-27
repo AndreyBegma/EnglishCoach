@@ -31,7 +31,8 @@ export const userSettings = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
     uiLang: languageEnum().notNull().default("en"),
     explainLang: languageEnum().notNull().default("en"),
-    // Null until the placement test has run.
+    // Null until the placement test has run. A cache of the overall level's band from
+    // `skill_levels` (`src/levels/`): written there, never set on its own.
     cefrLevel: cefrLevelEnum(),
     wordsPerDay: smallint().notNull().default(5),
     timezone: text().notNull().default("Europe/Kyiv"),

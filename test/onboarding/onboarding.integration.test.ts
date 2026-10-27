@@ -5,6 +5,7 @@ import { getHub } from "../../src/db/repositories/hub";
 import { findActiveSession } from "../../src/db/repositories/sessions";
 import { findUserByTelegramId, getSettings } from "../../src/db/repositories/users";
 import type { SettingsChanged } from "../../src/events/settings-events";
+import { getLevels, SEEDED_UNCERTAINTY } from "../../src/levels";
 import type { LlmProvider } from "../../src/llm";
 import { encodeOnboardingCallback, type OnboardingCallback } from "../../src/onboarding/callbacks";
 import { learnerContextFromDb, loadSkillRegistry, SkillRunner } from "../../src/skills";
@@ -203,7 +204,13 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
     expect(s.script.calls).toBe(16);
     expect(s.card().text).toContain("Your level: B1");
     expect(s.card().text).toContain("Based on 8 correct answers out of 15.");
-    expect((await s.settings()).settings.cefrLevel).toBe("B1");
+    const { user, settings } = await s.settings();
+    expect(settings.cefrLevel).toBe("B1");
+    // Every item was a grammar item: grammar carries the evidence, the other skills the seed.
+    const levels = await getLevels(database.db, user.id);
+    expect(levels?.skills.grammar?.evidence).toBe(15);
+    expect(levels?.skills.grammar?.uncertainty).toBeLessThan(SEEDED_UNCERTAINTY.placement);
+    expect(levels?.skills.reading).toMatchObject({ label: "B1.5", evidence: 0 });
   });
 
   test("a learner who knows their level skips the test", async () => {
@@ -219,7 +226,9 @@ describe.skipIf(!testServerUrl)("onboarding and placement with a mocked Telegram
 
     await s.hubOnly();
     expect(s.script.calls).toBe(0);
-    expect((await s.settings()).settings).toMatchObject({ cefrLevel: "C1", wordsPerDay: 3 });
+    const { user, settings } = await s.settings();
+    expect(settings).toMatchObject({ cefrLevel: "C1", wordsPerDay: 3 });
+    expect((await getLevels(database.db, user.id))?.overall.label).toBe("C1.5");
   });
 
   test("choosing their own provider ends onboarding on Settings → AI provider", async () => {

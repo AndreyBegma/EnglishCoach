@@ -1,8 +1,9 @@
 import { and, eq, lte, sql } from "drizzle-orm";
 import type { Db } from "../db/client";
 import { listTopMistakes } from "../db/repositories/mistakes";
-import { dailyStats, type Mistake, type UserSettings } from "../db/schema";
+import { dailyStats, type Mistake, type Skill, type UserSettings } from "../db/schema";
 import { localDate } from "../grammar/stats";
+import { getLevels, type Levels, SKILLS } from "../levels";
 import { type Streak, streakDays } from "./streak";
 
 /** Days in the activity sparkline. */
@@ -35,8 +36,16 @@ export interface GrammarBlock {
   correct30: number;
 }
 
+export interface LevelBlock {
+  /** The overall level, "B1.6". */
+  overall: string;
+  /** Skills with graded items behind them, in course order. */
+  skills: { skill: Skill; label: string }[];
+}
+
 export interface ProgressData {
-  level: UserSettings["cefrLevel"];
+  /** Null until the learner has a level. */
+  level: LevelBlock | null;
   wordsPerDay: number;
   streak: Streak;
   today: TodayBlock;
@@ -149,16 +158,27 @@ export async function grammarBlock(db: Db, userId: number, today: string): Promi
   };
 }
 
+function levelBlock(levels: Levels): LevelBlock {
+  return {
+    overall: levels.overall.label,
+    skills: SKILLS.flatMap((skill) => {
+      const level = levels.skills[skill];
+      return level && level.evidence > 0 ? [{ skill, label: level.label }] : [];
+    }),
+  };
+}
+
 /** Everything the Progress screen shows, one query per block. */
 export async function loadProgress(
   db: Db,
   userId: number,
-  settings: Pick<UserSettings, "cefrLevel" | "wordsPerDay" | "timezone"> | undefined,
+  settings: Pick<UserSettings, "wordsPerDay" | "timezone"> | undefined,
   now: Date = new Date(),
 ): Promise<ProgressData> {
   const timezone = settings?.timezone ?? "UTC";
   const today = localDate(now, timezone);
-  const [streak, todayStats, cards, activity, grammar, weak] = await Promise.all([
+  const [levels, streak, todayStats, cards, activity, grammar, weak] = await Promise.all([
+    getLevels(db, userId),
     streakDays(db, userId, { now, timezone }),
     todayBlock(db, userId, today),
     cardsBlock(db, userId, timezone, now),
@@ -167,7 +187,7 @@ export async function loadProgress(
     listTopMistakes(db, userId, WEAK_PREVIEW),
   ]);
   return {
-    level: settings?.cefrLevel ?? null,
+    level: levels ? levelBlock(levels) : null,
     wordsPerDay: settings?.wordsPerDay ?? 0,
     streak,
     today: todayStats,

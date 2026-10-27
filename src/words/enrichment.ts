@@ -1,4 +1,5 @@
 import type { Db } from "../db/client";
+import { verifiedExamples } from "../db/repositories/examples";
 import { getSettings } from "../db/repositories/users";
 import {
   getWordEnrichment,
@@ -7,12 +8,19 @@ import {
   saveWordEnrichments,
   uncachedWordIds,
 } from "../db/repositories/word-enrichments";
-import type { Language, Word, WordEnrichmentData } from "../db/schema";
+import type {
+  CardExample,
+  CreditedExample,
+  Language,
+  Word,
+  WordEnrichmentData,
+} from "../db/schema";
 import type { WordImages } from "../images";
 import type { LlmProvider } from "../llm/types";
 import type { Logger } from "../log";
 import {
   ENRICH_BATCH_MAX,
+  EXAMPLE_CHECK_MAX,
   type LearnerContext,
   nativeLanguageOf,
   type SkillOutput,
@@ -60,25 +68,56 @@ function ownerFields(word: Word, lang: Language) {
   };
 }
 
+/** Examples on a card. */
+const EXAMPLES = 2;
+
+/**
+ * The examples a card takes as given, in order of precedence: the owner's sentence, then
+ * human-written Tatoeba sentences up to the card's two. The model writes only the rest.
+ */
+function givenExamples(word: Word, lang: Language, verified: readonly CreditedExample[]) {
+  const owner = ownerFields(word, lang).example;
+  const room = EXAMPLES - (owner ? 1 : 0);
+  return { owner, verified: verified.filter((example) => example.en !== owner).slice(0, room) };
+}
+
+type Given = ReturnType<typeof givenExamples>;
+
 /**
  * Builds the cache row from the model's card. The curated fields win: the model was told to keep
- * them, and the server makes sure it did.
+ * them, and the server makes sure it did. The model was told to copy the given examples first, so
+ * what follows them in its list is its own: `written`, still to be checked.
  */
-function mergeCard(word: Word, lang: Language, card: BatchCard): WordEnrichmentData {
+function mergeCard(word: Word, lang: Language, card: BatchCard, given: Given) {
   const owner = ownerFields(word, lang);
-  const [first, second] = card.examples;
-  const examples =
-    owner.example && first ? [{ en: owner.example, translation: first.translation }] : [];
-  return {
+  const examples: CreditedExample[] = [];
+  const [first] = card.examples;
+  if (given.owner && first) examples.push({ en: given.owner, translation: first.translation });
+  examples.push(...given.verified);
+  const skip = (given.owner ? 1 : 0) + given.verified.length;
+  const written = card.examples.slice(skip, skip + EXAMPLES - examples.length);
+  const data: WordEnrichmentData = {
     translation: owner.translation ?? card.translation,
     ipa: owner.ipa ?? card.ipa,
     pos: word.pos || card.pos,
-    examples: examples.length && second ? [...examples, second] : card.examples,
+    examples,
     collocations: card.collocations,
     mnemonic: card.mnemonic,
     imageQuery: card.image_query,
     emoji: card.emoji,
   };
+  return { data, written };
+}
+
+/**
+ * A card's examples when the model wrote them all (the inline fallback): human-written sentences
+ * first, the model's after, two in all.
+ */
+export function preferVerified(
+  written: readonly CardExample[],
+  verified: readonly CreditedExample[],
+): CreditedExample[] {
+  return [...verified, ...written].slice(0, EXAMPLES);
 }
 
 /** The context of a shared card: a language, no learner. */
@@ -141,6 +180,14 @@ export class WordEnricher {
   }
 
   private async enrichBatch(batch: Word[], lang: Language): Promise<number> {
+    const verified = await verifiedExamples(
+      this.deps.db,
+      batch.map((word) => word.id),
+      lang,
+    );
+    const given = new Map(
+      batch.map((word) => [word.id, givenExamples(word, lang, verified.get(word.id) ?? [])]),
+    );
     const { data } = await this.runner(lang).runSkill(0, "vocab-enrich-batch", {
       words: batch.map((word) => ({
         id: word.id,
@@ -148,21 +195,71 @@ export class WordEnricher {
         pos: word.pos || null,
         word_level: word.cefrLevel,
         ...ownerFields(word, lang),
+        given_examples: (given.get(word.id)?.verified ?? []).map(({ en, translation }) => ({
+          en,
+          translation,
+        })),
       })),
     });
     const byId = new Map(data.cards.map((card) => [card.id, card]));
-    const rows = batch.flatMap((word) => {
+    const merged = batch.flatMap((word) => {
       const card = byId.get(word.id);
-      return card ? [{ wordId: word.id, lang, data: mergeCard(word, lang, card) }] : [];
+      const wordGiven = given.get(word.id);
+      return card && wordGiven ? [{ word, ...mergeCard(word, lang, card, wordGiven) }] : [];
     });
-    if (rows.length < batch.length) {
+    if (merged.length < batch.length) {
       this.deps.log.warn("word enrichment batch left words out", {
         lang,
         asked: batch.length,
-        answered: rows.length,
+        answered: merged.length,
       });
     }
-    return saveWordEnrichments(this.deps.db, rows);
+    await this.checkWritten(merged, lang);
+    return saveWordEnrichments(
+      this.deps.db,
+      merged.map(({ word, data }) => ({ wordId: word.id, lang, data })),
+    );
+  }
+
+  /**
+   * The validation pass: the model's own examples are checked by `example-check` (grammar, the
+   * word in the card's sense, the translation) and appended to their card only when they pass.
+   * A rejected example is dropped and logged as a metric; a card may then show one example.
+   */
+  private async checkWritten(
+    cards: { word: Word; data: WordEnrichmentData; written: CardExample[] }[],
+    lang: Language,
+  ): Promise<void> {
+    const items = cards.flatMap(({ word, data, written }) =>
+      written.map((example) => ({ word, data, example })),
+    );
+    for (let start = 0; start < items.length; start += EXAMPLE_CHECK_MAX) {
+      const slice = items.slice(start, start + EXAMPLE_CHECK_MAX);
+      const { data } = await this.runner(lang).runSkill(0, "example-check", {
+        items: slice.map(({ word, data: card, example }, index) => ({
+          index,
+          lemma: word.lemma,
+          pos: card.pos || null,
+          sense: card.translation,
+          en: example.en,
+          translation: example.translation,
+        })),
+      });
+      const ok = new Set(data.results.filter((result) => result.ok).map((result) => result.index));
+      slice.forEach(({ word, data: card, example }, index) => {
+        if (ok.has(index)) {
+          card.examples.push(example);
+          return;
+        }
+        const problem = data.results.find((result) => result.index === index)?.problem ?? null;
+        this.deps.log.info("model example rejected", {
+          metric: "vocab.example.rejected",
+          wordId: word.id,
+          lang,
+          problem,
+        });
+      });
+    }
   }
 
   /** Keeps the next `prefetchDays × words_per_day` new words of one learner enriched. */

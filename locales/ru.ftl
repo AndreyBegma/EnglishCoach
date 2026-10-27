@@ -151,6 +151,7 @@ provider-unavailable-server = Серверная LLM не настроена. Д
 vocab-collocations = Сочетания: { $list }
 vocab-mnemonic = 💡 { $text }
 vocab-photo-credit = 📷 { $author } / { $source }
+vocab-example-credit = 💬 Пример: { $source } (CC BY 2.0 FR)
 vocab-image-next = 🔄 Другая картинка
 vocab-image-none = Другой картинки для этого слова нет.
 vocab-got-it = ✅ Понятно

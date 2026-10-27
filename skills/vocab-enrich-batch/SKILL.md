@@ -27,7 +27,11 @@ Some items already carry fields from a curated list. **Keep them as given**:
 - `ipa`: use it unchanged as the card's `ipa`.
 - `example`: use this sentence unchanged as `examples[0].en` and translate it; write only the
   second example yourself.
-A null field is yours to write.
+- `given_examples`: human-written sentences with their translations. Copy them unchanged, in
+  order, right after the `example` sentence (or first, when `example` is null), and write only as
+  many examples of your own as the card still needs to reach 2. Describe the sense these
+  sentences show.
+A null field or an empty list is yours to write.
 
 ## Output
 `cards` holds exactly one card per item of `task.words`, with the item's `id`, in the same order.

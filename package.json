@@ -17,7 +17,8 @@
     "db:seed:words": "bun scripts/seed-words.ts",
     "seed:generate": "bun scripts/generate-seed.ts",
     "db:import:owner-words": "bun scripts/import-owner-words.ts",
-    "db:import:pronunciation": "bun scripts/import-pronunciation.ts"
+    "db:import:pronunciation": "bun scripts/import-pronunciation.ts",
+    "db:import:tatoeba": "bun scripts/import-tatoeba.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

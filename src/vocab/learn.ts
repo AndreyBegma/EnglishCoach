@@ -9,11 +9,13 @@ import {
   markCardKnown,
   unmarkCardKnown,
 } from "../db/repositories/cards";
+import { verifiedExamples } from "../db/repositories/examples";
 import { getWordEnrichment } from "../db/repositories/word-enrichments";
 import type { CardBack, CardRow, Language, Word, WordEnrichmentData } from "../db/schema";
 import type { WordImage } from "../images";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
 import type { SkillOutput } from "../skills";
+import { preferVerified } from "../words/enrichment";
 import { WordPicker } from "../words/picker";
 import type { VocabCallback } from "./callbacks";
 import { button, type Lead, type VocabCore } from "./core";
@@ -246,8 +248,9 @@ export class LearnFlow implements SessionKindHandler {
   }
 
   /**
-   * The new card's back: from the shared cache the prefetch job fills, else enriched inline. A miss
-   * is logged as a metric — it should stay near zero. Undefined when the inline call failed.
+   * The new card's back: from the shared cache the prefetch job fills, else enriched inline, with
+   * human-written examples in front of the model's. A miss is logged as a metric — it should stay
+   * near zero. Undefined when the inline call failed.
    */
   private async backFor(
     handle: LearningHandle,
@@ -276,7 +279,13 @@ export class LearnFlow implements SessionKindHandler {
         }),
       lead,
     );
-    return enriched ? backFromEnrichment(enriched.data) : undefined;
+    if (!enriched) return undefined;
+    const verified = await verifiedExamples(this.core.deps.db, [word.id], lang);
+    const back = backFromEnrichment(enriched.data);
+    return {
+      ...back,
+      examples: preferVerified(enriched.data.examples, verified.get(word.id) ?? []),
+    };
   }
 
   private async addOwnWord(handle: LearningHandle, ctx: BotContext, text: string) {

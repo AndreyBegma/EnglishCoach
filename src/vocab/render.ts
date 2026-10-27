@@ -1,4 +1,4 @@
-import type { CardExample, CardRow } from "../db/schema";
+import { type CardExample, type CardRow, type ExampleCredit, exampleCredit } from "../db/schema";
 
 export type T = (key: string, variables?: Record<string, string | number>) => string;
 
@@ -39,6 +39,8 @@ export function cardHtml(t: T, card: Pick<CardRow, "front" | "backJson">): strin
       lines.push(`• ${escapeHtml(exampleText(example))}`);
       if (typeof example !== "string") lines.push(`  <i>${escapeHtml(example.translation)}</i>`);
     }
+    const credits = back.examples.flatMap((example) => exampleCredit(example) ?? []);
+    if (credits.length) lines.push(exampleCreditHtml(t, credits));
   }
   if (back.collocations?.length) {
     lines.push("", t("vocab-collocations", { list: escapeHtml(back.collocations.join(", ")) }));
@@ -77,9 +79,26 @@ const link = (text: string, href: string | null) =>
   href ? `<a href="${escapeAttr(href)}">${escapeHtml(text)}</a>` : escapeHtml(text);
 
 /**
+ * The CC BY attribution of human-written examples: Tatoeba and the contributor, linked to the
+ * sentence's page (which credits its translators too).
+ */
+export function exampleCreditHtml(t: T, credits: readonly ExampleCredit[]): string {
+  const source = credits
+    .map((credit) =>
+      link(
+        credit.author ? `Tatoeba / ${credit.author}` : `Tatoeba #${credit.id}`,
+        `https://tatoeba.org/en/sentences/show/${credit.id}`,
+      ),
+    )
+    .join(", ");
+  return t("vocab-example-credit", { source });
+}
+
+/**
  * The caption of a word card shown as a photo: the word, IPA, translation, the first example and
- * the photo's credit, below the previous step's result. The example is cut first to fit
- * `MAX_CAPTION`; undefined when even without it the caption is too long.
+ * the photo's credit, below the previous step's result. A Tatoeba example brings its attribution
+ * line, counted with it. The example is cut first to fit `MAX_CAPTION`; undefined when even without
+ * it the caption is too long.
  */
 export function cardCaption(
   t: T,
@@ -101,10 +120,12 @@ export function cardCaption(
   const first = back.examples?.[0];
   if (!first) return without;
   const example = exampleText(first);
-  const room = MAX_CAPTION - visibleLength(without) - "\n\n• ".length;
+  const source = exampleCredit(first);
+  const attribution = source ? `${exampleCreditHtml(t, [source])}\n` : "";
+  const room = MAX_CAPTION - visibleLength(without) - "\n\n• ".length - visibleLength(attribution);
   if (room < MIN_EXAMPLE) return without;
   const shown = example.length > room ? `${example.slice(0, room - 1)}…` : example;
-  return `${top.join("\n")}\n\n• ${escapeHtml(shown)}\n\n${credits}`;
+  return `${top.join("\n")}\n\n• ${escapeHtml(shown)}\n\n${attribution}${credits}`;
 }
 
 /** One exercise: the instruction, then what the learner works on. */

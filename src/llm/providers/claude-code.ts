@@ -1,3 +1,6 @@
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { z } from "zod";
 import { LlmProviderError } from "../errors";
 import { CURATED_MODELS, pickModel } from "../models";
@@ -55,7 +58,13 @@ export function claudeArgs(
   system: string,
   schema: Record<string, unknown>,
 ): string[] {
-  // `--tools ""` disables every built-in tool: the CLI is used as a plain completion endpoint.
+  // The CLI is a plain completion endpoint, isolated from the host's Claude Code setup:
+  // - `--tools ""` disables every built-in tool;
+  // - `--setting-sources ""` loads no user/project/local settings: no hooks, no host `CLAUDE.md`;
+  // - `--strict-mcp-config` with an empty config loads no MCP servers (host or claude.ai);
+  // - `--disable-slash-commands` loads no skills or commands;
+  // - `--no-session-persistence` leaves no session on disk.
+  // `--bare` would also isolate, but it ignores the subscription login this provider exists for.
   // `--json-schema` makes the CLI validate the answer and return it as `structured_output`.
   return [
     "-p",
@@ -67,6 +76,13 @@ export function claudeArgs(
     system,
     "--tools",
     "",
+    "--setting-sources",
+    "",
+    "--strict-mcp-config",
+    "--mcp-config",
+    JSON.stringify({ mcpServers: {} }),
+    "--disable-slash-commands",
+    "--no-session-persistence",
     "--json-schema",
     JSON.stringify(schema),
   ];
@@ -74,7 +90,8 @@ export function claudeArgs(
 
 /**
  * Runs the Claude Code CLI on the host (the host's Claude subscription pays). System prompt via
- * `--system-prompt`, conversation on stdin, no tools, killed after `timeoutMs`.
+ * `--system-prompt`, conversation on stdin, no tools, no host settings/MCP/hooks/`CLAUDE.md`
+ * (see `claudeArgs`), run in an empty temp directory, killed after `timeoutMs`.
  */
 export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): LlmProvider {
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
@@ -93,14 +110,18 @@ export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): Ll
       const system = `${req.system}\n\nRespond with only a JSON value that matches this JSON Schema, with no prose around it:\n${JSON.stringify(schema)}`;
 
       return completeWithRepair("claude-code", req.messages, req.schema, async (messages) => {
+        // An empty cwd, so no project `CLAUDE.md` or `.claude/` is discovered from the server's dir.
+        const cwd = await mkdtemp(join(tmpdir(), "englishcoach-claude-"));
         let proc: Bun.Subprocess<Uint8Array, "pipe", "pipe">;
         try {
           proc = Bun.spawn([...options.command, ...claudeArgs(model, system, schema)], {
+            cwd,
             stdin: new TextEncoder().encode(renderConversation(messages)),
             stdout: "pipe",
             stderr: "pipe",
           });
         } catch (error) {
+          await rm(cwd, { recursive: true, force: true });
           throw new LlmProviderError(
             "claude-code",
             `claude could not be started: ${String(error)}`,
@@ -150,6 +171,7 @@ export function createClaudeCodeProvider(options: ClaudeCodeProviderOptions): Ll
           };
         } finally {
           clearTimeout(timer);
+          await rm(cwd, { recursive: true, force: true });
         }
       });
     },

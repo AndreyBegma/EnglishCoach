@@ -40,8 +40,15 @@
     {
       "idx": 5,
       "version": "7",
-      "when": 1793090748186,
-      "tag": "0005_word_images",
+      "when": 1793091133142,
+      "tag": "0005_owner_course",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793091510713,
+      "tag": "0006_word_images",
       "breakpoints": true
     }
   ]

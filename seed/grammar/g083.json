@@ -1,0 +1,270 @@
+{
+  "id": "g083",
+  "position": 83,
+  "cefrLevel": "C2",
+  "title": "Пунктуация: запятая, точка с запятой, двоеточие, апостроф",
+  "plannedFrom": "2027-12-20",
+  "plannedTo": "2027-12-25",
+  "sections": {
+    "why": [
+      "Знаки препинания в английском работают иначе, чем в русском. У нас запятая стоит перед «что», «который», «чтобы» почти всегда, в английском перед that её нет. Зато нужны апострофы, которых в русском нет вообще. Правильная пунктуация делает письма и документацию понятнее и профессиональнее."
+    ],
+    "formation": [
+      "• Запятая (,): после вводных слов (However, ...), после if-части в начале предложения, в перечислении (apples, bananas, and oranges), перед and / but / so, если они соединяют две полные части, и вокруг уточнений с which (Kyiv, which is the capital, is big).",
+      "• Точка с запятой (;): соединяет две близкие по смыслу полные части без союза (I was tired; I went home.) и стоит перед however (It rained; however, we went out.).",
+      "• Двоеточие (:): после полной фразы вводит список, пояснение или цитату (I need three things: a laptop, a charger, and a mouse.).",
+      "• Апостроф ('): сокращения (don't, it's) и принадлежность: единственное число 's (Anna's office), множественное на -s только ' (the engineers' office), нерегулярное множественное 's (the women's room)."
+    ],
+    "usage": [
+      "1. Запятая отделяет вводное слово или условие. (Unfortunately, the server is down. — К сожалению, сервер не работает. If it rains, we'll stay home. — Если пойдёт дождь, мы останемся дома.)",
+      "2. Точка с запятой заменяет союз между двумя самостоятельными предложениями. (The server crashed; we lost all the data. — Сервер упал; мы потеряли все данные.)",
+      "3. Двоеточие вводит то, что идёт дальше. (He had one goal: to win. — У него была одна цель: победить.)",
+      "4. Апостроф показывает принадлежность или пропущенные буквы. (The company changed its logo. — Компания сменила логотип. It's raining. — Идёт дождь.)"
+    ],
+    "signalWords": [
+      "However, therefore, for example, unfortunately (после них запятая). Whose / who's, its / it's, your / you're (проверяй: можно ли развернуть в «is» или «are»)."
+    ],
+    "mistakes": [
+      "✗ I think, that he is right → ✓ I think that he is right (перед that запятой нет, в отличие от русского «что»)",
+      "✗ I was tired, I went to bed. → ✓ I was tired, so I went to bed. / I was tired; I went to bed. (две полные части одной запятой не соединяются)",
+      "✗ The company changed it's logo → ✓ its logo (it's = it is, принадлежность без апострофа)",
+      "✗ two bug's → ✓ two bugs (во множественном числе апострофа нет)",
+      "✗ He is the developer, that fixed the bug → ✓ He is the developer who fixed the bug (перед who / that без запятой)"
+    ],
+    "remember": [
+      "В английском запятая не заменяет русскую перед that; its без апострофа это «его», it's с апострофом это «it is»."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Выберите правильный вариант (апостроф)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The company changed ___ logo. (a) its (b) it's",
+          "answer": "its"
+        },
+        {
+          "number": 2,
+          "prompt": "___ raining again. (a) Its (b) It's",
+          "answer": "It's"
+        },
+        {
+          "number": 3,
+          "prompt": "The dog wagged ___ tail. (a) its (b) it's",
+          "answer": "its"
+        },
+        {
+          "number": 4,
+          "prompt": "I think ___ a good plan. (a) its (b) it's",
+          "answer": "it's"
+        },
+        {
+          "number": 5,
+          "prompt": "The two ___ laptops are on the table. (a) developer's (b) developers'",
+          "answer": "developers'"
+        },
+        {
+          "number": 6,
+          "prompt": "My ___ husband is a lawyer (I have one sister). (a) sister's (b) sisters'",
+          "answer": "sister's"
+        },
+        {
+          "number": 7,
+          "prompt": "___ laptop is this? (a) Who's (b) Whose",
+          "answer": "Whose"
+        },
+        {
+          "number": 8,
+          "prompt": "___ late again. (a) Your (b) You're",
+          "answer": "You're"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Расставьте недостающие запятые",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "However we decided to continue.",
+          "answer": "However, we decided to continue."
+        },
+        {
+          "number": 2,
+          "prompt": "If you need help call me.",
+          "answer": "If you need help, call me."
+        },
+        {
+          "number": 3,
+          "prompt": "I bought apples bananas and oranges.",
+          "answer": "I bought apples, bananas, and oranges. / I bought apples, bananas and oranges."
+        },
+        {
+          "number": 4,
+          "prompt": "Kyiv which is the capital of Ukraine is a beautiful city.",
+          "answer": "Kyiv, which is the capital of Ukraine, is a beautiful city."
+        },
+        {
+          "number": 5,
+          "prompt": "Unfortunately I missed the call.",
+          "answer": "Unfortunately, I missed the call."
+        },
+        {
+          "number": 6,
+          "prompt": "The deadline is tomorrow but we are not ready.",
+          "answer": "The deadline is tomorrow, but we are not ready."
+        },
+        {
+          "number": 7,
+          "prompt": "John come here please.",
+          "answer": "John, come here, please."
+        },
+        {
+          "number": 8,
+          "prompt": "Yes I agree with you.",
+          "answer": "Yes, I agree with you."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Поставьте нужный знак: запятая (,), точка с запятой (;) или двоеточие (:)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have three hobbies___ coding, hiking, and photography.",
+          "answer": ":"
+        },
+        {
+          "number": 2,
+          "prompt": "The server crashed___ we lost all the data. (без союза)",
+          "answer": ";"
+        },
+        {
+          "number": 3,
+          "prompt": "She was tired___ but she kept working.",
+          "answer": ","
+        },
+        {
+          "number": 4,
+          "prompt": "Remember this___ never deploy on Friday.",
+          "answer": ":"
+        },
+        {
+          "number": 5,
+          "prompt": "The movie was long___ however, I enjoyed it.",
+          "answer": ";"
+        },
+        {
+          "number": 6,
+          "prompt": "If it rains___ we will stay home.",
+          "answer": ","
+        },
+        {
+          "number": 7,
+          "prompt": "He had one goal___ to win.",
+          "answer": ":"
+        },
+        {
+          "number": 8,
+          "prompt": "I like tea___ my brother prefers coffee. (без союза)",
+          "answer": ";"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку в пунктуации",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I think, that he is right.",
+          "answer": "I think that he is right."
+        },
+        {
+          "number": 2,
+          "prompt": "I was tired, I went to bed early.",
+          "answer": "I was tired, so I went to bed early. / I was tired; I went to bed early. / I was tired. I went to bed early."
+        },
+        {
+          "number": 3,
+          "prompt": "The company is growing it's team.",
+          "answer": "The company is growing its team."
+        },
+        {
+          "number": 4,
+          "prompt": "There are two bug's in the code.",
+          "answer": "There are two bugs in the code."
+        },
+        {
+          "number": 5,
+          "prompt": "The womens' room is on the left.",
+          "answer": "The women's room is on the left."
+        },
+        {
+          "number": 6,
+          "prompt": "He is the developer, that fixed the bug.",
+          "answer": "He is the developer who fixed the bug. / He is the developer that fixed the bug."
+        },
+        {
+          "number": 7,
+          "prompt": "I need three things a laptop, a charger, and a mouse.",
+          "answer": "I need three things: a laptop, a charger, and a mouse."
+        },
+        {
+          "number": 8,
+          "prompt": "The students books are on the desk. (студентов несколько)",
+          "answer": "The students' books are on the desk."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский (следите за пунктуацией)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я думаю, что он прав.",
+          "answer": "I think he is right. / I think that he is right."
+        },
+        {
+          "number": 2,
+          "prompt": "Это ноутбук, который я купил вчера.",
+          "answer": "This is the laptop I bought yesterday. / This is the laptop that I bought yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "Он сказал, что опоздает.",
+          "answer": "He said he would be late. / He said that he would be late."
+        },
+        {
+          "number": 4,
+          "prompt": "Это офис Анны.",
+          "answer": "It's Anna's office. / This is Anna's office."
+        },
+        {
+          "number": 5,
+          "prompt": "Если пойдёт дождь, мы останемся дома.",
+          "answer": "If it rains, we will stay home. / If it rains, we'll stay home."
+        },
+        {
+          "number": 6,
+          "prompt": "Мне нужны ноутбук, зарядка и мышь.",
+          "answer": "I need a laptop, a charger, and a mouse. / I need a laptop, a charger and a mouse."
+        },
+        {
+          "number": 7,
+          "prompt": "К сожалению, сервер не работает.",
+          "answer": "Unfortunately, the server is down. / Unfortunately, the server is not working. / Unfortunately, the server isn't working."
+        },
+        {
+          "number": 8,
+          "prompt": "Это офис наших инженеров.",
+          "answer": "It's our engineers' office. / This is our engineers' office."
+        }
+      ]
+    }
+  ]
+}

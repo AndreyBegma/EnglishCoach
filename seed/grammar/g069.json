@@ -1,0 +1,274 @@
+{
+  "id": "g069",
+  "position": 69,
+  "cefrLevel": "C1",
+  "title": "Смягчение высказываний (hedging): tend to, appear to, it seems, arguably",
+  "plannedFrom": "2027-09-13",
+  "plannedTo": "2027-09-18",
+  "sections": {
+    "why": [
+      "В английском (особенно в письме, отчётах и на переговорах) прямое утверждение часто звучит слишком резко или рискованно. Hedging — это способ сказать «похоже», «как правило», «пожалуй», не утверждая ничего на 100%. В русском это «кажется», «как правило», «по-видимому», «пожалуй»."
+    ],
+    "formation": [
+      "• subject + seem / appear + to + глагол: He seems to know the system.",
+      "• subject + seem / appear + to have + V3 (о прошлом): She seems to have forgotten.",
+      "• It seems / appears that + предложение: It seems that the server is down.",
+      "• subject + tend to + глагол: Developers tend to underestimate deadlines. Отрицание: tend not to / don't tend to.",
+      "• Наречия: arguably, apparently, presumably, probably, somewhat, relatively. Arguably ставим перед сказуемым или прилагательным: It is arguably the best option.",
+      "• Глаголы: suggest, indicate, imply: The data suggests that users prefer dark mode.",
+      "• Модальные и прочие: may, might, be likely to, in most cases, generally."
+    ],
+    "usage": [
+      "1. Предположение по внешним признакам: The client appears to be unhappy. (Клиент, похоже, недоволен.)",
+      "2. Общая тенденция, не закон: Prices tend to rise in summer. (Цены, как правило, растут летом.)",
+      "3. Спорное мнение: Arguably, Python is the easiest language to learn. (Пожалуй, Python — самый простой язык для изучения.)",
+      "4. Результаты исследований, выводы: The results suggest that the new design is better. (Результаты говорят о том, что новый дизайн лучше.)",
+      "5. Вежливое несогласие и критика: It seems to me that there may be a problem here. (Мне кажется, здесь может быть проблема.)"
+    ],
+    "signalWords": [
+      "seem, appear, tend, arguably, apparently, presumably, somewhat, to some extent, in most cases, generally, likely, suggest, indicate."
+    ],
+    "mistakes": [
+      "✗ He is seemed to be tired → ✓ He seems to be tired (seem не употребляется в пассиве).",
+      "✗ It seems that she to be late → ✓ It seems that she is late / She seems to be late (после that нужно целое предложение).",
+      "✗ She tends being late → ✓ She tends to be late (после tend — to + глагол).",
+      "✗ Obviously, he has resigned (это просто слух) → ✓ Apparently, he has resigned (apparently = «судя по всему», а не «очевидно»).",
+      "✗ Arguable, this is the best → ✓ Arguably, this is the best (нужно наречие)."
+    ],
+    "remember": [
+      "Seem / appear / tend + to, а для прошлого — to have + V3; arguably — наречие «пожалуй», apparently — «судя по всему», не «очевидно»."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте нужную форму",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He ___ (seem) to know the system well.",
+          "answer": "seems"
+        },
+        {
+          "number": 2,
+          "prompt": "Developers ___ (tend) to work late before a release.",
+          "answer": "tend"
+        },
+        {
+          "number": 3,
+          "prompt": "It ___ that the server is down. (appear)",
+          "answer": "appears"
+        },
+        {
+          "number": 4,
+          "prompt": "She appears ___ (be) tired today.",
+          "answer": "to be"
+        },
+        {
+          "number": 5,
+          "prompt": "This is ___ the best framework for small projects. (adverb from: arguable)",
+          "answer": "arguably"
+        },
+        {
+          "number": 6,
+          "prompt": "Teenagers ___ to spend a lot of time online. (tend)",
+          "answer": "tend"
+        },
+        {
+          "number": 7,
+          "prompt": "They seem ___ (finish) the work already.",
+          "answer": "to have finished"
+        },
+        {
+          "number": 8,
+          "prompt": "___, the meeting has been moved. (adverb from: apparent)",
+          "answer": "Apparently"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She (a) seems being (b) seems to be angry.",
+          "answer": "(b) seems to be"
+        },
+        {
+          "number": 2,
+          "prompt": "It appears (a) that (b) to the bug is in the API.",
+          "answer": "(a) that"
+        },
+        {
+          "number": 3,
+          "prompt": "Managers tend (a) avoiding (b) to avoid risks.",
+          "answer": "(b) to avoid"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Arguable (b) Arguably, Python is the easiest language to learn.",
+          "answer": "(b) Arguably"
+        },
+        {
+          "number": 5,
+          "prompt": "There (a) seems (b) seem to be a problem with the login page.",
+          "answer": "(a) seems"
+        },
+        {
+          "number": 6,
+          "prompt": "He (a) appears to have (b) appears having left already; his desk is empty.",
+          "answer": "(a) appears to have"
+        },
+        {
+          "number": 7,
+          "prompt": "Prices tend (a) to rise (b) rising in December.",
+          "answer": "(a) to rise"
+        },
+        {
+          "number": 8,
+          "prompt": "(a) Obviously (b) Apparently, he has resigned, but nobody has confirmed it.",
+          "answer": "(b) Apparently"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Смягчите утверждение, используя слово в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is unhappy with his job. (seem)",
+          "answer": "He seems to be unhappy with his job. / It seems that he is unhappy with his job."
+        },
+        {
+          "number": 2,
+          "prompt": "Cats sleep more than dogs. (tend)",
+          "answer": "Cats tend to sleep more than dogs."
+        },
+        {
+          "number": 3,
+          "prompt": "This is the best solution. (arguably)",
+          "answer": "This is arguably the best solution."
+        },
+        {
+          "number": 4,
+          "prompt": "The client didn't like the offer. (Begin with: It appears that)",
+          "answer": "It appears that the client didn't like the offer."
+        },
+        {
+          "number": 5,
+          "prompt": "Our users don't read the instructions. (tend)",
+          "answer": "Our users tend not to read the instructions. / Our users don't tend to read the instructions."
+        },
+        {
+          "number": 6,
+          "prompt": "The data proves that the app is slow. (suggest)",
+          "answer": "The data suggests that the app is slow."
+        },
+        {
+          "number": 7,
+          "prompt": "She forgot the meeting. (seem)",
+          "answer": "She seems to have forgotten the meeting. / It seems that she forgot the meeting."
+        },
+        {
+          "number": 8,
+          "prompt": "The update will fix the problem. (likely)",
+          "answer": "The update is likely to fix the problem. / It is likely that the update will fix the problem."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He is seemed to be tired.",
+          "answer": "He seems to be tired."
+        },
+        {
+          "number": 2,
+          "prompt": "It seems that she to be late.",
+          "answer": "It seems that she is late. / She seems to be late."
+        },
+        {
+          "number": 3,
+          "prompt": "People tends to forget passwords.",
+          "answer": "People tend to forget passwords."
+        },
+        {
+          "number": 4,
+          "prompt": "She tends being late for meetings.",
+          "answer": "She tends to be late for meetings."
+        },
+        {
+          "number": 5,
+          "prompt": "Arguable, this is the best option.",
+          "answer": "Arguably, this is the best option."
+        },
+        {
+          "number": 6,
+          "prompt": "Obviously, the CEO is leaving, but I only heard it from a colleague. (это слух, не факт)",
+          "answer": "Apparently, the CEO is leaving, but I only heard it from a colleague."
+        },
+        {
+          "number": 7,
+          "prompt": "The results appear to being wrong.",
+          "answer": "The results appear to be wrong."
+        },
+        {
+          "number": 8,
+          "prompt": "The old version seems have worked better.",
+          "answer": "The old version seems to have worked better."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Похоже, сервер не отвечает.",
+          "answer": "It seems that the server isn't responding. / The server doesn't seem to be responding."
+        },
+        {
+          "number": 2,
+          "prompt": "Разработчики, как правило, недооценивают сроки.",
+          "answer": "Developers tend to underestimate deadlines."
+        },
+        {
+          "number": 3,
+          "prompt": "Он, кажется, уже ушёл.",
+          "answer": "He seems to have left already. / He seems to have already left."
+        },
+        {
+          "number": 4,
+          "prompt": "Это, пожалуй, лучший ресторан в городе.",
+          "answer": "This is arguably the best restaurant in the city."
+        },
+        {
+          "number": 5,
+          "prompt": "По-видимому, клиент недоволен ценой.",
+          "answer": "Apparently, the client is unhappy with the price. / The client appears to be unhappy with the price."
+        },
+        {
+          "number": 6,
+          "prompt": "Данные показывают, что пользователи предпочитают тёмную тему.",
+          "answer": "The data suggests that users prefer the dark theme."
+        },
+        {
+          "number": 7,
+          "prompt": "Она, кажется, немного нервничает.",
+          "answer": "She seems a bit nervous. / She seems to be a little nervous."
+        },
+        {
+          "number": 8,
+          "prompt": "Цены, как правило, растут летом.",
+          "answer": "Prices tend to rise in the summer. / Prices tend to go up in summer."
+        }
+      ]
+    }
+  ]
+}

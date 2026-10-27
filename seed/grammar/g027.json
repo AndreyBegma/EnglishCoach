@@ -1,0 +1,276 @@
+{
+  "id": "g027",
+  "position": 27,
+  "cefrLevel": "B1",
+  "title": "Past Perfect",
+  "plannedFrom": "2026-12-14",
+  "plannedTo": "2026-12-16",
+  "sections": {
+    "why": [
+      "Past Perfect показывает, что одно действие в прошлом произошло РАНЬШЕ другого действия в прошлом. В русском для этого нет отдельной формы: «Когда я пришёл, фильм уже начался» звучит одинаково для обоих действий. В английском порядок событий нужно показывать формой глагола."
+    ],
+    "formation": [
+      "Утверждение: had + V3 (третья форма глагола). Для всех лиц одинаково.",
+      "I had finished. / She had left.",
+      "Отрицание: had not (hadn't) + V3.",
+      "We hadn't started.",
+      "Вопрос: Had + подлежащее + V3?",
+      "Had you seen him before?",
+      "Краткий ответ: Yes, I had. / No, I hadn't."
+    ],
+    "usage": [
+      "1. Действие закончилось до другого момента в прошлом: When I arrived, the meeting had already started. (Когда я приехал, встреча уже началась.)",
+      "2. Причина прошлой ситуации: He was tired because he hadn't slept. (Он был уставшим, потому что не спал.)",
+      "3. В косвенной речи вместо Past Simple и Present Perfect: She said she had finished the task. (Она сказала, что закончила задачу.)",
+      "4. Опыт до момента в прошлом: I had never seen the sea before I moved there. (Я никогда не видел море до переезда туда.)"
+    ],
+    "signalWords": [
+      "already, just, yet, never, ever, before, by the time, after, when, until.",
+      "By the time we arrived, the shop had closed.",
+      "After she had eaten, she went out.",
+      "Если действия идут друг за другом и очередность очевидна, можно использовать Past Simple: I got up and had breakfast."
+    ],
+    "mistakes": [
+      "✗ When I came, the film started. → ✓ When I came, the film had started. (фильм начался раньше моего прихода, нужен Past Perfect)",
+      "✗ I had went home. → ✓ I had gone home. (после had нужна третья форма, а не вторая)",
+      "✗ She had left yesterday. → ✓ She left yesterday. (если есть чёткое время в прошлом и нет второго действия, нужен Past Simple)",
+      "✗ I didn't had time. → ✓ I hadn't had time. (отрицание Past Perfect строится через hadn't)",
+      "✗ Had you finished? Yes, I finished. → ✓ Yes, I had. (в коротком ответе повторяем had)"
+    ],
+    "remember": [
+      "Два прошлых действия: то, что было первым, ставь в had + V3; то, что было вторым, оставь в Past Simple."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Past Perfect",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "When I arrived, the film ___ (start).",
+          "answer": "had started"
+        },
+        {
+          "number": 2,
+          "prompt": "She was happy because she ___ (pass) the exam.",
+          "answer": "had passed"
+        },
+        {
+          "number": 3,
+          "prompt": "They ___ (eat) before we came.",
+          "answer": "had eaten"
+        },
+        {
+          "number": 4,
+          "prompt": "I couldn't open the file because I ___ (forget) the password.",
+          "answer": "had forgotten"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ (not finish) his work when the boss called.",
+          "answer": "hadn't finished / had not finished"
+        },
+        {
+          "number": 6,
+          "prompt": "By 5 o'clock we ___ (complete) the project.",
+          "answer": "had completed"
+        },
+        {
+          "number": 7,
+          "prompt": "She said she ___ (see) that movie before.",
+          "answer": "had seen"
+        },
+        {
+          "number": 8,
+          "prompt": "The train ___ (already, leave) when we got to the station.",
+          "answer": "had already left"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "When she called, I (a) already left (b) had already left.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "After he (a) had finished (b) finished the code, he went home.",
+          "answer": "a"
+        },
+        {
+          "number": 3,
+          "prompt": "I was late because I (a) missed (b) had missed the bus.",
+          "answer": "b"
+        },
+        {
+          "number": 4,
+          "prompt": "Yesterday I (a) went (b) had gone to the cinema.",
+          "answer": "a"
+        },
+        {
+          "number": 5,
+          "prompt": "He (a) had never flown (b) never flew before that trip.",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "She opened the door and (a) went (b) had gone in.",
+          "answer": "a"
+        },
+        {
+          "number": 7,
+          "prompt": "By the time I got up, my wife (a) left (b) had left for work.",
+          "answer": "b"
+        },
+        {
+          "number": 8,
+          "prompt": "They were sad because they (a) lost (b) had lost the game.",
+          "answer": "b"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Объедините два предложения: первое действие в Past Perfect",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I finished my work. Then I went home. (After ...)",
+          "answer": "After I had finished my work, I went home."
+        },
+        {
+          "number": 2,
+          "prompt": "The film started. Then we arrived. (When we arrived, ...)",
+          "answer": "When we arrived, the film had started."
+        },
+        {
+          "number": 3,
+          "prompt": "She didn't sleep. She was tired. (She was tired because ...)",
+          "answer": "She was tired because she hadn't slept."
+        },
+        {
+          "number": 4,
+          "prompt": "He lost his keys. He couldn't get in. (He couldn't get in because ...)",
+          "answer": "He couldn't get in because he had lost his keys."
+        },
+        {
+          "number": 5,
+          "prompt": "They ate dinner. Then they watched TV. (After ...)",
+          "answer": "After they had eaten dinner, they watched TV."
+        },
+        {
+          "number": 6,
+          "prompt": "I read the book. Then I saw the film. (Before I saw the film, ...)",
+          "answer": "Before I saw the film, I had read the book."
+        },
+        {
+          "number": 7,
+          "prompt": "The shop closed. Then we got there. (When we got there, ...)",
+          "answer": "When we got there, the shop had closed."
+        },
+        {
+          "number": 8,
+          "prompt": "She saved the file. Then the computer crashed. (By the time the computer crashed, ...)",
+          "answer": "By the time the computer crashed, she had saved the file."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Задайте вопрос или сделайте отрицание",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Сделайте вопрос: She had left before you came.",
+          "answer": "Had she left before you came?"
+        },
+        {
+          "number": 2,
+          "prompt": "Сделайте отрицание: I had seen him before.",
+          "answer": "I hadn't seen him before. / I had not seen him before."
+        },
+        {
+          "number": 3,
+          "prompt": "Сделайте вопрос: They had finished the test.",
+          "answer": "Had they finished the test?"
+        },
+        {
+          "number": 4,
+          "prompt": "Сделайте отрицание: He had called me.",
+          "answer": "He hadn't called me. / He had not called me."
+        },
+        {
+          "number": 5,
+          "prompt": "Ответьте коротко (да): Had you eaten before the meeting?",
+          "answer": "Yes, I had."
+        },
+        {
+          "number": 6,
+          "prompt": "Ответьте коротко (нет): Had she met him before?",
+          "answer": "No, she hadn't."
+        },
+        {
+          "number": 7,
+          "prompt": "Сделайте вопрос с when: The train had left. (When ... ?)",
+          "answer": "When had the train left?"
+        },
+        {
+          "number": 8,
+          "prompt": "Сделайте вопрос: Why / he / not come? (Past Perfect, начните с Why)",
+          "answer": "Why hadn't he come?"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Когда я пришёл в офис, все уже ушли.",
+          "answer": "When I got to the office, everyone had already left."
+        },
+        {
+          "number": 2,
+          "prompt": "Он опоздал, потому что пропустил автобус.",
+          "answer": "He was late because he had missed the bus."
+        },
+        {
+          "number": 3,
+          "prompt": "Я никогда не видел снег до этой поездки.",
+          "answer": "I had never seen snow before that trip."
+        },
+        {
+          "number": 4,
+          "prompt": "После того как мы закончили релиз, мы пошли обедать.",
+          "answer": "After we had finished the release, we went to lunch."
+        },
+        {
+          "number": 5,
+          "prompt": "Она сказала, что уже отправила письмо.",
+          "answer": "She said she had already sent the email."
+        },
+        {
+          "number": 6,
+          "prompt": "К тому времени, как я приехал, концерт уже закончился.",
+          "answer": "By the time I arrived, the concert had already finished. / By the time I arrived, the concert had already ended."
+        },
+        {
+          "number": 7,
+          "prompt": "Я не мог войти в систему, потому что забыл пароль.",
+          "answer": "I couldn't log in because I had forgotten my password."
+        },
+        {
+          "number": 8,
+          "prompt": "Мы не ели с утра, поэтому были очень голодные.",
+          "answer": "We hadn't eaten since the morning, so we were very hungry."
+        }
+      ]
+    }
+  ]
+}

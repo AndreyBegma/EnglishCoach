@@ -1,0 +1,279 @@
+{
+  "id": "g076",
+  "position": 76,
+  "cefrLevel": "C2",
+  "title": "Сложные относительные конструкции: of which, whereby, in which case",
+  "plannedFrom": "2027-11-01",
+  "plannedTo": "2027-11-06",
+  "sections": {
+    "why": [
+      "В русском мы легко строим длинные фразы с «из которых», «согласно которому», «в таком случае». В английском для этого есть особые конструкции: предлог + which/whom, whose, whereby. Они делают речь формальной и компактной — их любят в отчётах, договорах, статьях и серьёзных письмах."
+    ],
+    "formation": [
+      "• количество + of which / of whom: two of whom, most of which, none of which",
+      "• whose + существительное: a company whose founder... (вместо «of which the founder»)",
+      "• предлог + which / whom: the meeting at which..., the person to whom...",
+      "• whereby = «посредством чего, согласно которому»: a system whereby...",
+      "• , in which case = «и в таком случае»: She may refuse, in which case...",
+      "• the extent to which = «в какой степени»"
+    ],
+    "usage": [
+      "1. Число или часть + of which/whom (для вещей — which, для людей — whom):",
+      "We interviewed ten people, two of whom were developers. (Мы опросили десять человек, двое из которых были разработчиками.)",
+      "He wrote many emails, most of which were ignored. (Он написал много писем, большинство из которых проигнорировали.)",
+      "2. Whose — принадлежность, и для людей, и для вещей:",
+      "It's a startup whose product is used worldwide. (Это стартап, чей продукт используется по всему миру.)",
+      "3. Whereby — правило, договорённость, метод, по которому что-то делается:",
+      "They introduced a policy whereby all staff can work remotely on Fridays. (Они ввели политику, по которой все сотрудники могут работать удалённо по пятницам.)",
+      "4. Предлог + which/whom в формальном стиле:",
+      "The person to whom I wrote never replied. (Человек, которому я писал, так и не ответил.)",
+      "5. In which case — продолжение мысли с последствием:",
+      "The flight may be cancelled, in which case you will get a refund. (Рейс могут отменить, и в этом случае вам вернут деньги.)"
+    ],
+    "signalWords": [
+      "Запятая перед of which/of whom/in which case; слова вроде «из которых», «согласно которому», «в таком случае», «в какой степени»."
+    ],
+    "mistakes": [
+      "✗ most of them are old (после запятой, как продолжение фразы) → ✓ most of which are old (of them не соединяет предложения, нужен относительный оборот)",
+      "✗ the book which cover is red → ✓ the book whose cover is red (which не показывает принадлежность)",
+      "✗ the woman with who I work → ✓ the woman with whom I work (после предлога — whom)",
+      "✗ a system whereby in which users log in → ✓ a system whereby users log in (whereby уже содержит предлог, второй не нужен)",
+      "✗ in that case which → ✓ in which case (в этом обороте порядок фиксирован)"
+    ],
+    "remember": [
+      "Часть + of which/whom, принадлежность — whose, «по которому» — whereby, «и тогда» — in which case."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте: which, whom, whose, whereby",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She has three brothers, all of ___ work in IT.",
+          "answer": "whom"
+        },
+        {
+          "number": 2,
+          "prompt": "We use a system ___ every change is reviewed by two people.",
+          "answer": "whereby"
+        },
+        {
+          "number": 3,
+          "prompt": "The company, ___ founder lives in Berlin, is hiring.",
+          "answer": "whose"
+        },
+        {
+          "number": 4,
+          "prompt": "The report contains many charts, most of ___ are useless.",
+          "answer": "which"
+        },
+        {
+          "number": 5,
+          "prompt": "The manager to ___ I sent the file is on holiday.",
+          "answer": "whom"
+        },
+        {
+          "number": 6,
+          "prompt": "You may need a visa, in ___ case you should apply early.",
+          "answer": "which"
+        },
+        {
+          "number": 7,
+          "prompt": "The meeting at ___ we discussed the budget was long.",
+          "answer": "which"
+        },
+        {
+          "number": 8,
+          "prompt": "He made several promises, none of ___ he kept.",
+          "answer": "which"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Соедините предложения, используя слово в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "We have 20 servers. Half of them are old. (of which)",
+          "answer": "We have 20 servers, half of which are old."
+        },
+        {
+          "number": 2,
+          "prompt": "The team agreed on a rule. By this rule, every bug must be logged. (whereby)",
+          "answer": "The team agreed on a rule whereby every bug must be logged."
+        },
+        {
+          "number": 3,
+          "prompt": "The author wrote five books. The last of them won a prize. (of which)",
+          "answer": "The author wrote five books, the last of which won a prize."
+        },
+        {
+          "number": 4,
+          "prompt": "I met a woman. Her son works at Google. (whose)",
+          "answer": "I met a woman whose son works at Google."
+        },
+        {
+          "number": 5,
+          "prompt": "She may refuse. If she refuses, we will ask someone else. (in which case)",
+          "answer": "She may refuse, in which case we will ask someone else."
+        },
+        {
+          "number": 6,
+          "prompt": "There are 30 candidates. Only five of them have experience. (of whom)",
+          "answer": "There are 30 candidates, only five of whom have experience."
+        },
+        {
+          "number": 7,
+          "prompt": "The person was very kind. I spoke to her at the desk. (to whom)",
+          "answer": "The person to whom I spoke at the desk was very kind."
+        },
+        {
+          "number": 8,
+          "prompt": "I was surprised by how much the product had changed. (the extent to which)",
+          "answer": "I was surprised by the extent to which the product had changed."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The project, ___ budget was cut, was cancelled. (a) whose (b) which (c) who",
+          "answer": "(a) whose"
+        },
+        {
+          "number": 2,
+          "prompt": "He has two cars, ___ are red. (a) both of which (b) both of them",
+          "answer": "(a) both of which"
+        },
+        {
+          "number": 3,
+          "prompt": "She gave me advice, ___ I ignored. (a) that (b) which",
+          "answer": "(b) which"
+        },
+        {
+          "number": 4,
+          "prompt": "The man ___ I spoke is a lawyer. (a) to who (b) to whom",
+          "answer": "(b) to whom"
+        },
+        {
+          "number": 5,
+          "prompt": "Many guests came, ___ were my friends. (a) some of whom (b) some of which",
+          "answer": "(a) some of whom"
+        },
+        {
+          "number": 6,
+          "prompt": "We have a policy ___ employees can work from home. (a) whereby (b) whereas",
+          "answer": "(a) whereby"
+        },
+        {
+          "number": 7,
+          "prompt": "She may be late, ___ case start without her. (a) in which (b) in that",
+          "answer": "(a) in which"
+        },
+        {
+          "number": 8,
+          "prompt": "We have a plan, the details ___ are secret. (a) of that (b) of which",
+          "answer": "(b) of which"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The book, which cover is red, is mine.",
+          "answer": "The book, whose cover is red, is mine."
+        },
+        {
+          "number": 2,
+          "prompt": "He has many friends, most of them live abroad.",
+          "answer": "He has many friends, most of whom live abroad."
+        },
+        {
+          "number": 3,
+          "prompt": "The woman with who I work is Spanish.",
+          "answer": "The woman with whom I work is Spanish."
+        },
+        {
+          "number": 4,
+          "prompt": "There is a system whereby in which users log in with a key.",
+          "answer": "There is a system whereby users log in with a key."
+        },
+        {
+          "number": 5,
+          "prompt": "She has two sons, both of who are doctors.",
+          "answer": "She has two sons, both of whom are doctors."
+        },
+        {
+          "number": 6,
+          "prompt": "The office, in that I work, is small.",
+          "answer": "The office, in which I work, is small."
+        },
+        {
+          "number": 7,
+          "prompt": "I read three articles, none of that were useful.",
+          "answer": "I read three articles, none of which were useful. / I read three articles, none of which was useful."
+        },
+        {
+          "number": 8,
+          "prompt": "He may call, in this case tell him I'm busy.",
+          "answer": "He may call, in which case tell him I'm busy."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "У нас три разработчика, двое из которых работают удалённо.",
+          "answer": "We have three developers, two of whom work remotely."
+        },
+        {
+          "number": 2,
+          "prompt": "Это компания, основатель которой когда-то работал в Google.",
+          "answer": "This is a company whose founder once worked at Google."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы ввели правило, согласно которому весь код проверяется.",
+          "answer": "We introduced a rule whereby all code is reviewed."
+        },
+        {
+          "number": 4,
+          "prompt": "Он может опоздать, и в этом случае мы начнём без него.",
+          "answer": "He may be late, in which case we will start without him."
+        },
+        {
+          "number": 5,
+          "prompt": "Человек, которому я написал, не ответил.",
+          "answer": "The person to whom I wrote did not reply."
+        },
+        {
+          "number": 6,
+          "prompt": "Она задала много вопросов, на большинство из которых никто не смог ответить.",
+          "answer": "She asked many questions, most of which nobody could answer."
+        },
+        {
+          "number": 7,
+          "prompt": "Отель, в котором мы остановились, был очень чистым.",
+          "answer": "The hotel in which we stayed was very clean."
+        },
+        {
+          "number": 8,
+          "prompt": "Баг, из-за которого сайт упал, уже исправлен.",
+          "answer": "The bug because of which the site crashed has already been fixed."
+        }
+      ]
+    }
+  ]
+}

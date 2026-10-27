@@ -1,0 +1,274 @@
+{
+  "id": "g031",
+  "position": 31,
+  "cefrLevel": "B1",
+  "title": "Разделительные вопросы (question tags) и короткие ответы: so do I / neither do I",
+  "plannedFrom": "2026-12-28",
+  "plannedTo": "2026-12-30",
+  "sections": {
+    "why": [
+      "Question tag — это короткий «хвостик» в конце фразы, как русское «..., да?», «..., правда?», «..., не так ли?». Им мы просим подтвердить то, в чём почти уверены, или просто поддерживаем разговор. А ответы so do I / neither do I значат «я тоже» / «я тоже нет»."
+    ],
+    "formation": [
+      "• Утверждение + отрицательный хвост: You work here, don't you?",
+      "• Отрицание + положительный хвост: You don't work here, do you?",
+      "• Хвост = вспомогательный глагол из первой части + местоимение: She has finished, hasn't she? He can swim, can't he? They were late, weren't they?",
+      "• Если в первой части нет вспомогательного глагола (Present Simple, Past Simple), берём do / does / did: You like jazz, don't you? She left, didn't she?",
+      "• Особые случаи: I am → aren't I? (I'm right, aren't I?); Let's → shall we? (Let's go, shall we?); приказ → will you? (Close the door, will you?); there is → isn't there?",
+      "• Слова nobody, nothing, never, hardly, seldom уже несут отрицание, поэтому хвост положительный: Nobody called, did they?",
+      "• Ответ «я тоже»: So + вспомогательный + подлежащее. Ответ «я тоже нет»: Neither / Nor + вспомогательный + подлежащее."
+    ],
+    "usage": [
+      "1. Просим подтвердить то, в чём уверены (голос идёт вниз): It's cold today, isn't it? (Сегодня холодно, правда?)",
+      "2. Задаём настоящий вопрос, когда не уверены (голос идёт вверх): You haven't seen my keys, have you? (Ты не видел мои ключи?)",
+      "3. Соглашаемся с утверждением: I love pizza. — So do I. (Я тоже.) I've been to Rome. — So have I. I was tired. — So was I.",
+      "4. Соглашаемся с отрицанием: I don't like coffee. — Neither do I. (Я тоже нет.) I can't swim. — Neither can I.",
+      "5. Не соглашаемся: I like it. — Oh, I don't. / I'm not hungry. — Really? I am."
+    ],
+    "signalWords": [
+      "right?, isn't it?, don't you?, so do I, neither do I, nor do I. В разговоре часто говорят проще: Me too (я тоже), Me neither (я тоже нет)."
+    ],
+    "mistakes": [
+      "✗ You like coffee, do you? → ✓ You like coffee, don't you? (утверждение — хвост отрицательный)",
+      "✗ She is late, is not she? → ✓ She is late, isn't she? (в хвосте краткая форма, глагол стоит перед местоимением)",
+      "✗ I'm late, amn't I? → ✓ I'm late, aren't I? (особая форма)",
+      "✗ I like jazz. — So I do. → ✓ So do I. (вспомогательный глагол стоит перед подлежащим)",
+      "✗ I don't know. — Neither I don't. → ✓ Neither do I. (neither уже содержит отрицание)"
+    ],
+    "remember": [
+      "Хвост — зеркало: плюс → минус, минус → плюс; а для «я тоже» помни порядок: so / neither + вспомогательный + подлежащее."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Допишите question tag",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You work in IT, ___ you?",
+          "answer": "don't"
+        },
+        {
+          "number": 2,
+          "prompt": "She doesn't drive, ___ she?",
+          "answer": "does"
+        },
+        {
+          "number": 3,
+          "prompt": "They have finished the report, ___ they?",
+          "answer": "haven't"
+        },
+        {
+          "number": 4,
+          "prompt": "He was late yesterday, ___ he?",
+          "answer": "wasn't"
+        },
+        {
+          "number": 5,
+          "prompt": "We can use this laptop, ___ we?",
+          "answer": "can't"
+        },
+        {
+          "number": 6,
+          "prompt": "It isn't expensive, ___ it?",
+          "answer": "is"
+        },
+        {
+          "number": 7,
+          "prompt": "You'll call me later, ___ you?",
+          "answer": "won't"
+        },
+        {
+          "number": 8,
+          "prompt": "Your sister lives in Kyiv, ___ she?",
+          "answer": "doesn't"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный короткий ответ",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I love working from home. — (a) So do I. (b) Neither do I.",
+          "answer": "(a) So do I."
+        },
+        {
+          "number": 2,
+          "prompt": "I don't have much free time. — (a) So do I. (b) Neither do I.",
+          "answer": "(b) Neither do I."
+        },
+        {
+          "number": 3,
+          "prompt": "I've never been to Japan. — (a) So have I. (b) Neither have I.",
+          "answer": "(b) Neither have I."
+        },
+        {
+          "number": 4,
+          "prompt": "I was really tired yesterday. — (a) So was I. (b) So did I.",
+          "answer": "(a) So was I."
+        },
+        {
+          "number": 5,
+          "prompt": "I can speak a little French. — (a) So do I. (b) So can I.",
+          "answer": "(b) So can I."
+        },
+        {
+          "number": 6,
+          "prompt": "I didn't sleep well. — (a) Neither did I. (b) Neither do I.",
+          "answer": "(a) Neither did I."
+        },
+        {
+          "number": 7,
+          "prompt": "I'm going to the gym later. — (a) So do I. (b) So am I.",
+          "answer": "(b) So am I."
+        },
+        {
+          "number": 8,
+          "prompt": "I wouldn't like to live there. — (a) Neither would I. (b) Neither wouldn't I.",
+          "answer": "(a) Neither would I."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Добавьте question tag (напишите всё предложение)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Nobody called me.",
+          "answer": "Nobody called me, did they?"
+        },
+        {
+          "number": 2,
+          "prompt": "Let's start now.",
+          "answer": "Let's start now, shall we?"
+        },
+        {
+          "number": 3,
+          "prompt": "I'm right.",
+          "answer": "I'm right, aren't I?"
+        },
+        {
+          "number": 4,
+          "prompt": "Open the window.",
+          "answer": "Open the window, will you?"
+        },
+        {
+          "number": 5,
+          "prompt": "There is a problem with the server.",
+          "answer": "There is a problem with the server, isn't there?"
+        },
+        {
+          "number": 6,
+          "prompt": "You never drink coffee.",
+          "answer": "You never drink coffee, do you?"
+        },
+        {
+          "number": 7,
+          "prompt": "Anna should see a doctor.",
+          "answer": "Anna should see a doctor, shouldn't she?"
+        },
+        {
+          "number": 8,
+          "prompt": "She hardly ever eats meat.",
+          "answer": "She hardly ever eats meat, does she?"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Ответьте «я тоже» или «я тоже нет» (so do I / neither do I)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I live in a big city. — ...",
+          "answer": "So do I."
+        },
+        {
+          "number": 2,
+          "prompt": "I haven't finished yet. — ...",
+          "answer": "Neither have I."
+        },
+        {
+          "number": 3,
+          "prompt": "I'll be at the meeting. — ...",
+          "answer": "So will I."
+        },
+        {
+          "number": 4,
+          "prompt": "I don't use Windows. — ...",
+          "answer": "Neither do I."
+        },
+        {
+          "number": 5,
+          "prompt": "I was at the party. — ...",
+          "answer": "So was I."
+        },
+        {
+          "number": 6,
+          "prompt": "I can't find my phone. — ...",
+          "answer": "Neither can I."
+        },
+        {
+          "number": 7,
+          "prompt": "I've already had lunch. — ...",
+          "answer": "So have I."
+        },
+        {
+          "number": 8,
+          "prompt": "I didn't see the email. — ...",
+          "answer": "Neither did I."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Ты работаешь в IT, да?",
+          "answer": "You work in IT, don't you?"
+        },
+        {
+          "number": 2,
+          "prompt": "Сегодня жарко, правда?",
+          "answer": "It's hot today, isn't it?"
+        },
+        {
+          "number": 3,
+          "prompt": "Ты ведь не забыл про встречу?",
+          "answer": "You didn't forget about the meeting, did you?"
+        },
+        {
+          "number": 4,
+          "prompt": "— Я люблю путешествовать. — Я тоже.",
+          "answer": "I love traveling. — So do I."
+        },
+        {
+          "number": 5,
+          "prompt": "— Я не пью кофе вечером. — Я тоже нет.",
+          "answer": "I don't drink coffee in the evening. — Neither do I."
+        },
+        {
+          "number": 6,
+          "prompt": "Давай закажем пиццу, ладно?",
+          "answer": "Let's order a pizza, shall we?"
+        },
+        {
+          "number": 7,
+          "prompt": "Он починил баг, не так ли?",
+          "answer": "He fixed the bug, didn't he?"
+        },
+        {
+          "number": 8,
+          "prompt": "— Я никогда не был в Лондоне. — Я тоже.",
+          "answer": "I've never been to London. — Neither have I."
+        }
+      ]
+    }
+  ]
+}

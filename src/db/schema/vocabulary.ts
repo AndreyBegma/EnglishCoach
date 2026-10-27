@@ -20,7 +20,8 @@ export const OWNER_LIST_SOURCE = "owner_list";
 /**
  * The seeded CEFR-levelled frequency dictionary, overlaid by the owner's curated list. Owner rows
  * (`source = owner_list`) carry the owner's level, fields and a curriculum position; the picker
- * follows that order. The owner's data lives only in the database, never in the repository.
+ * follows that order. The owner's words are committed under `seed/` without their example
+ * sentences (dictionary text); those arrive only from the private workbook import.
  */
 export const words = pgTable(
   "words",

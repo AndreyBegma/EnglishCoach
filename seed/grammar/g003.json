@@ -1,0 +1,269 @@
+{
+  "id": "g003",
+  "position": 3,
+  "cefrLevel": "A2",
+  "title": "Present Continuous и разница с Present Simple",
+  "plannedFrom": "2026-10-21",
+  "plannedTo": "2026-10-21",
+  "sections": {
+    "why": [
+      "Present Continuous показывает действие, которое происходит прямо сейчас или в этот период времени: «я пишу код (сейчас)». В русском для «обычно пишу» и «пишу сейчас» форма одна, а в английском — две разные: I write (обычно) и I am writing (сейчас)."
+    ],
+    "formation": [
+      "• Утверждение: am / is / are + V-ing. I am working. She is talking. They are waiting.",
+      "• Отрицание: am not / isn't / aren't + V-ing. He isn't working.",
+      "• Вопрос: Am / Is / Are + подлежащее + V-ing? Are you listening? What is she doing?",
+      "• Правописание -ing: make → making (e убираем), run → running (удваиваем согласную), write → writing, sit → sitting, lie → lying."
+    ],
+    "usage": [
+      "1. Действие происходит в момент речи: Be quiet! The baby is sleeping. (Тише! Ребёнок спит.)",
+      "2. Временная ситуация, «в эти дни»: I am working from home this week. (На этой неделе я работаю из дома.)",
+      "3. Изменения вокруг нас: The weather is getting colder. (Становится холоднее.)",
+      "4. Сравнение с Present Simple: She usually works from home, but today she is working in the office. (Она обычно работает дома, но сегодня работает в офисе.)",
+      "Глаголы состояния НЕ используются в Continuous: know, understand, like, love, want, need, have (иметь), believe. I know the answer. (Я знаю ответ.) I don't understand. (Я не понимаю.)"
+    ],
+    "signalWords": [
+      "now, right now, at the moment, today, this week, currently, Look! Listen! Для сравнения: always, usually, every day — это Present Simple."
+    ],
+    "mistakes": [
+      "✗ I am knowing the answer. → ✓ I know the answer. Know — глагол состояния, Continuous не нужен.",
+      "✗ Where you are going? → ✓ Where are you going? В вопросе am/is/are выходит перед подлежащим.",
+      "✗ They playing football now. → ✓ They are playing football now. Нельзя пропускать are.",
+      "✗ I am go to work by metro every day. → ✓ I go to work by metro every day. Привычка — Present Simple; am и V1 вместе не ставим.",
+      "✗ Are you liking this music? → ✓ Do you like this music? Like — глагол состояния."
+    ],
+    "remember": ["Сейчас и временно — am/is/are + -ing; всегда и обычно — Present Simple."]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в Present Continuous",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I ___ (write) code right now.",
+          "answer": "am writing"
+        },
+        {
+          "number": 2,
+          "prompt": "She ___ (talk) to a client at the moment.",
+          "answer": "is talking"
+        },
+        {
+          "number": 3,
+          "prompt": "They ___ (not work) today.",
+          "answer": "aren't working / are not working / 're not working"
+        },
+        {
+          "number": 4,
+          "prompt": "We ___ (have) a meeting now.",
+          "answer": "are having"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ (run) in the park.",
+          "answer": "is running"
+        },
+        {
+          "number": 6,
+          "prompt": "___ you ___ (listen) to me?",
+          "answer": "Are / listening"
+        },
+        {
+          "number": 7,
+          "prompt": "It ___ (rain) outside.",
+          "answer": "is raining"
+        },
+        {
+          "number": 8,
+          "prompt": "My laptop ___ (make) a strange noise.",
+          "answer": "is making"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите Present Simple или Present Continuous",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She (a) drinks (b) is drinking tea every morning.",
+          "answer": "a (drinks)"
+        },
+        {
+          "number": 2,
+          "prompt": "Be quiet! The baby (a) sleeps (b) is sleeping.",
+          "answer": "b (is sleeping)"
+        },
+        {
+          "number": 3,
+          "prompt": "I (a) don't understand (b) am not understanding this word.",
+          "answer": "a (don't understand)"
+        },
+        {
+          "number": 4,
+          "prompt": "Look! It (a) snows (b) is snowing.",
+          "answer": "b (is snowing)"
+        },
+        {
+          "number": 5,
+          "prompt": "He usually (a) works (b) is working from home, but today he is in the office.",
+          "answer": "a (works)"
+        },
+        {
+          "number": 6,
+          "prompt": "What (a) do you do (b) are you doing? - I'm a tester.",
+          "answer": "a (do you do)"
+        },
+        {
+          "number": 7,
+          "prompt": "Right now I (a) wait (b) am waiting for a call.",
+          "answer": "b (am waiting)"
+        },
+        {
+          "number": 8,
+          "prompt": "They (a) have (b) are having a house in Kyiv.",
+          "answer": "a (have)"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Преобразуйте предложение по заданию",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Make a question: He is working now.",
+          "answer": "Is he working now?"
+        },
+        {
+          "number": 2,
+          "prompt": "Make it negative: We are waiting for the bus.",
+          "answer": "We aren't waiting for the bus. / We're not waiting for the bus. / We are not waiting for the bus."
+        },
+        {
+          "number": 3,
+          "prompt": "Make a question: They are building a new website.",
+          "answer": "Are they building a new website?"
+        },
+        {
+          "number": 4,
+          "prompt": "Make a question with What: You are doing something.",
+          "answer": "What are you doing?"
+        },
+        {
+          "number": 5,
+          "prompt": "Make it negative: I am sitting in the office.",
+          "answer": "I'm not sitting in the office. / I am not sitting in the office."
+        },
+        {
+          "number": 6,
+          "prompt": "Make a question with Why: She is crying.",
+          "answer": "Why is she crying?"
+        },
+        {
+          "number": 7,
+          "prompt": "Make a question with Where: Tom is going somewhere.",
+          "answer": "Where is Tom going?"
+        },
+        {
+          "number": 8,
+          "prompt": "Make it negative: The server is working.",
+          "answer": "The server isn't working. / The server is not working."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и напишите правильное предложение",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I am knowing the answer.",
+          "answer": "I know the answer."
+        },
+        {
+          "number": 2,
+          "prompt": "She works on a new project now.",
+          "answer": "She is working on a new project now. / She's working on a new project now."
+        },
+        {
+          "number": 3,
+          "prompt": "Where you are going?",
+          "answer": "Where are you going?"
+        },
+        {
+          "number": 4,
+          "prompt": "He is wanting a coffee.",
+          "answer": "He wants a coffee."
+        },
+        {
+          "number": 5,
+          "prompt": "They playing football now.",
+          "answer": "They are playing football now. / They're playing football now."
+        },
+        {
+          "number": 6,
+          "prompt": "I am go to work by metro every day.",
+          "answer": "I go to work by metro every day."
+        },
+        {
+          "number": 7,
+          "prompt": "Are you liking this music?",
+          "answer": "Do you like this music?"
+        },
+        {
+          "number": 8,
+          "prompt": "It rains now, take an umbrella.",
+          "answer": "It is raining now, take an umbrella. / It's raining now, take an umbrella."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я сейчас пишу код.",
+          "answer": "I am writing code now. / I'm writing code now. / I'm writing code right now. / I am writing code right now."
+        },
+        {
+          "number": 2,
+          "prompt": "Что ты делаешь?",
+          "answer": "What are you doing?"
+        },
+        {
+          "number": 3,
+          "prompt": "Она обычно работает из дома, но сегодня она в офисе.",
+          "answer": "She usually works from home, but today she is in the office. / She usually works from home, but today she's at the office. / She usually works from home, but today she is working in the office."
+        },
+        {
+          "number": 4,
+          "prompt": "Идёт дождь.",
+          "answer": "It is raining. / It's raining."
+        },
+        {
+          "number": 5,
+          "prompt": "Я не понимаю этот вопрос.",
+          "answer": "I don't understand this question. / I do not understand this question."
+        },
+        {
+          "number": 6,
+          "prompt": "Мы ждём клиента.",
+          "answer": "We are waiting for a client. / We're waiting for a client. / We are waiting for the client. / We're waiting for the client."
+        },
+        {
+          "number": 7,
+          "prompt": "Куда ты идёшь?",
+          "answer": "Where are you going?"
+        },
+        {
+          "number": 8,
+          "prompt": "Он сейчас не работает над этой задачей.",
+          "answer": "He isn't working on this task now. / He's not working on this task now. / He isn't working on this task right now. / He's not working on this task right now."
+        }
+      ]
+    }
+  ]
+}

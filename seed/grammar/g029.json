@@ -1,0 +1,272 @@
+{
+  "id": "g029",
+  "position": 29,
+  "cefrLevel": "B1",
+  "title": "Фразовые глаголы: как устроены, частицы up / out / off / on",
+  "plannedFrom": "2026-12-21",
+  "plannedTo": "2026-12-23",
+  "sections": {
+    "why": [
+      "Фразовый глагол = глагол + частица (up, out, off, on), вместе они часто дают новое значение: give = давать, give up = сдаваться. В русском похожую роль играют приставки: «вставать», «выключать». В английской разговорной речи фразовые глаголы встречаются на каждом шагу."
+    ],
+    "formation": [
+      "Глагол + частица. Бывают два вида.",
+      "1) Без дополнения (неперех.): I woke up early. The car broke down.",
+      "2) С дополнением (перех.):",
+      "• Разделяемые: turn off the light = turn the light off. Если дополнение местоимение, оно ставится ТОЛЬКО в середину: turn it off (не turn off it).",
+      "• Неразделяемые: look after the kids, get on the bus. Здесь дополнение всегда после частицы: look after them.",
+      "Форму времени меняет только глагол: She turned off the TV. He is looking up a word."
+    ],
+    "usage": [
+      "1. up: движение вверх, завершение, усиление: pick up (поднять, забрать), give up (сдаться), set up (настроить), speed up (ускорить). Please set up the server. (Пожалуйста, настрой сервер.)",
+      "2. out: наружу, исчезновение, выяснение: find out (выяснить), work out (решить; тренироваться), run out of (закончиться), carry out (выполнить). We ran out of time. (У нас закончилось время.)",
+      "3. off: отключение, уход, отмена: turn off (выключить), take off (снять; взлететь), call off (отменить), set off (отправиться). The meeting was called off. (Встречу отменили.)",
+      "4. on: включение, продолжение, одежда: turn on (включить), carry on (продолжать), put on (надеть), get on (садиться в транспорт; ладить). Carry on with your work. (Продолжай работать.)"
+    ],
+    "signalWords": [
+      "Если у глагола неожиданный перевод (look up = искать в словаре, а не «смотреть вверх»), перед вами фразовый глагол. Учите его целиком, вместе с примером."
+    ],
+    "mistakes": [
+      "✗ Turn off it. → ✓ Turn it off. (местоимение только внутри разделяемого глагола)",
+      "✗ Please look at after my cat. → ✓ Please look after my cat. (не добавляйте лишних частиц)",
+      "✗ I gave up to smoke. → ✓ I gave up smoking. (после give up идёт -ing)",
+      "✗ She put on the jacket it. → ✓ She put it on. (два дополнения не нужны)",
+      "✗ We run out the milk. → ✓ We ran out of milk. (run out of требует of)"
+    ],
+    "remember": [
+      "Фразовый глагол учим как отдельное слово с примером. Местоимение (it, them) всегда встаёт между глаголом и частицей: turn it off, pick them up."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте подходящую частицу (up / out / off / on)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Please turn ___ the light. It's dark in here.",
+          "answer": "on"
+        },
+        {
+          "number": 2,
+          "prompt": "I woke ___ at 6 o'clock today.",
+          "answer": "up"
+        },
+        {
+          "number": 3,
+          "prompt": "The match was called ___ because of the rain.",
+          "answer": "off"
+        },
+        {
+          "number": 4,
+          "prompt": "We ran ___ of coffee this morning.",
+          "answer": "out"
+        },
+        {
+          "number": 5,
+          "prompt": "He put ___ his jacket and left.",
+          "answer": "on"
+        },
+        {
+          "number": 6,
+          "prompt": "Don't give ___! You can do it.",
+          "answer": "up"
+        },
+        {
+          "number": 7,
+          "prompt": "The plane takes ___ at 9:30.",
+          "answer": "off"
+        },
+        {
+          "number": 8,
+          "prompt": "I can't find ___ the answer to this question.",
+          "answer": "out"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Please (a) turn off it (b) turn it off.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "I'm tired. I want to (a) give up (b) give out this task.",
+          "answer": "a"
+        },
+        {
+          "number": 3,
+          "prompt": "He (a) looks after (b) looks up his little sister every afternoon.",
+          "answer": "a"
+        },
+        {
+          "number": 4,
+          "prompt": "(a) Carry on (b) Carry off with your work, please.",
+          "answer": "a"
+        },
+        {
+          "number": 5,
+          "prompt": "She (a) picked it up (b) picked up it from the floor.",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "The team will (a) set up (b) set out a new server tomorrow.",
+          "answer": "a"
+        },
+        {
+          "number": 7,
+          "prompt": "We (a) ran out of (b) ran out time for the demo.",
+          "answer": "a"
+        },
+        {
+          "number": 8,
+          "prompt": "Take (a) off (b) on your shoes before you come in.",
+          "answer": "a"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Вставьте фразовый глагол (turn on, find out, give up, set up, pick up, take off, call off, work out)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Can you ___ the TV? (включить)",
+          "answer": "turn on"
+        },
+        {
+          "number": 2,
+          "prompt": "I need to ___ what time the train leaves. (выяснить)",
+          "answer": "find out"
+        },
+        {
+          "number": 3,
+          "prompt": "She decided to ___ smoking. (бросить)",
+          "answer": "give up"
+        },
+        {
+          "number": 4,
+          "prompt": "Could you ___ me at the airport? (забрать)",
+          "answer": "pick up"
+        },
+        {
+          "number": 5,
+          "prompt": "They had to ___ the concert. (отменить)",
+          "answer": "call off"
+        },
+        {
+          "number": 6,
+          "prompt": "The developer will ___ the database. (настроить)",
+          "answer": "set up"
+        },
+        {
+          "number": 7,
+          "prompt": "Please ___ your coat. It's hot in here. (снять)",
+          "answer": "take off"
+        },
+        {
+          "number": 8,
+          "prompt": "I can't ___ this math problem. (решить)",
+          "answer": "work out"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Замените существительное местоимением (fill in)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Turn off the light. → Turn ___ ___.",
+          "answer": "it off"
+        },
+        {
+          "number": 2,
+          "prompt": "Pick up the keys. → Pick ___ ___.",
+          "answer": "them up"
+        },
+        {
+          "number": 3,
+          "prompt": "She put on her coat. → She put ___ ___.",
+          "answer": "it on"
+        },
+        {
+          "number": 4,
+          "prompt": "Please set up the printer. → Please set ___ ___.",
+          "answer": "it up"
+        },
+        {
+          "number": 5,
+          "prompt": "He gave up the idea. → He gave ___ ___.",
+          "answer": "it up"
+        },
+        {
+          "number": 6,
+          "prompt": "They called off the meeting. → They called ___ ___.",
+          "answer": "it off"
+        },
+        {
+          "number": 7,
+          "prompt": "I'll find out the facts. → I'll find ___ ___.",
+          "answer": "them out"
+        },
+        {
+          "number": 8,
+          "prompt": "Take off your shoes. → Take ___ ___.",
+          "answer": "them off"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Выключи, пожалуйста, компьютер.",
+          "answer": "Please turn off the computer. / Please turn the computer off."
+        },
+        {
+          "number": 2,
+          "prompt": "Я просыпаюсь в семь часов каждый день.",
+          "answer": "I wake up at seven o'clock every day."
+        },
+        {
+          "number": 3,
+          "prompt": "У нас закончился интернет.",
+          "answer": "We ran out of internet. / We have run out of internet."
+        },
+        {
+          "number": 4,
+          "prompt": "Не сдавайся, у тебя всё получится.",
+          "answer": "Don't give up. You will make it. / Don't give up, you can do it."
+        },
+        {
+          "number": 5,
+          "prompt": "Мне нужно выяснить, когда начинается встреча.",
+          "answer": "I need to find out when the meeting starts."
+        },
+        {
+          "number": 6,
+          "prompt": "Самолёт взлетел вовремя.",
+          "answer": "The plane took off on time."
+        },
+        {
+          "number": 7,
+          "prompt": "Давай продолжим работу после обеда.",
+          "answer": "Let's carry on working after lunch. / Let's carry on with the work after lunch."
+        },
+        {
+          "number": 8,
+          "prompt": "Ты можешь включить кондиционер?",
+          "answer": "Can you turn on the air conditioner? / Can you turn the air conditioner on?"
+        }
+      ]
+    }
+  ]
+}

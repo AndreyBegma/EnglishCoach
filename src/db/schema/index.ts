@@ -3,6 +3,7 @@
 export * from "./enums";
 export * from "./images";
 export * from "./mistakes";
+export * from "./owner-course";
 export * from "./providers";
 export * from "./sessions";
 export * from "./stats";

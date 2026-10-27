@@ -1,0 +1,276 @@
+{
+  "id": "g014",
+  "position": 14,
+  "cefrLevel": "A2",
+  "title": "Модальные глаголы: can/could, must/have to, should",
+  "plannedFrom": "2026-10-31",
+  "plannedTo": "2026-10-31",
+  "sections": {
+    "why": [
+      "Модальные глаголы показывают, как мы относимся к действию: можем ли, обязаны ли, стоит ли. В русском для этого «могу», «должен», «нужно», «надо», а в английском — короткие слова, которые не меняются по лицам."
+    ],
+    "formation": [
+      "• can / could / must / should + глагол без to. She can swim. You should rest.",
+      "• В 3-м лице нет -s: he can, she must, it should.",
+      "• Отрицание и вопрос без do: can't, couldn't, mustn't, shouldn't; Can you help? Should I go?",
+      "• have to + глагол: I have to go. Отрицание: don't/doesn't have to. Вопрос: Do you have to work? Прошедшее: had to.",
+      "• Прошедшее от can: could / couldn't. У must прошедшего нет, вместо него had to."
+    ],
+    "usage": [
+      "1. can: умение или возможность. I can code in Python. (Я умею программировать на Python.) I can't hear you. (Я вас не слышу.)",
+      "2. could: умение в прошлом и вежливая просьба. I could swim when I was five. (Я умел плавать в пять лет.) Could you help me, please? (Не могли бы вы мне помочь?)",
+      "3. can / could: разрешение и просьба. Can I use your phone? (Можно воспользоваться твоим телефоном?)",
+      "4. must: сильная необходимость, обычно по мнению говорящего. I must call my mom. (Мне надо позвонить маме.)",
+      "5. have to: необходимость из-за правил или обстоятельств. I have to wear a suit at work. (Мне приходится носить костюм на работе.)",
+      "6. mustn't: запрет. You mustn't park here. (Здесь нельзя парковаться.)",
+      "7. don't have to: можно не делать, не обязательно. You don't have to come. (Тебе не обязательно приходить.)",
+      "8. should / shouldn't: совет. You should see a doctor. (Тебе стоит сходить к врачу.) You shouldn't eat so late. (Не стоит так поздно есть.)"
+    ],
+    "signalWords": [
+      "Please (просьба: Could you...?), rules, law, company policy (have to), I think you... (совет: should)."
+    ],
+    "mistakes": [
+      "✗ I can to swim. → ✓ I can swim. После can, must, should нет to.",
+      "✗ She cans drive. → ✓ She can drive. Модальный глагол не получает -s.",
+      "✗ You don't must go. → ✓ You mustn't go. / You don't have to go. Отрицание делаем через mustn't или don't have to, а не через do.",
+      "✗ You mustn't come tomorrow (если можно не приходить) → ✓ You don't have to come tomorrow. mustn't значит «нельзя», а не «не нужно».",
+      "✗ Yesterday I must work late. → ✓ Yesterday I had to work late. В прошедшем вместо must нужно had to.",
+      "✗ Does he can swim? → ✓ Can he swim? Вопрос с модальным глаголом без do."
+    ],
+    "remember": [
+      "mustn't значит «нельзя», don't have to значит «не обязательно», should значит «стоит»."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте can, can't, could или couldn't",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My sister ___ play the piano very well.",
+          "answer": "can"
+        },
+        {
+          "number": 2,
+          "prompt": "I'm sorry, I ___ hear you. The line is bad.",
+          "answer": "can't"
+        },
+        {
+          "number": 3,
+          "prompt": "When I was five, I ___ swim. I learned later.",
+          "answer": "couldn't"
+        },
+        {
+          "number": 4,
+          "prompt": "___ you help me with this task, please? (polite request)",
+          "answer": "Could / Can"
+        },
+        {
+          "number": 5,
+          "prompt": "He ___ run very fast when he was young.",
+          "answer": "could"
+        },
+        {
+          "number": 6,
+          "prompt": "Sorry, I ___ come to the meeting tomorrow. I'm on holiday.",
+          "answer": "can't"
+        },
+        {
+          "number": 7,
+          "prompt": "___ I use your phone, please?",
+          "answer": "Can / Could"
+        },
+        {
+          "number": 8,
+          "prompt": "She ___ drive, so she takes the bus.",
+          "answer": "can't"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You (a) mustn't (b) don't have to park here. It's forbidden.",
+          "answer": "(a) mustn't"
+        },
+        {
+          "number": 2,
+          "prompt": "Tomorrow is Sunday. I (a) mustn't (b) don't have to get up early.",
+          "answer": "(b) don't have to"
+        },
+        {
+          "number": 3,
+          "prompt": "I (a) must (b) have to wear a suit at work. It's the company rule.",
+          "answer": "(b) have to"
+        },
+        {
+          "number": 4,
+          "prompt": "Yesterday I (a) must (b) had to work late.",
+          "answer": "(b) had to"
+        },
+        {
+          "number": 5,
+          "prompt": "You (a) mustn't (b) don't have to tell anyone. It's a secret.",
+          "answer": "(a) mustn't"
+        },
+        {
+          "number": 6,
+          "prompt": "She (a) doesn't has to (b) doesn't have to come to the meeting.",
+          "answer": "(b) doesn't have to"
+        },
+        {
+          "number": 7,
+          "prompt": "I feel terrible. I (a) must (b) mustn't see a doctor.",
+          "answer": "(a) must"
+        },
+        {
+          "number": 8,
+          "prompt": "Passengers (a) have to (b) must to show their tickets.",
+          "answer": "(a) have to"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Дайте совет: вставьте should или shouldn't с глаголом в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You look tired. You ___ (go) to bed early.",
+          "answer": "should go"
+        },
+        {
+          "number": 2,
+          "prompt": "He has a headache. He ___ (drink) so much coffee.",
+          "answer": "shouldn't drink"
+        },
+        {
+          "number": 3,
+          "prompt": "You ___ (see) a doctor about that cough.",
+          "answer": "should see"
+        },
+        {
+          "number": 4,
+          "prompt": "It's late. We ___ (leave) now.",
+          "answer": "should leave"
+        },
+        {
+          "number": 5,
+          "prompt": "She ___ (not work) so many hours.",
+          "answer": "shouldn't work"
+        },
+        {
+          "number": 6,
+          "prompt": "You ___ (test) your code before you send it.",
+          "answer": "should test"
+        },
+        {
+          "number": 7,
+          "prompt": "Children ___ (not play) games all night.",
+          "answer": "shouldn't play"
+        },
+        {
+          "number": 8,
+          "prompt": "___ I call the client today, or wait until Monday? (Fill the first word)",
+          "answer": "Should"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Перепишите предложение с модальным глаголом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She is able to speak three languages. (can)",
+          "answer": "She can speak three languages."
+        },
+        {
+          "number": 2,
+          "prompt": "It is necessary for me to leave early. (have to)",
+          "answer": "I have to leave early."
+        },
+        {
+          "number": 3,
+          "prompt": "It's not a good idea to eat so late. (shouldn't)",
+          "answer": "You shouldn't eat so late. / We shouldn't eat so late."
+        },
+        {
+          "number": 4,
+          "prompt": "Smoking is forbidden here. (mustn't)",
+          "answer": "You mustn't smoke here."
+        },
+        {
+          "number": 5,
+          "prompt": "It isn't necessary to bring a laptop. (don't have to)",
+          "answer": "You don't have to bring a laptop."
+        },
+        {
+          "number": 6,
+          "prompt": "He has to work on Saturday. (make a question)",
+          "answer": "Does he have to work on Saturday?"
+        },
+        {
+          "number": 7,
+          "prompt": "I could understand the film. (make negative)",
+          "answer": "I couldn't understand the film."
+        },
+        {
+          "number": 8,
+          "prompt": "I have to call my boss. (say it about yesterday)",
+          "answer": "I had to call my boss yesterday."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Ты умеешь программировать на Python?",
+          "answer": "Can you code in Python? / Can you program in Python?"
+        },
+        {
+          "number": 2,
+          "prompt": "Я не мог вчера прийти, потому что был занят.",
+          "answer": "I couldn't come yesterday because I was busy."
+        },
+        {
+          "number": 3,
+          "prompt": "Мне нужно закончить отчёт сегодня.",
+          "answer": "I have to finish the report today. / I must finish the report today."
+        },
+        {
+          "number": 4,
+          "prompt": "Тебе не нужно ждать меня.",
+          "answer": "You don't have to wait for me."
+        },
+        {
+          "number": 5,
+          "prompt": "Здесь нельзя курить.",
+          "answer": "You mustn't smoke here. / You can't smoke here."
+        },
+        {
+          "number": 6,
+          "prompt": "Тебе стоит больше отдыхать.",
+          "answer": "You should rest more. / You should get more rest."
+        },
+        {
+          "number": 7,
+          "prompt": "Можно мне задать вопрос?",
+          "answer": "Can I ask a question? / Could I ask a question?"
+        },
+        {
+          "number": 8,
+          "prompt": "Вчера нам пришлось остаться в офисе допоздна.",
+          "answer": "Yesterday we had to stay at the office until late. / We had to stay in the office late yesterday."
+        }
+      ]
+    }
+  ]
+}

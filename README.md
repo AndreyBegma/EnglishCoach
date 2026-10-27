@@ -41,26 +41,51 @@ To run everything in containers instead: `docker compose up -d --build`.
 | `LLM_LIVE_TESTS=1 bun test test/skills/live.test.ts` | Opt-in smoke test against real models: one skill call per provider whose credentials are set — Anthropic once per tier on its default model — (`SERVER_ANTHROPIC_API_KEY`, `SERVER_OPENAI_API_KEY` [+ `SERVER_OPENAI_BASE_URL`, `LLM_LIVE_OPENAI_MODEL`], or a `claude` binary). Costs money; never runs in CI |
 | `bun run db:generate` | Generate a migration from `src/db/schema/` into `drizzle/` |
 | `bun run db:migrate` | Apply migrations to `DATABASE_URL` |
-| `bun run db:seed:words` | Seed the CEFR frequency dictionary (`data/words/`), idempotent |
-| `bun run db:import:owner-words <path>` | Import the owner's curated word list (.xlsx) over the dictionary, idempotent — see below |
+| `bun run db:seed` | Seed everything the repository carries: the dictionary, then the owner's content from `seed/` — idempotent, see below |
+| `bun run db:seed:words` | Seed only the CEFR frequency dictionary (`data/words/`), idempotent |
+| `bun run db:import:owner-words <path>` | Import the owner's curated word list (.xlsx) over the dictionary, with its example sentences, idempotent — see below |
+| `bun run seed:generate <path>` | Regenerate `seed/` from the owner's workbook — see below |
 
-## The owner's word list
+## The owner's content
 
-The owner's curated list (Oxford 5000 levels, dictionary example sentences) is **not
-redistributable and never goes into git** — neither the workbook nor anything extracted from it.
-Keep it in `data/private/` (git-ignored) or anywhere outside the repository, and import it into
-the database:
+The owner's workbook (word list, grammar course, phrasal verbs, daily plan) stays **outside the
+repository** — keep it in `data/private/` (git-ignored) or anywhere else. What it holds reaches the
+database two ways:
+
+- **`seed/` (committed)** — everything the owner wrote, plus the word list **without its `Пример`
+  column**: per word the part of speech, IPA, Russian translation, level, topic and curriculum
+  position (`words/stage-0…6.json`), the removed list (`removed.json`), the grammar course — 85
+  topics with their rule sections, 425 exercises and every item's answer, one file per topic
+  (`grammar/g001.json` …; the id is stable and other modules refer to it) — the phrasal verbs with
+  the owner's examples (`phrasal-verbs.json`) and the plan (`plan.json`).
+- **`db:import:owner-words` (private)** — the word sheets' example sentences come from Oxford
+  dictionaries and are not redistributable: they never go into git and arrive only through this
+  import.
 
 ```sh
-bun run db:seed:words                                   # the dictionary first
-bun run db:import:owner-words data/private/owner-words.xlsx
+bun run db:seed                                         # dictionary + seed/, no LLM needed
+bun run db:import:owner-words data/private/owner-words.xlsx   # optional: adds the examples
 ```
 
-The importer reads the sheets `0 Проверка A1–A2`, `1 B1` … `6 Редкие III` (day-header rows skipped)
-and `Убрано` (lemmas never offered). The owner's level, part of speech, IPA, Russian translation,
-example and topic win over the dictionary's; its frequency rank stays. Learn words then follows the
-owner's order at the learner's level. Re-running it, or re-seeding the dictionary afterwards,
-changes nothing. The phrasal-verb and grammar sheets are not imported yet.
+Both are idempotent and can run in either order: the seed never overwrites an example the import
+set. The importer reads the sheets `0 Проверка A1–A2`, `1 B1` … `6 Редкие III` (day-header rows
+skipped) and `Убрано` (lemmas never offered). The owner's level, part of speech, IPA, Russian
+translation, example and topic win over the dictionary's; its frequency rank stays. Learn words
+then follows the owner's order at the learner's level.
+
+### Regenerating `seed/`
+
+After the owner changes the workbook:
+
+```sh
+bun run seed:generate data/private/owner-words.xlsx
+OWNER_WORKBOOK=data/private/owner-words.xlsx bun test test/seed   # guard: no word-sheet example in seed/
+```
+
+The generator is deterministic (same workbook → same files, already Biome-formatted) and refuses
+to write while an exercise item has no answer or an answer has no item — it lists each mismatch.
+`test/seed/committed-seed.test.ts` pins the counts; update them with the regenerated seed. With
+`OWNER_WORKBOOK` set it also fails if any seed file carries one of the word sheets' examples.
 
 With `SERVER_LLM_PROVIDER` set, a BullMQ job keeps the next `WORD_PREFETCH_DAYS` × words-per-day
 new words of every learner enriched ahead of time (after each Learn words session, on a level /

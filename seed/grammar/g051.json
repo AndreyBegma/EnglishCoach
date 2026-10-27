@@ -1,0 +1,276 @@
+{
+  "id": "g051",
+  "position": 51,
+  "cefrLevel": "B2",
+  "title": "Словообразование: суффиксы -tion, -ment, -ness, -ity, -ful, -less, -ive, -able",
+  "plannedFrom": "2027-05-10",
+  "plannedTo": "2027-05-15",
+  "sections": {
+    "why": [
+      "Суффиксы помогают из одного слова получить целую семью слов: decide → decision → decisive. В русском так же (решить → решение → решительный), но в английском суффикс почти всегда ещё и меняет часть речи. Знаешь суффиксы — понимаешь новые слова без словаря."
+    ],
+    "formation": [
+      "Суффиксы существительных (кто/что?):",
+      "• глагол + -tion / -sion / -ation: educate → education, decide → decision, inform → information",
+      "• глагол + -ment: develop → development, manage → management, improve → improvement",
+      "• прилагательное + -ness (состояние, качество): happy → happiness, kind → kindness, ill → illness",
+      "• прилагательное + -ity: possible → possibility, able → ability, secure → security",
+      "Суффиксы прилагательных (какой?):",
+      "• существительное + -ful (полный чего-то): help → helpful, use → useful, care → careful",
+      "• существительное + -less (без чего-то): help → helpless, use → useless, care → careless",
+      "• глагол + -ive: create → creative, act → active, attract → attractive",
+      "• глагол + -able / -ible (можно сделать): read → readable, rely → reliable, access → accessible"
+    ],
+    "usage": [
+      "1. Когда нужно назвать действие или состояние существительным: The development of the app took a year. (Разработка приложения заняла год.)",
+      "2. Когда нужно описать качество: This tool is really useful. (Этот инструмент очень полезный.)",
+      "3. Когда нужно сказать об отсутствии: The advice was useless. (Совет был бесполезным.)",
+      "4. В формальной и деловой речи: We need an improvement in security. (Нам нужно улучшить безопасность.)"
+    ],
+    "signalWords": [
+      "Посмотри на конец слова: -tion, -ment, -ness, -ity всегда дают существительное (the decision, a possibility); -ful, -less, -ive, -able дают прилагательное (a careful driver). Пары -ful / -less почти всегда противоположны: careful ≠ careless, useful ≠ useless."
+    ],
+    "mistakes": [
+      "✗ happyness → ✓ happiness (если слово кончается на -y после согласной, y меняется на i)",
+      "✗ usefull → ✓ useful (в суффиксе -ful только одна l)",
+      "✗ developement → ✓ development (в development нет лишней e)",
+      "✗ informations → ✓ information (information не имеет множественного числа)",
+      "✗ readible → ✓ readable (у read суффикс -able, а -ible только в отдельных словах: accessible)"
+    ],
+    "remember": [
+      "Если слово кончается на -tion, -ment, -ness, -ity, то это вещь (существительное), а если на -ful, -less, -ive, -able, то это признак (прилагательное)."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Образуйте существительное от слова в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The ___ (develop) of this app took six months.",
+          "answer": "development"
+        },
+        {
+          "number": 2,
+          "prompt": "Thank you for your ___ (kind).",
+          "answer": "kindness"
+        },
+        {
+          "number": 3,
+          "prompt": "Her ___ (decide) to quit surprised everyone.",
+          "answer": "decision"
+        },
+        {
+          "number": 4,
+          "prompt": "The ___ (manage) approved the new budget.",
+          "answer": "management"
+        },
+        {
+          "number": 5,
+          "prompt": "She smiled with ___ (happy).",
+          "answer": "happiness"
+        },
+        {
+          "number": 6,
+          "prompt": "The ___ (possible) of failure is very small.",
+          "answer": "possibility"
+        },
+        {
+          "number": 7,
+          "prompt": "The ___ (educate) system in this country is good.",
+          "answer": "education"
+        },
+        {
+          "number": 8,
+          "prompt": "Our website has a serious ___ (secure) problem.",
+          "answer": "security"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You deleted the whole folder by mistake. Don't be so ___. (a) careful (b) careless",
+          "answer": "(b) careless"
+        },
+        {
+          "number": 2,
+          "prompt": "This tool is very ___. I use it every day. (a) useful (b) useless",
+          "answer": "(a) useful"
+        },
+        {
+          "number": 3,
+          "prompt": "The old printer is completely ___. It doesn't work at all. (a) helpful (b) useless",
+          "answer": "(b) useless"
+        },
+        {
+          "number": 4,
+          "prompt": "Our designer is very ___. She always has new ideas. (a) creative (b) creation",
+          "answer": "(a) creative"
+        },
+        {
+          "number": 5,
+          "prompt": "This code is hard to read. It isn't ___. (a) readable (b) reading",
+          "answer": "(a) readable"
+        },
+        {
+          "number": 6,
+          "prompt": "He is a ___ person. You can always count on him. (a) reliable (b) reliance",
+          "answer": "(a) reliable"
+        },
+        {
+          "number": 7,
+          "prompt": "Thanks for the ___ advice! (a) helpful (b) helpless",
+          "answer": "(a) helpful"
+        },
+        {
+          "number": 8,
+          "prompt": "The new design is very ___. People love it. (a) attractive (b) attraction",
+          "answer": "(a) attractive"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Перефразируйте, используя слово с суффиксом",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Change the adjective to a noun: 'It is important to be kind.' → '___ is important.'",
+          "answer": "Kindness"
+        },
+        {
+          "number": 2,
+          "prompt": "Change the adjective to a noun: 'It is possible that he will win.' → 'There is a ___ that he will win.'",
+          "answer": "possibility"
+        },
+        {
+          "number": 3,
+          "prompt": "Change the verb to a noun: 'We need to improve the speed.' → 'We need some ___ in the speed.'",
+          "answer": "improvement"
+        },
+        {
+          "number": 4,
+          "prompt": "Use -less: 'This advice has no use.' → 'This advice is ___.'",
+          "answer": "useless"
+        },
+        {
+          "number": 5,
+          "prompt": "Use -ful: 'She always takes care.' → 'She is always ___.'",
+          "answer": "careful"
+        },
+        {
+          "number": 6,
+          "prompt": "Use -able: 'You can rely on this tool.' → 'This tool is ___.'",
+          "answer": "reliable"
+        },
+        {
+          "number": 7,
+          "prompt": "Use -ive: 'This offer attracts customers.' → 'This offer is ___ to customers.'",
+          "answer": "attractive"
+        },
+        {
+          "number": 8,
+          "prompt": "Change the verb to a noun: 'The company manages the project well.' → 'The ___ of the project is good.'",
+          "answer": "management"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have a lot of informations about this project.",
+          "answer": "I have a lot of information about this project."
+        },
+        {
+          "number": 2,
+          "prompt": "She is very helpfull.",
+          "answer": "She is very helpful."
+        },
+        {
+          "number": 3,
+          "prompt": "Thank you for your kindess.",
+          "answer": "Thank you for your kindness."
+        },
+        {
+          "number": 4,
+          "prompt": "This button is useles.",
+          "answer": "This button is useless."
+        },
+        {
+          "number": 5,
+          "prompt": "We need to discuss the developement plan.",
+          "answer": "We need to discuss the development plan."
+        },
+        {
+          "number": 6,
+          "prompt": "The meeting was very productiv.",
+          "answer": "The meeting was very productive."
+        },
+        {
+          "number": 7,
+          "prompt": "This is an acceptible solution.",
+          "answer": "This is an acceptable solution."
+        },
+        {
+          "number": 8,
+          "prompt": "The happyness of our users is important.",
+          "answer": "The happiness of our users is important."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Это очень полезное приложение.",
+          "answer": "This is a very useful app."
+        },
+        {
+          "number": 2,
+          "prompt": "Нам нужно улучшить безопасность нашего сайта.",
+          "answer": "We need to improve the security of our website."
+        },
+        {
+          "number": 3,
+          "prompt": "Разработка нового продукта заняла полгода.",
+          "answer": "The development of the new product took six months."
+        },
+        {
+          "number": 4,
+          "prompt": "Он принял неправильное решение.",
+          "answer": "He made the wrong decision."
+        },
+        {
+          "number": 5,
+          "prompt": "Этот код нечитаемый.",
+          "answer": "This code is unreadable."
+        },
+        {
+          "number": 6,
+          "prompt": "Будьте осторожны, пол мокрый.",
+          "answer": "Be careful, the floor is wet."
+        },
+        {
+          "number": 7,
+          "prompt": "Мне нужна дополнительная информация.",
+          "answer": "I need more information. / I need some additional information."
+        },
+        {
+          "number": 8,
+          "prompt": "Она очень творческий человек.",
+          "answer": "She is a very creative person."
+        }
+      ]
+    }
+  ]
+}

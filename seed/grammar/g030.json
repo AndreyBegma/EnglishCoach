@@ -1,0 +1,276 @@
+{
+  "id": "g030",
+  "position": 30,
+  "cefrLevel": "B1",
+  "title": "Наречия: образование, наречия частотности, место в предложении",
+  "plannedFrom": "2026-12-24",
+  "plannedTo": "2026-12-26",
+  "sections": {
+    "why": [
+      "Наречие говорит, КАК, КАК ЧАСТО или В КАКОЙ СТЕПЕНИ что-то происходит: «быстро», «всегда», «очень». В русском наречия свободно гуляют по предложению. В английском у них более жёсткие места, и это частый источник ошибок."
+    ],
+    "formation": [
+      "1) Прилагательное + -ly: slow → slowly, careful → carefully, quick → quickly.",
+      "2) -y → -ily: easy → easily, happy → happily.",
+      "3) Исключения: good → well; fast → fast; hard → hard; late → late; early → early. (hardly = едва ли, lately = в последнее время, это другие слова)",
+      "4) Наречия частотности: always, usually, often, sometimes, rarely, never.",
+      "Порядок слов:",
+      "• Частотность стоит ПЕРЕД основным глаголом: I often work late.",
+      "• Но ПОСЛЕ глагола to be: She is always on time.",
+      "• С вспомогательным глаголом: между ним и основным: I have never been there.",
+      "• Наречие образа действия стоит после глагола или дополнения: He speaks clearly. She did the task quickly."
+    ],
+    "usage": [
+      "1. Описать действие (образ действия): Please drive carefully. (Пожалуйста, веди осторожно.)",
+      "2. Сказать, как часто: We usually have lunch at one. (Мы обычно обедаем в час.)",
+      "3. Усилить или ослабить: It's really cold. I'm quite tired. (Очень холодно. Я довольно устал.)",
+      "4. Выразить отношение к фразе целиком: Unfortunately, we missed the train. (К сожалению, мы опоздали на поезд.)"
+    ],
+    "signalWords": [
+      "always (100%), usually, often, sometimes, rarely / seldom, never (0%), really, very, quite, extremely, also, already, still.",
+      "How often...? Каждый день = every day (не ставим между подлежащим и глаголом)."
+    ],
+    "mistakes": [
+      "✗ He speaks English good. → ✓ He speaks English well. (good прилагательное, well наречие)",
+      "✗ I like very much coffee. → ✓ I like coffee very much. (наречие нельзя ставить между глаголом и дополнением)",
+      "✗ She goes always to work by bus. → ✓ She always goes to work by bus. (частотность перед глаголом)",
+      "✗ He never is late. → ✓ He is never late. (после be наречие частотности идёт после глагола)",
+      "✗ I don't never work on Sunday. → ✓ I never work on Sunday. (в английском только одно отрицание)"
+    ],
+    "remember": [
+      "Частота идёт ПЕРЕД обычным глаголом и ПОСЛЕ to be; образ действия идёт в конец; good → well."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Образуйте наречие от прилагательного",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She speaks very (quiet) ___.",
+          "answer": "quietly"
+        },
+        {
+          "number": 2,
+          "prompt": "He works (hard) ___ every day.",
+          "answer": "hard"
+        },
+        {
+          "number": 3,
+          "prompt": "They won the game (easy) ___.",
+          "answer": "easily"
+        },
+        {
+          "number": 4,
+          "prompt": "She is a good singer. She sings very (good) ___.",
+          "answer": "well"
+        },
+        {
+          "number": 5,
+          "prompt": "Please speak (slow) ___.",
+          "answer": "slowly"
+        },
+        {
+          "number": 6,
+          "prompt": "The children played (happy) ___ in the garden.",
+          "answer": "happily"
+        },
+        {
+          "number": 7,
+          "prompt": "She answered the question (careful) ___.",
+          "answer": "carefully"
+        },
+        {
+          "number": 8,
+          "prompt": "The train arrived (late) ___ again.",
+          "answer": "late"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She (a) always is (b) is always on time.",
+          "answer": "b"
+        },
+        {
+          "number": 2,
+          "prompt": "I (a) often go (b) go often to the gym.",
+          "answer": "a"
+        },
+        {
+          "number": 3,
+          "prompt": "He speaks English (a) good (b) well.",
+          "answer": "b"
+        },
+        {
+          "number": 4,
+          "prompt": "Choose the correct sentence: (a) I like very much this song. (b) I like this song very much.",
+          "answer": "b"
+        },
+        {
+          "number": 5,
+          "prompt": "We (a) have never (b) never have been to Japan.",
+          "answer": "a"
+        },
+        {
+          "number": 6,
+          "prompt": "They (a) usually have (b) have usually breakfast at seven.",
+          "answer": "a"
+        },
+        {
+          "number": 7,
+          "prompt": "He (a) drives careful (b) drives carefully.",
+          "answer": "b"
+        },
+        {
+          "number": 8,
+          "prompt": "I (a) don't never (b) never eat meat.",
+          "answer": "b"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Поставьте наречие на правильное место",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I go to the office by bus. (usually)",
+          "answer": "I usually go to the office by bus."
+        },
+        {
+          "number": 2,
+          "prompt": "She is late for meetings. (never)",
+          "answer": "She is never late for meetings."
+        },
+        {
+          "number": 3,
+          "prompt": "We have lunch together. (sometimes)",
+          "answer": "We sometimes have lunch together. / Sometimes we have lunch together."
+        },
+        {
+          "number": 4,
+          "prompt": "He has finished his work. (already)",
+          "answer": "He has already finished his work."
+        },
+        {
+          "number": 5,
+          "prompt": "They are friendly. (always)",
+          "answer": "They are always friendly."
+        },
+        {
+          "number": 6,
+          "prompt": "I watch TV in the evening. (rarely)",
+          "answer": "I rarely watch TV in the evening."
+        },
+        {
+          "number": 7,
+          "prompt": "She plays the piano. (beautifully)",
+          "answer": "She plays the piano beautifully."
+        },
+        {
+          "number": 8,
+          "prompt": "My manager reads emails. (carefully)",
+          "answer": "My manager reads emails carefully."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He speaks English very good.",
+          "answer": "He speaks English very well."
+        },
+        {
+          "number": 2,
+          "prompt": "I like very much pizza.",
+          "answer": "I like pizza very much."
+        },
+        {
+          "number": 3,
+          "prompt": "She goes always to bed late.",
+          "answer": "She always goes to bed late."
+        },
+        {
+          "number": 4,
+          "prompt": "He drives very fastly.",
+          "answer": "He drives very fast."
+        },
+        {
+          "number": 5,
+          "prompt": "I don't never drink coffee.",
+          "answer": "I never drink coffee."
+        },
+        {
+          "number": 6,
+          "prompt": "They are in often a hurry.",
+          "answer": "They are often in a hurry."
+        },
+        {
+          "number": 7,
+          "prompt": "She sings beautiful.",
+          "answer": "She sings beautifully."
+        },
+        {
+          "number": 8,
+          "prompt": "We have been never to Spain.",
+          "answer": "We have never been to Spain."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я обычно встаю в семь часов.",
+          "answer": "I usually get up at seven o'clock."
+        },
+        {
+          "number": 2,
+          "prompt": "Он всегда приходит на работу вовремя.",
+          "answer": "He always comes to work on time."
+        },
+        {
+          "number": 3,
+          "prompt": "Она очень хорошо говорит по-английски.",
+          "answer": "She speaks English very well."
+        },
+        {
+          "number": 4,
+          "prompt": "Мы редко ходим в кино.",
+          "answer": "We rarely go to the cinema."
+        },
+        {
+          "number": 5,
+          "prompt": "Пожалуйста, пиши код аккуратно.",
+          "answer": "Please write the code carefully. / Please write code carefully."
+        },
+        {
+          "number": 6,
+          "prompt": "Я никогда не был в Лондоне.",
+          "answer": "I have never been to London."
+        },
+        {
+          "number": 7,
+          "prompt": "К сожалению, сервер сегодня работает медленно.",
+          "answer": "Unfortunately, the server is working slowly today. / Unfortunately, the server is slow today."
+        },
+        {
+          "number": 8,
+          "prompt": "Иногда мы работаем из дома.",
+          "answer": "Sometimes we work from home. / We sometimes work from home."
+        }
+      ]
+    }
+  ]
+}

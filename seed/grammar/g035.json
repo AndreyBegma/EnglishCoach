@@ -1,0 +1,273 @@
+{
+  "id": "g035",
+  "position": 35,
+  "cefrLevel": "B2",
+  "title": "wish / if only: настоящее, прошлое и would",
+  "plannedFrom": "2027-01-18",
+  "plannedTo": "2027-01-23",
+  "sections": {
+    "why": [
+      "Wish и if only выражают сожаление и желание, чтобы реальность была другой: «жаль, что...», «хоть бы...», «если бы только...». If only звучит эмоциональнее, чем wish, а грамматика у них одинаковая. Главное правило: после wish глагол «отступает» во времени на шаг назад."
+    ],
+    "formation": [
+      "• wish + Past Simple — сожаление о настоящем: I wish I had more free time. (Жаль, что у меня мало свободного времени.)",
+      "• wish + Past Perfect (had + V3) — сожаление о прошлом: I wish I had studied harder. (Жаль, что я мало занимался.)",
+      "• wish + would + V1 — недовольство чужим поведением или желание, чтобы что-то изменилось: I wish he would stop smoking. (Хоть бы он бросил курить.)",
+      "• wish + could — об умении или возможности: I wish I could play the guitar.",
+      "• Глагол be: после wish используется were для всех лиц (в разговоре допустимо и was): I wish I were taller.",
+      "• If only используем так же: If only I knew the answer! If only we had left earlier!"
+    ],
+    "usage": [
+      "1. Сожаление о нынешней ситуации: I wish I lived in a bigger city. (Жаль, что я не живу в большом городе.)",
+      "2. Сожаление о том, что было: She wishes she hadn't said that. (Она жалеет, что сказала это.)",
+      "3. Раздражение чужим поведением: I wish you wouldn't leave the door open. (Лучше бы ты не оставлял дверь открытой.)",
+      "4. Желание перемен в ситуации, которую мы не контролируем: I wish it would stop raining. (Хоть бы дождь кончился.)",
+      "5. Для приятных надежд о будущем wish не нужен, там используем hope: I hope it stops soon."
+    ],
+    "signalWords": [
+      "Жаль, что...; хоть бы...; если бы только...; сейчас, всегда, вчера, тогда. По русскому «жаль, что у меня нет...» — настоящее, «жаль, что я не сделал...» — прошлое, «хоть бы он перестал...» — would."
+    ],
+    "mistakes": [
+      "✗ I wish I have more time. → ✓ I wish I had more time. (настоящее сожаление — Past Simple)",
+      "✗ I wish I would have a car. → ✓ I wish I had a car. (would не для собственного состояния)",
+      "✗ I wish I didn't go there yesterday. → ✓ I wish I hadn't gone there yesterday. (о прошлом — Past Perfect)",
+      "✗ I wish he stopped making noise! (раздражение) → ✓ I wish he would stop making noise!",
+      "✗ I wish I will pass the exam. → ✓ I hope I will pass the exam. (надежда на будущее — hope)"
+    ],
+    "remember": [
+      "Сдвиг на шаг назад: сейчас — Past Simple, прошлое — Past Perfect, раздражает чужое поведение — would."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Сожаление о настоящем (wish + Past Simple)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I wish I ___ (have) more free time.",
+          "answer": "had"
+        },
+        {
+          "number": 2,
+          "prompt": "She wishes she ___ (live) in a bigger city.",
+          "answer": "lived"
+        },
+        {
+          "number": 3,
+          "prompt": "I wish I ___ (can) play the guitar.",
+          "answer": "could"
+        },
+        {
+          "number": 4,
+          "prompt": "He wishes he ___ (be) taller.",
+          "answer": "were / was"
+        },
+        {
+          "number": 5,
+          "prompt": "We wish we ___ (not have) to work on Saturdays.",
+          "answer": "didn't have"
+        },
+        {
+          "number": 6,
+          "prompt": "I wish it ___ (not be) so cold today.",
+          "answer": "weren't / wasn't"
+        },
+        {
+          "number": 7,
+          "prompt": "If only I ___ (know) the answer!",
+          "answer": "knew"
+        },
+        {
+          "number": 8,
+          "prompt": "They wish they ___ (own) a house.",
+          "answer": "owned"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Сожаление о прошлом (wish + Past Perfect)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I wish I ___ (study) harder at school.",
+          "answer": "had studied"
+        },
+        {
+          "number": 2,
+          "prompt": "She wishes she ___ (not say) that.",
+          "answer": "hadn't said"
+        },
+        {
+          "number": 3,
+          "prompt": "If only we ___ (leave) earlier!",
+          "answer": "had left"
+        },
+        {
+          "number": 4,
+          "prompt": "I wish I ___ (take) a photo of it.",
+          "answer": "had taken"
+        },
+        {
+          "number": 5,
+          "prompt": "He wishes he ___ (not lose) the keys.",
+          "answer": "hadn't lost"
+        },
+        {
+          "number": 6,
+          "prompt": "I wish you ___ (tell) me the truth.",
+          "answer": "had told"
+        },
+        {
+          "number": 7,
+          "prompt": "If only they ___ (not cancel) the trip!",
+          "answer": "hadn't canceled / hadn't cancelled"
+        },
+        {
+          "number": 8,
+          "prompt": "We wish we ___ (buy) the tickets earlier.",
+          "answer": "had bought"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "It's raining again. I wish it (a) stops (b) would stop.",
+          "answer": "(b) would stop"
+        },
+        {
+          "number": 2,
+          "prompt": "I failed the exam. I wish I (a) studied (b) had studied more.",
+          "answer": "(b) had studied"
+        },
+        {
+          "number": 3,
+          "prompt": "I'm so tired. I wish I (a) didn't have (b) wouldn't have to work today.",
+          "answer": "(a) didn't have"
+        },
+        {
+          "number": 4,
+          "prompt": "My neighbor plays loud music at night. I wish he (a) would stop (b) stops.",
+          "answer": "(a) would stop"
+        },
+        {
+          "number": 5,
+          "prompt": "I don't speak Italian. I wish I (a) can (b) could.",
+          "answer": "(b) could"
+        },
+        {
+          "number": 6,
+          "prompt": "She wasn't at the party. I wish she (a) was (b) had been there.",
+          "answer": "(b) had been"
+        },
+        {
+          "number": 7,
+          "prompt": "You always leave the door open. I wish you (a) will close (b) would close it.",
+          "answer": "(b) would close"
+        },
+        {
+          "number": 8,
+          "prompt": "If only I (a) hadn't eaten (b) didn't eat so much last night!",
+          "answer": "(a) hadn't eaten"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Перепишите с wish (начните так, как указано)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I don't have a car. Begin: I wish ...",
+          "answer": "I wish I had a car."
+        },
+        {
+          "number": 2,
+          "prompt": "I didn't call her yesterday. Begin: I wish ...",
+          "answer": "I wish I had called her yesterday."
+        },
+        {
+          "number": 3,
+          "prompt": "He talks too much, and it annoys me. Begin: I wish ...",
+          "answer": "I wish he would stop talking so much. / I wish he wouldn't talk so much."
+        },
+        {
+          "number": 4,
+          "prompt": "We live far from the city. Begin: We wish ...",
+          "answer": "We wish we didn't live so far from the city. / We wish we lived closer to the city."
+        },
+        {
+          "number": 5,
+          "prompt": "She didn't pass the driving test. Begin: She wishes ...",
+          "answer": "She wishes she had passed the driving test."
+        },
+        {
+          "number": 6,
+          "prompt": "I can't swim. Begin: I wish ...",
+          "answer": "I wish I could swim."
+        },
+        {
+          "number": 7,
+          "prompt": "The internet is so slow today. Begin: I wish ...",
+          "answer": "I wish the internet weren't so slow today. / I wish the internet wasn't so slow today."
+        },
+        {
+          "number": 8,
+          "prompt": "They sold the house. Begin: They wish ...",
+          "answer": "They wish they hadn't sold the house."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Жаль, что у меня нет больше свободного времени.",
+          "answer": "I wish I had more free time."
+        },
+        {
+          "number": 2,
+          "prompt": "Хорошо бы я умел играть на гитаре.",
+          "answer": "I wish I could play the guitar."
+        },
+        {
+          "number": 3,
+          "prompt": "Жаль, что я не купил билеты раньше.",
+          "answer": "I wish I had bought the tickets earlier."
+        },
+        {
+          "number": 4,
+          "prompt": "Хоть бы он перестал шуметь!",
+          "answer": "I wish he would stop making noise! / I wish he would stop making so much noise!"
+        },
+        {
+          "number": 5,
+          "prompt": "Жаль, что сегодня так холодно.",
+          "answer": "I wish it weren't so cold today. / I wish it wasn't so cold today."
+        },
+        {
+          "number": 6,
+          "prompt": "Если бы только я знал его номер!",
+          "answer": "If only I knew his number!"
+        },
+        {
+          "number": 7,
+          "prompt": "Она жалеет, что не сказала ему правду.",
+          "answer": "She wishes she had told him the truth."
+        },
+        {
+          "number": 8,
+          "prompt": "Жаль, что мне приходится работать по выходным.",
+          "answer": "I wish I didn't have to work on weekends."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "id": "g021",
+  "position": 21,
+  "cefrLevel": "B1",
+  "title": "Нулевое и первое условное (if + Present)",
+  "plannedFrom": "2026-11-23",
+  "plannedTo": "2026-11-25",
+  "sections": {
+    "why": [
+      "Условные предложения говорят о том, что произойдёт, если выполнится условие. Нулевое условное описывает общие факты и правила, первое — реальные возможные ситуации в будущем. В русском мы используем будущее время в обеих частях («если он придёт, я скажу»), а в английском после if будущее время НЕ ставится."
+    ],
+    "formation": [
+      "• Нулевое условное: If + Present Simple, Present Simple",
+      "If you heat ice, it melts.",
+      "• Первое условное: If + Present Simple, will + глагол",
+      "If it rains, we will stay at home.",
+      "• Отрицание: If you don't hurry, you will miss the train. / I won't go if he doesn't invite me.",
+      "• Вопрос: What will you do if you lose your job?",
+      "• Части можно менять местами. Запятая нужна, только если if-часть стоит первой: We will stay at home if it rains."
+    ],
+    "usage": [
+      "1. Нулевое условное: законы природы, общие факты, привычные последствия.",
+      "If you mix red and blue, you get purple. (Если смешать красный и синий, получится фиолетовый.)",
+      "If the server is down, users see an error. (Если сервер не работает, пользователи видят ошибку.)",
+      "2. Первое условное: реальная возможность в будущем, обещание, предупреждение, план.",
+      "If I finish early, I will call you. (Если я закончу рано, я тебе позвоню.)",
+      "If you touch that, you will break it. (Если ты это тронешь, ты это сломаешь.)",
+      "3. В главной части первого условного можно использовать can, may, must, should или повелительное наклонение.",
+      "If you are tired, take a break. (Если устал, сделай перерыв.)",
+      "If the build fails, you can restart it. (Если сборка упадёт, можно перезапустить её.)",
+      "4. Вместо if not часто используют unless (= если не).",
+      "Unless you hurry, you will be late. (Если не поторопишься, опоздаешь.)"
+    ],
+    "signalWords": [
+      "if, unless, when (для действий, которые точно произойдут), as soon as, before, after, until. После when / as soon as / before / after / until о будущем тоже используем Present Simple: I will call you as soon as I arrive."
+    ],
+    "mistakes": [
+      "✗ If it will rain, we will stay. → ✓ If it rains, we will stay. (после if будущее время не ставим)",
+      "✗ If I will have time, I will help you. → ✓ If I have time, I will help you. (то же правило)",
+      "✗ I will call you when I will arrive. → ✓ I will call you when I arrive. (после when тоже Present)",
+      "✗ Unless you don't study, you will fail. → ✓ Unless you study, you will fail. (unless уже содержит отрицание)",
+      "✗ If you will help me, I will be happy. → ✓ If you help me, I will be happy."
+    ],
+    "remember": [
+      "После if — Present, в главной части — will. Будущее прячется в главной части, а не в if-части."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Поставьте глагол в нужную форму (Present Simple или will + глагол)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If you heat water to 100 degrees, it ___ (boil).",
+          "answer": "boils"
+        },
+        {
+          "number": 2,
+          "prompt": "If it rains tomorrow, we ___ (stay) at home.",
+          "answer": "will stay"
+        },
+        {
+          "number": 3,
+          "prompt": "If she ___ (study) hard, she will pass the exam.",
+          "answer": "studies"
+        },
+        {
+          "number": 4,
+          "prompt": "If you press this button, the door ___ (open).",
+          "answer": "opens"
+        },
+        {
+          "number": 5,
+          "prompt": "I ___ (call) you if I have any news.",
+          "answer": "will call"
+        },
+        {
+          "number": 6,
+          "prompt": "If they ___ (not hurry), they will miss the bus.",
+          "answer": "don't hurry / do not hurry"
+        },
+        {
+          "number": 7,
+          "prompt": "If you ___ (mix) oil and water, they don't mix.",
+          "answer": "mix"
+        },
+        {
+          "number": 8,
+          "prompt": "We ___ (be) late if the traffic is bad.",
+          "answer": "will be"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If it (a) will snow (b) snows tomorrow, we will build a snowman.",
+          "answer": "(b) snows"
+        },
+        {
+          "number": 2,
+          "prompt": "I (a) will tell (b) tell you as soon as I know the result.",
+          "answer": "(a) will tell"
+        },
+        {
+          "number": 3,
+          "prompt": "If you (a) will come (b) come to my office, I will show you the new project.",
+          "answer": "(b) come"
+        },
+        {
+          "number": 4,
+          "prompt": "Unless you (a) leave (b) don't leave now, you will miss your flight.",
+          "answer": "(a) leave"
+        },
+        {
+          "number": 5,
+          "prompt": "When I (a) will get (b) get home, I will have dinner.",
+          "answer": "(b) get"
+        },
+        {
+          "number": 6,
+          "prompt": "If you (a) are (b) will be hungry, there is some pizza in the fridge.",
+          "answer": "(a) are"
+        },
+        {
+          "number": 7,
+          "prompt": "She will be angry if you (a) don't tell (b) won't tell her the truth.",
+          "answer": "(a) don't tell"
+        },
+        {
+          "number": 8,
+          "prompt": "If the code (a) doesn't work (b) won't work, I will check the logs.",
+          "answer": "(a) doesn't work"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Составьте предложение с if из двух частей (первое условное)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "You don't hurry. You will miss the train. (If ...)",
+          "answer": "If you don't hurry, you will miss the train."
+        },
+        {
+          "number": 2,
+          "prompt": "It will be sunny. We will go to the beach. (If ...)",
+          "answer": "If it is sunny, we will go to the beach."
+        },
+        {
+          "number": 3,
+          "prompt": "He doesn't sleep enough. He will feel tired. (If ...)",
+          "answer": "If he doesn't sleep enough, he will feel tired."
+        },
+        {
+          "number": 4,
+          "prompt": "I will find a cheap hotel. I will stay in Prague for a week. (If ...)",
+          "answer": "If I find a cheap hotel, I will stay in Prague for a week."
+        },
+        {
+          "number": 5,
+          "prompt": "You study every day. You will improve your English. (If ...)",
+          "answer": "If you study every day, you will improve your English."
+        },
+        {
+          "number": 6,
+          "prompt": "Translate the part: Мы опоздаем, если не выйдем сейчас. -> We will be late ___",
+          "answer": "if we don't leave now / if we do not leave now"
+        },
+        {
+          "number": 7,
+          "prompt": "Rewrite with unless: If you don't wear a jacket, you will be cold.",
+          "answer": "Unless you wear a jacket, you will be cold."
+        },
+        {
+          "number": 8,
+          "prompt": "Rewrite with the if-part second: If she calls, I will answer.",
+          "answer": "I will answer if she calls."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "If it will rain, I will take an umbrella.",
+          "answer": "If it rains, I will take an umbrella."
+        },
+        {
+          "number": 2,
+          "prompt": "I will send you the file when I will finish.",
+          "answer": "I will send you the file when I finish."
+        },
+        {
+          "number": 3,
+          "prompt": "Unless you don't hurry, we will be late.",
+          "answer": "Unless you hurry, we will be late. / If you don't hurry, we will be late."
+        },
+        {
+          "number": 4,
+          "prompt": "If you heat ice, it will melts.",
+          "answer": "If you heat ice, it melts."
+        },
+        {
+          "number": 5,
+          "prompt": "If I will see him, I will give him your message.",
+          "answer": "If I see him, I will give him your message."
+        },
+        {
+          "number": 6,
+          "prompt": "What you will do if you lose your phone?",
+          "answer": "What will you do if you lose your phone?"
+        },
+        {
+          "number": 7,
+          "prompt": "If he not comes, we will start without him.",
+          "answer": "If he doesn't come, we will start without him."
+        },
+        {
+          "number": 8,
+          "prompt": "She will be happy if you will visit her.",
+          "answer": "She will be happy if you visit her."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Если завтра будет дождь, мы останемся дома.",
+          "answer": "If it rains tomorrow, we will stay at home."
+        },
+        {
+          "number": 2,
+          "prompt": "Если ты не поторопишься, ты опоздаешь на работу.",
+          "answer": "If you don't hurry, you will be late for work."
+        },
+        {
+          "number": 3,
+          "prompt": "Я позвоню тебе, как только закончу встречу.",
+          "answer": "I will call you as soon as I finish the meeting."
+        },
+        {
+          "number": 4,
+          "prompt": "Если сайт не загрузится, я перезапущу сервер.",
+          "answer": "If the website doesn't load, I will restart the server."
+        },
+        {
+          "number": 5,
+          "prompt": "Если нагреть лёд, он тает.",
+          "answer": "If you heat ice, it melts."
+        },
+        {
+          "number": 6,
+          "prompt": "Что ты будешь делать, если потеряешь паспорт?",
+          "answer": "What will you do if you lose your passport?"
+        },
+        {
+          "number": 7,
+          "prompt": "Если не будешь спать достаточно, ты будешь уставшим.",
+          "answer": "If you don't sleep enough, you will be tired. / Unless you sleep enough, you will be tired."
+        },
+        {
+          "number": 8,
+          "prompt": "Если у меня будет время в выходные, я схожу в спортзал.",
+          "answer": "If I have time at the weekend, I will go to the gym."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+{
+  "id": "g045",
+  "position": 45,
+  "cefrLevel": "B2",
+  "title": "Цель и результат: to / in order to / so that / so…that / such…that",
+  "plannedFrom": "2027-03-29",
+  "plannedTo": "2027-04-03",
+  "sections": {
+    "why": [
+      "Эти конструкции отвечают на вопросы \"зачем?\" (цель: чтобы) и \"с каким результатом?\" (так..., что). По-русски \"чтобы\" универсально, а в английском нужно выбирать между to, in order to и so that, и не путать so и such."
+    ],
+    "formation": [
+      "• to + V: I use a VPN to protect my data.",
+      "• in order to / so as to + V (более формально): She left early in order to catch the train.",
+      "• отрицание цели: in order not to / so as not to + V (не просто \"not to\"): He whispered so as not to wake the baby.",
+      "• so that + подлежащее + can / could / will / would: Speak slowly so that everyone can understand.",
+      "• so + прилагательное / наречие + that: The test was so difficult that nobody finished it.",
+      "• such + (a/an) + прилагательное + существительное + that: It was such a good movie that I watched it twice.",
+      "• so much / so many / so little / so few + существительное + that: There were so many people that we couldn't move."
+    ],
+    "usage": [
+      "1. To / in order to, когда подлежащее одно и то же. (Я пошёл в магазин, чтобы купить хлеб. — I went to the store to buy bread.)",
+      "2. So that, когда подлежащие разные или нужен модальный глагол. (Я напишу инструкцию, чтобы все могли её понять. — I'll write instructions so that everyone can follow them.) В прошедшем времени: so that + could / would.",
+      "3. So ... that для результата с прилагательным или наречием. (Он бежал так быстро, что поймал автобус. — He ran so fast that he caught the bus.)",
+      "4. Such ... that для результата с существительным. (Это был такой длинный день, что я уснул. — It was such a long day that I fell asleep.)",
+      "5. Отрицательная цель. (Я записал это, чтобы не забыть. — I wrote it down so that I wouldn't forget. / ... in order not to forget.)"
+    ],
+    "signalWords": [
+      "Чтобы = to / in order to / so that; такой + прилагательное = so; такой + (прилагательное) + существительное = such (a); так много = so much / so many."
+    ],
+    "mistakes": [
+      "✗ I came here for learn English → ✓ I came here to learn English (после for нет голого глагола; цель — to + V)",
+      "✗ He left early to not be late → ✓ ... in order not to be late / so as not to be late (отрицание ставится перед to)",
+      "✗ It was so good film → ✓ It was such a good movie (с существительным нужно such a)",
+      "✗ She was such tired that... → ✓ She was so tired that... (с прилагательным нужно so)",
+      "✗ I took an umbrella so that I don't get wet → ✓ ... so that I wouldn't get wet (прошедшее время)",
+      "✗ There were so people → ✓ so many people"
+    ],
+    "remember": [
+      "Одно подлежащее — to; разные подлежащие — so that + can / could / would; прилагательное — so; существительное — such (a)."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте to или so that",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I went to the pharmacy ___ buy some medicine.",
+          "answer": "to"
+        },
+        {
+          "number": 2,
+          "prompt": "Please speak slowly ___ everyone can understand.",
+          "answer": "so that"
+        },
+        {
+          "number": 3,
+          "prompt": "She learns English ___ get a better job.",
+          "answer": "to"
+        },
+        {
+          "number": 4,
+          "prompt": "I'll write it down ___ I don't forget.",
+          "answer": "so that"
+        },
+        {
+          "number": 5,
+          "prompt": "We took a taxi ___ be on time.",
+          "answer": "to"
+        },
+        {
+          "number": 6,
+          "prompt": "He turned off his phone ___ nobody could disturb him.",
+          "answer": "so that"
+        },
+        {
+          "number": 7,
+          "prompt": "They saved money ___ buy a new house.",
+          "answer": "to"
+        },
+        {
+          "number": 8,
+          "prompt": "Leave early ___ you won't miss the train.",
+          "answer": "so that"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Вставьте so, such или such a",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The test was ___ difficult that nobody finished it.",
+          "answer": "so"
+        },
+        {
+          "number": 2,
+          "prompt": "It was ___ boring lecture that I fell asleep.",
+          "answer": "such a"
+        },
+        {
+          "number": 3,
+          "prompt": "She speaks ___ quickly that I can't follow her.",
+          "answer": "so"
+        },
+        {
+          "number": 4,
+          "prompt": "We had ___ good weather that we stayed outside all day.",
+          "answer": "such"
+        },
+        {
+          "number": 5,
+          "prompt": "There were ___ many people that we couldn't find a table.",
+          "answer": "so"
+        },
+        {
+          "number": 6,
+          "prompt": "He is ___ talented developer that everyone wants to hire him.",
+          "answer": "such a"
+        },
+        {
+          "number": 7,
+          "prompt": "I was ___ tired that I fell asleep on the sofa.",
+          "answer": "so"
+        },
+        {
+          "number": 8,
+          "prompt": "It was ___ cold day that we stayed at home.",
+          "answer": "such a"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Объедините предложения, используя слово или конструкцию в скобках",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I'm learning Spanish. I want to travel around Mexico. (in order to)",
+          "answer": "I'm learning Spanish in order to travel around Mexico."
+        },
+        {
+          "number": 2,
+          "prompt": "She whispered. She didn't want to wake the baby. (so as not to)",
+          "answer": "She whispered so as not to wake the baby."
+        },
+        {
+          "number": 3,
+          "prompt": "I wrote the instructions. Everyone can follow them. (so that)",
+          "answer": "I wrote the instructions so that everyone can follow them. / I wrote the instructions so that everyone could follow them."
+        },
+        {
+          "number": 4,
+          "prompt": "The soup was very hot. I couldn't eat it. (so ... that)",
+          "answer": "The soup was so hot that I couldn't eat it."
+        },
+        {
+          "number": 5,
+          "prompt": "It was a very long meeting. Everyone was exhausted. (such ... that)",
+          "answer": "It was such a long meeting that everyone was exhausted."
+        },
+        {
+          "number": 6,
+          "prompt": "He took notes. He didn't want to forget anything. (so that)",
+          "answer": "He took notes so that he wouldn't forget anything."
+        },
+        {
+          "number": 7,
+          "prompt": "She has a lot of work. She can't go out. (so much ... that)",
+          "answer": "She has so much work that she can't go out."
+        },
+        {
+          "number": 8,
+          "prompt": "He ran fast. He caught the bus. (so ... that)",
+          "answer": "He ran so fast that he caught the bus."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите ошибку и перепишите предложение правильно",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I came here for learn English.",
+          "answer": "I came here to learn English."
+        },
+        {
+          "number": 2,
+          "prompt": "He left early to not be late.",
+          "answer": "He left early in order not to be late. / He left early so as not to be late."
+        },
+        {
+          "number": 3,
+          "prompt": "It was so good film.",
+          "answer": "It was such a good movie. / It was such a good film."
+        },
+        {
+          "number": 4,
+          "prompt": "She was such tired that she fell asleep.",
+          "answer": "She was so tired that she fell asleep."
+        },
+        {
+          "number": 5,
+          "prompt": "I took an umbrella so that I don't get wet.",
+          "answer": "I took an umbrella so that I wouldn't get wet."
+        },
+        {
+          "number": 6,
+          "prompt": "There were so people that we couldn't move.",
+          "answer": "There were so many people that we couldn't move."
+        },
+        {
+          "number": 7,
+          "prompt": "We spoke quietly so that not to wake him up.",
+          "answer": "We spoke quietly so as not to wake him up. / We spoke quietly so that we wouldn't wake him up."
+        },
+        {
+          "number": 8,
+          "prompt": "The weather was such good that we stayed outside.",
+          "answer": "The weather was so good that we stayed outside. / It was such good weather that we stayed outside."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Я пошёл в магазин, чтобы купить хлеб.",
+          "answer": "I went to the store to buy bread."
+        },
+        {
+          "number": 2,
+          "prompt": "Он говорил медленно, чтобы все поняли.",
+          "answer": "He spoke slowly so that everyone could understand."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы выехали рано, чтобы не опоздать.",
+          "answer": "We left early in order not to be late. / We left early so as not to be late."
+        },
+        {
+          "number": 4,
+          "prompt": "Тест был таким сложным, что никто не справился.",
+          "answer": "The test was so difficult that nobody could do it. / The test was so difficult that nobody passed it."
+        },
+        {
+          "number": 5,
+          "prompt": "Это был такой хороший фильм, что я посмотрел его дважды.",
+          "answer": "It was such a good movie that I watched it twice. / It was such a good film that I watched it twice."
+        },
+        {
+          "number": 6,
+          "prompt": "Я записал это, чтобы не забыть.",
+          "answer": "I wrote it down so that I wouldn't forget. / I wrote it down in order not to forget. / I wrote it down so as not to forget."
+        },
+        {
+          "number": 7,
+          "prompt": "У меня было так много работы, что я пропустил обед.",
+          "answer": "I had so much work that I skipped lunch."
+        },
+        {
+          "number": 8,
+          "prompt": "Он купил новый ноутбук, чтобы работать быстрее.",
+          "answer": "He bought a new laptop to work faster. / He bought a new laptop in order to work faster."
+        }
+      ]
+    }
+  ]
+}

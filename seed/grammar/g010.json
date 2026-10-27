@@ -1,0 +1,275 @@
+{
+  "id": "g010",
+  "position": 10,
+  "cefrLevel": "A2",
+  "title": "Предлоги места и движения",
+  "plannedFrom": "2026-10-28",
+  "plannedTo": "2026-10-28",
+  "sections": {
+    "why": [
+      "Предлоги места отвечают на вопрос «где?» (in, on, at, under, next to), а предлоги движения — на вопрос «куда?» (to, into, out of, through). В русском много падежей (в доме, в дом), а в английском смысл передаёт именно предлог, поэтому его легко перепутать."
+    ],
+    "formation": [
+      "Предлог + существительное (или местоимение): in the box, next to him, to the office.",
+      "Предлоги места:",
+      "• in — внутри чего-то: in the room, in Kyiv, in the car.",
+      "• on — на поверхности: on the table, on the wall, on the second floor.",
+      "• at — в точке, у места: at the door, at the bus stop, at work, at home, at school.",
+      "• under (под), above (над), between (между), behind (за, позади), in front of (перед), opposite (напротив), next to / near (рядом с).",
+      "Предлоги движения:",
+      "• to — к, в (направление): go to the park, go to work.",
+      "• into / out of — в / из: walk into the room, take it out of the bag.",
+      "• from (из, от), across (через, поперёк), through (сквозь), along (вдоль), up / down (вверх / вниз), over (над, через)."
+    ],
+    "usage": [
+      "1. Где что находится. (The keys are on the table. — Ключи лежат на столе.)",
+      "2. Где человек находится (в точке). (She is at the airport. — Она в аэропорту.)",
+      "3. Движение в сторону места. (We are going to the cinema. — Мы идём в кино.)",
+      "4. Движение внутрь и наружу. (He ran out of the house. — Он выбежал из дома.)",
+      "5. Устойчивые сочетания без артикля: at home, at work, at school, go home (без to!), arrive in a city / at a place. (I arrived in Berlin / at the hotel. — Я приехал в Берлин / в отель.)"
+    ],
+    "signalWords": ["Где? → in / on / at. Куда? → to / into. Откуда? → from / out of."],
+    "mistakes": [
+      "• ✗ I go to home. → ✓ I go home. После go, come, get перед home предлог не нужен.",
+      "• ✗ I am in the work. → ✓ I am at work. Место работы или учёбы — at.",
+      "• ✗ She lives at Kyiv. → ✓ She lives in Kyiv. Город и страна — in.",
+      "• ✗ I arrived to London. → ✓ I arrived in London. После arrive — in (город) или at (место).",
+      "• ✗ The picture is in the wall. → ✓ The picture is on the wall. На поверхности — on."
+    ],
+    "remember": [
+      "IN — внутри, ON — на поверхности, AT — в точке; TO — движение к месту, но go home без to."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте in, on или at",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "My phone is ___ the table.",
+          "answer": "on"
+        },
+        {
+          "number": 2,
+          "prompt": "She lives ___ Poland.",
+          "answer": "in"
+        },
+        {
+          "number": 3,
+          "prompt": "He is waiting ___ the bus stop.",
+          "answer": "at"
+        },
+        {
+          "number": 4,
+          "prompt": "There are many apps ___ my phone.",
+          "answer": "on"
+        },
+        {
+          "number": 5,
+          "prompt": "The children are ___ school now.",
+          "answer": "at"
+        },
+        {
+          "number": 6,
+          "prompt": "Your passport is ___ the bag.",
+          "answer": "in"
+        },
+        {
+          "number": 7,
+          "prompt": "We live ___ the third floor.",
+          "answer": "on"
+        },
+        {
+          "number": 8,
+          "prompt": "I'm ___ home today.",
+          "answer": "at"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный вариант",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "He goes (a) to work (b) in work by metro.",
+          "answer": "a (to work)"
+        },
+        {
+          "number": 2,
+          "prompt": "I came (a) to home (b) home late yesterday.",
+          "answer": "b (home)"
+        },
+        {
+          "number": 3,
+          "prompt": "We arrived (a) to Paris (b) in Paris at noon.",
+          "answer": "b (in Paris)"
+        },
+        {
+          "number": 4,
+          "prompt": "The cat is sitting (a) under (b) above the chair.",
+          "answer": "a (under)"
+        },
+        {
+          "number": 5,
+          "prompt": "She walked (a) in (b) into the room and sat down.",
+          "answer": "b (into)"
+        },
+        {
+          "number": 6,
+          "prompt": "The bank is (a) next to (b) at the supermarket.",
+          "answer": "a (next to)"
+        },
+        {
+          "number": 7,
+          "prompt": "He took his laptop (a) out of (b) from the bag.",
+          "answer": "a (out of)"
+        },
+        {
+          "number": 8,
+          "prompt": "The picture hangs (a) in (b) on the wall.",
+          "answer": "b (on)"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Вставьте подходящий предлог (to, into, out of, from, across, through, between, behind, in front of, opposite)",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "The pharmacy is ___ the bank and the cafe.",
+          "answer": "between"
+        },
+        {
+          "number": 2,
+          "prompt": "He walked ___ the park every morning.",
+          "answer": "through"
+        },
+        {
+          "number": 3,
+          "prompt": "We drove ___ Kyiv ___ Lviv last weekend.",
+          "answer": "from / to"
+        },
+        {
+          "number": 4,
+          "prompt": "The dog jumped ___ the car.",
+          "answer": "into"
+        },
+        {
+          "number": 5,
+          "prompt": "She got ___ the taxi and paid the driver.",
+          "answer": "out of"
+        },
+        {
+          "number": 6,
+          "prompt": "Our office is ___ the central station, on the other side of the street.",
+          "answer": "opposite"
+        },
+        {
+          "number": 7,
+          "prompt": "There is a small garden ___ the house.",
+          "answer": "behind"
+        },
+        {
+          "number": 8,
+          "prompt": "He crossed the bridge and walked ___ the river.",
+          "answer": "along"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Исправьте ошибку в предлоге",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I go to home after work.",
+          "answer": "I go home after work."
+        },
+        {
+          "number": 2,
+          "prompt": "She is in work now.",
+          "answer": "She is at work now."
+        },
+        {
+          "number": 3,
+          "prompt": "They live at Berlin.",
+          "answer": "They live in Berlin."
+        },
+        {
+          "number": 4,
+          "prompt": "We arrived to the hotel late.",
+          "answer": "We arrived at the hotel late."
+        },
+        {
+          "number": 5,
+          "prompt": "The poster is in the wall.",
+          "answer": "The poster is on the wall."
+        },
+        {
+          "number": 6,
+          "prompt": "He is sitting on the car and listening to music.",
+          "answer": "He is sitting in the car and listening to music."
+        },
+        {
+          "number": 7,
+          "prompt": "Put the keys at the table.",
+          "answer": "Put the keys on the table."
+        },
+        {
+          "number": 8,
+          "prompt": "She came in the office at nine.",
+          "answer": "She came into the office at nine."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Мой ноутбук лежит на столе.",
+          "answer": "My laptop is on the table."
+        },
+        {
+          "number": 2,
+          "prompt": "Я сейчас дома, а мой муж на работе.",
+          "answer": "I am at home now, and my husband is at work. / I'm at home now and my husband is at work."
+        },
+        {
+          "number": 3,
+          "prompt": "Мы приехали в Лондон в шесть утра.",
+          "answer": "We arrived in London at six in the morning. / We arrived in London at 6 a.m."
+        },
+        {
+          "number": 4,
+          "prompt": "Банк находится напротив вокзала.",
+          "answer": "The bank is opposite the station. / The bank is opposite the train station."
+        },
+        {
+          "number": 5,
+          "prompt": "Она достала телефон из сумки.",
+          "answer": "She took her phone out of the bag. / She took the phone out of her bag."
+        },
+        {
+          "number": 6,
+          "prompt": "После работы я иду домой пешком.",
+          "answer": "After work I walk home. / After work I go home on foot."
+        },
+        {
+          "number": 7,
+          "prompt": "Кафе находится между аптекой и банком.",
+          "answer": "The cafe is between the pharmacy and the bank."
+        },
+        {
+          "number": 8,
+          "prompt": "Он вошёл в комнату и сел рядом со мной.",
+          "answer": "He walked into the room and sat next to me. / He came into the room and sat down next to me."
+        }
+      ]
+    }
+  ]
+}

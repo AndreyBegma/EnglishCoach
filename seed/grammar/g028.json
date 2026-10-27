@@ -1,0 +1,273 @@
+{
+  "id": "g028",
+  "position": 28,
+  "cefrLevel": "B1",
+  "title": "Количество: few/a few, little/a little, enough, too, a lot of",
+  "plannedFrom": "2026-12-17",
+  "plannedTo": "2026-12-19",
+  "sections": {
+    "why": [
+      "Эти слова говорят, сколько чего-то есть: много, мало, достаточно, слишком. В русском «мало» и «немного» различаются интонацией и смыслом, и в английском так же: few и a few отличаются по тону (плохо, что мало, или нормально, что немного)."
+    ],
+    "formation": [
+      "• Исчисляемые (people, ideas, bugs): many / a few / few / a lot of",
+      "• Неисчисляемые (time, money, water, traffic): much / a little / little / a lot of",
+      "• enough стоит ПЕРЕД существительным: enough time. После прилагательного: good enough.",
+      "• too + прилагательное: too expensive. too much / too many + существительное.",
+      "• not enough / too much / too many: в вопросах и отрицаниях much и many обычны, в утверждениях чаще a lot of."
+    ],
+    "usage": [
+      "1. a few / a little = немного, но достаточно (позитивно): I have a few friends here. (У меня тут есть несколько друзей.) I have a little time. (У меня есть немного времени.)",
+      "2. few / little = мало, почти нет (негативно): I have few friends here. (У меня тут мало друзей.) We have little time. (У нас мало времени.)",
+      "3. a lot of / lots of = много, подходит для обоих типов и для утверждений: She has a lot of experience. (У неё много опыта.)",
+      "4. enough = достаточно: Do we have enough chairs? (У нас достаточно стульев?) He isn't old enough. (Он недостаточно взрослый.)",
+      "5. too = слишком (больше, чем нужно, и это плохо): It's too hot. (Слишком жарко.) There are too many bugs. (Слишком много багов.)"
+    ],
+    "signalWords": [
+      "How many? (исчисляемые) / How much? (неисчисляемые), a bit of, plenty of, not enough, too much, too many.",
+      "Проверка: можно ли поставить перед словом a/two? Если да, то исчисляемое."
+    ],
+    "mistakes": [
+      "✗ I have a few money. → ✓ I have a little money. (money неисчисляемое)",
+      "✗ too much people → ✓ too many people. (people исчисляемое)",
+      "✗ I'm enough tired. → ✓ I'm tired enough. / I'm too tired. (enough после прилагательного)",
+      "✗ I have little friends. → ✓ I have a few friends. (если хотите сказать «несколько», нужно a few)",
+      "✗ It's very much expensive. → ✓ It's too expensive. (much с прилагательным не используется)"
+    ],
+    "remember": [
+      "С «a» — позитивно (a few, a little), без «a» — почти нет (few, little). Many считаем, much измеряем, enough ставим перед существительным."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Выберите правильное слово",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "We don't have (many / much) time.",
+          "answer": "much"
+        },
+        {
+          "number": 2,
+          "prompt": "How (many / much) people came to the party?",
+          "answer": "many"
+        },
+        {
+          "number": 3,
+          "prompt": "I need (a few / a little) water, please.",
+          "answer": "a little"
+        },
+        {
+          "number": 4,
+          "prompt": "She has (a few / a little) good ideas.",
+          "answer": "a few"
+        },
+        {
+          "number": 5,
+          "prompt": "There is (too many / too much) traffic in the city.",
+          "answer": "too much"
+        },
+        {
+          "number": 6,
+          "prompt": "He has (a lot of / many) experience in design.",
+          "answer": "a lot of"
+        },
+        {
+          "number": 7,
+          "prompt": "Only (few / a few) people understood the question, so it was a problem.",
+          "answer": "few"
+        },
+        {
+          "number": 8,
+          "prompt": "How (many / much) coffee do you drink every day?",
+          "answer": "much"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Вставьте few / a few / little / a little",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have ___ questions about the task. (несколько)",
+          "answer": "a few"
+        },
+        {
+          "number": 2,
+          "prompt": "We have ___ time, so we can't finish today. (почти нет)",
+          "answer": "little"
+        },
+        {
+          "number": 3,
+          "prompt": "Would you like ___ sugar in your tea? (немного)",
+          "answer": "a little"
+        },
+        {
+          "number": 4,
+          "prompt": "___ people live in this village. It's almost empty. (очень мало)",
+          "answer": "Few"
+        },
+        {
+          "number": 5,
+          "prompt": "There is ___ milk in the fridge, enough for breakfast. (немного)",
+          "answer": "a little"
+        },
+        {
+          "number": 6,
+          "prompt": "He has ___ friends, so he often feels lonely. (мало)",
+          "answer": "few"
+        },
+        {
+          "number": 7,
+          "prompt": "Wait ___ minutes, I'll be ready soon. (несколько)",
+          "answer": "a few"
+        },
+        {
+          "number": 8,
+          "prompt": "She speaks ___ English, so it's hard for her to work abroad. (почти не говорит)",
+          "answer": "little"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Вставьте enough / too / too much / too many",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "This laptop is ___ slow for programming.",
+          "answer": "too"
+        },
+        {
+          "number": 2,
+          "prompt": "We don't have ___ money to buy a new car.",
+          "answer": "enough"
+        },
+        {
+          "number": 3,
+          "prompt": "There are ___ errors in your code. Please check it again.",
+          "answer": "too many"
+        },
+        {
+          "number": 4,
+          "prompt": "I drank ___ coffee, and now I can't sleep.",
+          "answer": "too much"
+        },
+        {
+          "number": 5,
+          "prompt": "Is the room warm ___ for you?",
+          "answer": "enough"
+        },
+        {
+          "number": 6,
+          "prompt": "He is ___ young to drive a car.",
+          "answer": "too"
+        },
+        {
+          "number": 7,
+          "prompt": "We have ___ chairs for everybody. Don't worry.",
+          "answer": "enough"
+        },
+        {
+          "number": 8,
+          "prompt": "It's ___ noisy here. I can't work.",
+          "answer": "too"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Найдите и исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "I have a few money in my account.",
+          "answer": "I have a little money in my account."
+        },
+        {
+          "number": 2,
+          "prompt": "There are too much people in the bus.",
+          "answer": "There are too many people in the bus."
+        },
+        {
+          "number": 3,
+          "prompt": "She isn't enough tall to play basketball.",
+          "answer": "She isn't tall enough to play basketball."
+        },
+        {
+          "number": 4,
+          "prompt": "How much students are in your group?",
+          "answer": "How many students are in your group?"
+        },
+        {
+          "number": 5,
+          "prompt": "It's very much hot today.",
+          "answer": "It's very hot today. / It's too hot today."
+        },
+        {
+          "number": 6,
+          "prompt": "We have little friends in this city, but they are great.",
+          "answer": "We have a few friends in this city, but they are great."
+        },
+        {
+          "number": 7,
+          "prompt": "Do you have enough of time?",
+          "answer": "Do you have enough time?"
+        },
+        {
+          "number": 8,
+          "prompt": "There is many traffic on Monday morning.",
+          "answer": "There is a lot of traffic on Monday morning. / There is much traffic on Monday morning."
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "У нас мало времени до дедлайна.",
+          "answer": "We have little time before the deadline."
+        },
+        {
+          "number": 2,
+          "prompt": "У меня есть несколько вопросов по проекту.",
+          "answer": "I have a few questions about the project."
+        },
+        {
+          "number": 3,
+          "prompt": "Сколько денег тебе нужно?",
+          "answer": "How much money do you need?"
+        },
+        {
+          "number": 4,
+          "prompt": "В этом коде слишком много ошибок.",
+          "answer": "There are too many errors / bugs in this code."
+        },
+        {
+          "number": 5,
+          "prompt": "Этот чемодан слишком тяжёлый для меня.",
+          "answer": "This suitcase is too heavy for me."
+        },
+        {
+          "number": 6,
+          "prompt": "У тебя достаточно опыта для этой работы.",
+          "answer": "You have enough experience for this job."
+        },
+        {
+          "number": 7,
+          "prompt": "Налей мне, пожалуйста, немного воды.",
+          "answer": "Please pour me a little water. / Please give me a little water."
+        },
+        {
+          "number": 8,
+          "prompt": "В нашей команде много талантливых людей.",
+          "answer": "There are a lot of talented people in our team. / There are many talented people in our team."
+        }
+      ]
+    }
+  ]
+}

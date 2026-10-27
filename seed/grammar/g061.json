@@ -1,0 +1,280 @@
+{
+  "id": "g061",
+  "position": 61,
+  "cefrLevel": "C1",
+  "title": "Зависимые предлоги после глаголов, прилагательных и существительных",
+  "plannedFrom": "2027-07-19",
+  "plannedTo": "2027-07-24",
+  "sections": {
+    "why": [
+      "Многие английские глаголы, прилагательные и существительные «намертво» связаны с определённым предлогом, и он часто не совпадает с русским. Мы «боимся чего-то», а англичане are afraid OF something; мы «зависим ОТ», они depend ON. Ошибка в предлоге сразу выдаёт русскоговорящего, поэтому учите слово вместе с предлогом."
+    ],
+    "formation": [
+      "• глагол + предлог: depend on, listen to, apologize for",
+      "• прилагательное + предлог: good at, afraid of, interested in",
+      "• существительное + предлог: reason for, increase in, solution to",
+      "• после предлога глагол всегда стоит в форме -ing: good at solving, interested in learning, apologize for being late",
+      "• некоторые глаголы предлога НЕ требуют: discuss, mention, enter, marry, approach, answer"
+    ],
+    "usage": [
+      "1. Глагол + предлог: depend on (зависеть от), rely on (полагаться на), focus on (сосредоточиться на), succeed in (преуспеть в), apologize for (извиняться за), blame someone for (винить за), accuse someone of (обвинять в), prevent someone from (мешать кому-то сделать), listen to (слушать), wait for (ждать), look for (искать), belong to (принадлежать).",
+      "Our site depends on this API. (Наш сайт зависит от этого API.)",
+      "She apologized for being late. (Она извинилась за опоздание.)",
+      "2. Прилагательное + предлог: good at, interested in, afraid of, proud of, responsible for, fed up with, keen on, similar to, married to, angry with (человек) / angry about (ситуация).",
+      "He is proud of his team. (Он гордится своей командой.)",
+      "3. Существительное + предлог: reason for, solution to, increase in, demand for, interest in, approach to, reply to.",
+      "There was a sharp increase in prices. (Был резкий рост цен.)",
+      "4. Глаголы без предлога: у нас есть «обсуждать О чём-то», «жениться НА», «подходить К», а в английском предлога нет.",
+      "We discussed the budget. (Мы обсудили бюджет.)",
+      "He married a colleague. (Он женился на коллеге.)",
+      "5. Предлог меняет смысл: think about (размышлять) и think of (придумать, иметь мнение); look at (смотреть), look for (искать), look after (присматривать).",
+      "What do you think of this design? (Что ты думаешь об этом дизайне?)"
+    ],
+    "signalWords": [
+      "Явных слов-маркеров нет. Правило одно: записывайте слово сразу с предлогом, как единое целое (collocation), и всегда проверяйте в словаре."
+    ],
+    "mistakes": [
+      "✗ We discussed about the plan → ✓ We discussed the plan (discuss без предлога)",
+      "✗ It depends of the weather → ✓ It depends on the weather (по аналогии с «от»)",
+      "✗ I'm interested on music → ✓ I'm interested in music",
+      "✗ She explained me the problem → ✓ She explained the problem to me (explain требует to)",
+      "✗ I'm good in math → ✓ I'm good at math",
+      "✗ I'm thinking to change my job → ✓ I'm thinking about changing my job (after a preposition: -ing)"
+    ],
+    "remember": [
+      "Предлог — часть слова: depend ON, afraid OF, good AT, reason FOR; а после предлога идёт -ing."
+    ]
+  },
+  "exercises": [
+    {
+      "number": 1,
+      "instruction": "Вставьте нужный предлог",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She is very good ___ explaining complex ideas.",
+          "answer": "at"
+        },
+        {
+          "number": 2,
+          "prompt": "I'm not familiar ___ this framework.",
+          "answer": "with"
+        },
+        {
+          "number": 3,
+          "prompt": "Our team depends ___ third-party APIs.",
+          "answer": "on"
+        },
+        {
+          "number": 4,
+          "prompt": "He apologized ___ being late.",
+          "answer": "for"
+        },
+        {
+          "number": 5,
+          "prompt": "They congratulated her ___ passing the exam.",
+          "answer": "on"
+        },
+        {
+          "number": 6,
+          "prompt": "Are you afraid ___ flying?",
+          "answer": "of"
+        },
+        {
+          "number": 7,
+          "prompt": "I'm looking forward ___ the weekend.",
+          "answer": "to"
+        },
+        {
+          "number": 8,
+          "prompt": "This is the reason ___ the delay.",
+          "answer": "for"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "instruction": "Выберите правильный предлог",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She is responsible (a) for (b) of (c) about the database.",
+          "answer": "for"
+        },
+        {
+          "number": 2,
+          "prompt": "He insisted (a) in (b) on (c) at paying for dinner.",
+          "answer": "on"
+        },
+        {
+          "number": 3,
+          "prompt": "There's been an increase (a) of (b) in (c) on the number of users.",
+          "answer": "in"
+        },
+        {
+          "number": 4,
+          "prompt": "I'm really interested (a) on (b) in (c) at learning Rust.",
+          "answer": "in"
+        },
+        {
+          "number": 5,
+          "prompt": "She's married (a) with (b) to (c) at a designer.",
+          "answer": "to"
+        },
+        {
+          "number": 6,
+          "prompt": "We need to focus (a) in (b) on (c) to performance.",
+          "answer": "on"
+        },
+        {
+          "number": 7,
+          "prompt": "They accused him (a) of (b) for (c) with copying the code.",
+          "answer": "of"
+        },
+        {
+          "number": 8,
+          "prompt": "I'm fed up (a) of (b) with (c) for these endless meetings.",
+          "answer": "with"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "instruction": "Исправьте ошибку",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She explained me the problem.",
+          "answer": "She explained the problem to me."
+        },
+        {
+          "number": 2,
+          "prompt": "We discussed about the budget.",
+          "answer": "We discussed the budget."
+        },
+        {
+          "number": 3,
+          "prompt": "He is very proud about his team.",
+          "answer": "He is very proud of his team."
+        },
+        {
+          "number": 4,
+          "prompt": "I'm thinking to change my job.",
+          "answer": "I'm thinking about changing my job. / I'm thinking of changing my job."
+        },
+        {
+          "number": 5,
+          "prompt": "The result depends of the weather.",
+          "answer": "The result depends on the weather."
+        },
+        {
+          "number": 6,
+          "prompt": "She is angry on me.",
+          "answer": "She is angry with me."
+        },
+        {
+          "number": 7,
+          "prompt": "I listen the music every day.",
+          "answer": "I listen to music every day. / I listen to the music every day."
+        },
+        {
+          "number": 8,
+          "prompt": "She is very similar with her mother.",
+          "answer": "She is very similar to her mother."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "instruction": "Предлог + глагол в форме -ing",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "She's good ___ (solve) problems quickly.",
+          "answer": "at solving"
+        },
+        {
+          "number": 2,
+          "prompt": "He's thinking ___ (move) to Berlin.",
+          "answer": "of moving / about moving"
+        },
+        {
+          "number": 3,
+          "prompt": "They blamed me ___ (delete) the file.",
+          "answer": "for deleting"
+        },
+        {
+          "number": 4,
+          "prompt": "We succeeded ___ (fix) the bug before the release.",
+          "answer": "in fixing"
+        },
+        {
+          "number": 5,
+          "prompt": "She's keen ___ (join) our team.",
+          "answer": "on joining"
+        },
+        {
+          "number": 6,
+          "prompt": "The rain prevented us ___ (leave) early.",
+          "answer": "from leaving"
+        },
+        {
+          "number": 7,
+          "prompt": "I'm tired ___ (wait) for the bus.",
+          "answer": "of waiting"
+        },
+        {
+          "number": 8,
+          "prompt": "She insisted ___ (see) the manager.",
+          "answer": "on seeing"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "instruction": "Переведите на английский",
+      "items": [
+        {
+          "number": 1,
+          "prompt": "Наш сайт зависит от внешнего API.",
+          "answer": "Our website depends on an external API."
+        },
+        {
+          "number": 2,
+          "prompt": "Я жду автобус уже двадцать минут.",
+          "answer": "I've been waiting for the bus for twenty minutes."
+        },
+        {
+          "number": 3,
+          "prompt": "Она извинилась за опоздание.",
+          "answer": "She apologized for being late."
+        },
+        {
+          "number": 4,
+          "prompt": "Мы обсудили новый проект на встрече.",
+          "answer": "We discussed the new project at the meeting."
+        },
+        {
+          "number": 5,
+          "prompt": "Я беспокоюсь о сроках.",
+          "answer": "I'm worried about the deadline. / I'm worried about the deadlines."
+        },
+        {
+          "number": 6,
+          "prompt": "Он гордится своей дочерью.",
+          "answer": "He is proud of his daughter."
+        },
+        {
+          "number": 7,
+          "prompt": "Она вышла замуж за коллегу.",
+          "answer": "She married a colleague. / She got married to a colleague."
+        },
+        {
+          "number": 8,
+          "prompt": "Я с нетерпением жду отпуска.",
+          "answer": "I'm looking forward to my vacation. / I'm looking forward to the vacation."
+        }
+      ]
+    }
+  ]
+}

@@ -146,7 +146,12 @@ provider and is logged as a metric.
 1. **The hub.** Exactly one menu message per chat with inline buttons:
    Learn words · Review · Grammar · Talk · Progress · Settings. It is
    **pinned**, and after every session it is **re-sent at the bottom** (old
-   one deleted, new one pinned). Sub-screens (settings, progress) open by
+   one deleted, new one pinned). The "… pinned a message" notice each pin
+   adds is deleted by `PinNotices` (`src/hub/pin-notices.ts`): from its
+   `pinned_message` update when Telegram delivers one to the bot (the Bot API
+   does not promise it in private chats), otherwise as the first unknown
+   message ID after the hub, once a later learner message proves it is not
+   theirs. Sub-screens (settings, progress) open by
    *editing* the hub message, never by sending new ones.
 2. **One window per session.** While a session runs, the chat holds the hub
    and one session window; nothing else lives longer than a few seconds.

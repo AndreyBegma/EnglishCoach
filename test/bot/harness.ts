@@ -43,6 +43,9 @@ export interface ChatMessage {
   photo?: string;
 }
 
+/** The text of the service message the fake adds when a message is pinned. */
+export const PIN_NOTICE = "📌 pinned a message";
+
 type Markup = { inline_keyboard?: { text: string; callback_data?: string }[][] };
 
 /**
@@ -54,6 +57,8 @@ export class FakeTelegram {
   /** chatId → messageId → message. */
   readonly chats = new Map<number, Map<number, ChatMessage>>();
   readonly pinned = new Map<number, number>();
+  /** Delivers the pin notice as an update; left unset, the notice arrives silently. */
+  onPinNotice?: (chatId: number, noticeId: number, pinnedId: number) => Promise<void>;
   private nextId = 100;
 
   chat(chatId: number): Map<number, ChatMessage> {
@@ -169,9 +174,14 @@ export class FakeTelegram {
         for (const id of p.message_ids as number[]) this.chat(chatId).delete(id);
         return ok(true);
       }
-      case "pinChatMessage":
+      case "pinChatMessage": {
         this.pinned.set(chatId, Number(p.message_id));
+        // A private chat shows a "… pinned a message" notice the API never names.
+        const id = this.nextId++;
+        this.chat(chatId).set(id, { id, from: "bot", text: PIN_NOTICE, buttons: [], labels: [] });
+        await this.onPinNotice?.(chatId, id, Number(p.message_id));
         return ok(true);
+      }
       case "answerCallbackQuery":
         return ok(true);
       default:
@@ -219,6 +229,8 @@ export interface HarnessOptions {
   llmFactories?: ProviderFactories;
   /** Replaces the skill runner session handlers get as `deps.skills`. */
   skills?: SkillRunner;
+  /** Whether Telegram sends the bot its own pin notice as an update (default "deliver"). */
+  pinUpdates?: "deliver" | "silent";
 }
 
 /** A fixed 32-byte master key; tests decrypt stored keys with it. */
@@ -262,8 +274,9 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
         learner: learnerContextFromDb(db),
       }),
     botConfig: { botInfo: BOT_INFO },
+    transport: telegram.transformer,
+    pinSettleMs: 0,
   });
-  app.bot.api.config.use(telegram.transformer);
 
   let updateId = 1;
   const user = (id: number, languageCode = "en") => ({
@@ -274,8 +287,29 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
     language_code: languageCode,
   });
 
-  const send = (update: Omit<Update, "update_id">) =>
-    app.bot.handleUpdate({ update_id: updateId++, ...update } as Update);
+  const send = async (update: Omit<Update, "update_id">) => {
+    await app.bot.handleUpdate({ update_id: updateId++, ...update } as Update);
+    await app.pins.idle();
+  };
+
+  if ((options.pinUpdates ?? "deliver") === "deliver") {
+    telegram.onPinNotice = (chatId, noticeId, pinnedId) =>
+      send({
+        message: {
+          message_id: noticeId,
+          date: Math.floor(Date.now() / 1000),
+          chat: { id: chatId, type: "private", first_name: `User${chatId}` },
+          from: BOT_INFO,
+          pinned_message: {
+            message_id: pinnedId,
+            date: 0,
+            chat: { id: chatId, type: "private", first_name: `User${chatId}` },
+            from: BOT_INFO,
+            text: telegram.chat(chatId).get(pinnedId)?.text ?? "",
+          },
+        },
+      } as Omit<Update, "update_id">);
+  }
 
   return {
     ...app,

@@ -13,6 +13,7 @@ import { getSettings } from "../db/repositories/users";
 import type { User } from "../db/schema";
 import type { Logger } from "../log";
 import { loadProgress } from "../progress/queries";
+import type { PinNotices } from "./pin-notices";
 import { type RenderedScreen, renderScreen } from "./screens";
 
 /** Hubs live in the private chat with the user, whose chat ID is the user's Telegram ID. */
@@ -23,6 +24,8 @@ export interface HubDeps {
   db: Db;
   i18n: Translator;
   log: Logger;
+  /** Deletes the service message each pin adds to the chat. */
+  pins: PinNotices;
 }
 
 /**
@@ -116,6 +119,7 @@ export class HubService {
 
     try {
       await api.pinChatMessage(chatId, message.message_id, { disable_notification: true });
+      this.deps.pins.pinned(chatId, message.message_id);
       await saveHub(db, { userId: user.id, chatId, messageId: message.message_id, pinned: true });
     } catch (error) {
       // An unpinned hub still works; do not fail the whole update over it.

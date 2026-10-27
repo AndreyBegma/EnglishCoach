@@ -64,6 +64,20 @@
       "when": 1793092719148,
       "tag": "0008_mistake_topic",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793093141436,
+      "tag": "0009_pronunciation",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1793093415067,
+      "tag": "0010_tts_status_board",
+      "breakpoints": true
     }
   ]
 }

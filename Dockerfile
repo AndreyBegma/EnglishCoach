@@ -16,7 +16,8 @@ COPY drizzle ./drizzle
 COPY seed ./seed
 COPY data/words ./data/words
 COPY data/grammar ./data/grammar
-COPY scripts/entrypoint.sh scripts/entrypoint-migrate.ts scripts/seed.ts ./scripts/
+COPY data/pronunciation ./data/pronunciation
+COPY scripts/entrypoint.sh scripts/entrypoint-migrate.ts scripts/seed.ts scripts/import-pronunciation.ts ./scripts/
 # Owned by `bun` so a fresh tts-cache volume is writable.
 RUN mkdir -p data/tts && chown bun:bun data/tts
 USER bun

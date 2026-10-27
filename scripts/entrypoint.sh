@@ -6,5 +6,6 @@ set -eu
 
 bun scripts/entrypoint-migrate.ts
 bun scripts/seed.ts
+bun scripts/import-pronunciation.ts
 
 exec "$@"

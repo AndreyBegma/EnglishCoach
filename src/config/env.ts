@@ -124,6 +124,12 @@ const envSchema = z
     WORD_ENRICH_CONCURRENCY: unsetIfBlank(z.coerce.number().int().min(1).max(10).default(1)),
     WORD_BACKFILL_EVERY_MINUTES: unsetIfBlank(z.coerce.number().int().min(0).max(1440).default(30)),
     WORD_BACKFILL_WORDS: unsetIfBlank(z.coerce.number().int().min(1).max(200).default(20)),
+    // Voicing the owner's list ahead of time (needs TTS_URL and TTS_STORAGE_CHAT_ID).
+    VOICE_BACKFILL_EVERY_MINUTES: unsetIfBlank(
+      z.coerce.number().int().min(0).max(1440).default(15),
+    ),
+    // Texts per run; each new one costs one storage-chat upload, 3 s apart.
+    VOICE_BACKFILL_TEXTS: unsetIfBlank(z.coerce.number().int().min(1).max(1000).default(200)),
     // Pictures on new-word cards: Pexels first, Unsplash as the fallback. Neither: no pictures.
     PEXELS_API_KEY: unsetIfBlank(requiredString.optional()),
     UNSPLASH_ACCESS_KEY: unsetIfBlank(requiredString.optional()),

@@ -158,6 +158,19 @@ photo in place. Unsplash's download endpoint is called when one of its photos
 is chosen. Any picture failure shows the text card; errors are logged with
 the source and status only. A learner's own words have no picture.
 
+**Word voices.** `Tts` (`src/voice/tts.ts`) voices a text once per engine and voice, uploads it
+to the storage chat (`TTS_STORAGE_CHAT_ID`) and stores the `file_id` in `tts_audio`; a play is
+then `sendVoice(file_id)`. The new-word card (text or photo) and review feedback on a word show
+🔊 (the word) and "🔊 Example" (its first example) only when `tts.canPlay` says the tap can work:
+voiced before, or an engine can voice it for that learner now. Every play uses the learner's
+`english_variant`. A 🔊 tap takes the session lock and must match the card on screen (busy →
+"wait", stale → "already answered"); it leaves the card's keyboard alone, and its voice note is
+deleted with the step. The prefetch job prewarms upcoming words and examples; the voice backfill
+(`src/voice/backfill.ts`, its own BullMQ queue, Kokoro only — background work never spends a
+paid key) voices the whole owner's list a slice at a time and keeps one pinned status message in
+the storage chat (`tts_status_board`), edited in place at most once a minute, re-sent and
+re-pinned when it is gone; `pinNoticeCleanup` deletes the pin notice there too.
+
 ## Grammar syllabus
 
 One topic map from A1 to C2 in `data/grammar/syllabus/*.yaml` (one file per

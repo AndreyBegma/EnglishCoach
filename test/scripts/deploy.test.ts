@@ -164,6 +164,7 @@ describe("entrypoint.sh", () => {
     expect(r.calls).toEqual([
       "bun scripts/entrypoint-migrate.ts",
       "bun scripts/seed.ts",
+      "bun scripts/import-pronunciation.ts",
       "bun src/index.ts",
     ]);
   });

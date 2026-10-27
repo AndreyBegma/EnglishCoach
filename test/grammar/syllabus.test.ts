@@ -98,6 +98,15 @@ describe("the syllabus files", () => {
     }
   });
 
+  test("every C2 topic has at least one C1 prerequisite", () => {
+    const c2 = syllabus.topics.filter((t) => t.band === "C2");
+    expect(c2.length).toBeGreaterThan(0);
+    for (const t of c2) {
+      const hasC1 = t.prerequisites.some((id) => syllabus.byId.get(id)?.band === "C1");
+      expect(hasC1, t.id).toBe(true);
+    }
+  });
+
   test("every band from A1 to C2 has topics", () => {
     for (const band of CEFR_LEVELS) {
       expect(

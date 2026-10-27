@@ -8,6 +8,7 @@ import { masterKeyFromBase64 } from "./crypto/secrets";
 import { createDb } from "./db/client";
 import type { SettingsField } from "./events/settings-events";
 import { createApp } from "./http/app";
+import { createWordImages } from "./images";
 import { createServerProvider, defaultFactories, resolveProvider } from "./llm";
 import { createLogger } from "./log";
 import { BullRoutineJobs } from "./queue/routine-jobs";
@@ -89,6 +90,7 @@ const timeouts = new BullSessionTimeouts({
   log,
 });
 const routineJobs = new BullRoutineJobs({ redisUrl: env.REDIS_URL, log });
+const images = createWordImages(env, { db: database.db, log });
 const { bot, sessions, routine, settingsEvents } = createBot({
   token: env.TELEGRAM_BOT_TOKEN,
   db: database.db,
@@ -98,6 +100,7 @@ const { bot, sessions, routine, settingsEvents } = createBot({
   refusals: redisRefusalGate(redis.client),
   timeouts,
   enableDemoSession: env.ENABLE_DEMO_SESSION,
+  images,
   masterKey,
   llmEnv: env,
   skills,
@@ -124,6 +127,7 @@ if (wordEnrichment) {
     batchSize: env.WORD_ENRICH_BATCH,
     prefetchDays: env.WORD_PREFETCH_DAYS,
     adminTelegramIds: env.ADMIN_TELEGRAM_IDS,
+    images,
   });
   const requestPrefetch = (userId: number) =>
     wordEnrichment

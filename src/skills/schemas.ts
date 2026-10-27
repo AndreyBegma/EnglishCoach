@@ -143,6 +143,17 @@ export const VocabEnrichOutput = z.object({
     .describe("Two level-appropriate sentences and their translations"),
   collocations: z.array(text).length(3),
   mnemonic: text.describe("In explain_lang"),
+  image_query: text
+    .max(80)
+    .nullable()
+    .describe("A short English stock-photo query for the first example's sense; null if abstract"),
+  emoji: z
+    .string()
+    .trim()
+    .min(1)
+    .max(16)
+    .nullable()
+    .describe("One emoji for an abstract word (image_query null), else null"),
 });
 
 // ---------------------------------------------------------------- vocab-exercise
@@ -341,7 +352,8 @@ export const VocabEnrichBatchOutput = z.object({
         examples: VocabEnrichOutput.shape.examples,
         collocations: VocabEnrichOutput.shape.collocations,
         mnemonic: VocabEnrichOutput.shape.mnemonic,
-        image_query: text.max(80).describe("A short English image-search query for the word"),
+        image_query: VocabEnrichOutput.shape.image_query,
+        emoji: VocabEnrichOutput.shape.emoji,
       }),
     )
     .describe("One card per word of task.words, same ids"),

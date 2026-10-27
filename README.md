@@ -68,6 +68,11 @@ language / daily-goal change and nightly), and a low-rate backfill works through
 list (`WORD_BACKFILL_EVERY_MINUTES`, `WORD_BACKFILL_WORDS`). Cards then read the shared cache; a
 miss falls back to inline enrichment and logs `metric: vocab.enrich.cache_miss`.
 
+New-word cards carry a stock photo when `PEXELS_API_KEY` (tried first) or `UNSPLASH_ACCESS_KEY`
+is set — both free developer keys. Each word's picture is fetched once, shared by every learner
+and credited in the caption; the prefetch job fetches pictures of upcoming words too. With neither
+key, cards stay text.
+
 ## Layout
 
 ```

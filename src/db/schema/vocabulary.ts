@@ -64,6 +64,10 @@ export type CardBack = {
   examples?: (CardExample | string)[];
   collocations?: string[];
   mnemonic?: string;
+  /** A stock-photo query for the card's picture; null or absent: no picture. */
+  imageQuery?: string | null;
+  /** An abstract word's emoji, shown in place of a picture. */
+  emoji?: string | null;
 };
 
 /** FSRS state columns, 1:1 with the ts-fsrs 5 `Card` (see `src/db/fsrs.ts`). */

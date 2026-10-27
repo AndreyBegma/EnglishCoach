@@ -17,8 +17,10 @@ export type WordEnrichmentData = {
   examples: CardExample[];
   collocations: string[];
   mnemonic: string;
-  /** A short English search query for the card's picture. */
-  imageQuery: string;
+  /** A short English search query for the card's picture; null for an abstract word. */
+  imageQuery: string | null;
+  /** An abstract word's emoji, shown instead of a picture; absent in rows written before it. */
+  emoji?: string | null;
 };
 
 /**

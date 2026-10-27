@@ -5,6 +5,7 @@ import type { FlowState } from "../../src/bot/context";
 import { createBot } from "../../src/bot/index";
 import type { Db } from "../../src/db/client";
 import type { SessionKind } from "../../src/db/repositories/sessions";
+import type { WordImages } from "../../src/images";
 import { type ProviderFactories, resolveProvider } from "../../src/llm";
 import type { ServerEnv } from "../../src/llm/providers/server";
 import { createLogger } from "../../src/log";
@@ -219,6 +220,8 @@ export interface HarnessOptions {
   llmFactories?: ProviderFactories;
   /** Replaces the skill runner session handlers get as `deps.skills`. */
   skills?: SkillRunner;
+  /** Pictures on new-word cards, over a mocked stock-photo HTTP client. */
+  images?: WordImages;
 }
 
 /** A fixed 32-byte master key; tests decrypt stored keys with it. */
@@ -261,6 +264,7 @@ export function createHarness(db: Db, options: HarnessOptions = {}) {
           ),
         learner: learnerContextFromDb(db),
       }),
+    images: options.images,
     botConfig: { botInfo: BOT_INFO },
   });
   app.bot.api.config.use(telegram.transformer);

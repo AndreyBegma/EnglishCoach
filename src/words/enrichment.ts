@@ -1,12 +1,14 @@
 import type { Db } from "../db/client";
 import { getSettings } from "../db/repositories/users";
 import {
+  getWordEnrichment,
   listPrefetchLearners,
   ownerWordsWithoutEnrichment,
   saveWordEnrichments,
   uncachedWordIds,
 } from "../db/repositories/word-enrichments";
 import type { Language, Word, WordEnrichmentData } from "../db/schema";
+import type { WordImages } from "../images";
 import type { LlmProvider } from "../llm/types";
 import type { Logger } from "../log";
 import {
@@ -32,6 +34,8 @@ export interface WordEnricherDeps {
   prefetchDays?: number;
   /** `ADMIN_TELEGRAM_IDS`: admins are learners too. */
   adminTelegramIds?: readonly number[];
+  /** Pictures for the prefetched words; absent when no stock-photo key is set. */
+  images?: WordImages;
 }
 
 const DEFAULT_BATCH = 10;
@@ -65,6 +69,7 @@ function mergeCard(word: Word, lang: Language, card: BatchCard): WordEnrichmentD
     collocations: card.collocations,
     mnemonic: card.mnemonic,
     imageQuery: card.image_query,
+    emoji: card.emoji,
   };
 }
 
@@ -162,7 +167,27 @@ export class WordEnricher {
       settings.cefrLevel ?? DEFAULT_LEVEL,
       days * settings.wordsPerDay,
     );
-    return this.enrich(upcoming, settings.explainLang);
+    const written = await this.enrich(upcoming, settings.explainLang);
+    await this.fetchImages(upcoming, settings.explainLang);
+    return written;
+  }
+
+  /**
+   * Fetches the pictures of upcoming words too (each once, ever), so a card does not wait on the
+   * stock APIs either. Only for prefetch, not backfill: the APIs' hourly limits are small.
+   */
+  private async fetchImages(list: Word[], lang: Language): Promise<void> {
+    const { images, db, log } = this.deps;
+    if (!images) return;
+    for (const word of list) {
+      const query = (await getWordEnrichment(db, word.id, lang))?.imageQuery;
+      if (!query) continue;
+      try {
+        await images.forWord(word.id, query);
+      } catch (error) {
+        log.warn("word image prefetch failed", { wordId: word.id, error });
+      }
+    }
   }
 
   private learners() {

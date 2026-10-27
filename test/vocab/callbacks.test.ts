@@ -11,6 +11,8 @@ import { normaliseAnswer } from "../../src/vocab/review";
 describe("vocabulary callback codec", () => {
   const all: VocabCallback[] = [
     { op: "got-it", cardId: 42 },
+    { op: "know", cardId: 42 },
+    { op: "unknow", cardId: 42 },
     { op: "choice", cardId: 9_999_999_999, index: 3 },
     { op: "rate", cardId: 7, rating: "again" },
     { op: "rate", cardId: 7, rating: "hard" },

@@ -1,4 +1,19 @@
-import { and, asc, count, eq, gt, gte, inArray, lte, ne, notExists, or, sql } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  eq,
+  gt,
+  gte,
+  inArray,
+  isNotNull,
+  isNull,
+  lte,
+  ne,
+  notExists,
+  or,
+  sql,
+} from "drizzle-orm";
 import type { Db } from "../client";
 import type { FsrsCardColumns, FsrsReviewLogColumns } from "../fsrs";
 import { type CardBack, type CardRow, cards, type Mistake, mistakes, reviewLogs } from "../schema";
@@ -8,12 +23,23 @@ export type CardItemType = CardRow["itemType"];
 /**
  * A word card that was created (and enriched) but never rated: the learner saw it in Learn words
  * and has not passed its first check yet. It belongs to Learn words, not to Review, so it never
- * counts as due. Grammar-pattern cards are reviewed from their first appearance.
+ * counts as due. Grammar-pattern cards are reviewed from their first appearance. A word the
+ * learner marked known is neither pending nor reviewable.
  */
-export const isPendingCard = and(inArray(cards.itemType, ["word", "user_word"]), eq(cards.reps, 0));
+export const isPendingCard = and(
+  inArray(cards.itemType, ["word", "user_word"]),
+  eq(cards.reps, 0),
+  isNull(cards.knownAt),
+);
 
-/** The negation of `isPendingCard`: cards Review may show. */
-export const isReviewableCard = or(eq(cards.itemType, "grammar_pattern"), gt(cards.reps, 0));
+/** Cards Review may show: rated (or grammar) and not marked known. */
+export const isReviewableCard = and(
+  isNull(cards.knownAt),
+  or(eq(cards.itemType, "grammar_pattern"), gt(cards.reps, 0)),
+);
+
+/** Cards the learner marked "I know this word 100%". */
+export const isKnownCard = isNotNull(cards.knownAt);
 
 export interface NewCard {
   userId: number;
@@ -62,6 +88,53 @@ export async function getCard(
     .from(cards)
     .where(and(eq(cards.id, cardId), eq(cards.userId, userId)));
   return card;
+}
+
+/**
+ * Marks a word card known at `now`: it leaves Learn and Review for good. Idempotent; false when
+ * the card is not the user's, is not a word card or was already known.
+ */
+export async function markCardKnown(
+  db: Db,
+  userId: number,
+  cardId: number,
+  now: Date,
+): Promise<boolean> {
+  const updated = await db
+    .update(cards)
+    .set({ knownAt: now })
+    .where(
+      and(
+        eq(cards.id, cardId),
+        eq(cards.userId, userId),
+        inArray(cards.itemType, ["word", "user_word"]),
+        isNull(cards.knownAt),
+      ),
+    )
+    .returning({ id: cards.id });
+  return updated.length > 0;
+}
+
+/**
+ * Returns a known word to learning. Its FSRS state was never touched, so a never-rated card is
+ * pending again and a rated one resumes its old schedule. False when the card was not known.
+ */
+export async function unmarkCardKnown(db: Db, userId: number, cardId: number): Promise<boolean> {
+  const updated = await db
+    .update(cards)
+    .set({ knownAt: null })
+    .where(and(eq(cards.id, cardId), eq(cards.userId, userId), isKnownCard))
+    .returning({ id: cards.id });
+  return updated.length > 0;
+}
+
+/** How many words the user marked known. */
+export async function countKnownWords(db: Db, userId: number): Promise<number> {
+  const [row] = await db
+    .select({ value: count() })
+    .from(cards)
+    .where(and(eq(cards.userId, userId), isKnownCard));
+  return row?.value ?? 0;
 }
 
 /** The oldest pending card: shown before any new word is picked, with its cached enrichment. */

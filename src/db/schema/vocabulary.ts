@@ -68,6 +68,12 @@ export const cards = pgTable(
     // ts-fsrs `State`: 0 New, 1 Learning, 2 Review, 3 Relearning.
     state: smallint().notNull(),
     lastReview: timestamp({ withTimezone: true }),
+    /**
+     * Set when the learner marked the word "I know this 100%": the card is never offered as new,
+     * never reviewed and never due. Orthogonal to FSRS (the state columns stay untouched), so
+     * returning the word to learning is just clearing it.
+     */
+    knownAt: timestamp({ withTimezone: true }),
     createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [

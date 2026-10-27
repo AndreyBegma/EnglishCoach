@@ -5,6 +5,8 @@ import {
   findPendingCard,
   findWordCardByFront,
   getCard,
+  markCardKnown,
+  unmarkCardKnown,
 } from "../db/repositories/cards";
 import type { CardBack, CardRow } from "../db/schema";
 import type { LearningHandle, SessionKindHandler } from "../sessions/session-manager";
@@ -75,6 +77,11 @@ export class LearnFlow implements SessionKindHandler {
     switch (callback.op) {
       case "got-it":
         return step?.kind === "card" && step.cardId === callback.cardId;
+      case "know":
+        return step?.kind === "card" && step.cardId === callback.cardId;
+      case "unknow":
+        // Idempotent and independent of the step: the button stays on the "known" message.
+        return true;
       case "choice":
         return step?.kind === "choice" && step.cardId === callback.cardId;
       case "add-word":
@@ -97,6 +104,31 @@ export class LearnFlow implements SessionKindHandler {
       case "got-it": {
         const card = await getCard(this.core.deps.db, handle.user.id, callback.cardId);
         if (card) await this.core.sendExercise(handle, ctx, card, "recognition");
+        return;
+      }
+      case "know": {
+        const { db } = this.core.deps;
+        const card = await getCard(db, handle.user.id, callback.cardId);
+        if (!card) return;
+        // The daily counter only grows in `rate`, so a known word never uses up the limit.
+        if (await markCardKnown(db, handle.user.id, card.id, this.core.now())) {
+          await handle.send(t("vocab-known", { word: escapeHtml(card.front) }), {
+            ...HTML,
+            reply_markup: InlineKeyboard.from([
+              [button(t("vocab-known-undo"), { op: "unknow", cardId: card.id })],
+            ]),
+          });
+        }
+        await this.showNext(handle, ctx);
+        return;
+      }
+      case "unknow": {
+        const { db } = this.core.deps;
+        const card = await getCard(db, handle.user.id, callback.cardId);
+        // The card is pending again (or back on its old schedule); the next pick shows it first.
+        if (card && (await unmarkCardKnown(db, handle.user.id, card.id))) {
+          await handle.send(t("vocab-known-undone", { word: escapeHtml(card.front) }), HTML);
+        }
         return;
       }
       case "choice":
@@ -199,7 +231,7 @@ export class LearnFlow implements SessionKindHandler {
     const existing = await findWordCardByFront(db, handle.user.id, text);
     if (existing) {
       await handle.send(t("vocab-add-word-exists", { word: escapeHtml(existing.front) }), HTML);
-      if (existing.reps === 0) await this.showCard(handle, ctx, existing);
+      if (existing.reps === 0 && !existing.knownAt) await this.showCard(handle, ctx, existing);
       else await this.showNext(handle, ctx);
       return;
     }
@@ -228,8 +260,9 @@ export class LearnFlow implements SessionKindHandler {
       reply_markup: InlineKeyboard.from([
         [
           button(t("vocab-got-it"), { op: "got-it", cardId: card.id }),
-          button(t("vocab-add-word"), { op: "add-word" }),
+          button(t("vocab-know"), { op: "know", cardId: card.id }),
         ],
+        [button(t("vocab-add-word"), { op: "add-word" })],
         ...speakRow(t, ctx, card.id),
         [button(t("vocab-finish"), { op: "finish" })],
       ]),

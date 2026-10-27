@@ -190,6 +190,60 @@ describe.skipIf(!testServerUrl)("vocabulary sessions with a mocked Telegram API"
     expect(llm.calls.enrich).toBe(1);
   });
 
+  test("💯 know: the word is skipped for good, does not use the daily limit, and can be undone", async () => {
+    const { h, telegramId, user } = await setup(2);
+    await openFromHub(h, telegramId, user.id, "learn");
+    const decide = await cardOf(user.id, "decide");
+    expect(last(h, telegramId).buttons[0]?.[1]).toBe(
+      encodeVocabCallback({ op: "know", cardId: decide.id }),
+    );
+
+    await press(h, telegramId, { op: "know", cardId: decide.id });
+    expect((await cardOf(user.id, "decide")).knownAt).toBeInstanceOf(Date);
+    // A replacement is shown right away, under the toast.
+    const toast = botMessages(h, telegramId).at(-2);
+    expect(toast?.text).toContain("“decide” is marked as known");
+    expect(toast?.buttons[0]?.[0]).toBe(encodeVocabCallback({ op: "unknow", cardId: decide.id }));
+    expect(last(h, telegramId).text).toContain("borrow");
+
+    // Two more words still fit today's limit of two: the known one consumed nothing.
+    const borrow = await cardOf(user.id, "borrow");
+    await press(h, telegramId, { op: "got-it", cardId: borrow.id });
+    await press(h, telegramId, { op: "choice", cardId: borrow.id, index: 0 });
+    expect(last(h, telegramId).text).toContain("journey");
+    const journey = await cardOf(user.id, "journey");
+    await press(h, telegramId, { op: "got-it", cardId: journey.id });
+    await press(h, telegramId, { op: "choice", cardId: journey.id, index: 0 });
+    expect(last(h, telegramId).text).toContain("You have learned 2 new words today");
+    const [stats] = await database.db
+      .select()
+      .from(dailyStats)
+      .where(eq(dailyStats.userId, user.id));
+    expect(stats?.newWords).toBe(2);
+
+    // Undo from the old toast: the word is back in learning and shown first next time.
+    await h.press(
+      telegramId,
+      toast?.id ?? -1,
+      encodeVocabCallback({ op: "unknow", cardId: decide.id }),
+    );
+    expect((await cardOf(user.id, "decide")).knownAt).toBeNull();
+    expect(last(h, telegramId).text).toContain("“decide” is back in learning");
+  });
+
+  test("a known word is never offered again in a later session", async () => {
+    const { h, telegramId, user } = await setup(5);
+    await openFromHub(h, telegramId, user.id, "learn");
+    const decide = await cardOf(user.id, "decide");
+    await press(h, telegramId, { op: "know", cardId: decide.id });
+    await h.say(telegramId, "/cancel");
+    await expectOnlyHub(h, telegramId, user.id);
+
+    await openFromHub(h, telegramId, user.id, "learn");
+    expect(last(h, telegramId).text).toContain("borrow");
+    expect(last(h, telegramId).text).not.toContain("decide");
+  });
+
   test("+ my word: the learner's own word becomes an enriched user_word card", async () => {
     const { h, telegramId, user, llm } = await setup(2);
     await openFromHub(h, telegramId, user.id, "learn");

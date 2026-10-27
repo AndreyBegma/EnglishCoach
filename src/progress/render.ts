@@ -61,6 +61,7 @@ export function renderProgress(
     t("progress-cards", { new: cards.new, learning: cards.learning, review: cards.review }),
     t("progress-due", { today: cards.dueToday, tomorrow: cards.dueTomorrow }),
     t("progress-words", { count: cards.wordsLearned }),
+    ...(cards.wordsKnown > 0 ? [t("progress-known", { count: cards.wordsKnown })] : []),
     "",
     t("progress-activity", { spark: sparkline(data.activity) }),
     t("progress-grammar", {

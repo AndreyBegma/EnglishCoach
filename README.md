@@ -128,6 +128,32 @@ and, from whisper, per-word confidence. Voice messages over 60 s are rejected be
 once, its Telegram `file_id` is stored in `tts_audio`, and every later play is
 `sendVoice(file_id)` — instant, no upload, never a forward. Without it each send uploads the file.
 
+## Backups
+
+The `backup` compose service runs `pg_dump -Fc` daily at `BACKUP_HOUR` (UTC, default 03) into
+`./backups/coach-YYYYMMDD-HHMMSS.dump` (git-ignored; it also dumps once at start). Each dump is
+checked with `pg_restore --list`, then `scripts/backup-rotate.sh` keeps the newest dump of each of
+the last 7 days, 4 ISO weeks and 3 months and deletes the rest.
+
+Once a week (`BACKUP_CHECK_DAY`, default Sunday) right after the dump, `scripts/restore-check.sh`
+restores the newest dump into a throwaway database, counts the restored tables, drops it, and
+appends the result to `backups/restore-check.log`. Failures print `BACKUP FAILED` /
+`restore-check: FAILED` on stderr (`docker compose logs backup`); passwords are never printed.
+Last result: `tail backups/restore-check.log`. Run either by hand:
+`docker compose exec backup /scripts/backup.sh` (or `restore-check.sh`).
+
+**Manual restore.** Restore into a new database first and look at it:
+
+```sh
+docker compose exec backup /scripts/restore.sh /backups/coach-20261027-030000.dump coach_restored
+docker compose exec postgres psql -U coach -d coach_restored
+```
+
+To replace the live data: `docker compose stop app`, then
+`docker compose exec postgres dropdb -U coach coach`, `createdb -U coach coach`, and
+`docker compose exec backup pg_restore --no-owner -d coach /backups/<file>.dump`; start `app` again.
+Copy dumps off the host too — a backup on the same disk does not survive the disk.
+
 ## Skills
 
 A skill is `skills/<id>/SKILL.md`: YAML frontmatter plus the system prompt. `loadSkillRegistry()`

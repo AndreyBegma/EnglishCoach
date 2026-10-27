@@ -1,0 +1,410 @@
+# Grammar syllabus, band B1. Keys are topic ids; the owner's rule text lives in seed/grammar.
+
+g015:
+  level: B1.1
+  title:
+    en: "Present Perfect: experience and result"
+    ru: "Present Perfect: опыт и результат"
+    uk: "Present Perfect: досвід і результат"
+  prerequisites: [g006]
+  contrast_with: [g017]
+  examples:
+    - "I have visited Rome twice."
+    - "She has lost her keys, so she can't get in."
+    - "Have you ever tried sushi?"
+  interference:
+    - wrong: "I already saw this film."
+      right: "I have already seen this film."
+      cause: "Russian and Ukrainian have one past tense for both finished events and present results."
+    - wrong: "I am here three times."
+      right: "I have been here three times."
+      cause: "The life-experience meaning is expressed with a plain present or past in Russian/Ukrainian."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g016:
+  level: B1.1
+  title:
+    en: "Present Perfect with since/for, already/yet/just/ever/never"
+    ru: "Present Perfect с since/for, already/yet/just/ever/never"
+    uk: "Present Perfect із since/for, already/yet/just/ever/never"
+  prerequisites: [g015]
+  contrast_with: [g018]
+  examples:
+    - "We have lived here since 2019."
+    - "He has worked here for five years."
+    - "Have you finished yet? I've just started."
+  interference:
+    - wrong: "I live here for five years."
+      right: "I have lived here for five years."
+      cause: "Russian/Ukrainian use the present tense for a state that started in the past and continues."
+    - wrong: "I know him since school."
+      right: "I have known him since school."
+      cause: "Direct translation of 'я знаю его со школы' keeps the present tense."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g017:
+  level: B1.2
+  title:
+    en: Present Perfect or Past Simple
+    ru: Present Perfect или Past Simple
+    uk: Present Perfect чи Past Simple
+  prerequisites: [g015, g006]
+  contrast_with: [g015, g006]
+  examples:
+    - "I have seen that film. I saw it last week."
+    - "She has broken her arm. She broke it skiing in January."
+    - "When did you arrive?"
+  interference:
+    - wrong: "I have seen him yesterday."
+      right: "I saw him yesterday."
+      cause: "With one past tense at home, learners overuse the Present Perfect once they learn it, even with finished time."
+    - wrong: "When have you arrived?"
+      right: "When did you arrive?"
+      cause: "A question about a point in time needs the Past Simple; Russian/Ukrainian make no such split."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g018:
+  level: B1.3
+  title:
+    en: Present Perfect Continuous
+    ru: Present Perfect Continuous
+    uk: Present Perfect Continuous
+  prerequisites: [g016, g003]
+  contrast_with: [g016]
+  examples:
+    - "I have been waiting for an hour."
+    - "It has been raining all morning, so the roads are wet."
+    - "How long have you been learning English?"
+  interference:
+    - wrong: "I wait for you for an hour."
+      right: "I have been waiting for you for an hour."
+      cause: "Russian/Ukrainian 'я жду тебя уже час' uses the present tense for an ongoing action with a duration."
+    - wrong: "I have been knowing him for years."
+      right: "I have known him for years."
+      cause: "State verbs have no continuous form; Russian/Ukrainian have no such restriction to transfer."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g019:
+  level: B1.3
+  title:
+    en: "Gerund or infinitive after verbs (enjoy doing / want to do)"
+    ru: "Герундий или инфинитив после глаголов (enjoy doing / want to do)"
+    uk: "Герундій чи інфінітив після дієслів (enjoy doing / want to do)"
+  prerequisites: [g002]
+  contrast_with: [g020]
+  examples:
+    - "I enjoy cooking for friends."
+    - "She wants to change jobs."
+    - "Stop talking and listen."
+  interference:
+    - wrong: "I enjoy to cook."
+      right: "I enjoy cooking."
+      cause: "Russian/Ukrainian put an infinitive after every verb ('люблю готовить'), so learners default to 'to do'."
+    - wrong: "I want that you come."
+      right: "I want you to come."
+      cause: "Calque of 'хочу, чтобы ты пришёл' with a that-clause instead of object + infinitive."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g020:
+  level: B1.4
+  title:
+    en: "used to / be used to / get used to"
+    ru: "used to / be used to / get used to"
+    uk: "used to / be used to / get used to"
+  prerequisites: [g006, g019]
+  contrast_with: [g019]
+  examples:
+    - "I used to play football every weekend."
+    - "She is used to working at night."
+    - "You'll soon get used to the cold."
+  interference:
+    - wrong: "I am used to work late."
+      right: "I am used to working late."
+      cause: "The 'to' looks like an infinitive marker; Russian 'привык работать' has an infinitive."
+    - wrong: "I use to get up early."
+      right: "I usually get up early."
+      cause: "Russian 'обычно' is a present habit; 'used to' only describes the past."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g021:
+  level: B1.4
+  title:
+    en: "Zero and first conditional (if + Present)"
+    ru: "Нулевое и первое условное (if + Present)"
+    uk: "Нульовий і перший умовний спосіб (if + Present)"
+  prerequisites: [g002, g013]
+  contrast_with: [g022, g096]
+  examples:
+    - "If you heat ice, it melts."
+    - "If it rains tomorrow, we will stay at home."
+    - "I'll call you if I have time."
+  interference:
+    - wrong: "If it will rain, we will stay at home."
+      right: "If it rains, we will stay at home."
+      cause: "Russian/Ukrainian use the future tense in both clauses ('если пойдёт дождь')."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g022:
+  level: B1.5
+  title:
+    en: "Second conditional (unreal present)"
+    ru: "Второе условное (нереальное настоящее)"
+    uk: "Другий умовний спосіб (нереальне теперішнє)"
+  prerequisites: [g021, g006]
+  contrast_with: [g021]
+  examples:
+    - "If I had more time, I would learn Spanish."
+    - "If I were you, I'd take the job."
+    - "What would you do if you won the lottery?"
+  interference:
+    - wrong: "If I would have money, I would buy a car."
+      right: "If I had money, I would buy a car."
+      cause: "Russian 'бы' appears in both clauses, so 'would' is copied into the if-clause."
+    - wrong: "If I was you, I'd go."
+      right: "If I were you, I'd go."
+      cause: "The fixed advice phrase uses 'were'; there is no subjunctive verb form in Russian/Ukrainian to map it to."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g023:
+  level: B1.5
+  title:
+    en: "Passive voice: Present and Past Simple"
+    ru: "Пассивный залог: Present и Past Simple"
+    uk: "Пасивний стан: Present і Past Simple"
+  prerequisites: [g002, g006]
+  contrast_with: [g036]
+  examples:
+    - "English is spoken all over the world."
+    - "The bridge was built in 1890."
+    - "Our office is cleaned every evening."
+  interference:
+    - wrong: "The house built in 1990."
+      right: "The house was built in 1990."
+      cause: "Russian short participles ('дом построен') need no auxiliary in the present, so 'be' is dropped."
+    - wrong: "Here speak English."
+      right: "English is spoken here."
+      cause: "Russian/Ukrainian prefer an impersonal active form ('здесь говорят') over the passive."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g024:
+  level: B1.6
+  title:
+    en: "Relative clauses: who / which / that / where / whose"
+    ru: "Относительные придаточные: who / which / that / where / whose"
+    uk: "Відносні підрядні речення: who / which / that / where / whose"
+  prerequisites: [g001, g011]
+  contrast_with: [g042]
+  examples:
+    - "The woman who lives next door is a doctor."
+    - "This is the book that changed my life."
+    - "That's the café where we first met."
+  interference:
+    - wrong: "The man which called you is here."
+      right: "The man who called you is here."
+      cause: "Russian 'который' covers people and things alike, so learners pick 'which' for people."
+    - wrong: "This is the book that I told you about it."
+      right: "This is the book that I told you about."
+      cause: "A resumptive pronoun is added as in colloquial Russian/Ukrainian clauses."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g025:
+  level: B1.6
+  title:
+    en: "Reported speech: statements and backshift"
+    ru: "Косвенная речь: утверждения и сдвиг времён"
+    uk: "Непряма мова: твердження і зсув часів"
+  prerequisites: [g006, g017]
+  contrast_with: [g026]
+  examples:
+    - "She said that she was tired."
+    - "He told me he had finished the report."
+    - "They said they would come later."
+  interference:
+    - wrong: "He said that he is busy."
+      right: "He said that he was busy."
+      cause: "Russian/Ukrainian keep the tense of the original words; there is no sequence of tenses."
+    - wrong: "She said me that she was late."
+      right: "She told me that she was late."
+      cause: "Russian 'сказала мне' maps to 'said me'; English needs 'tell somebody' or 'say to somebody'."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g026:
+  level: B1.7
+  title:
+    en: "Reported speech: questions, requests, orders"
+    ru: "Косвенная речь: вопросы, просьбы, приказы"
+    uk: "Непряма мова: питання, прохання, накази"
+  prerequisites: [g025, g008]
+  contrast_with: [g025, g097]
+  examples:
+    - "She asked me where I lived."
+    - "He asked if I could help him."
+    - "The teacher told us not to talk."
+  interference:
+    - wrong: "She asked where do I live."
+      right: "She asked where I lived."
+      cause: "Russian/Ukrainian keep question word order in reported questions."
+    - wrong: "He asked me that I help him."
+      right: "He asked me to help him."
+      cause: "Calque of 'попросил, чтобы я помог' with a clause instead of an infinitive."
+  exercise_types: [multiple_choice, error_correction, transformation]
+
+g027:
+  level: B1.7
+  title:
+    en: Past Perfect
+    ru: Past Perfect
+    uk: Past Perfect
+  prerequisites: [g006, g017]
+  contrast_with: [g006, g040]
+  examples:
+    - "When I arrived, the film had already started."
+    - "She had never seen the sea before that trip."
+    - "We had finished dinner by eight."
+  interference:
+    - wrong: "When I came, they already left."
+      right: "When I came, they had already left."
+      cause: "Russian/Ukrainian mark the earlier past only with word order or 'уже', never with a tense."
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g028:
+  level: B1.2
+  title:
+    en: "Quantity: few/a few, little/a little, enough, too, a lot of"
+    ru: "Количество: few/a few, little/a little, enough, too, a lot of"
+    uk: "Кількість: few/a few, little/a little, enough, too, a lot of"
+  prerequisites: [g005]
+  contrast_with: [g005]
+  examples:
+    - "I have a few friends in London."
+    - "There is little time left, so hurry up."
+    - "This coffee is too hot to drink."
+    - "Are you old enough to drive?"
+  interference:
+    - wrong: "He has a little friends."
+      right: "He has a few friends."
+      cause: "Russian 'мало/немного' does not split countable and uncountable nouns."
+    - wrong: "He is enough old."
+      right: "He is old enough."
+      cause: "Russian 'достаточно взрослый' puts the word before the adjective."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g029:
+  level: B1.8
+  title:
+    en: "Phrasal verbs: how they work, particles up / out / off / on"
+    ru: "Фразовые глаголы: как устроены, частицы up / out / off / on"
+    uk: "Фразові дієслова: як влаштовані, частки up / out / off / on"
+  prerequisites: [g002]
+  contrast_with: [g070]
+  examples:
+    - "Could you turn off the light?"
+    - "I need to find out the truth."
+    - "Put your coat on, it's cold."
+  interference:
+    - wrong: "Turn off it."
+      right: "Turn it off."
+      cause: "Russian prefixes are part of the verb ('выключи его'), so the particle is not expected to move around a pronoun."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g030:
+  level: B1.2
+  title:
+    en: "Adverbs: formation, frequency adverbs, position in the sentence"
+    ru: "Наречия: образование, наречия частотности, место в предложении"
+    uk: "Прислівники: утворення, прислівники частотності, місце в реченні"
+  prerequisites: [g012]
+  contrast_with: [g049]
+  examples:
+    - "She speaks English fluently."
+    - "I usually get up at seven."
+    - "He is always late."
+  interference:
+    - wrong: "She speaks English very good."
+      right: "She speaks English very well."
+      cause: "Russian 'хорошо' is both adjective-like and adverb; 'good' gets used for 'well'."
+    - wrong: "I like very much coffee."
+      right: "I like coffee very much."
+      cause: "Free Russian word order lets the adverb sit between the verb and the object."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g031:
+  level: B1.8
+  title:
+    en: "Question tags and short answers: so do I / neither do I"
+    ru: "Разделительные вопросы (question tags) и короткие ответы: so do I / neither do I"
+    uk: "Розділові питання (question tags) і короткі відповіді: so do I / neither do I"
+  prerequisites: [g008, g002]
+  contrast_with: [g008]
+  examples:
+    - "You're from Kyiv, aren't you?"
+    - "She didn't call, did she?"
+    - "I love jazz. So do I."
+  interference:
+    - wrong: "You are tired, yes?"
+      right: "You are tired, aren't you?"
+      cause: "Russian/Ukrainian use one invariable tag ('да?', 'правда?')."
+    - wrong: "I like tea. Me too not."
+      right: "I don't like tea. Neither do I."
+      cause: "Russian 'я тоже нет' has no auxiliary echo."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g032:
+  level: B1.9
+  title:
+    en: "Modals of probability: might / may / could / must / can't"
+    ru: "Модальные глаголы вероятности: might / may / could / must / can't"
+    uk: "Модальні дієслова ймовірності: might / may / could / must / can't"
+  prerequisites: [g014]
+  contrast_with: [g038]
+  examples:
+    - "She must be at home; the lights are on."
+    - "He can't be serious."
+    - "It might rain later."
+  interference:
+    - wrong: "He mustn't be at work, his car is here."
+      right: "He can't be away, his car is here."
+      cause: "Russian 'не может быть' / 'должно быть' do not map to 'mustn't' for negative certainty."
+    - wrong: "Maybe he is at home."
+      right: "He might be at home."
+      cause: "Russian expresses probability with adverbs ('может быть') rather than modal verbs."
+  exercise_types: [multiple_choice, gap_fill, transformation]
+
+g096:
+  level: B1.4
+  title:
+    en: "Future time clauses: when / as soon as / until + Present"
+    ru: "Придаточные времени в будущем: when / as soon as / until + Present"
+    uk: "Підрядні часу в майбутньому: when / as soon as / until + Present"
+  prerequisites: [g013, g021]
+  contrast_with: [g021]
+  examples:
+    - "I'll call you when I get home."
+    - "We'll start as soon as everyone arrives."
+    - "Wait here until I come back."
+  interference:
+    - wrong: "I'll call you when I will get home."
+      right: "I'll call you when I get home."
+      cause: "Russian/Ukrainian use the future tense after 'когда' for a future event."
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g097:
+  level: B1.7
+  title:
+    en: "Indirect questions: Could you tell me where…? / I wonder if…"
+    ru: "Косвенные вопросы: Could you tell me where…? / I wonder if…"
+    uk: "Непрямі питання: Could you tell me where…? / I wonder if…"
+  prerequisites: [g008, g026]
+  contrast_with: [g008, g026]
+  examples:
+    - "Could you tell me where the station is?"
+    - "Do you know what time it starts?"
+    - "I wonder if she's coming."
+  interference:
+    - wrong: "Could you tell me where is the station?"
+      right: "Could you tell me where the station is?"
+      cause: "Russian/Ukrainian keep the same word order in direct and embedded questions."
+    - wrong: "I don't know does he live here."
+      right: "I don't know if he lives here."
+      cause: "Russian 'ли' marks the question inside the clause; English needs 'if/whether' and statement order."
+  exercise_types: [multiple_choice, error_correction, transformation]

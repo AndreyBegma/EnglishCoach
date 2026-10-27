@@ -1,5 +1,5 @@
 {
-  "id": "bab6b537-a246-489c-b488-584827259a48",
+  "id": "4b2e2ca1-0077-45b9-8e81-9666a12d57c2",
   "prevId": "3d66d8ba-f5b5-494b-8a58-703db38f8835",
   "version": "7",
   "dialect": "postgresql",
@@ -177,6 +177,12 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "topic_id": {
+          "name": "topic_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "card_id": {
           "name": "card_id",
@@ -1806,51 +1812,6 @@
           ]
         }
       },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.tts_status_board": {
-      "name": "tts_status_board",
-      "schema": "",
-      "columns": {
-        "chat_id": {
-          "name": "chat_id",
-          "type": "bigint",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "message_id": {
-          "name": "message_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "failures_on": {
-          "name": "failures_on",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "failures": {
-          "name": "failures",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

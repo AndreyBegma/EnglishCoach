@@ -219,16 +219,6 @@ onboarding-done = Добро пожаловать!
 # --- grammar ---
 grammar-pick-topic = ✍️ Практика грамматики: 10 вопросов. Выберите тему или смешанный режим.
 grammar-mixed = 🎲 Микс (рекомендуется)
-grammar-topic-tenses = Времена
-grammar-topic-articles = Артикли
-grammar-topic-prepositions = Предлоги
-grammar-topic-comparatives = Степени сравнения
-grammar-topic-conditionals = Условные предложения
-grammar-topic-modals = Модальные глаголы
-grammar-topic-passive = Страдательный залог
-grammar-topic-reported-speech = Косвенная речь
-grammar-topic-gerund-infinitive = Герундий / инфинитив
-grammar-topic-relative-clauses = Придаточные определительные
 grammar-topic-chosen = Тема: { $topic }
 grammar-question-header = ❓ Вопрос { $n } из { $total }
 grammar-chosen = Ваш ответ: { $answer }

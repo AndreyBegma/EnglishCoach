@@ -1,0 +1,337 @@
+# A2: the owner's course g001–g014, plus g095. The rule text of g001–g014 lives in seed/grammar.
+
+g001:
+  level: A2.1
+  title:
+    en: The verb to be and basic word order
+    ru: Глагол to be и базовый порядок слов в предложении
+    uk: Дієслово to be і базовий порядок слів у реченні
+  prerequisites: [g088]
+  contrast_with: [g002]
+  examples:
+    - I am a developer.
+    - My laptop is on the table.
+    - I drink coffee at work every day.
+  interference:
+    - wrong: I developer.
+      right: I am a developer.
+      cause: Russian and Ukrainian drop the present-tense copula ("Я разработчик").
+    - wrong: I like very much music.
+      right: I like music very much.
+      cause: Free Russian and Ukrainian word order lets an adverb sit between the verb and its object.
+    - wrong: Yes, I'm.
+      right: Yes, I am.
+      cause: Learners contract everywhere, not knowing short answers keep the full form.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g002:
+  level: A2.1
+  title:
+    en: "Present Simple: statements, negatives, questions"
+    ru: "Present Simple: утверждения, отрицания, вопросы"
+    uk: "Present Simple: ствердження, заперечення, питання"
+  prerequisites: [g001]
+  contrast_with: [g003]
+  examples:
+    - She works in a bank.
+    - I don't eat meat.
+    - Does he play football?
+  interference:
+    - wrong: He work from home.
+      right: He works from home.
+      cause: Russian and Ukrainian endings mark every person, so the lone English -s in the third person is easy to forget.
+    - wrong: She don't like coffee.
+      right: "She doesn't like coffee."
+      cause: Russian and Ukrainian negate with "не" alone; learners do not move -s onto the auxiliary.
+    - wrong: You like jazz?
+      right: Do you like jazz?
+      cause: Russian and Ukrainian make questions with intonation only, with no auxiliary.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g003:
+  level: A2.2
+  title:
+    en: Present Continuous and how it differs from Present Simple
+    ru: Present Continuous и разница с Present Simple
+    uk: Present Continuous і різниця з Present Simple
+  prerequisites: [g002]
+  contrast_with: [g002]
+  examples:
+    - "I'm working from home this week."
+    - Look, it's raining.
+    - She usually drives, but today she's taking the bus.
+  interference:
+    - wrong: I am knowing the answer.
+      right: I know the answer.
+      cause: Russian and Ukrainian have one present tense, so learners do not know that state verbs avoid the continuous.
+    - wrong: Where you are going?
+      right: Where are you going?
+      cause: Russian and Ukrainian keep statement word order in questions.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g004:
+  level: A2.2
+  title:
+    en: "Articles a/an, the and zero article: the basics"
+    ru: "Артикли a/an, the и нулевой артикль: основы"
+    uk: "Артиклі a/an, the і нульовий артикль: основи"
+  prerequisites: [g001]
+  contrast_with: [g005]
+  examples:
+    - I saw a dog. The dog was very friendly.
+    - She is an engineer.
+    - I love music.
+  interference:
+    - wrong: She is teacher.
+      right: She is a teacher.
+      cause: Russian and Ukrainian have no articles, so learners leave them out entirely.
+    - wrong: The life is beautiful.
+      right: Life is beautiful.
+      cause: Overcorrection after learning the; abstract nouns in general take no article.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g005:
+  level: A2.3
+  title:
+    en: "Plurals; countable and uncountable nouns; some / any / much / many"
+    ru: Множественное число; исчисляемые и неисчисляемые; some/any/much/many
+    uk: "Множина; злічувані та незлічувані іменники; some / any / much / many"
+  prerequisites: [g004]
+  contrast_with: [g028, g095]
+  examples:
+    - I need some advice.
+    - How many people came?
+    - "There isn't much time left."
+  interference:
+    - wrong: I need an advice.
+      right: I need some advice.
+      cause: Russian "совет" and Ukrainian "порада" are countable, so the English uncountable noun gets an article.
+    - wrong: The news are interesting.
+      right: The news is interesting.
+      cause: Russian "новости" and Ukrainian "новини" are plural, so learners use a plural verb.
+    - wrong: How much people?
+      right: How many people?
+      cause: Russian "сколько" and Ukrainian "скільки" do not distinguish countable from uncountable.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g006:
+  level: A2.4
+  title:
+    en: "Past Simple: regular and irregular verbs"
+    ru: "Past Simple: правильные и неправильные глаголы"
+    uk: "Past Simple: правильні та неправильні дієслова"
+  prerequisites: [g002, g091]
+  contrast_with: [g007]
+  examples:
+    - We moved to Kyiv in 2019.
+    - I didn't see him yesterday.
+    - Did you buy the tickets?
+  interference:
+    - wrong: I didn't saw him.
+      right: "I didn't see him."
+      cause: Russian and Ukrainian mark the past on the main verb, so learners mark it twice.
+    - wrong: Yesterday I go to the cinema.
+      right: Yesterday I went to the cinema.
+      cause: Learners rely on the time word to show the past, as context does in speech.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g007:
+  level: A2.5
+  title:
+    en: Past Continuous together with Past Simple
+    ru: Past Continuous и Past Simple вместе
+    uk: Past Continuous і Past Simple разом
+  prerequisites: [g003, g006]
+  contrast_with: [g006]
+  examples:
+    - I was cooking when the phone rang.
+    - While we were driving, it started to snow.
+    - At 8 pm yesterday I was watching a film.
+  interference:
+    - wrong: I was see him at the station.
+      right: I saw him at the station.
+      cause: Learners attach was to the verb as a past marker, like Russian "был" before the verb.
+    - wrong: While I walked home, it started to rain.
+      right: While I was walking home, it started to rain.
+      cause: Russian and Ukrainian show the process with imperfective aspect, not a separate tense, so learners miss the continuous.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g008:
+  level: A2.5
+  title:
+    en: "Questions: question words and auxiliary verbs"
+    ru: "Вопросы: вопросительные слова и вспомогательные глаголы"
+    uk: "Питання: питальні слова та допоміжні дієслова"
+  prerequisites: [g002, g006]
+  contrast_with: []
+  examples:
+    - Where do you live?
+    - Who called you?
+    - What did she say?
+  interference:
+    - wrong: Where you live?
+      right: Where do you live?
+      cause: Russian and Ukrainian questions need no auxiliary, only a question word.
+    - wrong: Does she works here?
+      right: Does she work here?
+      cause: Learners keep the -s on the main verb after does.
+    - wrong: Who did call you?
+      right: Who called you?
+      cause: Learners add do in subject questions, generalising the auxiliary rule.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g009:
+  level: A2.6
+  title:
+    en: "Prepositions of time: in / on / at"
+    ru: "Предлоги времени: in / on / at"
+    uk: "Прийменники часу: in / on / at"
+  prerequisites: [g001]
+  contrast_with: [g010]
+  examples:
+    - The meeting is on Monday at 10 am.
+    - I was born in 1995.
+    - We go skiing in winter.
+  interference:
+    - wrong: in Monday
+      right: on Monday
+      cause: Russian "в понедельник" and Ukrainian "у понеділок" use the same preposition as for months.
+    - wrong: I'll call you in next week.
+      right: "I'll call you next week."
+      cause: Russian "на следующей неделе" has a preposition; English drops it before next, last, this.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g010:
+  level: A2.6
+  title:
+    en: Prepositions of place and movement
+    ru: Предлоги места и движения
+    uk: Прийменники місця та руху
+  prerequisites: [g001]
+  contrast_with: [g009]
+  examples:
+    - The keys are on the table.
+    - She walked into the room.
+    - We drove through the tunnel.
+  interference:
+    - wrong: I am going to home.
+      right: I am going home.
+      cause: Russian "иду домой" has no preposition, but learners generalise "go to" to home.
+    - wrong: She is in the work.
+      right: She is at work.
+      cause: Russian "на работе" and Ukrainian "на роботі" are translated with in or on instead of at.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g011:
+  level: A2.7
+  title:
+    en: "Possessive and reflexive pronouns: my / mine, 's, myself"
+    ru: "Притяжательные и возвратные местоимения: my/mine, 's, myself"
+    uk: "Присвійні та зворотні займенники: my / mine, 's, myself"
+  prerequisites: [g088]
+  contrast_with: []
+  examples:
+    - "This isn't my bag; mine is black."
+    - "That's my sister's car."
+    - He hurt himself.
+  interference:
+    - wrong: "It's my."
+      right: "It's mine."
+      cause: Russian "моё" works both before a noun and alone; English has two forms.
+    - wrong: "The dog wagged it's tail."
+      right: The dog wagged its tail.
+      cause: Learners treat the apostrophe as a possessive marker everywhere.
+    - wrong: I washed my hands myself.
+      right: I washed my hands.
+      cause: Russian "своё" and reflexive verbs in "-ся" are translated with an extra reflexive.
+  exercise_types: [multiple_choice, gap_fill, error_correction]
+
+g012:
+  level: A2.7
+  title:
+    en: Comparative and superlative adjectives
+    ru: Сравнительная и превосходная степень прилагательных
+    uk: Вищий і найвищий ступені порівняння прикметників
+  prerequisites: [g001]
+  contrast_with: [g078]
+  examples:
+    - My flat is bigger than yours.
+    - This is the most interesting book I've read.
+    - Today is worse than yesterday.
+  interference:
+    - wrong: more better
+      right: better
+      cause: Russian "более лучший" and Ukrainian "більш кращий" exist in careless speech and learners double the comparison.
+    - wrong: She is taller then me.
+      right: She is taller than me.
+      cause: Then and than sound alike; Russian "чем" maps to neither spelling.
+    - wrong: the most big
+      right: the biggest
+      cause: Russian "самый" is always a separate word, so learners avoid the -est ending.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g013:
+  level: A2.8
+  title:
+    en: "Future: will, be going to, Present Continuous for plans"
+    ru: "Будущее: will, be going to, Present Continuous для планов"
+    uk: "Майбутнє: will, be going to, Present Continuous для планів"
+  prerequisites: [g003]
+  contrast_with: [g096]
+  examples:
+    - "I'm meeting Anna tomorrow."
+    - "It's going to rain — look at those clouds."
+    - "I'll help you with that."
+  interference:
+    - wrong: I will to call you.
+      right: I will call you.
+      cause: Russian "буду звонить" is followed by an infinitive, so learners add to.
+    - wrong: She will goes there.
+      right: She will go there.
+      cause: Learners keep the third-person -s after will.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g014:
+  level: A2.9
+  title:
+    en: "Modal verbs: can / could, must / have to, should"
+    ru: "Модальные глаголы: can/could, must/have to, should"
+    uk: "Модальні дієслова: can / could, must / have to, should"
+  prerequisites: [g092]
+  contrast_with: [g032]
+  examples:
+    - You should see a doctor.
+    - I have to work on Saturday.
+    - Could you help me?
+  interference:
+    - wrong: I can to swim.
+      right: I can swim.
+      cause: Russian and Ukrainian modals take an infinitive, so learners insert to.
+    - wrong: She cans drive.
+      right: She can drive.
+      cause: Learners add the third-person -s, as "может" conjugates.
+    - wrong: "You mustn't come tomorrow, it's optional."
+      right: "You don't have to come tomorrow, it's optional."
+      cause: Russian "не должен" covers both prohibition and absence of obligation.
+  exercise_types: [multiple_choice, gap_fill, error_correction, transformation]
+
+g095:
+  level: A2.4
+  title:
+    en: "Indefinite pronouns: some-, any-, no-, every-"
+    ru: "Неопределённые местоимения: some-, any-, no-, every-"
+    uk: "Неозначені займенники: some-, any-, no-, every-"
+  prerequisites: [g005]
+  contrast_with: [g005]
+  examples:
+    - Somebody called you.
+    - "I didn't see anything."
+    - Everyone is waiting.
+  interference:
+    - wrong: "I don't know nothing."
+      right: "I don't know anything."
+      cause: Russian "ничего не знаю" and Ukrainian "нічого не знаю" use double negation.
+    - wrong: Everybody are here.
+      right: Everybody is here.
+      cause: Russian "все" is plural, so learners use a plural verb after everybody.
+  exercise_types: [multiple_choice, gap_fill, error_correction]

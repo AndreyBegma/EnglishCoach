@@ -170,6 +170,30 @@ paid key) voices the whole owner's list a slice at a time and keeps one pinned s
 the storage chat (`tts_status_board`), edited in place at most once a minute, re-sent and
 re-pinned when it is gone; `pinNoticeCleanup` deletes the pin notice there too.
 
+## Grammar syllabus
+
+One topic map from A1 to C2 in `data/grammar/syllabus/*.yaml` (one file per
+band), keyed by topic id. The ids are the owner's course ids: `g001`–`g085`
+are the topics of `seed/grammar` and never change or move band; new topics
+take the next free number. The owner's rule text and exercises stay in the
+seed; the syllabus adds per topic a fine `level` (`B1.4`: band, then step
+1-9), a `title` in every UI locale (`en`, `ru`, `uk` — the picker shows it,
+there are no locale keys per topic), `prerequisites`, `contrast_with`,
+`examples`, `interference` (typical Russian/Ukrainian speaker mistakes, each
+with its cause) and `exercise_types` (grammar-quiz item types).
+`src/grammar/syllabus.ts` validates it with zod: every referenced id exists,
+no topic refers to itself, no prerequisite sits above its topic's level, the
+prerequisite graph is acyclic, every title locale is present. It is loaded
+when the grammar module loads, so an invalid file fails boot. The grammar
+picker offers the learner's band (B1 without a placement level); a button
+carries the topic id, and the quiz gets the topic's English title, its
+syllabus entry and only its exercise types. `mistakes.topic_id` maps a
+pattern to a syllabus topic: grammar-quiz names the item's topic (forced to
+the picked one; otherwise chosen from the learner's band and its neighbours),
+grammar-check may name another for the main error, and the server keeps only
+ids that exist in the syllabus. A later occurrence without an id keeps the
+stored one.
+
 ## Telegram UX rules
 
 1. **The hub.** Exactly one menu message per chat with inline buttons:

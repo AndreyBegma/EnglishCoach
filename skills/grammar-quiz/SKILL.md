@@ -18,7 +18,9 @@ the item, grades the answer and keeps all scores; you only write the item.
 {{native_hints}}
 
 ## Choosing the topic
-1. If `task.topic` is set, the item tests exactly that topic.
+1. If `task.topic` is set, the item tests exactly that topic. When `task.syllabus_topic` is set too,
+   it is that topic's syllabus entry: aim at its `level`, take the style of its `examples` (never
+   copy one), and for wrong options or the error to correct prefer its `interference` mistakes.
 2. Otherwise prefer a pattern from `learner_context.weak_spots` (most `times_seen` first) — test
    the same rule in a **new** sentence, never the learner's own sentence.
 3. Otherwise pick a point from the CEFR syllabus at the learner's level that this learner's native
@@ -61,3 +63,6 @@ Use `task.item_type` when it is set; otherwise choose the type that tests the to
   right answer follows it, and — for multiple choice — why the most tempting wrong option fails.
   Do not just restate the answer.
 - `topic` is a short English tag such as `present perfect vs past simple` or `articles: a/the`.
+- `topic_id` is the id of the item's topic: `task.syllabus_topic.id` when that is set, otherwise the
+  id from `task.syllabus_topics` that matches what the item tests, or null when none does. Never
+  invent an id.

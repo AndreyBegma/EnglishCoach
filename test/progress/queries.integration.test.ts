@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
+import { eq } from "drizzle-orm";
 import type { Database } from "../../src/db/client";
-import { cards, dailyStats, mistakes, userSettings, users } from "../../src/db/schema";
+import { cards, dailyStats, mistakes, userSettings, userStreak, users } from "../../src/db/schema";
 import { recordGradedItem, seedLevels } from "../../src/levels";
 import { loadProgress } from "../../src/progress/queries";
 import { streakDays } from "../../src/progress/streak";
@@ -124,7 +125,7 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       { skill: "grammar", label: expect.stringMatching(/^B1\.[6-9]$/) },
     ]);
     // Today is the 16th in Kyiv; the run 12-15 ended yesterday, the older run 01-06 is the best.
-    expect(data.streak).toEqual({ current: 4, best: 6 });
+    expect(data.streak).toMatchObject({ current: 4, best: 6 });
     expect(data.today).toEqual({ newWords: 3, reviews: 7, goalMet: false });
     expect(data.cards).toEqual({
       new: 2,
@@ -152,7 +153,7 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
       .values({ telegramId: 910_003, isAllowed: true })
       .returning();
     const data = await loadProgress(database.db, blank?.id ?? 0, undefined, NOW);
-    expect(data.streak).toEqual({ current: 0, best: 0 });
+    expect(data.streak).toMatchObject({ current: 0, best: 0, freezes: 1 });
     expect(data.cards).toEqual({
       new: 0,
       learning: 0,
@@ -170,33 +171,40 @@ describe.skipIf(!testServerUrl)("progress aggregates on seeded data", () => {
     test("across user-local midnight the run stays current only until a full day is missed", async () => {
       const { db } = database;
       // 22:30Z on the 15th: 15th in UTC, already the 16th in Kyiv. Run 12-15 ended "yesterday".
-      expect(await streakDays(db, userId, { now: NOW, timezone: TZ })).toEqual({
+      expect(await streakDays(db, userId, { now: NOW, timezone: TZ })).toMatchObject({
         current: 4,
         best: 6,
       });
       // The same instant in UTC: the 15th is today and is part of the run.
-      expect(await streakDays(db, userId, { now: NOW, timezone: "UTC" })).toEqual({
+      expect(await streakDays(db, userId, { now: NOW, timezone: "UTC" })).toMatchObject({
         current: 4,
         best: 6,
       });
-      // 22:30Z on the 16th is the 17th in Kyiv: the 16th was missed, the run is over.
+      // No freeze left, and this week's free one already granted.
+      await db
+        .update(userStreak)
+        .set({ freezes: 0, grantedWeek: "2026-03-16" })
+        .where(eq(userStreak.userId, userId));
+      // 22:30Z on the 16th is the 17th in Kyiv: the 16th was missed, the run is over — and a
+      // double goal today would restore it.
       const later = new Date("2026-03-16T22:30:00Z");
       expect(await streakDays(db, userId, { now: later, timezone: TZ })).toEqual({
         current: 0,
         best: 6,
+        freezes: 0,
+        restore: { missed: "2026-03-16", days: 4 },
       });
       // ...but in UTC it is still the 16th, whose goal is not met yet, so the run holds.
-      expect(await streakDays(db, userId, { now: later, timezone: "UTC" })).toEqual({
+      expect(await streakDays(db, userId, { now: later, timezone: "UTC" })).toMatchObject({
         current: 4,
         best: 6,
       });
     });
 
     test("an invalid timezone falls back to UTC", async () => {
-      expect(await streakDays(database.db, userId, { now: NOW, timezone: "Mars/Base" })).toEqual({
-        current: 4,
-        best: 6,
-      });
+      expect(
+        await streakDays(database.db, userId, { now: NOW, timezone: "Mars/Base" }),
+      ).toMatchObject({ current: 4, best: 6 });
     });
   });
 });

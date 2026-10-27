@@ -10,7 +10,15 @@ import {
   getOrCreateUser,
   updateSettings,
 } from "../../src/db/repositories/users";
-import { dailyStats, type LearningSession, learningSessions, mistakes } from "../../src/db/schema";
+import {
+  dailyStats,
+  type LearningSession,
+  learningSessions,
+  mistakes,
+  streakDays,
+  userStreak,
+  xpEvents,
+} from "../../src/db/schema";
 import { createLogger } from "../../src/log";
 import { MemoryRoutineJobs, MemoryRoutineStore, Routine } from "../../src/routine";
 import { encodeRoutineCallback } from "../../src/routine/callbacks";
@@ -91,7 +99,8 @@ describe.skipIf(!testServerUrl)("daily routine", () => {
       expect(jobs.scheduled.get(user.id)).toEqual([
         { slot: "morning", pattern: "30 8 * * *", tz: "Europe/Kyiv" },
         { slot: "evening", pattern: "0 20 * * *", tz: "Europe/Kyiv" },
-        { slot: "reminder", pattern: "0 22 * * *", tz: "Europe/Kyiv" },
+        // Evening + 2 h is 22:00, the start of quiet hours: pulled back to 21:30.
+        { slot: "reminder", pattern: "30 21 * * *", tz: "Europe/Kyiv" },
       ]);
     });
 
@@ -253,28 +262,149 @@ describe.skipIf(!testServerUrl)("daily routine", () => {
     });
   });
 
-  describe("reminder", () => {
-    test("nudges once when the goal is open, never when it is met or reminders are off", async () => {
-      const { h, user, store } = await setup();
-      const fireAt = new Date();
-      expect(await h.routine.fire({ userId: user.id, slot: "reminder" })).toBe("sent");
-      expect(store.prompts.get(user.id)?.slot).toBe("reminder");
-      expect(await h.routine.fire({ userId: user.id, slot: "reminder" })).toBe("skipped");
+  /** A routine on a pinned clock, over the harness's bot, for a fresh learner in Kyiv. */
+  async function routineAt(now: Date) {
+    const { h, user, telegramId } = await setup();
+    const store = new MemoryRoutineStore();
+    const routine = new Routine({
+      api: h.bot.api,
+      db: database.db,
+      i18n: createI18n(),
+      log: createLogger({ write: () => {} }),
+      skills: h.skills,
+      sessions: h.sessions,
+      jobs: new MemoryRoutineJobs(),
+      store,
+      adminIds: [user.telegramId],
+      now: () => now,
+    });
+    // The hub `/menu` sent is not the routine's.
+    const before = sendsTo(h, telegramId).length;
+    const sent = () => sendsTo(h, telegramId).slice(before);
+    return { routine, user, store, sent };
+  }
 
-      const other = await setup();
-      const date = localDate(new Date(fireAt.getTime() - 2 * 3_600_000), "Europe/Kyiv");
+  const ended = (user: { id: number; telegramId: number }, startedAt: Date) => ({
+    session: { id: 0, userId: user.id, startedAt } as LearningSession,
+    user,
+    status: "finished" as const,
+  });
+
+  describe("reminder", () => {
+    // 21:30 in Kyiv (EEST) on 1 July: the default reminder time, before quiet hours.
+    const EVENING = new Date("2026-07-01T18:30:00Z");
+
+    test("nudges once when the goal is open, never when it is met or reminders are off", async () => {
+      const { routine, user, store, sent } = await routineAt(EVENING);
+      expect(await routine.fire({ userId: user.id, slot: "reminder" })).toBe("sent");
+      expect(store.prompts.get(user.id)?.slot).toBe("reminder");
+      // Dedupe: a second fire the same local day (a retry, a rescheduled job) sends nothing.
+      expect(await routine.fire({ userId: user.id, slot: "reminder" })).toBe("skipped");
+      expect(sent()).toHaveLength(1);
+
+      const other = await routineAt(EVENING);
+      await database.db.insert(dailyStats).values({
+        userId: other.user.id,
+        date: "2026-07-01",
+        goalMet: true,
+        newWords: 5,
+        reviews: 1,
+      });
+      expect(await other.routine.fire({ userId: other.user.id, slot: "reminder" })).toBe("skipped");
+
+      const third = await routineAt(EVENING);
+      await updateSettings(database.db, third.user.id, { remindersEnabled: false });
+      expect(await third.routine.fire({ userId: third.user.id, slot: "reminder" })).toBe("skipped");
+    });
+
+    test("tells how many hours the streak has left", async () => {
+      const { routine, user, sent } = await routineAt(EVENING);
+      await database.db.insert(dailyStats).values(
+        ["2026-06-28", "2026-06-29", "2026-06-30"].map((date) => ({
+          userId: user.id,
+          date,
+          goalMet: true,
+          newWords: 5,
+          reviews: 1,
+        })),
+      );
+      expect(await routine.fire({ userId: user.id, slot: "reminder" })).toBe("sent");
+      // 21:30 → midnight is 2.5 h, rounded up.
+      expect(sent()[0]?.payload.text).toBe(
+        "🔥 Your 3-day streak burns in 3 h. A few minutes now keep it going.",
+      );
+    });
+
+    test("not in quiet hours, and the day's slot stays open for a later fire", async () => {
+      const late = await routineAt(new Date("2026-07-01T19:30:00Z")); // 22:30 in Kyiv
+      expect(await late.routine.fire({ userId: late.user.id, slot: "reminder" })).toBe("skipped");
+      expect(late.sent()).toHaveLength(0);
+      expect(late.store.claims.size).toBe(0);
+    });
+
+    test("at most three unsolicited messages a day", async () => {
+      const { routine, user, store, sent } = await routineAt(EVENING);
+      for (const _ of [1, 2, 3]) await store.reserveNotification(user.id, "2026-07-01", 3);
+      expect(await routine.fire({ userId: user.id, slot: "reminder" })).toBe("skipped");
+      expect(sent()).toHaveLength(0);
+    });
+  });
+
+  describe("streak on session end", () => {
+    const goalDay = (userId: number, date: string) => ({
+      userId,
+      date,
+      goalMet: true,
+      newWords: 5,
+      reviews: 1,
+    });
+    const days = (from: string, count: number) =>
+      Array.from({ length: count }, (_, i) =>
+        new Date(Date.parse(`${from}T00:00:00Z`) + i * 86_400_000).toISOString().slice(0, 10),
+      );
+    const milestoneAwards = async (userId: number) =>
+      (await database.db.select().from(xpEvents).where(eq(xpEvents.userId, userId)))
+        .filter((row) => "milestone" in row.meta)
+        .map((row) => [row.meta.milestone, row.amount]);
+
+    test("the seventh goal day pays the milestone bonus once", async () => {
+      const now = new Date("2026-07-07T12:00:00Z");
+      const { routine, user } = await routineAt(now);
       await database.db
         .insert(dailyStats)
-        .values({ userId: other.user.id, date, goalMet: true, newWords: 5, reviews: 1 });
-      expect(await other.h.routine.fire({ userId: other.user.id, slot: "reminder" })).toBe(
-        "skipped",
-      );
+        .values(days("2026-07-01", 6).map((date) => goalDay(user.id, date)));
+      await database.db
+        .insert(dailyStats)
+        .values({ userId: user.id, date: "2026-07-07", newWords: 5, reviews: 1 });
+      await routine.onSessionEnded(ended(user, now));
+      await routine.onSessionEnded(ended(user, now));
+      expect(await milestoneAwards(user.id)).toEqual([[7, 50]]);
+    });
 
-      const third = await setup();
-      await updateSettings(database.db, third.user.id, { remindersEnabled: false });
-      expect(await third.h.routine.fire({ userId: third.user.id, slot: "reminder" })).toBe(
-        "skipped",
-      );
+    test("a double goal after a break restores the streak and pays the milestones it passes", async () => {
+      const now = new Date("2026-07-12T12:00:00Z");
+      const { routine, user } = await routineAt(now);
+      // 1–10 July met, no freeze left, the 11th missed; on the 12th a double goal.
+      await database.db
+        .insert(dailyStats)
+        .values(days("2026-07-01", 10).map((date) => goalDay(user.id, date)));
+      await database.db.insert(userStreak).values({
+        userId: user.id,
+        freezes: 0,
+        grantedWeek: "2026-07-13",
+        settledThrough: "2026-07-10",
+      });
+      await database.db
+        .insert(dailyStats)
+        .values({ userId: user.id, date: "2026-07-12", newWords: 10, reviews: 2 });
+      await routine.onSessionEnded(ended(user, now));
+      const [restored] = await database.db
+        .select()
+        .from(streakDays)
+        .where(eq(streakDays.userId, user.id));
+      expect(restored).toMatchObject({ date: "2026-07-11", kind: "restore" });
+      // 1 → 12 days: the 7-day milestone, for the restored run.
+      expect(await milestoneAwards(user.id)).toEqual([[7, 50]]);
     });
   });
 
@@ -371,29 +501,6 @@ describe.skipIf(!testServerUrl)("daily routine", () => {
   });
 
   describe("daily goal", () => {
-    async function routineAt(now: Date) {
-      const { h, user } = await setup();
-      const routine = new Routine({
-        api: h.bot.api,
-        db: database.db,
-        i18n: createI18n(),
-        log: createLogger({ write: () => {} }),
-        skills: h.skills,
-        sessions: h.sessions,
-        jobs: new MemoryRoutineJobs(),
-        store: new MemoryRoutineStore(),
-        adminIds: [user.telegramId],
-        now: () => now,
-      });
-      return { routine, user };
-    }
-
-    const ended = (user: { id: number; telegramId: number }, startedAt: Date) => ({
-      session: { id: 0, userId: user.id, startedAt } as LearningSession,
-      user,
-      status: "finished" as const,
-    });
-
     test("met when the new words are done and a review or grammar answer happened", async () => {
       const now = new Date("2026-07-01T12:00:00Z");
       const { routine, user } = await routineAt(now);

@@ -4,10 +4,53 @@ import { defaultRepeatStrategy } from "bullmq";
 export const ROUTINE_SLOTS = ["morning", "evening", "reminder"] as const;
 export type RoutineSlot = (typeof ROUTINE_SLOTS)[number];
 
-/** The reminder fires this long after `evening_time` when the goal is still open. */
+/** The reminder fires this long after `evening_time` when the goal is still open… */
 export const REMINDER_DELAY_MINUTES = 120;
+/** …unless that is in quiet hours: then this long before they start, if still after the evening. */
+export const REMINDER_QUIET_LEAD_MINUTES = 30;
 
 const MINUTES_PER_DAY = 24 * 60;
+
+/**
+ * Learner-local hours with no unsolicited reminder, as minutes after midnight; `start > end`
+ * wraps midnight. A fixed default until notification settings exist (C-48).
+ */
+export const DEFAULT_QUIET_HOURS = { start: 22 * 60, end: 8 * 60 } as const;
+
+export type QuietHours = { start: number; end: number };
+
+/** Whether a minute of the day falls in `quiet`. */
+export function isQuietMinute(minute: number, quiet: QuietHours = DEFAULT_QUIET_HOURS): boolean {
+  const m = ((minute % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
+  return quiet.start <= quiet.end
+    ? m >= quiet.start && m < quiet.end
+    : m >= quiet.start || m < quiet.end;
+}
+
+/** Minutes after local midnight at `instant` in `zone`. */
+export function localMinutes(instant: Date, zone: string): number {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: safeZone(zone),
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(instant);
+  const part = (type: string) => Number(parts.find((p) => p.type === type)?.value ?? 0);
+  return part("hour") * 60 + part("minute");
+}
+
+/**
+ * The reminder's minute of the day for an evening at `evening` minutes: evening + 2 h, pulled
+ * back to `REMINDER_QUIET_LEAD_MINUTES` before quiet hours when it would land in them (the default
+ * 20:00 evening → 21:30), but never to within 30 minutes of the evening itself — a reminder that
+ * still falls in quiet hours is then dropped at fire time. May exceed a day (wraps past midnight).
+ */
+export function reminderMinute(evening: number, quiet: QuietHours = DEFAULT_QUIET_HOURS): number {
+  const late = evening + REMINDER_DELAY_MINUTES;
+  if (!isQuietMinute(late, quiet)) return late;
+  const early = quiet.start - REMINDER_QUIET_LEAD_MINUTES;
+  return early >= evening + REMINDER_QUIET_LEAD_MINUTES ? early : late;
+}
 
 /** `zone` when it is a time zone this runtime knows, else UTC — never a throw at fire time. */
 export function safeZone(zone: string): string {
@@ -58,8 +101,9 @@ export interface RoutineTimes {
 }
 
 /**
- * The learner's three daily slots. The reminder is evening + 2 h on the wall clock and may wrap
- * past midnight (evening 23:00 → reminder 01:00 the next calendar day).
+ * The learner's three daily slots. The reminder is evening + 2 h on the wall clock, kept out of
+ * quiet hours where it can be (`reminderMinute`), and may wrap past midnight (evening 23:00 →
+ * reminder 01:00 the next calendar day).
  */
 export function slotSchedules(times: RoutineTimes): SlotSchedule[] {
   const tz = safeZone(times.timezone);
@@ -67,7 +111,7 @@ export function slotSchedules(times: RoutineTimes): SlotSchedule[] {
   return [
     { slot: "morning", pattern: dailyPattern(minutesOf(times.morningTime)), tz },
     { slot: "evening", pattern: dailyPattern(evening), tz },
-    { slot: "reminder", pattern: dailyPattern(evening + REMINDER_DELAY_MINUTES), tz },
+    { slot: "reminder", pattern: dailyPattern(reminderMinute(evening)), tz },
   ];
 }
 

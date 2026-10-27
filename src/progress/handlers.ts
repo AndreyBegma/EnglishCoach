@@ -13,6 +13,8 @@ import type { SessionManager } from "../sessions/session-manager";
 import { parseProgressCallback } from "./callbacks";
 import { loadWeakSpots } from "./queries";
 import { renderWeakSpots } from "./render";
+import { buyFreeze } from "./streak";
+import { FREEZE_PRICE_XP } from "./streak-rules";
 
 export interface ProgressHandlerDeps {
   db: Db;
@@ -50,6 +52,22 @@ export function progressHandlers({
         await ctx.answerCallbackQuery();
         await hub.present(ctx.user, async () => {
           const settings = await getSettings(db, ctx.user.id);
+          const profile = await loadProfile(db, ctx.user.id, settings);
+          return renderProfile(i18n, settings?.uiLang ?? "en", profile);
+        });
+        return;
+      }
+      case "freeze": {
+        const settings = await getSettings(db, ctx.user.id);
+        const outcome = await buyFreeze(db, ctx.user.id, {
+          now: new Date(),
+          timezone: settings?.timezone ?? "UTC",
+        });
+        await ctx.answerCallbackQuery({
+          text: ctx.t(`profile-freeze-${outcome}`, { price: FREEZE_PRICE_XP }),
+        });
+        if (outcome !== "bought") return;
+        await hub.present(ctx.user, async () => {
           const profile = await loadProfile(db, ctx.user.id, settings);
           return renderProfile(i18n, settings?.uiLang ?? "en", profile);
         });

@@ -45,7 +45,7 @@ describe.skipIf(!redisUrl)("routine jobs on BullMQ", () => {
     expect(schedulers.map((s) => [s.key, s.pattern, s.tz]).sort()).toEqual([
       ["routine-7-evening", "0 20 * * *", "Europe/Kyiv"],
       ["routine-7-morning", "30 8 * * *", "Europe/Kyiv"],
-      ["routine-7-reminder", "0 22 * * *", "Europe/Kyiv"],
+      ["routine-7-reminder", "30 21 * * *", "Europe/Kyiv"],
     ]);
 
     await jobs.schedule(

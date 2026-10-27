@@ -11,7 +11,8 @@ const data = (overrides: Partial<ProfileData> = {}): ProfileData => ({
   // Under 1000: Fluent groups thousands per locale ("1,234", "1 234").
   xp: 734,
   level: profileLevel(734),
-  streak: { current: 4, best: 9 },
+  streak: { current: 4, best: 9, freezes: 2 },
+  spendableXp: 534,
   cefr: "B1.6",
   skills: [
     { skill: "grammar", label: "B1.4", practised: true },
@@ -52,7 +53,8 @@ describe("profile screen", () => {
       data({
         xp: 0,
         level: profileLevel(0),
-        streak: { current: 0, best: 0 },
+        streak: { current: 0, best: 0, freezes: 0 },
+        spendableXp: 0,
         cefr: null,
         skills: [],
         totals: { wordsLearned: 0, reviews: 0, grammarAnswered: 0, goalDays: 0 },
@@ -71,6 +73,19 @@ describe("profile screen", () => {
     const short = renderProfile(i18n, "en", data({ achievements: ["A", "B", "C", "D"] })).text;
     expect(short).toContain("• C");
     expect(short).not.toContain("• D");
+  });
+
+  test("shows the freezes, and a buy button only below the cap", () => {
+    const full = renderProfile(i18n, "en", data());
+    expect(full.text).toContain("🧊 Freezes: 2/2 · XP to spend: 534");
+    const short = renderProfile(
+      i18n,
+      "en",
+      data({ streak: { current: 4, best: 9, freezes: 1 } }),
+    ).keyboard.inline_keyboard.flat() as { text: string; callback_data: string }[];
+    expect(short).toHaveLength(3);
+    const buy = short.find((button) => button.text === "🧊 Buy a freeze · 200 XP");
+    expect(parseProgressCallback(buy?.callback_data)).toEqual({ type: "freeze" });
   });
 
   test("the XP bar fills in tenths", () => {

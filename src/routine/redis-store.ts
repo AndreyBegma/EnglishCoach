@@ -4,6 +4,13 @@ import type { RoutineSlot } from "./time";
 
 /** A slot's claim outlives its local day in every time zone (UTC−12 … UTC+14). */
 const CLAIM_TTL_SECONDS = 48 * 60 * 60;
+/** Counts one more message unless the cap is reached, in one step: 1 when counted, else 0. */
+const RESERVE_SCRIPT = `
+local count = tonumber(redis.call("GET", KEYS[1]) or "0")
+if count >= tonumber(ARGV[1]) then return 0 end
+redis.call("INCR", KEYS[1])
+redis.call("EXPIRE", KEYS[1], ARGV[2])
+return 1`;
 /** A prompt older than this cannot be deleted by the bot anyway (Telegram's 48 h limit). */
 const PROMPT_TTL_SECONDS = 48 * 60 * 60;
 
@@ -24,6 +31,22 @@ export class RedisRoutineStore implements RoutineStore {
 
   async releaseSlot(userId: number, slot: RoutineSlot, date: string) {
     await this.client.del(`routine:sent:${userId}:${slot}:${date}`);
+  }
+
+  async reserveNotification(userId: number, date: string, cap: number) {
+    const reserved = await this.client.eval(
+      RESERVE_SCRIPT,
+      1,
+      `routine:notified:${userId}:${date}`,
+      cap,
+      CLAIM_TTL_SECONDS,
+    );
+    return reserved === 1;
+  }
+
+  async releaseNotification(userId: number, date: string) {
+    const key = `routine:notified:${userId}:${date}`;
+    if ((await this.client.decr(key)) < 0) await this.client.del(key);
   }
 
   async getPrompt(userId: number) {

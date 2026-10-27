@@ -150,6 +150,7 @@ provider-unavailable-server = The server LLM is not configured. Add your own API
 vocab-collocations = Collocations: { $list }
 vocab-mnemonic = 💡 { $text }
 vocab-photo-credit = 📷 { $author } / { $source }
+vocab-example-credit = 💬 Example: { $source } (CC BY 2.0 FR)
 vocab-image-next = 🔄 Another picture
 vocab-image-none = No other picture for this word.
 vocab-got-it = ✅ Got it

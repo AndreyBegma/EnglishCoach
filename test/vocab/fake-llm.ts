@@ -1,6 +1,7 @@
 import type { Db } from "../../src/db/client";
 import type { CompletionRequest, LlmProvider } from "../../src/llm/types";
 import {
+  ExampleCheckOutput,
   learnerContextFromDb,
   loadSkillRegistry,
   SkillRunner,
@@ -114,6 +115,16 @@ export function vocabSkills(db: Db) {
               image_query: `${word.lemma} picture`,
               emoji: null,
             })),
+          }),
+        };
+      }
+      if (skill === ExampleCheckOutput) {
+        // The validation pass after enrichment: every model example passes here.
+        const items = (taskOf(req as CompletionRequest<unknown>) as unknown as { items: unknown[] })
+          .items;
+        return {
+          data: req.schema.parse({
+            results: items.map((_, index) => ({ index, ok: true, problem: null })),
           }),
         };
       }

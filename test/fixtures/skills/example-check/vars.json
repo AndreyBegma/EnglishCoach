@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "index": 0,
+      "lemma": "borrow",
+      "pos": "verb",
+      "sense": "брать взаймы, одалживать",
+      "en": "Can I borrow your pen for a minute?",
+      "translation": "Можно мне на минутку взять твою ручку?"
+    },
+    {
+      "index": 1,
+      "lemma": "bank",
+      "pos": "noun",
+      "sense": "банк",
+      "en": "We sat on the bank of the river.",
+      "translation": "Мы сидели на берегу реки."
+    }
+  ]
+}

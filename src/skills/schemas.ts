@@ -366,6 +366,11 @@ export const VocabEnrichBatchInput = z.object({
         ipa: text.nullable().default(null),
         /** An English sentence that must be the first example. */
         example: text.nullable().default(null),
+        /** Human-written examples with translations that follow it, kept unchanged. */
+        given_examples: z
+          .array(z.object({ en: text, translation: text }))
+          .max(2)
+          .default([]),
       }),
     )
     .min(1)
@@ -390,6 +395,42 @@ export const VocabEnrichBatchOutput = z.object({
     .describe("One card per word of task.words, same ids"),
 });
 
+// ---------------------------------------------------------------- example-check
+
+/** Examples per check call: two per word of a full enrichment batch. */
+export const EXAMPLE_CHECK_MAX = 2 * ENRICH_BATCH_MAX;
+
+export const ExampleCheckInput = z.object({
+  items: z
+    .array(
+      z.object({
+        index: z.number().int().nonnegative(),
+        lemma: text,
+        pos: text.nullable().default(null),
+        /** The card's translation of the word, in explain_lang: the sense the example must show. */
+        sense: text,
+        en: text,
+        translation: text,
+      }),
+    )
+    .min(1)
+    .max(EXAMPLE_CHECK_MAX),
+});
+
+export const ExampleCheckOutput = z.object({
+  results: z
+    .array(
+      z.object({
+        index: z.number().int().describe("The `index` of the item in task.items"),
+        ok: z
+          .boolean()
+          .describe("Grammatical, natural, uses the word in the given sense, translation faithful"),
+        problem: text.nullable().describe("What is wrong, in English, when ok is false; else null"),
+      }),
+    )
+    .describe("One verdict per item of task.items, same indexes"),
+});
+
 // ---------------------------------------------------------------- registries
 
 export const inputSchemas = {
@@ -402,6 +443,7 @@ export const inputSchemas = {
   ConversationInput,
   RoutinePlanInput,
   VocabEnrichBatchInput,
+  ExampleCheckInput,
 } satisfies Record<string, z.ZodObject>;
 
 // `satisfies ZodObject` is what guarantees a root object for every output (see top of file).
@@ -415,6 +457,7 @@ export const outputSchemas = {
   ConversationOutput,
   RoutinePlanOutput,
   VocabEnrichBatchOutput,
+  ExampleCheckOutput,
 } satisfies Record<string, z.ZodObject>;
 
 export type InputSchemaName = keyof typeof inputSchemas;
@@ -431,6 +474,7 @@ export const BASE_SKILLS = {
   conversation: { input: "ConversationInput", output: "ConversationOutput" },
   "routine-plan": { input: "RoutinePlanInput", output: "RoutinePlanOutput" },
   "vocab-enrich-batch": { input: "VocabEnrichBatchInput", output: "VocabEnrichBatchOutput" },
+  "example-check": { input: "ExampleCheckInput", output: "ExampleCheckOutput" },
 } as const satisfies Record<string, { input: InputSchemaName; output: OutputSchemaName }>;
 
 export type BaseSkillId = keyof typeof BASE_SKILLS;

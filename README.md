@@ -100,6 +100,35 @@ is set — both free developer keys. Each word's picture is fetched once, shared
 and credited in the caption; the prefetch job fetches pictures of upcoming words too. With neither
 key, cards stay text.
 
+## Example sentences (Tatoeba)
+
+Word cards prefer human-written example sentences to model-written ones. They come from
+[Tatoeba](https://tatoeba.org), whose sentences are licensed
+[CC BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/): **example sentences and their
+translations © Tatoeba contributors**. Each card that shows one credits it in the caption with a
+link to the sentence's page, which names its author and translators. The export is not part of
+this repository; only a small fixture under `test/fixtures/tatoeba/` is.
+
+```sh
+bun run db:import:tatoeba [dir]    # after db:seed and db:import:owner-words
+```
+
+The import reads Tatoeba's per-language exports (`eng_sentences_detailed.tsv`,
+`rus_`/`ukr_sentences_detailed.tsv`, `eng-rus`/`eng-ukr_links.tsv`) from `dir` (default:
+`$TATOEBA_DIR`, else `tatoeba/` in the system temp directory), downloading any that are missing
+from `downloads.tatoeba.org` and decompressing them with `bzip2`. It keeps English sentences
+with a Russian or Ukrainian translation, 4–15 words long, every word known to the dictionary
+(names aside), estimates each sentence's CEFR level from its hardest word, and keeps the best 10
+per word and language — at or below the word's level first — in `example_sentences`, linked to
+their lemmas in `example_sentence_words`. It is idempotent: a rerun upserts by Tatoeba id and
+removes what is no longer chosen.
+
+Enrichment then fills a card's two examples in this order: the owner's sentence (from the private
+import), Tatoeba sentences, and only then the model's own, which pass a validation call
+(`example-check`: grammar, the word in the card's sense, the translation) or are dropped
+(`metric: vocab.example.rejected`). Learners who study in English get model examples only — the
+export carries no English-to-English paraphrase.
+
 ## Layout
 
 ```

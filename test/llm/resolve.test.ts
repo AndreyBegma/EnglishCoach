@@ -51,6 +51,7 @@ function config(overrides: Partial<ProviderConfig>): ProviderConfig {
     encryptedApiKey: null,
     keyIv: null,
     keyTag: null,
+    workspaceId: null,
     isActive: true,
     updatedAt: new Date(),
     ...overrides,
@@ -143,10 +144,15 @@ describe("providerFromConfig", () => {
     expect((error as ProviderUnavailableError).i18nKey).toBe("provider-unavailable-runner");
   });
 
-  test("BYOK anthropic and openai get the decrypted key, the user's model and base URL", () => {
+  test("BYOK anthropic and openai get the decrypted key, the user's model, workspace and base URL", () => {
     const { factories, built } = recordingFactories();
     const anthropic = providerFromConfig(
-      config({ kind: "anthropic", model: "claude-opus-5-5", ...withKey("sk-ant-user-aaaa") }),
+      config({
+        kind: "anthropic",
+        model: "claude-opus-5-5",
+        workspaceId: "wrkspc_01TestWorkspace",
+        ...withKey("sk-ant-user-aaaa"),
+      }),
       { env, masterKey, factories },
     );
     const openai = providerFromConfig(
@@ -162,7 +168,14 @@ describe("providerFromConfig", () => {
     expect(anthropic.kind).toBe("anthropic");
     expect(openai.kind).toBe("openai");
     expect(built).toEqual([
-      { backend: "anthropic", options: { apiKey: "sk-ant-user-aaaa", model: "claude-opus-5-5" } },
+      {
+        backend: "anthropic",
+        options: {
+          apiKey: "sk-ant-user-aaaa",
+          model: "claude-opus-5-5",
+          workspaceId: "wrkspc_01TestWorkspace",
+        },
+      },
       {
         backend: "openai",
         options: {

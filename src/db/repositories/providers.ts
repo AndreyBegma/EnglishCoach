@@ -111,6 +111,29 @@ export async function setActiveProviderModel(
   return config;
 }
 
+/**
+ * Sets the Anthropic workspace ID of the active config; `null` clears it. Undefined, and nothing
+ * changed, when no `anthropic` config is active.
+ */
+export async function setActiveProviderWorkspace(
+  db: Db,
+  userId: number,
+  workspaceId: string | null,
+): Promise<ProviderConfig | undefined> {
+  const [config] = await db
+    .update(providerConfigs)
+    .set({ workspaceId })
+    .where(
+      and(
+        eq(providerConfigs.userId, userId),
+        eq(providerConfigs.isActive, true),
+        eq(providerConfigs.kind, "anthropic"),
+      ),
+    )
+    .returning();
+  return config;
+}
+
 /** Decrypts the config's API key. Only provider construction may call this. */
 export function decryptProviderKey(config: ProviderConfig, masterKey: Buffer): string | undefined {
   if (!config.encryptedApiKey || !config.keyIv || !config.keyTag) return undefined;

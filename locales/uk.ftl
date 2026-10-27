@@ -86,9 +86,26 @@ provider-key-rejected = ❌ Провайдер відхилив цей ключ.
 provider-model-set = ✅ Модель збережено.
 provider-testing = Перевіряю…
 provider-test-ok = ✅ Провайдер працює ({ $ms } мс).
-provider-test-bad-output = ⚠️ Провайдер відповів, але не коректним JSON ({ $ms } мс).
-provider-test-failed-status = ❌ Провайдер повернув помилку (HTTP { $status }, { $ms } мс).
-provider-test-failed = ❌ Не вдалося зв'язатися з провайдером ({ $ms } мс).
+provider-current = Провайдер: { $provider }
+provider-workspace = Workspace: { $workspace }
+provider-btn-workspace = 🏢 ID workspace
+provider-btn-workspace-clear = Скинути workspace
+provider-workspace-set = ✅ ID workspace збережено. Перевірте провайдера ще раз.
+provider-workspace-cleared = ✅ ID workspace скинуто.
+
+## Provider errors (Settings test; reusable in session prompts)
+provider-error-detail = Відповідь провайдера: { $detail }
+provider-error-auth = ❌ Провайдер відхилив API-ключ (HTTP 401). Перевірте його або введіть новий.
+provider-error-permission = ❌ Ключ не має доступу до цього (HTTP 403). Перевірте його права в консолі провайдера.
+provider-error-workspace = ❌ Ключ не прив'язаний до workspace (HTTP 400). Надішліть ID workspace з Anthropic Console.
+provider-error-model = ❌ Провайдер не знає цієї моделі (HTTP { $status }). Оберіть іншу модель.
+provider-error-rate-limit = ⏳ Перевищено ліміт запитів (HTTP 429). Зачекайте хвилину й спробуйте знову.
+provider-error-credits = ❌ На акаунті провайдера закінчилися кредити або не налаштовано оплату.
+provider-error-overloaded = ⏳ Провайдер перевантажений або недоступний (HTTP { $status }). Спробуйте пізніше.
+provider-error-bad-request = ❌ Провайдер відхилив запит (HTTP { $status }).
+provider-error-bad-output = ⚠️ Провайдер відповів, але не коректним JSON.
+provider-error-network = ❌ Не вдалося зв'язатися з провайдером.
+provider-error-unknown = ❌ Провайдер повернув помилку (HTTP { $status }).
 model-title = Модель: { $model }
 model-list-empty = Провайдер не повернув список моделей. Введіть ID моделі вручну.
 model-page = Сторінка { $page } з { $pages }
@@ -102,6 +119,8 @@ input-cancel = Скасувати
 input-key-invalid = Це не схоже на API-ключ. Вставте лише сам ключ.
 input-base-url-invalid = URL має починатися з https:// і не вказувати на локальну чи приватну адресу.
 input-model-invalid = Це не схоже на ID моделі.
+input-workspace = Надішліть ID workspace з Anthropic Console (Settings → Workspaces), наприклад wrkspc_01Ab… Зараз: { $workspace }.
+input-workspace-invalid = Це не схоже на ID workspace. Він починається з wrkspc_.
 input-timezone-invalid = Невідомий часовий пояс. Введіть назву на кшталт Europe/Kyiv або надішліть геолокацію.
 
 ## Progress

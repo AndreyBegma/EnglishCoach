@@ -240,15 +240,29 @@ describe.skipIf(!testServerUrl)("settings screens with a mocked Telegram API", (
     expect(s.hubLabels()).toContain("🧪 Test provider");
   });
 
-  test("test provider reports OK with latency, and an error by status", async () => {
+  test("test provider reports OK with latency, and an error by class with the provider's words", async () => {
     const s = await setup();
     await s.press({ type: "provider-test" });
     expect(s.hubText()).toMatch(/Provider works \(\d+ ms\)/);
 
-    s.h.llm.completeError = new LlmProviderError("anthropic", "anthropic request failed: 529", 529);
+    s.h.llm.completeError = new LlmProviderError(
+      "anthropic",
+      "anthropic request failed: 529",
+      529,
+      "Overloaded",
+      "overloaded_error",
+    );
     await s.press({ type: "provider-test" });
-    expect(s.hubText()).toMatch(/HTTP 529, \d+ ms/);
+    expect(s.hubText()).toContain("overloaded or down (HTTP 529)");
+    expect(s.hubText()).toContain("Provider says: Overloaded");
     expect(s.h.telegram.callsOf("sendMessage")).toHaveLength(0);
+  });
+
+  test("the provider screen names the provider once under its title", async () => {
+    const s = await setup();
+    await s.press({ type: "settings", page: "provider" });
+    expect(s.hubText()).toStartWith("🤖 AI provider\n\nProvider: Server");
+    expect(s.hubText()).not.toContain("AI provider:");
   });
 
   test("the runner is shown but cannot be chosen", async () => {

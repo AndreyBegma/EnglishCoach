@@ -1,4 +1,4 @@
-import Anthropic from "@anthropic-ai/sdk";
+import Anthropic, { type ClientOptions } from "@anthropic-ai/sdk";
 import type { ZodType } from "zod";
 import { isAuthError, toProviderError } from "../errors";
 import { CURATED_MODELS, modelCapabilities, pickModel, samplingParams } from "../models";
@@ -38,8 +38,17 @@ export type AnthropicProviderOptions = {
   apiKey: string;
   /** The user's chosen model; wins over the request's model and tier. */
   model?: string | null;
+  /**
+   * Sent as `anthropic-workspace-id` on every request. Keys not scoped to a workspace
+   * (`sk-ant-usr-…`) are refused without it.
+   */
+  workspaceId?: string | null;
   client?: AnthropicClient;
+  /** Replaces the SDK's HTTP transport; tests pass a fake to see the real requests. */
+  fetch?: ClientOptions["fetch"];
 };
+
+export const WORKSPACE_HEADER = "anthropic-workspace-id";
 
 /** Keywords structured outputs accept, copied as they are. Subschemas are handled separately. */
 const KEPT_KEYWORDS = new Set(["type", "enum", "const", "required", "description", "title"]);
@@ -154,8 +163,14 @@ function structuredOutput(
  * whether sampling parameters are sent, comes from the model's capability entry.
  */
 export function createAnthropicProvider(options: AnthropicProviderOptions): LlmProvider {
-  const { apiKey } = options;
-  const client: AnthropicClient = options.client ?? new Anthropic({ apiKey });
+  const { apiKey, workspaceId } = options;
+  const client: AnthropicClient =
+    options.client ??
+    new Anthropic({
+      apiKey,
+      fetch: options.fetch,
+      defaultHeaders: workspaceId ? { [WORKSPACE_HEADER]: workspaceId } : undefined,
+    });
 
   return {
     kind: "anthropic",

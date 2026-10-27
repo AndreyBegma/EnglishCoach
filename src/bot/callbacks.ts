@@ -44,7 +44,7 @@ export const SETTINGS_PAGES = [
 export type SettingsPage = (typeof SETTINGS_PAGES)[number];
 
 /** Settings that take free text (or a location) instead of a button. */
-export const SETTINGS_TEXT_INPUTS = ["timezone", "model"] as const;
+export const SETTINGS_TEXT_INPUTS = ["timezone", "model", "workspace"] as const;
 export type SettingsTextInput = (typeof SETTINGS_TEXT_INPUTS)[number];
 
 /** One settings value picked from a closed list. */
@@ -75,6 +75,8 @@ export type Callback =
   | { type: "input"; input: SettingsTextInput }
   | { type: "input-cancel" }
   | { type: "provider-test" }
+  /** Clears the Anthropic workspace ID of the active provider. */
+  | { type: "provider-workspace-clear" }
   | { type: "placement" };
 
 /** Callbacks handled by the settings module; all of them live on the hub message. */
@@ -89,6 +91,7 @@ export const SETTINGS_CALLBACKS = [
   "input",
   "input-cancel",
   "provider-test",
+  "provider-workspace-clear",
   "placement",
 ] as const satisfies readonly Callback["type"][];
 export type SettingsCallback = Extract<Callback, { type: (typeof SETTINGS_CALLBACKS)[number] }>;
@@ -194,6 +197,7 @@ const route = z.union([
   })),
   z.tuple([z.literal("px")]).transform(() => ({ type: "input-cancel" as const })),
   z.tuple([z.literal("pt")]).transform(() => ({ type: "provider-test" as const })),
+  z.tuple([z.literal("pw")]).transform(() => ({ type: "provider-workspace-clear" as const })),
   z.tuple([z.literal("pp")]).transform(() => ({ type: "placement" as const })),
 ]);
 
@@ -253,6 +257,8 @@ function partsOf(callback: Callback): (string | number)[] {
       return ["px"];
     case "provider-test":
       return ["pt"];
+    case "provider-workspace-clear":
+      return ["pw"];
     case "placement":
       return ["pp"];
   }

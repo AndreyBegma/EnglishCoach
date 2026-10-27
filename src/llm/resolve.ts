@@ -34,6 +34,7 @@ export function providerFromConfig(
       return factories.anthropic({
         apiKey: requireKey(config, deps.masterKey),
         model: config.model,
+        workspaceId: config.workspaceId,
       });
     case "openai":
       if (!config) break;

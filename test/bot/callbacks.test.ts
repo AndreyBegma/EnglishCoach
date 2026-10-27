@@ -32,8 +32,10 @@ describe("callback data", () => {
     { type: "model", index: 37 },
     { type: "model", index: "default" },
     { type: "input", input: "timezone" },
+    { type: "input", input: "workspace" },
     { type: "input-cancel" },
     { type: "provider-test" },
+    { type: "provider-workspace-clear" },
     { type: "placement" },
   ])("round-trips %p", (callback) => {
     const data = encodeCallback(callback);
